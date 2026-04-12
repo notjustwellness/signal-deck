@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>signal — concept deck</title>
+<style>
+  :root {
+    --signal: #AD4236;
+    --signal-light: #c4574b;
+    --rose-linen: #F6EFEA;
+    --deep-evening: #1A1410;
+    --deep-evening-soft: #2a2420;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--rose-linen);
+    color: var(--deep-evening);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* --- COVER SLIDE --- */
+  .cover {
+    min-height: 100vh;
+    background: var(--deep-evening);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 40px;
+    position: relative;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(173,66,54,0.15) 0%, transparent 70%);
+  }
+  .cover h1 {
+    font-size: 96px;
+    font-weight: 300;
+    color: var(--signal);
+    letter-spacing: -2px;
+    position: relative;
+    z-index: 1;
+  }
+  .cover .tagline {
+    font-size: 24px;
+    color: var(--rose-linen);
+    margin-top: 16px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    opacity: 0.85;
+    position: relative;
+    z-index: 1;
+  }
+  .cover .company {
+    position: absolute;
+    bottom: 40px;
+    font-size: 13px;
+    color: rgba(246,239,234,0.4);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* --- SECTION SLIDES --- */
+  .slide {
+    min-height: 100vh;
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    page-break-before: always;
+  }
+  .slide-dark {
+    background: var(--deep-evening);
+    color: var(--rose-linen);
+    max-width: none;
+    padding: 80px 10%;
+  }
+  .slide-signal {
+    background: var(--signal);
+    color: var(--rose-linen);
+    max-width: none;
+    padding: 80px 10%;
+  }
+
+  /* --- SECTION HEADERS --- */
+  .section-label {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .slide-dark .section-label,
+  .slide-signal .section-label {
+    color: rgba(246,239,234,0.5);
+  }
+  .slide h2 {
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 32px;
+    letter-spacing: -1px;
+  }
+  .slide h3 {
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    margin-top: 40px;
+  }
+  .slide p {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    max-width: 800px;
+  }
+  .slide-dark p, .slide-signal p {
+    opacity: 0.9;
+  }
+
+  /* --- HIGHLIGHT TEXT --- */
+  .highlight {
+    color: var(--signal);
+    font-weight: 500;
+  }
+  .slide-dark .highlight,
+  .slide-signal .highlight {
+    color: #fff;
+    font-weight: 500;
+  }
+
+  /* --- CARDS --- */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin: 32px 0;
+  }
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 2px 20px rgba(26,20,16,0.06);
+  }
+  .slide-dark .card {
+    background: var(--deep-evening-soft);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .card .card-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .card h4 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .card p {
+    font-size: 15px;
+    line-height: 1.6;
+    opacity: 0.8;
+  }
+
+  /* --- TIMELINE --- */
+  .timeline {
+    display: flex;
+    gap: 0;
+    margin: 40px 0;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 32px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--signal), var(--signal-light), rgba(173,66,54,0.3));
+  }
+  .timeline-item {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    padding: 0 12px;
+  }
+  .timeline-dot {
+    width: 16px;
+    height: 16px;
+    background: var(--signal);
+    border-radius: 50%;
+    margin: 24px auto 16px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 0 4px var(--rose-linen);
+  }
+  .slide-dark .timeline-dot {
+    box-shadow: 0 0 0 4px var(--deep-evening);
+  }
+  .timeline-time {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--signal);
+    font-weight: 600;
+  }
+  .timeline-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 8px 0 4px;
+  }
+  .timeline-desc {
+    font-size: 13px;
+    opacity: 0.65;
+    line-height: 1.4;
+  }
+
+  /* --- STAT BLOCKS --- */
+  .stat-row {
+    display: flex;
+    gap: 40px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat .number {
+    font-size: 56px;
+    font-weight: 200;
+    color: var(--signal);
+    line-height: 1;
+  }
+  .slide-dark .stat .number {
+    color: var(--signal-light);
+  }
+  .stat .label {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 8px;
+    opacity: 0.6;
+  }
+
+  /* --- TABLES --- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 15px;
+  }
+  th {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--signal);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--signal);
+  }
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(26,20,16,0.08);
+    vertical-align: top;
+  }
+  .slide-dark th {
+    border-bottom-color: var(--signal);
+    color: var(--signal-light);
+  }
+  .slide-dark td {
+    border-bottom-color: rgba(246,239,234,0.08);
+  }
+
+  /* --- QUOTE BLOCK --- */
+  .quote {
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1.5;
+    font-style: italic;
+    padding: 40px 0;
+    border-left: 4px solid var(--signal);
+    padding-left: 32px;
+    max-width: 700px;
+    margin: 32px 0;
+  }
+  .slide-dark .quote {
+    border-left-color: var(--signal);
+  }
+
+  /* --- COLOR SWATCHES --- */
+  .swatch-row {
+    display: flex;
+    gap: 24px;
+    margin: 32px 0;
+  }
+  .swatch {
+    flex: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  }
+  .swatch-color {
+    height: 120px;
+  }
+  .swatch-info {
+    padding: 16px;
+    background: white;
+    font-size: 14px;
+  }
+  .swatch-name {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .swatch-hex {
+    opacity: 0.5;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 12px;
+  }
+
+  /* --- INGREDIENT LAYERS --- */
+  .layer {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    margin: 16px 0;
+    border-left: 4px solid var(--signal);
+    box-shadow: 0 2px 12px rgba(26,20,16,0.04);
+  }
+  .slide-dark .layer {
+    background: var(--deep-evening-soft);
+    border-left-color: var(--signal);
+  }
+  .layer-name {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--signal);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .layer h4 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .ingredient-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .ingredient {
+    padding: 12px 16px;
+    background: var(--rose-linen);
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  .slide-dark .ingredient {
+    background: rgba(246,239,234,0.05);
+  }
+  .ingredient .dose {
+    font-weight: 600;
+    color: var(--signal);
+  }
+  .ingredient .evidence {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.5;
+    margin-top: 2px;
+  }
+
+  /* --- PACKET MOCKUP --- */
+  .packet-mockup {
+    width: 220px;
+    height: 220px;
+    background: var(--signal);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 32px auto;
+    box-shadow: 0 8px 40px rgba(173,66,54,0.3);
+    position: relative;
+  }
+  .packet-mockup .packet-tagline {
+    font-size: 12px;
+    color: var(--deep-evening);
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    font-weight: 400;
+  }
+  .packet-mockup .packet-name {
+    font-size: 36px;
+    color: #8B2E24;
+    font-weight: 500;
+    letter-spacing: 2px;
+  }
+
+  /* --- DUAL PATH DIAGRAM --- */
+  .dual-path {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr;
+    gap: 0;
+    margin: 40px 0;
+    align-items: stretch;
+  }
+  .path-box {
+    padding: 32px;
+    border-radius: 12px;
+  }
+  .path-left {
+    background: var(--signal);
+    color: var(--rose-linen);
+  }
+  .path-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: var(--signal);
+  }
+  .path-right {
+    background: var(--deep-evening-soft);
+    color: var(--rose-linen);
+  }
+  .path-box h4 {
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    opacity: 0.7;
+  }
+  .path-box p {
+    font-size: 15px;
+    opacity: 0.9;
+  }
+  .path-box ul {
+    list-style: none;
+    font-size: 14px;
+    margin-top: 12px;
+  }
+  .path-box li {
+    padding: 4px 0;
+    opacity: 0.85;
+  }
+  .path-box li::before {
+    content: '>';
+    margin-right: 8px;
+    opacity: 0.4;
+  }
+
+  /* --- FOOTER --- */
+  .slide-footer {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.3;
+    margin-top: auto;
+    padding-top: 40px;
+  }
+
+  /* --- PRINT --- */
+  @media print {
+    .slide { page-break-before: always; }
+    .cover { page-break-before: avoid; }
+    body { background: white; }
+  }
+
+  /* --- PERSONA --- */
+  .persona {
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    margin: 24px 0;
+    box-shadow: 0 2px 20px rgba(26,20,16,0.06);
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .persona-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--signal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: var(--rose-linen);
+    margin: 0 auto;
+  }
+  .persona-meta {
+    text-align: center;
+  }
+  .persona-name {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 12px;
+  }
+  .persona-title {
+    font-size: 13px;
+    opacity: 0.5;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .persona-hook {
+    font-size: 18px;
+    font-style: italic;
+    color: var(--signal);
+    border-left: 3px solid var(--signal);
+    padding-left: 16px;
+    margin-top: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .slide { padding: 40px 24px; }
+    .cover h1 { font-size: 56px; }
+    .slide h2 { font-size: 32px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .timeline { flex-direction: column; }
+    .timeline::before { display: none; }
+    .dual-path { grid-template-columns: 1fr; }
+    .path-center { transform: rotate(90deg); padding: 16px; }
+    .persona { grid-template-columns: 1fr; }
+    .stat-row { gap: 24px; }
+    .stat .number { font-size: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER ==================== -->
+<section class="cover">
+  <h1>signal</h1>
+  <div class="tagline">send the right signal.</div>
+  <div class="company">INSDR Wellness Co.</div>
+</section>
+
+<!-- ==================== EXPERIENCE IT FIRST ==================== -->
+<section class="slide slide-dark" style="text-align: center;">
+  <div class="section-label">Before you read any further</div>
+  <h2 style="max-width: 700px; margin: 0 auto 40px;">Try this. Right now.</h2>
+  <p style="max-width: 560px; margin: 0 auto 16px; font-size: 20px; line-height: 1.8; opacity: 0.9;">Close your eyes.</p>
+  <p style="max-width: 560px; margin: 0 auto 16px; font-size: 20px; line-height: 1.8; opacity: 0.9;">Close your mouth.</p>
+  <p style="max-width: 560px; margin: 0 auto 16px; font-size: 20px; line-height: 1.8; opacity: 0.9;">Focus as if you were chewing something.</p>
+  <p style="max-width: 560px; margin: 0 auto 16px; font-size: 20px; line-height: 1.8; opacity: 0.9;">Do this for two minutes.</p>
+  <p style="max-width: 560px; margin: 0 auto 48px; font-size: 20px; line-height: 1.8; opacity: 0.9;">Then notice how you feel.</p>
+  <div style="width: 80px; height: 1px; background: var(--signal); margin: 0 auto 48px;"></div>
+  <p style="max-width: 480px; margin: 0 auto; font-size: 15px; opacity: 0.4;">That calm, grounded, present feeling? That's what signal delivers &mdash; plus clinical-dose actives, a liquid burst, fresh breath, and real resistance. Every day. In a packet that fits in your pocket.</p>
+</section>
+
+<!-- ==================== THE IDEA ==================== -->
+<section class="slide">
+  <div class="section-label">Section 01</div>
+  <h2>The 2-minute ritual that helps you <span class="highlight">send the right signal</span> &mdash; to yourself and to everyone around you.</h2>
+  <p>Four chews. Each one has a liquid center that bursts when you bite down. Then real resistance as you chew &mdash; Hi-Chew tough, progressively dissolving. Over two minutes, it disappears completely. You absorb everything. You walk away with fresh breath and the quiet feeling that something just turned on.</p>
+  <p><span class="highlight">signal works in two directions.</span> Inward: a 2-minute forced pause that grounds you in your senses. No screen. No app. Just you and the chew. Outward: clinical-dose actives that optimize your skin, your energy, your presence. The signals your body sends get stronger.</p>
+  <p>Nobody owns this positioning. signal does.</p>
+</section>
+
+<!-- ==================== SENSORY GROUNDING ==================== -->
+<section class="slide slide-dark">
+  <div class="section-label">The Micro-Ritual</div>
+  <h2>120 seconds. 5 senses. Zero screens.</h2>
+  <p>No product exists that is a physical, ingestible, multi-sensory grounding ritual you can do in 2 minutes without a screen. signal is the first.</p>
+
+  <div class="card-grid" style="grid-template-columns: repeat(5, 1fr);">
+    <div class="card" style="text-align: center;">
+      <h4 style="color: var(--signal);">Taste</h4>
+      <p>Liquid burst. Immediate flavor hit.</p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <h4 style="color: var(--signal);">Texture</h4>
+      <p>Jaw resistance. Real physical engagement.</p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <h4 style="color: var(--signal);">Sound</h4>
+      <p>Crunch. Slosh. Rhythmic chew. ASMR.</p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <h4 style="color: var(--signal);">Feel</h4>
+      <p>Proprioception. You feel your body.</p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <h4 style="color: var(--signal);">Breath</h4>
+      <p>Fresh finish. The ritual is complete.</p>
+    </div>
+  </div>
+
+  <p style="margin-top: 24px; opacity: 0.7;">Clinically anchored in the 5-4-3-2-1 sensory grounding technique. The mindfulness market is $5.2B and growing at 10%+ CAGR. No consumer brand owns this territory.</p>
+  <p style="opacity: 0.5; font-size: 15px;">"Your phone can wait. This can't."</p>
+</section>
+
+<!-- ==================== FOUR REWARDS ==================== -->
+<section class="slide">
+  <div class="section-label">The Format Advantage</div>
+  <h2>Four rewards. Four time horizons. <span class="highlight">Zero faith required.</span></h2>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-time">Seconds</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-title">Liquid Burst</div>
+      <div class="timeline-desc">Dopamine hit. The crunch. The burst. You feel it the second you bite down.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">Minutes</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-title">Fresh Breath</div>
+      <div class="timeline-desc">Social confidence. You walk away ready to lean in.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">Weeks</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-title">Skin Quality</div>
+      <div class="timeline-desc">Something's different about you. People notice but can't name it.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">Months</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-title">Facial Tone</div>
+      <div class="timeline-desc">Two minutes of real resistance, every day. A tighter, more toned face.</div>
+    </div>
+  </div>
+
+  <p style="opacity:0.5; font-size: 15px; margin-top: 24px;">There is never a moment where you're operating on faith alone. That's why the habit sticks.</p>
+</section>
+
+<!-- ==================== MARKET ==================== -->
+<section class="slide slide-signal">
+  <div class="section-label">Market Opportunity</div>
+  <h2>Four converging tailwinds. One product at the intersection.</h2>
+
+  <div class="card-grid" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="card" style="background: rgba(246,239,234,0.15); box-shadow: none;">
+      <div class="card-label" style="color: rgba(246,239,234,0.5);">$30B+</div>
+      <h4>Hydration</h4>
+      <p>Liquid IV acquired for ~$500M. Proven acquirability.</p>
+    </div>
+    <div class="card" style="background: rgba(246,239,234,0.15); box-shadow: none;">
+      <div class="card-label" style="color: rgba(246,239,234,0.5);">$8B+</div>
+      <h4>Beauty-from-Within</h4>
+      <p>Vital Proteins + Dose & Co acquired by Nestl&eacute;.</p>
+    </div>
+    <div class="card" style="background: rgba(246,239,234,0.15); box-shadow: none;">
+      <div class="card-label" style="color: rgba(246,239,234,0.5);">$1.2B</div>
+      <h4>Format Innovation</h4>
+      <p>Gr&uuml;ns exit proved the playbook (April 2026).</p>
+    </div>
+    <div class="card" style="background: rgba(246,239,234,0.15); box-shadow: none;">
+      <div class="card-label" style="color: rgba(246,239,234,0.5);">$5.2B</div>
+      <h4>Mindfulness</h4>
+      <p>Fastest-growing wellness subsector. 10%+ CAGR. No physical product owns it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== COMPETITORS ==================== -->
+<section class="slide slide-dark">
+  <div class="section-label">Competitive Landscape</div>
+  <h2>Everyone does a piece of this. Nobody does all of it.</h2>
+
+  <div class="card-grid" style="grid-template-columns: repeat(2, 1fr);">
+    <div class="card">
+      <h4>Liquid IV / LMNT</h4>
+      <p>Hydration sachets. Requires water + mixing. Zero skincare. Zero ritual. Nobody films themselves pouring powder.</p>
+    </div>
+    <div class="card">
+      <h4>Vital Proteins</h4>
+      <p>Collagen powder in coffee. High friction. Benefits take 8 weeks. Most buyers churn before renewal.</p>
+    </div>
+    <div class="card">
+      <h4>Mud\Wtr (~$250M)</h4>
+      <p>Ritual-coded mushroom beverage. Right energy, but requires preparation. Not portable. Not multi-sensory.</p>
+    </div>
+    <div class="card">
+      <h4>Jawliner / Gymgum</h4>
+      <p>Pure jaw exercise. Zero functional ingredients. Male-only. No skin, no hydration, no mindfulness.</p>
+    </div>
+  </div>
+
+  <p style="font-size: 20px; margin-top: 24px; font-weight: 300;">The gap: no product combines functional actives + sensory grounding ritual + dual-pathway delivery + facial tone. No brand owns presence.</p>
+</section>
+
+<!-- ==================== SENSORY DESIGN ==================== -->
+<section class="slide">
+  <div class="section-label">Sensory Design</div>
+  <h2>Two moments you <span class="highlight">feel</span>, not just consume.</h2>
+
+  <div class="card-grid" style="grid-template-columns: repeat(2, 1fr);">
+    <div class="card">
+      <h4 style="color: var(--signal);">The Tear</h4>
+      <p>Soft-touch matte OPP over aluminum foil (6-9&mu;m). The foil fractures cleanly &mdash; a crisp snap, not a cheap rip. Laser-scored V-notch for a controlled, single-motion tear. This is a material spec, not a marketing concept. The tear is the opening act of the ritual.</p>
+      <p style="opacity: 0.5; font-size: 13px;">Cost: ~$0.08-0.12/packet at scale. Laser scoring adds ~$0.005.</p>
+    </div>
+    <div class="card">
+      <h4 style="color: var(--signal);">The Crunch</h4>
+      <p>The xylitol crystalline shell breaks on first bite. What you hear is bone-conducted &mdash; it's inside your head, not external. That internal crunch is personal, satisfying, and impossible to replicate from a capsule or gummy. It's one of the reasons the ritual <em>feels</em> like something is happening.</p>
+      <p style="opacity: 0.5; font-size: 13px;">Controlled by xylitol hardness + MCC compression ratio. Formulation lab spec.</p>
+    </div>
+  </div>
+
+  <p>These two moments &mdash; the tear and the crunch &mdash; are designed experiences, not accidents. They reinforce the sensory grounding ritual: you feel the packet in your hands, you hear the foil snap, you feel the crunch in your skull. You're present.</p>
+</section>
+
+<!-- ==================== FORMULATION ==================== -->
+<section class="slide slide-dark">
+  <div class="section-label">Formulation</div>
+  <h2>Every ingredient. Every dose. <span class="highlight">Every study cited.</span></h2>
+
+  <div class="layer">
+    <div class="layer-name">Layer 1 — Cellular Hydration</div>
+    <h4>Help your body use the water you already drink</h4>
+    <div class="ingredient-grid">
+      <div class="ingredient">
+        <strong>Sodium Hyaluronate</strong><br>
+        <span class="dose">120 mg/day</span>
+        <div class="evidence">Multiple RCTs</div>
+      </div>
+      <div class="ingredient">
+        <strong>Glyceryl Glucoside</strong><br>
+        <span class="dose">100 mg/day</span>
+        <div class="evidence">In-vitro</div>
+      </div>
+      <div class="ingredient">
+        <strong>Phytoceramides (Rice)</strong><br>
+        <span class="dose">40 mg/day</span>
+        <div class="evidence">Systematic Review</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="layer">
+    <div class="layer-name">Layer 2 — Skin + Antioxidant</div>
+    <h4>Protect and repair from the cellular level</h4>
+    <div class="ingredient-grid">
+      <div class="ingredient">
+        <strong>Phosphatidylcholine</strong><br>
+        <span class="dose">150 mg/day</span>
+        <div class="evidence">Established &bull; Triple-duty</div>
+      </div>
+      <div class="ingredient">
+        <strong>Astaxanthin</strong><br>
+        <span class="dose">4 mg/day</span>
+        <div class="evidence">RCT</div>
+      </div>
+      <div class="ingredient">
+        <strong>Vitamin C</strong><br>
+        <span class="dose">80 mg/day</span>
+        <div class="evidence">Established</div>
+      </div>
+      <div class="ingredient">
+        <strong>Vitamin E</strong><br>
+        <span class="dose">15 mg (100% DV)</span>
+        <div class="evidence">RCT</div>
+      </div>
+      <div class="ingredient">
+        <strong>Zinc</strong><br>
+        <span class="dose">11 mg (100% DV)</span>
+        <div class="evidence">Established</div>
+      </div>
+      <div class="ingredient">
+        <strong>Selenium</strong><br>
+        <span class="dose">55 mcg (100% RDA)</span>
+        <div class="evidence">Established</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="layer">
+    <div class="layer-name">Layer 3 — Electrolyte Micro-Dose</div>
+    <h4>Osmotic support. Co-pilots, not the engine.</h4>
+    <div class="ingredient-grid">
+      <div class="ingredient">
+        <strong>Potassium</strong> <span class="dose">100 mg</span>
+      </div>
+      <div class="ingredient">
+        <strong>Magnesium</strong> <span class="dose">50 mg</span>
+      </div>
+      <div class="ingredient">
+        <strong>Trace Minerals</strong> <span class="dose">60 mg</span>
+      </div>
+    </div>
+  </div>
+
+  <p style="margin-top: 24px; opacity: 0.5; font-size: 14px;">Evidence-graded. What we can prove, we claim. What we can't, we don't. Zero tolerance for disprovable claims.</p>
+</section>
+
+<!-- ==================== DUAL PATHWAY ==================== -->
+<section class="slide">
+  <div class="section-label">Delivery Innovation</div>
+  <h2>Dual-pathway absorption. <span class="highlight">No capsule can do this.</span></h2>
+
+  <div class="dual-path">
+    <div class="path-box path-left">
+      <h4>Buccal Pathway</h4>
+      <p>Liquid center bursts on bite. MCT oil micro-emulsion + PC liposomes carry fat-solubles through oral mucosa.</p>
+      <ul>
+        <li>Astaxanthin</li>
+        <li>Vitamin E</li>
+        <li>Phytoceramides</li>
+        <li>Vitamin C</li>
+        <li>Glyceryl glucoside</li>
+      </ul>
+    </div>
+    <div class="path-center">+</div>
+    <div class="path-box path-right">
+      <h4>GI Pathway</h4>
+      <p>Matrix dissolves over 2 minutes. Swallowed residue delivers actives to intestinal tract.</p>
+      <ul>
+        <li>Hyaluronic acid</li>
+        <li>Zinc + Selenium</li>
+        <li>Electrolytes</li>
+        <li>Prebiotic fiber</li>
+      </ul>
+    </div>
+  </div>
+
+  <p style="opacity: 0.5; font-size: 14px;">Based on established pharmaceutical delivery science. Chitosan/pectin mucoadhesive extends buccal contact time.</p>
+</section>
+
+<!-- ==================== PACKET DESIGN ==================== -->
+<section class="slide slide-dark">
+  <div class="section-label">Brand Identity</div>
+  <h2>The product IS the color. The color IS the product.</h2>
+
+  <div style="display: flex; gap: 60px; align-items: center; margin: 40px 0; flex-wrap: wrap;">
+    <div>
+      <div class="packet-mockup">
+        <div class="packet-tagline">send the right</div>
+        <div class="packet-name">signal</div>
+      </div>
+      <p style="text-align: center; font-size: 13px; opacity: 0.5; margin-top: 16px;">Front &mdash; Signal matte, embossed</p>
+    </div>
+    <div style="flex: 1; min-width: 300px;">
+      <h3 style="margin-top: 0;">Two sides. Two stories.</h3>
+      <p><span class="highlight">Front:</span> Solid Signal matte. Embossed type. The feeling.</p>
+      <p><span class="highlight">Back:</span> Clear. Transparent. You see the 4 chews inside. The facts.</p>
+      <p>The front sells the promise. The back proves it. The flip is a content moment.</p>
+      <p style="font-size: 15px; opacity: 0.6;">4 chews per packet. 60 packets per container. 2 months.</p>
+    </div>
+  </div>
+
+  <div class="swatch-row">
+    <div class="swatch">
+      <div class="swatch-color" style="background: var(--signal);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Signal</div>
+        <div class="swatch-hex">#AD4236</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: var(--rose-linen);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Rose Linen</div>
+        <div class="swatch-hex">#F6EFEA</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: var(--deep-evening);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Deep Evening</div>
+        <div class="swatch-hex">#1A1410</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PERSONAS ==================== -->
+<section class="slide">
+  <div class="section-label">Target Customer</div>
+  <h2>Three personas. One product. <span class="highlight">No niching.</span></h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Primary</div>
+      <h4>"Jordan" &mdash; Wellness-Aware Professional</h4>
+      <p>Female, 26-34. Drowning in screen time and decision fatigue. Has tried every supplement and quit them all.</p>
+      <p style="color: var(--signal); font-style: italic; margin-top: 12px;">"I thought it was just a skincare thing. Then I realized the two minutes were the part I actually needed."</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Secondary</div>
+      <h4>"Marcus" &mdash; Active Professional</h4>
+      <p>Male, 30-42. Gym 3-5x/week. Won't buy "beauty" but will buy "presence." The facial-toning angle resonates.</p>
+      <p style="color: var(--signal); font-style: italic; margin-top: 12px;">"Two minutes of real resistance. Your face and your body notice."</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Secondary</div>
+      <h4>"Lisa" &mdash; Busy Parent</h4>
+      <p>Female, 32-45. Mother of 1-3. Zero time for routines. Highest LTV persona.</p>
+      <p style="color: var(--signal); font-style: italic; margin-top: 12px;">"It's the only two minutes in my day where nobody needs anything from me."</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SKU PLATFORM ==================== -->
+<section class="slide slide-signal">
+  <div class="section-label">Platform Strategy</div>
+  <h2>One format. Eight signals. Infinite extension.</h2>
+  <p style="font-size: 20px; font-weight: 300;">The matrix and liquid center carrier are identical across all SKUs. Only the actives and flavor change. Same production line. Minimal incremental R&D.</p>
+
+  <table style="margin-top: 32px;">
+    <tr><th>SKU</th><th>Signal</th><th>When</th><th>Wave</th></tr>
+    <tr><td><strong>signal</strong></td><td>Your daily foundation</td><td>Anytime</td><td style="color: var(--rose-linen); opacity: 0.7;">Launch</td></tr>
+    <tr><td><strong>signal : rise</strong></td><td>Start your day</td><td>Morning</td><td style="opacity: 0.5;">Wave 1</td></tr>
+    <tr><td><strong>signal : rest</strong></td><td>End your day</td><td>Evening</td><td style="opacity: 0.5;">Wave 1</td></tr>
+    <tr><td><strong>signal : surge</strong></td><td>Get focused</td><td>Afternoon</td><td style="opacity: 0.5;">Wave 2</td></tr>
+    <tr><td><strong>signal : glow</strong></td><td>Look your best</td><td>30-day course</td><td style="opacity: 0.5;">Wave 2</td></tr>
+    <tr><td><strong>signal : edge</strong></td><td>Be at your peak</td><td>Pre-social</td><td style="opacity: 0.5;">Wave 3</td></tr>
+    <tr><td><strong>signal : still</strong></td><td>Come back to zero</td><td>Recovery</td><td style="opacity: 0.5;">Wave 3</td></tr>
+    <tr><td><strong>signal : guard</strong></td><td>Stay protected</td><td>Seasonal</td><td style="opacity: 0.5;">Later</td></tr>
+  </table>
+</section>
+
+<!-- ==================== BUSINESS MODEL ==================== -->
+<section class="slide">
+  <div class="section-label">Business Model</div>
+  <h2>DTC subscription. Bimonthly. <span class="highlight">$69 per container.</span></h2>
+
+  <div class="stat-row">
+    <div class="stat">
+      <div class="number">60</div>
+      <div class="label">Packets / Container</div>
+    </div>
+    <div class="stat">
+      <div class="number">$1.15</div>
+      <div class="label">Per Day</div>
+    </div>
+    <div class="stat">
+      <div class="number">$49</div>
+      <div class="label">Founder's Price</div>
+    </div>
+    <div class="stat">
+      <div class="number">500</div>
+      <div class="label">Launch Spots</div>
+    </div>
+  </div>
+
+  <table>
+    <tr><th>Tier</th><th>Price</th><th>Strategy</th></tr>
+    <tr><td>Bimonthly Subscription</td><td><strong>$69</strong></td><td>$1.15/day. "Less than your daily coffee."</td></tr>
+    <tr><td>One-Time Purchase</td><td>$89</td><td>Makes $69 feel obvious.</td></tr>
+    <tr><td>Founder's Price</td><td><strong>$49</strong></td><td>First 500. Locks in for life.</td></tr>
+    <tr><td>Starter Kit</td><td>$99</td><td>Container + samples + carry case.</td></tr>
+  </table>
+
+  <h3>At Scale (100K+ subscribers)</h3>
+  <table>
+    <tr><th>Metric</th><th>Value</th></tr>
+    <tr><td>COGS per container</td><td>$29-$43</td></tr>
+    <tr><td>DTC gross margin</td><td>55-65%</td></tr>
+    <tr><td>Amazon gross margin</td><td>40-50%</td></tr>
+  </table>
+</section>
+
+<!-- ==================== GROWTH ==================== -->
+<section class="slide slide-dark">
+  <div class="section-label">Growth Path</div>
+  <h2>DTC first. Amazon second. Retail when the data is undeniable.</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Month 5</div>
+      <h4>DTC Subscription</h4>
+      <p>Highest margin. Highest LTV. Proves habit metrics.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Month 6</div>
+      <h4>Amazon</h4>
+      <p>Review flywheel. 1,000 reviews in 6 months.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Month 11+</div>
+      <h4>Line Extensions</h4>
+      <p>signal : rise + signal : rest. Day-parting doubles consumption.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Month 12-18</div>
+      <h4>Retail</h4>
+      <p>Target. Walmart. Costco. Data-proven entry.</p>
+    </div>
+  </div>
+
+  <div class="stat-row" style="margin-top: 48px;">
+    <div class="stat">
+      <div class="number" style="color: var(--signal-light);">$250K</div>
+      <div class="label">MRR Target &mdash; Month 12</div>
+    </div>
+    <div class="stat">
+      <div class="number" style="color: var(--signal-light);">80%+</div>
+      <div class="label">Daily Use Target</div>
+    </div>
+    <div class="stat">
+      <div class="number" style="color: var(--signal-light);">5,000+</div>
+      <div class="label">Amazon Reviews &mdash; Year 1</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LAUNCH ==================== -->
+<section class="slide">
+  <div class="section-label">Launch</div>
+  <h2>30 days of content. Audio-forward. Then the doors open.</h2>
+
+  <div class="card-grid" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="card">
+      <div class="card-label">Week 1</div>
+      <h4>The Problem</h4>
+      <p>"Why you don't feel present." Founder story, screen-fatigue angle, expert clips.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Week 2</div>
+      <h4>The Tease</h4>
+      <p>"What if a 2-minute ritual could change how you show up?" Ingredient deep-dives, ASMR tease.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Week 3</div>
+      <h4>The Format</h4>
+      <p>"Meet signal." Full reveal, ASMR hero video, burst shot, creator wave.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Week 4</div>
+      <h4>The Urgency</h4>
+      <p>"First 500 get Founder's Price." Countdown, creator flood, launch day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 5 GATES ==================== -->
+<section class="slide slide-dark">
+  <div class="section-label">Acquirability</div>
+  <h2>Scored against the 5 gates that commanded a $1.2B exit.</h2>
+
+  <table>
+    <tr><th>Gate</th><th>Score</th><th>Why</th></tr>
+    <tr><td><strong>Enjoyment</strong></td><td style="color: var(--signal-light);">PASS-path</td><td>Liquid burst + Hi-Chew mouthfeel + crisp crunch + fresh finish = treat, not task</td></tr>
+    <tr><td><strong>Trust</strong></td><td style="color: var(--signal-light);">PASS-path</td><td>Every dose printed. Clear back shows chews. Evidence-graded. "Read the receipt."</td></tr>
+    <tr><td><strong>Consistent Use</strong></td><td style="color: var(--signal-light); font-weight: 600;">PASS</td><td>Four reward horizons + sensory grounding ritual. Never operating on faith. Strongest gate.</td></tr>
+    <tr><td><strong>Efficacy</strong></td><td style="color: var(--signal-light);">PASS-path</td><td>Clinical-dose HA, phytoceramides, astaxanthin (RCT/SR). Dual-pathway delivery.</td></tr>
+    <tr><td><strong>Experience</strong></td><td style="color: var(--signal-light);">PASS-path</td><td>Signal matte + clear back. Engineered tear (foil snap + laser score). 2-min sensory ritual.</td></tr>
+  </table>
+
+  <p style="margin-top: 24px; opacity: 0.6;">The joke only works because the product isn't one.</p>
+</section>
+
+<!-- ==================== LANDING PAGE ==================== -->
+<section class="slide slide-signal">
+  <div class="section-label">Landing Page</div>
+  <h2 style="font-size: 56px;">send the right signal.</h2>
+  <p style="font-size: 22px; font-weight: 300; max-width: 600px;">signal is the 2-minute ritual that helps you show up &mdash; to yourself and to everyone around you. Clinical-dose actives. Real resistance. A liquid center that hits different.</p>
+  <p style="font-size: 22px; font-weight: 300;">Four chews. Two minutes. You absorb everything.</p>
+
+  <div style="margin: 40px 0; padding: 24px 40px; background: var(--deep-evening); border-radius: 8px; display: inline-block; color: var(--rose-linen); font-size: 18px; font-weight: 500; letter-spacing: 1px;">
+    GET YOUR SIGNAL &mdash; $49 &rarr;
+  </div>
+
+  <p style="font-size: 14px; opacity: 0.6;">First 500 subscribers get Founder's Price. 60-day money-back guarantee.</p>
+</section>
+
+<!-- ==================== CLOSING ==================== -->
+<section class="cover" style="min-height: 60vh;">
+  <h1 style="font-size: 72px;">signal</h1>
+  <div class="tagline">the 120 seconds that belong to you.</div>
+  <div style="margin-top: 40px; font-size: 14px; color: rgba(246,239,234,0.4); letter-spacing: 1px;">
+    INSDR Wellness Co. &mdash; 2026
+  </div>
+</section>
+
+</body>
+</html>
