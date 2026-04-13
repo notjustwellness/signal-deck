@@ -6,8 +6,24 @@
 <title>signal — concept deck</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* --- SELF-HOSTED BRAND FONTS --- */
+  @font-face {
+    font-family: 'Anguita Sans';
+    src: url('fonts/AnguitaSans.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Bebas Neue';
+    src: url('fonts/BebasNeue-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
   :root {
     --signal: #AD4236;
     --signal-light: #c4574b;
@@ -16,8 +32,8 @@
     --deep-evening-soft: #2a2420;
 
     /* Typography system */
-    --font-display: 'Bebas Neue', 'Anguita Sans', Impact, sans-serif;
-    --font-editorial: 'Anguita Sans', 'Plus Jakarta Sans', -apple-system, sans-serif;
+    --font-display: 'Anguita Sans', 'Bebas Neue', Impact, sans-serif;
+    --font-editorial: 'Bebas Neue', 'Anguita Sans', Impact, sans-serif;
     --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
   }
 
@@ -57,10 +73,10 @@
   }
   .cover h1 {
     font-family: var(--font-display);
-    font-size: 180px;
-    font-weight: 400;
+    font-size: 140px;
+    font-weight: 900;
     color: var(--signal);
-    letter-spacing: 2px;
+    letter-spacing: -2px;
     line-height: 0.9;
     position: relative;
     z-index: 1;
@@ -129,20 +145,20 @@
   }
   .slide h2 {
     font-family: var(--font-display);
-    font-size: 68px;
-    font-weight: 400;
+    font-size: 56px;
+    font-weight: 900;
     line-height: 1.05;
     margin-bottom: 32px;
-    letter-spacing: 1px;
+    letter-spacing: -1px;
     text-transform: lowercase;
   }
   .slide h3 {
     font-family: var(--font-display);
-    font-size: 40px;
-    font-weight: 400;
+    font-size: 32px;
+    font-weight: 900;
     margin-bottom: 20px;
     margin-top: 40px;
-    letter-spacing: 1px;
+    letter-spacing: -0.5px;
     text-transform: lowercase;
   }
   .slide p {
@@ -196,10 +212,10 @@
   }
   .card h4 {
     font-family: var(--font-display);
-    font-size: 26px;
-    font-weight: 400;
+    font-size: 22px;
+    font-weight: 900;
     margin-bottom: 12px;
-    letter-spacing: 1px;
+    letter-spacing: -0.3px;
     text-transform: lowercase;
     line-height: 1.1;
   }
@@ -256,10 +272,10 @@
   }
   .timeline-title {
     font-family: var(--font-display);
-    font-size: 22px;
-    font-weight: 400;
+    font-size: 20px;
+    font-weight: 900;
     margin: 8px 0 4px;
-    letter-spacing: 0.5px;
+    letter-spacing: -0.3px;
     text-transform: lowercase;
   }
   .timeline-desc {
@@ -281,11 +297,11 @@
   }
   .stat .number {
     font-family: var(--font-display);
-    font-size: 78px;
-    font-weight: 400;
+    font-size: 64px;
+    font-weight: 900;
     color: var(--signal);
     line-height: 1;
-    letter-spacing: 1px;
+    letter-spacing: -1px;
   }
   .slide-dark .stat .number {
     color: var(--signal-light);
@@ -402,10 +418,10 @@
   }
   .layer h4 {
     font-family: var(--font-display);
-    font-size: 28px;
-    font-weight: 400;
+    font-size: 24px;
+    font-weight: 900;
     margin-bottom: 12px;
-    letter-spacing: 1px;
+    letter-spacing: -0.5px;
     text-transform: lowercase;
   }
   .ingredient-grid {
