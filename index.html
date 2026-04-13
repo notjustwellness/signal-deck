@@ -73,7 +73,7 @@
   }
   .cover-overline {
     font-family: var(--font-body);
-    font-size: 22px;
+    font-size: 18px;
     color: var(--rose-linen);
     font-weight: 300;
     letter-spacing: 2px;
@@ -115,7 +115,17 @@
     letter-spacing: 4px;
     text-transform: uppercase;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
+  .insdr-logo {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .insdr-logo-light { height: 12px; }
+  .insdr-logo-dark { height: 12px; }
+  .cover .company .insdr-logo-light { height: 10px; opacity: 0.6; }
 
   /* --- SECTION SLIDES --- */
   .slide {
@@ -630,7 +640,7 @@
 <section class="cover">
   <div class="cover-overline">send the right</div>
   <h1>signal</h1>
-  <div class="company">INSDR Wellness Co.</div>
+  <div class="company"><img src="logo/insdr_logo_light.png" alt="INSDR" class="insdr-logo insdr-logo-light"> Wellness Co.</div>
 </section>
 
 <!-- ==================== EXPERIENCE IT FIRST ==================== -->
@@ -1290,8 +1300,8 @@
 <section class="cover" style="min-height: 60vh;">
   <h1 style="font-size: 72px;">signal</h1>
   <div class="tagline">the 120 seconds that belong to you.</div>
-  <div style="margin-top: 40px; font-size: 14px; color: rgba(246,239,234,0.4); letter-spacing: 1px;">
-    INSDR Wellness Co. &mdash; 2026
+  <div style="margin-top: 40px; font-size: 14px; color: rgba(246,239,234,0.4); letter-spacing: 1px; display: flex; align-items: center; gap: 10px;">
+    <img src="logo/insdr_logo_light.png" alt="INSDR" style="height: 12px; opacity: 0.6;"> Wellness Co. &mdash; 2026
   </div>
 </section>
 
