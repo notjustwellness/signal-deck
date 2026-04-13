@@ -3,10 +3,108 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>signal — concept deck v2</title>
+<title>signal — concept deck</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* --- PASSWORD GATE --- */
+  #gate {
+    position: fixed;
+    inset: 0;
+    background: #1A1410;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    color: #F6EFEA;
+  }
+  #gate .gate-overline {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #AD4236;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  #gate .gate-title {
+    font-family: 'Anguita Sans', 'Bebas Neue', Impact, sans-serif;
+    font-size: 96px;
+    font-weight: 900;
+    color: #AD4236;
+    line-height: 0.9;
+    margin-bottom: 12px;
+    letter-spacing: -1px;
+    text-transform: lowercase;
+  }
+  #gate .gate-subtitle {
+    font-size: 14px;
+    opacity: 0.6;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+  }
+  #gate form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  #gate input {
+    background: rgba(246,239,234,0.08);
+    border: 1px solid rgba(246,239,234,0.2);
+    border-radius: 6px;
+    color: #F6EFEA;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-family: inherit;
+    width: 280px;
+    text-align: center;
+    letter-spacing: 1px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  #gate input:focus {
+    border-color: #AD4236;
+  }
+  #gate button {
+    background: #AD4236;
+    color: #F6EFEA;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 32px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s;
+  }
+  #gate button:hover {
+    background: #c4574b;
+  }
+  #gate .gate-error {
+    color: #AD4236;
+    font-size: 12px;
+    margin-top: 8px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    letter-spacing: 1px;
+  }
+  #gate .gate-error.show { opacity: 1; }
+  #gate .gate-footer {
+    position: absolute;
+    bottom: 40px;
+    font-size: 10px;
+    opacity: 0.3;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  body.locked { overflow: hidden; }
+  body.locked > section { display: none !important; }
+</style>
 <style>
   /* --- SELF-HOSTED BRAND FONTS --- */
   @font-face {
@@ -634,7 +732,48 @@
   }
 </style>
 </head>
-<body>
+<body class="locked">
+
+<!-- ==================== PASSWORD GATE ==================== -->
+<div id="gate">
+  <div class="gate-overline">INSDR Wellness Co. &mdash; Confidential</div>
+  <div class="gate-title">signal</div>
+  <div class="gate-subtitle">Enter password to view.</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
+    <button type="submit">Enter</button>
+    <div class="gate-error" id="gate-error">Incorrect. Try again.</div>
+  </form>
+  <div class="gate-footer">Do not share.</div>
+</div>
+
+<script>
+  (function() {
+    var PASS = "5-4-3-2-1";
+    var gate = document.getElementById("gate");
+    var body = document.body;
+    if (sessionStorage.getItem("signal_unlocked") === "true") {
+      gate.style.display = "none";
+      body.classList.remove("locked");
+    }
+    window.checkPass = function(e) {
+      e.preventDefault();
+      var input = document.getElementById("gate-pass").value;
+      var err = document.getElementById("gate-error");
+      if (input === PASS) {
+        sessionStorage.setItem("signal_unlocked", "true");
+        gate.style.display = "none";
+        body.classList.remove("locked");
+      } else {
+        err.classList.add("show");
+        document.getElementById("gate-pass").value = "";
+        document.getElementById("gate-pass").focus();
+        setTimeout(function(){ err.classList.remove("show"); }, 2400);
+      }
+      return false;
+    };
+  })();
+</script>
 
 <!-- ==================== COVER ==================== -->
 <section class="cover">
