@@ -42,8 +42,19 @@
   #gate .gate-subtitle {
     font-size: 14px;
     opacity: 0.6;
-    margin-bottom: 40px;
+    margin-bottom: 12px;
     letter-spacing: 1px;
+  }
+  #gate .gate-hint {
+    font-size: 13px;
+    color: #AD4236;
+    margin-bottom: 32px;
+    letter-spacing: 2px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  #gate .gate-hint strong {
+    font-weight: 700;
+    letter-spacing: 3px;
   }
   #gate form {
     display: flex;
@@ -739,6 +750,7 @@
   <div class="gate-overline">INSDR Wellness Co. &mdash; Confidential</div>
   <div class="gate-title">signal</div>
   <div class="gate-subtitle">Enter password to view.</div>
+  <div class="gate-hint">password: <strong>5-4-3-2-1</strong></div>
   <form onsubmit="return checkPass(event)">
     <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
     <button type="submit">Enter</button>
@@ -1129,10 +1141,14 @@
   <h3 style="margin-top: 32px;">What the Investor Gets</h3>
   <p>A stake in a celebrity-backed beauty-from-within brand with a novel format, clinical-dose ingredients, a co-marketing advantage no competitor can easily replicate, and a 12-month path from concept to $250K MRR. Exit playbook already established: Grüns sold for $1.2B in the same category in April 2026.</p>
 
-  <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(26,20,16,0.12);">
-    <a href="./appendices.html" style="display: inline-flex; align-items: center; gap: 12px; font-family: 'Anguita Sans', serif; font-size: 20px; color: var(--signal); text-decoration: none; border-bottom: 1px solid var(--signal); padding-bottom: 4px;">
-      Appendices &mdash; deeper detail, clinical references, SKU platform, IP strategy, 5 Gates scoring &rarr;
+  <div style="margin-top: 56px; padding-top: 40px; border-top: 1px solid rgba(26,20,16,0.12);">
+    <div style="font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color: var(--signal); opacity: 0.7; margin-bottom: 12px;">Before you decide &mdash; read this</div>
+    <a href="./appendices.html" style="display: block; font-family: 'Anguita Sans', serif; font-size: 56px; line-height: 1.05; color: var(--signal); text-decoration: none; font-weight: 900; letter-spacing: -1.5px; text-transform: lowercase; margin-bottom: 16px;">
+      open the appendices &rarr;
     </a>
+    <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; color: var(--deep-evening); opacity: 0.7; max-width: 720px; line-height: 1.5;">
+      12 deep-dive sections: clinical references, SKU platform, IP strategy, 5 Gates scoring, pilot study protocol, founding team detail, 90-day execution sequence, and more. Every claim in this deck has its receipt in here.
+    </div>
   </div>
 </section>
 

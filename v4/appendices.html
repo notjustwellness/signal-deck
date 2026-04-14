@@ -42,8 +42,19 @@
   #gate .gate-subtitle {
     font-size: 14px;
     opacity: 0.6;
-    margin-bottom: 40px;
+    margin-bottom: 12px;
     letter-spacing: 1px;
+  }
+  #gate .gate-hint {
+    font-size: 13px;
+    color: #AD4236;
+    margin-bottom: 32px;
+    letter-spacing: 2px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  #gate .gate-hint strong {
+    font-weight: 700;
+    letter-spacing: 3px;
   }
   #gate form {
     display: flex;
@@ -739,6 +750,7 @@
   <div class="gate-overline">INSDR Wellness Co. &mdash; Confidential</div>
   <div class="gate-title">signal</div>
   <div class="gate-subtitle">Enter password to view.</div>
+  <div class="gate-hint">password: <strong>5-4-3-2-1</strong></div>
   <form onsubmit="return checkPass(event)">
     <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
     <button type="submit">Enter</button>
