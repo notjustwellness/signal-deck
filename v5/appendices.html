@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>signal — appendices v5 (cellular energy thesis)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* --- PASSWORD GATE --- */
+  #gate { position: fixed; inset: 0; background: #1A1410; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; color: #F6EFEA; }
+  #gate .gate-overline { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #AD4236; margin-bottom: 16px; font-weight: 600; }
+  #gate .gate-title { font-family: 'Anguita Sans', 'Bebas Neue', Impact, sans-serif; font-size: 96px; font-weight: 900; color: #AD4236; line-height: 0.9; margin-bottom: 12px; letter-spacing: -1px; text-transform: lowercase; }
+  #gate .gate-subtitle { font-size: 14px; opacity: 0.6; margin-bottom: 32px; letter-spacing: 1px; }
+  #gate form { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  #gate input { background: rgba(246,239,234,0.08); border: 1px solid rgba(246,239,234,0.2); border-radius: 6px; color: #F6EFEA; padding: 14px 20px; font-size: 15px; font-family: inherit; width: 280px; text-align: center; letter-spacing: 1px; outline: none; transition: border-color 0.2s; }
+  #gate input:focus { border-color: #AD4236; }
+  #gate button { background: #AD4236; color: #F6EFEA; border: none; border-radius: 6px; padding: 12px 32px; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+  #gate button:hover { background: #c4574b; }
+  #gate .gate-error { color: #AD4236; font-size: 12px; margin-top: 8px; opacity: 0; transition: opacity 0.2s; letter-spacing: 1px; }
+  #gate .gate-error.show { opacity: 1; }
+  #gate .gate-footer { position: absolute; bottom: 40px; font-size: 10px; opacity: 0.3; letter-spacing: 3px; text-transform: uppercase; }
+  body.locked { overflow: hidden; }
+  body.locked > section { display: none !important; }
+</style>
+<style>
+  @font-face { font-family: 'Anguita Sans'; src: url('https://notjustwellness.github.io/signal-deck/v4/fonts/AnguitaSans.otf') format('opentype'); font-weight: 900; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Bebas Neue'; src: url('https://notjustwellness.github.io/signal-deck/v4/fonts/BebasNeue-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+
+  :root { --signal: #AD4236; --signal-light: #c4574b; --rose-linen: #F6EFEA; --deep-evening: #1A1410; --deep-evening-soft: #2a2420; --font-display: 'Anguita Sans', 'Bebas Neue', Impact, sans-serif; --font-editorial: 'Bebas Neue', 'Anguita Sans', Impact, sans-serif; --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-body); background: var(--rose-linen); color: var(--deep-evening); line-height: 1.6; -webkit-font-smoothing: antialiased; font-weight: 400; }
+
+  .cover { min-height: 100vh; background: var(--deep-evening); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 40px; position: relative; }
+  .cover::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(173,66,54,0.15) 0%, transparent 70%); }
+  .cover-overline { font-family: var(--font-body); font-size: 18px; color: var(--rose-linen); font-weight: 300; letter-spacing: 2px; opacity: 0.75; margin-bottom: 8px; position: relative; z-index: 1; text-transform: lowercase; }
+  .cover h1 { font-family: var(--font-display); font-size: 96px; font-weight: 900; color: var(--signal); letter-spacing: -2px; line-height: 0.9; position: relative; z-index: 1; text-transform: lowercase; }
+  .cover .tagline { font-family: var(--font-body); font-size: 20px; color: var(--rose-linen); margin-top: 16px; font-weight: 300; letter-spacing: 2px; opacity: 0.85; position: relative; z-index: 1; text-transform: lowercase; }
+  .cover .company { font-family: var(--font-body); position: absolute; bottom: 40px; font-size: 11px; color: rgba(246,239,234,0.4); letter-spacing: 4px; text-transform: uppercase; font-weight: 500; display: flex; align-items: center; gap: 10px; }
+  .insdr-logo-light { height: 12px; opacity: 0.6; }
+
+  .slide { min-height: 100vh; padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; max-width: 1200px; margin: 0 auto; page-break-before: always; }
+  .slide-dark { background: var(--deep-evening); color: var(--rose-linen); max-width: none; padding: 80px 10%; }
+  .slide-signal { background: var(--signal); color: var(--rose-linen); max-width: none; padding: 80px 10%; }
+
+  .section-label { font-family: var(--font-body); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--signal); margin-bottom: 16px; font-weight: 600; }
+  .slide-dark .section-label { color: rgba(246,239,234,0.5); }
+  .slide h2 { font-family: var(--font-display); font-size: 56px; font-weight: 900; line-height: 1.05; margin-bottom: 32px; letter-spacing: -1px; text-transform: lowercase; }
+  .slide h3 { font-family: var(--font-display); font-size: 32px; font-weight: 900; margin-bottom: 20px; margin-top: 40px; letter-spacing: -0.5px; text-transform: lowercase; }
+  .slide p { font-family: var(--font-body); font-size: 17px; line-height: 1.7; margin-bottom: 20px; max-width: 800px; font-weight: 400; }
+  .slide-dark p { opacity: 0.9; }
+  .highlight { color: var(--signal); font-weight: 500; }
+  .slide-dark .highlight { color: #fff; font-weight: 500; }
+
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 32px 0; }
+  .card { background: white; border-radius: 12px; padding: 32px; box-shadow: 0 2px 20px rgba(26,20,16,0.06); }
+  .slide-dark .card { background: var(--deep-evening-soft); box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+  .card .card-label { font-family: var(--font-body); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--signal); margin-bottom: 8px; font-weight: 700; }
+  .card h4 { font-family: var(--font-display); font-size: 22px; font-weight: 900; margin-bottom: 12px; letter-spacing: -0.3px; text-transform: lowercase; line-height: 1.1; }
+  .card p { font-family: var(--font-body); font-size: 15px; line-height: 1.6; opacity: 0.8; font-weight: 400; }
+
+  table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 15px; font-family: var(--font-body); }
+  th { font-family: var(--font-body); text-align: left; padding: 12px 16px; border-bottom: 2px solid var(--signal); font-weight: 700; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--signal); }
+  td { padding: 12px 16px; border-bottom: 1px solid rgba(26,20,16,0.08); vertical-align: top; }
+  .slide-dark th { border-bottom-color: var(--signal); color: var(--signal-light); }
+  .slide-dark td { border-bottom-color: rgba(246,239,234,0.08); }
+
+  .layer { background: white; border-radius: 12px; padding: 32px; margin: 16px 0; border-left: 4px solid var(--signal); box-shadow: 0 2px 12px rgba(26,20,16,0.04); }
+  .layer-name { font-family: var(--font-body); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--signal); font-weight: 700; margin-bottom: 4px; }
+  .layer h4 { font-family: var(--font-display); font-size: 24px; font-weight: 900; margin-bottom: 12px; letter-spacing: -0.5px; text-transform: lowercase; }
+
+  @media (max-width: 768px) {
+    .slide { padding: 40px 24px; }
+    .cover h1 { font-size: 56px; }
+    .slide h2 { font-size: 32px; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body class="locked">
+
+<!-- ==================== PASSWORD GATE ==================== -->
+<div id="gate">
+  <div class="gate-overline">INSDR Wellness Co. &mdash; Confidential</div>
+  <div class="gate-title">signal</div>
+  <div class="gate-subtitle">Enter password to view.</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
+    <button type="submit">Enter</button>
+    <div class="gate-error" id="gate-error">Incorrect. Try again.</div>
+  </form>
+  <div class="gate-footer">v5 appendices &mdash; Do not share.</div>
+</div>
+
+<script>
+  (function() {
+    var PASS = "5-4-3-2-1";
+    var gate = document.getElementById("gate");
+    var body = document.body;
+    if (sessionStorage.getItem("signal_unlocked") === "true") {
+      gate.style.display = "none";
+      body.classList.remove("locked");
+    }
+    window.checkPass = function(e) {
+      e.preventDefault();
+      var input = document.getElementById("gate-pass").value;
+      var err = document.getElementById("gate-error");
+      if (input === PASS) {
+        sessionStorage.setItem("signal_unlocked", "true");
+        gate.style.display = "none";
+        body.classList.remove("locked");
+      } else {
+        err.classList.add("show");
+        document.getElementById("gate-pass").value = "";
+        document.getElementById("gate-pass").focus();
+        setTimeout(function(){ err.classList.remove("show"); }, 2400);
+      }
+      return false;
+    };
+  })();
+</script>
+
+<!-- ==================== COVER ==================== -->
+<section class="cover" style="min-height: 80vh;">
+  <div class="cover-overline">signal &mdash; concept deck v5</div>
+  <h1>appendices</h1>
+  <div class="tagline">deeper detail. supporting evidence. the platform underneath.</div>
+  <div class="company"><img src="https://notjustwellness.github.io/signal-deck/v4/logo/insdr_logo_light.png" alt="INSDR" class="insdr-logo-light"> Wellness Co. &mdash; Confidential &middot; cellular energy thesis</div>
+</section>
+
+<!-- ==================== A0 • TABLE OF CONTENTS ==================== -->
+<section class="slide">
+  <div class="section-label">Contents</div>
+  <h2>What's <span class="highlight">in here.</span></h2>
+  <p>The main deck is 16 slides. Everything that didn't make the cut &mdash; but still matters &mdash; lives here. Use this as a reference document for due diligence, follow-up questions, or deep-dive sessions. v5 leads with the platform thesis because it's the biological foundation underneath everything else in the deck.</p>
+  <div class="card-grid" style="margin-top: 32px;">
+    <div class="card"><div class="card-label">A1</div><h4>the platform thesis</h4><p>Cellular energy as the biological foundation. Weissig framework, SKU mapping.</p></div>
+    <div class="card"><div class="card-label">A2</div><h4>try this</h4><p>The 90-second presence practice. Energy gives capacity; presence directs it.</p></div>
+    <div class="card"><div class="card-label">A3</div><h4>the sensory science</h4><p>5-4-3-2-1 grounding: the clinical science under the ritual. Pairs with A1.</p></div>
+    <div class="card"><div class="card-label">A4</div><h4>closest competitors</h4><p>Beauty-from-within + longevity-adjacent comp set. What they own, what we own.</p></div>
+    <div class="card"><div class="card-label">A5</div><h4>SKU platform strategy</h4><p>8 SKUs, 8 cell types, one biology. Launch sequencing locked.</p></div>
+    <div class="card"><div class="card-label">A6</div><h4>5 acquirability gates</h4><p>The mandatory filter. Every concept must PASS all 5.</p></div>
+    <div class="card"><div class="card-label">A7</div><h4>IP &amp; patent strategy</h4><p>Patents are the fence. The brand is the moat.</p></div>
+    <div class="card"><div class="card-label">A8</div><h4>pilot study protocol</h4><p>How we close the Efficacy gate to PASS.</p></div>
+    <div class="card"><div class="card-label">A9</div><h4>send a signal campaign</h4><p>Viral gifting mechanic. The brand name IS the launch.</p></div>
+    <div class="card"><div class="card-label">A10</div><h4>sensory &amp; packaging</h4><p>Tear, crunch, packet material, container design.</p></div>
+    <div class="card"><div class="card-label">A11</div><h4>flavor profiles</h4><p>The 3 launch flavors. Layered flavor delivery.</p></div>
+    <div class="card"><div class="card-label">A12</div><h4>founding team detail</h4><p>Who's doing what. Equity, roles, advisors.</p></div>
+    <div class="card"><div class="card-label">A13</div><h4>execution next steps</h4><p>The 90-day sequence. CMO, patent, waitlist, pilot.</p></div>
+  </div>
+</section>
+
+<!-- ==================== A1 • THE PLATFORM THESIS ==================== -->
+<section class="slide" id="A1">
+  <div class="section-label">A1 &mdash; The Platform Thesis</div>
+  <h2>Energy is the foundation. <span class="highlight">Every signal supports it.</span></h2>
+  <p>signal's launch SKU is positioned around skin because skin is the most visible expression of cellular energy decline. But the underlying biology that makes signal work is not specific to skin &mdash; it's specific to <strong>cellular energy</strong>. That's the thesis that lets a single brand architecture support eight discrete SKUs without becoming incoherent, and it's why v5 leads with energy rather than with hydration.</p>
+
+  <h3 style="margin-top: 40px;">The science we're building on</h3>
+  <p>Volkmar Weissig (President, World Mitochondria Society) published a 2025 review in the <em>Journal of Mitochondria, Plastids and Endosymbiosis</em> titled <em>"Mitochondrial dysfunction as the 'mother' of all hallmarks of aging."</em> His core argument: of the twelve canonical hallmarks of aging (L&oacute;pez-Ot&iacute;n et al. 2023), mitochondrial dysfunction sits upstream of all the others. Mitochondria don't just produce ATP &mdash; they also run intercellular communication via mtDAMPs, mitochondrial-derived peptides, cardiolipin, and N-formyl peptides. When the energy economy fails, every other process that maintains tissue (DNA repair, proteostasis, autophagy, telomere maintenance, stem cell function) starts underperforming because it can't run without ATP.</p>
+  <p>The crystallizing line, from the consumer-facing thread that surfaced this thesis: <span class="highlight">"It's not one hallmark failing. It's the energy behind all of them."</span></p>
+
+  <h3 style="margin-top: 40px;">How this maps to signal's 8-SKU platform</h3>
+  <p>If cellular energy is the foundation, then every SKU on the INSDR platform is a different expression of the same biology &mdash; nourishing mitochondria in the cell type that matters for the use case the buyer is reaching for that day.</p>
+
+  <table style="margin-top: 24px;">
+    <tr><th>SKU</th><th>Cell type targeted</th><th>What the energy supports</th></tr>
+    <tr><td><strong>signal (glow)</strong> &mdash; LAUNCH SKU</td><td>Dermal fibroblasts</td><td>HA &amp; collagen synthesis are both ATP-dependent. Skin cells need energy to build the reservoir.</td></tr>
+    <tr><td><strong>signal (rise)</strong></td><td>Metabolic cells</td><td>Morning energy production, fat oxidation, sustained alertness without caffeine crash.</td></tr>
+    <tr><td><strong>signal (rest)</strong></td><td>Sleep-state autophagy</td><td>The repair work your body does while you sleep is itself ATP-dependent.</td></tr>
+    <tr><td><strong>signal (surge)</strong></td><td>Skeletal muscle</td><td>Muscle contraction is literally ATP. Performance and recovery are energy questions.</td></tr>
+    <tr><td><strong>signal (edge)</strong></td><td>Neuronal</td><td>Brain uses ~20% of total ATP. Focus and clarity are downstream of neuronal energy supply.</td></tr>
+    <tr><td><strong>signal (still)</strong></td><td>Nervous system balance</td><td>Stress recovery and parasympathetic tone require ATP to restore homeostasis.</td></tr>
+    <tr><td><strong>signal (guard)</strong></td><td>Immune cells</td><td>T-cell function is ATP-starved during infection. Immune competence is an energy problem.</td></tr>
+    <tr><td><strong>signal (move)</strong></td><td>Connective tissue</td><td>Joint and tendon repair require energy at the cellular level.</td></tr>
+  </table>
+
+  <h3 style="margin-top: 40px;">Why the launch SKU is signal (glow)</h3>
+  <p>Skin gives the buyer something visible to validate against. Every chew is supporting the cellular machinery that holds water in skin tissue, and that machinery runs on energy. That's why <strong>astaxanthin</strong> (4mg/day) is the energy keystone of the formulation &mdash; it's one of the most-studied protectors of mitochondrial membranes, the structures dermal fibroblasts use to make ATP. HA and phytoceramides supply the substrates the cells use; astaxanthin protects the energy plant that uses them. The launch SKU is the most defensible entry because the visible outcome (skin) is the part of the body where energy decline shows up first to the mirror.</p>
+
+  <h3 style="margin-top: 40px;">Why this is the platform's moat</h3>
+  <p>Every future SKU emerges from the same biological foundation, so brand expansion doesn't require a new story &mdash; it requires a new application of an already-established one. This is the structural reason signal can scale to eight SKUs without diluting brand meaning. <strong>The brand verb &mdash; "send the right signal" &mdash; is also the literal biology. Mitochondria are signaling hubs. The tagline is the mechanism.</strong></p>
+
+  <h3 style="margin-top: 32px;">Important: claim discipline</h3>
+  <p style="font-size: 14px; opacity: 0.8;">signal does not claim to "treat mitochondrial dysfunction" or "reverse cellular aging." Those are pharmaceutical claims that signal as a dietary supplement cannot make. What signal claims is that its formulation supports the systems that are studied as part of healthy cellular function. The platform thesis above describes the biological framework we are building toward. The launch SKU's specific outcome claim is skin hydration, measured in the pilot study via corneometry and TEWL &mdash; not mitochondrial endpoints.</p>
+</section>
+
+<!-- ==================== A2 • TRY THIS (PRESENCE + ENERGY) ==================== -->
+<section class="slide" id="A2">
+  <div class="section-label">A2 &mdash; Try This</div>
+  <h2>Energy gives you capacity. <span class="highlight">Presence tells you where to spend it.</span></h2>
+  <p>A1 is about cellular energy &mdash; the biological fuel. This section is about what you do with it. <strong>Energy without presence is wasted; presence without energy is exhausting.</strong> Together, they produce what might be the closest thing to feeling invincible the body is built to feel. signal is designed to deliver both in the same 90 seconds: the chew provides the substrates and the ritual provides the reset.</p>
+  <p>Before you read another word about signal, do this. It takes 90 seconds and requires nothing but your jaw and your attention. This is what the format does &mdash; minus the active ingredients.</p>
+
+  <div class="layer" style="margin-top: 24px;">
+    <div class="layer-name">The Exercise</div>
+    <h4>chew nothing. focus on everything.</h4>
+    <ol style="margin-top: 16px; padding-left: 24px; font-size: 16px; line-height: 1.8;">
+      <li>Set a 90-second timer.</li>
+      <li>Close your mouth and start chewing as if you had a piece of gum.</li>
+      <li>Pay attention to your jaw. The muscles working. Your tongue. Your breath through your nose.</li>
+      <li>Notice that you can't scroll. You can't text. You can't be anywhere else.</li>
+      <li>When the timer ends, notice what just happened.</li>
+    </ol>
+  </div>
+
+  <h3 style="margin-top: 32px;">What you just experienced</h3>
+  <p>You took a 90-second pause &mdash; without an app, without a guide, without trying. The format forced it. That's the presence half of the product. Now pair it with the energy half (A1): every chew also delivers astaxanthin, HA, phytoceramides, and cofactor support for the mitochondrial machinery that powers every cell doing work during those 90 seconds and the hours that follow. <span class="highlight">The ritual gives you presence. The ingredients give you energy. Together, they're the closest thing to empowerment signal can credibly deliver.</span></p>
+  <p style="opacity: 0.7;">This is positioned as retention proof, not as the lead. The reason people <em>buy</em> signal is the visible outcome (skin, and later the use-case-specific outcomes of each SKU). The reason they <em>keep</em> signal is the 90 seconds &mdash; the pairing of energy and presence that turns the routine into a ritual they actually want to do.</p>
+</section>
+
+<!-- ==================== A3 • THE SENSORY SCIENCE (5-4-3-2-1 GROUNDING) ==================== -->
+<section class="slide" id="A3">
+  <div class="section-label">A3 &mdash; The Sensory Science</div>
+  <h2>The pause has <span class="highlight">a clinical name.</span></h2>
+  <p>If A1 is the biology and A2 is the practice, this is the clinical framework underneath both. The 5-4-3-2-1 sensory grounding technique is a CBT-derived intervention for acute anxiety, panic, and dissociation. It works by forcing attention to immediate sensory input &mdash; breaking the rumination loop. The 90-second signal ritual engages the same sensory channels through taste, texture, jaw proprioception, breath, and sound. That's why the practice in A2 works without the product: the sensory pattern alone is enough to produce the presence effect. The product makes it daily, repeatable, and paired with the energy substrates that give the resulting state something to spend itself on.</p>
+
+  <div class="layer">
+    <div class="layer-name">The Technique</div>
+    <h4>name what your senses are doing.</h4>
+    <p>Standard 5-4-3-2-1 protocol: <strong>5</strong> things you see, <strong>4</strong> things you feel, <strong>3</strong> things you hear, <strong>2</strong> things you smell, <strong>1</strong> thing you taste. The act of cataloguing pulls attention out of internal narrative and into physical present.</p>
+  </div>
+
+  <h3 style="margin-top: 32px;">How signal mirrors the technique</h3>
+  <table>
+    <tr><th>Sense</th><th>What signal engages</th><th>When (in 90 seconds)</th></tr>
+    <tr><td>Taste</td><td>Outer coating dissolves, then liquid-center flavor burst at ~10s</td><td>0&ndash;15 sec</td></tr>
+    <tr><td>Touch / texture</td><td>Jaw resistance against the chew matrix</td><td>0&ndash;90 sec</td></tr>
+    <tr><td>Proprioception</td><td>Jaw, face, mouth awareness</td><td>0&ndash;90 sec</td></tr>
+    <tr><td>Smell / breath</td><td>Aromatic finish through the nose</td><td>60&ndash;90+ sec</td></tr>
+    <tr><td>Sound</td><td>Packet tear + first-bite crunch</td><td>0&ndash;5 sec</td></tr>
+  </table>
+
+  <h3 style="margin-top: 32px;">Energy + presence = the state signal is built to produce</h3>
+  <p>The grounding literature explains <em>why</em> the ritual works psychologically. The Weissig framework in A1 explains <em>why</em> the ingredient stack works biologically. signal is the only daily product designed so both happen in the same moment, in the same mouth, with the same tear-chew-dissolve-breathe arc. Presence without capacity feels like willpower running on empty. Capacity without presence feels like energy drinks and scattered days. The combination is the thing people remember as "the best I've felt in years."</p>
+
+  <p style="margin-top: 24px; opacity: 0.7;">Claim discipline: we do NOT position signal as a mental health intervention or anxiety treatment. We position it as a daily cellular-energy-support product that happens to create a sensory grounding moment as a structural side effect of the format. The clinical literature on 5-4-3-2-1 supports the mechanism without the product needing to make a clinical claim.</p>
+</section>
+
+<!-- ==================== A4 • CLOSEST COMPETITORS ==================== -->
+<section class="slide">
+  <div class="section-label">A4 &mdash; Closest Competitors</div>
+  <h2>What they own. <span class="highlight">What we own.</span></h2>
+  <p>v5's competitive landscape extends beyond traditional beauty-from-within into longevity-adjacent territory &mdash; the comp set that matters for the energy-led positioning. Each brand owns one thing well. signal is the only entry built around cellular energy as the platform foundation, with a daily ritual format and clinical doses.</p>
+
+  <table>
+    <tr><th>Brand</th><th>Owns</th><th>Misses</th><th>Where signal Wins</th></tr>
+    <tr>
+      <td><strong>HUM Nutrition</strong></td>
+      <td>Clinical-dose ingredients. Trust. RD-formulated.</td>
+      <td>Format is generic capsules. No daily ritual. No unifying biological thesis across SKUs.</td>
+      <td>Same dose discipline + a format that creates a habit loop + cellular energy as the connective thesis.</td>
+    </tr>
+    <tr>
+      <td><strong>Lemme (Kourtney Kardashian)</strong></td>
+      <td>Voice. Personality. Aspirational identity. Celebrity cap table.</td>
+      <td>Sub-clinical doses. Gummy format competes with candy. Claims discipline is loose.</td>
+      <td>Same celebrity firepower (Vanness Wu, Asia) + clinical doses + zero overclaiming + energy-led narrative.</td>
+    </tr>
+    <tr>
+      <td><strong>Gr&uuml;ns ($1.2B Unilever exit, April 2026)</strong></td>
+      <td>Format-as-ritual. Daily-use habit anchor. Beautiful packaging. Proof the category exits.</td>
+      <td>8,670mg proprietary blend. Greens-coded, not beauty or longevity-coded.</td>
+      <td>Same daily-format ritual + transparent clinical doses + a benefit you can see in the mirror.</td>
+    </tr>
+    <tr>
+      <td><strong>Ritual HyaCera (2025)</strong></td>
+      <td>First major brand to combine HA + phytoceramides as an ingestible. Clinical voice. Editor coverage.</td>
+      <td>Capsule format. Pure "trust me, science" voice. No ritual, no emotional hook, no platform architecture.</td>
+      <td>Same HA + phytoceramide ingredients, plus the format, plus the energy thesis HyaCera doesn't claim.</td>
+    </tr>
+    <tr>
+      <td><strong>Timeline Nutritionals (Mitopure)</strong></td>
+      <td>Owns "urolithin A" as a branded ingredient. Longevity-positioned. Peter Attia credibility.</td>
+      <td>Single-ingredient pill. $50+/month for one SKU. Biohacker-coded, not female-targeted. No ritual.</td>
+      <td>Broader biological story, consumer-friendly format, no need to teach what "urolithin A" is to convert.</td>
+    </tr>
+    <tr>
+      <td><strong>Novos Labs</strong></td>
+      <td>Longevity-first positioning with multi-ingredient daily stack. Ingredient stack is aggressive.</td>
+      <td>Powder + pill format. Expensive ($90+/month). Biohacker/tech audience. Not daily-feelable.</td>
+      <td>Same multi-SKU longevity-adjacent positioning at half the price, in a daily chew that actually feels like something.</td>
+    </tr>
+    <tr>
+      <td><strong>Freaks of Nature Skin Electrolyte (March 2026)</strong></td>
+      <td>First brand to explicitly bridge hydration + skin. Kelly Slater celebrity halo.</td>
+      <td>Wrong persona (surfer/athlete). Wrong format (stick pack + water). Wrong price ($1.83/day premium). Distribution is athlete-DTC, not beauty retail.</td>
+      <td>Correct persona (Optimizer Mom), correct format (water-free chew), broader platform story (energy, not hydration).</td>
+    </tr>
+  </table>
+
+  <h3 style="margin-top: 32px;">The exit precedents</h3>
+  <p>Gr&uuml;ns sold to Unilever for <strong>$1.2B</strong> in April 2026 &mdash; same category, same daily-format thesis, built on greens (a saturated story) instead of skin + energy (a category we can own). The acquirer logic is already proven. Longevity-adjacent positioning trades at higher multiples than beauty-only &mdash; an important consideration for exit planning when the comp set shifts to include Mitopure and Novos.</p>
+</section>
+
+<!-- ==================== A5 • SKU PLATFORM STRATEGY ==================== -->
+<section class="slide">
+  <div class="section-label">A5 &mdash; SKU Platform Strategy</div>
+  <h2>One format. Eight cell types. <span class="highlight">One biology.</span></h2>
+  <p>The dissolvable chew with liquid center is not a single product &mdash; it's a manufacturing platform. Same chew matrix, same liquid carrier, same packet, same container. What changes per SKU is the actives targeting the cell type that matters for the use case, and the flavor coating. That's it. The biological unifier &mdash; cellular energy &mdash; lets all eight SKUs share a single brand story without each one needing its own pitch.</p>
+
+  <table>
+    <tr><th>SKU</th><th>Signal</th><th>When</th><th>Target cell type</th><th>Key Actives (beyond base)</th></tr>
+    <tr><td><strong>signal : glow</strong> (launch)</td><td>your daily signal</td><td>Anytime</td><td>Dermal fibroblasts</td><td>HA 120mg + phytoceramides 40mg + astaxanthin 4mg (the energy keystone)</td></tr>
+    <tr><td><strong>signal : rise</strong></td><td>start your day</td><td>Morning</td><td>Metabolic cells</td><td>B-vitamin complex + L-theanine + modest caffeine + CoQ10</td></tr>
+    <tr><td><strong>signal : rest</strong></td><td>end your day</td><td>Evening</td><td>Sleep-state autophagy</td><td>Magnesium glycinate + glycine + apigenin + tart cherry</td></tr>
+    <tr><td><strong>signal : surge</strong></td><td>move harder</td><td>Pre/post workout</td><td>Skeletal muscle mitochondria</td><td>Creatine + D-ribose + magnesium + CoQ10</td></tr>
+    <tr><td><strong>signal : edge</strong></td><td>think clearly</td><td>Work blocks</td><td>Neuronal</td><td>Lion's mane + acetyl-L-carnitine + creatine</td></tr>
+    <tr><td><strong>signal : still</strong></td><td>come back to zero</td><td>Post-stress</td><td>Nervous system balance</td><td>L-theanine + GABA + magnesium + apigenin</td></tr>
+    <tr><td><strong>signal : guard</strong></td><td>stay protected</td><td>Seasonal</td><td>Immune cells</td><td>Zinc + vitamin D + beta-glucan + elderberry</td></tr>
+    <tr><td><strong>signal : move</strong></td><td>stay mobile</td><td>Daily</td><td>Connective tissue</td><td>Collagen peptides + glucosamine + MSM + vitamin C</td></tr>
+  </table>
+
+  <h3 style="margin-top: 32px;">Launch sequencing (locked)</h3>
+  <p><strong>Launch:</strong> signal : glow only (the hero). Prove the habit. Prove the ritual. Prove the retention. Skin is the visible validation surface.</p>
+  <p><strong>First wave (post month 6):</strong> signal : rise + signal : rest (bookend pair, lowest R&amp;D delta, natural daily-use expansion).</p>
+  <p><strong>Second wave:</strong> signal : edge + signal : still (cognitive day + nervous system recovery).</p>
+  <p><strong>Third wave:</strong> signal : surge + signal : move (athletic performance + mobility).</p>
+  <p><strong>Later:</strong> signal : guard (seasonal immunity, highest R&amp;D and stability complexity).</p>
+
+  <h3 style="margin-top: 32px;">Why this architecture is defensible</h3>
+  <p>Most multi-SKU supplement brands have to teach a new story for every new SKU (*"our ashwagandha product is different because..."*). signal inherits one story &mdash; cellular energy in a specific cell type &mdash; and each new SKU is an application of that story, not a new story. Brand expansion compounds; it doesn't reset. This is the structural reason the platform can scale without narrative dilution.</p>
+</section>
+
+<!-- ==================== A6 • 5 GATES ==================== -->
+<section class="slide">
+  <div class="section-label">A6 &mdash; 5 Acquirability Gates</div>
+  <h2>The mandatory filter. <span class="highlight">4 PASS / 1 PASS-path.</span></h2>
+  <p>Every wellness concept in this workspace must PASS all five gates. One FAIL disqualifies. signal currently sits at 4 PASS, with Efficacy on a defined PASS-path closed by the budgeted pilot study. The cellular energy framing doesn't change the gate status &mdash; the launch SKU's endpoint is still skin hydration (corneometry), not mitochondrial function.</p>
+
+  <table>
+    <tr><th>Gate</th><th>Question</th><th>Status</th><th>Evidence</th></tr>
+    <tr><td><strong>1. Enjoyment</strong></td><td>Do people actually like using it?</td><td><span class="highlight">PASS</span></td><td>Hi-Chew texture reference. Layered flavor delivery. 90-second sensory experience designed for taste-test wins. The liquid-center flavor burst is a presence-based sensory receipt.</td></tr>
+    <tr><td><strong>2. Trust</strong></td><td>Do they believe the claims?</td><td><span class="highlight">PASS</span></td><td>Clinical-dose ingredients with direct RCT citations (Oe 2017, Kawada 2014, Gao 2022, Guillou 2011, Bizot 2017, Tominaga 2017). Energy framework cites Weissig 2025 and L&oacute;pez-Ot&iacute;n 2023. Zero disprovable claims. FDA disclaimer present.</td></tr>
+    <tr><td><strong>3. Consistent Use</strong></td><td>Will they use it every day?</td><td><span class="highlight">PASS</span></td><td>Format creates a ritual loop (90-second daily ritual with taste receipt). Subscription default. Bookend opportunity with rise/rest later. Daily-use metric is the sacred number &mdash; target 70%+ by M3 of beta.</td></tr>
+    <tr><td><strong>4. Efficacy</strong></td><td>Does it actually work?</td><td><strong>PASS-path</strong></td><td>Individual ingredients are RCT-proven at the doses in signal. Combined formulation has not yet been tested. Pilot study budgeted (M3&ndash;M9) closes this gate with skin hydration endpoints. Mitochondrial framework is directional, not clinical.</td></tr>
+    <tr><td><strong>5. Experience</strong></td><td>Does using it feel like an upgrade?</td><td><span class="highlight">PASS</span></td><td>Multi-sensory ritual. Premium packet. Signal-red identity. The felt-feedback of the liquid-center flavor burst is the differentiator vs. every beauty supplement the buyer has tried and dropped.</td></tr>
+  </table>
+
+  <h3 style="margin-top: 32px;">Pre-launch science budget</h3>
+  <p>Closing Efficacy to full PASS requires ~$100&ndash;170K across pilot study + analytical validation. Included in the $500K&ndash;$1M ask. The pilot measures skin hydration endpoints specifically; the energy framing is supported by existing literature, not by a signal-specific study.</p>
+</section>
+
+<!-- ==================== A7 • IP & PATENT STRATEGY ==================== -->
+<section class="slide">
+  <div class="section-label">A7 &mdash; IP & Patent Strategy</div>
+  <h2>Patents are the fence. <span class="highlight">The brand is the moat.</span></h2>
+  <p>Let's be honest about how IP works in ingestible formulations: <strong>it doesn't, not by itself.</strong> Utility patents on supplement formulas are notoriously hard to enforce. Prior art is vast &mdash; hyaluronic acid, phytoceramides, and astaxanthin are all available today as individual supplements from dozens of brands. A patent claim on "the combination of X + Y + Z in a chew" is a defensive filing, not a competitive moat, and any investor who has lived through a CPG category will tell you the same thing.</p>
+  <p>We file anyway &mdash; because priority dates, assignment clauses, and design coverage are cheap insurance against a copycat lawsuit. But we don't pitch the patent stack to investors as the reason signal wins. <strong>The real defensibility is the thing that took Gr&uuml;ns to a $1.2B exit in April 2026: daily-use habit metrics, review velocity, subscription retention, and retail distribution.</strong> Gr&uuml;ns didn't win on IP. They won on 80% daily-use rates, 85K+ verified reviews, and a shelf position Unilever couldn't easily replicate. That's the playbook.</p>
+
+  <h3 style="margin-top: 40px;">The defensive filing plan</h3>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Layer 1</div>
+      <h4>provisional utility patent</h4>
+      <p><strong>$3K&ndash;$5K.</strong> Filed before any public demo. Locks a 12-month priority date on the format (dissolvable chew + liquid center + packet architecture). Defensive, not offensive. Cheap insurance against a fast-following copycat.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Layer 2</div>
+      <h4>design patent</h4>
+      <p><strong>$2K&ndash;$3K.</strong> Covers the visual identity of the packet + container + the chew form factor itself. Faster to issue, harder to design around, and meaningfully stronger than utility filings in this category.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Layer 3</div>
+      <h4>trade secrets</h4>
+      <p>The exact compression profile, flavor encapsulation ratio, and lipid carrier formula that give the chew its progressive dissolve, time the liquid-center flavor burst at ~10 seconds, and keep the fat-soluble actives stable inside the center. Confection-industry technique, not a proprietary absorption system. CMO under NDA. Never disclosed.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Layer 4</div>
+      <h4>what we don't patent</h4>
+      <p>HA. Phytoceramides. Astaxanthin. These are prior art &mdash; decades of research, dozens of commercial sources. Patenting them would be a waste of money and would invite invalidation challenges on day one.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 40px;">What the moat actually is</h3>
+  <p>The seven-layer moat stack in the main deck (slide 9) does not list IP. That's deliberate. The things that actually make signal hard to copy are: <strong>(1)</strong> the sensory ritual that creates daily habit, <strong>(2)</strong> the cellular energy thesis that no other beauty-from-within brand has claimed, <strong>(3)</strong> the clinical doses that competitors would have to reformulate and reprice to match, <strong>(4)</strong> first-mover partnerships, <strong>(5)</strong> the celebrity cap table and Asia distribution via Vanness Wu, and <strong>(6)</strong> the daily-use habit metrics we earn in the first 6 months of launch. Patents are #0 on that list &mdash; table stakes, not strategy.</p>
+
+  <h3 style="margin-top: 32px;">Filing sequence</h3>
+  <p><strong>M1&ndash;M2:</strong> Provisional utility filed. CMO MSA includes assignment-of-inventions clause.<br>
+  <strong>M2&ndash;M3:</strong> Design patent filed once final packet/container design is locked.<br>
+  <strong>M11:</strong> Convert provisional to non-provisional before 12-month deadline &mdash; <em>only if</em> commercial traction justifies the $15K&ndash;$25K full utility filing cost.<br>
+  <strong>M14&ndash;M18:</strong> File international (PCT) for Asia distribution coverage &mdash; only after product-market fit is demonstrated.</p>
+</section>
+
+<!-- ==================== A8 • PILOT STUDY ==================== -->
+<section class="slide">
+  <div class="section-label">A8 &mdash; Pilot Study Protocol</div>
+  <h2>How we move <span class="highlight">Efficacy to PASS.</span></h2>
+  <p>The Efficacy gate moves from PASS-path to PASS when we have direct evidence that <em>signal as a combined formulation</em> produces measurable skin hydration improvement. The individual ingredients are already proven. The combination is what we need to test. <strong>Critical:</strong> the pilot measures skin hydration endpoints, not mitochondrial function. The energy framing in the main deck is a platform thesis, not a clinical claim about the launch SKU.</p>
+
+  <table>
+    <tr><th>Element</th><th>Spec</th></tr>
+    <tr><td><strong>Design</strong></td><td>Randomized, placebo-controlled, double-blind</td></tr>
+    <tr><td><strong>Sample size</strong></td><td>n = 60 (30 active / 30 placebo)</td></tr>
+    <tr><td><strong>Duration</strong></td><td>12 weeks daily use</td></tr>
+    <tr><td><strong>Population</strong></td><td>Adults 25&ndash;55 with self-reported dry skin, no concurrent topical Rx</td></tr>
+    <tr><td><strong>Primary endpoint</strong></td><td>Change in stratum corneum hydration (corneometry) at week 12</td></tr>
+    <tr><td><strong>Secondary endpoints</strong></td><td>TEWL (transepidermal water loss), self-reported skin smoothness, subject satisfaction</td></tr>
+    <tr><td><strong>Site</strong></td><td>Independent CRO with dermatology measurement capability</td></tr>
+    <tr><td><strong>Budget</strong></td><td>$40K&ndash;$80K all-in</td></tr>
+    <tr><td><strong>Timeline</strong></td><td>Commission M3, in-flight M4&ndash;M8, results M9</td></tr>
+  </table>
+
+  <h3 style="margin-top: 32px;">Why this is the right study</h3>
+  <p>Corneometry and TEWL are the two gold-standard non-invasive measures of skin hydration. Both are used in the published RCTs we already cite (Oe 2017, Bizot 2017). Replicating the methodology means our pilot results plug directly into the existing literature &mdash; no new measurement framework, no methodological debate. Mitochondrial endpoints (mtDNA copy number, OCR, membrane potential) are deliberately NOT used in this pilot; those belong to pharmaceutical-grade studies, not dietary supplement PoCs.</p>
+</section>
+
+<!-- ==================== A9 • SEND A SIGNAL ==================== -->
+<section class="slide">
+  <div class="section-label">A9 &mdash; Send a Signal</div>
+  <h2>The brand name <span class="highlight">is the launch mechanic.</span></h2>
+  <p>Most viral gifting campaigns are bolt-ons &mdash; a referral code, a generic discount, a mechanic that has nothing to do with the product. signal is different. The product literally delivers a signal, so the act of sending one to a friend is on-brand by definition. The CTA is the brand name. Under development: extend from launch campaign to permanent embedded feature (subscribers retain ongoing send ability to first-time recipients).</p>
+
+  <div class="layer">
+    <div class="layer-name">The Mechanic</div>
+    <h4>send one. get one free.</h4>
+    <p>Pay <strong>$5</strong> to send a 4-chew packet to a friend. We ship one to them and one to you &mdash; two people, two packets, one ritual. The brand spreads at near-breakeven acquisition cost vs. the $25&ndash;$50 typical CAC for DTC supplements.</p>
+  </div>
+
+  <h3 style="margin-top: 32px;">Why this works specifically for signal</h3>
+  <ul style="font-size: 16px; line-height: 1.8; padding-left: 24px;">
+    <li><strong>Brand-name alignment:</strong> "send a signal" is what the product is. The campaign IS the brand promise.</li>
+    <li><strong>Low-friction sample:</strong> 4 chews is enough to experience the format, the flavor, and the 90-second ritual. It's a real product trial, not a teaser.</li>
+    <li><strong>Reciprocity loop:</strong> The sender feels generous (they paid). The recipient feels chosen (someone thought of them). Both have skin in the game.</li>
+    <li><strong>Built-in story:</strong> "My friend sent me this thing called signal" is a better intro than any ad we could buy.</li>
+    <li><strong>Asia activation:</strong> Vanness's audience can send signals across borders &mdash; the campaign becomes the entry vehicle for international expansion at zero incremental brand spend.</li>
+  </ul>
+
+  <h3 style="margin-top: 32px;">Unit economics <span style="font-size: 14px; font-weight: 400; opacity: 0.6; letter-spacing: normal; text-transform: none;">(directional estimates)</span></h3>
+  <div style="background: rgba(173,66,54,0.08); border-left: 3px solid var(--signal); padding: 16px 20px; margin: 16px 0; font-size: 14px; line-height: 1.6;">
+    <strong style="color: var(--signal); text-transform: uppercase; letter-spacing: 1px; font-size: 11px;">Note:</strong> The numbers below are <strong>directional estimates pending CMO COGS validation and 3PL shipping quotes.</strong> COGS and shipping will be refined once the manufacturing partner is selected (M3&ndash;M4). The economic logic &mdash; near-breakeven acquisition, positive on subscription conversion &mdash; holds across a reasonable range.
+  </div>
+  <table>
+    <tr><th>Item</th><th>Estimate</th></tr>
+    <tr><td>Customer payment</td><td>+$5.00</td></tr>
+    <tr><td>2&times; sampler COGS (4 chews each)</td><td>&minus;$1.60</td></tr>
+    <tr><td>2&times; packet + US shipping (light poly mailer)</td><td>&minus;$3.50</td></tr>
+    <tr><td>Payment processing (~2.9% + $0.30)</td><td>&minus;$0.45</td></tr>
+    <tr><td><strong>Net per send</strong></td><td><strong>&asymp; &minus;$0.55</strong></td></tr>
+  </table>
+  <p style="opacity: 0.75;">A small negative net per send &mdash; consistent with the main deck slide 12 claim of <em>"~$0&ndash;$2 net CAC per acquisition pair."</em> This is dramatically cheaper than $25&ndash;$50 paid social acquisition. Once subscription conversion is layered in (target: ~20% of recipients convert to the $49 Founder's Price), the unit economics flip decisively positive within the first billing cycle.</p>
+</section>
+
+<!-- ==================== A10 • SENSORY & PACKAGING ==================== -->
+<section class="slide">
+  <div class="section-label">A10 &mdash; Sensory & Packaging</div>
+  <h2>Designed for <span class="highlight">tear, crunch, and texture.</span></h2>
+  <p>Two sensory moments are real and provable: the packet tear and the first-bite crunch. We do not claim a "sonic logo," "Pavlovian cue," or any liquid slosh effect &mdash; those were ruled out as overclaims. What we DO claim is engineered into the materials. Under the energy thesis, the felt-feedback of the ritual is the consumer-facing evidence that something is happening &mdash; the presence-based sensory receipt that every other beauty supplement fails to deliver.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">The Tear</div>
+      <h4>laser-scored V-notch.</h4>
+      <p><strong>Material:</strong> Soft-touch OPP front / aluminum foil mid-layer / clear PET back. <strong>Notch:</strong> Laser-scored V on the top edge for clean tear without scissors. <strong>Cost:</strong> $0.08&ndash;$0.12 per packet at MOQ.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">The Crunch</div>
+      <h4>xylitol shell hardness.</h4>
+      <p>The first bite resistance comes from a compressed xylitol shell. Tunable hardness in the chew matrix spec. Same compression principle as Hi-Chew &mdash; hard initial bite, progressive dissolve over 90 seconds.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">The Packet</div>
+      <h4>matte front. clear back.</h4>
+      <p>Front: matte Signal-red with "send the right" overline + "signal" wordmark. Back: clear PET window showing the chew inside &mdash; you can see the product before you tear. 4 chews per packet. 1 packet = 1 serving.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">The Container</div>
+      <h4>60 packets per box.</h4>
+      <p>Deep Evening (#1A1410) primary container. 60 packets per box = 60-day supply at 1 serving/day. Recyclable paperboard with foil-stamped wordmark. Premium unboxing without plastic clamshell.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== A11 • FLAVOR PROFILES ==================== -->
+<section class="slide">
+  <div class="section-label">A11 &mdash; Flavor Profiles</div>
+  <h2>Three flavors. <span class="highlight">Literal names.</span></h2>
+  <p>Locked launch flavors. Layered flavor delivery: outer coating dissolves first (immediate flavor hit), liquid center bursts at ~10 seconds (second wave), chew matrix carries final 60 seconds. No cute names. Just the fruit. The liquid-center flavor burst is the felt-feedback moment &mdash; the taste receipt that tells the buyer something is happening in real time.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Flavor 01</div>
+      <h4>passion fruit &middot; yuzu</h4>
+      <p>Bright, tart, tropical. The hero flavor. Designed to read as premium without being polarizing. Yuzu adds a citrus spine that prevents the passion fruit from going syrupy.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Flavor 02</div>
+      <h4>watermelon &middot; cucumber &middot; mint</h4>
+      <p>Cooling, hydrating-coded, refreshing. The "summer" SKU. Cucumber + mint give it a spa cue without entering wellness-clich&eacute; territory. Watermelon carries the sweetness.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Flavor 03</div>
+      <h4>blood orange &middot; ginger</h4>
+      <p>Warm, energizing, slightly spicy. The "morning" lean. Ginger provides a heat note that distinguishes it from generic citrus. Blood orange gives it color and depth.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 32px;">Why three at launch (not one, not five)</h3>
+  <p>One flavor reads as a sample, not a brand. Five flavors splits inventory and confuses subscription decisions. Three lets us offer a sampler box (one of each) at trial, then convert to subscriber-favorite at month 2. It's the minimum number that supports a "discover your signal" purchase journey.</p>
+</section>
+
+<!-- ==================== A12 • FOUNDING TEAM ==================== -->
+<section class="slide">
+  <div class="section-label">A12 &mdash; Founding Team Detail</div>
+  <h2>Four people. <span class="highlight">One signal.</span></h2>
+  <p>The team is locked in principle, with formal documentation pending attorney review. Founders' MOU drafted. Equity splits and SAFE structures are draft-stage and are part of the use-of-funds legal allocation in the Ask.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">CEO</div>
+      <h4>Damon</h4>
+      <p>Concept origination, brand architecture, formulation direction, fundraising lead. Wellness/health entrepreneurship background. Owns the thesis end-to-end.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">COO</div>
+      <h4>Gabby</h4>
+      <p>Operations, supply chain, CMO management, regulatory compliance, retail-readiness work. The execution partner who makes the launch actually happen.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Investor-Founder</div>
+      <h4>Vanness Wu</h4>
+      <p>Asian celebrity audience reach (Taiwan, China, broader APAC). Investor capital + co-founder commitment. Anchor for the cross-border distribution story. Participation pending formal SAFE + co-founder agreement.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Advisor</div>
+      <h4>Frank</h4>
+      <p>Runs GNC Taiwan full-time. Supplement industry category expertise, regulatory guidance, and supplier network access. 4&ndash;8 hours/month advisory commitment. Equity allocated at advisor grade (0.5&ndash;1%), not co-founder grade.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 32px;">What's pending</h3>
+  <p>Founders' MOU is drafted but not signed. Cap table is conceptual. Vanness's SAFE note + co-founder agreement is pending attorney review. Incorporation and formal equity issuance happen in M1&ndash;M2 of the funded period (covered in the Ask).</p>
+</section>
+
+<!-- ==================== A13 • EXECUTION NEXT STEPS ==================== -->
+<section class="slide">
+  <div class="section-label">A13 &mdash; Execution Next Steps</div>
+  <h2>The 90-day sequence. <span class="highlight">Locked.</span></h2>
+  <p>Manufacturing validation is the critical path. Patent filing is time-sensitive. Habit measurement is the sacred metric. Everything else can run in parallel. This is the sequence the Ask funds.</p>
+
+  <table>
+    <tr><th>Window</th><th>Action</th><th>Why now</th></tr>
+    <tr><td><strong>Day 1&ndash;30</strong></td><td>Provisional patent filed. CMO outreach (5&ndash;8 candidates: Nutralliance, Adams &amp; Brooks, Bettera priority). Founders' MOU signed. Incorporation. Close Vanness SAFE.</td><td>Patent priority date locks before any public demo. CMO selection has the longest lead time. Vanness anchor is load-bearing for the runway.</td></tr>
+    <tr><td><strong>Day 30&ndash;60</strong></td><td>CMO selected and under MSA. Formulation R&amp;D kickoff (simplified prototype first, then full active stack). Mutual NDA executed. Waitlist landing page live.</td><td>R&amp;D timeline starts as soon as CMO is locked. Waitlist begins building owned audience.</td></tr>
+    <tr><td><strong>Day 60&ndash;90</strong></td><td>Pilot study commissioned with CRO. First taste-test round complete (3&ndash;5 rounds total). Brand creative production begins. First co-marketing conversation initiated. Send a Signal beta launches to 200&ndash;500 testers.</td><td>Pilot study in-flight by month 3 means results land at month 9 &mdash; in time for full PASS at launch. Habit measurement starts as soon as beta ships.</td></tr>
+  </table>
+
+  <h3 style="margin-top: 32px;">Critical-path dependencies</h3>
+  <ul style="font-size: 16px; line-height: 1.8; padding-left: 24px;">
+    <li><strong>Patent before demo.</strong> No public formulation disclosure or sampling outside NDA until provisional is on file.</li>
+    <li><strong>CMO before R&amp;D.</strong> R&amp;D timeline cannot start until a manufacturing partner is committed.</li>
+    <li><strong>Habit metric before scale.</strong> Target 70%+ daily-use rate by M3 of beta. If the curve isn't tracking, the format or ritual is failing and needs rework before marketing spend.</li>
+    <li><strong>Pilot before launch.</strong> Efficacy gate moves to PASS only when pilot results are in hand. Launch can technically proceed with PASS-path, but full PASS dramatically strengthens the trust narrative for investors and acquirers.</li>
+    <li><strong>Founders' docs before capital.</strong> SAFE notes cannot close until equity structure is formally documented. Vanness's SAFE is the load-bearing conversion for the runway.</li>
+  </ul>
+</section>
+
+<!-- ==================== BACK TO MAIN DECK ==================== -->
+<section class="slide slide-dark" style="text-align: center; justify-content: center;">
+  <div class="section-label">End of Appendices</div>
+  <h2 style="margin: 0 auto 32px;">that's the rest <span class="highlight">of the picture.</span></h2>
+  <p style="margin: 0 auto 48px; opacity: 0.75;">The main deck is the pitch. This is the proof underneath it. Every claim in the main 16-slide v5 cut is backed by something here &mdash; the platform thesis, the patent strategy, the pilot study, the team.</p>
+  <a href="./index.html" style="display: inline-flex; align-items: center; gap: 12px; font-family: 'Anguita Sans', serif; font-size: 22px; color: var(--signal-light); text-decoration: none; border-bottom: 1px solid var(--signal); padding-bottom: 4px;">
+    &larr; back to the main deck
+  </a>
+  <div style="margin-top: 80px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.4;">
+    INSDR Wellness Co. &mdash; Confidential &mdash; 2026 &middot; v5 cellular energy thesis
+  </div>
+</section>
+
+</body>
+</html>
