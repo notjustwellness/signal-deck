@@ -49,14 +49,14 @@
 
   /* Shockwave animation (ported from signal_teaser.html) */
   .shockwaves { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; pointer-events: none; z-index: 0; display: flex; align-items: center; justify-content: center; }
-  .wave { position: absolute; top: 50%; left: 50%; width: 60px; height: 60px; margin-top: -30px; margin-left: -30px; border: 1.5px solid #e85a4c; border-radius: 50%; opacity: 0; animation: shockwave 6s cubic-bezier(0.2, 0.7, 0.3, 1) infinite; will-change: transform, opacity; box-shadow: 0 0 30px rgba(232,90,76,0.6), inset 0 0 15px rgba(232,90,76,0.3); }
-  /* Pulse timing = 60 BPM (resting heartbeat). New wave every 1.0s — coherence cue for the viewer. */
+  .wave { position: absolute; top: 50%; left: 50%; width: 60px; height: 60px; margin-top: -30px; margin-left: -30px; border: 1.5px solid #e85a4c; border-radius: 50%; opacity: 0; animation: shockwave 9s cubic-bezier(0.2, 0.7, 0.3, 1) infinite; will-change: transform, opacity; box-shadow: 0 0 30px rgba(232,90,76,0.6), inset 0 0 15px rgba(232,90,76,0.3); }
+  /* Pulse timing = ~40 BPM (calm meditative heartbeat). New wave every 1.5s — coherence cue for the viewer. */
   .wave-1 { animation-delay: 0s; }
-  .wave-2 { animation-delay: 1.0s; }
-  .wave-3 { animation-delay: 2.0s; }
-  .wave-4 { animation-delay: 3.0s; }
-  .wave-5 { animation-delay: 4.0s; }
-  .wave-6 { animation-delay: 5.0s; }
+  .wave-2 { animation-delay: 1.5s; }
+  .wave-3 { animation-delay: 3.0s; }
+  .wave-4 { animation-delay: 4.5s; }
+  .wave-5 { animation-delay: 6.0s; }
+  .wave-6 { animation-delay: 7.5s; }
   @keyframes shockwave {
     0% { transform: scale(0.2); opacity: 0; border-width: 2px; }
     8% { opacity: 0.85; }
