@@ -59,21 +59,28 @@
 
   /* Shockwave animation (ported from signal_teaser.html) */
   .shockwaves { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; pointer-events: none; z-index: 0; display: flex; align-items: center; justify-content: center; }
-  .wave { position: absolute; top: 50%; left: 50%; width: 60px; height: 60px; margin-top: -30px; margin-left: -30px; border: 1.5px solid #e85a4c; border-radius: 50%; opacity: 0; animation: shockwave 9s cubic-bezier(0.2, 0.7, 0.3, 1) infinite; will-change: transform, opacity; box-shadow: 0 0 30px rgba(232,90,76,0.6), inset 0 0 15px rgba(232,90,76,0.3); }
-  /* Pulse timing = ~40 BPM (calm meditative heartbeat). New wave every 1.5s — coherence cue for the viewer. */
+  .wave { position: absolute; top: 50%; left: 50%; width: 60px; height: 60px; margin-top: -30px; margin-left: -30px; border: 1.5px solid #e85a4c; border-radius: 50%; opacity: 0; animation: shockwave 10s cubic-bezier(0.2, 0.7, 0.3, 1) infinite; will-change: transform, opacity; box-shadow: 0 0 30px rgba(232,90,76,0.6), inset 0 0 15px rgba(232,90,76,0.3); }
+  /* New wave every 2.5s — synced to the A-tuned sonar (landing pitch = A4). */
   .wave-1 { animation-delay: 0s; }
-  .wave-2 { animation-delay: 1.5s; }
-  .wave-3 { animation-delay: 3.0s; }
-  .wave-4 { animation-delay: 4.5s; }
-  .wave-5 { animation-delay: 6.0s; }
-  .wave-6 { animation-delay: 7.5s; }
+  .wave-2 { animation-delay: 2.5s; }
+  .wave-3 { animation-delay: 5.0s; }
+  .wave-4 { animation-delay: 7.5s; }
   @keyframes shockwave {
     0% { transform: scale(0.2); opacity: 0; border-width: 2px; }
     8% { opacity: 0.85; }
     100% { transform: scale(28); opacity: 0; border-width: 0.5px; }
   }
-  @media (prefers-reduced-motion: reduce) { .wave { display: none; } }
-  @media print { .shockwaves { display: none !important; } }
+  .anchor-dot { position: absolute; top: 50%; left: 50%; width: 36px; height: 36px; margin-top: -18px; margin-left: -18px; border-radius: 50%; background: radial-gradient(circle, rgba(232,90,76,1) 0%, rgba(232,90,76,0.55) 45%, transparent 75%); opacity: 0; pointer-events: none; z-index: 0; will-change: transform, opacity; }
+  .anchor-dot.flashing { animation: anchor-pulse 1.6s cubic-bezier(0.1, 0.7, 0.3, 1) forwards; }
+  @keyframes anchor-pulse {
+    0%, 13.75% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    14% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
+    22% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.15); }
+    85% { opacity: 0.18; transform: translate(-50%, -50%) scale(1.0); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  }
+  @media (prefers-reduced-motion: reduce) { .wave, .anchor-dot { display: none; } }
+  @media print { .shockwaves, .anchor-dot { display: none !important; } }
 
   @keyframes breathe {
     0%, 100% { transform: scale(1); opacity: 0.9; }
@@ -189,9 +196,8 @@
     <div class="wave wave-2"></div>
     <div class="wave wave-3"></div>
     <div class="wave wave-4"></div>
-    <div class="wave wave-5"></div>
-    <div class="wave wave-6"></div>
   </div>
+  <div class="anchor-dot" aria-hidden="true"></div>
   <div class="cover-overline">send the right</div>
   <h1 aria-label="signal" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 100px; letter-spacing: -3px;"><span style="color: var(--rose-linen);">/</span>sɪɡ<span style="color: var(--rose-linen);">ˈ</span>nɑ<span style="color: var(--rose-linen);">ː</span>l<span style="color: var(--rose-linen);">/</span></h1>
   <div class="tagline">the signal your cells are waiting for.</div>
@@ -476,7 +482,7 @@
     <tr><td><strong>02</strong></td><td><strong>Energy thesis</strong> &mdash; cellular energy as the platform foundation. No other beauty-from-within brand has claimed this.</td><td><strong>Uncopyable in narrative</strong> &mdash; first-mover wins the language</td></tr>
     <tr><td><strong>03</strong></td><td><strong>Formulation architecture</strong> &mdash; every SKU carries a machinery-protection keystone chosen for the tissue. AstaZine&reg; astaxanthin in glow/surge/guard; Kaneka QH&reg; Ubiquinol in rise/edge/move; MitoPrime&trade; Ergothioneine in rest/still. Best-fit per biology, not one ingredient stretched across all 8.</td><td>Three supplier-relationship axes + architecture-as-narrative belong to first mover</td></tr>
     <tr><td><strong>04</strong></td><td><strong>Sensory ritual</strong> &mdash; 90-second multi-sensory experience with felt-feedback receipt</td><td>Impossible without format change</td></tr>
-    <tr><td><strong>05</strong></td><td><strong>Celebrity cap table</strong> &mdash; Vanness Wu + Asia audience</td><td><strong>Uncopyable</strong></td></tr>
+    <tr><td><strong>05</strong></td><td><strong>Co-founder + APAC-intro</strong> &mdash; Vanness Wu (non-capital co-founder 2026-04-18 PM) + Asia audience reach + APAC-intro network</td><td><strong>Uncopyable</strong></td></tr>
     <tr><td><strong>06</strong></td><td><strong>First-mover partnerships</strong> &mdash; longevity-adjacent (Mitopure, Novos, Ritual) + electrolyte-adjacent (LMNT, Hydrant) co-marketing</td><td>Contractually locked 12&ndash;24 months</td></tr>
     <tr><td><strong>07</strong></td><td><strong>Platform Architecture</strong> &mdash; 8 SKUs, 8 cell types, ONE biological foundation. Every signal expresses the same energy thesis in a different tissue.</td><td>12&ndash;24 months &mdash; can't be retroactively unified</td></tr>
     <tr><td><strong>08</strong></td><td><strong>Asia distribution</strong> &mdash; cross-border e-commerce via Vanness's network</td><td><strong>Uncopyable</strong></td></tr>
@@ -547,9 +553,9 @@
       <p>Operations, manufacturing relationships, supply chain, day-to-day execution. The ops counterweight to the brand/strategy lead.</p>
     </div>
     <div class="card">
-      <div class="card-label">Investor + co-founder</div>
+      <div class="card-label">Co-founder + APAC-intro</div>
       <h4>Vanness Wu</h4>
-      <p>Asian celebrity audience reach (Taiwan, China, broader APAC). Investor capital + co-founder commitment. Anchor for the cross-border distribution story. Participation pending formal SAFE + co-founder agreement.</p>
+      <p>Asian celebrity audience reach (Taiwan, China, broader APAC). Non-capital co-founder + APAC-intro source + brand amplifier (updated 2026-04-18 PM &mdash; SAFE pursuit cancelled; co-founder role preserved without capital layer). Anchor for the cross-border distribution story. Formalization pending revised Founders' MOU + legal engagement.</p>
     </div>
     <div class="card">
       <div class="card-label">Advisor</div>
@@ -647,7 +653,7 @@
   <p style="max-width: 780px; font-size: 14px; opacity: 0.75;">signal does not claim to "treat mitochondrial dysfunction" or "reverse cellular aging." The cellular energy framework presented in this deck (slides 2&ndash;4, 8) describes the biological foundation we are building toward and the published research that informs our formulation choices. It is not a clinical claim about any specific SKU. Each substrate and keystone carries its own peer-reviewed RCT evidence at the dose we use.</p>
   <p style="max-width: 780px; font-size: 14px; opacity: 0.75;">signal has not been tested as a combined formulation in a company-funded clinical trial. The efficacy gate closes via ingredient-level RCT pedigree + real-world retention/habit metrics (the Gr&uuml;ns playbook). Synergistic effects between ingredients are not claimed.</p>
   <p style="max-width: 780px; font-size: 14px; opacity: 0.75;">Market figures and acquisition valuations are sourced from public reports and may vary by source. The Gr&uuml;ns $1.2B acquisition by Unilever (April 2026) is publicly confirmed.</p>
-  <p style="max-width: 780px; font-size: 14px; opacity: 0.75;">Vanness Wu's participation is subject to formal documentation (SAFE note + co-founder agreement) pending attorney review. This deck represents preliminary intent and is not a binding investment offer.</p>
+  <p style="max-width: 780px; font-size: 14px; opacity: 0.75;">Vanness Wu's participation is subject to formal documentation (revised Founders' MOU as non-capital co-founder + APAC-intro source) pending attorney review. Earlier SAFE anchor pursuit was cancelled 2026-04-18 PM; co-founder role preserved. This deck represents preliminary intent and is not a binding investment offer.</p>
   <p style="max-width: 780px; font-size: 14px; opacity: 0.75;">This deck is confidential. v5 is a strategic-direction prototype exploring the cellular energy thesis as core positioning. v4 (signal-deck/v4/) is the current launch-ready cut with skin hydration as the consumer-facing thesis.</p>
 </section>
 
@@ -699,43 +705,95 @@
 </script>
 
 <script>
-  /* Sonar-ping engine — synthesized Web Audio submarine tone synced to cover shockwaves (1.5s) */
+  /* Sonar-ping engine — A-tuned: every ping lands on A4 (440 Hz), descending perfect-5th sweep, anchor resonance, 2.5s cadence synced to shockwaves */
   (function() {
     let audioCtx = null;
     let pingInterval = null;
     let isMuted = sessionStorage.getItem('signal_ping_muted') === 'true';
     let hasGesture = false;
     let coverInView = false;
+    const LANDING = 440, INTERVAL_RATIO = 1.5, ANCHOR_RING = 1.2, PING_RATE_MS = 2500;
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) isMuted = true;
     function getCtx() {
       if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; } }
       return audioCtx;
+    }
+    function flashAnchorDot() {
+      const dot = document.querySelector('.anchor-dot');
+      if (!dot) return;
+      dot.classList.remove('flashing');
+      void dot.offsetWidth;
+      dot.classList.add('flashing');
     }
     function playPing() {
       if (isMuted) return;
       const ctx = getCtx(); if (!ctx) return;
       if (ctx.state === 'suspended') ctx.resume();
       const t = ctx.currentTime;
+      const start = LANDING * INTERVAL_RATIO;
+      const mid = LANDING + (start - LANDING) * 0.4;
+      const merger = ctx.createChannelMerger(2);
+      const panL = ctx.createGain(), panR = ctx.createGain();
+      panL.gain.setValueAtTime(1.0, t); panL.gain.linearRampToValueAtTime(0.85, t + 0.22);
+      panR.gain.setValueAtTime(0.78, t); panR.gain.linearRampToValueAtTime(0.85, t + 0.22);
+      panL.connect(merger, 0, 0); panR.connect(merger, 0, 1);
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass'; filter.frequency.value = 2600; filter.Q.value = 1.05;
+      merger.connect(filter); filter.connect(ctx.destination);
       const osc = ctx.createOscillator();
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(900, t);
-      osc.frequency.exponentialRampToValueAtTime(340, t + 0.28);
-      const gain = ctx.createGain();
-      gain.gain.setValueAtTime(0, t);
-      gain.gain.linearRampToValueAtTime(0.14, t + 0.01);
-      gain.gain.linearRampToValueAtTime(0.085, t + 0.08);
-      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.95);
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'lowpass'; filter.frequency.value = 2400; filter.Q.value = 1.05;
-      osc.connect(gain); gain.connect(filter); filter.connect(ctx.destination);
-      [[0.17, 0.38], [0.34, 0.22], [0.58, 0.12]].forEach(([dt, dg]) => {
-        const d = ctx.createDelay(2); d.delayTime.value = dt;
-        const g = ctx.createGain(); g.gain.value = dg;
-        filter.connect(d); d.connect(g); g.connect(ctx.destination);
-      });
-      osc.start(t); osc.stop(t + 1.1);
+      osc.frequency.setValueAtTime(start, t);
+      osc.frequency.exponentialRampToValueAtTime(mid, t + 0.04);
+      osc.frequency.exponentialRampToValueAtTime(LANDING, t + 0.22);
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(0.14, t + 0.01);
+      g.gain.linearRampToValueAtTime(0.085, t + 0.08);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.95);
+      osc.connect(g); g.connect(panL); g.connect(panR);
+      const oscP = ctx.createOscillator();
+      oscP.type = 'sine';
+      oscP.frequency.setValueAtTime(start * 3, t);
+      oscP.frequency.exponentialRampToValueAtTime(mid * 3, t + 0.04);
+      oscP.frequency.exponentialRampToValueAtTime(LANDING * 3, t + 0.22);
+      const gP = ctx.createGain();
+      gP.gain.setValueAtTime(0, t);
+      gP.gain.linearRampToValueAtTime(0.018, t + 0.015);
+      gP.gain.exponentialRampToValueAtTime(0.0005, t + 0.6);
+      oscP.connect(gP); gP.connect(panR);
+      osc.start(t); osc.stop(t + 1.05);
+      oscP.start(t); oscP.stop(t + 0.7);
+      const aStart = t + 0.22;
+      const oscA = ctx.createOscillator();
+      oscA.type = 'sine'; oscA.frequency.value = LANDING;
+      const gA = ctx.createGain();
+      gA.gain.setValueAtTime(0, aStart);
+      gA.gain.linearRampToValueAtTime(0.065, aStart + 0.05);
+      gA.gain.exponentialRampToValueAtTime(0.0001, aStart + ANCHOR_RING);
+      oscA.connect(gA); gA.connect(panL); gA.connect(panR);
+      const adL = ctx.createDelay(3); adL.delayTime.value = 0.41;
+      const adR = ctx.createDelay(3); adR.delayTime.value = 0.62;
+      const adLg = ctx.createGain(); adLg.gain.value = 0.35;
+      const adRg = ctx.createGain(); adRg.gain.value = 0.28;
+      const aMerger = ctx.createChannelMerger(2);
+      gA.connect(adL); adL.connect(adLg); adLg.connect(aMerger, 0, 0);
+      gA.connect(adR); adR.connect(adRg); adRg.connect(aMerger, 0, 1);
+      aMerger.connect(filter);
+      oscA.start(aStart); oscA.stop(aStart + ANCHOR_RING + 0.1);
+      const eL = ctx.createDelay(3); eL.delayTime.value = 0.18;
+      const eLg = ctx.createGain(); eLg.gain.value = 0.32;
+      const eLm = ctx.createChannelMerger(2);
+      filter.connect(eL); eL.connect(eLg); eLg.connect(eLm, 0, 0); eLm.connect(ctx.destination);
+      const eR = ctx.createDelay(3); eR.delayTime.value = 0.35;
+      const eRg = ctx.createGain(); eRg.gain.value = 0.22;
+      const eRm = ctx.createChannelMerger(2);
+      filter.connect(eR); eR.connect(eRg); eRg.connect(eRm, 0, 1); eRm.connect(ctx.destination);
+      const eC = ctx.createDelay(3); eC.delayTime.value = 0.82;
+      const eCg = ctx.createGain(); eCg.gain.value = 0.16;
+      filter.connect(eC); eC.connect(eCg); eCg.connect(ctx.destination);
+      flashAnchorDot();
     }
-    function startLoop() { if (pingInterval || isMuted) return; playPing(); pingInterval = setInterval(playPing, 1500); }
+    function startLoop() { if (pingInterval || isMuted) return; playPing(); pingInterval = setInterval(playPing, PING_RATE_MS); }
     function stopLoop() { if (pingInterval) { clearInterval(pingInterval); pingInterval = null; } }
     function maybeStart() { if (hasGesture && coverInView && !isMuted) startLoop(); }
     const origCheck = window.checkPass;
