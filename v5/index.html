@@ -57,30 +57,12 @@
   .cover { min-height: 100vh; background: var(--deep-evening); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 40px; position: relative; overflow: hidden; }
   .cover::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(173,66,54,0.15) 0%, transparent 70%); }
 
-  /* Shockwave animation (ported from signal_teaser.html) */
-  .shockwaves { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; pointer-events: none; z-index: 0; display: flex; align-items: center; justify-content: center; }
-  .wave { position: absolute; top: 50%; left: 50%; width: 60px; height: 60px; margin-top: -30px; margin-left: -30px; border: 1.5px solid #e85a4c; border-radius: 50%; opacity: 0; animation: shockwave 10s cubic-bezier(0.2, 0.7, 0.3, 1) infinite; will-change: transform, opacity; box-shadow: 0 0 30px rgba(232,90,76,0.6), inset 0 0 15px rgba(232,90,76,0.3); }
-  /* New wave every 2.5s — synced to the A-tuned sonar (landing pitch = A4). */
-  .wave-1 { animation-delay: 0s; }
-  .wave-2 { animation-delay: 2.5s; }
-  .wave-3 { animation-delay: 5.0s; }
-  .wave-4 { animation-delay: 7.5s; }
-  @keyframes shockwave {
-    0% { transform: scale(0.2); opacity: 0; border-width: 2px; }
-    8% { opacity: 0.85; }
-    100% { transform: scale(28); opacity: 0; border-width: 0.5px; }
-  }
-  .anchor-dot { position: absolute; top: 50%; left: 50%; width: 36px; height: 36px; margin-top: -18px; margin-left: -18px; border-radius: 50%; background: radial-gradient(circle, rgba(232,90,76,1) 0%, rgba(232,90,76,0.55) 45%, transparent 75%); opacity: 0; pointer-events: none; z-index: 0; will-change: transform, opacity; }
-  .anchor-dot.flashing { animation: anchor-pulse 1.6s cubic-bezier(0.1, 0.7, 0.3, 1) forwards; }
-  @keyframes anchor-pulse {
-    0%, 13.75% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-    14% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
-    22% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.15); }
-    85% { opacity: 0.18; transform: translate(-50%, -50%) scale(1.0); }
-    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
-  }
-  @media (prefers-reduced-motion: reduce) { .wave, .anchor-dot { display: none; } }
-  @media print { .shockwaves, .anchor-dot { display: none !important; } }
+  /* Entrainment wordmark — two ghost layers converge to unison, synced to two-frequencies-syncing audio */
+  .wordmark-container { position: relative; display: inline-block; line-height: 1; z-index: 1; }
+  .wordmark-ghost { margin: 0; will-change: transform, opacity; transition: transform 0.2s linear, opacity 0.2s linear; opacity: 0.5; transform: translateX(-7px); }
+  .wordmark-ghost.ghost-right { position: absolute; top: 0; left: 0; right: 0; transform: translateX(7px); }
+  @media (prefers-reduced-motion: reduce) { .wordmark-ghost { transform: translateX(0) !important; transition: none !important; } }
+  @media print { .wordmark-ghost.ghost-left { display: none !important; } .wordmark-ghost.ghost-right { position: static !important; opacity: 1 !important; transform: none !important; } }
 
   @keyframes breathe {
     0%, 100% { transform: scale(1); opacity: 0.9; }
@@ -191,15 +173,11 @@
 
 <!-- ==================== 01 • COVER ==================== -->
 <section class="cover">
-  <div class="shockwaves" aria-hidden="true">
-    <div class="wave wave-1"></div>
-    <div class="wave wave-2"></div>
-    <div class="wave wave-3"></div>
-    <div class="wave wave-4"></div>
-  </div>
-  <div class="anchor-dot" aria-hidden="true"></div>
   <div class="cover-overline">send the right</div>
-  <h1 aria-label="signal" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 100px; letter-spacing: -3px;"><span style="color: var(--rose-linen);">/</span>sɪɡ<span style="color: var(--rose-linen);">ˈ</span>nɑ<span style="color: var(--rose-linen);">ː</span>l<span style="color: var(--rose-linen);">/</span></h1>
+  <div class="wordmark-container">
+    <h1 class="wordmark-ghost ghost-left" aria-hidden="true" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 100px; letter-spacing: -3px;"><span style="color: var(--rose-linen);">/</span>sɪɡ<span style="color: var(--rose-linen);">ˈ</span>nɑ<span style="color: var(--rose-linen);">ː</span>l<span style="color: var(--rose-linen);">/</span></h1>
+    <h1 class="wordmark-ghost ghost-right" aria-label="signal" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 100px; letter-spacing: -3px;"><span style="color: var(--rose-linen);">/</span>sɪɡ<span style="color: var(--rose-linen);">ˈ</span>nɑ<span style="color: var(--rose-linen);">ː</span>l<span style="color: var(--rose-linen);">/</span></h1>
+  </div>
   <div class="tagline">the signal your cells are waiting for.</div>
   <div class="company"><img src="logo/insdr_logo_light.png" alt="INSDR" class="insdr-logo-light"> Wellness Co. &nbsp;&middot;&nbsp; v5 &middot; cellular energy thesis</div>
 </section>
@@ -705,97 +683,102 @@
 </script>
 
 <script>
-  /* Sonar-ping engine — A-tuned: every ping lands on A4 (440 Hz), descending perfect-5th sweep, anchor resonance, 2.5s cadence synced to shockwaves */
+  /* Signal entrainment engine — two-frequencies-syncing audio + double wordmark convergence.
+     Concept: attraction's physiological entrainment made audible+visible. */
   (function() {
     let audioCtx = null;
-    let pingInterval = null;
+    let hasFired = false;
     let isMuted = sessionStorage.getItem('signal_ping_muted') === 'true';
     let hasGesture = false;
     let coverInView = false;
-    const LANDING = 440, INTERVAL_RATIO = 1.5, ANCHOR_RING = 1.2, PING_RATE_MS = 2500;
+    const DRIFT_DURATION = 2.0, HOLD_DURATION = 0.8, DECAY_DURATION = 2.5, LANDING_PITCH = 440, INITIAL_OFFSET = 10;
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) isMuted = true;
     function getCtx() {
       if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; } }
       return audioCtx;
     }
-    function flashAnchorDot() {
-      const dot = document.querySelector('.anchor-dot');
-      if (!dot) return;
-      dot.classList.remove('flashing');
-      void dot.offsetWidth;
-      dot.classList.add('flashing');
+    function resetVisualSplit(instant) {
+      const gL = document.querySelector('.ghost-left');
+      const gR = document.querySelector('.ghost-right');
+      if (!gL || !gR) return;
+      if (instant) { gL.style.transition = 'none'; gR.style.transition = 'none'; }
+      gL.style.transform = 'translateX(-7px)'; gR.style.transform = 'translateX(7px)';
+      gL.style.opacity = '0.5'; gR.style.opacity = '0.5';
     }
-    function playPing() {
+    function runVisualConvergence() {
+      const gL = document.querySelector('.ghost-left');
+      const gR = document.querySelector('.ghost-right');
+      if (!gL || !gR) return;
+      resetVisualSplit(true);
+      void gL.offsetWidth;
+      const driftMs = DRIFT_DURATION * 1000;
+      gL.style.transition = 'transform ' + driftMs + 'ms cubic-bezier(0.45, 0, 0.2, 1), opacity ' + driftMs + 'ms ease';
+      gR.style.transition = 'transform ' + driftMs + 'ms cubic-bezier(0.45, 0, 0.2, 1), opacity ' + driftMs + 'ms ease';
+      gL.style.transform = 'translateX(0)'; gR.style.transform = 'translateX(0)';
+    }
+    function playEntrainmentEvent() {
       if (isMuted) return;
       const ctx = getCtx(); if (!ctx) return;
       if (ctx.state === 'suspended') ctx.resume();
-      const t = ctx.currentTime;
-      const start = LANDING * INTERVAL_RATIO;
-      const mid = LANDING + (start - LANDING) * 0.4;
-      const merger = ctx.createChannelMerger(2);
-      const panL = ctx.createGain(), panR = ctx.createGain();
-      panL.gain.setValueAtTime(1.0, t); panL.gain.linearRampToValueAtTime(0.85, t + 0.22);
-      panR.gain.setValueAtTime(0.78, t); panR.gain.linearRampToValueAtTime(0.85, t + 0.22);
-      panL.connect(merger, 0, 0); panR.connect(merger, 0, 1);
+      const t = ctx.currentTime + 0.02;
+      const master = ctx.createGain();
+      master.gain.setValueAtTime(0.0001, t);
+      master.gain.exponentialRampToValueAtTime(0.35, t + 0.25);
+      master.gain.setValueAtTime(0.35, t + DRIFT_DURATION);
+      master.gain.setValueAtTime(0.35, t + DRIFT_DURATION + HOLD_DURATION);
+      master.gain.exponentialRampToValueAtTime(0.0001, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION);
       const filter = ctx.createBiquadFilter();
-      filter.type = 'lowpass'; filter.frequency.value = 2600; filter.Q.value = 1.05;
-      merger.connect(filter); filter.connect(ctx.destination);
-      const osc = ctx.createOscillator();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(start, t);
-      osc.frequency.exponentialRampToValueAtTime(mid, t + 0.04);
-      osc.frequency.exponentialRampToValueAtTime(LANDING, t + 0.22);
-      const g = ctx.createGain();
-      g.gain.setValueAtTime(0, t);
-      g.gain.linearRampToValueAtTime(0.14, t + 0.01);
-      g.gain.linearRampToValueAtTime(0.085, t + 0.08);
-      g.gain.exponentialRampToValueAtTime(0.001, t + 0.95);
-      osc.connect(g); g.connect(panL); g.connect(panR);
-      const oscP = ctx.createOscillator();
-      oscP.type = 'sine';
-      oscP.frequency.setValueAtTime(start * 3, t);
-      oscP.frequency.exponentialRampToValueAtTime(mid * 3, t + 0.04);
-      oscP.frequency.exponentialRampToValueAtTime(LANDING * 3, t + 0.22);
-      const gP = ctx.createGain();
-      gP.gain.setValueAtTime(0, t);
-      gP.gain.linearRampToValueAtTime(0.018, t + 0.015);
-      gP.gain.exponentialRampToValueAtTime(0.0005, t + 0.6);
-      oscP.connect(gP); gP.connect(panR);
-      osc.start(t); osc.stop(t + 1.05);
-      oscP.start(t); oscP.stop(t + 0.7);
-      const aStart = t + 0.22;
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(1400, t);
+      filter.frequency.linearRampToValueAtTime(2400, t + DRIFT_DURATION);
+      filter.frequency.linearRampToValueAtTime(1600, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION * 0.6);
+      filter.Q.value = 0.5;
+      master.connect(filter); filter.connect(ctx.destination);
+      const stereo = ctx.createChannelMerger(2);
+      const leftBus = ctx.createGain(); leftBus.gain.value = 1.0;
+      const rightBus = ctx.createGain(); rightBus.gain.value = 1.0;
+      leftBus.connect(stereo, 0, 0); rightBus.connect(stereo, 0, 1);
+      stereo.connect(master);
       const oscA = ctx.createOscillator();
-      oscA.type = 'sine'; oscA.frequency.value = LANDING;
-      const gA = ctx.createGain();
-      gA.gain.setValueAtTime(0, aStart);
-      gA.gain.linearRampToValueAtTime(0.065, aStart + 0.05);
-      gA.gain.exponentialRampToValueAtTime(0.0001, aStart + ANCHOR_RING);
-      oscA.connect(gA); gA.connect(panL); gA.connect(panR);
-      const adL = ctx.createDelay(3); adL.delayTime.value = 0.41;
-      const adR = ctx.createDelay(3); adR.delayTime.value = 0.62;
-      const adLg = ctx.createGain(); adLg.gain.value = 0.35;
-      const adRg = ctx.createGain(); adRg.gain.value = 0.28;
-      const aMerger = ctx.createChannelMerger(2);
-      gA.connect(adL); adL.connect(adLg); adLg.connect(aMerger, 0, 0);
-      gA.connect(adR); adR.connect(adRg); adRg.connect(aMerger, 0, 1);
-      aMerger.connect(filter);
-      oscA.start(aStart); oscA.stop(aStart + ANCHOR_RING + 0.1);
-      const eL = ctx.createDelay(3); eL.delayTime.value = 0.18;
-      const eLg = ctx.createGain(); eLg.gain.value = 0.32;
-      const eLm = ctx.createChannelMerger(2);
-      filter.connect(eL); eL.connect(eLg); eLg.connect(eLm, 0, 0); eLm.connect(ctx.destination);
-      const eR = ctx.createDelay(3); eR.delayTime.value = 0.35;
-      const eRg = ctx.createGain(); eRg.gain.value = 0.22;
-      const eRm = ctx.createChannelMerger(2);
-      filter.connect(eR); eR.connect(eRg); eRg.connect(eRm, 0, 1); eRm.connect(ctx.destination);
-      const eC = ctx.createDelay(3); eC.delayTime.value = 0.82;
-      const eCg = ctx.createGain(); eCg.gain.value = 0.16;
-      filter.connect(eC); eC.connect(eCg); eCg.connect(ctx.destination);
-      flashAnchorDot();
+      oscA.type = 'sine'; oscA.frequency.setValueAtTime(LANDING_PITCH, t);
+      const gA = ctx.createGain(); gA.gain.value = 0.55;
+      oscA.connect(gA); gA.connect(leftBus);
+      const oscB = ctx.createOscillator();
+      oscB.type = 'sine';
+      oscB.frequency.setValueAtTime(LANDING_PITCH + INITIAL_OFFSET, t);
+      oscB.frequency.linearRampToValueAtTime(LANDING_PITCH, t + DRIFT_DURATION);
+      const gB = ctx.createGain(); gB.gain.value = 0.55;
+      oscB.connect(gB); gB.connect(rightBus);
+      const oscSub = ctx.createOscillator();
+      oscSub.type = 'sine'; oscSub.frequency.value = LANDING_PITCH / 2;
+      const gSub = ctx.createGain();
+      gSub.gain.setValueAtTime(0, t);
+      gSub.gain.setValueAtTime(0, t + DRIFT_DURATION * 0.7);
+      gSub.gain.linearRampToValueAtTime(0.28, t + DRIFT_DURATION);
+      gSub.gain.exponentialRampToValueAtTime(0.001, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION);
+      oscSub.connect(gSub); gSub.connect(leftBus); gSub.connect(rightBus);
+      const oscTop = ctx.createOscillator();
+      oscTop.type = 'sine'; oscTop.frequency.value = LANDING_PITCH * 2;
+      const gTop = ctx.createGain();
+      gTop.gain.setValueAtTime(0, t);
+      gTop.gain.setValueAtTime(0, t + DRIFT_DURATION * 0.85);
+      gTop.gain.linearRampToValueAtTime(0.09, t + DRIFT_DURATION + 0.15);
+      gTop.gain.exponentialRampToValueAtTime(0.0001, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION * 0.8);
+      oscTop.connect(gTop); gTop.connect(leftBus); gTop.connect(rightBus);
+      const dL = ctx.createDelay(3); dL.delayTime.value = 0.47;
+      const dR = ctx.createDelay(3); dR.delayTime.value = 0.68;
+      const dLg = ctx.createGain(); dLg.gain.value = 0.22;
+      const dRg = ctx.createGain(); dRg.gain.value = 0.18;
+      const dMerger = ctx.createChannelMerger(2);
+      master.connect(dL); dL.connect(dLg); dLg.connect(dMerger, 0, 0);
+      master.connect(dR); dR.connect(dRg); dRg.connect(dMerger, 0, 1);
+      dMerger.connect(ctx.destination);
+      const stopT = t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION + 0.2;
+      [oscA, oscB, oscSub, oscTop].forEach(function(o) { o.start(t); o.stop(stopT); });
     }
-    function startLoop() { if (pingInterval || isMuted) return; playPing(); pingInterval = setInterval(playPing, PING_RATE_MS); }
-    function stopLoop() { if (pingInterval) { clearInterval(pingInterval); pingInterval = null; } }
-    function maybeStart() { if (hasGesture && coverInView && !isMuted) startLoop(); }
+    function fireEvent() { runVisualConvergence(); playEntrainmentEvent(); }
+    function startOnce() { if (hasFired || isMuted) return; hasFired = true; fireEvent(); }
+    function maybeStart() { if (hasGesture && coverInView && !isMuted) startOnce(); }
     const origCheck = window.checkPass;
     if (typeof origCheck === 'function') {
       window.checkPass = function(e) {
@@ -804,7 +787,7 @@
         return r;
       };
     }
-    ['click', 'touchstart', 'keydown'].forEach(evt => {
+    ['click', 'touchstart', 'keydown'].forEach(function(evt) {
       document.addEventListener(evt, function once() {
         hasGesture = true; maybeStart();
         document.removeEventListener(evt, once);
@@ -813,10 +796,10 @@
     function bindObserver() {
       const cover = document.querySelector('.cover');
       if (!cover) return;
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
+      const io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
           coverInView = entry.intersectionRatio > 0.3;
-          if (coverInView) maybeStart(); else stopLoop();
+          if (coverInView) maybeStart();
         });
       }, { threshold: [0, 0.3, 0.6, 1.0] });
       io.observe(cover);
@@ -825,23 +808,23 @@
       if (document.getElementById('pingMuteBtn')) return;
       const btn = document.createElement('button');
       btn.id = 'pingMuteBtn';
-      btn.setAttribute('aria-label', 'toggle sonar sound');
-      btn.setAttribute('title', 'toggle sonar sound');
+      btn.setAttribute('aria-label', 'toggle signal sound');
+      btn.setAttribute('title', 'toggle signal sound');
       btn.innerHTML = isMuted ? svgOff() : svgOn();
       btn.addEventListener('click', function(e) {
         e.stopPropagation();
         isMuted = !isMuted;
         sessionStorage.setItem('signal_ping_muted', String(isMuted));
         btn.innerHTML = isMuted ? svgOff() : svgOn();
-        if (isMuted) stopLoop(); else { hasGesture = true; maybeStart(); }
+        if (!isMuted) { hasGesture = true; maybeStart(); }
       });
       document.body.appendChild(btn);
     }
     function svgOn() { return '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>'; }
     function svgOff() { return '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>'; }
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', function() { bindObserver(); bindMuteButton(); });
-    } else { bindObserver(); bindMuteButton(); }
+      document.addEventListener('DOMContentLoaded', function() { bindObserver(); bindMuteButton(); resetVisualSplit(true); });
+    } else { bindObserver(); bindMuteButton(); resetVisualSplit(true); }
   })();
 </script>
 
