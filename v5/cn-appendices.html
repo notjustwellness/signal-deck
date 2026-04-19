@@ -131,7 +131,7 @@
     var PASS = "5-4-3-2-1";
     var gate = document.getElementById("gate");
     var body = document.body;
-    if (sessionStorage.get项目("signal_unlocked") === "true") {
+    if (sessionStorage.getItem("signal_unlocked") === "true") {
       gate.style.display = "none";
       body.classList.remove("locked");
     }
@@ -140,7 +140,7 @@
       var input = document.getElementById("gate-pass").value;
       var err = document.getElementById("gate-error");
       if (input === PASS) {
-        sessionStorage.set项目("signal_unlocked", "true");
+        sessionStorage.setItem("signal_unlocked", "true");
         gate.style.display = "none";
         body.classList.remove("locked");
       } else {
@@ -959,7 +959,7 @@
   (function() {
     let audioCtx = null;
     let pingInterval = null;
-    let isMuted = sessionStorage.get项目('signal_ping_muted') === 'true';
+    let isMuted = sessionStorage.getItem('signal_ping_muted') === 'true';
     let hasGesture = false;
     let coverInView = false;
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) isMuted = true;
@@ -1029,7 +1029,7 @@
       btn.addEventListener('click', function(e) {
         e.stopPropagation();
         isMuted = !isMuted;
-        sessionStorage.set项目('signal_ping_muted', String(isMuted));
+        sessionStorage.setItem('signal_ping_muted', String(isMuted));
         btn.innerHTML = isMuted ? svgOff() : svgOn();
         if (isMuted) stopLoop(); else { hasGesture = true; maybeStart(); }
       });
