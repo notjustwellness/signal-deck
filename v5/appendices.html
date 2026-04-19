@@ -33,6 +33,20 @@
     will-change: transform; opacity: 1;
   }
   @media (max-width: 768px), (hover: none) { .floating-packet { display: none; } }
+  /* Front ↔ back crossfade — 7s cycle, both stacked at the same cursor-tracked position */
+  .floating-packet--face { animation: 7s ease-in-out infinite; }
+  .floating-packet--front { animation-name: signalPacketFlipFront; }
+  .floating-packet--back  { animation-name: signalPacketFlipBack; }
+  @keyframes signalPacketFlipFront {
+    0%, 42%  { opacity: 1; }
+    50%, 92% { opacity: 0; }
+    100%     { opacity: 1; }
+  }
+  @keyframes signalPacketFlipBack {
+    0%, 42%  { opacity: 0; }
+    50%, 92% { opacity: 1; }
+    100%     { opacity: 0; }
+  }
 </style>
 <style>
   @font-face { font-family: 'Anguita Sans'; src: url('fonts/AnguitaSans.otf') format('opentype'); font-weight: 900; font-style: normal; font-display: swap; }
@@ -163,8 +177,8 @@
     <div class="card"><div class="card-label">A8</div><h4>efficacy closure strategy</h4><p>How we close the Efficacy gate to PASS &mdash; no pilot required. Ingredient RCT pedigree + habit metrics.</p></div>
     <div class="card"><div class="card-label">A9</div><h4>send a signal campaign</h4><p>Viral gifting mechanic. The brand name IS the launch.</p></div>
     <div class="card"><div class="card-label">A10</div><h4>sensory &amp; packaging</h4><p>Tear, crunch, packet material, container design.</p></div>
-    <div class="card"><div class="card-label">A11</div><h4>flavor profiles</h4><p>The 3 launch flavors. Layered flavor delivery.</p></div>
-    <div class="card"><div class="card-label">A12</div><h4>founding team detail</h4><p>Who's doing what. Equity, roles, advisors.</p></div>
+    <div class="card"><div class="card-label">A11</div><h4>flavor profiles</h4><p>One biology-aligned flavor per SKU. Eight total. Layered flavor delivery.</p></div>
+    <div class="card"><div class="card-label">A12</div><h4>founding team</h4><p>Four people. One signal.</p></div>
     <div class="card"><div class="card-label">A13</div><h4>execution next steps</h4><p>The 90-day sequence. CMO, patent, waitlist, beta.</p></div>
     <div class="card" style="border: 1px solid var(--signal);"><div class="card-label">A14</div><h4>brand identity &rarr;</h4><p>Wordmark, color, typography, trademark brief. Opens as a separate printable document.</p></div>
     <div class="card"><div class="card-label">A15</div><h4>GTM partner evaluation</h4><p>PLTFRM fit assessment. Honest evaluation, not a confirmed partnership.</p></div>
@@ -547,61 +561,80 @@
 <!-- ==================== A11 • FLAVOR PROFILES ==================== -->
 <section class="slide">
   <div class="section-label">A11 &mdash; Flavor Profiles</div>
-  <h2>Three flavors. <span class="highlight">Literal names.</span></h2>
-  <p>Locked launch flavors. Layered flavor delivery: outer coating dissolves first (immediate flavor hit), liquid center bursts at ~10 seconds (second wave), chew matrix carries final 60 seconds. No cute names. Just the fruit. The liquid-center flavor burst is the felt-feedback moment &mdash; the taste receipt that tells the buyer something is happening in real time.</p>
+  <h2>One flavor per SKU. <span class="highlight">Biology-aligned. Literal names.</span></h2>
+  <p>Locked launch flavors &mdash; one per SKU, eight total. Layered flavor delivery: outer coating dissolves first (immediate flavor hit), liquid center bursts at ~10 seconds (second wave), chew matrix carries final 60 seconds. No cute names. Just the fruit. Each flavor is chosen to pair with the SKU's biology &mdash; so the taste moment itself reinforces what the chew is for. The liquid-center flavor burst is the felt-feedback moment &mdash; the taste receipt that tells the buyer something is happening in real time.</p>
 
   <div class="card-grid">
     <div class="card">
-      <div class="card-label">Flavor 01</div>
+      <div class="card-label">glow</div>
       <h4>passion fruit &middot; yuzu</h4>
-      <p>Bright, tart, tropical. The hero flavor. Designed to read as premium without being polarizing. Yuzu adds a citrus spine that prevents the passion fruit from going syrupy.</p>
+      <p>Bright, tart, tropical. The hero beauty-from-within flavor. Yuzu adds a citrus spine that prevents passion fruit from going syrupy. Reads as premium and unmistakably skin-category without being polarizing.</p>
     </div>
     <div class="card">
-      <div class="card-label">Flavor 02</div>
-      <h4>watermelon &middot; cucumber &middot; mint</h4>
-      <p>Cooling, hydrating-coded, refreshing. The "summer" SKU. Cucumber + mint give it a spa cue without entering wellness-clich&eacute; territory. Watermelon carries the sweetness.</p>
+      <div class="card-label">rise</div>
+      <h4>grapefruit &middot; ginger &middot; lemon</h4>
+      <p>Sharp, bitter-edge, clean morning citrus. Grapefruit signals alertness; ginger gives thermal lift; lemon brightens. The energy SKU tastes the way the biology promises to feel.</p>
     </div>
     <div class="card">
-      <div class="card-label">Flavor 03</div>
-      <h4>blood orange &middot; ginger</h4>
-      <p>Warm, energizing, slightly spicy. The "morning" lean. Ginger provides a heat note that distinguishes it from generic citrus. Blood orange gives it color and depth.</p>
+      <div class="card-label">rest</div>
+      <h4>lavender &middot; honey</h4>
+      <p>Calming, floral, warm-sweet. The evening flavor. Lavender cues wind-down without entering herbal-tea cliché; honey softens the floral into something crave-forward, not medicinal.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">surge</div>
+      <h4>tart cherry &middot; pomegranate</h4>
+      <p>Deep, tart, athletic-coded. Tart cherry is already the cultural signal for muscle recovery; pomegranate adds depth and polyphenol color. The pre/post-training SKU tastes like it belongs in a gym bag.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">edge</div>
+      <h4>matcha &middot; lemon</h4>
+      <p>Green, umami, bright. Matcha is the universal cognition-and-focus flavor cue; lemon keeps it from going grassy. The clarity SKU tastes like a study session, not a dessert.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">still</div>
+      <h4>chamomile &middot; honey</h4>
+      <p>Soft, floral, grounding. Chamomile is the canonical stress-down flavor; honey rounds the edge. The stress-modulation SKU tastes like the pause it's meant to create.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">guard</div>
+      <h4>ginger &middot; elderberry</h4>
+      <p>Warming, spiced, immune-coded. Elderberry is the buyer's existing cultural handshake for gut/immune support; ginger adds thermal bite. The gut-barrier SKU tastes the way wellness has already taught her to trust.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">move</div>
+      <h4>turmeric &middot; ginger &middot; black pepper</h4>
+      <p>Earthy, warm, slightly pungent. The joint &amp; connective-tissue SKU. Turmeric is the universal anti-inflammatory cue; black pepper (piperine) is the bioavailability tell; ginger carries the warmth. Unmistakably recovery.</p>
     </div>
   </div>
 
-  <h3 style="margin-top: 32px;">Why three at launch (not one, not five)</h3>
-  <p>One flavor reads as a sample, not a brand. Five flavors splits inventory and confuses subscription decisions. Three lets us offer a sampler box (one of each) at trial, then convert to subscriber-favorite at month 2. It's the minimum number that supports a "discover your signal" purchase journey.</p>
+  <h3 style="margin-top: 32px;">Why one flavor per SKU (not a shared flavor, not a sampler)</h3>
+  <p>A shared flavor across SKUs means the mouth-experience is identical whether you bought glow or surge &mdash; the buyer's senses can't distinguish what she paid for. Pairing each SKU to a biology-aligned flavor makes the chew itself read as purpose-built: glow tastes like skin, rise tastes like morning, rest tastes like wind-down. The flavor becomes a second signal &mdash; reinforcing the SKU's intent before the ingredients have time to work. It also turns cross-SKU trial into a taste journey, not a redundancy.</p>
 </section>
 
 <!-- ==================== A12 • FOUNDING TEAM ==================== -->
 <section class="slide">
-  <div class="section-label">A12 &mdash; Founding Team Detail</div>
+  <div class="section-label">A12 &mdash; Founding Team</div>
   <h2>Four people. <span class="highlight">One signal.</span></h2>
 
   <div class="card-grid">
     <div class="card">
       <div class="card-label">CEO</div>
       <h4>Damon</h4>
-      <p>Concept origination, brand architecture, formulation direction, fundraising lead. Wellness/health entrepreneurship background. Owns the thesis end-to-end.</p>
     </div>
     <div class="card">
       <div class="card-label">COO</div>
       <h4>Gabby</h4>
-      <p>Operations, supply chain, CMO management, regulatory compliance, retail-readiness work. The execution partner who makes the launch actually happen.</p>
     </div>
     <div class="card">
       <div class="card-label">Investor-Founder</div>
       <h4>Vanness Wu</h4>
-      <p>Asian celebrity audience reach (Taiwan, China, broader APAC). Non-capital co-founder + APAC-intro source + brand amplifier (updated 2026-04-18 PM — SAFE pursuit cancelled; co-founder role preserved without capital layer). Anchor for the cross-border distribution story. Formalization pending revised Founders' MOU + legal engagement.</p>
+      <p>Asian celebrity (Taiwan, China, broader APAC).</p>
     </div>
     <div class="card">
       <div class="card-label">Advisor</div>
       <h4>Frank</h4>
-      <p>Runs GNC Taiwan full-time. Supplement industry category expertise, regulatory guidance, and supplier network access. 4&ndash;8 hours/month advisory commitment. Equity allocated at advisor grade (0.5&ndash;1%), not co-founder grade.</p>
     </div>
   </div>
-
-  <h3 style="margin-top: 32px;">What's pending</h3>
-  <p>Founders' MOU is drafted but not signed. Cap table is conceptual. Vanness's co-founder formalization (non-capital co-founder + APAC-intro source — SAFE cancelled 2026-04-18 PM) is pending attorney review. Incorporation and formal equity issuance happen in Phase 1 bootstrap (covered in the Ask).</p>
 </section>
 
 <!-- ==================== A13 • EXECUTION NEXT STEPS ==================== -->
@@ -857,7 +890,7 @@
     <tr>
       <td><strong>Taste experience</strong></td>
       <td>None &mdash; engineered to be flavorless</td>
-      <td>Three launch flavors (passion fruit-yuzu, watermelon-cucumber-mint, blood orange-ginger), layered progressive release</td>
+      <td>One biology-aligned flavor per SKU (eight total &mdash; e.g. glow: passion fruit-yuzu, rise: grapefruit-ginger-lemon, rest: lavender-honey), layered progressive release with liquid-center burst at ~10s</td>
     </tr>
     <tr>
       <td><strong>Consumer relationship to the daily act</strong></td>
@@ -894,18 +927,19 @@
   </div>
 </section>
 
-<img src="signal_packet_float.png" alt="" class="floating-packet" id="floatingPacket" aria-hidden="true">
+<img src="signal_packet_float_front.png" alt="" class="floating-packet floating-packet--face floating-packet--front" id="floatingPacketFront" aria-hidden="true">
+<img src="signal_packet_float_back.png" alt="" class="floating-packet floating-packet--face floating-packet--back" id="floatingPacketBack" aria-hidden="true">
 <script>
   (function() {
     if (window.matchMedia('(max-width: 768px)').matches) return;
     if (window.matchMedia('(hover: none)').matches) return;
-    const packet = document.getElementById('floatingPacket');
-    if (!packet) return;
+    const packets = document.querySelectorAll('#floatingPacketFront, #floatingPacketBack');
+    if (!packets.length) return;
     let tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
     const setDefault = () => {
       tx = window.innerWidth * 0.85; ty = window.innerHeight * 0.82;
       cx = tx; cy = ty;
-      packet.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+      packets.forEach(p => { p.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`; });
     };
     setDefault();
     document.addEventListener('mousemove', (e) => {
@@ -914,7 +948,7 @@
     });
     const animate = () => {
       cx += (tx - cx) * 0.09; cy += (ty - cy) * 0.09;
-      packet.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+      packets.forEach(p => { p.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`; });
       if (Math.abs(tx - cx) > 0.3 || Math.abs(ty - cy) > 0.3) raf = requestAnimationFrame(animate);
       else raf = null;
     };

@@ -35,6 +35,20 @@
     will-change: transform; opacity: 1;
   }
   @media (max-width: 768px), (hover: none) { .floating-packet { display: none; } }
+  /* Front ↔ back crossfade — 7s cycle, both stacked at the same cursor-tracked position */
+  .floating-packet--face { animation: 7s ease-in-out infinite; }
+  .floating-packet--front { animation-name: signalPacketFlipFront; }
+  .floating-packet--back  { animation-name: signalPacketFlipBack; }
+  @keyframes signalPacketFlipFront {
+    0%, 42%  { opacity: 1; }
+    50%, 92% { opacity: 0; }
+    100%     { opacity: 1; }
+  }
+  @keyframes signalPacketFlipBack {
+    0%, 42%  { opacity: 0; }
+    50%, 92% { opacity: 1; }
+    100%     { opacity: 0; }
+  }
 </style>
 <style>
   /* --- SELF-HOSTED BRAND FONTS (referenced from v4) --- */
@@ -656,7 +670,8 @@
   <div class="company"><img src="logo/insdr_logo_light.png" alt="INSDR" class="insdr-logo-light"> Wellness Co. &nbsp;&middot;&nbsp; v5 &middot; cellular energy thesis</div>
 </section>
 
-<img src="signal_packet_float.png" alt="" class="floating-packet" id="floatingPacket" aria-hidden="true">
+<img src="signal_packet_float_front.png" alt="" class="floating-packet floating-packet--face floating-packet--front" id="floatingPacketFront" aria-hidden="true">
+<img src="signal_packet_float_back.png" alt="" class="floating-packet floating-packet--face floating-packet--back" id="floatingPacketBack" aria-hidden="true">
 <script>
   /* Packet follows the cursor across the entire viewport with eased lerp motion.
      Hidden while gate is locked (see body.locked .floating-packet rule).
@@ -664,13 +679,13 @@
   (function() {
     if (window.matchMedia('(max-width: 768px)').matches) return;
     if (window.matchMedia('(hover: none)').matches) return;
-    const packet = document.getElementById('floatingPacket');
-    if (!packet) return;
+    const packets = document.querySelectorAll('#floatingPacketFront, #floatingPacketBack');
+    if (!packets.length) return;
     let tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
     const setDefault = () => {
       tx = window.innerWidth * 0.85; ty = window.innerHeight * 0.82;
       cx = tx; cy = ty;
-      packet.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+      packets.forEach(p => { p.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`; });
     };
     setDefault();
     document.addEventListener('mousemove', (e) => {
@@ -679,7 +694,7 @@
     });
     const animate = () => {
       cx += (tx - cx) * 0.09; cy += (ty - cy) * 0.09;
-      packet.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+      packets.forEach(p => { p.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`; });
       if (Math.abs(tx - cx) > 0.3 || Math.abs(ty - cy) > 0.3) raf = requestAnimationFrame(animate);
       else raf = null;
     };
