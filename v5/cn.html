@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="language" content="zh-CN">
+<title>signal — 概念演示 v5 (A路径：细胞能量论)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* --- PASSWORD GATE --- */
+  #gate { position: fixed; inset: 0; background: #1A1410; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; color: #F6EFEA; }
+  #gate .gate-overline { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #AD4236; margin-bottom: 16px; font-weight: 600; }
+  #gate .gate-title { font-family: 'Anguita Sans', 'Bebas Neue', Impact, sans-serif; font-size: 96px; font-weight: 900; color: #AD4236; line-height: 0.9; margin-bottom: 12px; letter-spacing: -1px; text-transform: lowercase; }
+  #gate .gate-subtitle { font-size: 14px; opacity: 0.6; margin-bottom: 12px; letter-spacing: 1px; }
+  #gate .gate-hint { font-size: 13px; color: #AD4236; margin-bottom: 32px; letter-spacing: 2px; font-family: 'Plus Jakarta Sans', sans-serif; }
+  #gate .gate-hint strong { font-weight: 700; letter-spacing: 3px; }
+  #gate form { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  #gate input { background: rgba(246,239,234,0.08); border: 1px solid rgba(246,239,234,0.2); border-radius: 6px; color: #F6EFEA; padding: 14px 20px; font-size: 15px; font-family: inherit; width: 280px; text-align: center; letter-spacing: 1px; outline: none; transition: border-color 0.2s; }
+  #gate input:focus { border-color: #AD4236; }
+  #gate button { background: #AD4236; color: #F6EFEA; border: none; border-radius: 6px; padding: 12px 32px; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+  #gate button:hover { background: #c4574b; }
+  #gate .gate-error { color: #AD4236; font-size: 12px; margin-top: 8px; opacity: 0; transition: opacity 0.2s; letter-spacing: 1px; }
+  #gate .gate-error.show { opacity: 1; }
+  #gate .gate-footer { position: absolute; bottom: 40px; font-size: 10px; opacity: 0.3; letter-spacing: 3px; text-transform: uppercase; }
+  body.locked { overflow: hidden; }
+  body.locked > section { display: none !important; }
+  body.locked .floating-packet { display: none !important; }
+  /* Floating packet — cursor-follow ambient across the entire viewport */
+  .floating-packet {
+    position: fixed; top: 0; left: 0; z-index: 100;
+    width: 120px; max-width: 120px; pointer-events: none;
+    filter: drop-shadow(0 12px 36px rgba(0,0,0,0.5));
+    transform: translate(-50%, -50%) translate3d(0, 0, 0);
+    will-change: transform; opacity: 1;
+  }
+  @media (max-width: 768px), (hover: none) { .floating-packet { display: none; } }
+  /* Front ↔ back crossfade — 7s cycle, both stacked at the same cursor-tracked position */
+  .floating-packet--face { animation: 7s ease-in-out infinite; }
+  .floating-packet--front { animation-name: signalPacketFlipFront; }
+  .floating-packet--back  { animation-name: signalPacketFlipBack; }
+  @keyframes signalPacketFlipFront {
+    0%, 42%  { opacity: 1; }
+    50%, 92% { opacity: 0; }
+    100%     { opacity: 1; }
+  }
+  @keyframes signalPacketFlipBack {
+    0%, 42%  { opacity: 0; }
+    50%, 92% { opacity: 1; }
+    100%     { opacity: 0; }
+  }
+</style>
+<style>
+  /* --- SELF-HOSTED BRAND FONTS (referenced from v4) --- */
+  @font-face { font-family: 'Anguita Sans'; src: url('fonts/AnguitaSans.otf') format('opentype'); font-weight: 900; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Bebas Neue'; src: url('fonts/BebasNeue-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+
+  :root {
+    --signal: #AD4236;
+    --signal-light: #c4574b;
+    --rose-linen: #F6EFEA;
+    --deep-evening: #1A1410;
+    --deep-evening-soft: #2a2420;
+    --font-display: 'Anguita Sans', 'Bebas Neue', Impact, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+    --font-editorial: 'Bebas Neue', 'Anguita Sans', Impact, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-body); background: var(--rose-linen); color: var(--deep-evening); line-height: 1.6; -webkit-font-smoothing: antialiased; font-weight: 400; }
+
+  .cover { min-height: 100vh; background: var(--deep-evening); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 40px; position: relative; overflow: hidden; }
+  .cover::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(173,66,54,0.15) 0%, transparent 70%); }
+
+  /* Entrainment wordmark — two ghost layers converge to unison, synced to two-frequencies-syncing audio */
+  .wordmark-container { position: relative; display: inline-block; line-height: 1; z-index: 1; }
+  .wordmark-ghost { margin: 0; will-change: transform, opacity; transition: transform 0.2s linear, opacity 0.2s linear; opacity: 0.5; transform: translateX(-7px); }
+  .wordmark-ghost.ghost-right { position: absolute; top: 0; left: 0; right: 0; transform: translateX(7px); }
+  @media (prefers-reduced-motion: reduce) { .wordmark-ghost { transform: translateX(0) !important; transition: none !important; } }
+  @media print { .wordmark-ghost.ghost-left { display: none !important; } .wordmark-ghost.ghost-right { position: static !important; opacity: 1 !important; transform: none !important; } }
+
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.15); opacity: 1; }
+  }
+  .cover-overline { font-family: var(--font-body); font-size: 18px; color: var(--rose-linen); font-weight: 300; letter-spacing: 2px; opacity: 0.75; margin-bottom: 8px; position: relative; z-index: 1; text-transform: lowercase; }
+  .cover h1 { font-family: var(--font-display); font-size: 140px; font-weight: 900; color: var(--signal); letter-spacing: -2px; line-height: 0.9; position: relative; z-index: 1; text-transform: lowercase; }
+  .cover .tagline { font-family: var(--font-body); font-size: 20px; color: var(--rose-linen); margin-top: 16px; font-weight: 300; letter-spacing: 2px; opacity: 0.85; position: relative; z-index: 1; text-transform: lowercase; }
+  .cover .company { font-family: var(--font-body); position: absolute; bottom: 40px; font-size: 11px; color: rgba(246,239,234,0.4); letter-spacing: 4px; text-transform: uppercase; font-weight: 500; display: flex; align-items: center; gap: 10px; z-index: 1; }
+  .insdr-logo-light { height: 12px; opacity: 0.6; }
+
+  .slide { min-height: 100vh; padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; max-width: 1200px; margin: 0 auto; page-break-before: always; }
+  .slide-dark { background: var(--deep-evening); color: var(--rose-linen); max-width: none; padding: 80px 10%; }
+  .slide-signal { background: var(--signal); color: var(--rose-linen); max-width: none; padding: 80px 10%; }
+
+  .section-label { font-family: var(--font-body); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--signal); margin-bottom: 16px; font-weight: 600; }
+  .slide-dark .section-label, .slide-signal .section-label { color: rgba(246,239,234,0.5); }
+  .slide h2 { font-family: var(--font-display); font-size: 56px; font-weight: 900; line-height: 1.05; margin-bottom: 32px; letter-spacing: -1px; text-transform: lowercase; }
+  .slide h3 { font-family: var(--font-display); font-size: 32px; font-weight: 900; margin-bottom: 20px; margin-top: 40px; letter-spacing: -0.5px; text-transform: lowercase; }
+  .slide p { font-family: var(--font-body); font-size: 17px; line-height: 1.7; margin-bottom: 20px; max-width: 800px; font-weight: 400; }
+  .slide-dark p, .slide-signal p { opacity: 0.9; }
+  .highlight { color: var(--signal); font-weight: 500; }
+  .slide-dark .highlight, .slide-signal .highlight { color: #fff; font-weight: 500; }
+
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 32px 0; }
+  .card { background: white; border-radius: 12px; padding: 32px; box-shadow: 0 2px 20px rgba(26,20,16,0.06); }
+  .slide-dark .card { background: var(--deep-evening-soft); box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+  .card .card-label { font-family: var(--font-body); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--signal); margin-bottom: 8px; font-weight: 700; }
+  .card h4 { font-family: var(--font-display); font-size: 22px; font-weight: 900; margin-bottom: 12px; letter-spacing: -0.3px; text-transform: lowercase; line-height: 1.1; }
+  .card p { font-family: var(--font-body); font-size: 15px; line-height: 1.6; opacity: 0.8; font-weight: 400; }
+
+  table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 15px; font-family: var(--font-body); }
+  th { font-family: var(--font-body); text-align: left; padding: 12px 16px; border-bottom: 2px solid var(--signal); font-weight: 700; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--signal); }
+  td { padding: 12px 16px; border-bottom: 1px solid rgba(26,20,16,0.08); vertical-align: top; }
+  .slide-dark th { border-bottom-color: var(--signal); color: var(--signal-light); }
+  .slide-dark td { border-bottom-color: rgba(246,239,234,0.08); }
+
+  .quote { font-size: 28px; font-weight: 300; line-height: 1.5; font-style: italic; padding: 40px 0; border-left: 4px solid var(--signal); padding-left: 32px; max-width: 700px; margin: 32px 0; }
+
+  /* v5-specific: energy pyramid */
+  .energy-pyramid { display: flex; flex-direction: column; align-items: center; margin: 48px 0; gap: 4px; max-width: 720px; }
+  .pyramid-row { background: var(--deep-evening-soft); color: var(--rose-linen); padding: 18px 24px; border-radius: 8px; text-align: center; font-family: var(--font-body); }
+  .pyramid-row .label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; margin-bottom: 4px; }
+  .pyramid-row .name { font-family: var(--font-display); font-size: 18px; font-weight: 900; text-transform: lowercase; letter-spacing: -0.3px; }
+  .pyramid-base { background: var(--signal); width: 100%; }
+  .pyramid-mid { width: 75%; }
+  .pyramid-top { width: 50%; }
+
+  @media (max-width: 768px) {
+    .slide { padding: 40px 24px; }
+    .cover h1 { font-size: 56px; }
+    .slide h2 { font-size: 32px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .energy-pyramid > div { width: 100% !important; }
+  }
+
+  /* Sonar-ping mute toggle */
+  #pingMuteBtn { position: fixed; top: 16px; right: 16px; z-index: 150; width: 38px; height: 38px; border-radius: 50%; background: rgba(26,20,16,0.55); border: 1px solid rgba(246,239,234,0.2); color: var(--rose-linen); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: background 0.2s; }
+  #pingMuteBtn:hover { background: rgba(26,20,16,0.85); }
+  #pingMuteBtn svg { opacity: 0.85; }
+  body.locked #pingMuteBtn { display: none !important; }
+  @media print { #pingMuteBtn { display: none !important; } }
+  @media (max-width: 768px), (hover: none) { #pingMuteBtn { top: 12px; right: 12px; width: 34px; height: 34px; } }
+</style>
+</head>
+<body class="locked">
+<!-- ==================== PASSWORD GATE ==================== -->
+<div id="gate">
+  <div class="gate-overline">INSDR Wellness Co. — 保密文件</div>
+  <div class="gate-title" aria-label="signal" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; letter-spacing: -2px;"><span style="color: #F6EFEA;">/</span>sɪɡ<span style="color: #F6EFEA;">ˈ</span>nɑ<span style="color: #F6EFEA;">ː</span>l<span style="color: #F6EFEA;">/</span></div>
+  <div class="gate-subtitle">输入密码查看。</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="密码">
+    <button type="submit">进入</button>
+    <div class="gate-error" id="gate-error">密码错误。请重试。</div>
+  </form>
+  <div class="gate-footer">请勿外传。</div>
+</div>
+
+<script>
+  (function() {
+    var PASS = "5-4-3-2-1";
+    var gate = document.getElementById("gate");
+    var body = document.body;
+    if (sessionStorage.getItem("signal_unlocked") === "true") {
+      gate.style.display = "none";
+      body.classList.remove("locked");
+    }
+    window.checkPass = function(e) {
+      e.preventDefault();
+      var input = document.getElementById("gate-pass").value;
+      var err = document.getElementById("gate-error");
+      if (input === PASS) {
+        sessionStorage.setItem("signal_unlocked", "true");
+        gate.style.display = "none";
+        body.classList.remove("locked");
+      } else {
+        err.classList.add("show");
+        document.getElementById("gate-pass").value = "";
+        document.getElementById("gate-pass").focus();
+        setTimeout(function(){ err.classList.remove("show"); }, 2400);
+      }
+      return false;
+    };
+  })();
+</script>
+
+
+<!-- ==================== 01 • COVER ==================== -->
+<section class="cover">
+  <div class="cover-overline">发出正确的</div>
+  <div class="wordmark-container">
+    <h1 class="wordmark-ghost ghost-left" aria-hidden="true" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 100px; letter-spacing: -3px;"><span style="color: var(--rose-linen);">/</span>sɪɡ<span style="color: var(--rose-linen);">ˈ</span>nɑ<span style="color: var(--rose-linen);">ː</span>l<span style="color: var(--rose-linen);">/</span></h1>
+    <h1 class="wordmark-ghost ghost-right" aria-label="signal" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 100px; letter-spacing: -3px;"><span style="color: var(--rose-linen);">/</span>sɪɡ<span style="color: var(--rose-linen);">ˈ</span>nɑ<span style="color: var(--rose-linen);">ː</span>l<span style="color: var(--rose-linen);">/</span></h1>
+  </div>
+  <div class="tagline">你的细胞一直在等的那个 signal。</div>
+  <div class="company"><img src="logo/insdr_logo_light.png" alt="INSDR" class="insdr-logo-light"> Wellness Co.  ·  v5 · 细胞能量论</div>
+</section>
+
+<!-- ==================== 02 • THE ONE REASON ==================== -->
+<section class="slide slide-dark" style="text-align: center; justify-content: center; align-items: center;">
+  <div class="section-label">底层逻辑</div>
+  <h2 style="max-width: 980px; margin: 0 auto 32px; font-size: 76px; line-height: 1.05;">你的细胞不是没时间了。<span class="highlight">是没能量了。</span></h2>
+  <p style="max-width: 720px; margin: 0 auto; font-size: 19px; opacity: 0.85; text-align: center;">衰老不看日历，看的是能量账本。你身体里的每一个细胞都需要 ATP <span style="opacity: 0.75;">(也就是细胞运转依赖的能量货币)</span> 来干活 — 修复 DNA、生成胶原蛋白、清理受损蛋白、在皮肤组织里锁住水分、完成一次神经冲动。当能量水平下降，这些活儿不会停，只是会开始 <em>摸鱼</em>。这就是细胞层面"变老"的真相。</p>
+
+  <blockquote style="max-width: 780px; margin: 56px auto 0; padding: 0 24px; text-align: center; font-family: 'Anguita Sans', 'Bebas Neue', serif; font-size: 30px; font-weight: 900; line-height: 1.25; color: rgba(246,239,234,0.92); letter-spacing: -0.5px; text-transform: lowercase;">
+    "活细胞不仅需要能量来维持其所有功能，还需要能量来维持其结构。没有了能量，生命将瞬间熄灭，细胞结构也会随之崩塌。"
+  </blockquote>
+  <p style="max-width: 720px; margin: 18px auto 0; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.55; text-align: center; font-weight: 500;">
+    — Albert Szent-Györgyi  ·  诺贝尔奖演讲，1937年12月11日
+  </p>
+</section>
+
+<!-- ==================== 03 • THE PROBLEM ==================== -->
+<section class="slide">
+  <div class="section-label">问题的根源</div>
+  <h2>你口中所谓的衰老，<span class="highlight">本质上是一件事出了问题。</span></h2>
+  <p>几十年来，衰老科学一直是一份各自为政的问题清单。2023年更新版的经典《衰老的标志》论文列举了十二个标志：端粒磨损、基因组不稳定、表观遗传漂变、蛋白质稳态丧失、线粒体功能障碍、细胞衰老、干细胞耗竭、细胞间通讯改变、营养感应失调、菌群失调、慢性炎症、巨自噬失活。</p>
+  <p style="margin-top: 20px;">十二个标志。十二个研究孤岛。十二种号称能对症下药的保健品。而且几乎所有这些方案 — 针对皮肤的胶原蛋白、针对长寿蛋白的 NAD+、针对睡眠的褪黑素、针对自噬的尿石素 — 瞄准的都只是下游的症状。</p>
+
+  <p style="margin-top: 32px;">2025年，Volkmar Weissig（世界线粒体学会主席）发表了一篇综述，指出 <strong>线粒体功能障碍是所有其他十一个标志的上游根源。</strong> 线粒体不仅仅生产 ATP — 它们还通过信号分子（mtDAMPs、线粒体衍生肽、心磷脂）来调控细胞间通讯。当能量经济崩溃时，每一个细胞维护流程 — DNA 修复、自噬、端粒维护、胶原蛋白合成 — 都会因为缺乏 ATP 而开始掉链子。</p>
+
+  <div class="quote" style="margin-top: 40px;">不是某一个标志失灵了。<br>是支撑这一切的 <span class="highlight">能量</span> 出问题了。</div>
+  <p style="font-size: 13px; opacity: 0.55; margin-top: -16px; margin-left: 36px;">— 这句点题的话出自一条评论，它完美诠释了 Weissig 的理论 (来自 young_goose_skincare)</p>
+</section>
+
+<!-- ==================== 04 • WHY NOT ANOTHER SUPPLEMENT ==================== -->
+<section class="slide">
+  <div class="section-label">为什么不是另一款补剂？</div>
+  <h2>大多数补剂治标。<span class="highlight">signal 治本。</span></h2>
+  <p>随便走进一家健康品店看看什么卖得最好。胶原蛋白粉修护皮肤结构。NAD+ 前体激活长寿蛋白。褪黑素引导入睡。尿石素 A 促进细胞自噬。每一种都是抓着一个下游标志不放，试图直接去推它一把。</p>
+  <p style="margin-top: 24px;">倒也不是说它们没用。只是它们都是在同一个上游系统的下游做文章。如果你的细胞没有足够的能量去执行任务，就算补充再多原料，那些真正干活的细胞机器也用不上。你可以往一个无法合成胶原蛋白的身体里猛灌胶原蛋白。你可以给运转不起来的线粒体输送 NAD+。瓶颈根本不在原料上。瓶颈在于能量的供需平衡。</p>
+  <p style="margin-top: 24px;">signal 不是另一款口服美容品。它是底层逻辑的底层 — 这套配方旨在保护和维持能量生产，从而让其他所有系统能够真正运转起来。首发单品会在皮肤上体现这个逻辑（因为皮肤是细胞能量下降最直观的晴雨表）。后续单品会在其他系统上验证这一点。</p>
+
+  <p style="margin-top: 48px; font-family: 'Anguita Sans', serif; font-size: 36px; line-height: 1.1; color: var(--signal); font-weight: 900; letter-spacing: -1px; text-transform: lowercase; max-width: 820px;">别的补剂治标。signal 支撑起驱动这一切的能量。</p>
+
+  <div style="margin-top: 56px;">
+    <a href="./cn-appendices.html" style="display: inline-flex; align-items: center; gap: 8px; font-family: 'Anguita Sans', serif; font-size: 28px; color: var(--signal); text-decoration: none; border-bottom: 2px solid var(--signal); padding-bottom: 4px; text-transform: lowercase; letter-spacing: -0.5px;">
+      想看硬核理论版？ → 详见附录
+    </a>
+  </div>
+</section>
+
+<!-- ==================== 04b • THE LIGHTBULB (lightbulb moment + the arc) ==================== -->
+<section class="slide">
+  <div class="section-label">那个顿悟时刻</div>
+  <h2>你缺的不是成分。<span class="highlight">你缺的是能量。</span></h2>
+  <p style="max-width: 860px;">你吃补剂已经吃了好几年了。咖啡里加胶原蛋白粉。冲电解质水。一颗美容软糖。再来一包复合维生素。每天四五种产品，便宜点也要花掉七块五美金。但从来没搞明白它们到底起没起作用。问题从来不是你吃进去的那些成分，而是它们进到你体内之后发生的事。</p>
+
+  <div class="card-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 40px;">
+    <div class="card">
+      <div class="card-label">01 · 你的架子</div>
+      <h4>已经堆满了。</h4>
+      <p>胶原蛋白、玻尿酸、B族维生素、电解质、益生菌。原材料到处都是。你在这上面花的钱已经够多了。成分不是问题所在。</p>
+    </div>
+    <div class="card">
+      <div class="card-label">02 · 你的细胞</div>
+      <h4>才是卡脖子的环节。</h4>
+      <p>没有能量去利用你给它的东西，你的细胞只是在空转。你在给一台跑不起来的机器拼命喂燃料。</p>
+    </div>
+    <div class="card">
+      <div class="card-label">03 · signal</div>
+      <h4>就是那块丢失的拼图。</h4>
+      <p>你的细胞一直在等的那个 signal。你之前吃的每一种补剂，终于找到了它们存在的意义。每天一包。听你的安排。</p>
+    </div>
+  </div>
+
+  <!-- The arc — second beat -->
+  <h3 style="margin-top: 80px;">三个节点，一条弧线。</h3>
+  <p style="max-width: 820px; opacity: 0.75; font-size: 15px;">九十天，你真的会坚持吃下去 — 因为你发自内心地想。</p>
+
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 40px;">
+    <div>
+      <div style="font-family: 'Anguita Sans', 'Bebas Neue', serif; font-size: 52px; font-weight: 900; color: var(--signal); letter-spacing: -2px; line-height: 0.9; text-transform: lowercase;">第 01 天。</div>
+      <div style="font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--signal); opacity: 0.7; margin-top: 8px; margin-bottom: 16px; font-weight: 700;">那个意外的小惊喜</div>
+      <p style="font-size: 15px;">一颗你真的想吃的咀嚼片。九十秒，感觉像是一个专属的瞬间，而不是一项待办任务。第一反应是：<em>原来吃补剂的感觉还可以是这样的？</em></p>
+    </div>
+    <div>
+      <div style="font-family: 'Anguita Sans', 'Bebas Neue', serif; font-size: 52px; font-weight: 900; color: var(--signal); letter-spacing: -2px; line-height: 0.9; text-transform: lowercase;">第 30 天。</div>
+      <div style="font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--signal); opacity: 0.7; margin-top: 8px; margin-bottom: 16px; font-weight: 700;">习惯成型</div>
+      <p style="font-size: 15px;">你一次都没落下。不是因为自律 — 而是因为这九十秒是你一天里最期待的那个片刻。</p>
+    </div>
+    <div>
+      <div style="font-family: 'Anguita Sans', 'Bebas Neue', serif; font-size: 52px; font-weight: 900; color: var(--signal); letter-spacing: -2px; line-height: 0.9; text-transform: lowercase;">第 90 天。</div>
+      <div style="font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--signal); opacity: 0.7; margin-top: 8px; margin-bottom: 16px; font-weight: 700;">恍然大悟</div>
+      <p style="font-size: 15px;">吃补剂不再是一种负担。坚持不再需要靠意志力死撑。这是第一次，保持习惯变得如此简单 — 你也终于明白了，为什么这才是整件事的核心。</p>
+    </div>
+  </div>
+
+  <p style="margin-top: 72px; font-family: 'Anguita Sans', serif; font-size: 36px; line-height: 1.1; color: var(--signal); font-weight: 900; letter-spacing: -1px; text-transform: lowercase; max-width: 860px;">你每天吃一包。不是因为感觉它起效了，而是因为你看懂了它起效的原理。</p>
+</section>
+
+<!-- ==================== 05 • THE SOLUTION ==================== -->
+<section class="slide slide-dark">
+  <div class="section-label">解决方案</div>
+  <h2>每日一嚼，支持细胞能量。<span class="highlight">九十秒。每一天。</span></h2>
+  <p>signal 是一种入口即溶的咀嚼片，配方剂量拉到临床级别，基于两条平行的底层逻辑：<strong>(1)</strong> 保护好细胞能量的基础设施（也就是线粒体膜），<strong>(2)</strong> 补充特定细胞类型所需的原料，从而实现肉眼可见的效果。两个完全独立的层面，而不是硬凑在一起的说法 — 基石成分保护每个细胞都在用的能量工厂；原料成分则在目标细胞里干它们自己的活。在首发单品中，这个肉眼可见的效果就是皮肤的水润度和结构感。</p>
+
+  <div class="card-grid" style="grid-template-columns: 1fr 1fr; margin-top: 40px;">
+    <div class="card">
+      <div class="card-label">能量基石 · 每日 4mg</div>
+      <h4>雨生红球藻提取物（虾青素）</h4>
+      <p>关于保护线粒体膜，它是被研究得最透彻的成分之一。能穿透血脑屏障。能穿透血视网膜屏障。高度集中在能量生产的核心场所——脂质双分子层中。如果要选一种成分来直接支撑细胞能量论，就是它了。</p>
+    </div>
+    <div class="card">
+      <div class="card-label">原料 · 每日 120 mg · Hyabest®</div>
+      <h4>透明质酸（玻尿酸）</h4>
+      <p>你的皮肤细胞用来构建真皮层水库的原材料。原料来源于日本 Kewpie Corporation 的 <strong>Hyabest®(S)LF-P</strong> — 注册商标级原料，低分子量 (200k–500k Da)，生物发酵来源，非转基因。正是那几篇确立了口服玻尿酸能改善皮肤水润度的人体临床研究（Oe 2021; Grier-Welch 2025 / Ritual HyaCera）里所使用的同款同剂量原料。</p>
+    </div>
+    <div class="card">
+      <div class="card-label">原料 · 每日 350 mg · Ceratiq®</div>
+      <h4>植物神经酰胺</h4>
+      <p>构建皮肤屏障脂质的原材料。原料来源于法国 PLT Health Solutions / Robertet 的 <strong>Ceratiq®</strong> — 注册商标级原料，法国非转基因小麦来源，每批次均通过无麸质检测，拥有 FDA NDI 认证及皮肤水润度宣称许可。这也是那篇 Ritual HyaCera 为期 12 周的人体临床研究（Grier-Welch et al., 2025）中使用的同款同剂量原料 — 我们比它们多了那个线粒体基石成分。</p>
+    </div>
+    <div class="card">
+      <div class="card-label">能量辅因子</div>
+      <h4>维生素 C、E、锌、硒</h4>
+      <p>维生素 E 保护线粒体脂质免受氧化。维生素 C 是 ATP 相关酶促反应的辅因子。锌和硒支持抗氧化防御体系，从而保障能量生产。每种都达到 100% 每日摄入量。</p>
+    </div>
+  </div>
+
+  <p style="margin-top: 32px;"><strong>剂型：</strong> 九十秒入口即溶咀嚼片，单片尺寸 2.7 × 1.5 × 1 cm（大概一颗嗨啾软糖的大小）。无需喝水，无需冲泡，毫无阻力。每包含三颗 — 一包就是一次的量。每罐 60 包，能用两个月。剂型本身就是护城河 — 第六页会展开讲。</p>
+</section>
+
+<!-- ==================== 05b • THE HABIT (why you keep taking it) ==================== -->
+<section class="slide">
+  <div class="section-label">习惯养成</div>
+  <h2>第一款让你<span class="highlight">发自内心期待的补剂。</span></h2>
+  <p>大多数口服美容品失败，是因为你根本坚持不下去 — 药片难以下咽，粉末冲起来麻烦，软糖最后就真的当糖吃了。到第 60 天，它已经在柜子深处吃灰了。signal 是一段九十秒的每日小确幸，而它恰好包含了足量的临床成分。这不是一个附加功能，这就是它的核心机制：成分只有在你坚持吃的情况下才有效，而只有体验本身让你觉得值得重复，你才会坚持。四件事加在一起，让这句话成为事实 — 而不是口号。</p>
+
+  <div class="card-grid" style="grid-template-columns: repeat(4, 1fr); margin-top: 40px;">
+    <div class="card">
+      <div class="card-label">01 · 时间成本</div>
+      <h4>九十秒。</h4>
+      <p>撕开，咀嚼，品尝，融化。比刷牙时间还短。但又长得足够让你感觉那是属于自己的片刻。</p>
+    </div>
+    <div class="card">
+      <div class="card-label">02 · 剂型化学</div>
+      <h4>双重质地，一颗搞定。</h4>
+      <p>咀嚼基质承载水溶性活性物（玻尿酸、维生素）。MCT 液体夹心承载脂溶性活性物（虾青素、CoQ10）。一种剂型，不用再叠吃药片和冲剂了。</p>
+    </div>
+    <div class="card">
+      <div class="card-label">03 · 形式设计</div>
+      <h4>围绕进食那一刻而设计。</h4>
+      <p>硬质外壳。渐进式融化。液体夹心在入口第十秒左右爆开。一切都是为了吃的那一刻本身而设计的 — 而不是一颗你想赶紧吞下去的苦药。</p>
+    </div>
+    <div class="card">
+      <div class="card-label">04 · 解锁体验</div>
+      <h4>补剂，从此不再是个负担。</h4>
+      <p>大多数口服美容品栽在续购率上 — 每天的动作太容易被遗忘。signal 把这个逻辑翻转了过来。愉悦感带来坚持。坚持带来结果。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 06 • THE FORMAT ==================== -->
+<section class="slide">
+  <div class="section-label">剂型护城河</div>
+  <h2>一片咀嚼片。一个独立包。<span class="highlight">一罐仪式感。</span></h2>
+  <p>在抗衰美容这个赛道，这种东西根本不存在。入口即溶的咀嚼片，带液体爆珠夹心，独立易撕包，60包一罐。剂型本身就是护城河 — 一种看起来像"产品"而不是"疗程"的补剂。</p>
+
+  <div class="card-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 40px;">
+    <div class="card" style="padding: 0; overflow: hidden;">
+      <div style="display: flex; height: 260px;">
+        <img src="signal_packet.png" alt="signal 包装正面 —— 深红色，印有凸版压印的 /sɪɡˈnɑːl/ 字样" style="width: 50%; height: 260px; object-fit: cover; display: block;">
+        <img src="signal_packet_back.png" alt="signal 包装背面 —— 透明 PET 视窗，能看到里面的三颗夹心咀嚼片" style="width: 50%; height: 260px; object-fit: cover; display: block;">
+      </div>
+      <div style="padding: 24px;">
+        <div class="card-label">独立包</div>
+        <h4>哑光正面。透明背面。</h4>
+        <p>一包三颗。一包就是一次的剂量。激光刻痕的 V 型开口，撕起来干脆利落。背面的透明 PET 视窗让你在打开之前就能看到里面的东西 — 仪式感从看到包装那一刻就开始了，甚至早于你咬下第一口。</p>
+      </div>
+    </div>
+    <div class="card" style="padding: 0; overflow: hidden;">
+      <img src="signal_chew.jpg" alt="signal 咀嚼片" style="width: 100%; height: 260px; object-fit: cover; display: block;">
+      <div style="padding: 24px;">
+        <div class="card-label">咀嚼片</div>
+        <h4>入口即溶。九十秒。</h4>
+        <p>木糖醇外壳，渐进式融化，液体夹心大约在第 10 秒时爆开。这个味觉瞬间就是最直接的体感反馈 — 是每一次咀嚼时都能收到的"它正在起作用"的信号，在你从镜子里看到改变之前。</p>
+      </div>
+    </div>
+    <div class="card" style="padding: 0; overflow: hidden;">
+      <img src="signal_container.jpg" alt="signal 外包装罐" style="width: 100%; height: 260px; object-fit: cover; display: block;">
+      <div style="padding: 24px;">
+        <div class="card-label">外包装罐</div>
+        <h4>60 包。两个月的量。</h4>
+        <p>深邃夜幕主色调的纸盒。可回收纸板材质，烫金压印的标识。高级的开箱体验，但不用那些烦人的塑料内托。每两个月配送一次。</p>
+      </div>
+    </div>
+  </div>
+
+  <p style="margin-top: 32px;"><span class="highlight">Grüns 已经证明了这种"独立包+外罐"的结构值 12 亿美元。</span> signal 把这种每日一包的仪式感应用到了另一个赛道 — 抗衰美容 — 而且我们是第一个进来的。</p>
+</section>
+
+<!-- ==================== 07 • THE PROOF ==================== -->
+<section class="slide">
+  <div class="section-label">证据链</div>
+  <h2>每一份剂量，都有据可查。<span class="highlight">每一条宣称，都有出处。</span></h2>
+  <p>signal 的立论建立在两层证据之上：(1) 关于原料成分（玻尿酸、植物神经酰胺、虾青素）已发表的 RCT 研究，(2) 关于线粒体功能作为细胞维护上游驱动力的成熟生物学理论。我们不会宣称有一个针对整个配方的组合临床试验 — 功效验证这道门，我们靠的是原料级别的 RCT 背书，加上第三个月的习惯数据指标（就是 Grüns 那个 12 亿美金的玩法）。我们宣称的是，每一种单独成分都在它的研究有效剂量上，并且我们正在搭建的理论框架，正是长寿研究界正在汇聚的共识。完整的功效闭环策略详见附录 A8。</p>
+
+  <table style="margin-top: 32px;">
+    <tr><th>成分 / 机制</th><th>signal 使用剂量</th><th>证据支持</th><th>指向结果</th></tr>
+    <tr>
+      <td><strong>虾青素</strong> (线粒体膜保护)</td>
+      <td>每日 4 mg</td>
+      <td>Tominaga 2017 (安慰剂对照) • 多项关于线粒体脂质保护的体外研究</td>
+      <td>改善皮肤弹性、抵御紫外线、减少皱纹</td>
+    </tr>
+    <tr>
+      <td><strong>透明质酸</strong> (原料，Hyabest®)</td>
+      <td>每日 120 mg</td>
+      <td>Oe 2021 (Nutrients期刊) • Grier-Welch 2025 (与HyaCera复配研究) • Kawada 2014 • Gao 2022 荟萃分析 (汇总7项RCT)</td>
+      <td>显著改善皮肤水润度与弹性</td>
+    </tr>
+    <tr>
+      <td><strong>植物神经酰胺</strong> (原料，Ceratiq®)</td>
+      <td>每日 350 mg</td>
+      <td>Saint-Jeannet 2019 (n=64, 12周) • Grier-Welch 2025 (n=63, 与HyaCera复配研究)</td>
+      <td>减少皱纹显现，增加皮肤水润度</td>
+    </tr>
+    <tr>
+      <td><strong>线粒体功能障碍理论框架</strong></td>
+      <td>&mdash;</td>
+      <td>Weissig 2025 综述 • López-Otín et al. 2023 (《衰老的标志》更新版) • PMC10776122 (线粒体功能障碍与其他标志的相互作用)</td>
+      <td>这是底层框架依据，不是临床功效宣称</td>
+    </tr>
+    <tr>
+      <td><strong>维生素 C、E、锌、硒</strong> (辅因子)</td>
+      <td>各 100% DV</td>
+      <td>公认的生理学基础</td>
+      <td>为线粒体膜提供抗氧化支持；为 ATP 相关酶反应提供辅因子支持</td>
+    </tr>
+  </table>
+
+  <p style="margin-top: 32px;"><span class="highlight">重要声明：严格遵守宣称规范。</span> signal 不宣称能够"治疗线粒体功能障碍"或"逆转细胞衰老"。那些是药品才能做的宣称，膳食补充剂不能越界。signal 宣称的是，其配方支持了当前研究所认定的、对健康细胞功能至关重要的基础系统。每一种原料和基石成分，在其使用的剂量上，都有经过同行评议的 RCT 证据支持。</p>
+</section>
+
+<!-- ==================== 08 • THE FOUNDATION ==================== -->
+<section class="slide slide-signal">
+  <div class="section-label">守住根本，而非追逐症状</div>
+  <h2 style="color: var(--rose-linen);">别的补剂治标。<br>signal 守住根本。</h2>
+  <p style="max-width: 820px; font-size: 18px; opacity: 0.95;">把健康补剂这个品类想象成一座金字塔。顶层是 <em>肉眼可见的效果</em> — 也就是人们买补剂想要的东西。中层是 <em>细胞维护流程</em> — 身体为了产出那些效果真正在做的事情。底层是 <em>能量</em> — 让所有中层流程得以运转的 ATP。</p>
+
+  <div class="energy-pyramid">
+    <div class="pyramid-row pyramid-top" style="background: rgba(246,239,234,0.18);">
+      <div class="label">第三层 — 你买补剂的目的</div>
+      <div class="name">肉眼可见的效果</div>
+      <div style="font-size: 13px; opacity: 0.85; margin-top: 4px;">皮肤光泽、专注力、睡眠、精力、蛋白质利用、肠道健康、恢复力、活动力</div>
+    </div>
+    <div class="pyramid-row pyramid-mid" style="background: rgba(246,239,234,0.12);">
+      <div class="label">第二层 — 大多数补剂瞄准的目标</div>
+      <div class="name">细胞维护</div>
+      <div style="font-size: 13px; opacity: 0.85; margin-top: 4px;">胶原蛋白合成、自噬、DNA 修复、神经递质生成、肠道屏障完整性、免疫应答</div>
+    </div>
+    <div class="pyramid-row pyramid-base">
+      <div class="label">第一层 — 别人都不直接支持的东西</div>
+      <div class="name">细胞能量</div>
+      <div style="font-size: 13px; opacity: 0.95; margin-top: 4px;">ATP 生产、线粒体完整性、让上面一切成为可能的底层燃料</div>
+    </div>
+  </div>
+
+  <p style="max-width: 820px; font-size: 17px; opacity: 0.95; margin-top: 24px;">所有其他的口服美容品牌都在上面两层抢地盘。signal 抢占的是最底下那一层。<strong>不先解决第一层的问题，你在第二层再怎么堆胶原蛋白都没用。</strong> 这就是为什么 signal 是另一种维度的产品，而不是在同一个赛道里多了一个选手。</p>
+
+  <p style="margin-top: 24px; max-width: 820px; font-size: 15px; opacity: 0.85;">战略加分项：这也让 signal 对消费者现有的补剂方案是加法，而不是替代。你不需要扔掉你的胶原蛋白粉来配合 signal — signal 是在支持那些需要靠你的胶原蛋白粉来干活的细胞。</p>
+</section>
+
+<!-- ==================== 09 • WHY IT'S UNCOPYABLE ==================== -->
+<section class="slide slide-dark">
+  <div class="section-label">护城河</div>
+  <h2>任何单一层面都能抄。<span class="highlight">但组合在一起，就抄不走。</span></h2>
+  <p>signal 的防御力不是靠某一个单一功能。它是一套由八个层面构成的组合拳，竞争者想要完全复制，需要 12 到 18 个月 — 而其中有一层，是其他任何口服美容品牌都没有占领的心智高地：<strong>把细胞能量作为平台根基。</strong> 等到对手反应过来，signal 已经锁定了独家合作关系、占据了叙事主导权，并且搭建了一个它们无法用单一生物学逻辑去统一的、多单品架构。</p>
+
+  <table style="margin-top: 32px;">
+    <tr><th>#</th><th>护城河层级</th><th>复制所需时间</th></tr>
+    <tr><td><strong>01</strong></td><td><strong>剂型</strong> — 入口即溶咀嚼片 + 液体夹心爆珠 + 单次独立包装</td><td>12–18 个月 (需要新代工厂，新生产线)</td></tr>
+    <tr><td><strong>02</strong></td><td><strong>能量理论</strong> — 把细胞能量作为平台根基。还没有哪个口服美容品牌这么说过。</td><td><strong>叙事上无法复制</strong> — 谁先说，谁就赢走了这套语言体系</td></tr>
+    <tr><td><strong>03</strong></td><td><strong>配方架构</strong> — 每一个单品都携带了针对特定组织挑选的保护性基石成分。glow/surge/guard 里的 AstaZine® 虾青素；rise/edge/move 里的 Kaneka QH® 泛醇；rest/still 里的 MitoPrime™ 麦角硫因。针对不同生物学需求用最好的料，而不是拿一个成分硬套全部 8 款产品。</td><td>三条供应商关系轴心 + 以架构为叙事，先发者通吃</td></tr>
+    <tr><td><strong>04</strong></td><td><strong>感官仪式</strong> — 九十秒多重感官体验，带体感反馈确认</td><td>不变剂型就不可能实现</td></tr>
+    <tr><td><strong>05</strong></td><td><strong>联合创始人 + 亚太区渠道资源</strong> — 吴建豪 (2026-04-18 下午确认以非现金联合创始人身份加入) + 亚洲受众触达 + 亚太区引荐网络</td><td><strong>不可复制</strong></td></tr>
+    <tr><td><strong>06</strong></td><td><strong>先发合作绑定</strong> — 抗衰圈层 (Mitopure, Novos, Ritual) + 电解质圈层 (LMNT, Hydrant) 的联合营销</td><td>合同锁定 12–24 个月</td></tr>
+    <tr><td><strong>07</strong></td><td><strong>平台化架构</strong> — 8 款单品，8 种细胞类型，但共用同一个生物学根基。每一款 signal 都是在不同组织里表达同一种能量理论。</td><td>12–24 个月 — 后来者无法回头统一架构</td></tr>
+    <tr><td><strong>08</strong></td><td><strong>亚洲分销</strong> — 借助 Vanness 网络的跨境电商</td><td><strong>不可复制</strong></td></tr>
+  </table>
+
+  <h3 style="margin-top: 40px;">两步走战略</h3>
+  <div class="card-grid" style="grid-template-columns: 1fr 1fr; margin-top: 16px;">
+    <div class="card">
+      <div class="card-label">第一阶段 · 第 0–12 个月</div>
+      <h4>楔子产品</h4>
+      <p>signal (glow)。一款首发单品，通过皮肤——这个最显性的细胞类型——来诠释能量理论。这块楔子能让我们被看见，转化那些体量最大的美容品类消费者。</p>
+    </div>
+    <div class="card">
+      <div class="card-label">第二阶段 · 第 12 个月起</div>
+      <h4>平台化扩张</h4>
+      <p>signal (rise / rest / surge / edge / still / guard / move)。另外七款单品，每一款都是同一种生物学逻辑在不同细胞类型里的不同演绎。这套平台会统一在同一套理论之下，任何对手都无法回头去追认。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 10 • THE MARKET ==================== -->
+<section class="slide">
+  <div class="section-label">市场机会</div>
+  <h2>一个尚不存在的品类，<span class="highlight">诞生在三个已有品类的交汇点。</span></h2>
+  <p>signal 卡位在三个庞大市场的重叠区域，占据了一个它们都还没触及的品类位置：<strong>由细胞能量驱动的口服美容。</strong></p>
+
+  <div class="card-grid" style="grid-template-columns: 1fr 1fr 1fr; margin-top: 32px;">
+    <div class="card">
+      <div class="card-label">市场一</div>
+      <h4>口服美容</h4>
+      <p style="font-size: 22px; font-weight: 700; color: var(--signal); margin-bottom: 8px;">80亿+ 美金</p>
+      <p>年增长率 12%。从 Z 世代到熟龄保养，已经在吃的人跨代际存在，需求正在向"真正有用的东西"靠拢。HUM、Lemme、Ritual、Vital Proteins 都在这里。但没有一家把能量作为地基来讲。</p>
+    </div>
+    <div class="card">
+      <div class="card-label">市场二</div>
+      <h4>长寿补剂</h4>
+      <p style="font-size: 22px; font-weight: 700; color: var(--signal); margin-bottom: 8px;">500亿+ 美金</p>
+      <p>NAD+ 前体、尿石素 A (Mitopure)、CoQ10、NMN、NR。竞争格局：Novos、Tru Niagen、Timeline Nutritionals、Pendulum。大多是胶囊剂型，大多是极客风，没有针对女性受众的品牌占据这条赛道。</p>
+    </div>
+    <div class="card">
+      <div class="card-label">市场三</div>
+      <h4>医美项目</h4>
+      <p style="font-size: 22px; font-weight: 700; color: var(--signal); margin-bottom: 8px;">80亿+ 美金</p>
+      <p>肉毒、填充、微针、激光、红光。求美者单次花费 500 到 2000 美金，她们都在问"我该吃点啥来维护效果？"皮肤科医生已经在推荐口服玻尿酸和胶原蛋白了。signal 是那个理所当然的、可以吃下去的搭档。</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 40px;">为什么是现在</h3>
+  <p>细胞能量是 2026 年行业媒体的关键词。NutraIngredients、BeautyMatter、Vogue Scandinavia 还有 Glossy，过去半年都在推"细胞健康"或者"由内而外的美丽"这些选题。这个词在 2026 年的行业报道里已经铺天盖地了，但还没有哪个消费品牌把它据为己有。signal 要在这三个市场和一个文化势头的交汇点插上旗。</p>
+  <p style="margin-top: 16px;"><span class="highlight">对标退出的估值参考：</span> Grüns (2026年4月被联合利华 12 亿美金收购) 对标的是剂型和品类打法。Vital Proteins (被雀巢收购) 和 Liquid IV (被联合利华收购) 对标的是品类先例。长寿赛道的估值倍数普遍高于美容赛道 — 卡位决定了退出的天花板。</p>
+</section>
+
+<!-- ==================== 11 • THE TEAM ==================== -->
+<section class="slide slide-dark">
+  <div class="section-label">团队</div>
+  <h2>创始人、顾问、<span class="highlight">渠道。</span></h2>
+
+  <div class="card-grid" style="grid-template-columns: repeat(4, 1fr); margin-top: 40px;">
+    <div class="card">
+      <div class="card-label">联合创始人</div>
+      <h4>Damon</h4>
+    </div>
+    <div class="card">
+      <div class="card-label">联合创始人</div>
+      <h4>Gabby</h4>
+    </div>
+    <div class="card">
+      <div class="card-label">联合创始人 · 亚太区引荐</div>
+      <h4>吴建豪</h4>
+    </div>
+    <div class="card">
+      <div class="card-label">联合创始人</div>
+      <h4>Frank</h4>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 12 • BUSINESS MODEL ==================== -->
+<section class="slide">
+  <div class="section-label">商业模式</div>
+  <h2>每罐 $69。<span class="highlight">每天 $1.15。</span></h2>
+  <p>DTC 订阅制。每两个月配送一罐。默认走订阅价，前 500 名用户享受 Founder's 售价，另外通过 Send a Signal 机制来做冷启动拉新。</p>
+
+  <table style="margin-top: 32px;">
+    <tr><th>价格层级</th><th>售价</th><th>每日成本</th><th>备注</th></tr>
+    <tr><td><strong>Founder's 售价</strong> (限前 500 名)</td><td>$49 / 罐</td><td>$0.82</td><td>锁定早期支持者的终身价格。满 500 人即关闭。</td></tr>
+    <tr><td><strong>订阅默认价</strong></td><td>$59 / 罐</td><td>$0.98</td><td>每两个月自动配送。可随时暂停或跳过。</td></tr>
+    <tr><td><strong>单次购买价</strong></td><td>$69 / 罐</td><td>$1.15</td><td>试用购买或非订阅复购。</td></tr>
+    <tr><td><strong>Send a Signal</strong> (非订阅用户)</td><td>$5 / 次</td><td>&mdash;</td><td>上线初期的经典玩法。付 5 美金，寄出两包:一包给朋友，一包给自己。净成本约 −$0.55/次，算作拉新成本。</td></tr>
+    <tr><td><strong>Send a Signal</strong> (订阅用户，常驻功能)</td><td>$5 / 次</td><td>&mdash;</td><td>常驻功能。订阅用户付 5 美金，寄一包给没试过 signal 的朋友。自己不会多得一包（因为已经订阅了）。每月限 1 次，会校验收件人是否为新客。净收入约 +$2.00/次。<strong>品牌动词，就是永续增长引擎。</strong></td></tr>
+  </table>
+
+  <p style="margin-top: 32px;">第 12 个月的目标单客模型：规模化后毛利率约 60%，6 个月留存下的 LTV 约 $120，通过 Send a Signal 实现的净拉新成本约 $0–$2，对比之下付费社交广告的拉新成本在 $25–$50。<span class="highlight">以上为基于 CMO 成本验证和 3PL 运费报价前的预估方向值。</span></p>
+</section>
+
+<!-- ==================== 13 • LAUNCH PLAN ==================== -->
+<section class="slide slide-dark">
+  <div class="section-label">启动蓝图</div>
+  <h2>12 个月，<span class="highlight">从概念到品类。</span></h2>
+  <p>执行顺序已经锁定。关键路径依赖项包括：生产验证（周期最长）、专利优先权（必须在公开演示前提交）、以及习惯数据验证（通过 Grüns 的玩法关闭功效验证的大门 — 靠留存率+成分背书，而不是自己花钱做试验）。其余事项并行推进。</p>
+
+  <table style="margin-top: 32px;">
+    <tr><th>时间窗口</th><th>里程碑</th></tr>
+    <tr><td><strong>M1&ndash;M2</strong></td><td>提交临时专利申请。与 Zone Halo 启动 8 单品平台配方工作 ($10K/单品 = 总计 $80K，已确认)。签署 Founders' MOU。完成公司注册。</td></tr>
+    <tr><td><strong>M3&ndash;M4</strong></td><td>配方研发交付锁定规格（先做简化版原型，再做全活性物堆叠）。Send a Signal 面向 200–500 名内测用户启动。</td></tr>
+    <tr><td><strong>M5&ndash;M8</strong></td><td>习惯度监测：目标是在内测第三个月实现 70%+ 的日活使用率。如果数据趋势不达标，说明剂型或仪式感设计有问题，需要在规模化投入前返工调整。<strong>这是目前我们关闭"功效验证"这扇门的主要机制。</strong></td></tr>
+    <tr><td><strong>M9</strong></td><td>留存基准达成。功效验证大门通过"原料级 RCT 背书（14+ 种品牌原料） + 真实世界留存数据"正式关闭。第一个营销素材 — 就是那个留存率数字本身 — 上线。</td></tr>
+    <tr><td><strong>M10&ndash;M12</strong></td><td>公开发布。Founder's 售价 层级开启。Send a Signal 全面铺开。联合营销合作启动（补水线对接 LMNT、Hydrant、Cure；能量线对接各长寿品牌做交叉推荐）。</td></tr>
+  </table>
+
+  <h3 style="margin-top: 40px;">渠道策略</h3>
+  <p>发布以 DTC 订阅为先（毛利最高、习惯数据反馈最快）。零售渠道按特定顺序打开，匹配那群已经习惯"堆叠"补剂的消费者常去的购物场景：</p>
+  <ul style="margin-top: 16px; margin-bottom: 24px; padding-left: 28px; line-height: 1.8;">
+    <li><strong>Ulta Wellness</strong> (主要美容渠道) — Ulta 店内四 pillar 的 Wellness 专区是目前唯一在扩品内服美容产品的主流美妆零售商（根据 2026 年 4 月行业消息，Sephora 正在退出这个品类）。推介窗口：第 4 到第 6 个月，带着习惯数据和品牌原料 RCT 背书去谈。具体路径见附录 A15 关于 PLTFRM 的介绍。</li>
+    <li><strong>Erewhon</strong> — 美容仪式感货架。通过 Presence Marketing (PLTFRM 旗下) 进入自然渠道。</li>
+    <li><strong>Amazon</strong> — 关键词卡位:"beauty supplement"、"beauty from within"、"collagen alternative"。第 10 个月上线。</li>
+    <li><strong>亚洲跨境</strong> — Vanness 的分销网络；按亚太区法规路径依次推进。</li>
+  </ul>
+
+  <p style="margin-top: 32px;"><span class="highlight">前 6 个月唯一重要的指标：日活使用率。</span> Grüns 赢就赢在 80% 的日活率和 8.5 万条真实评论上。signal 的习惯假设能否成立，就看这颗咀嚼片加上仪式感，能不能跑出同样的增长曲线。其他所有东西，都排在这一个指标后面。</p>
+</section>
+
+<!-- ==================== 14 • THE ASK ==================== -->
+<section class="slide">
+  <div class="section-label">融资需求</div>
+  <h2>先靠自己。<span class="highlight">留存数据跑通了再开亲友轮。</span></h2>
+  <p>signal 选择先靠收入自启动 — 而不是一上来就签大机构的 SAFE。四位联合创始人共同出资覆盖最小化启动成本；早期收入滚动投入增长。一旦留存数据验证了习惯假设（根据 Grüns 的剧本，内测第三个月日活率 70%+），我们再开放一笔小额的 friends-and-family 轮，用于加速推进完整的 8 单品平台。机构化的 pre-seed / seed 轮融资，等到亲友轮数据和留存数据更有说服力时再说。</p>
+
+  <h3 style="margin-top: 32px;">第一阶段 — 自启动 (仅 glow 单品)</h3>
+  <table>
+    <tr><th>类别</th><th>预算范围</th><th>用途</th></tr>
+    <tr><td>Zone Halo 配方费 (仅 glow)</td><td>$10K</td><td>首发只做一个单品，$10K/单品已确认。其余单品推迟至第二阶段。</td></tr>
+    <tr><td>临时专利 + 外观设计专利</td><td>$8K&ndash;$10K</td><td>剂型的防御性优先权日期。不作为核心护城河去讲。详见附录 A5。</td></tr>
+    <tr><td>公司注册 + 法务</td><td>$5K&ndash;$10K</td><td>创始人文件、代工厂 MSA、宣称合规审查、法规事务</td></tr>
+    <tr><td>首轮生产 (小起订量)</td><td>$15K&ndash;$30K</td><td>DTC 上线用的初始库存，约 5–10K 包</td></tr>
+    <tr><td>包装 + 品牌视觉资产</td><td>$5K&ndash;$10K</td><td>哑光 Signal 正面 + 透明背面的独立包；落地页刷新</td></tr>
+    <tr><td>上线前营销 (自然流量优先)</td><td>$0&ndash;$10K</td><td>TikTok 原生内容，自有渠道。不投付费硬广。</td></tr>
+    <tr><td>创始人薪酬</td><td>$0</td><td>延迟至留存数据达标 / 亲友轮之后</td></tr>
+    <tr><td><strong>第一阶段自启动总额</strong></td><td><strong>$43K&ndash;$80K</strong></td><td><strong>联合创始人自行出资</strong></td></tr>
+  </table>
+
+  <h3 style="margin-top: 40px;">第二阶段 — 亲友轮 (由留存指标触发)</h3>
+  <table>
+    <tr><th>类别</th><th>预算范围</th><th>用途</th></tr>
+    <tr><td>亲友轮单笔金额</td><td>$25K–$100K / 人</td><td>3–5 位参与者 = 总计 $150K–$400K</td></tr>
+    <tr><td>剩余 7 款单品平台化 (Zone Halo)</td><td>$70K</td><td>rise, rest, surge, edge, still, guard, move — $10K/单品</td></tr>
+    <tr><td>生产规模放大</td><td>$60K&ndash;$150K</td><td>根据已验证的习惯需求扩大库存</td></tr>
+    <tr><td>顾问委员会 + 留存分析</td><td>$40K&ndash;$80K</td><td>3–5 位有资历的科学家 + 用户队列追踪。靠习惯数据+成分背书关闭功效验证大门，而不是自己投钱做 RCT (详见附录 A8)</td></tr>
+    <tr><td>创始人薪酬 + 首个运营岗招聘</td><td>剩余资金</td><td>CEO 和 COO 薪资在亲友轮后开始发放；针对 Grüns 式机会招聘补剂运营专员</td></tr>
+    <tr><td><strong>第二阶段触发条件</strong></td><td colspan="2"><strong>内测第三个月日活率 70%+ + 付费订阅用户超 500 人 + 留存数据趋势对标 Grüns 基准</strong></td></tr>
+  </table>
+
+  <h3 style="margin-top: 32px;">亲友轮参与者将获得什么</h3>
+  <p>一个机会：投进第一个把"细胞能量论"作为地基的口服美容品牌。一个多单品、统一在单一生物学逻辑下的平台，任何对手都无法回头追认。自带明星联合创始人（吴建豪，非现金入股）以及现成的亚洲分销渠道。一个清晰的路径：从自启动 (glow) → 留存验证 (M3) → 亲友轮助推完整的 8 单品平台。退出参考剧本：同剂型赛道的 Grüns 在 2026 年 4 月卖了 12 亿美金。卡位长寿赛道，估值倍数远超纯美容品牌。</p>
+
+  <div style="margin-top: 56px; padding-top: 40px; border-top: 1px solid rgba(26,20,16,0.12);">
+    <div style="font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color: var(--signal); opacity: 0.7; margin-bottom: 12px;">做决定前 — 请先读这里</div>
+    <a href="./cn-appendices.html" style="display: block; font-family: 'Anguita Sans', serif; font-size: 56px; line-height: 1.05; color: var(--signal); text-decoration: none; font-weight: 900; letter-spacing: -1.5px; text-transform: lowercase; margin-bottom: 16px;">
+      打开附录 →
+    </a>
+    <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; color: var(--deep-evening); opacity: 0.7; max-width: 720px; line-height: 1.5;">
+      13 个深度拆解章节：平台理论 (Weissig 框架 + 单品与细胞类型映射)、九十秒临在感练习、感官科学、临床参考文献、单品平台路线图、IP 策略、五关评分、功效闭环策略 (成分 RCTs + 习惯数据)、创始团队详情、九十天执行排期，以及更多。这份 deck 里的每一个论断，都能在里面找到出处。
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 15 • DISCLAIMER ==================== -->
+<section class="slide">
+  <div class="section-label">法律声明</div>
+  <h2>没有星号小字。<span class="highlight">所有披露都在这里。</span></h2>
+  <p style="max-width: 780px; font-size: 14px; opacity: 0.75;">以上声明未经美国食品药品监督管理局评估。本产品不用于诊断、治疗、治愈或预防任何疾病。signal 是一款膳食补充剂。</p>
+  <p style="max-width: 780px; font-size: 14px; opacity: 0.75;">本 deck 引用的临床研究 (Oe 2017, Kawada 2014, Gao 2022, Guillou 2011, Bizot 2017, Tominaga 2017) 支持的是在对应剂量下的独立成分功效 — 并非针对任何个人的特定效果保证。个体效果存在差异。</p>
+  <p style="max-width: 780px; font-size: 14px; opacity: 0.75;">signal 不宣称能够"治疗线粒体功能障碍"或"逆转细胞衰老"。本 deck (第 2–4、8 页) 中展示的细胞能量框架，描述的是我们正在构建的生物学基础，以及指导我们配方选择的已发表研究。这不是针对任何具体单品的临床功效宣称。每一种原料和基石成分，在其使用的剂量上，都有经过同行评议的 RCT 证据支持。</p>
+  <p style="max-width: 780px; font-size: 14px; opacity: 0.75;">signal 的完整组合配方尚未经过公司资助的临床试验测试。功效验证的大门，我们靠的是"原料级 RCT 背书 + 真实世界留存/习惯数据"（Grüns 的剧本）。不宣称成分间的协同增效作用。</p>
+  <p style="max-width: 780px; font-size: 14px; opacity: 0.75;">市场规模及收购估值数据来源于公开报告，可能因来源不同而有差异。Grüns 于 2026 年 4 月被联合利华以 12 亿美金收购的消息已获公开证实。</p>
+  <p style="max-width: 780px; font-size: 14px; opacity: 0.75;">吴建豪先生的参与以正式文件为准（修改后的 Founders' MOU，明确其非现金联合创始人身份及亚太区引荐来源），尚待律师审核。此前寻求 SAFE 领投方的计划已于 2026-04-18 下午取消；联合创始人身份保留。本 deck 仅代表初步意向，不构成具有约束力的投资要约。</p>
+  <p style="max-width: 780px; font-size: 14px; opacity: 0.75;">本 deck 为保密文件。v5 版本是探索"细胞能量论"作为核心定位的战略方向原型。v4 (signal-deck/v4/) 是目前面向市场发布的版本，消费者端的核心理论聚焦于"皮肤水润度"。</p>
+</section>
+
+<!-- ==================== 16 • CLOSING ==================== -->
+<section class="cover" style="min-height: 100vh;">
+  <div class="cover-overline">发出正确的</div>
+  <h1 aria-label="signal" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 86px; letter-spacing: -2.5px;"><span style="color: var(--rose-linen);">/</span>sɪɡ<span style="color: var(--rose-linen);">ˈ</span>nɑ<span style="color: var(--rose-linen);">ː</span>l<span style="color: var(--rose-linen);">/</span></h1>
+  <div class="tagline">你的细胞一直在等的那个 signal。</div>
+
+  <blockquote style="max-width: 820px; margin: 80px auto 0; padding: 0 24px; text-align: center; font-family: 'Anguita Sans', 'Bebas Neue', serif; font-size: 26px; font-weight: 900; line-height: 1.3; color: rgba(246,239,234,0.9); letter-spacing: -0.4px; text-transform: lowercase; position: relative; z-index: 1;">
+    "生命不过是电子<br>在寻找一个可以安歇的地方。"
+  </blockquote>
+  <p style="max-width: 720px; margin: 14px auto 0; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.5; text-align: center; font-weight: 500; position: relative; z-index: 1;">
+    — Albert Szent-Györgyi
+  </p>
+
+  <div class="company"><img src="logo/insdr_logo_light.png" alt="INSDR" class="insdr-logo-light"> Wellness Co.  ·  v5 · 细胞能量论</div>
+</section>
+
+<img src="signal_packet_float_front.png" alt="" class="floating-packet floating-packet--face floating-packet--front" id="floatingPacketFront" aria-hidden="true">
+<img src="signal_packet_float_back.png" alt="" class="floating-packet floating-packet--face floating-packet--back" id="floatingPacketBack" aria-hidden="true">
+<script>
+  /* Packet follows the cursor across the entire viewport with eased lerp motion.
+     Hidden while gate is locked (see body.locked .floating-packet rule).
+     Disabled on touch/mobile. */
+  (function() {
+    if (window.matchMedia('(max-width: 768px)').matches) return;
+    if (window.matchMedia('(hover: none)').matches) return;
+    const packets = document.querySelectorAll('#floatingPacketFront, #floatingPacketBack');
+    if (!packets.length) return;
+    let tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+    const setDefault = () => {
+      tx = window.innerWidth * 0.85; ty = window.innerHeight * 0.82;
+      cx = tx; cy = ty;
+      packets.forEach(p => { p.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`; });
+    };
+    setDefault();
+    document.addEventListener('mousemove', (e) => {
+      tx = e.clientX + 70; ty = e.clientY + 60;
+      if (!raf) animate();
+    });
+    const animate = () => {
+      cx += (tx - cx) * 0.09; cy += (ty - cy) * 0.09;
+      packets.forEach(p => { p.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`; });
+      if (Math.abs(tx - cx) > 0.3 || Math.abs(ty - cy) > 0.3) raf = requestAnimationFrame(animate);
+      else raf = null;
+    };
+    window.addEventListener('resize', setDefault);
+  })();
+</script>
+
+<script>
+  /* Signal entrainment engine — two-frequencies-syncing audio + double wordmark convergence.
+     Concept: attraction's physiological entrainment made audible+visible. */
+  (function() {
+    let audioCtx = null;
+    let hasFired = false;
+    let isMuted = sessionStorage.getItem('signal_ping_muted') === 'true';
+    let hasGesture = false;
+    let coverInView = false;
+    const DRIFT_DURATION = 2.0, HOLD_DURATION = 0.8, DECAY_DURATION = 2.5, LANDING_PITCH = 440, INITIAL_OFFSET = 10;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) isMuted = true;
+    function getCtx() {
+      if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; } }
+      return audioCtx;
+    }
+    function resetVisualSplit(instant) {
+      const gL = document.querySelector('.ghost-left');
+      const gR = document.querySelector('.ghost-right');
+      if (!gL || !gR) return;
+      if (instant) { gL.style.transition = 'none'; gR.style.transition = 'none'; }
+      gL.style.transform = 'translateX(-7px)'; gR.style.transform = 'translateX(7px)';
+      gL.style.opacity = '0.5'; gR.style.opacity = '0.5';
+    }
+    function runVisualConvergence() {
+      const gL = document.querySelector('.ghost-left');
+      const gR = document.querySelector('.ghost-right');
+      if (!gL || !gR) return;
+      resetVisualSplit(true);
+      void gL.offsetWidth;
+      const driftMs = DRIFT_DURATION * 1000;
+      gL.style.transition = 'transform ' + driftMs + 'ms cubic-bezier(0.45, 0, 0.2, 1), opacity ' + driftMs + 'ms ease';
+      gR.style.transition = 'transform ' + driftMs + 'ms cubic-bezier(0.45, 0, 0.2, 1), opacity ' + driftMs + 'ms ease';
+      gL.style.transform = 'translateX(0)'; gR.style.transform = 'translateX(0)';
+    }
+    function playEntrainmentEvent() {
+      if (isMuted) return;
+      const ctx = getCtx(); if (!ctx) return;
+      if (ctx.state === 'suspended') ctx.resume();
+      const t = ctx.currentTime + 0.02;
+      const master = ctx.createGain();
+      master.gain.setValueAtTime(0.0001, t);
+      master.gain.exponentialRampToValueAtTime(0.35, t + 0.25);
+      master.gain.setValueAtTime(0.35, t + DRIFT_DURATION);
+      master.gain.setValueAtTime(0.35, t + DRIFT_DURATION + HOLD_DURATION);
+      master.gain.exponentialRampToValueAtTime(0.0001, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION);
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(1400, t);
+      filter.frequency.linearRampToValueAtTime(2400, t + DRIFT_DURATION);
+      filter.frequency.linearRampToValueAtTime(1600, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION * 0.6);
+      filter.Q.value = 0.5;
+      master.connect(filter); filter.connect(ctx.destination);
+      const stereo = ctx.createChannelMerger(2);
+      const leftBus = ctx.createGain(); leftBus.gain.value = 1.0;
+      const rightBus = ctx.createGain(); rightBus.gain.value = 1.0;
+      leftBus.connect(stereo, 0, 0); rightBus.connect(stereo, 0, 1);
+      stereo.connect(master);
+      const oscA = ctx.createOscillator();
+      oscA.type = 'sine'; oscA.frequency.setValueAtTime(LANDING_PITCH, t);
+      const gA = ctx.createGain(); gA.gain.value = 0.55;
+      oscA.connect(gA); gA.connect(leftBus);
+      const oscB = ctx.createOscillator();
+      oscB.type = 'sine';
+      oscB.frequency.setValueAtTime(LANDING_PITCH + INITIAL_OFFSET, t);
+      oscB.frequency.linearRampToValueAtTime(LANDING_PITCH, t + DRIFT_DURATION);
+      const gB = ctx.createGain(); gB.gain.value = 0.55;
+      oscB.connect(gB); gB.connect(rightBus);
+      const oscSub = ctx.createOscillator();
+      oscSub.type = 'sine'; oscSub.frequency.value = LANDING_PITCH / 2;
+      const gSub = ctx.createGain();
+      gSub.gain.setValueAtTime(0, t);
+      gSub.gain.setValueAtTime(0, t + DRIFT_DURATION * 0.7);
+      gSub.gain.linearRampToValueAtTime(0.28, t + DRIFT_DURATION);
+      gSub.gain.exponentialRampToValueAtTime(0.001, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION);
+      oscSub.connect(gSub); gSub.connect(leftBus); gSub.connect(rightBus);
+      const oscTop = ctx.createOscillator();
+      oscTop.type = 'sine'; oscTop.frequency.value = LANDING_PITCH * 2;
+      const gTop = ctx.createGain();
+      gTop.gain.setValueAtTime(0, t);
+      gTop.gain.setValueAtTime(0, t + DRIFT_DURATION * 0.85);
+      gTop.gain.linearRampToValueAtTime(0.09, t + DRIFT_DURATION + 0.15);
+      gTop.gain.exponentialRampToValueAtTime(0.0001, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION * 0.8);
+      oscTop.connect(gTop); gTop.connect(leftBus); gTop.connect(rightBus);
+      const dL = ctx.createDelay(3); dL.delayTime.value = 0.47;
+      const dR = ctx.createDelay(3); dR.delayTime.value = 0.68;
+      const dLg = ctx.createGain(); dLg.gain.value = 0.22;
+      const dRg = ctx.createGain(); dRg.gain.value = 0.18;
+      const dMerger = ctx.createChannelMerger(2);
+      master.connect(dL); dL.connect(dLg); dLg.connect(dMerger, 0, 0);
+      master.connect(dR); dR.connect(dRg); dRg.connect(dMerger, 0, 1);
+      dMerger.connect(ctx.destination);
+      const stopT = t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION + 0.2;
+      [oscA, oscB, oscSub, oscTop].forEach(function(o) { o.start(t); o.stop(stopT); });
+    }
+    function fireEvent() { runVisualConvergence(); playEntrainmentEvent(); }
+    function startOnce() { if (hasFired || isMuted) return; hasFired = true; fireEvent(); }
+    function maybeStart() { if (hasGesture && coverInView && !isMuted) startOnce(); }
+    const origCheck = window.checkPass;
+    if (typeof origCheck === 'function') {
+      window.checkPass = function(e) {
+        const r = origCheck(e);
+        if (!document.body.classList.contains('locked')) { hasGesture = true; maybeStart(); }
+        return r;
+      };
+    }
+    ['click', 'touchstart', 'keydown'].forEach(function(evt) {
+      document.addEventListener(evt, function once() {
+        hasGesture = true; maybeStart();
+        document.removeEventListener(evt, once);
+      }, { once: true, capture: true });
+    });
+    function bindObserver() {
+      const cover = document.querySelector('.cover');
+      if (!cover) return;
+      const io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          coverInView = entry.intersectionRatio > 0.3;
+          if (coverInView) maybeStart();
+        });
+      }, { threshold: [0, 0.3, 0.6, 1.0] });
+      io.observe(cover);
+    }
+    function bindMuteButton() {
+      if (document.getElementById('pingMuteBtn')) return;
+      const btn = document.createElement('button');
+      btn.id = 'pingMuteBtn';
+      btn.setAttribute('aria-label', 'toggle signal sound');
+      btn.setAttribute('title', 'toggle signal sound');
+      btn.innerHTML = isMuted ? svgOff() : svgOn();
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        isMuted = !isMuted;
+        sessionStorage.setItem('signal_ping_muted', String(isMuted));
+        btn.innerHTML = isMuted ? svgOff() : svgOn();
+        if (!isMuted) { hasGesture = true; maybeStart(); }
+      });
+      document.body.appendChild(btn);
+    }
+    function svgOn() { return '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>'; }
+    function svgOff() { return '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>'; }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() { bindObserver(); bindMuteButton(); resetVisualSplit(true); });
+    } else { bindObserver(); bindMuteButton(); resetVisualSplit(true); }
+  })();
+</script>
+
+</body>
+</html>
