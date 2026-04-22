@@ -378,6 +378,29 @@ em { font-style: italic; }
   .page, .page.dark, .cta { page-break-inside: avoid; }
 }
 
+/* ─── PACKET HERO VISUAL ─── */
+.packet-visual {
+  margin: 40px auto 8px;
+  max-width: 560px;
+  text-align: center;
+}
+.packet-visual img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0 24px 48px rgba(26,20,16,0.12);
+}
+.packet-caption {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  font-weight: 700;
+  margin-top: 14px;
+}
+
 /* ─── PASSWORD GATE ─── */
 body.locked { overflow: hidden; height: 100vh; }
 body.locked > section,
@@ -595,6 +618,11 @@ body.locked > footer { display: none !important; }
       <h4>The flagship packet.</h4>
       <p>The daily core act. A dual-chew filled-chew packet — one substrate chew + one keystone chew, two chews × 90 seconds each. Three-act arc: cool crunch → warm pop → grounded clarity. Seven registered ingredient brands. Mechanism-only claims. 30 packets per container, one month at a time.</p>
     </div>
+  </div>
+
+  <div class="packet-visual">
+    <img src="signal_packet_back.png" alt="signal flagship packet — back view showing two chews visible through the packaging">
+    <div class="packet-caption">The flagship packet &mdash; one substrate chew, one keystone chew, both visible before you open it.</div>
   </div>
 
   <h3>The full cellcare routine</h3>
