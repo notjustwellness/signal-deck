@@ -93,6 +93,24 @@ body {
   position: relative;
   z-index: 1;
 }
+.cover-insdr-logo {
+  width: 280px;
+  height: auto;
+  display: block;
+  margin: 0 auto 36px;
+  opacity: 0.92;
+  position: relative;
+  z-index: 1;
+  filter: brightness(1.1);
+}
+.foot-logo {
+  height: 14px;
+  width: auto;
+  vertical-align: middle;
+  margin-right: 8px;
+  opacity: 0.7;
+  filter: brightness(1.2);
+}
 .cover-wordmark {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 700;
@@ -348,14 +366,164 @@ em { font-style: italic; }
   .cover { page-break-after: always; min-height: auto; padding: 120px 40px; }
   .page, .page.dark, .cta { page-break-inside: avoid; }
 }
+
+/* ─── PASSWORD GATE ─── */
+body.locked { overflow: hidden; height: 100vh; }
+body.locked > section,
+body.locked > footer { display: none !important; }
+#gate {
+  position: fixed;
+  inset: 0;
+  background: var(--deep-evening);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: var(--rose-linen);
+  font-family: var(--font-body);
+}
+#gate::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(173,66,54,0.18), transparent 60%);
+  pointer-events: none;
+}
+#gate > * { position: relative; z-index: 1; }
+#gate .gate-overline {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--signal-light);
+  margin-bottom: 36px;
+  font-weight: 700;
+}
+#gate .gate-logo {
+  width: 200px;
+  height: auto;
+  margin-bottom: 32px;
+  opacity: 0.92;
+  filter: brightness(1.1);
+}
+#gate .gate-wordmark {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 72px;
+  color: var(--signal);
+  line-height: 1;
+  letter-spacing: -2px;
+  margin-bottom: 24px;
+}
+#gate .gate-wordmark .accent { color: var(--rose-linen); }
+#gate .gate-subtitle {
+  font-size: 14px;
+  opacity: 0.55;
+  margin-bottom: 36px;
+  letter-spacing: 1px;
+  text-align: center;
+  max-width: 400px;
+}
+#gate input {
+  background: transparent;
+  border: 1px solid rgba(246,239,234,0.25);
+  color: var(--rose-linen);
+  padding: 14px 22px;
+  font-size: 15px;
+  font-family: var(--font-body);
+  border-radius: 100px;
+  width: 280px;
+  margin-bottom: 14px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+#gate input:focus { outline: none; border-color: var(--signal); }
+#gate button {
+  background: var(--signal);
+  color: var(--rose-linen);
+  border: none;
+  padding: 14px 36px;
+  font-size: 11px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#gate button:hover { background: var(--signal-light); }
+#gate .gate-error {
+  color: var(--signal-light);
+  font-size: 12px;
+  margin-top: 12px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  letter-spacing: 1px;
+  height: 16px;
+}
+#gate .gate-error.show { opacity: 1; }
+#gate .gate-footer {
+  position: absolute;
+  bottom: 40px;
+  font-size: 10px;
+  opacity: 0.3;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
 </style>
 </head>
-<body>
+<body class="locked">
+
+<!-- ═══════════════════ PASSWORD GATE ═══════════════════ -->
+<div id="gate">
+  <div class="gate-overline">INSDR Wellness Co. &mdash; Confidential Brand Manifesto</div>
+  <img src="insdr_logo_light.png" alt="INSDR" class="gate-logo">
+  <div class="gate-wordmark"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="gate-subtitle">Enter password to view.</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
+    <br>
+    <button type="submit">Enter</button>
+    <div class="gate-error" id="gate-error">Incorrect. Try again.</div>
+  </form>
+  <div class="gate-footer">Do not share.</div>
+</div>
+
+<script>
+  (function() {
+    var PASS = "54321";
+    var gate = document.getElementById("gate");
+    var body = document.body;
+    if (sessionStorage.getItem("insdr_manifesto_unlocked") === "true") {
+      gate.style.display = "none";
+      body.classList.remove("locked");
+    }
+    window.checkPass = function(e) {
+      e.preventDefault();
+      var input = document.getElementById("gate-pass").value;
+      var err = document.getElementById("gate-error");
+      if (input === PASS) {
+        sessionStorage.setItem("insdr_manifesto_unlocked", "true");
+        gate.style.display = "none";
+        body.classList.remove("locked");
+      } else {
+        err.classList.add("show");
+        document.getElementById("gate-pass").value = "";
+        document.getElementById("gate-pass").focus();
+        setTimeout(function(){ err.classList.remove("show"); }, 2400);
+      }
+      return false;
+    };
+  })();
+</script>
+
 
 <!-- ═══════════════════ COVER ═══════════════════ -->
 <section class="cover">
-  <div class="cover-overline">INSDR Wellness Co. &mdash; the cellcare company</div>
-  <div class="cover-insdr">I N S D R</div>
+  <div class="cover-overline">Wellness Co. &mdash; the cellcare company</div>
+  <img src="insdr_logo_light.png" alt="INSDR" class="cover-insdr-logo">
   <div class="cover-wordmark"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
   <div class="cover-tagline">What's in your <span class="highlight">cellcare</span> routine?</div>
   <div class="cover-sub">Brand Manifesto &middot; 2026</div>
@@ -370,7 +538,7 @@ em { font-style: italic; }
 
   <div class="pullquote">Not a longevity pill. Not a senolytic pulse. Not a fasting mimetic. Cellcare is daily upkeep.</div>
 
-  <p>Skincare became a $200B category because somebody taught you the word <em>routine</em>. Cellcare is the same move, for what's underneath.</p>
+  <p>Skincare built a category worth <strong>over $150B</strong> because somebody taught you the word <em>routine</em>. Cellcare is the same move, for what's underneath.</p>
 </section>
 
 <!-- ═══════════════════ II — THE MECHANISM ═══════════════════ -->
@@ -378,8 +546,8 @@ em { font-style: italic; }
   <div class="inner">
     <div class="section-label">II &mdash; The Mechanism</div>
     <h2>Your cells run on <span class="accent">Mg&#8209;ATP.</span></h2>
-    <p>ATP is the energy every cell in your body uses to do its job &mdash; repair DNA, build collagen, fire a thought, hold water in tissue. <strong>But ATP only works in its magnesium-bound form.</strong> Free ATP is biologically inert. Approximately 90% of functional cellular ATP exists as Mg-ATP.</p>
-    <p>Creatine is the fastest way your cells regenerate ATP once it's spent. And creatine kinase &mdash; the enzyme that does the regenerating &mdash; requires magnesium to function. Mg²⁺ is also a cofactor for <strong>600+ enzymatic reactions</strong>, including the rate-limiting mitochondrial dehydrogenases.</p>
+    <p>ATP is the energy every cell in your body uses to do its job &mdash; repair DNA, build collagen, fire a thought, hold water in tissue. <strong>But ATP only works in its magnesium-bound form.</strong> Unbound ATP is functionally inactive in most cellular contexts; approximately 90% of cellular ATP exists as Mg-ATP.</p>
+    <p>Creatine, once phosphorylated to phosphocreatine by creatine kinase, is the fastest ATP-regeneration system your cells have. That phosphorylation step requires magnesium to function. Mg²⁺ is also a cofactor for <strong>600+ enzymatic reactions</strong>, including the rate-limiting mitochondrial dehydrogenases.</p>
 
     <div class="fact-bar">
       <div class="fact">
@@ -445,7 +613,7 @@ em { font-style: italic; }
       </div>
       <div class="keystone-row">
         <div class="keystone-name">MitoPrime™<br>Ergothioneine</div>
-        <div class="keystone-desc">Nutrition 21. US GRAS + EU Novel Foods. A sulfur-containing amino acid your body can't make; concentrates inside mitochondria where oxidative load is highest. 10 mg.</div>
+        <div class="keystone-desc">Nutrition 21. US GRAS + EU Novel Foods. A sulfur-containing amino acid your body can't make; accumulates in cells and tissues under high oxidative load, including mitochondria-rich organs. 10 mg.</div>
       </div>
     </div>
 
@@ -459,7 +627,7 @@ em { font-style: italic; }
 <section class="page">
   <div class="section-label">V &mdash; Why Now</div>
   <h2>The architecture is validated. <span class="accent">The category is open.</span></h2>
-  <p>In April 2026, Unilever acquired <strong>Grüns</strong> &mdash; a daily-greens packet brand, four years old, packet-in-container format &mdash; for <strong>$1.2 billion</strong>. Unilever didn't buy a formulation; they bought a habit (80%+ daily-use, 85K+ verified reviews). The daily-packet architecture at premium price point is now validated at acquisition scale.</p>
+  <p>In April 2026, Unilever acquired <strong>Grüns</strong> &mdash; a daily-greens packet brand, three years old, packet-in-container format &mdash; for <strong>$1.2 billion</strong>. Unilever didn't buy a formulation; they bought a habit: <strong>95,000+ five-star reviews, 1M+ customers, 10M gummies shipped daily</strong>. The daily-packet architecture at premium price point is now validated at acquisition scale.</p>
 
   <p>At the same time, cellular-health has become the dominant trade-press narrative of 2026 &mdash; NutraIngredients, BeautyMatter, Vogue Scandinavia, Glossy all running "mitochondrial" or "cellular energy" framings. The phrase is omnipresent. <strong>No consumer brand has claimed it yet.</strong> That won't last.</p>
 
@@ -511,7 +679,7 @@ em { font-style: italic; }
 
 <!-- ═══════════════════ FOOTER ═══════════════════ -->
 <footer class="foot">
-  INSDR Wellness Co. &middot; 2026 &middot; the cellcare company &middot; Brand Manifesto
+  <img src="insdr_logo_light.png" alt="INSDR" class="foot-logo"> Wellness Co. &middot; 2026 &middot; the cellcare company &middot; Brand Manifesto
 </footer>
 
 </body>
