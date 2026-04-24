@@ -401,6 +401,25 @@ em { font-style: italic; }
   margin-top: 14px;
 }
 
+/* ─── PAIRED PACKET VISUAL ─── */
+.packet-pair {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  margin: 40px auto 8px;
+  max-width: 820px;
+}
+@media print, (min-width: 720px) {
+  .packet-pair { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+.packet-pair .packet-visual { margin: 0; max-width: none; }
+.packet-pair .packet-visual img {
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  background: rgba(26,20,16,0.04);
+}
+.packet-pair .packet-caption { text-align: center; }
+
 /* ─── PASSWORD GATE ─── */
 body.locked { overflow: hidden; height: 100vh; }
 body.locked > section,
@@ -609,24 +628,30 @@ body.locked > footer { display: none !important; }
 
   <div class="card-row two">
     <div class="card">
-      <div class="card-label">Phase 00 &middot; Q4 2026</div>
-      <h4>The AM cellcare chew.</h4>
-      <p>Two soft chews every morning. 5g NNB Pürest Creatine™ + 1.5g Albion TRAACS® magnesium bisglycinate. Very subtle natural flavor, no sugar, no sugar alcohols, no artificial sweeteners. 60-chew container for home; gifted airtight travel pack for when you're out. The simplest possible daily cellcare act.</p>
+      <div class="card-label">signal N&deg;001 &middot; Q4 2026</div>
+      <h4>the first cellcare chew.</h4>
+      <p>Not a longevity pill. A daily practice &mdash; because your cells burn ATP every second. Creatine recycles it. Magnesium activates it. A packet a day &mdash; one pearl chew &mdash; the first in your cellcare routine. 5g NNB Pürest Creatine™ + 1.5g Albion TRAACS® magnesium bisglycinate. Very subtle natural flavor, no sugar, no sugar alcohols. 30 packets per carton &mdash; one month at a time.</p>
     </div>
     <div class="card">
-      <div class="card-label">Phase 01 &middot; 2027</div>
-      <h4>The flagship packet.</h4>
+      <div class="card-label">signal N&deg;002 &middot; 2027</div>
+      <h4>the flagship packet.</h4>
       <p>The daily core act. A dual-chew filled-chew packet — one substrate chew + one keystone chew, two chews × 90 seconds each. Three-act arc: cool crunch → warm pop → grounded clarity. Seven registered ingredient brands. Mechanism-only claims. 30 packets per container, one month at a time.</p>
     </div>
   </div>
 
-  <div class="packet-visual">
-    <img src="signal_packet_back.png" alt="signal flagship packet — back view showing two chews visible through the packaging">
-    <div class="packet-caption">The flagship packet &mdash; one substrate chew, one keystone chew, both visible before you open it.</div>
+  <div class="packet-pair">
+    <div class="packet-visual">
+      <img src="signal_n001_front.jpg" alt="signal N°001 packet — front view, cream printed foil with creatine + magnesium descriptor">
+      <div class="packet-caption">signal N&deg;001 &mdash; creatine + magnesium &middot; one pearl chew</div>
+    </div>
+    <div class="packet-visual">
+      <img src="signal_packet_back.png" alt="signal N°002 flagship packet — back view showing two chews visible through the packaging">
+      <div class="packet-caption">signal N&deg;002 &mdash; flagship &middot; one substrate + one keystone chew</div>
+    </div>
   </div>
 
   <h3>The full cellcare routine</h3>
-  <p>AM cellcare chew (foundation). Flagship packet (daily core act). Evening chew (wind-down, coming after flagship). Sunday check-in (photo, HRV, three lines of journal — the ritual that becomes the record). Four touchpoints, same shape as a skincare routine.</p>
+  <p>signal N&deg;001 creatine + Mg (foundation). signal N&deg;002 flagship (daily core act). Evening chew (wind-down, coming after flagship). Sunday check-in (photo, HRV, three lines of journal — the ritual that becomes the record). Four touchpoints, same shape as a skincare routine.</p>
   <p>Every future product extends the cellcare routine &mdash; rhythm, cadence, format. Never into outcome categories. We will never make signal Hair. Never signal Sleep. Never signal Focus. Those already exist; they're the supplements cellcare supports.</p>
 </section>
 
@@ -675,10 +700,42 @@ body.locked > footer { display: none !important; }
   <p>The 2025 Weissig review in the <em>Journal of Mitochondria, Plastids and Endosymbiosis</em> argued that <strong>mitochondrial dysfunction sits upstream of all other hallmarks of aging</strong> &mdash; DNA repair, autophagy, telomere maintenance, collagen synthesis. When the energy economy fails, everything downstream underperforms. That biology is the foundation underneath cellcare. Every specialist supplement on your shelf is asking cells to do work. Cellcare is what lets them.</p>
 </section>
 
-<!-- ═══════════════════ VI — WHO'S DOING IT ═══════════════════ -->
+<!-- ═══════════════════ VI — HOW IT SPREADS ═══════════════════ -->
+<section class="page">
+  <div class="section-label">VI &mdash; How It Spreads</div>
+  <h2>A signal <span class="accent">from the future.</span> Start now.</h2>
+  <p>Cellcare is a category we're building. Every new category needs a vocabulary, and a reason to start before the proof is in. <strong>Send a Signal</strong> gives both.</p>
+
+  <p>Anyone already in the practice can Send a Signal to someone they care about. $5 &mdash; a price engineered to be honest &mdash; pays for one packet, mounted on a kraft card, with an insert that teaches what cellcare is. No personalization. No sender note. Just the signal, arriving at a doorstep. The CTA on every card reads the same way: <strong>YOUR TURN &rarr; SEND A SIGNAL.</strong></p>
+
+  <div class="fact-bar">
+    <div class="fact">
+      <div class="fact-big">$2.67</div>
+      <div class="fact-label">all-in per send</div>
+    </div>
+    <div class="fact">
+      <div class="fact-big">~$22</div>
+      <div class="fact-label">effective CAC at 12&ndash;15% conversion</div>
+    </div>
+    <div class="fact">
+      <div class="fact-big">&lt;$35</div>
+      <div class="fact-label">paid-media ceiling &middot; senders pay, not us</div>
+    </div>
+  </div>
+
+  <p>That's the acquisition story. The category story is bigger.</p>
+
+  <p>Every card is a small signal from someone already inside the practice &mdash; sent back to someone who hasn't started. Cellcare is a category from a future where this is daily and obvious; Send a Signal is how we let you start early. <strong>The product is the evidence. The category is the point.</strong></p>
+
+  <div class="pullquote">A signal is something you receive. Then, once you're in, something you send.</div>
+
+  <p style="font-family: var(--font-body); font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink-dim); font-weight: 700; margin-top: 28px;">insdrwellness.com/send</p>
+</section>
+
+<!-- ═══════════════════ VII — WHO'S DOING IT ═══════════════════ -->
 <section class="page dark">
   <div class="inner">
-    <div class="section-label">VI &mdash; Who's Doing It</div>
+    <div class="section-label">VII &mdash; Who's Doing It</div>
     <h2>INSDR Wellness is <span class="accent">the cellcare company.</span></h2>
     <p>A parent brand built to make cellcare a behavior, not a marketing word. Founded 2026. Bootstrap-launched. Habit-metric disciplined. Category-first positioning.</p>
 
@@ -710,7 +767,7 @@ body.locked > footer { display: none !important; }
 <!-- ═══════════════════ VII — INVITATION ═══════════════════ -->
 <section class="cta">
   <h2>Start cellcare.</h2>
-  <p>The first cellcare product &mdash; the AM cellcare chew &mdash; ships Q4 2026. The flagship dual-chew packet arrives 2027. Founder's Price locks in for the first 500 names on the flagship. The ritual starts before the product ships.</p>
+  <p>signal N&deg;001 &mdash; creatine + magnesium &mdash; ships Q4 2026. signal N&deg;002, the flagship dual-chew, arrives 2027. Founder's Price locks in for the first 500 names on N&deg;002. The ritual starts before the product ships.</p>
   <div class="cta-contact">
     insdrwellness.com &middot; damon.sun@insdrwellness.com &middot; @chew_signal
   </div>
