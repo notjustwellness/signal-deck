@@ -142,7 +142,6 @@ body {
   font-size: 96px;
   letter-spacing: -3px;
   color: var(--signal);
-  margin-bottom: 28px;
   line-height: 1;
   position: relative;
   z-index: 1;
@@ -150,6 +149,21 @@ body {
 .cover-wordmark .accent {
   color: var(--rose-linen);
 }
+
+/* ─── ENTRAINMENT WORDMARK — two ghost layers converge to unison, synced to signal sound ─── */
+.wordmark-container { position: relative; display: inline-block; line-height: 1; margin-bottom: 28px; z-index: 1; }
+.wordmark-ghost { margin: 0; will-change: transform, opacity; transition: transform 0.2s linear, opacity 0.2s linear; opacity: 0.5; transform: translateX(-7px); }
+.wordmark-ghost.ghost-right { position: absolute; top: 0; left: 0; right: 0; transform: translateX(7px); }
+@media (prefers-reduced-motion: reduce) { .wordmark-ghost { transform: translateX(0) !important; transition: none !important; } }
+@media print { .wordmark-ghost.ghost-left { display: none !important; } .wordmark-ghost.ghost-right { position: static !important; opacity: 1 !important; transform: none !important; } }
+
+/* ─── SIGNAL-SOUND MUTE TOGGLE — fixed top-right, only visible post-gate ─── */
+#pingMuteBtn { position: fixed; top: 16px; right: 16px; z-index: 150; width: 38px; height: 38px; border-radius: 50%; background: rgba(26,20,16,0.55); border: 1px solid rgba(246,239,234,0.2); color: var(--rose-linen); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: background 0.2s; }
+#pingMuteBtn:hover { background: rgba(26,20,16,0.85); }
+#pingMuteBtn svg { opacity: 0.85; }
+body.locked #pingMuteBtn { display: none !important; }
+@media print { #pingMuteBtn { display: none !important; } }
+@media (max-width: 768px), (hover: none) { #pingMuteBtn { top: 12px; right: 12px; width: 34px; height: 34px; } }
 .cover-tagline {
   font-family: var(--font-display);
   font-size: 56px;
@@ -615,6 +629,28 @@ body.locked > footer { display: none !important; }
   font-weight: 700;
   text-align: center;
 }
+.sas-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-shadow: 0 5mm 10mm rgba(0,0,0,0.25), 0 1mm 2mm rgba(0,0,0,0.15);
+  border-radius: 2px;
+  position: relative;
+  z-index: 1;
+  cursor: zoom-in;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+  transform-origin: center center;
+  will-change: transform;
+}
+.sas-photo:hover {
+  transform: scale(2);
+  z-index: 100;
+  box-shadow: 0 32px 72px rgba(0,0,0,0.4);
+}
+.sas-photo.envelope-photo   { max-width: 560px; }
+.sas-photo.card-outer-photo { max-width: 420px; }
+.sas-photo.card-inside-photo{ max-width: 760px; }
+.sas-photo.insert-photo     { max-width: 300px; }
 @media (max-width: 840px) {
   .sas-system .envelope,
   .sas-system .card-outer,
@@ -1138,7 +1174,10 @@ body.locked > footer { display: none !important; }
     <img src="insdr_logo_light.png" alt="INSDR" class="cover-logo-top">
     <div class="cover-overline">Wellness - the cellcare company</div>
   </div>
-  <div class="cover-wordmark"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="wordmark-container">
+    <h1 class="wordmark-ghost ghost-left cover-wordmark" aria-hidden="true" style="margin:0;"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></h1>
+    <h1 class="wordmark-ghost ghost-right cover-wordmark" aria-label="signal" style="margin:0;"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></h1>
+  </div>
   <div class="cover-tagline">What's in your <span class="highlight">cellcare</span> routine?</div>
   <div class="cover-sub">Brand Manifesto &middot; 2026</div>
 </section>
@@ -1159,24 +1198,26 @@ body.locked > footer { display: none !important; }
 <section class="page dark">
   <div class="inner">
     <div class="section-label">II &mdash; The Mechanism</div>
-    <h2>Your cells run on <span class="accent">Mg&#8209;ATP.</span></h2>
-    <p>ATP is the energy every cell in your body uses to do its job &mdash; repair DNA, build collagen, fire a thought, hold water in tissue. <strong>But ATP only works in its magnesium-bound form.</strong> Unbound ATP is functionally inactive in most cellular contexts; approximately 90% of cellular ATP exists as Mg-ATP.</p>
-    <p>Creatine, once phosphorylated to phosphocreatine by creatine kinase, is the fastest ATP-regeneration system your cells have. That phosphorylation step requires magnesium to function. Mg²⁺ is also a cofactor for <strong>600+ enzymatic reactions</strong>, including the rate-limiting mitochondrial dehydrogenases.</p>
+    <h2>Your cells run on energy. <span class="accent">Energy runs on magnesium.</span></h2>
+    <p>Every cell in your body runs on ATP &mdash; the molecule that powers everything cells do. Repair DNA. Build proteins. Fire a thought. But ATP doesn't work alone. <strong>It only does its job when magnesium is attached to it.</strong> About 9 out of 10 ATP molecules in your cells carry magnesium. The rest sit idle.</p>
+    <p>And energy is just the start. Magnesium activates more than <strong>600 enzymes</strong> &mdash; the molecular machinery your cells use to repair DNA, build proteins, send nerve signals, contract muscle, keep the heart firing in rhythm, and form bone. Most of what happens inside a cell, magnesium is what makes it possible.</p>
 
     <div class="fact-bar">
       <div class="fact">
         <div class="fact-big">~90%</div>
-        <div class="fact-label">of cellular ATP is Mg-ATP</div>
+        <div class="fact-label">of cellular ATP carries magnesium</div>
       </div>
       <div class="fact">
         <div class="fact-big">600+</div>
-        <div class="fact-label">enzymes require Mg²⁺</div>
+        <div class="fact-label">enzymes activated by magnesium</div>
       </div>
       <div class="fact">
         <div class="fact-big">~48-55%</div>
-        <div class="fact-label">US adults below Mg EAR</div>
+        <div class="fact-label">US adults don't get enough</div>
       </div>
     </div>
+
+    <p>Creatine is the fastest way your cells recharge ATP. That recharge step needs magnesium too.</p>
 
     <p>The upstream machinery is quietly underpowered before you take another supplement on top of it. Most supplements ask your cells to do work. Cellcare is what gives the machinery the ability to do it.</p>
   </div>
@@ -1217,17 +1258,50 @@ body.locked > footer { display: none !important; }
     </div>
   </div>
 
+  <div class="packet-visual" style="margin-top: 56px; max-width: 440px;">
+    <img src="signal_n001_carton.png" alt="signal N°001 monthly carton — matte red paperboard with INSDR lockup, IPA wordmark /sɪɡˈnɑːl/, N°001 edition marker, 'a daily CELLCARE chew · creatine + magnesium' descriptor, NET WT 7G · LOT 0001 · 04.26, 100% PCW · FSC CERTIFIED · PLANT-BASED INKS eco-spec, repeating wordmark on spine">
+    <div class="packet-caption">signal N&deg;001 &mdash; monthly carton &middot; 30 packets &middot; one month at a time</div>
+  </div>
+
   <h3>The full cellcare routine</h3>
   <p>signal N&deg;001 creatine + Mg (foundation). signal N&deg;002 flagship (daily core act). Evening chew (wind-down, coming after flagship). Three touchpoints, same shape as a skincare routine.</p>
   <p>Every future product extends the cellcare routine &mdash; rhythm, cadence, format. Never into outcome categories. We will never make signal Hair. Never signal Sleep. Never signal Focus. Those already exist; they're the supplements cellcare supports.</p>
 </section>
 
-<!-- ═══════════════════ IV — WHY IT WORKS ═══════════════════ -->
+<!-- ═══════════════════ IV — THE VESSEL ═══════════════════ -->
+<section class="page">
+  <div class="section-label">IV &mdash; The Vessel</div>
+  <h2>Designed for the counter. <span class="accent">Not the cabinet.</span></h2>
+  <p>Most supplements lose to geography. They get tucked into a cabinet, then a drawer, then forgotten. <strong>The product you don't see is the product you stop taking.</strong> Adherence is a retention problem before it's a formulation problem. So we designed against the cabinet.</p>
+
+  <div class="packet-visual" style="margin-top: 40px; max-width: 640px;">
+    <img src="signal_vessel_aluminum.png" alt="signal N°001 anodized aluminum vessel on a kitchen counter — matte red shell with top window revealing 30 packets standing on edge, laser-etched front with INSDR lockup, /sɪɡˈnaːl/ wordmark, N° 001, creatine + magnesium descriptor, small silicone feet">
+    <div class="packet-caption">the aluminum vessel &middot; anodized, machined, permanent</div>
+  </div>
+
+  <p style="margin-top: 36px;">Anodized aluminum shell. Signal red, matte. Machined thick with laser-etched typography on the front face. Thirty packets stand on edge inside, visible through a window cut into the top. It arrives once, with your first month. It stays on the counter for years. <strong>Every glance is a reminder.</strong></p>
+
+  <div class="packet-visual" style="margin-top: 40px; max-width: 560px;">
+    <img src="signal_vessel_refill.png" alt="signal N°001 paperboard refill — slim FSC-certified cassette with 30 packets pre-loaded on edge, same matte-red signal typography as the aluminum vessel, designed to drop directly into the shell">
+    <div class="packet-caption">the monthly refill &middot; FSC paperboard, drops into the shell</div>
+  </div>
+
+  <p style="margin-top: 36px;">Every month after that, a slim paperboard refill arrives in the mail &mdash; thirty fresh packets pre-loaded in an FSC-certified cassette. Drop it into the aluminum shell. No tools, no assembly, no disposable plastic. <strong>The ritual is the refill.</strong></p>
+
+  <p>Built to last. Shipped small. Counted daily. The vessel is the adherence mechanism &mdash; because the supplement you see is the supplement you take.</p>
+</section>
+
+<!-- ═══════════════════ V — THE FORMULATION ═══════════════════ -->
 <section class="page dark">
   <div class="inner">
-    <div class="section-label">IV &mdash; The Formulation</div>
+    <div class="section-label">V &mdash; The Formulation</div>
     <h2>Four keystones. <span class="accent">Named. Dosed. On label.</span></h2>
-    <p>The flagship keystone chew carries <strong>one ionic activator plus three mitochondrial protectors</strong>. Each is a registered ingredient brand with its own peer-reviewed clinical evidence at the dose we use. No proprietary blends. No "& other ingredients." The fine print is the whole print.</p>
+    <p>The flagship keystone chew &mdash; the red one &mdash; carries <strong>one ionic activator plus three mitochondrial protectors</strong>. Each is a registered ingredient brand with its own peer-reviewed clinical evidence at the dose we use. No proprietary blends. No "& other ingredients." The fine print is the whole print.</p>
+
+    <div class="packet-visual" style="margin: 36px auto 8px; max-width: 580px;">
+      <img src="signal_two_chews.jpg" alt="signal N°002 two chews — amber translucent substrate chew on left, red translucent keystone chew on right, each with a small amber liquid-pop bead visible at center">
+      <div class="packet-caption" style="color: rgba(246,239,234,0.6);">signal N&deg;002 &middot; two chews per packet &middot; <strong style="color: rgba(246,239,234,0.9);">red keystone</strong> + amber substrate</div>
+    </div>
 
     <div style="margin-top: 32px;">
       <div class="keystone-row">
@@ -1248,15 +1322,15 @@ body.locked > footer { display: none !important; }
       </div>
     </div>
 
-    <p style="margin-top: 28px;">The substrate chew carries <strong>BioPQQ®</strong> (Mitsubishi Gas Chemical) &middot; <strong>SpermidineLIFE®</strong> (Longevity Labs) &middot; <strong>B-complex</strong> &middot; <strong>gingerol</strong>. Plus sensory-dose cofactors in the keystone chew: <strong>Suntheanine®</strong> (Taiyo) + N-Acetyl L-Tyrosine + L-citrulline.</p>
+    <p style="margin-top: 28px;">The amber substrate chew carries <strong>BioPQQ®</strong> (Mitsubishi Gas Chemical) &middot; <strong>SpermidineLIFE®</strong> (Longevity Labs) &middot; <strong>B-complex</strong> &middot; <strong>gingerol</strong>. Plus sensory-dose cofactors in the keystone chew: <strong>Suntheanine®</strong> (Taiyo) + N-Acetyl L-Tyrosine + L-citrulline.</p>
 
     <p><strong>Mechanism only. No outcome claims.</strong> We describe what the cell uses, what the machinery does. We don't sell you an energy feeling, a skin outcome, a sleep fix. Specialist outcomes are the job of specialist supplements. Our job is the cellcare they all depend on.</p>
   </div>
 </section>
 
-<!-- ═══════════════════ V — WHY NOW ═══════════════════ -->
+<!-- ═══════════════════ VI — WHY NOW ═══════════════════ -->
 <section class="page">
-  <div class="section-label">V &mdash; Why Now</div>
+  <div class="section-label">VI &mdash; Why Now</div>
   <h2>The architecture is validated. <span class="accent">The category is open.</span></h2>
   <p>In April 2026, Unilever acquired <strong>Grüns</strong> &mdash; a daily-greens packet brand, three years old, packet-in-container format &mdash; for <strong>$1.2 billion</strong>. Unilever didn't buy a formulation; they bought a habit: <strong>95,000+ five-star reviews, 1M+ customers, 10M gummies shipped daily</strong>. The daily-packet architecture at premium price point is now validated at acquisition scale.</p>
 
@@ -1273,9 +1347,9 @@ body.locked > footer { display: none !important; }
   <p>The first-mover window is short. Competitors will enter; a new equilibrium will form around whoever anchors it. What survives is the anchor position &mdash; brand, habit, distribution. We're building to be the anchor, not another bottle on the shelf.</p>
 </section>
 
-<!-- ═══════════════════ VI — HOW IT SPREADS ═══════════════════ -->
+<!-- ═══════════════════ VII — HOW IT SPREADS ═══════════════════ -->
 <section class="page">
-  <div class="section-label">VI &mdash; How It Spreads</div>
+  <div class="section-label">VII &mdash; How It Spreads</div>
   <h2>A signal <span class="accent">from the future.</span> Start now.</h2>
   <p>Cellcare is a category we're building. Every new category needs a vocabulary, and a reason to start before the proof is in. <strong>Send a Signal</strong> gives both.</p>
 
@@ -1285,119 +1359,28 @@ body.locked > footer { display: none !important; }
 
     <!-- Stage 1: Envelope — what arrives in the mail -->
     <div class="sas-stage">
-      <div class="envelope">
-        <div class="env-meta">
-          TRANSMISSION ORIGIN:<br>
-          INSD_RW_CELL_<br>
-          PROTOCOL_HUB<br>
-          <span class="redacted">[REDACTED]</span>
-          <span class="lot">04.26 &middot; LOT 0081</span>
-        </div>
-        <div class="env-stamp">POSTAGE<br>HERE</div>
-        <div class="env-address-panel">
-          <div class="addr-line"></div>
-          <div class="addr-line"></div>
-          <div class="addr-line"></div>
-        </div>
-        <div class="lockup-bottom">
-          <img src="insdr_logo_light.png" alt="INSDR">
-          <span class="lock-text">Wellness - the cellcare company</span>
-        </div>
-      </div>
+      <img src="sas_envelope.png" alt="Send a Signal envelope — A6 matte-red with INSDR lockup, TRANSMISSION ORIGIN meta, REDACTED block, stamped address panel" class="sas-photo envelope-photo">
       <div class="sas-stage-name">What arrives in the mail</div>
       <div class="sas-stage-dims">Envelope &middot; A6 &middot; 156 &times; 111 mm</div>
     </div>
 
     <!-- Stage 2: Card outer — what they see before opening -->
     <div class="sas-stage">
-      <div class="card-outer">
-        <div class="spine"></div>
-        <div class="co-lockup">
-          <img src="insdr_logo_light.png" alt="INSDR">
-          <span class="lock-text">Wellness - the cellcare company</span>
-        </div>
-        <div class="transmission-block">
-          <div class="t-header">
-            TRANSMISSION:<br>
-            SIGNAL RECEIVED.<br>
-            <span class="bracket">[TIMESTAMP ERROR:<br>
-            FUTURE ORIGIN]</span>
-          </div>
-          <div class="t-body">
-            From T+50 Yrs: Protocol efficiency maximized with early intervention. Start cellcare now.
-          </div>
-          <div class="t-ipa"><span class="a">/</span>sɪɡ<span class="a">ˈ</span>nɑ<span class="a">ː</span>l<span class="a">/</span> received.</div>
-          <div class="t-cta">
-            DECODE TRANSMISSION PROTOCOL &rarr;
-            <span class="url">insdrwellness.com/send</span>
-          </div>
-        </div>
-        <div class="co-footer">INBOX: CELLCARE_PROTOCOL_UNIT &middot; 100% PCW &middot; FSC CERTIFIED</div>
-      </div>
+      <img src="sas_card_outer.png" alt="Send a Signal card outer — A6 folded matte-red with INSDR lockup, TRANSMISSION: SIGNAL RECEIVED block, DECODE TRANSMISSION PROTOCOL CTA" class="sas-photo card-outer-photo">
       <div class="sas-stage-name">What they see before opening</div>
       <div class="sas-stage-dims">Card &middot; A6 folded &middot; 105 &times; 148 mm</div>
     </div>
 
     <!-- Stage 3: Card inside spread — what they read + the packet -->
     <div class="sas-stage">
-      <div class="card-inside">
-        <div class="ci-panel ci-panel-left">
-          <div>
-            <div class="ci-eyebrow">TRANSMISSION LOG</div>
-            <div class="ci-body">
-              <p>Signal received. Timestamp error resolved to <span class="highlight">future origin.</span></p>
-              <p>From T+50 years: start now. The protocol is the habit. The habit is the cellcare.</p>
-              <p><span class="highlight">Your cells do the rest.</span></p>
-            </div>
-            <div class="ci-ipa"><span class="a">/</span>sɪɡ<span class="a">ˈ</span>nɑ<span class="a">ː</span>l<span class="a">/</span> received.</div>
-          </div>
-          <div class="ci-cta-wrapper">
-            <div class="ci-cta">YOUR TURN &rarr;<br>SEND A <span class="wordmark"><span class="a">/</span>sɪɡ<span class="a">ˈ</span>nɑ<span class="a">ː</span>l<span class="a">/</span></span></div>
-            <div class="ci-url">insdrwellness.com/send</div>
-            <div class="ci-lockup">
-              <img src="insdr_logo_dark.png" alt="INSDR">
-              Wellness - the cellcare company
-            </div>
-          </div>
-        </div>
-        <div class="ci-panel ci-panel-right">
-          <div class="packet-mount">
-            <div class="slit slit-tl"></div>
-            <div class="slit slit-tr"></div>
-            <div class="slit slit-bl"></div>
-            <div class="slit slit-br"></div>
-            <div class="mounted-packet">
-              <div class="seal-lr seal-l"></div>
-              <div class="seal-lr seal-r"></div>
-              <div class="seal-t">
-                <div class="notch notch-l"></div>
-                <div class="notch notch-r"></div>
-              </div>
-              <div class="chew-pearl"></div>
-              <div class="back-copy">
-                <div class="contains">CONTAINS: 1 CHEW.</div>
-                <div>Serving Size: 1 Packet (1 Chew).</div>
-                <div>Best Before: 10/25.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <img src="sas_card_inside.png" alt="Send a Signal card inside spread — cream left panel with TRANSMISSION LOG body and YOUR TURN SEND A /sɪɡˈnɑːl/ CTA, red right panel with N°001 packet mounted on 4 corner slits" class="sas-photo card-inside-photo">
       <div class="sas-stage-name">What they read when they open it</div>
       <div class="sas-stage-dims">Inside spread &middot; 210 &times; 148 mm &middot; N&deg;001 packet mounted on 4 corner slits</div>
     </div>
 
     <!-- Stage 4: A7 insert — the category moment -->
     <div class="sas-stage">
-      <div class="insert front">
-        <div class="ins-header">&ldquo;what I wish I&rsquo;d<br>known sooner&rdquo;</div>
-        <div class="ins-list">
-          <div class="ins-row"><span class="prefix">&gt;</span>SKINCARE.<span class="qualifier">(secondary)</span></div>
-          <div class="ins-row"><span class="prefix">&gt;</span>HAIRCARE.<span class="qualifier">(secondary)</span></div>
-          <div class="ins-row primary"><span class="prefix">&gt;&gt;&gt;</span>CELLCARE.</div>
-        </div>
-        <div class="ins-footer">FUTURE PROTOCOL &middot; A DAILY CELLCARE CHEW &middot; START PROTOCOL 01/30</div>
-      </div>
+      <img src="sas_a7_insert.png" alt="Send a Signal A7 insert — SKINCARE / HAIRCARE / CELLCARE typographic hero, CELLCARE as the 2× primary row in signal red" class="sas-photo insert-photo">
       <div class="sas-stage-name">The category moment</div>
       <div class="sas-stage-dims">Insert &middot; A7 &middot; 74 &times; 105 mm</div>
     </div>
@@ -1428,10 +1411,10 @@ body.locked > footer { display: none !important; }
   <p style="font-family: var(--font-body); font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink-dim); font-weight: 700; margin-top: 28px;">insdrwellness.com/send</p>
 </section>
 
-<!-- ═══════════════════ VII — WHO'S DOING IT ═══════════════════ -->
+<!-- ═══════════════════ VIII — WHO'S DOING IT ═══════════════════ -->
 <section class="page dark">
   <div class="inner">
-    <div class="section-label">VII &mdash; Who's Doing It</div>
+    <div class="section-label">VIII &mdash; Who's Doing It</div>
     <h2>INSDR Wellness is <span class="accent">the cellcare company.</span></h2>
     <p>A parent brand built to make cellcare a behavior, not a marketing word. Founded 2026. Bootstrap-launched. Habit-metric disciplined. Category-first positioning.</p>
 
@@ -1468,6 +1451,227 @@ body.locked > footer { display: none !important; }
     insdrwellness.com &middot; damon.sun@insdrwellness.com &middot; @chew_signal
   </div>
 </section>
+
+<!-- ═══════════════════ SIGNAL ENTRAINMENT ENGINE ═══════════════════ -->
+<script>
+  /* Signal entrainment engine — two-frequencies-syncing audio + double wordmark convergence visual.
+     Concept: attraction's physiological entrainment made audible+visible. Two tones start 10 Hz apart
+     (audible beat pattern) and drift to unison on A4. Wordmark ghosts drift from ±7px offset to alignment.
+     Ported from signal_consumer_deck.html — keep in sync with that surface. */
+  (function() {
+    let audioCtx = null;
+    let hasFired = false;
+    let isMuted = sessionStorage.getItem('signal_ping_muted') === 'true';
+    let hasGesture = false;
+    let coverInView = false;
+
+    // Fires once per page session: ghosts converge to alignment, tones lock on A, then rest.
+    const DRIFT_DURATION = 2.0;      // audio frequency drift time (seconds) — acoustic correctness
+    const HOLD_DURATION = 0.8;       // unison held bright
+    const DECAY_DURATION = 2.5;      // warm fade after lock
+    const LANDING_PITCH = 440;       // A4 — signal's pitch (both tones converge here)
+    const INITIAL_OFFSET = 10;       // Hz — creates beat pattern before drift completes
+    // Visual convergence spans the full audio event so the logo reaches clear exactly as the sound fades.
+    const VISUAL_CONVERGENCE_DURATION = DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION;  // 5.3s
+
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      isMuted = true;
+    }
+
+    function getCtx() {
+      if (!audioCtx) {
+        try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+        catch (e) { return null; }
+      }
+      return audioCtx;
+    }
+
+    function resetVisualSplit(instant) {
+      const gL = document.querySelector('.ghost-left');
+      const gR = document.querySelector('.ghost-right');
+      if (!gL || !gR) return;
+      if (instant) {
+        gL.style.transition = 'none';
+        gR.style.transition = 'none';
+      }
+      gL.style.transform = 'translateX(-7px)';
+      gR.style.transform = 'translateX(7px)';
+      gL.style.opacity = '0.5';
+      gR.style.opacity = '0.5';
+    }
+
+    function runVisualConvergence() {
+      const gL = document.querySelector('.ghost-left');
+      const gR = document.querySelector('.ghost-right');
+      if (!gL || !gR) return;
+      resetVisualSplit(true);
+      void gL.offsetWidth;
+      const visualMs = VISUAL_CONVERGENCE_DURATION * 1000;
+      gL.style.transition = 'transform ' + visualMs + 'ms cubic-bezier(0.45, 0, 0.2, 1), opacity ' + visualMs + 'ms ease';
+      gR.style.transition = 'transform ' + visualMs + 'ms cubic-bezier(0.45, 0, 0.2, 1), opacity ' + visualMs + 'ms ease';
+      gL.style.transform = 'translateX(0)';
+      gR.style.transform = 'translateX(0)';
+    }
+
+    function playEntrainmentEvent() {
+      if (isMuted) return;
+      const ctx = getCtx();
+      if (!ctx) return;
+      if (ctx.state === 'suspended') ctx.resume();
+      const t = ctx.currentTime + 0.02;
+
+      const master = ctx.createGain();
+      master.gain.setValueAtTime(0.0001, t);
+      master.gain.exponentialRampToValueAtTime(0.35, t + 0.25);
+      master.gain.setValueAtTime(0.35, t + DRIFT_DURATION);
+      master.gain.setValueAtTime(0.35, t + DRIFT_DURATION + HOLD_DURATION);
+      master.gain.exponentialRampToValueAtTime(0.0001, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION);
+
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(1400, t);
+      filter.frequency.linearRampToValueAtTime(2400, t + DRIFT_DURATION);
+      filter.frequency.linearRampToValueAtTime(1600, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION * 0.6);
+      filter.Q.value = 0.5;
+      master.connect(filter);
+      filter.connect(ctx.destination);
+
+      const stereo = ctx.createChannelMerger(2);
+      const leftBus = ctx.createGain(); leftBus.gain.value = 1.0;
+      const rightBus = ctx.createGain(); rightBus.gain.value = 1.0;
+      leftBus.connect(stereo, 0, 0);
+      rightBus.connect(stereo, 0, 1);
+      stereo.connect(master);
+
+      const oscA = ctx.createOscillator();
+      oscA.type = 'sine';
+      oscA.frequency.setValueAtTime(LANDING_PITCH, t);
+      const gA = ctx.createGain(); gA.gain.value = 0.55;
+      oscA.connect(gA); gA.connect(leftBus);
+
+      const oscB = ctx.createOscillator();
+      oscB.type = 'sine';
+      oscB.frequency.setValueAtTime(LANDING_PITCH + INITIAL_OFFSET, t);
+      oscB.frequency.linearRampToValueAtTime(LANDING_PITCH, t + DRIFT_DURATION);
+      const gB = ctx.createGain(); gB.gain.value = 0.55;
+      oscB.connect(gB); gB.connect(rightBus);
+
+      const oscSub = ctx.createOscillator();
+      oscSub.type = 'sine';
+      oscSub.frequency.value = LANDING_PITCH / 2;
+      const gSub = ctx.createGain();
+      gSub.gain.setValueAtTime(0, t);
+      gSub.gain.setValueAtTime(0, t + DRIFT_DURATION * 0.7);
+      gSub.gain.linearRampToValueAtTime(0.28, t + DRIFT_DURATION);
+      gSub.gain.exponentialRampToValueAtTime(0.001, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION);
+      oscSub.connect(gSub); gSub.connect(leftBus); gSub.connect(rightBus);
+
+      const oscTop = ctx.createOscillator();
+      oscTop.type = 'sine';
+      oscTop.frequency.value = LANDING_PITCH * 2;
+      const gTop = ctx.createGain();
+      gTop.gain.setValueAtTime(0, t);
+      gTop.gain.setValueAtTime(0, t + DRIFT_DURATION * 0.85);
+      gTop.gain.linearRampToValueAtTime(0.09, t + DRIFT_DURATION + 0.15);
+      gTop.gain.exponentialRampToValueAtTime(0.0001, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION * 0.8);
+      oscTop.connect(gTop); gTop.connect(leftBus); gTop.connect(rightBus);
+
+      const dL = ctx.createDelay(3); dL.delayTime.value = 0.47;
+      const dR = ctx.createDelay(3); dR.delayTime.value = 0.68;
+      const dLg = ctx.createGain(); dLg.gain.value = 0.22;
+      const dRg = ctx.createGain(); dRg.gain.value = 0.18;
+      const dMerger = ctx.createChannelMerger(2);
+      master.connect(dL); dL.connect(dLg); dLg.connect(dMerger, 0, 0);
+      master.connect(dR); dR.connect(dRg); dRg.connect(dMerger, 0, 1);
+      dMerger.connect(ctx.destination);
+
+      const stopT = t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION + 0.2;
+      [oscA, oscB, oscSub, oscTop].forEach(function(o) { o.start(t); o.stop(stopT); });
+    }
+
+    function fireEvent() {
+      runVisualConvergence();
+      playEntrainmentEvent();
+    }
+    function startOnce() {
+      if (hasFired || isMuted) return;
+      hasFired = true;
+      fireEvent();
+    }
+    function maybeStart() {
+      if (hasGesture && coverInView && !isMuted) startOnce();
+    }
+
+    // Hook gate unlock — the click IS the user gesture Chrome wants
+    const origCheck = window.checkPass;
+    if (typeof origCheck === 'function') {
+      window.checkPass = function(e) {
+        const r = origCheck(e);
+        if (!document.body.classList.contains('locked')) {
+          hasGesture = true;
+          maybeStart();
+        }
+        return r;
+      };
+    }
+
+    // Fallback: any user interaction counts as gesture
+    ['click', 'touchstart', 'keydown'].forEach(function(evt) {
+      document.addEventListener(evt, function once() {
+        hasGesture = true;
+        maybeStart();
+        document.removeEventListener(evt, once);
+      }, { once: true, capture: true });
+    });
+
+    function bindObserver() {
+      const cover = document.querySelector('.cover');
+      if (!cover) return;
+      const io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          coverInView = entry.intersectionRatio > 0.3;
+          if (coverInView) maybeStart();
+        });
+      }, { threshold: [0, 0.3, 0.6, 1.0] });
+      io.observe(cover);
+    }
+
+    function bindMuteButton() {
+      if (document.getElementById('pingMuteBtn')) return;
+      const btn = document.createElement('button');
+      btn.id = 'pingMuteBtn';
+      btn.setAttribute('aria-label', 'toggle signal sound');
+      btn.setAttribute('title', 'toggle signal sound');
+      btn.innerHTML = isMuted ? svgOff() : svgOn();
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        isMuted = !isMuted;
+        sessionStorage.setItem('signal_ping_muted', String(isMuted));
+        btn.innerHTML = isMuted ? svgOff() : svgOn();
+        if (!isMuted) { hasGesture = true; maybeStart(); }
+      });
+      document.body.appendChild(btn);
+    }
+    function svgOn() {
+      return '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>';
+    }
+    function svgOff() {
+      return '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>';
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        bindObserver();
+        bindMuteButton();
+        resetVisualSplit(true);
+      });
+    } else {
+      bindObserver();
+      bindMuteButton();
+      resetVisualSplit(true);
+    }
+  })();
+</script>
 
 <!-- ═══════════════════ FOOTER ═══════════════════ -->
 <footer class="foot">

@@ -782,6 +782,7 @@
     let hasGesture = false;
     let coverInView = false;
     const DRIFT_DURATION = 2.0, HOLD_DURATION = 0.8, DECAY_DURATION = 2.5, LANDING_PITCH = 440, INITIAL_OFFSET = 10;
+    const VISUAL_CONVERGENCE_DURATION = DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION;  // 5.3s — visual spans full audio event
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) isMuted = true;
     function getCtx() {
       if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; } }
@@ -801,9 +802,9 @@
       if (!gL || !gR) return;
       resetVisualSplit(true);
       void gL.offsetWidth;
-      const driftMs = DRIFT_DURATION * 1000;
-      gL.style.transition = 'transform ' + driftMs + 'ms cubic-bezier(0.45, 0, 0.2, 1), opacity ' + driftMs + 'ms ease';
-      gR.style.transition = 'transform ' + driftMs + 'ms cubic-bezier(0.45, 0, 0.2, 1), opacity ' + driftMs + 'ms ease';
+      const visualMs = VISUAL_CONVERGENCE_DURATION * 1000;
+      gL.style.transition = 'transform ' + visualMs + 'ms cubic-bezier(0.45, 0, 0.2, 1), opacity ' + visualMs + 'ms ease';
+      gR.style.transition = 'transform ' + visualMs + 'ms cubic-bezier(0.45, 0, 0.2, 1), opacity ' + visualMs + 'ms ease';
       gL.style.transform = 'translateX(0)'; gR.style.transform = 'translateX(0)';
     }
     function playEntrainmentEvent() {
