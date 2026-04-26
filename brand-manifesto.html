@@ -1134,6 +1134,29 @@ h2.zh-mandarin, h3.zh-mandarin, h4.zh-mandarin {
   /* Inherit accent color from English siblings */
 }
 
+/* ─── CURSOR-FOLLOW QUOTE FLOATER ─── */
+#cursor-quote {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 145;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.8px;
+  line-height: 1.18;
+  color: var(--cream);
+  text-shadow: 0 0 6px rgba(0,0,0,0.55), 0 1px 2px rgba(0,0,0,0.85);
+  text-align: center;
+  transform: translate3d(-9999px, -9999px, 0);
+  transition: opacity 0.35s ease;
+  opacity: 0;
+  will-change: transform;
+}
+#cursor-quote.visible { opacity: 0.92; }
+body.locked #cursor-quote { opacity: 0 !important; }
+@media (max-width: 720px) { #cursor-quote { display: none; } }
+
 </style>
 </head>
 <body class="locked">
@@ -1298,6 +1321,15 @@ h2.zh-mandarin, h3.zh-mandarin, h4.zh-mandarin {
   <div lang="zh-TW" class="packet-caption zh-mandarin">signal N°001 — 月盒裝 · 30 包 · 一次一個月份</div>
   </div>
 
+  <h3 style="margin-top: 64px;">Why creatine + magnesium first.</h3>
+  <h3 lang="zh-TW" class="zh-mandarin">為什麼第一支產品是肌酸加鎂？</h3>
+  <p><strong>SuppCo</strong> is a supplement-tracking app where stackers log what they actually take and share their stacks with each other. Past 200,000 products tracked, tens of thousands of users actively logging &mdash; their top-stacked list is the closest thing the supplement industry has to a real-time index of what the practice looks like in 2026.</p>
+  <p lang="zh-TW" class="zh-mandarin"><strong>SuppCo</strong> 是一個紀錄保健品的 app，使用者會在上面登錄自己實際吃的產品，也會分享自己的配方組合。目前已經累積超過 20 萬筆產品紀錄，好幾萬個活躍用戶在上面持續更新——他們整理出來的「熱門組合排行榜」，大概就是 2026 年保健市場最接近真實使用行為的一份即時指標。</p>
+  <p>In SuppCo's 2026 top ten, <strong>creatine claims three of the slots</strong> &mdash; across brands targeting completely different audiences. Roughly a third of the people stacking creatine are women; the core demographic is in their thirties and forties; and they're taking it for cognitive function and everyday energy as much as for the gym. <strong>Magnesium glycinate shows up three times too</strong>, across price tiers from mass-market (Nature's Bounty) to practitioner-grade (Pure Encapsulations). Pure Encapsulations Magnesium Glycinate alone has been added by <strong>25,386 unique users in 2026</strong> &mdash; the biggest upward jump on the list.</p>
+  <p lang="zh-TW" class="zh-mandarin">在 SuppCo 的 2026 年前十大排行榜裡面，<strong>肌酸一個人就佔了三個名額</strong>——而且來自三個目標族群完全不一樣的品牌。大概有三分之一的肌酸使用者是女性；主要年齡層落在三十到四十多歲；她們吃肌酸的理由，和去健身房一樣常見的，是為了日常思緒與體力。<strong>甘胺酸鎂也出現三次</strong>，價位從大眾市場（Nature's Bounty）一路到專業級（Pure Encapsulations）。光是 Pure Encapsulations 的甘胺酸鎂，<strong>2026 年已經有 25,386 個不同用戶加進自己的清單</strong>——是這個排行榜上升幅度最大的一支產品。</p>
+  <p><strong>signal N&deg;001 is creatine + magnesium in one packet, one chew.</strong> We didn't pick the molecules. The stackers did. We built the chew that makes the stack a single act.</p>
+  <p lang="zh-TW" class="zh-mandarin"><strong>signal N°001 就是一口咬下，同時吃到肌酸加鎂。</strong>不是我們去挑這些分子。是這些使用者選的。我們只是做了一個咀嚼產品，讓這件事一次完成。</p>
+
   <h3>The full cellcare routine</h3>
   <h3 lang="zh-TW" class="zh-mandarin">完整的細胞保養日常</h3>
   <p>signal N&deg;001 creatine + Mg (foundation). signal N&deg;002 flagship (daily core act). Evening chew (wind-down, coming after flagship). Three touchpoints, same shape as a skincare routine.</p>
@@ -1409,9 +1441,99 @@ h2.zh-mandarin, h3.zh-mandarin, h4.zh-mandarin {
   <p lang="zh-TW" class="zh-mandarin">先行者窗口很短。競爭者會進來；新的平衡會圍繞著定錨的那個人重新成形。存活下來的是定錨的位置 — 品牌、習慣、通路。我們要成為那個定錨者，不是架上又一個瓶子。</p>
 </section>
 
-<!-- ═══════════════════ VII — HOW IT SPREADS ═══════════════════ -->
+<!-- ═══════════════════ VII — THE PRACTICE ═══════════════════ -->
+<section class="page dark">
+  <div class="inner">
+    <div class="section-label">VII &mdash; The Practice</div>
+    <h2>Signal is the bricks and mortar. <span class="accent">You are the architect.</span></h2>
+  <h2 lang="zh-TW" class="zh-mandarin">Signal 是那個打底的材料。<span class="accent">你才是建築師。</span></h2>
+
+    <p>Most brands sell you the whole answer. We don&rsquo;t. <strong>Signal is necessary, but not sufficient.</strong> Your cells run on ATP &mdash; and they also run on what you do with the rest of your day. The chew gives them the substrate. The way you live tells them when to use it.</p>
+  <p lang="zh-TW" class="zh-mandarin">多數品牌賣你一個完整的答案。我們不是。<strong>Signal 是必要的，但不是充分的。</strong>你的細胞需要 ATP，也需要你一天當中做的其他事。咀嚼給它們基質；你怎麼過日子，告訴它們什麼時候用這些基質。</p>
+
+    <p>That&rsquo;s the practice. And the practice is how we begin to build a tribe &mdash; people who know the chew is one part of cellcare, not the whole of it.</p>
+  <p lang="zh-TW" class="zh-mandarin">這就是那個「做法」。而這個做法，才是你建立一群人跟你的方式——他們知道，這一包咀嚼是細胞保養的一部分，不是全部。</p>
+
+    <div class="card-row three" style="margin-top: 28px;">
+
+      <div class="card">
+        <div class="card-label">Movement</div>
+        <h4>Mitochondrial biogenesis.</h4>
+  <h4 lang="zh-TW" class="zh-mandarin">粒線體新生（Mitochondrial biogenesis）</h4>
+        <p>Exercise tells your cells to build more mitochondria. Signal gives those mitochondria the magnesium they need to fire. The chew is the substrate; the workout is the signal.</p>
+  <p lang="zh-TW" class="zh-mandarin">運動會告訴你的細胞：「再多長一些粒線體出來。」然後 Signal 給這些粒線體它們需要的鎂。咀嚼是基質；運動是那個訊號。</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Sleep</div>
+        <h4>Cellular cleanup.</h4>
+  <h4 lang="zh-TW" class="zh-mandarin">細胞清理（Cellular cleanup）</h4>
+        <p>Deep sleep is when your cells take out the trash &mdash; clearing waste and rebuilding what got worn down. No supplement replaces that window. Signal supports the day; sleep does the work overnight.</p>
+  <p lang="zh-TW" class="zh-mandarin">深層睡眠的時候，你的細胞才會去倒垃圾、清除廢物、把磨損的地方重建。沒有保健品能取代這個窗口。Signal 負責白天的支持，晚上是睡眠在主導。</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Fasting</div>
+        <h4>Autophagy.</h4>
+  <h4 lang="zh-TW" class="zh-mandarin">自噬作用（Autophagy）</h4>
+        <p>Time-restricted eating triggers autophagy &mdash; your cells cleaning up their own damaged parts. Signal feeds the cells; fasting tells them when to clean house.</p>
+  <p lang="zh-TW" class="zh-mandarin">限時飲食會啟動自噬作用——細胞自己吃掉自己損壞的零件。Signal 餵養細胞，而斷食告訴它們：「該大掃除了。」</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Thermal Stress</div>
+        <h4>Heat-shock proteins.</h4>
+  <h4 lang="zh-TW" class="zh-mandarin">熱休克蛋白（Heat-shock proteins）</h4>
+        <p>Cold plunges and saunas trigger hormetic stress &mdash; the kind that tells cells to repair. Signal supplies the substrate for that repair; the temperature swing pulls the trigger.</p>
+  <p lang="zh-TW" class="zh-mandarin">冰浴或桑拿會引發「激效壓力」（hormetic stress）——一種告訴細胞「啟動修復」的機制。Signal 提供修復要用的基質；溫度的高低變化，負責扣下那個板機。</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Circadian Alignment</div>
+        <h4>The cellular clock.</h4>
+  <h4 lang="zh-TW" class="zh-mandarin">細胞的生理時鐘（The cellular clock）</h4>
+        <p>Light at sunrise. Meals in the daylight window. Your cells run on a clock, and that clock answers to the sun. Signal supports the metabolism; the clock decides when to use it.</p>
+  <p lang="zh-TW" class="zh-mandarin">日出時看光。白天吃飯。你體內有一個時鐘，這個時鐘聽太陽的。Signal 支持代謝，但什麼時候用這個代謝能力——時鐘決定。</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Hydration &amp; Minerals</div>
+        <h4>Electrical potential.</h4>
+  <h4 lang="zh-TW" class="zh-mandarin">電位（Electrical potential）</h4>
+        <p>Magnesium is one mineral; sodium and potassium do the other half of the work. Cell membranes hold an electrical charge that depends on all three. Signal handles magnesium; you handle the rest.</p>
+  <p lang="zh-TW" class="zh-mandarin">鎂只是其中一種礦物質。鈉跟鉀做了大部分的工作。細胞膜上的電荷，靠這三個一起維持。Signal 幫你搞定鎂，其他的你來。</p>
+      </div>
+
+    </div>
+
+    <p style="margin-top: 36px;">This is how the tribe forms. Not around a product, but around a practice. <strong>We don&rsquo;t sell you cellcare. We hand you the part you can hold &mdash; and trust you to build the rest.</strong></p>
+  <p lang="zh-TW" class="zh-mandarin">這就是那一群人形成的方式。不是圍繞一個產品，而是圍繞一個「做法」。<strong>我們沒有賣你「細胞保養」這件事。我們只是把你可以拿在手上的那塊交給你——然後相信你會自己去把剩下的一切蓋起來。</strong></p>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ VIII — WHAT YOU'LL FEEL ═══════════════════ -->
 <section class="page">
-  <div class="section-label">VII &mdash; How It Spreads</div>
+  <div class="section-label">VIII &mdash; What You'll Feel</div>
+  <h2>Cellcare doesn't tingle. <span class="accent">That's the whole point.</span></h2>
+  <h2 lang="zh-TW" class="zh-mandarin">細胞保養不會讓你「有感」。<span class="accent">那正是它的重點。</span></h2>
+
+  <p>You don&rsquo;t feel your moisturizer working. You wouldn&rsquo;t stop using it. <strong>Skincare's job is upkeep</strong> &mdash; the felt-outcome stuff is what you go to a dermatologist for. Cellcare is the same shape. When you want to <em>feel</em> something, that's what your other supplements are for.</p>
+  <p lang="zh-TW" class="zh-mandarin">你不會真的「感覺到」保濕乳液在作用。但你也不會因此就不擦了。<strong>皮膚保養的本質是維持</strong> &mdash; 那些「有感」的效果，是你要去找皮膚科醫師處理的事。細胞保養是同樣的邏輯。當你想要「有感覺」的時候，那是其他保健品的工作。</p>
+
+  <p>What you <em>do</em> feel from signal is the chew itself &mdash; the bite, the burst, the daily act. <strong>That's the receipt.</strong> What's happening biologically is upstream of feel. The ritual is the proof; your cells do the rest.</p>
+  <p lang="zh-TW" class="zh-mandarin">你從 signal 真正感受到的，是咀嚼時的口感、爆漿、每天這個動作。<strong>那才是收據。</strong> 身體裡發生的生理機制，都在感受的上游。儀式本身就是證明；細胞會處理好後面的事。</p>
+
+  <div class="pullquote">The chew is what you feel. The biology is what you don't.</div>
+  <div lang="zh-TW" class="pullquote zh-mandarin">你感受到的是咀嚼。生物機制是另一回事。</div>
+
+  <p>The supplements that promise a feel deliver one of three things: a stimulant, a placebo, or a 90-day outcome you mistake for the product. Cellcare is the floor under all of that. <strong>You're not supposed to feel it. You're supposed to use it.</strong></p>
+  <p lang="zh-TW" class="zh-mandarin">那些主打「有感」的保健品，給你的不外乎是刺激劑、安慰劑，或者一個你誤以為來自產品的 90 天效果。細胞保養是所有這些東西底下的地基。<strong>你不應該去感覺它。你只需要持續使用它。</strong></p>
+</section>
+
+<!-- ═══════════════════ IX — HOW IT SPREADS ═══════════════════ -->
+<section class="page">
+  <div class="section-label">IX &mdash; How It Spreads</div>
   <h2>A signal <span class="accent">from the future.</span> Start now.</h2>
   <h2 lang="zh-TW" class="zh-mandarin">一個<span class="accent">來自未來的 signal。</span>現在就開始。</h2>
   <p>Cellcare is a category we're building. Every new category needs a vocabulary, and a reason to start before the proof is in. <strong>Send a Signal</strong> gives both.</p>
@@ -1419,6 +1541,9 @@ h2.zh-mandarin, h3.zh-mandarin, h4.zh-mandarin {
 
   <p>Anyone already in the practice can Send a Signal to someone they care about. $5 &mdash; a price engineered to be honest &mdash; pays for one packet, mounted on a cream card, with an insert that teaches what cellcare is. No personalization. No sender note. Just the signal, arriving at a doorstep. The CTA on every card reads the same way: <strong>YOUR TURN &rarr; SEND A SIGNAL.</strong></p>
   <p lang="zh-TW" class="zh-mandarin">任何已經在實踐的人，都可以 Send a Signal 給他們在乎的人。$5 — 一個刻意設計成誠實的價格 — 支付一包，裱在一張奶油色卡紙上，附帶一張說明什麼是細胞保養的內頁。沒有個人化訊息。沒有寄件人留言。就只是一個 signal，送到某個人的門口。每張卡上的 CTA 都寫一樣的話：<strong>YOUR TURN → SEND A SIGNAL.</strong></p>
+
+  <p>If a recipient asks what one packet does &mdash; nothing they can feel. That's not what it's there for. The packet is the format demo; the mechanism is what happens once cellcare is in their routine.</p>
+  <p lang="zh-TW" class="zh-mandarin">如果有人在問「一包 signal 有什麼感覺」&mdash; 沒感覺。那不是它存在的目的。這一包是形式上的展示；真正的機制，是當細胞保養進入他們的日常之後，才會發生的事。</p>
 
   <div class="sas-system">
 
@@ -1486,11 +1611,11 @@ h2.zh-mandarin, h3.zh-mandarin, h4.zh-mandarin {
   <p style="font-family: var(--font-body); font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink-dim); font-weight: 700; margin-top: 28px;">insdrwellness.com/send</p>
 </section>
 
-<!-- ═══════════════════ VIII — WHO'S DOING IT ═══════════════════ -->
+<!-- ═══════════════════ X — WHO'S DOING IT ═══════════════════ -->
 <section class="page dark">
   <div class="inner">
-    <div class="section-label">VIII &mdash; Who's Doing It</div>
-    <h2>INSDR Wellness is <span class="accent">the cellcare company.</span></h2>
+    <div class="section-label">X &mdash; Who's Doing It</div>
+    <h2><img src="insdr_logo_light.png" alt="INSDR" style="height: 0.78em; width: auto; vertical-align: baseline; margin-right: 0.18em; filter: brightness(1.15);"> Wellness is <span class="accent">the cellcare company.</span></h2>
   <h2 lang="zh-TW" class="zh-mandarin">INSDR Wellness 是<span class="accent">the cellcare company.</span></h2>
     <p>A parent brand built to make cellcare a behavior, not a marketing word. Founded 2026. Bootstrap-launched. Habit-metric disciplined. Category-first positioning.</p>
   <p lang="zh-TW" class="zh-mandarin">一個為「把細胞保養變成一種行為，而非行銷詞彙」而生的母品牌。2026 創立。自力啟動。以習慣指標為管理紀律。品類優先的定位。</p>
@@ -1524,7 +1649,7 @@ h2.zh-mandarin, h3.zh-mandarin, h4.zh-mandarin {
   </div>
 </section>
 
-<!-- ═══════════════════ IX — INVITATION ═══════════════════ -->
+<!-- ═══════════════════ XI — INVITATION ═══════════════════ -->
 <section class="cta">
   <h2>Start cellcare.</h2>
   <h2 lang="zh-TW" class="zh-mandarin">開始細胞保養。</h2>
@@ -1760,6 +1885,30 @@ h2.zh-mandarin, h3.zh-mandarin, h4.zh-mandarin {
 <footer class="foot">
   <img src="insdr_logo_light.png" alt="INSDR" class="foot-logo"> Wellness &middot; 2026 &middot; the cellcare company &middot; Brand Manifesto
 </footer>
+
+<!-- ═══════════════════ CURSOR-FOLLOW QUOTE FLOATER ═══════════════════ -->
+<div id="cursor-quote" aria-hidden="true">&ldquo;Treating humans without<br>the concept of energy is<br>treating dead matter.&rdquo;</div>
+<script>
+  (function() {
+    const quote = document.getElementById('cursor-quote');
+    if (!quote) return;
+    let raf = null;
+    let x = 0, y = 0;
+    function tick() {
+      quote.style.transform = `translate3d(${x + 18}px, ${y + 22}px, 0)`;
+      raf = null;
+    }
+    document.addEventListener('mousemove', (e) => {
+      x = e.clientX;
+      y = e.clientY;
+      if (!quote.classList.contains('visible')) quote.classList.add('visible');
+      if (!raf) raf = requestAnimationFrame(tick);
+    });
+    document.addEventListener('mouseleave', () => {
+      quote.classList.remove('visible');
+    });
+  })();
+</script>
 
 </body>
 </html>
