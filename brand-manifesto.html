@@ -150,8 +150,22 @@ body {
   color: var(--rose-linen);
 }
 
+/* ─── COVER HEADLINE — pairs with wordmark to read "send the right /sɪɡˈnɑːl/" ─── */
+.cover-headline {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  letter-spacing: -0.2px;
+  line-height: 1;
+  color: var(--rose-linen);
+  font-weight: 300;
+  margin-bottom: 14px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
 /* ─── ENTRAINMENT WORDMARK — two ghost layers converge to unison, synced to signal sound ─── */
-.wordmark-container { position: relative; display: inline-block; line-height: 1; margin-bottom: 28px; z-index: 1; }
+.wordmark-container { position: relative; display: inline-block; line-height: 1; margin-bottom: 72px; z-index: 1; }
 .wordmark-ghost { margin: 0; will-change: transform, opacity; transition: transform 0.2s linear, opacity 0.2s linear; opacity: 0.5; transform: translateX(-7px); }
 .wordmark-ghost.ghost-right { position: absolute; top: 0; left: 0; right: 0; transform: translateX(7px); }
 @media (prefers-reduced-motion: reduce) { .wordmark-ghost { transform: translateX(0) !important; transition: none !important; } }
@@ -1211,6 +1225,7 @@ body.locked #cursor-quote { opacity: 0 !important; }
     <img src="insdr_logo_light.png" alt="INSDR" class="cover-logo-top">
     <div class="cover-overline">Wellness - the cellcare company</div>
   </div>
+  <div class="cover-headline">send the right</div>
   <div class="wordmark-container">
     <h1 class="wordmark-ghost ghost-left cover-wordmark" aria-hidden="true" style="margin:0;"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></h1>
     <h1 class="wordmark-ghost ghost-right cover-wordmark" aria-label="signal" style="margin:0;"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></h1>
@@ -1291,7 +1306,7 @@ body.locked #cursor-quote { opacity: 0 !important; }
       <div class="card-label">signal N&deg;002 &middot; 2027</div>
       <h4>the flagship packet.</h4>
   <h4 lang="zh-TW" class="zh-mandarin">旗艦包。</h4>
-      <p>The daily core act. A dual-chew filled-chew packet — one substrate chew + one keystone chew, two chews × 90 seconds each. Three-act arc: cool crunch → warm pop → grounded clarity. Seven registered ingredient brands. Mechanism-only claims. 30 packets per container, one month at a time.</p>
+      <p>The daily core act. A dual-chew soft chew packet — one substrate chew + one keystone chew, two chews × 90 seconds each. Three-act arc: cool crunch → warm bloom → grounded clarity. Seven registered ingredient brands. Mechanism-only claims. 30 packets per container, one month at a time.</p>
   <p lang="zh-TW" class="zh-mandarin">每日的核心動作。一包雙顆爆漿咀嚼錠 — 一顆基質咀嚼 + 一顆關鍵咀嚼，兩顆各含 90 秒。三段式體驗弧線：爽脆咬感 → 溫熱爆漿 → 落地般的清晰感。七支註冊品牌成分。純機制訴求。一罐 30 包，一次一個月份。</p>
     </div>
   </div>
@@ -1378,7 +1393,7 @@ body.locked #cursor-quote { opacity: 0 !important; }
   <p lang="zh-TW" class="zh-mandarin">旗艦的關鍵咀嚼錠 — 紅色那顆 — 乘載<strong>一種離子活化劑加上三種粒線體保護劑</strong>。每一支都是有註冊品牌的成分，在我們用的劑量下擁有獨立、經同儕審查的臨床證據。沒有專利複方。沒有「及其他成分」。最細的那行字，就是全部。</p>
 
     <div class="packet-visual" style="margin: 36px auto 8px; max-width: 580px;">
-      <img src="signal_two_chews.jpg" alt="signal N°002 two chews — amber translucent substrate chew on left, red translucent keystone chew on right, each with a small amber liquid-pop bead visible at center">
+      <img src="signal_two_chews.jpg" alt="signal N°002 two chews — amber translucent substrate chew on left, red translucent keystone chew on right">
       <div class="packet-caption" style="color: rgba(246,239,234,0.6);">signal N&deg;002 &middot; two chews per packet &middot; <strong style="color: rgba(246,239,234,0.9);">red keystone</strong> + amber substrate</div>
   <div lang="zh-TW" class="packet-caption zh-mandarin">signal N°002 · 每包兩顆 · <strong style="color: rgba(246,239,234,0.9);">紅色關鍵</strong> + 琥珀色基質</div>
     </div>
