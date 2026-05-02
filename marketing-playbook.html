@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INSDR Wellness — the cellcare company | Marketing Playbook</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --signal: #AD4236;
+  --signal-light: #C85D51;
+  --signal-deep: #7A2E26;
+  --deep-evening: #1A1410;
+  --rose-linen: #F6EFEA;
+  --cream: #EFE5D1;
+  --cream-deep: #E5D7BC;
+  --ink: #1A1410;
+  --ink-soft: rgba(26,20,16,0.72);
+  --ink-dim: rgba(26,20,16,0.5);
+  --font-display: 'Bebas Neue', 'Helvetica Neue', sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--rose-linen);
+  color: var(--ink);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 300;
+}
+
+/* ─── PAGES ─── */
+.page {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 96px 56px;
+}
+.page.dark {
+  background: var(--deep-evening);
+  color: var(--rose-linen);
+  max-width: none;
+  padding: 96px 56px;
+}
+.page.dark .inner {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* ─── COVER ─── */
+.cover {
+  min-height: 92vh;
+  background: var(--deep-evening);
+  color: var(--rose-linen);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 40px;
+  position: relative;
+}
+.cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(173,66,54,0.18), transparent 60%);
+  pointer-events: none;
+}
+.cover-lockup {
+  position: absolute;
+  top: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+}
+.cover-overline {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--signal-light);
+  font-weight: 700;
+}
+.cover-insdr-line {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(246,239,234,0.7);
+  font-weight: 500;
+}
+.cover-title {
+  font-family: var(--font-display);
+  font-size: 88px;
+  line-height: 0.92;
+  letter-spacing: -0.5px;
+  color: var(--rose-linen);
+  margin-bottom: 28px;
+  z-index: 2;
+  font-weight: 400;
+}
+.cover-thesis {
+  font-family: var(--font-body);
+  font-size: 24px;
+  line-height: 1.35;
+  font-style: italic;
+  color: var(--signal-light);
+  font-weight: 400;
+  max-width: 720px;
+  margin-bottom: 18px;
+  z-index: 2;
+}
+.cover-subline {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(246,239,234,0.72);
+  max-width: 600px;
+  z-index: 2;
+}
+.cover-meta {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(246,239,234,0.4);
+  z-index: 2;
+}
+
+/* ─── SECTION LABELS ─── */
+.section-label {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+.page.dark .section-label { color: var(--signal-light); }
+
+/* ─── H2 ─── */
+h2 {
+  font-family: var(--font-display);
+  font-size: 56px;
+  line-height: 0.95;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  margin-bottom: 18px;
+  font-weight: 400;
+}
+.page.dark h2 { color: var(--rose-linen); }
+h2 .accent { color: var(--signal); }
+.page.dark h2 .accent { color: var(--signal-light); }
+
+/* ─── SECTION OPENING FRAME ─── */
+.section-open {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 32px 0 56px;
+  max-width: 680px;
+  font-weight: 400;
+}
+.page.dark .section-open { color: rgba(246,239,234,0.78); }
+
+/* ─── PRINCIPLES ─── */
+.principle {
+  margin: 48px 0;
+  padding-top: 36px;
+  border-top: 1px solid rgba(26,20,16,0.12);
+}
+.page.dark .principle { border-top-color: rgba(246,239,234,0.1); }
+.principle:first-of-type { border-top: none; padding-top: 0; }
+.principle h3 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.3px;
+  color: var(--ink);
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+.page.dark .principle h3 { color: var(--rose-linen); }
+.principle p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 680px;
+  margin-bottom: 14px;
+}
+.page.dark .principle p { color: rgba(246,239,234,0.85); }
+.principle p strong { color: var(--ink); font-weight: 600; }
+.page.dark .principle p strong { color: var(--rose-linen); font-weight: 500; }
+
+/* ─── KICKER (the italic quotable beat) ─── */
+.kicker {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--signal);
+  font-weight: 500;
+  margin-top: 18px;
+  padding-left: 18px;
+  border-left: 2px solid var(--signal);
+  max-width: 640px;
+}
+.page.dark .kicker { color: var(--signal-light); border-left-color: var(--signal-light); }
+
+/* ─── TOC ─── */
+.toc {
+  background: var(--cream);
+  padding: 96px 56px;
+  border-top: 1px solid rgba(26,20,16,0.08);
+  border-bottom: 1px solid rgba(26,20,16,0.08);
+}
+.toc-inner { max-width: 820px; margin: 0 auto; }
+.toc h3 {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+.toc-list { list-style: none; }
+.toc-list li {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  align-items: baseline;
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(26,20,16,0.1);
+}
+.toc-list li:last-child { border-bottom: none; }
+.toc-num {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: var(--signal);
+  font-weight: 400;
+}
+.toc-name {
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: -0.2px;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+.toc-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+/* ─── AUDIT QUESTIONS ─── */
+.audit-cat {
+  margin: 56px 0;
+  padding-top: 32px;
+  border-top: 1px solid rgba(26,20,16,0.12);
+}
+.audit-cat:first-of-type { border-top: none; padding-top: 0; }
+.audit-cat h3 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 1;
+  letter-spacing: -0.2px;
+  color: var(--ink);
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+.audit-cat-frame {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--ink-dim);
+  margin-bottom: 22px;
+  max-width: 620px;
+}
+.audit-list {
+  list-style: none;
+  counter-reset: audit;
+}
+.audit-list li {
+  counter-increment: audit;
+  display: grid;
+  grid-template-columns: 36px 1fr 80px;
+  align-items: start;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(26,20,16,0.08);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.audit-list li::before {
+  content: counter(audit);
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--signal);
+  font-weight: 400;
+}
+.audit-score {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--ink-dim);
+  text-align: right;
+  font-weight: 600;
+}
+.audit-totals {
+  background: var(--cream);
+  padding: 32px;
+  margin-top: 48px;
+  border-left: 3px solid var(--signal);
+}
+.audit-totals h4 {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+.audit-totals p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+.audit-totals p strong { color: var(--ink); font-weight: 600; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--deep-evening);
+  color: rgba(246,239,234,0.55);
+  padding: 64px 56px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+footer .footer-line {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: rgba(246,239,234,0.75);
+}
+
+@media (max-width: 720px) {
+  .page, .toc { padding: 64px 28px; }
+  .cover-title { font-size: 60px; }
+  h2 { font-size: 40px; }
+  .principle h3 { font-size: 24px; }
+  .audit-list li { grid-template-columns: 28px 1fr; }
+  .audit-list li .audit-score { display: none; }
+  .toc-list li { grid-template-columns: 40px 1fr; gap: 16px; }
+}
+
+/* ─── PASSWORD GATE ─── */
+#gate { position: fixed; inset: 0; background: #1A1410; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; color: #F6EFEA; padding: 40px; text-align: center; }
+#gate .gate-overline { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #AD4236; margin-bottom: 16px; font-weight: 600; }
+#gate .gate-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 72px; color: #AD4236; line-height: 0.9; margin-bottom: 32px; letter-spacing: -1.6px; text-transform: lowercase; }
+#gate .gate-title .accent { color: #F6EFEA; }
+#gate .gate-subtitle { font-size: 14px; opacity: 0.6; margin-bottom: 32px; letter-spacing: 1px; }
+#gate form { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+#gate input { background: rgba(246,239,234,0.08); border: 1px solid rgba(246,239,234,0.2); border-radius: 6px; color: #F6EFEA; padding: 14px 20px; font-size: 15px; font-family: inherit; width: 280px; text-align: center; letter-spacing: 1px; outline: none; transition: border-color 0.2s; }
+#gate input:focus { border-color: #AD4236; }
+#gate button { background: #AD4236; color: #F6EFEA; border: none; border-radius: 6px; padding: 12px 32px; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+#gate button:hover { background: #c4574b; }
+#gate .gate-error { color: #AD4236; font-size: 12px; margin-top: 8px; opacity: 0; transition: opacity 0.2s; letter-spacing: 1px; }
+#gate .gate-error.show { opacity: 1; }
+#gate .gate-footer { position: absolute; bottom: 40px; font-size: 10px; opacity: 0.3; letter-spacing: 3px; text-transform: uppercase; }
+body.locked { overflow: hidden; height: 100vh; }
+body.locked > section, body.locked > footer { display: none !important; }
+@media print { #gate { display: none !important; } }
+</style>
+</head>
+<body class="locked">
+
+<!-- ═══════════════════ PASSWORD GATE ═══════════════════ -->
+<div id="gate">
+  <div class="gate-overline">INSDR Wellness — the cellcare company &middot; Confidential</div>
+  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="gate-subtitle">Enter password to view the marketing playbook.</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
+    <button type="submit">Enter</button>
+    <div class="gate-error" id="gate-error">Incorrect. Try again.</div>
+  </form>
+  <div class="gate-footer">Marketing Playbook &mdash; Do not share.</div>
+</div>
+
+<!-- ═══════════════════ COVER ═══════════════════ -->
+<section class="cover">
+  <div class="cover-lockup">
+    <div class="cover-overline">INSDR Wellness — the cellcare company</div>
+    <div class="cover-insdr-line">internal · marketing playbook · 2026</div>
+  </div>
+  <div class="cover-title">
+    BUILD A WORLD.<br>
+    INVITE THEM IN.<br>
+    LET THEM<br>
+    DECODE IT.
+  </div>
+  <div class="cover-thesis">Consistency is the new persuasion.</div>
+  <div class="cover-subline">People don't want to be sold to anymore. They want to figure something out. This playbook is how we make sure they always can.</div>
+  <div class="cover-meta">signal · marketing playbook · v1.3 · 2026-05-02</div>
+</section>
+
+<!-- ═══════════════════ TOC ═══════════════════ -->
+<section class="toc">
+  <div class="toc-inner">
+    <h3>Contents</h3>
+    <ul class="toc-list">
+      <li>
+        <div class="toc-num">I</div>
+        <div>
+          <div class="toc-name">The Five</div>
+          <div class="toc-desc">The unbreakable values.</div>
+        </div>
+      </li>
+      <li>
+        <div class="toc-num">II</div>
+        <div>
+          <div class="toc-name">The Posture</div>
+          <div class="toc-desc">How the brand carries itself in public.</div>
+        </div>
+      </li>
+      <li>
+        <div class="toc-num">III</div>
+        <div>
+          <div class="toc-name">Every Piece</div>
+          <div class="toc-desc">The rules every piece of content must pass.</div>
+        </div>
+      </li>
+      <li>
+        <div class="toc-num">IV</div>
+        <div>
+          <div class="toc-name">Claimed By Others</div>
+          <div class="toc-desc">How authority gets built, since we don't self-claim it.</div>
+        </div>
+      </li>
+      <li>
+        <div class="toc-num">V</div>
+        <div>
+          <div class="toc-name">What We Refuse</div>
+          <div class="toc-desc">The anti-catalog.</div>
+        </div>
+      </li>
+      <li>
+        <div class="toc-num">VI</div>
+        <div>
+          <div class="toc-name">Where We Live</div>
+          <div class="toc-desc">Channels and cadence.</div>
+        </div>
+      </li>
+      <li>
+        <div class="toc-num">VII</div>
+        <div>
+          <div class="toc-name">The Audit</div>
+          <div class="toc-desc">Twenty questions, scored.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════ I — THE FIVE ═══════════════════ -->
+<section class="page">
+  <div class="section-label">I &mdash; The Five</div>
+  <h2>The unbreakable <span class="accent">values.</span></h2>
+  <p class="section-open">Five values. The shape of every world we build. Equally weighted. None compensates for another. If a piece of work fails one, it fails all five. Together, they produce one thing &mdash; a brand that feels real. <strong>Authenticity is not a sixth value. It is what the other five make.</strong></p>
+
+  <div class="principle">
+    <h3>Clarity.</h3>
+    <p>A reader should know what we're saying after one line. We don't earn attention by being clever &mdash; we earn it by being clear. Cleverness is what brands reach for when they don't trust the idea underneath.</p>
+    <div class="kicker">If a sentence needs a second read, cut it in half.</div>
+  </div>
+
+  <div class="principle">
+    <h3>Usefulness.</h3>
+    <p>Every piece teaches something. If the reader is no smarter, no calmer, no closer to a decision after watching &mdash; we've wasted their time, and ours. We don't post. We explain.</p>
+    <div class="kicker">Six seconds, one thing learned.</div>
+  </div>
+
+  <div class="principle">
+    <h3>Honesty.</h3>
+    <p>The phone in their pocket is a lie detector. Every claim gets screenshotted, cross-checked, dragged into a comment thread by someone who already doesn't trust us. We stop one sentence before the line where someone could check us and find air.</p>
+    <div class="kicker">If you'd cringe seeing it next to the evidence, don't ship it.</div>
+  </div>
+
+  <div class="principle">
+    <h3>Consistency.</h3>
+    <p>Same brand in a DM as on a billboard. Same point of view this week as next quarter. The compounding is the proof &mdash; said enough times, in enough places, in the same voice, doubt becomes impossible.</p>
+    <div class="kicker">Consistency is the new persuasion.</div>
+  </div>
+
+  <div class="principle">
+    <h3>Earned Authority.</h3>
+    <p>A brand can't claim its way into credibility anymore. Authority is claimed by others &mdash; real people, in real places, repeatedly &mdash; or it isn't authority at all. We don't announce that we're trusted. We show up until we are.</p>
+    <div class="kicker">Authority is given. We earn the right to receive it.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════ II — THE POSTURE ═══════════════════ -->
+<section class="page dark">
+  <div class="inner">
+    <div class="section-label">II &mdash; The Posture</div>
+    <h2>We build a world. <span class="accent">We don't pitch.</span></h2>
+    <p class="section-open">You can't sell anyone anything anymore. The phone in their pocket counter-arguments any pitch in real time. So we don't pitch. We build a world, open the door, and let the right people walk in.</p>
+
+    <div class="principle">
+      <h3>We build a world. We invite people in.</h3>
+      <p>Marketing isn't a megaphone &mdash; it's an entrance. The work isn't to push messaging out; the work is to build a world worth walking into. Cellcare. The IPA wordmark. The /sɪɡˈnɑːl/ you send. A consumer who steps in finds detail, depth, layers &mdash; and starts to feel like an insider for noticing them. That feeling is the whole game.</p>
+      <div class="kicker">The world is the product. The product is just the doorway in.</div>
+    </div>
+
+    <div class="principle">
+      <h3>Curiosity over persuasion.</h3>
+      <p>We don't explain the product. We make it interesting enough to be decoded. The packet front carries no claim, no CTA &mdash; just "send the right /sɪɡˈnɑːl/." The chew is the receipt; the IPA is the cipher; the manifesto is the long read for whoever wants it. Every layer rewards attention. Nothing demands it.</p>
+      <div class="kicker">People don't want to be sold to. They want to figure something out.</div>
+    </div>
+
+    <div class="principle">
+      <h3>Scarcity as default.</h3>
+      <p>When a brand behaves like the door is sometimes closed, people line up outside it. We don't broadcast availability; we let it become known. Founder's-Price waitlists, capped releases, signal-only access &mdash; the posture isn't artificial scarcity, it's a refusal to chase.</p>
+      <p>Scarcity as <em>posture</em>, never scarcity as <em>tactic</em>. No countdown timers. No "24 hours left." No fake stock counts. The door is sometimes closed because that's how a real practice works &mdash; not because we engineered the close to push you through it. We don't need everyone. We need the right people, deeply.</p>
+      <div class="kicker">A door always open is a door no one notices.</div>
+    </div>
+
+    <div class="principle">
+      <h3>Authority is given, never announced.</h3>
+      <p>We don't say "trusted by." We don't claim "#1." We don't print "dermatologist recommended." The moment a brand tells you it's authoritative, you start checking &mdash; and announced authority is suspect by default. So we don't announce. We show up consistently in places that already carry trust, and let other people say what we'd otherwise have to say about ourselves.</p>
+      <div class="kicker">The brand that has to tell you it's trusted, isn't.</div>
+    </div>
+
+    <div class="principle">
+      <h3>Constant low-lift presence. Never campaigns.</h3>
+      <p>Campaigns are bursts followed by silence &mdash; how brands behave when they don't have a daily reason to exist. We have a daily reason. So we show up daily, in formats so light that volume isn't the cost it would be for a polished agency operation. A phone. A moment. A frame. Repeated.</p>
+      <div class="kicker">Bursts and silences look like a brand trying. Constant presence looks like a brand that already is.</div>
+    </div>
+
+    <div class="principle">
+      <h3>Six months before any pitch.</h3>
+      <p>The first six months a new person encounters us, they see proof, world, voice &mdash; never a sales pitch. By the time we ask them for anything, they've already decided. The ask is a confirmation, not a conversion.</p>
+      <div class="kicker">If a stranger has to be asked, we asked too soon.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ III — EVERY PIECE ═══════════════════ -->
+<section class="page">
+  <div class="section-label">III &mdash; Every Piece</div>
+  <h2>Every piece is a doorway. <span class="accent">Build it accordingly.</span></h2>
+  <p class="section-open">We don't think in campaigns or assets. We think in pieces &mdash; daily, light, fast, shot from where we already are. Every piece is small enough to ship without ceremony and specific enough to teach one thing. Five rules govern every piece, regardless of channel.</p>
+
+  <div class="principle">
+    <h3>The six-second teach.</h3>
+    <p>If a viewer can't name what they learned six seconds in, the piece failed. Not engaged, not entertained &mdash; <em>learned</em>. The six seconds aren't a constraint; they're the test. If we can't teach something true and useful in that window, we don't have a piece worth posting.</p>
+    <div class="kicker">Six seconds. One thing learned. Or it doesn't ship.</div>
+  </div>
+
+  <div class="principle">
+    <h3>Product in the first two seconds.</h3>
+    <p>The hand reaches the bowl, the packet tears, the chew is between teeth &mdash; within the first two seconds of every piece. Not a logo. Not a tagline. The thing itself, in motion, in use. The brand is not what we say next; it's what's already on screen before we've said anything.</p>
+    <div class="kicker">Show the product before you've earned the second.</div>
+  </div>
+
+  <div class="principle">
+    <h3>Shot on a phone. Feels native.</h3>
+    <p>No hero shots. No polished brand films. No campaign shoots repurposed into "content." If a viewer can't tell whether a piece was made by us or by a customer who happens to film well, we got the texture right. Native isn't an aesthetic &mdash; it's the proof that the brand belongs in the feed instead of bracketing it with ad disclosures.</p>
+    <p>And avoid the genre tells. The slow morning-routine reach-and-tear, the kitchen-counter unboxing, the ambient lo-fi behind a sunrise B-roll &mdash; those formats are now legible to consumers as <em>seeded brand content</em>, regardless of who shot them. Vary the time of day, the location, the hands, the sound. A gym bag at noon. A train at dusk. A bathroom mirror. Real interruptions allowed. The look that consumers can't pre-classify is the look that lands.</p>
+    <div class="kicker">If it looks made-for-the-feed, it was. If it looks like every other wellness video on the algorithm, it shouldn't ship.</div>
+  </div>
+
+  <div class="principle">
+    <h3>The hook can't be guessable.</h3>
+    <p>A reader who can predict the next line before they read it has already scrolled. The hook isn't "five reasons" or "what every woman should know" or any sentence a competitor could use unchanged. It's a specific, provocative claim about the reader's world &mdash; something that sounds like news, not a brochure. If we'd be okay seeing the line under a competitor's logo, the line is dead.</p>
+    <div class="kicker">If they can guess the hook, the hook is dead.</div>
+  </div>
+
+  <div class="principle">
+    <h3>Same message. Different format. Every place.</h3>
+    <p>A DM, a billboard, an email, a TikTok, a packet insert &mdash; different formats of the same brand. The voice doesn't shift to fit the channel; the brand stays itself, and the channel adapts. Repetition is the work. Variety is what makes repetition feel new.</p>
+    <div class="kicker">Said enough times in enough places, doubt becomes impossible.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════ IV — CLAIMED BY OTHERS ═══════════════════ -->
+<section class="page dark">
+  <div class="inner">
+    <div class="section-label">IV &mdash; Claimed By Others</div>
+    <h2>A brand can't claim its way into credibility. <span class="accent">It has to be claimed by other people.</span></h2>
+    <p class="section-open">Authority used to come from megaphones. Now it comes from the absence of one &mdash; from the fact that other people are saying about us what we never had to say about ourselves. Our job is to make the brand claim-worthy. The claiming is theirs.</p>
+
+    <div class="principle">
+      <h3>Real people. Real places. Repeatedly.</h3>
+      <p>A creator opening a packet on a kitchen counter we'll never see is worth more than any campaign asset we could shoot. A stranger in a comment section who learned the IPA pronunciation is worth more than any explainer we could write. Our job is to be visible in the places where these moments happen &mdash; not to manufacture them.</p>
+      <div class="kicker">The proof is in the wild. Our job is to be findable.</div>
+    </div>
+
+    <div class="principle">
+      <h3>Specific over generic.</h3>
+      <p>"Loved by thousands" is suspicious. "I take it after teeth, before coffee, every day for ninety-eight days now" is unimpeachable. Generic proof reads like marketing; specific proof reads like life. We always favor the second &mdash; even when the first looks bigger on a deck.</p>
+      <div class="kicker">Names. Numbers. Moments. Or it isn't proof.</div>
+    </div>
+
+    <div class="principle">
+      <h3>Third-party. Unpaid.</h3>
+      <p>The asymmetry is everything. A creator we didn't pay carries trust a paid one can't manufacture. We invest in the relationship, the product, the world. If the content comes back, it's because the brand earned it. The moment we pay for a post, the post stops counting.</p>
+      <div class="kicker">If we paid for the proof, it isn't proof.</div>
+    </div>
+
+    <div class="principle">
+      <h3>Send a Signal: the seed.</h3>
+      <p>A $5 packet on a card, sent by an existing user to someone they care about, is the most efficient proof mechanic we have. It bypasses the trust gap entirely &mdash; the recipient already trusts the sender, and the sender has skin in the game. Every Send a Signal is a piece of third-party proof in motion. The flywheel doesn't start with us.</p>
+      <div class="kicker">The first signal isn't from us. It's from the person who already cares about them.</div>
+    </div>
+
+    <div class="principle">
+      <h3>No undisclosed presence.</h3>
+      <p>r/HailCorporate has thirty thousand subscribers dedicated to outing brand reps posing as real people in comment threads. We don't post under fake personas. We don't seed Reddit threads. We don't write our own five-star reviews. When someone from signal participates in a community, they participate as themselves &mdash; on the record, with the brand visible. The only authority that compounds is the one with our name on it.</p>
+      <div class="kicker">If we'd be embarrassed to be outed, we shouldn't be posting.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ V — WHAT WE REFUSE ═══════════════════ -->
+<section class="page">
+  <div class="section-label">V &mdash; What We Refuse</div>
+  <h2>The shortest list <span class="accent">is also the most important.</span></h2>
+  <p class="section-open">Most brand failures aren't from missing what to do; they're from not refusing what's easy. The defaults of the supplement category &mdash; the polished films, the announced credibility, the campaign bursts, the hype copy &mdash; are gravitational. Naming what we don't do, in writing, is how we resist gravity.</p>
+
+  <div class="principle">
+    <h3>No hero shots. No brand films.</h3>
+    <p>No agency-shot lifestyle imagery. No "introducing signal" 60-second spots. No campaign assets that look like a 2019 magazine ad rewritten for Instagram. The aesthetic isn't a budget choice; it's a posture choice. The phone is the camera. The kitchen is the set. The lived life is the production.</p>
+  </div>
+
+  <div class="principle">
+    <h3>No announced authority.</h3>
+    <p>No "#1 dermatologist recommended." No "clinically proven." No "as seen in." No "loved by thousands." No badge wall of vegan / non-GMO / gluten-free / organic stamps treated as identity. Every one of these phrases &mdash; and every one of these badges &mdash; is gravity pulling us toward the supplement-category default. If the proof is real, it'll come from someone other than us. If we have to print it ourselves, it doesn't count.</p>
+  </div>
+
+  <div class="principle">
+    <h3>No campaigns.</h3>
+    <p>No "launch moments." No three-week pushes followed by silence. No agency-orchestrated bursts. The brand has a daily reason to exist, so it shows up daily. Anything else is theatre.</p>
+  </div>
+
+  <div class="principle">
+    <h3>No exciting sells.</h3>
+    <p>No urgency-engineered scarcity ("only 24 hours left!"). No FOMO copy. No "you've been missing this!" framings. Excitement is what brands manufacture when the product can't carry the decision. Ours can.</p>
+  </div>
+
+  <div class="principle">
+    <h3>No guessable hooks.</h3>
+    <p>No "five reasons." No "what every [demographic] should know." No "did you know that&hellip;" framings. No sentence a competitor could swap their logo into and ship unchanged. If a reader can predict the line before reading it, the line never had to be written.</p>
+  </div>
+
+  <div class="principle">
+    <h3>No banned vocabulary.</h3>
+    <p>"Game-changing." "Revolutionary." "Industry-leading." "Cutting-edge." "Innovative." "Disruptive." Any word brands have used so often it stopped meaning anything is a word we don't use. The list grows. It never shrinks.</p>
+    <div class="kicker">If the word lives in every other brand's deck, it doesn't live in ours.</div>
+  </div>
+
+  <div class="principle">
+    <h3>No subscription traps.</h3>
+    <p>The most common trust-breaker in the supplement category isn't a bad product &mdash; it's a billing experience that feels engineered to keep you paying. We don't bury renewal terms. We don't require a phone call to cancel. We don't ship a "trial" that auto-converts. If you can sign up in one tap, you can cancel in one tap. The subscription is a relationship, not a trap.</p>
+    <div class="kicker">A cancellation flow tells the customer how the brand thinks of them. We design ours like we'd want our own.</div>
+  </div>
+
+  <div class="principle">
+    <h3>No founder-as-protagonist.</h3>
+    <p>"I struggled with [problem], so I made [product]." It's the most-used origin template in the wellness category, and consumers can recite it before you do. The founders matter to the company; they don't matter to the customer's first encounter. The world is the protagonist. The thesis is the protagonist. The cells are the protagonist. The founders show up when they're useful &mdash; not as the hook.</p>
+    <div class="kicker">If the brand only works with the founder on camera, it isn't a brand. It's a personality.</div>
+  </div>
+
+  <div class="principle">
+    <h3>AI is not the voice.</h3>
+    <p>We're going to be unmistakable about this. <strong>AI does not originate our copy. AI does not speak for our brand. AI is not the content creator.</strong> AI does not sit between us and the consumer. AI is plumbing &mdash; it organizes calendars, cross-references documents, speeds up the back office, helps us see patterns in data we already have. That is the entire territory it's allowed to occupy.</p>
+    <p>Every brand-facing touchpoint &mdash; a caption, a comment reply, a packet insert, a creator brief, a DM, an email subject line, an SMS, a script, a hook &mdash; <strong>originates with a human</strong> who has the lived context to mean it. Readers can spot AI-originated prose within a sentence: the em-dash overuse, the suspiciously even cadence, the hallucinated "studies show," the eight-fingered hands, the dialogue that sounds like nobody who has ever lived. The tells aren't subtle anymore. The moment a reader spots them, the brand becomes ambient noise.</p>
+    <p><strong>Origination versus refinement.</strong> AI is allowed to refine human work &mdash; tighten a sentence, catch a redundancy, suggest a sharper cadence, propose three variants of a line we already wrote. The original idea, the original sentence, the original frame must come from a human first. AI sharpens. AI doesn't start.</p>
+    <p>Authenticity is the only thing we can't fake. We don't try.</p>
+    <div class="kicker">AI doesn't get to start the sentence.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════ VI — WHERE WE LIVE ═══════════════════ -->
+<section class="page dark">
+  <div class="inner">
+    <div class="section-label">VI &mdash; Where We Live</div>
+    <h2>Channels are world-extensions. <span class="accent">Not megaphones.</span></h2>
+    <p class="section-open">Each channel is a different room of the same world. The voice doesn't change between rooms. The cadence does. The job of a channel is to make the world thicker, more findable, and more present in the daily texture of someone's feed and inbox.</p>
+
+    <div class="principle">
+      <h3>Organic social — the daily presence.</h3>
+      <p>TikTok, Instagram, YouTube Shorts. Three to seven pieces a week, not in a calendar built around launches but around the world's daily rhythm. A morning chew, an evening chew, a kitchen, a bag, a packet on a counter. Small enough that any single piece can fail without consequence. The compounding is the point.</p>
+    </div>
+
+    <div class="principle">
+      <h3>Email and SMS — the receipt.</h3>
+      <p>Email is where we tell the long story to people who opted in. SMS is where the world arrives at someone's hand without asking for it. Neither is a discount engine. Both are extensions of the world &mdash; a chew arriving, a question answered, a quiet update from a brand that respects the inbox. We send less than we could. We send more than we have to.</p>
+    </div>
+
+    <div class="principle">
+      <h3>PR and partnerships — where authority is claimed.</h3>
+      <p>We don't pitch press for vanity hits. We earn coverage by being interesting to people who already cover this territory &mdash; independent journalists, creators with audiences who care, voices that already carry trust. We invest in the relationship, not the placement. The placement, if it comes, is because the world we built was worth writing about.</p>
+    </div>
+
+    <div class="principle">
+      <h3>Retail — where the brand becomes physical.</h3>
+      <p>A shelf is a touchpoint, not a transaction. The vessel, the packet, the carton, the silver foil, the IPA &mdash; the brand reads the same in a beauty store as on a screen. Retail is where someone who decoded us online finds proof we exist offline too. The vessel is the third-party proof.</p>
+    </div>
+
+    <div class="principle">
+      <h3>Send a Signal — the seed flywheel.</h3>
+      <p>The acquisition mechanic and the advocacy mechanic in one motion. A $5 packet on a card from someone who already trusts the brand, mailed to someone who already trusts that person. Every Send a Signal is a piece of organic proof in physical form, and the brand name is the verb. No other supplement runs this. We run it as the foundation of growth.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ VII — THE AUDIT ═══════════════════ -->
+<section class="page">
+  <div class="section-label">VII &mdash; The Audit</div>
+  <h2>Twenty questions. <span class="accent">Score each 1&ndash;5.</span></h2>
+  <p class="section-open">The playbook is the principle. The audit is the test. Run any piece through these twenty before it ships &mdash; or run a current campaign through them when something feels off. Anything below a 4 is a fix-before-shipping issue. Brands that follow these stay tight. Brands that don't drift back to the category default within a quarter.</p>
+
+  <div class="audit-cat">
+    <h3>Hook & Messaging.</h3>
+    <p class="audit-cat-frame">Does your copy stop the scroll, or does it sound like every other brand in the category?</p>
+    <ol class="audit-list">
+      <li><span></span><span>Our hooks lead with a claim about the reader's world, not our product's features.</span><span class="audit-score">_____ / 5</span></li>
+      <li><span></span><span>Our copy could not be swapped for a competitor's by changing the logo.</span><span class="audit-score">_____ / 5</span></li>
+      <li><span></span><span>Our first line in any ad or post says something specific, not something safe.</span><span class="audit-score">_____ / 5</span></li>
+      <li><span></span><span>We've killed "game-changing," "revolutionary," and "industry-leading" from all active copy.</span><span class="audit-score">_____ / 5</span></li>
+    </ol>
+  </div>
+
+  <div class="audit-cat">
+    <h3>Content Format.</h3>
+    <p class="audit-cat-frame">Does your content look like it was built for the feed, or like it was repurposed from a 2019 campaign shoot?</p>
+    <ol class="audit-list">
+      <li><span></span><span>Most of our content looks like it was made for the feed, not repurposed from a campaign.</span><span class="audit-score">_____ / 5</span></li>
+      <li><span></span><span>We publish more native creator content than polished brand content.</span><span class="audit-score">_____ / 5</span></li>
+      <li><span></span><span>Our product actually appears in the first 2 seconds of our videos.</span><span class="audit-score">_____ / 5</span></li>
+      <li><span></span><span>If someone muted our content, they could still follow what's happening.</span><span class="audit-score">_____ / 5</span></li>
+    </ol>
+  </div>
+
+  <div class="audit-cat">
+    <h3>Authority Signals.</h3>
+    <p class="audit-cat-frame">Are you announcing authority, or earning it?</p>
+    <ol class="audit-list">
+      <li><span></span><span>We let customers, creators, and employees say our brand is good more often than we say it ourselves.</span><span class="audit-score">_____ / 5</span></li>
+      <li><span></span><span>Our proof is specific (names, numbers, moments) rather than generic ("loved by thousands").</span><span class="audit-score">_____ / 5</span></li>
+      <li><span></span><span>We don't rely on legacy credibility markers ("as seen in," "#1 rated") as our main authority signal.</span><span class="audit-score">_____ / 5</span></li>
+      <li><span></span><span>We can point to 10+ pieces of third-party content about our brand from the last 90 days.</span><span class="audit-score">_____ / 5</span></li>
+    </ol>
+  </div>
+
+  <div class="audit-cat">
+    <h3>Channel Strategy.</h3>
+    <p class="audit-cat-frame">Are you showing up consistently, or running campaign bursts between long silences?</p>
+    <ol class="audit-list">
+      <li><span></span><span>Our brand publishes something at least 3 days a week across owned channels.</span><span class="audit-score">_____ / 5</span></li>
+      <li><span></span><span>We don't go dark between launches.</span><span class="audit-score">_____ / 5</span></li>
+      <li><span></span><span>Our content calendar is built around a consistent point of view, not around product drops.</span><span class="audit-score">_____ / 5</span></li>
+      <li><span></span><span>If a new customer found us today, they'd see at least 6 months of active presence before they ever see a sales pitch.</span><span class="audit-score">_____ / 5</span></li>
+    </ol>
+  </div>
+
+  <div class="audit-cat">
+    <h3>Proof & Consistency.</h3>
+    <p class="audit-cat-frame">Does your brand feel like the same brand in a DM as it does on a billboard?</p>
+    <ol class="audit-list">
+      <li><span></span><span>Someone could describe what our brand stands for in one sentence after spending 5 minutes with our content.</span><span class="audit-score">_____ / 5</span></li>
+      <li><span></span><span>Our DMs, emails, ads, and organic posts all sound like the same brand wrote them.</span><span class="audit-score">_____ / 5</span></li>
+      <li><span></span><span>We repeat our core message on purpose, not by accident.</span><span class="audit-score">_____ / 5</span></li>
+      <li><span></span><span>A new hire could write in our voice within their first two weeks because the voice is documented and obvious.</span><span class="audit-score">_____ / 5</span></li>
+    </ol>
+  </div>
+
+  <div class="audit-totals">
+    <h4>Score totals</h4>
+    <p><strong>80–100</strong> — Brand operating at full discipline.</p>
+    <p><strong>60–79</strong> — A category leader on most axes; one or two need attention.</p>
+    <p><strong>40–59</strong> — The category default is starting to creep in. Fix the lowest-scoring axis first.</p>
+    <p><strong>Below 40</strong> — Don't ship. Reset before posting.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <div class="footer-line">INSDR Wellness — the cellcare company</div>
+  <div>marketing playbook · v1.3 · internal · 2026</div>
+</footer>
+
+<script>
+  (function() {
+    var PASS = "54321";
+    var gate = document.getElementById("gate");
+    var body = document.body;
+    if (sessionStorage.getItem("signal_unlocked") === "true") {
+      gate.style.display = "none";
+      body.classList.remove("locked");
+    }
+    window.checkPass = function(e) {
+      e.preventDefault();
+      var input = document.getElementById("gate-pass").value;
+      var err = document.getElementById("gate-error");
+      if (input === PASS) {
+        sessionStorage.setItem("signal_unlocked", "true");
+        gate.style.display = "none";
+        body.classList.remove("locked");
+      } else {
+        err.classList.add("show");
+        document.getElementById("gate-pass").value = "";
+        document.getElementById("gate-pass").focus();
+        setTimeout(function(){ err.classList.remove("show"); }, 2400);
+      }
+      return false;
+    };
+  })();
+</script>
+
+</body>
+</html>
