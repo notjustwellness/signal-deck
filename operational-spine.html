@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signal — The Operational Spine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --signal: #AD4236;
+  --signal-light: #C85D51;
+  --signal-deep: #7A2E26;
+  --deep-evening: #1A1410;
+  --deep-evening-soft: #2A2018;
+  --rose-linen: #F6EFEA;
+  --rose-linen-dim: #E8DFD8;
+  --cream: #EFE5D1;
+  --cream-deep: #E5D7BC;
+  --font-display: 'Bebas Neue', 'Helvetica Neue', sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: var(--font-body);
+  background: var(--rose-linen);
+  color: var(--deep-evening);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 48px 120px;
+}
+
+/* ───────── Header ───────── */
+.hero {
+  border-bottom: 1px solid var(--deep-evening);
+  padding-bottom: 32px;
+  margin-bottom: 64px;
+}
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  color: var(--signal);
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: 64px;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  color: var(--deep-evening);
+  margin-bottom: 16px;
+}
+.hero .subhead {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 19px;
+  color: var(--deep-evening-soft);
+  max-width: 760px;
+}
+
+/* ───────── Section header ───────── */
+.lane-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 28px;
+  margin-top: 72px;
+}
+.lane-header .num {
+  font-family: var(--font-display);
+  font-size: 56px;
+  line-height: 1;
+  color: var(--signal);
+}
+.lane-header h2 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  letter-spacing: 0.04em;
+  color: var(--deep-evening);
+}
+.lane-header .meta {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--signal-deep);
+  margin-left: auto;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ───────── Sub-flow label ───────── */
+.sub-flow-label {
+  font-family: var(--font-display);
+  font-size: 15px;
+  letter-spacing: 0.18em;
+  color: var(--signal-deep);
+  margin-top: 36px;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--cream-deep);
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.sub-flow-label .tag {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--signal);
+  font-weight: 400;
+}
+.sub-flow-label .desc {
+  margin-left: auto;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--deep-evening-soft);
+}
+
+/* ───────── Flow row ───────── */
+.flow {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  flex-wrap: wrap;
+  row-gap: 32px;
+}
+.station {
+  flex: 1 1 0;
+  min-width: 180px;
+  background: var(--cream);
+  border: 1px solid var(--cream-deep);
+  border-radius: 4px;
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.station + .arrow {
+  flex: 0 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--signal);
+  font-size: 18px;
+  font-weight: 700;
+  font-family: var(--font-body);
+}
+.station + .arrow.loop {
+  color: var(--signal-deep);
+}
+.station .label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--signal);
+  margin-bottom: 8px;
+}
+.station .name {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--deep-evening);
+  margin-bottom: 6px;
+  line-height: 1.25;
+}
+.station .detail {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--deep-evening-soft);
+  line-height: 1.45;
+}
+.station .vendor {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--signal-deep);
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--cream-deep);
+}
+
+/* dark lane variant */
+.lane.dark .station {
+  background: var(--deep-evening);
+  border-color: var(--deep-evening-soft);
+}
+.lane.dark .station .label { color: var(--signal-light); }
+.lane.dark .station .name { color: var(--rose-linen); }
+.lane.dark .station .detail { color: var(--rose-linen-dim); }
+.lane.dark .station .vendor {
+  color: var(--signal-light);
+  border-top-color: var(--deep-evening-soft);
+}
+
+/* signal accent station — for the moment of truth */
+.station.accent {
+  background: var(--signal);
+  border-color: var(--signal-deep);
+}
+.station.accent .label { color: var(--cream); }
+.station.accent .name,
+.station.accent .detail { color: var(--rose-linen); }
+.station.accent .vendor {
+  color: var(--cream);
+  border-top-color: var(--signal-deep);
+}
+
+/* exception variant — for issue/return flows */
+.station.exception {
+  background: var(--rose-linen);
+  border-color: var(--signal-light);
+  border-style: dashed;
+}
+.station.exception .label { color: var(--signal-deep); }
+
+/* upstream lane */
+.lane.upstream .station {
+  background: var(--cream-deep);
+  border-color: var(--cream-deep);
+}
+
+/* ───────── Sub-flow / branches ───────── */
+.branch-note {
+  margin-top: 14px;
+  padding: 14px 18px;
+  background: rgba(173, 66, 54, 0.06);
+  border-left: 3px solid var(--signal);
+  font-size: 13px;
+  color: var(--deep-evening-soft);
+  line-height: 1.5;
+}
+.branch-note strong {
+  color: var(--signal-deep);
+  font-weight: 700;
+}
+
+/* ───────── Unboxing system callout (special) ───────── */
+.unboxing-system {
+  margin-top: 24px;
+  padding: 28px 32px;
+  background: var(--deep-evening);
+  color: var(--rose-linen);
+  border-radius: 4px;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 28px;
+}
+.unboxing-system .us-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  letter-spacing: 0.18em;
+  color: var(--signal-light);
+  line-height: 1.3;
+}
+.unboxing-system .us-title small {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--rose-linen-dim);
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+.unboxing-system ol {
+  list-style: none;
+  counter-reset: us;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.unboxing-system ol li {
+  counter-increment: us;
+  padding: 8px 0 8px 32px;
+  position: relative;
+  border-top: 1px solid var(--deep-evening-soft);
+  color: var(--rose-linen-dim);
+}
+.unboxing-system ol li:first-child { border-top: none; }
+.unboxing-system ol li::before {
+  content: counter(us, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 8px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--signal-light);
+}
+.unboxing-system ol li strong {
+  color: var(--rose-linen);
+  font-weight: 700;
+}
+
+/* ───────── Always-on infrastructure banner ───────── */
+.infra-banner {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  padding: 18px 22px;
+  background: var(--deep-evening);
+  color: var(--rose-linen);
+  border-radius: 4px;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 24px;
+  align-items: center;
+}
+.infra-banner .infra-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  color: var(--signal-light);
+  line-height: 1.3;
+}
+.infra-banner .infra-content {
+  font-size: 13px;
+  color: var(--rose-linen-dim);
+  line-height: 1.55;
+}
+.infra-banner .infra-content strong {
+  color: var(--rose-linen);
+  font-weight: 700;
+}
+
+/* ───────── Vendor stack grid ───────── */
+.vendor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--deep-evening);
+  border: 1px solid var(--deep-evening);
+  margin-top: 32px;
+}
+.vendor-card {
+  background: var(--rose-linen);
+  padding: 28px 24px;
+}
+.vendor-card .role {
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--signal);
+  margin-bottom: 10px;
+}
+.vendor-card .v-name {
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: 0.02em;
+  color: var(--deep-evening);
+  margin-bottom: 12px;
+}
+.vendor-card .v-detail {
+  font-size: 13px;
+  color: var(--deep-evening-soft);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.vendor-card .v-cost {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--signal-deep);
+  text-transform: uppercase;
+}
+
+/* ───────── Risk callouts ───────── */
+.risks {
+  margin-top: 64px;
+  padding: 36px 40px;
+  background: var(--deep-evening);
+  color: var(--rose-linen);
+  border-radius: 4px;
+}
+.risks h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+  color: var(--rose-linen);
+}
+.risks .risk-sub {
+  font-size: 14px;
+  color: var(--rose-linen-dim);
+  margin-bottom: 28px;
+  font-weight: 300;
+}
+.risk-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  list-style: none;
+}
+.risk-item {
+  border-top: 2px solid var(--signal);
+  padding-top: 16px;
+}
+.risk-item .r-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  color: var(--signal-light);
+  margin-bottom: 8px;
+}
+.risk-item .r-text {
+  font-size: 13px;
+  color: var(--rose-linen-dim);
+  line-height: 1.55;
+}
+
+/* ───────── Cross-border note ───────── */
+.cross-border {
+  margin-top: 48px;
+  padding: 32px 36px;
+  background: var(--cream);
+  border-left: 4px solid var(--signal);
+}
+.cross-border h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  color: var(--deep-evening);
+  margin-bottom: 12px;
+}
+.cross-border p {
+  font-size: 14px;
+  color: var(--deep-evening-soft);
+  line-height: 1.6;
+}
+.cross-border p + p { margin-top: 10px; }
+
+/* ───────── Responsive ───────── */
+@media (max-width: 900px) {
+  .page { padding: 48px 24px 80px; }
+  .hero h1 { font-size: 44px; }
+  .flow { flex-direction: column; }
+  .station + .arrow { transform: rotate(90deg); height: 24px; }
+  .station { flex: 1 1 auto; }
+  .lane-header h2 { font-size: 24px; }
+  .infra-banner, .unboxing-system { grid-template-columns: 1fr; gap: 12px; }
+}
+
+/* ───────── Print ───────── */
+@media print {
+  body { background: white; }
+  .page { padding: 24px; max-width: 100%; }
+  .station, .vendor-card, .cross-border, .infra-banner, .unboxing-system { break-inside: avoid; }
+}
+
+/* ───────── Password gate ───────── */
+#gate { position: fixed; inset: 0; background: #1A1410; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; color: #F6EFEA; padding: 40px; text-align: center; }
+#gate .gate-overline { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #AD4236; margin-bottom: 16px; font-weight: 600; }
+#gate .gate-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 72px; color: #AD4236; line-height: 0.9; margin-bottom: 32px; letter-spacing: -1.6px; text-transform: lowercase; }
+#gate .gate-title .accent { color: #F6EFEA; }
+#gate .gate-subtitle { font-size: 14px; opacity: 0.6; margin-bottom: 32px; letter-spacing: 1px; }
+#gate form { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+#gate input { background: rgba(246,239,234,0.08); border: 1px solid rgba(246,239,234,0.2); border-radius: 6px; color: #F6EFEA; padding: 14px 20px; font-size: 15px; font-family: inherit; width: 280px; text-align: center; letter-spacing: 1px; outline: none; transition: border-color 0.2s; }
+#gate input:focus { border-color: #AD4236; }
+#gate button { background: #AD4236; color: #F6EFEA; border: none; border-radius: 6px; padding: 12px 32px; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+#gate button:hover { background: #c4574b; }
+#gate .gate-error { color: #AD4236; font-size: 12px; margin-top: 8px; opacity: 0; transition: opacity 0.2s; letter-spacing: 1px; }
+#gate .gate-error.show { opacity: 1; }
+#gate .gate-footer { position: absolute; bottom: 40px; font-size: 10px; opacity: 0.3; letter-spacing: 3px; text-transform: uppercase; }
+body.locked { overflow: hidden; height: 100vh; }
+body.locked > div.page { display: none !important; }
+@media print { #gate { display: none !important; } }
+</style>
+</head>
+<body class="locked">
+
+<!-- ═══════════════════ PASSWORD GATE ═══════════════════ -->
+<div id="gate">
+  <div class="gate-overline">INSDR Wellness — the cellcare company &middot; Confidential</div>
+  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="gate-subtitle">Enter password to view the operational spine.</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
+    <button type="submit">Enter</button>
+    <div class="gate-error" id="gate-error">Incorrect. Try again.</div>
+  </form>
+  <div class="gate-footer">Operational Spine &mdash; Do not share.</div>
+</div>
+
+<div class="page">
+
+  <!-- ───────── HERO ───────── -->
+  <header class="hero">
+    <div class="eyebrow">SIGNAL · OPERATIONS · v3</div>
+    <h1>The Operational Spine</h1>
+    <p class="subhead">From customer click to chew in hand to thirty-day reorder. Every system, vendor, and entity that has to fire correctly — plus the unboxing, onboarding, exception, and recovery flows that turn a fulfilled order into a returning customer.</p>
+  </header>
+
+  <!-- ───────── ① UPSTREAM ───────── -->
+  <div class="lane-header">
+    <div class="num">①</div>
+    <h2>Upstream — runs weeks ahead of any order</h2>
+    <div class="meta">Lead time · 8–14 weeks</div>
+  </div>
+
+  <div class="lane upstream">
+    <div class="flow">
+      <div class="station">
+        <div class="label">Formulation</div>
+        <div class="name">Zone Halo</div>
+        <div class="detail">Owns formulation, compliance, COA review, and the contract-manufacturer relationship.</div>
+        <div class="vendor">$20K/mo all-in retainer</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Manufacture</div>
+        <div class="name">Contract Manufacturer (US)</div>
+        <div class="detail">Produces finished chews. Lot codes, expiration dating, QC release. Selected and managed by Zone Halo.</div>
+        <div class="vendor">Contracted via Zone Halo</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Packaging</div>
+        <div class="name">China-sourced vendors</div>
+        <div class="detail">Anodized aluminum vessels (per-SKU) + paperboard refills + Send a Signal cards + welcome cards + branded mailers.</div>
+        <div class="vendor">4–6 wk tooling · $3–15K</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Customs</div>
+        <div class="name">Customs broker</div>
+        <div class="detail">Clears packaging shipments through US customs. Duty calc, bond, ISF filing, port handoff.</div>
+        <div class="vendor">Flexport · ITN · or boutique</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Receiving</div>
+        <div class="name">ShipMonk inbound</div>
+        <div class="detail">3PL receives + inspects + puts away. Lot codes recorded. Expiration FIFO maintained.</div>
+        <div class="vendor">Receiving fee per pallet</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Available</div>
+        <div class="name">Live inventory</div>
+        <div class="detail">Inventory synced to Shopify SKUs. Lot codes carried through to every order line for recall traceability.</div>
+        <div class="vendor">Shopify ↔ ShipMonk API</div>
+      </div>
+    </div>
+
+    <div class="branch-note" style="margin-top: 28px;">
+      <strong>Demand planning — Damon owns it monthly.</strong>
+      Sales velocity × lead time × 1.5 safety-stock multiplier = next PO. POs cut to Zone Halo (chews) and packaging vendors (vessels + refills + cards) on different cadences. Stockout risk is highest in months 4–8 when velocity is climbing but the model isn't tuned yet.
+    </div>
+
+    <div class="branch-note">
+      <strong>Lot tracking is the recall infrastructure.</strong>
+      CMO assigns a lot code at production. Lot rides the SKU through ShipMonk receiving → Shopify inventory → the customer order line. If FDA recalls a lot, you can identify every affected customer in &lt;24 hours. Has to be configured at SKU setup, not retrofitted after a recall starts.
+    </div>
+  </div>
+
+  <!-- ───────── ② CUSTOMER FLOW ───────── -->
+  <div class="lane-header">
+    <div class="num">②</div>
+    <h2>Customer journey — four sub-flows from click to repeat</h2>
+    <div class="meta">Cycle · 2–5 days · then 30-day reorder loop</div>
+  </div>
+
+  <!-- Always-on infrastructure banner -->
+  <div class="infra-banner">
+    <div class="infra-title">ALWAYS-ON LAYER<br/>tracking + consent</div>
+    <div class="infra-content">
+      <strong>Pixel + attribution stack</strong> — Meta CAPI (server-side), Google Ads Enhanced Conversions, TikTok Pixel, KnoCommerce post-purchase survey. Built before paid spend turns on; without it, iOS 14+ eats 30–50% of attributable conversions.
+      &nbsp;·&nbsp;
+      <strong>Consent capture</strong> — TCPA-compliant SMS double-opt-in at checkout, CCPA disclosure, cookie consent banner. C-Corp is the liable entity; Robot Friends configures the language.
+    </div>
+  </div>
+
+  <div class="lane customer">
+
+    <!-- ──── ②.1 FORWARD FLOW ──── -->
+    <div class="sub-flow-label">
+      <span class="tag">②.1</span> FORWARD FLOW
+      <span class="desc">click → delivery</span>
+    </div>
+
+    <div class="flow">
+      <div class="station">
+        <div class="label">Demand</div>
+        <div class="name">Awareness · Acquisition</div>
+        <div class="detail">Email + SMS flows, paid social (UGC creative), Send a Signal viral loop. Pre-purchase email pop-up captures 5–10% of cold visitors.</div>
+        <div class="vendor">Robot Friends · paid · SaS</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Storefront</div>
+        <div class="name">insdrwellness.com</div>
+        <div class="detail">Shopify storefront. PDP + live chat at PDP/checkout. Account portal supports snooze, address change, lot-code visibility.</div>
+        <div class="vendor">Shopify · Gorgias chat</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Checkout</div>
+        <div class="name">Payment + Tax + Consent</div>
+        <div class="detail">Shopify Payments. Shopify Tax for state sales tax. Fraud screening. TCPA-compliant SMS double-opt-in.</div>
+        <div class="vendor">Shopify · Stripe backup</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station accent">
+        <div class="label">Order created</div>
+        <div class="name">Shopify is the system of record</div>
+        <div class="detail">Order, customer, payment, tax, address, lot code — all canonical here. Webhooks fan out to every downstream system.</div>
+        <div class="vendor">→ Klaviyo · ShipMonk · Gorgias</div>
+      </div>
+    </div>
+
+    <div class="branch-note">
+      <strong>From the order, three things happen in parallel:</strong>
+      &nbsp;(a) confirmation email/SMS goes out via Klaviyo,
+      &nbsp;(b) order routes to ShipMonk via API for fulfillment,
+      &nbsp;(c) order data flows to Gorgias so the CS team has full context if the customer reaches out.
+    </div>
+
+    <div class="flow" style="margin-top: 24px;">
+      <div class="station">
+        <div class="label">Confirmation</div>
+        <div class="name">Klaviyo transactional</div>
+        <div class="detail">Order receipt + thank-you flow. Brand-voice template managed by Robot Friends.</div>
+        <div class="vendor">Robot Friends-managed</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Fulfill</div>
+        <div class="name">ShipMonk operations</div>
+        <div class="detail">Pick · pack · per-SOP unboxing assembly · brand-correct insert order · label. Lot code stamped on the order line.</div>
+        <div class="vendor">ShipMonk · ~$5–9/order</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Carrier</div>
+        <div class="name">USPS · UPS · FedEx</div>
+        <div class="detail">Rate-shopped at label time. Tracking number written back to Shopify.</div>
+        <div class="vendor">3PL-negotiated rates</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">In-transit</div>
+        <div class="name">Tracking comms</div>
+        <div class="detail">Shipped / out-for-delivery / delivered SMS + email triggered by carrier webhooks.</div>
+        <div class="vendor">Klaviyo + Robot Friends</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station accent">
+        <div class="label">Delivery</div>
+        <div class="name">Customer receives</div>
+        <div class="detail">The unboxing is the brand's first physical handshake — designed end-to-end (see below), not improvised by the 3PL.</div>
+        <div class="vendor">The moment of truth</div>
+      </div>
+    </div>
+
+    <!-- ──── UNBOXING SYSTEM ──── -->
+    <div class="unboxing-system">
+      <div class="us-title">
+        UNBOXING SYSTEM
+        <small>designed, not improvised</small>
+      </div>
+      <ol>
+        <li><strong>Outer mailer</strong> — branded box (preferred for unboxing video) or branded polymailer ($0.40 cheaper). Decide pre-launch.</li>
+        <li><strong>First-touch welcome card</strong> — sits on top of the vessel. Specific voice, not generic. Personalization approach TBD (explicitly NOT founder-signed).</li>
+        <li><strong>Anodized aluminum vessel</strong> — top window. Inside the lid: ritual cue + QR linking to a digital welcome experience. Brand-led, not founder-led — exact concept TBD (adjacent to a founder welcome, but not one).</li>
+        <li><strong>Paperboard refill</strong> — sealed inside the vessel, drops in from top. First-impression friction matters; sealing must be clean.</li>
+        <li><strong>Send a Signal card</strong> — kept separate from the welcome card. Introduced later in the onboarding flow as "when you're ready, share this," not as a hard CTA on day one.</li>
+        <li><strong>ShipMonk packing SOP</strong> — written document specifying insert order, orientation, mailer choice, tape style. 3PLs default to ugly without explicit instruction.</li>
+        <li><strong>Tactile + sensory cues</strong> — matte foil vs gloss, vessel weight, opening sound. Brand assets, specified upstream at the supplier brief — not at fulfillment.</li>
+      </ol>
+    </div>
+
+    <!-- ──── ②.2 ONBOARDING LOOP ──── -->
+    <div class="sub-flow-label">
+      <span class="tag">②.2</span> ONBOARDING LOOP
+      <span class="desc">Day 0 → Day 6 — the window where the habit either forms or doesn't</span>
+    </div>
+
+    <div class="flow">
+      <div class="station">
+        <div class="label">Day 0 · 30 min</div>
+        <div class="name">"Open it now" SMS</div>
+        <div class="detail">Triggered 30 min after the carrier "delivered" webhook. One line: "the matte red packet, 90 seconds, that's it." Captures the customer at peak excitement.</div>
+        <div class="vendor">Klaviyo · trigger by webhook</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Day 0 · QR</div>
+        <div class="name">Welcome experience (TBD)</div>
+        <div class="detail">Digital experience unlocked via QR inside the vessel lid. Brand-led, not personality-led — explicitly NOT a founder welcome. Adjacent concept open: ritual primer, ambient brand piece, sensory walkthrough, category manifesto read.</div>
+        <div class="vendor">Hosted unlisted · concept TBD</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Day 1 · AM</div>
+        <div class="name">Habit-stacking nudge</div>
+        <div class="detail">SMS: "After your [coffee / skincare / teeth], one packet. That's the whole ritual." Anchors the habit to an existing one.</div>
+        <div class="vendor">Klaviyo SMS · Robot Friends</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Day 3</div>
+        <div class="name">First-impressions survey</div>
+        <div class="detail">One-question survey ("what surprised you?") at peak novelty. Captures unfiltered testimonials + product feedback while memory is fresh.</div>
+        <div class="vendor">Fairing · ~$49/mo</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Day 5</div>
+        <div class="name">Category education</div>
+        <div class="detail">Email teaching the cellcare category in plain language. Activates the "category-defining" register from the marketing playbook before reorder considerations begin.</div>
+        <div class="vendor">Klaviyo · Robot Friends</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station accent">
+        <div class="label">Hand-off</div>
+        <div class="name">→ Reorder loop ②.3</div>
+        <div class="detail">By Day 7, the habit is forming and the customer is primed for the review request that opens the reorder engine.</div>
+        <div class="vendor">Day 7 review request next</div>
+      </div>
+    </div>
+
+    <div class="branch-note">
+      <strong>Send a Signal recipient → customer conversion gets its own onboarding flow.</strong>
+      When a SaS card lands with a recipient and they redeem, their email goes into a dedicated Klaviyo segment with a tailored welcome flow — leveraging the pre-warm context ("Damon thought of you"). Highest-converting first touch the brand will ever have; do not waste it on cold-acquisition copy.
+    </div>
+
+    <!-- ──── ②.3 REORDER LOOP ──── -->
+    <div class="sub-flow-label">
+      <span class="tag">②.3</span> REORDER LOOP
+      <span class="desc">Day 7 → Day 45+ · the actual retention engine — no auto-sub means manual reorder IS the LTV</span>
+    </div>
+
+    <div class="flow">
+      <div class="station">
+        <div class="label">Day 7</div>
+        <div class="name">Review request</div>
+        <div class="detail">Junip email asks for a product review post-delivery. Reviews lift paid CVR ~15–25% and feed organic SEO.</div>
+        <div class="vendor">Junip · ~$60/mo</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Day 14</div>
+        <div class="name">UGC + replenishment teaser</div>
+        <div class="detail">Soft replenishment messaging — "you're halfway through" — primes the reorder decision before the prompt lands.</div>
+        <div class="vendor">Klaviyo flow</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Day 25 / 28 / 31</div>
+        <div class="name">Reorder SMS</div>
+        <div class="detail">Klaviyo SMS with a one-tap reorder link. Replenishment tone — "it's about time" — never "you've been charged."</div>
+        <div class="vendor">Klaviyo SMS · Robot Friends</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station accent">
+        <div class="label">Reorder placed</div>
+        <div class="name">One-tap → Shopify</div>
+        <div class="detail">Pre-filled cart with last order. Day-30 reorder rate is the metric Robot Friends gets measured on, not open rate.</div>
+        <div class="vendor">Loops back to ②.1</div>
+      </div>
+      <div class="arrow loop">↻</div>
+      <div class="station">
+        <div class="label">Day 45+</div>
+        <div class="name">Win-back</div>
+        <div class="detail">If no reorder by day 45, win-back flow: lower-friction format, gift-a-friend prompt, founder voice. CS-initiated outreach for high-LTV churners.</div>
+        <div class="vendor">Klaviyo + CS-initiated</div>
+      </div>
+    </div>
+
+    <div class="branch-note">
+      <strong>Milestone surprise &amp; delight.</strong>
+      Reorder #3 unlocks a free Send a Signal kit. Reorder #6 triggers a handwritten note via PostPilot direct mail. Reorder #12 unlocks early access to N°002 / N°003. Loyalty without a points program — milestones the customer doesn't see coming.
+    </div>
+
+    <!-- ──── ②.4 EXCEPTION FLOW ──── -->
+    <div class="sub-flow-label">
+      <span class="tag">②.4</span> EXCEPTION + RECOVERY FLOW
+      <span class="desc">proactive monitoring + reactive triage — turning issues into evangelists</span>
+    </div>
+
+    <div class="branch-note" style="margin-top: 0;">
+      <strong>Proactive monitoring catches issues before customers do.</strong>
+      &nbsp;(a) Stalled-package detection — carrier webhooks flag any package not moving for 3+ days; auto-trigger a Klaviyo SMS ("we see your package is stuck — we're sending a replacement, no need to ask").
+      &nbsp;(b) High-LTV concierge routing — Klaviyo segment identifies $300+ / 3+ reorder customers; Gorgias auto-routes their tickets to founder or senior CS with faster SLA + more resolution latitude.
+      &nbsp;(c) CS-initiated win-back — Day 60+ churners get a CS outreach ("anything we can do?") instead of a generic Klaviyo flow.
+    </div>
+
+    <div class="flow" style="margin-top: 18px;">
+      <div class="station exception">
+        <div class="label">Trigger</div>
+        <div class="name">Issue detected</div>
+        <div class="detail">Customer-reported (lost, damaged, refund) OR system-detected (stalled package, failed delivery, address bounce).</div>
+        <div class="vendor">Customer + carrier webhooks</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station exception">
+        <div class="label">Intake</div>
+        <div class="name">Gorgias ticket</div>
+        <div class="detail">Customer email/chat creates a ticket. Gorgias AI Agent auto-resolves ~30% (where-is-my-order, return policy, cancel). HelpCenter articles deflect more.</div>
+        <div class="vendor">Gorgias AI · ~$0.50/auto</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station exception">
+        <div class="label">Triage</div>
+        <div class="name">Boldr CS agent</div>
+        <div class="detail">Tier-1 resolves 70%+ via macros. Tier-2 escalation to founder for high-LTV / brand-sensitive cases. VIP segment auto-routed.</div>
+        <div class="vendor">Boldr · founder escalation</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station exception">
+        <div class="label">Resolution</div>
+        <div class="name">Refund · reship · recovery kit</div>
+        <div class="detail">Standard: refund or reship via ShipMonk. Brand-sensitive: recovery kit (free SaS + handwritten card) pre-stocked at ShipMonk for one-click trigger.</div>
+        <div class="vendor">Shopify · ShipMonk · carrier</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station exception">
+        <div class="label">Reconcile</div>
+        <div class="name">Finance + cohort</div>
+        <div class="detail">Refund hits the P&amp;L. Carrier-claim recovery offsets cost. Issue tagged in cohort data — recurring patterns surface in monthly review.</div>
+        <div class="vendor">Pilot bookkeeper</div>
+      </div>
+    </div>
+
+    <div class="branch-note">
+      <strong>Recall path lives here too.</strong>
+      If FDA flags a lot, ShipMonk freezes inventory in that lot, Shopify pulls affected SKUs, Klaviyo sends recall notices to every customer who received that lot (queryable via the lot-code thread from lane ①), Gorgias gets pre-loaded macros, and Zone Halo handles regulatory comms. Tabletop-rehearse this once before launch.
+    </div>
+  </div>
+
+  <!-- ───────── ③ ALWAYS-ON ───────── -->
+  <div class="lane-header">
+    <div class="num">③</div>
+    <h2>Always-on operating layer</h2>
+    <div class="meta">Runs 24/7 in the background</div>
+  </div>
+
+  <div class="lane dark">
+    <div class="flow">
+      <div class="station">
+        <div class="label">Entity</div>
+        <div class="name">DE C-Corp</div>
+        <div class="detail">Parent + contracting entity for every vendor. Owns Shopify Payments account and all customer data.</div>
+        <div class="vendor">Stripe Atlas or Clerky</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Capital</div>
+        <div class="name">US bank + accounting</div>
+        <div class="detail">Mercury or Brex business account. Bookkeeper (Pilot / Bench / fractional). Sales-tax filings via TaxJar.</div>
+        <div class="vendor">Mercury · Pilot · TaxJar</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Team</div>
+        <div class="name">4 founders remote</div>
+        <div class="detail">HK / APAC time zones. Async ops via Slack + Notion. Founders own escalation / L2 customer issues.</div>
+        <div class="vendor">Slack · Notion · Linear</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Customer service</div>
+        <div class="name">Gorgias + Boldr</div>
+        <div class="detail">Gorgias helpdesk + HelpCenter (FAQ deflection) + AI Agent (~30% auto-resolve) + live chat at PDP/checkout. Boldr provides US-hours human agents from month 2 with VIP routing.</div>
+        <div class="vendor">~$1.5–2.5K/mo blended</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Lifecycle</div>
+        <div class="name">Segments + VIP</div>
+        <div class="detail">Klaviyo segments power VIP routing, snooze controls, milestone triggers. Triple Whale identifies high-LTV customers for concierge treatment.</div>
+        <div class="vendor">Klaviyo + Triple Whale</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Analytics</div>
+        <div class="name">Triple Whale</div>
+        <div class="detail">From month 3: unified attribution + cohort analysis. Day-30 / 60 / 90 reorder rates per channel — the metrics that prove (or break) the no-sub model.</div>
+        <div class="vendor">Triple Whale · ~$129/mo</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="label">Compliance</div>
+        <div class="name">FDA · FTC · TCPA · sales tax</div>
+        <div class="detail">Zone Halo covers FDA / labeling. Outside counsel for FTC ad substantiation + TCPA. State-tax nexus triggers when 3PL holds inventory.</div>
+        <div class="vendor">Zone Halo + counsel</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───────── CROSS-BORDER NOTE ───────── -->
+  <div class="cross-border">
+    <h3>The cross-border layer is where most founders get caught</h3>
+    <p>Four founders abroad means the DE C-Corp has to be the contracting entity for every vendor (Zone Halo, ShipMonk, Robot Friends, Shopify Payments, Boldr, Junip, Triple Whale, PostPilot, Fairing). That C-Corp needs a US EIN, a US bank account, and a US business address before Shopify Payments will pay out — none of which can be skipped or backfilled.</p>
+    <p>The day inventory lands at ShipMonk, sales-tax nexus is established in that warehouse's state. From that day forward, the C-Corp is on the hook for state registration and filings — handled by TaxJar on autopilot, but not invisible.</p>
+    <p>TCPA liability sits with the C-Corp, not Robot Friends. Settlements run $500–1,500 per non-compliant SMS, and class-action plaintiffs aggressively scan SMS programs. Double-opt-in language at checkout, consent records stored permanently, opt-out honored within 24 hours — non-negotiable.</p>
+    <p>Customer service coverage is the quietly-critical piece. With no founder in a US time zone, "we'll get back to you within 24 hours" can become 36 hours real fast. Gorgias AI deflection + HelpCenter + Boldr coverage from month 2 closes that gap before it shows up in reviews.</p>
+  </div>
+
+  <!-- ───────── VENDOR STACK ───────── -->
+  <div class="lane-header">
+    <div class="num">④</div>
+    <h2>The vendor stack at a glance</h2>
+    <div class="meta">Thirteen contracts to sign</div>
+  </div>
+
+  <div class="vendor-grid">
+    <div class="vendor-card">
+      <div class="role">FORMULATION + CMO</div>
+      <div class="v-name">Zone Halo</div>
+      <div class="v-detail">Single upstream node. Owns formulation, compliance, label, and the manufacturer relationship.</div>
+      <div class="v-cost">$20K/mo all-in retainer</div>
+    </div>
+    <div class="vendor-card">
+      <div class="role">CUSTOMS</div>
+      <div class="v-name">Customs broker</div>
+      <div class="v-detail">Clears inbound packaging shipments. Duty calc, bond, ISF, port handoff. Flexport / ITN / boutique.</div>
+      <div class="v-cost">~$150–500 per shipment</div>
+    </div>
+    <div class="vendor-card">
+      <div class="role">FULFILLMENT</div>
+      <div class="v-name">ShipMonk</div>
+      <div class="v-detail">3PL of record. Receives inbound freight, holds inventory, picks/packs DTC + Send a Signal in one operation. Recovery kit pre-stocked.</div>
+      <div class="v-cost">~$5–9/order + storage</div>
+    </div>
+    <div class="vendor-card">
+      <div class="role">EMAIL + SMS + RETENTION</div>
+      <div class="v-name">Robot Friends</div>
+      <div class="v-detail">Manages Klaviyo. Owns confirmation, shipping, onboarding, post-purchase, and reorder flows. Measured on day-30 reorder rate.</div>
+      <div class="v-cost">Retainer · Klaviyo subs</div>
+    </div>
+    <div class="vendor-card">
+      <div class="role">STOREFRONT + PAYMENTS</div>
+      <div class="v-name">Shopify</div>
+      <div class="v-detail">Storefront, checkout, order system of record. Customer Accounts portal supports snooze, address change, lot-code visibility.</div>
+      <div class="v-cost">$299/mo + 2.9% + $0.30</div>
+    </div>
+    <div class="vendor-card">
+      <div class="role">CUSTOMER SERVICE</div>
+      <div class="v-name">Gorgias + Boldr</div>
+      <div class="v-detail">Gorgias helpdesk + HelpCenter (FAQ + organic SEO) + AI Agent (~30% auto-resolve) + live chat at PDP/checkout. Boldr agents from month 2 with VIP routing.</div>
+      <div class="v-cost">~$1.5–2.5K/mo blended</div>
+    </div>
+    <div class="vendor-card">
+      <div class="role">REVIEWS</div>
+      <div class="v-name">Junip</div>
+      <div class="v-detail">Day-7 post-delivery review request. Photo + video reviews fed back to PDP and paid creative.</div>
+      <div class="v-cost">~$60/mo</div>
+    </div>
+    <div class="vendor-card">
+      <div class="role">FIRST-IMPRESSIONS SURVEY</div>
+      <div class="v-name">Fairing</div>
+      <div class="v-detail">Day-3 one-question survey ("what surprised you?"). Captures unfiltered testimonials + product feedback at peak novelty.</div>
+      <div class="v-cost">~$49/mo</div>
+    </div>
+    <div class="vendor-card">
+      <div class="role">DIRECT MAIL</div>
+      <div class="v-name">PostPilot</div>
+      <div class="v-detail">Triggered postcards for milestones (reorder #6 handwritten note), win-back, recovery kits. Multi-channel reorder lift.</div>
+      <div class="v-cost">~$0.79–1.50/postcard</div>
+    </div>
+    <div class="vendor-card">
+      <div class="role">ATTRIBUTION + ANALYTICS</div>
+      <div class="v-name">Triple Whale</div>
+      <div class="v-detail">From month 3. Unified attribution across paid channels. Cohort + LTV dashboards. VIP segment identification. Founder weekly review surface.</div>
+      <div class="v-cost">~$129/mo starter</div>
+    </div>
+    <div class="vendor-card">
+      <div class="role">POST-PURCHASE SURVEY</div>
+      <div class="v-name">KnoCommerce</div>
+      <div class="v-detail">"How did you hear about us?" survey at checkout. Closes the iOS-14+ attribution gap with self-reported source data.</div>
+      <div class="v-cost">~$30/mo</div>
+    </div>
+    <div class="vendor-card">
+      <div class="role">SALES TAX</div>
+      <div class="v-name">TaxJar</div>
+      <div class="v-detail">State-by-state nexus monitoring, registration, and filing. Triggers the day inventory lands at ShipMonk.</div>
+      <div class="v-cost">~$50/state/mo</div>
+    </div>
+    <div class="vendor-card">
+      <div class="role">ENTITY + CAPITAL</div>
+      <div class="v-name">DE C-Corp + Mercury</div>
+      <div class="v-detail">Delaware C-Corp is the contracting entity. Mercury or Brex for the US bank account. Pilot or fractional bookkeeper.</div>
+      <div class="v-cost">$8–15K Y1 setup</div>
+    </div>
+  </div>
+
+  <!-- ───────── RISKS ───────── -->
+  <div class="risks">
+    <h2>Critical-path failure points</h2>
+    <p class="risk-sub">If any one of these breaks, the spine is broken. Map ownership and a fallback plan for each before launch.</p>
+    <ul class="risk-list">
+      <li class="risk-item">
+        <div class="r-name">Zone Halo timeline slip</div>
+        <div class="r-text">Formulation + CMO is the longest lead-time block. A 4-week slip pushes launch by a quarter. Mitigation: lock retainer May 2026, get CMO selected by July, formulation locked Sept 1.</div>
+      </li>
+      <li class="risk-item">
+        <div class="r-name">Onboarding gap → habit fails to form</div>
+        <div class="r-text">If Day 0–6 is empty, the customer doesn't form the habit and Day-30 reorder collapses. The no-sub model breaks. Mitigation: full onboarding loop ②.2 live at launch, not phase-2.</div>
+      </li>
+      <li class="risk-item">
+        <div class="r-name">Reorder loop fails to fire</div>
+        <div class="r-text">No subscription = reorder is the entire LTV. If Klaviyo flows break or Robot Friends mis-times the SMS, day-30 reorder rate collapses and the model breaks. Mitigation: reorder rate is the KPI Robot Friends is measured on.</div>
+      </li>
+      <li class="risk-item">
+        <div class="r-name">Reactive-only customer service</div>
+        <div class="r-text">If CS only triggers when customers reach out, angry reviews accumulate before the brand can intervene. Stalled-package surprises become refund storms. Mitigation: proactive monitoring layer at launch — webhooks + auto-recovery + VIP routing.</div>
+      </li>
+      <li class="risk-item">
+        <div class="r-name">Unboxing improvised by 3PL</div>
+        <div class="r-text">Without a written packing SOP, ShipMonk defaults to ugly. The first physical handshake is the brand's most expensive asset to repair after the fact. Mitigation: packing SOP doc signed off pre-launch; first 100 orders QC-photographed.</div>
+      </li>
+      <li class="risk-item">
+        <div class="r-name">ShipMonk single point of failure</div>
+        <div class="r-text">Only US physical presence. If their warehouse goes offline (outage, fire, software bug) you can't ship. Mitigation: contract terms, monitoring, second-warehouse plan by Y2.</div>
+      </li>
+      <li class="risk-item">
+        <div class="r-name">Demand-planning miss → stockout</div>
+        <div class="r-text">8–14 wk lead time means a missed PO = months of lost revenue. Highest risk in months 4–8 when velocity climbs faster than the model. Mitigation: Damon owns monthly, safety-stock formula, 1.5× multiplier.</div>
+      </li>
+      <li class="risk-item">
+        <div class="r-name">Recall traceability gap</div>
+        <div class="r-text">FDA gives 24–72 hours to identify affected customers. If lot codes don't thread through CMO → ShipMonk → order line, you can't comply. Mitigation: configure lot tracking at SKU setup, tabletop-rehearse the recall path before launch.</div>
+      </li>
+      <li class="risk-item">
+        <div class="r-name">Robot Friends dependency</div>
+        <div class="r-text">They own customer comms + the reorder + onboarding engines. If the relationship breaks, retention is at risk. Mitigation: Klaviyo account ownership stays with the C-Corp, not RF. Flow templates exportable.</div>
+      </li>
+      <li class="risk-item">
+        <div class="r-name">Shopify Payments hold</div>
+        <div class="r-text">New supplement merchants get flagged. A 30–90 day rolling reserve on payouts is common. Mitigation: bank reserves to cover the reserve; backup processor (Stripe direct) ready as a flip-the-switch alternative.</div>
+      </li>
+      <li class="risk-item">
+        <div class="r-name">Customs / inbound freight</div>
+        <div class="r-text">Aluminum vessels from China face duty + delay risk. A 2-week customs hold leaves 3PL out of stock. Mitigation: customs broker named pre-launch, safety stock, two-port flexibility.</div>
+      </li>
+      <li class="risk-item">
+        <div class="r-name">Returns / damaged / lost blowup</div>
+        <div class="r-text">Without a defined exception flow, week one becomes a fire drill. Mitigation: Gorgias macros pre-built, recovery kits pre-stocked at ShipMonk, Boldr trained on resolution paths, carrier-claim process documented.</div>
+      </li>
+      <li class="risk-item">
+        <div class="r-name">TCPA violation</div>
+        <div class="r-text">SMS without proper double-opt-in is class-action bait — $500–1,500 per message. Mitigation: TCPA-compliant consent language at checkout, consent records stored permanently, opt-out honored within 24 hours.</div>
+      </li>
+      <li class="risk-item">
+        <div class="r-name">Pixel / attribution unbuilt at launch</div>
+        <div class="r-text">Without server-side tracking, iOS 14+ eats 30–50% of attributable conversions. Paid spend without attribution = flying blind. Mitigation: Meta CAPI + Google EC + TikTok Pixel + KnoCommerce live before first dollar of paid.</div>
+      </li>
+      <li class="risk-item">
+        <div class="r-name">Time-zone coverage gap</div>
+        <div class="r-text">No founder in US hours. Refund disputes, lost packages, and angry reviews compound during the gap. Mitigation: Gorgias AI deflection + HelpCenter + Boldr coverage from month 2.</div>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+  (function() {
+    var PASS = "54321";
+    var gate = document.getElementById("gate");
+    var body = document.body;
+    if (sessionStorage.getItem("signal_unlocked") === "true") {
+      gate.style.display = "none";
+      body.classList.remove("locked");
+    }
+    window.checkPass = function(e) {
+      e.preventDefault();
+      var input = document.getElementById("gate-pass").value;
+      var err = document.getElementById("gate-error");
+      if (input === PASS) {
+        sessionStorage.setItem("signal_unlocked", "true");
+        gate.style.display = "none";
+        body.classList.remove("locked");
+      } else {
+        err.classList.add("show");
+        document.getElementById("gate-pass").value = "";
+        document.getElementById("gate-pass").focus();
+        setTimeout(function(){ err.classList.remove("show"); }, 2400);
+      }
+      return false;
+    };
+  })();
+</script>
+
+</body>
+</html>
