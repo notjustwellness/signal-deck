@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>signal — Brand Identity Guidelines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Anguita Sans'; src: url('fonts/AnguitaSans.otf') format('opentype'); font-weight: 900; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Bebas Neue'; src: url('fonts/BebasNeue-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+
+  :root {
+    --signal: #AD4236;
+    --signal-light: #c4574b;
+    --rose-linen: #F6EFEA;
+    --deep-evening: #1A1410;
+    --deep-evening-soft: #2a2420;
+    --font-display: 'Anguita Sans', 'Bebas Neue', Impact, sans-serif;
+    --font-editorial: 'Bebas Neue', 'Anguita Sans', Impact, sans-serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  }
+
+  @page { size: letter; margin: 0; }
+  @media print {
+    body { margin: 0; padding: 0; }
+    .page { break-after: page; page-break-after: always; }
+    .page:last-child { break-after: auto; page-break-after: auto; }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { font-family: var(--font-body); background: #ccc; color: var(--deep-evening); line-height: 1.6; -webkit-font-smoothing: antialiased; font-weight: 400; }
+
+  .page {
+    width: 8.5in;
+    min-height: 11in;
+    padding: 0.75in;
+    margin: 0.5in auto;
+    background: var(--rose-linen);
+    box-shadow: 0 4px 40px rgba(0,0,0,0.15);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    break-inside: avoid;
+  }
+  .page.dark { background: var(--deep-evening); color: var(--rose-linen); }
+  .page.signal { background: var(--signal); color: var(--rose-linen); }
+
+  .section-label { font-family: var(--font-body); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--signal); margin-bottom: 12px; font-weight: 700; }
+  .page.dark .section-label, .page.signal .section-label { color: rgba(246,239,234,0.6); }
+
+  h1 { font-family: var(--font-display); font-size: 84px; font-weight: 900; line-height: 0.95; letter-spacing: -2px; text-transform: lowercase; margin-bottom: 16px; color: var(--signal); }
+  .page.dark h1, .page.signal h1 { color: var(--signal-light); }
+  h2 { font-family: var(--font-display); font-size: 44px; font-weight: 900; line-height: 1.05; letter-spacing: -1px; text-transform: lowercase; margin-bottom: 24px; color: var(--deep-evening); }
+  .page.dark h2, .page.signal h2 { color: var(--rose-linen); }
+  h3 { font-family: var(--font-display); font-size: 22px; font-weight: 900; letter-spacing: -0.3px; text-transform: lowercase; margin-top: 28px; margin-bottom: 12px; }
+  h4 { font-family: var(--font-display); font-size: 16px; font-weight: 900; letter-spacing: 0px; text-transform: lowercase; margin-top: 16px; margin-bottom: 6px; }
+  p { font-size: 13px; line-height: 1.6; margin-bottom: 12px; max-width: 6.5in; }
+  p.lead { font-size: 15px; line-height: 1.55; }
+  p.small { font-size: 11px; opacity: 0.75; line-height: 1.5; }
+
+  /* --- Wordmark rendering --- */
+  .wordmark {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: var(--signal);
+    text-transform: lowercase;
+    line-height: 1;
+  }
+  .wordmark-xl { font-size: 100px; letter-spacing: -3px; }
+  .wordmark-lg { font-size: 68px; letter-spacing: -2.4px; }
+  .wordmark-md { font-size: 44px; letter-spacing: -1.4px; }
+  .wordmark-sm { font-size: 28px; letter-spacing: -0.8px; }
+  .wordmark .accent { color: var(--rose-linen); }
+  .wordmark-monochrome .accent { color: inherit; }
+
+  /* --- Cover page --- */
+  .cover {
+    background: var(--deep-evening);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 5in;
+    height: 5in;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(173,66,54,0.18) 0%, transparent 70%);
+  }
+  .cover-overline {
+    position: relative;
+    z-index: 1;
+    font-size: 12px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(246,239,234,0.75);
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+  .cover-wordmark { position: relative; z-index: 1; font-size: 140px; letter-spacing: -4px; margin-bottom: 12px; }
+  .cover-subtitle {
+    position: relative;
+    z-index: 1;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(246,239,234,0.6);
+    margin-top: 32px;
+    font-weight: 500;
+  }
+  .cover-footer {
+    position: absolute;
+    bottom: 0.75in;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(246,239,234,0.35);
+  }
+
+  /* --- Color swatches --- */
+  .color-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .swatch {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(26,20,16,0.1);
+  }
+  .swatch-color { height: 2.2in; }
+  .swatch-info { padding: 16px; background: white; }
+  .swatch-name { font-family: var(--font-display); font-size: 20px; font-weight: 900; letter-spacing: -0.3px; text-transform: lowercase; margin-bottom: 4px; color: var(--deep-evening); }
+  .swatch-hex { font-family: 'SF Mono', monospace; font-size: 11px; opacity: 0.6; margin-bottom: 8px; }
+  .swatch-role { font-size: 11px; line-height: 1.5; opacity: 0.75; }
+
+  /* --- Wordmark options grid --- */
+  .wordmark-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .wordmark-card {
+    border: 1px solid rgba(26,20,16,0.12);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .wordmark-card-display {
+    min-height: 1.8in;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .wordmark-card-info { padding: 14px 18px; background: white; border-top: 1px solid rgba(26,20,16,0.08); }
+  .wordmark-card-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--signal); font-weight: 700; margin-bottom: 4px; }
+  .wordmark-card-name { font-family: var(--font-display); font-size: 16px; font-weight: 900; letter-spacing: -0.3px; text-transform: lowercase; margin-bottom: 4px; }
+  .wordmark-card-spec { font-size: 10px; font-family: 'SF Mono', monospace; opacity: 0.6; }
+
+  /* --- Typography specimens --- */
+  .type-specimen {
+    border-bottom: 1px solid rgba(26,20,16,0.08);
+    padding: 14px 0;
+  }
+  .type-specimen:last-child { border-bottom: none; }
+  .type-name { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--signal); font-weight: 700; margin-bottom: 6px; }
+  .type-sample-display { font-family: var(--font-display); font-size: 40px; font-weight: 900; line-height: 1; letter-spacing: -1px; text-transform: lowercase; margin-bottom: 4px; }
+  .type-sample-editorial { font-family: var(--font-editorial); font-size: 28px; line-height: 1; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .type-sample-body { font-family: var(--font-body); font-size: 14px; line-height: 1.55; margin-bottom: 4px; }
+  .type-sample-wordmark { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 40px; letter-spacing: -1.2px; color: var(--signal); margin-bottom: 4px; }
+  .type-role { font-size: 10px; opacity: 0.6; font-style: italic; }
+
+  /* --- Do/Don't grid --- */
+  .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 14px; }
+  .rules-col { padding: 16px; border-radius: 6px; }
+  .rules-col.do { background: rgba(173,66,54,0.06); border-left: 3px solid var(--signal); }
+  .rules-col.dont { background: rgba(26,20,16,0.04); border-left: 3px solid var(--deep-evening); }
+  .rules-col h4 { margin-top: 0; margin-bottom: 10px; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; }
+  .rules-col ul { list-style: none; padding: 0; }
+  .rules-col li { font-size: 11px; line-height: 1.5; padding: 4px 0; padding-left: 14px; position: relative; }
+  .rules-col.do li::before { content: '✓'; position: absolute; left: 0; color: var(--signal); font-weight: 700; }
+  .rules-col.dont li::before { content: '✕'; position: absolute; left: 0; color: var(--deep-evening); font-weight: 700; }
+
+  /* --- Clear space diagram --- */
+  .clearspace-box {
+    background: white;
+    border: 1px solid rgba(26,20,16,0.1);
+    border-radius: 6px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 16px;
+  }
+  .clearspace-wordmark-wrap {
+    border: 2px dashed rgba(173,66,54,0.35);
+    padding: 40px 60px;
+    position: relative;
+  }
+  .clearspace-wordmark-wrap::before, .clearspace-wordmark-wrap::after {
+    content: 's';
+    position: absolute;
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: rgba(173,66,54,0.6);
+    font-weight: 900;
+  }
+  .clearspace-wordmark-wrap::before { top: 4px; left: 10px; }
+  .clearspace-wordmark-wrap::after { bottom: 4px; right: 10px; }
+  .clearspace-caption { font-size: 11px; opacity: 0.65; margin-top: 14px; text-align: center; max-width: 4.5in; }
+
+  /* --- Trademark section --- */
+  .tm-disclaimer {
+    background: rgba(173,66,54,0.08);
+    border-left: 3px solid var(--signal);
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  .tm-disclaimer strong { color: var(--signal); }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 11px; }
+  th { text-align: left; padding: 8px 10px; border-bottom: 1.5px solid var(--signal); font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--signal); font-weight: 700; }
+  td { padding: 8px 10px; border-bottom: 1px solid rgba(26,20,16,0.08); vertical-align: top; line-height: 1.4; }
+  .likelihood-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .lb-low { background: rgba(26,20,16,0.08); color: var(--deep-evening); }
+  .lb-mod { background: rgba(173,66,54,0.15); color: var(--signal); }
+  .lb-high { background: var(--signal); color: var(--rose-linen); }
+
+  .page-footer {
+    margin-top: auto;
+    padding-top: 20px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.35;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* --- Print view --- */
+  .print-instructions {
+    max-width: 8.5in;
+    margin: 20px auto;
+    padding: 16px 24px;
+    background: var(--deep-evening);
+    color: var(--rose-linen);
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .print-instructions strong { color: var(--signal-light); }
+  @media print {
+    .print-instructions { display: none; }
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; }
+    #gate { display: none !important; }
+  }
+
+  /* --- PASSWORD GATE --- */
+  #gate { position: fixed; inset: 0; background: #1A1410; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; color: #F6EFEA; }
+  #gate .gate-overline { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #AD4236; margin-bottom: 16px; font-weight: 600; }
+  #gate .gate-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 72px; color: #AD4236; line-height: 0.9; margin-bottom: 32px; letter-spacing: -1.6px; text-transform: lowercase; }
+  #gate .gate-title .accent { color: #F6EFEA; }
+  #gate .gate-subtitle { font-size: 14px; opacity: 0.6; margin-bottom: 32px; letter-spacing: 1px; }
+  #gate form { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  #gate input { background: rgba(246,239,234,0.08); border: 1px solid rgba(246,239,234,0.2); border-radius: 6px; color: #F6EFEA; padding: 14px 20px; font-size: 15px; font-family: inherit; width: 280px; text-align: center; letter-spacing: 1px; outline: none; transition: border-color 0.2s; }
+  #gate input:focus { border-color: #AD4236; }
+  #gate button { background: #AD4236; color: #F6EFEA; border: none; border-radius: 6px; padding: 12px 32px; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+  #gate button:hover { background: #c4574b; }
+  #gate .gate-error { color: #AD4236; font-size: 12px; margin-top: 8px; opacity: 0; transition: opacity 0.2s; letter-spacing: 1px; }
+  #gate .gate-error.show { opacity: 1; }
+  #gate .gate-footer { position: absolute; bottom: 40px; font-size: 10px; opacity: 0.3; letter-spacing: 3px; text-transform: uppercase; }
+  body.locked { overflow: hidden; }
+  body.locked > section, body.locked > .print-instructions { display: none !important; }
+  body.locked .floating-packet { display: none !important; }
+  /* Floating packet — cursor-follow ambient across the entire viewport */
+  .floating-packet {
+    position: fixed; top: 0; left: 0; z-index: 100;
+    width: 120px; max-width: 120px; pointer-events: none;
+    filter: drop-shadow(0 12px 36px rgba(0,0,0,0.5));
+    transform: translate(-50%, -50%) translate3d(0, 0, 0);
+    will-change: transform; opacity: 1;
+  }
+  @media (max-width: 768px), (hover: none) { .floating-packet { display: none; } }
+  /* Front ↔ back crossfade — 7s cycle, both stacked at the same cursor-tracked position */
+  .floating-packet--face { animation: 7s ease-in-out infinite; }
+  .floating-packet--front { animation-name: signalPacketFlipFront; }
+  .floating-packet--back  { animation-name: signalPacketFlipBack; }
+  @keyframes signalPacketFlipFront {
+    0%, 42%  { opacity: 1; }
+    50%, 92% { opacity: 0; }
+    100%     { opacity: 1; }
+  }
+  @keyframes signalPacketFlipBack {
+    0%, 42%  { opacity: 0; }
+    50%, 92% { opacity: 1; }
+    100%     { opacity: 0; }
+  }
+  @media print { .floating-packet { display: none !important; } }
+</style>
+</head>
+<body class="locked">
+
+<!-- ==================== PASSWORD GATE ==================== -->
+<div id="gate">
+  <div class="gate-overline">INSDR Wellness — the cellcare company &mdash; Confidential</div>
+  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="gate-subtitle">Enter password to view brand identity.</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
+    <button type="submit">Enter</button>
+    <div class="gate-error" id="gate-error">Incorrect. Try again.</div>
+  </form>
+  <div class="gate-footer">Brand Identity &mdash; Do not share.</div>
+</div>
+
+<script>
+  (function() {
+    var PASS = "54321";
+    var gate = document.getElementById("gate");
+    var body = document.body;
+    if (sessionStorage.getItem("signal_unlocked") === "true") {
+      gate.style.display = "none";
+      body.classList.remove("locked");
+    }
+    window.checkPass = function(e) {
+      e.preventDefault();
+      var input = document.getElementById("gate-pass").value;
+      var err = document.getElementById("gate-error");
+      if (input === PASS) {
+        sessionStorage.setItem("signal_unlocked", "true");
+        gate.style.display = "none";
+        body.classList.remove("locked");
+      } else {
+        err.classList.add("show");
+        document.getElementById("gate-pass").value = "";
+        document.getElementById("gate-pass").focus();
+        setTimeout(function(){ err.classList.remove("show"); }, 2400);
+      }
+      return false;
+    };
+  })();
+</script>
+
+<div class="print-instructions">
+  <strong>To export this as a PDF:</strong> press <strong>⌘P</strong> (Mac) or <strong>Ctrl+P</strong> (Windows), set <em>Destination</em> to <strong>"Save as PDF"</strong>, choose paper size <strong>US Letter</strong>, set margins to <strong>None</strong>, and enable <strong>"Background graphics"</strong>. This instruction banner will not appear in the printed output.
+</div>
+
+<!-- ==================== PAGE 1 — COVER ==================== -->
+<section class="page cover">
+  <div class="cover-overline">INSDR Wellness — the cellcare company &nbsp;·&nbsp; Confidential</div>
+  <div class="wordmark cover-wordmark" aria-label="signal"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="cover-subtitle">Brand Identity Guidelines &nbsp;·&nbsp; the flagship cellcare product &nbsp;·&nbsp; v1 &nbsp;·&nbsp; 2026</div>
+  <div class="cover-footer">Do not share without permission.</div>
+</section>
+
+<!-- ==================== PAGE 2 — PRONUNCIATION ==================== -->
+<section class="page">
+  <div class="section-label">01 &nbsp;·&nbsp; How to say it</div>
+  <h2>Pronounced <span style="color: var(--signal);">sig-NAHL.</span></h2>
+  <p class="lead">The brand reads like a dictionary entry because it is one. <strong>/sɪɡˈnɑːl/</strong> is the International Phonetic Alphabet transcription of the word &ldquo;signal&rdquo; — the same notation a linguist or language teacher uses to show exact pronunciation.</p>
+  <p class="lead">Say it out loud: <strong>sig-NAHL</strong>. Stress on the second syllable. The &ldquo;i&rdquo; is short like in <em>sit</em>, the &ldquo;a&rdquo; is the long open vowel in <em>father</em>, and the final &ldquo;l&rdquo; is soft.</p>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 36px;">
+    <div style="padding: 24px; background: white; border-radius: 6px; border: 1px solid rgba(26,20,16,0.08); text-align: center;">
+      <div class="section-label">IPA</div>
+      <div class="wordmark" aria-label="signal" style="font-size: 56px; letter-spacing: -1.6px;"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+      <p class="small" style="margin-top: 10px;">The primary visible wordmark</p>
+    </div>
+    <div style="padding: 24px; background: white; border-radius: 6px; border: 1px solid rgba(26,20,16,0.08); text-align: center;">
+      <div class="section-label">Phonetic</div>
+      <div style="font-family: var(--font-display); font-size: 56px; font-weight: 900; letter-spacing: -1.6px; color: var(--signal); line-height: 1;">sig-NAHL</div>
+      <p class="small" style="margin-top: 10px;">The spoken pronunciation guide</p>
+    </div>
+  </div>
+
+  <h3>Why IPA as a wordmark</h3>
+  <p>The IPA transcription is a brand move that says <em>&ldquo;we know what we are; we don&rsquo;t need to translate ourselves.&rdquo;</em> It treats the brand name like a dictionary entry — sophisticated, confident, impossible to mispronounce, and unlike anything else in the CPG category. Where other brands rely on a stylized logotype, signal uses the very notation language teachers use to teach the word itself. The brackets make it unmistakable as <em>notation</em>, not text.</p>
+
+  <div class="page-footer">
+    <span>signal — Brand Identity Guidelines</span>
+    <span>Page 02</span>
+  </div>
+</section>
+
+<!-- ==================== PAGE 3 — WORDMARK OPTIONS ==================== -->
+<section class="page">
+  <div class="section-label">02 &nbsp;·&nbsp; The Wordmark</div>
+  <h2>Four approved versions.</h2>
+  <p class="lead">The canonical wordmark is the two-color treatment (Option A). The three monochrome versions exist for specific background and printing contexts where the two-color cannot be used.</p>
+
+  <div class="wordmark-options">
+
+    <!-- A: Canonical two-color on dark -->
+    <div class="wordmark-card">
+      <div class="wordmark-card-display" style="background: var(--deep-evening);">
+        <span class="wordmark wordmark-lg" aria-label="signal"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></span>
+      </div>
+      <div class="wordmark-card-info">
+        <div class="wordmark-card-label">A &nbsp;·&nbsp; Canonical</div>
+        <div class="wordmark-card-name">two-color on dark</div>
+        <div class="wordmark-card-spec">Signal red #AD4236 · Rose Linen #F6EFEA accents</div>
+      </div>
+    </div>
+
+    <!-- B: Monochrome Signal red on Rose Linen -->
+    <div class="wordmark-card">
+      <div class="wordmark-card-display" style="background: var(--rose-linen);">
+        <span class="wordmark wordmark-lg wordmark-monochrome" aria-label="signal"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></span>
+      </div>
+      <div class="wordmark-card-info">
+        <div class="wordmark-card-label">B &nbsp;·&nbsp; Monochrome red</div>
+        <div class="wordmark-card-name">on light backgrounds</div>
+        <div class="wordmark-card-spec">Signal red #AD4236 · for Rose Linen surfaces</div>
+      </div>
+    </div>
+
+    <!-- C: Monochrome Rose Linen on Signal red -->
+    <div class="wordmark-card">
+      <div class="wordmark-card-display" style="background: var(--signal);">
+        <span class="wordmark wordmark-lg wordmark-monochrome" aria-label="signal" style="color: var(--rose-linen);"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></span>
+      </div>
+      <div class="wordmark-card-info">
+        <div class="wordmark-card-label">C &nbsp;·&nbsp; Monochrome linen</div>
+        <div class="wordmark-card-name">on Signal red</div>
+        <div class="wordmark-card-spec">Rose Linen #F6EFEA · for packet fronts</div>
+      </div>
+    </div>
+
+    <!-- D: Monochrome Deep Evening on Rose Linen -->
+    <div class="wordmark-card">
+      <div class="wordmark-card-display" style="background: var(--rose-linen);">
+        <span class="wordmark wordmark-lg wordmark-monochrome" aria-label="signal" style="color: var(--deep-evening);"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></span>
+      </div>
+      <div class="wordmark-card-info">
+        <div class="wordmark-card-label">D &nbsp;·&nbsp; Monochrome dark</div>
+        <div class="wordmark-card-name">single-color print</div>
+        <div class="wordmark-card-spec">Deep Evening #1A1410 · for grayscale/foil</div>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="small" style="margin-top: 18px;"><strong>All four versions</strong> use Plus Jakarta Sans 700 weight. The canonical (A) two-color version is the preferred treatment whenever the background is dark and color printing is available. The monochrome variants exist to preserve brand recognition when the canonical cannot render — they are not stylistic alternatives.</p>
+
+  <div class="page-footer">
+    <span>signal — Brand Identity Guidelines</span>
+    <span>Page 03</span>
+  </div>
+</section>
+
+<!-- ==================== PAGE 4 — COLOR PALETTE ==================== -->
+<section class="page">
+  <div class="section-label">03 &nbsp;·&nbsp; Color</div>
+  <h2>Three colors. Zero noise.</h2>
+  <p class="lead">No gradients, no color-blocking, no secondary palettes. Total restraint. Warm across the entire spectrum — even the darkest color has brown warmth, even the lightest has pink warmth. Nothing cold, nothing clinical.</p>
+
+  <div class="color-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background: #AD4236;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">signal</div>
+        <div class="swatch-hex">#AD4236 &nbsp;·&nbsp; rgb(173, 66, 54)</div>
+        <div class="swatch-role">The hero color. Packet front, wordmark letters, CTAs, primary surface. Deep copper-red — warm, alive, confident. Between fire and dried blood.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #F6EFEA;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">rose linen</div>
+        <div class="swatch-hex">#F6EFEA &nbsp;·&nbsp; rgb(246, 239, 234)</div>
+        <div class="swatch-role">The warm neutral. Web backgrounds, interior packaging, wordmark IPA accent characters, body copy. Barely-there blush warmth — linen in morning light.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #1A1410;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">deep evening</div>
+        <div class="swatch-hex">#1A1410 &nbsp;·&nbsp; rgb(26, 20, 16)</div>
+        <div class="swatch-role">The dark anchor. Container color, dark slide backgrounds, wordmark on light, display fixtures. Warm brownish near-black. The warmth in the dark is what keeps the palette alive.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>How the colors work together</h3>
+  <p><strong>Packet front:</strong> Signal surface + Deep Evening embossed type. Warm on warm. &nbsp;<strong>Packet back:</strong> clear PET, product visible. &nbsp;<strong>Container:</strong> Deep Evening exterior, Signal or Rose Linen accents. &nbsp;<strong>Web / landing pages:</strong> Rose Linen backgrounds, Deep Evening text, Signal for CTAs and hero elements. &nbsp;<strong>Social content:</strong> Signal as the signature color, Deep Evening for text overlays, Rose Linen for contrast and breathing room.</p>
+
+  <h3>What to avoid</h3>
+  <p>Never pure white (#FFFFFF) — too clinical; use Rose Linen instead. &nbsp;Never pure black (#000000) — too cold; use Deep Evening instead. &nbsp;Never pastels — soft-wellness coded. &nbsp;Never earth tones or kraft — LMNT/granola territory. &nbsp;Never neon accent colors — energy drink coded. &nbsp;No gradients except the subtle radial glow that appears on cover-slide backgrounds.</p>
+
+  <div class="page-footer">
+    <span>signal — Brand Identity Guidelines</span>
+    <span>Page 04</span>
+  </div>
+</section>
+
+<!-- ==================== PAGE 5 — TYPOGRAPHY ==================== -->
+<section class="page">
+  <div class="section-label">04 &nbsp;·&nbsp; Typography</div>
+  <h2>Three fonts. One job each.</h2>
+  <p class="lead">The brand voice is quiet confidence. The typography matches — one display face for headlines, one editorial face for overlines, one body face that also carries the IPA wordmark.</p>
+
+  <div class="type-specimen">
+    <div class="type-name">Anguita Sans &nbsp;·&nbsp; Primary Display</div>
+    <div class="type-sample-display">the signal your cells are waiting for.</div>
+    <div class="type-role">All h1–h2 headlines across the deck, website, and packaging. Self-hosted (Latinotype license). Black weight only — it&rsquo;s a display face, not a body face.</div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-name">Bebas Neue &nbsp;·&nbsp; Editorial Secondary</div>
+    <div class="type-sample-editorial">SECTION LABELS · OVERLINES · SMALL CAPS</div>
+    <div class="type-role">All-caps overlines, section labels, editorial callouts. Google Fonts + self-hosted. Secondary display fallback for Anguita Sans in headline contexts.</div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-name">Plus Jakarta Sans &nbsp;·&nbsp; Body &amp; Wordmark</div>
+    <div class="type-sample-body">The body workhorse. Clean, modern, readable at every size. Full Unicode coverage including the IPA Extensions block — which is why it carries the wordmark as well as body copy.</div>
+    <div class="type-role">All body paragraphs, tables, labels, captions, descriptions, UI text — and <strong>the visible IPA wordmark itself</strong>. Google Fonts.</div>
+  </div>
+
+  <div class="type-specimen">
+    <div class="type-name">The IPA Wordmark Exception</div>
+    <div class="type-sample-wordmark" aria-label="signal">/sɪɡ<span style="color: var(--rose-linen);">ˈ</span>nɑ<span style="color: var(--rose-linen);">ː</span>l/</div>
+    <div class="type-role">Plus Jakarta Sans 700, not Anguita Sans. The two custom display faces (Anguita Sans, Bebas Neue) do not contain the IPA glyphs ɪ ɡ ˈ ɑ ː — verified via fontTools inspection. Plus Jakarta Sans has full Unicode coverage and is already part of the brand stack.</div>
+  </div>
+
+  <h3>Typography rules</h3>
+  <p>All headlines lowercase — matches the lowercase &ldquo;signal&rdquo; voice. No serifs anywhere. No script or handwritten faces ever. Anguita Sans is for display at large sizes only (never body text); Plus Jakarta Sans is for body at 11–18px. Cover wordmark always in Plus Jakarta Sans 700 with the two-color treatment. Never substitute another font for the IPA characters.</p>
+
+  <div class="page-footer">
+    <span>signal — Brand Identity Guidelines</span>
+    <span>Page 05</span>
+  </div>
+</section>
+
+<!-- ==================== PAGE 6 — WORDMARK USAGE ==================== -->
+<section class="page">
+  <div class="section-label">05 &nbsp;·&nbsp; Usage</div>
+  <h2>Do. Don&rsquo;t.</h2>
+  <p class="lead">The wordmark is the most load-bearing element in the brand system. These rules exist to keep it consistent across every touchpoint, from slide decks to physical packaging to investor one-pagers.</p>
+
+  <div class="rules-grid">
+    <div class="rules-col do">
+      <h4>Do</h4>
+      <ul>
+        <li>Use the canonical two-color treatment (Option A) as the default</li>
+        <li>Use Plus Jakarta Sans 700 as the wordmark font — always</li>
+        <li>Keep the wordmark lowercase, always, even at the start of sentences in visual contexts</li>
+        <li>Include <code>aria-label=&ldquo;signal&rdquo;</code> on every web wordmark so screen readers and copy-paste return the brand name</li>
+        <li>Respect clear space equal to the height of one lowercase &ldquo;s&rdquo; on all four sides</li>
+        <li>Use the IPA brackets — they are part of the wordmark, not decoration</li>
+        <li>Pair with the overline &ldquo;send the right&rdquo; on cover treatments</li>
+      </ul>
+    </div>
+    <div class="rules-col dont">
+      <h4>Don&rsquo;t</h4>
+      <ul>
+        <li>Substitute Anguita Sans or any other font for the wordmark — Anguita Sans lacks the IPA glyphs</li>
+        <li>Capitalize the wordmark or any individual character</li>
+        <li>Rotate, skew, outline, drop-shadow, or distort the wordmark in any way</li>
+        <li>Recolor with anything outside the three-color palette</li>
+        <li>Place on busy photographic backgrounds — use a solid surface color</li>
+        <li>Use the written word &ldquo;signal&rdquo; (in Anguita Sans or otherwise) as the wordmark — the wordmark is always the IPA form</li>
+        <li>Remove the brackets or strip the IPA modifier characters (ˈ, ː)</li>
+        <li>Render at less than the minimum size (see next page)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>The brand WORD vs. the visible WORDMARK</h3>
+  <p>These are separate things. The brand <strong>word</strong> is still &ldquo;signal&rdquo; — used in spoken conversation, body copy, URLs, email addresses, legal documents, the master tagline &ldquo;send the right signal,&rdquo; and INSDR Wellness — the cellcare company references. The brand <strong>wordmark</strong> is the visible logo element: <em>/sɪɡˈnɑːl/</em> in Plus Jakarta Sans, two-color. The IPA exception applies only to the visible logo, not to every occurrence of the word &ldquo;signal&rdquo; in copy.</p>
+
+  <div class="page-footer">
+    <span>signal — Brand Identity Guidelines</span>
+    <span>Page 06</span>
+  </div>
+</section>
+
+<!-- ==================== PAGE 7 — CLEAR SPACE & MINIMUM SIZE ==================== -->
+<section class="page">
+  <div class="section-label">06 &nbsp;·&nbsp; Clear Space &amp; Minimum Size</div>
+  <h2>Room to breathe.</h2>
+  <p class="lead">The wordmark needs visual space around it equal to the height of one lowercase &ldquo;s&rdquo; character. No other element (text, image, border) may enter the clear space zone.</p>
+
+  <div class="clearspace-box">
+    <div class="clearspace-wordmark-wrap">
+      <span class="wordmark wordmark-md" aria-label="signal"><span class="accent" style="color: var(--signal-light);">/</span>sɪɡ<span class="accent" style="color: var(--signal-light);">ˈ</span>nɑ<span class="accent" style="color: var(--signal-light);">ː</span>l<span class="accent" style="color: var(--signal-light);">/</span></span>
+    </div>
+    <div class="clearspace-caption">Dashed rectangle represents the minimum clear-space zone. The small &ldquo;s&rdquo; marks at the corners show the unit of measure — the clear-space is the x-height of the wordmark&rsquo;s lowercase &ldquo;s.&rdquo;</div>
+  </div>
+
+  <h3>Minimum sizes</h3>
+  <p><strong>Digital:</strong> 120px wide minimum (enough to keep the IPA modifier characters readable at screen DPI). &nbsp;<strong>Print (business cards, letterhead):</strong> 1.2 inches wide minimum. &nbsp;<strong>Packaging (packet front):</strong> 0.9 inches wide minimum. &nbsp;<strong>Favicon / app icon:</strong> do NOT use the full IPA wordmark — use a single-character &ldquo;s&rdquo; or the upcoming monogram instead. The IPA wordmark is not legible at 32×32px or below.</p>
+
+  <h3>Preferred sizes by context</h3>
+  <table>
+    <tr><th>Context</th><th>Font size</th><th>Notes</th></tr>
+    <tr><td>Deck cover slide hero</td><td>100px</td><td>Plus Jakarta Sans 700, two-color on Deep Evening</td></tr>
+    <tr><td>Deck closing slide</td><td>86px</td><td>Slightly smaller for visual hierarchy</td></tr>
+    <tr><td>Deck gate / password page</td><td>96px</td><td>Centered, Deep Evening background</td></tr>
+    <tr><td>Landing page hero</td><td>120–160px</td><td>Responsive, scales down on mobile</td></tr>
+    <tr><td>Packet front</td><td>~64pt print</td><td>Two-color, Signal red surface</td></tr>
+    <tr><td>Email signature / bio</td><td>24–32px</td><td>Small but still two-color where possible</td></tr>
+    <tr><td>Investor one-pager</td><td>48–60pt</td><td>Cover position, centered</td></tr>
+  </table>
+
+  <div class="page-footer">
+    <span>signal — Brand Identity Guidelines</span>
+    <span>Page 07</span>
+  </div>
+</section>
+
+<!-- ==================== PAGE 8 — TRADEMARK BRIEF (OVERVIEW) ==================== -->
+<section class="page">
+  <div class="section-label">07 &nbsp;·&nbsp; Trademark Brief &nbsp;·&nbsp; Part One</div>
+  <h2>What you&rsquo;re up against.</h2>
+
+  <div class="tm-disclaimer">
+    <strong>Research, not legal advice.</strong> The analysis on pages 7–9 is a data brief prepared for strategic planning. It is not a trademark clearance, it is not legal advice, and it does not substitute for a formal knockout search or attorney consultation. Consult a qualified US trademark attorney before filing any application.
+  </div>
+
+  <h3>The core problem</h3>
+  <p>&ldquo;Signal&rdquo; is a common 6-letter English noun with decades of commercial use across many USPTO classes. That makes it arbitrary when applied to a dietary supplement chew (good — arbitrary marks are theoretically registrable), but also crowded (bad — registering a common word in a saturated class is one of the hardest things to do at the USPTO).</p>
+
+  <h3>The Big Three conflicts to know about</h3>
+
+  <h4>1. Signal Messenger (Signal Technology Foundation) — Reg. 5230850</h4>
+  <p>Registered in Classes 9, 38, 42 for encrypted messaging software. A Class 5 dietary supplement is far enough removed that a 2(d) likelihood-of-confusion refusal is unlikely under the standard DuPont analysis. The real risk is softer: Signal Messenger arguably qualifies as a famous mark among tech-literate consumers, which expands protection beyond registered classes under dilution theory. Signal Foundation has sent cease-and-desist letters before. <strong>Watchable, not blocking.</strong></p>
+
+  <h4>2. Signal toothpaste (Unilever)</h4>
+  <p>Massive global oral-care brand dating to 1961, sold in Europe, the Middle East, and Asia. The key fact: <strong>Unilever divested its US oral care portfolio in 2003</strong> (Church &amp; Dwight bought Mentadent, Pepsodent, Aim; Signal was never a meaningful US brand). There is no active Signal toothpaste in US commerce today. That likely means Unilever has no enforceable US Class 3 rights to block a US wellness brand — but an attorney must confirm that no zombie US registration or recent intent-to-use filing exists on TSDR. If the US registration is dead, this is a non-issue. If it&rsquo;s alive, it&rsquo;s a serious Class 3 problem.</p>
+
+  <h4>3. The unknown Class 5 or Class 29/30 supplement brand</h4>
+  <p>Statistically, the real risk is not the famous marks — it&rsquo;s some small registered supplement, functional food, or candy brand named &ldquo;SIGNAL [something]&rdquo; that didn&rsquo;t surface in web-search summaries but exists on USPTO TESS. Roughly <strong>1 in 5 USPTO applications receive a 2(d) likelihood-of-confusion refusal</strong> (source: Gerben IP), and that rate climbs sharply for short common English words in crowded consumer classes. A paid attorney knockout search — $500–800 — is the highest-leverage spend before any filing.</p>
+
+  <div class="page-footer">
+    <span>signal — Brand Identity Guidelines</span>
+    <span>Page 08</span>
+  </div>
+</section>
+
+<!-- ==================== PAGE 9 — TRADEMARK BRIEF (PROCESS & STRATEGY) ==================== -->
+<section class="page">
+  <div class="section-label">07 &nbsp;·&nbsp; Trademark Brief &nbsp;·&nbsp; Part Two</div>
+  <h2>Process, likelihood, strategy.</h2>
+
+  <h3>USPTO process for a Class 5 CPG (2026 fees)</h3>
+  <table>
+    <tr><th>Phase</th><th>Timeline</th><th>Cost</th></tr>
+    <tr><td>Filing (intent-to-use, Section 1(b))</td><td>Immediate</td><td>$350/class filing + $950–2,000 attorney</td></tr>
+    <tr><td>Examining attorney assignment</td><td>8–10 months from filing</td><td>—</td></tr>
+    <tr><td>First office action or approval</td><td>~1 month after assignment</td><td>$500–2,000 per response if refused</td></tr>
+    <tr><td>Publication in TMOG + opposition window</td><td>~1 month</td><td>—</td></tr>
+    <tr><td>Notice of Allowance → Statement of Use</td><td>Up to 36 months extendable</td><td>$150/class + $125/class per extension</td></tr>
+    <tr><td><strong>Total, single-class ITU</strong></td><td><strong>~16 months to registration</strong></td><td><strong>~$2,500–5,000 all-in</strong></td></tr>
+    <tr><td><strong>Multi-class defensive (3 + 5 + 30)</strong></td><td>same timeline</td><td><strong>~$4,500–8,000 all-in</strong></td></tr>
+  </table>
+
+  <h3>Likelihood assessment</h3>
+  <table>
+    <tr><th>Strategy</th><th>Likelihood</th><th>Why</th></tr>
+    <tr>
+      <td>Bare <strong>SIGNAL</strong> word mark in Class 5</td>
+      <td><span class="likelihood-badge lb-low">LOW to VERY LOW</span></td>
+      <td>Common word in a crowded class. Existing PST Vet compound mark in Class 005. Near-certain office action on likelihood-of-confusion or descriptiveness grounds. Possible, but slow and expensive.</td>
+    </tr>
+    <tr>
+      <td>Stylized IPA design mark <strong>/sɪɡˈnɑːl/</strong></td>
+      <td><span class="likelihood-badge lb-mod">MODERATE</span></td>
+      <td>Design marks are narrower in scope but easier to register. The IPA bracketing is genuinely unusual — no CPG competitor uses phonetic transcription as its primary wordmark. That unusualness is itself a distinctiveness argument.</td>
+    </tr>
+    <tr>
+      <td><strong>INSDR SIGNAL</strong> or <strong>SIGNAL BY INSDR</strong> word mark</td>
+      <td><span class="likelihood-badge lb-high">MODERATE to MODERATE–HIGH</span></td>
+      <td>A house-mark compound substantially reduces 2(d) risk because the first word (INSDR) is a unique coinage and examiners weigh the mark as a whole. This is the recommended starting path.</td>
+    </tr>
+  </table>
+
+  <h3>Recommended mitigation strategy</h3>
+  <p><strong>File two applications in parallel:</strong> (1) &ldquo;INSDR SIGNAL&rdquo; as a standard-character word mark in Class 5, and (2) the stylized IPA /sɪɡˈnɑːl/ wordmark as a design mark in Class 5, with defensive filings in Class 3 (cosmetics) and Class 30 (confectionery) if budget permits. The word-mark filing ducks most likelihood-of-confusion refusals because INSDR is a novel coinage; the design mark locks down the visual identity. Combined cost: ~$700 government + $1,800 attorney = $2,500 for the core filings, or ~$4,500 for multi-class defensive coverage. <strong>Combined likelihood: MODERATE to MODERATE–HIGH.</strong></p>
+
+  <h3>The honest bottom line</h3>
+  <p>Bare &ldquo;SIGNAL&rdquo; as a standard-character word mark in Class 5 is a hard filing. You&rsquo;re fighting a crowded class, a common English word, a famous tech mark in adjacent classes, and a global Unilever toothpaste that may or may not still have US paper on file. <strong>Do not file the bare word mark first.</strong> Do two things, in this order: <strong>(1)</strong> Pay $500–800 for an attorney knockout search on SIGNAL + SIGNL + phonetic variants in Classes 3/5/29/30/32 — this is the single highest-leverage spend before filing, and resolves the real question in 48 hours. <strong>(2)</strong> If the knockout is clean, file &ldquo;INSDR SIGNAL&rdquo; + the IPA /sɪɡˈnɑːl/ design mark, both in Class 5 ITU, with defensive filings in Class 3 and 30. Budget ~$4,500 all-in, timeline ~16 months to registration. Do not publicly launch or demo the final brand until the ITU is filed and the priority date is locked. Do not file before talking to a US trademark attorney.</p>
+
+  <div class="tm-disclaimer">
+    <strong>One more time, for the record:</strong> the content on pages 7–9 is research, not legal advice. It was compiled from publicly available USPTO summaries, Justia trademark records, Gerben IP reporting, and USPTO fee schedules. It is not a clearance, it is not an opinion of counsel, and it should not be relied on as a basis for any filing decision. Consult a qualified US trademark attorney.
+  </div>
+
+  <div class="page-footer">
+    <span>signal — Brand Identity Guidelines &nbsp;·&nbsp; INSDR Wellness — the cellcare company &nbsp;·&nbsp; Confidential</span>
+    <span>Page 09</span>
+  </div>
+</section>
+
+<img src="signal_packet_float_front.png" alt="" class="floating-packet floating-packet--face floating-packet--front" id="floatingPacketFront" aria-hidden="true">
+<img src="signal_packet_float_back.png" alt="" class="floating-packet floating-packet--face floating-packet--back" id="floatingPacketBack" aria-hidden="true">
+<script>
+  (function() {
+    if (window.matchMedia('(max-width: 768px)').matches) return;
+    if (window.matchMedia('(hover: none)').matches) return;
+    const packets = document.querySelectorAll('#floatingPacketFront, #floatingPacketBack');
+    if (!packets.length) return;
+    let tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+    const setDefault = () => {
+      tx = window.innerWidth * 0.85; ty = window.innerHeight * 0.82;
+      cx = tx; cy = ty;
+      packets.forEach(p => { p.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`; });
+    };
+    setDefault();
+    document.addEventListener('mousemove', (e) => {
+      tx = e.clientX + 70; ty = e.clientY + 60;
+      if (!raf) animate();
+    });
+    const animate = () => {
+      cx += (tx - cx) * 0.09; cy += (ty - cy) * 0.09;
+      packets.forEach(p => { p.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`; });
+      if (Math.abs(tx - cx) > 0.3 || Math.abs(ty - cy) > 0.3) raf = requestAnimationFrame(animate);
+      else raf = null;
+    };
+    window.addEventListener('resize', setDefault);
+  })();
+</script>
+</body>
+</html>
