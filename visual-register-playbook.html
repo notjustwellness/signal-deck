@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INSDR Wellness — the cellcare company | Visual Register Playbook</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --signal: #AD4236;
+  --signal-light: #C85D51;
+  --signal-deep: #7A2E26;
+  --deep-evening: #1A1410;
+  --rose-linen: #F6EFEA;
+  --cream: #EFE5D1;
+  --cream-deep: #E5D7BC;
+  --ink: #1A1410;
+  --ink-soft: rgba(26,20,16,0.72);
+  --ink-dim: rgba(26,20,16,0.5);
+  --font-display: 'Bebas Neue', 'Helvetica Neue', sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--rose-linen);
+  color: var(--ink);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 300;
+}
+
+/* ─── PAGES ─── */
+.page {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 96px 56px;
+}
+.page.dark {
+  background: var(--deep-evening);
+  color: var(--rose-linen);
+  max-width: none;
+  padding: 96px 56px;
+}
+.page.dark .inner { max-width: 820px; margin: 0 auto; }
+
+.page.wide { max-width: 1080px; }
+
+/* ─── COVER ─── */
+.cover {
+  min-height: 92vh;
+  background: var(--deep-evening);
+  color: var(--rose-linen);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 40px;
+  position: relative;
+}
+.cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(173,66,54,0.18), transparent 60%);
+  pointer-events: none;
+}
+.cover-lockup {
+  position: absolute;
+  top: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+}
+.cover-overline {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--signal-light);
+  font-weight: 700;
+}
+.cover-insdr-line {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(246,239,234,0.7);
+  font-weight: 500;
+}
+.cover-title {
+  font-family: var(--font-display);
+  font-size: 96px;
+  line-height: 0.92;
+  letter-spacing: -0.5px;
+  color: var(--rose-linen);
+  margin-bottom: 28px;
+  z-index: 2;
+  font-weight: 400;
+}
+.cover-thesis {
+  font-family: var(--font-body);
+  font-size: 24px;
+  line-height: 1.35;
+  font-style: italic;
+  color: var(--signal-light);
+  font-weight: 400;
+  max-width: 720px;
+  margin-bottom: 18px;
+  z-index: 2;
+}
+.cover-subline {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(246,239,234,0.72);
+  max-width: 600px;
+  z-index: 2;
+}
+.cover-meta {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(246,239,234,0.4);
+  z-index: 2;
+}
+
+/* ─── SECTION LABELS ─── */
+.section-label {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+.page.dark .section-label { color: var(--signal-light); }
+
+/* ─── H2 ─── */
+h2 {
+  font-family: var(--font-display);
+  font-size: 64px;
+  line-height: 0.95;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  margin-bottom: 18px;
+  font-weight: 400;
+}
+.page.dark h2 { color: var(--rose-linen); }
+h2 .accent { color: var(--signal); }
+.page.dark h2 .accent { color: var(--signal-light); }
+
+/* ─── SECTION OPENING FRAME ─── */
+.section-open {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 32px 0 56px;
+  max-width: 680px;
+  font-weight: 400;
+}
+.page.dark .section-open { color: rgba(246,239,234,0.78); }
+
+/* ─── PRINCIPLES ─── */
+.principle {
+  margin: 48px 0;
+  padding-top: 36px;
+  border-top: 1px solid rgba(26,20,16,0.12);
+}
+.page.dark .principle { border-top-color: rgba(246,239,234,0.1); }
+.principle:first-of-type { border-top: none; padding-top: 0; }
+.principle h3 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.3px;
+  color: var(--ink);
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+.page.dark .principle h3 { color: var(--rose-linen); }
+.principle p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 680px;
+  margin-bottom: 14px;
+}
+.page.dark .principle p { color: rgba(246,239,234,0.85); }
+.principle p strong { color: var(--ink); font-weight: 600; }
+.page.dark .principle p strong { color: var(--rose-linen); font-weight: 500; }
+
+/* ─── KICKER (italic quotable beat) ─── */
+.kicker {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--signal);
+  font-weight: 500;
+  margin-top: 18px;
+  padding-left: 18px;
+  border-left: 2px solid var(--signal);
+  max-width: 640px;
+}
+.page.dark .kicker { color: var(--signal-light); border-left-color: var(--signal-light); }
+
+/* ─── CANONICAL IMAGE BLOCK ─── */
+.canonical-frame {
+  margin: 56px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.canonical-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  box-shadow: 0 24px 60px rgba(26,20,16,0.35);
+}
+.canonical-meta { font-family: var(--font-body); }
+.canonical-meta .filename {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--signal-light);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.canonical-meta h4 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 1.05;
+  letter-spacing: -0.2px;
+  color: var(--rose-linen);
+  margin-bottom: 18px;
+  font-weight: 400;
+}
+.decoded-list { list-style: none; margin-top: 20px; }
+.decoded-list li {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid rgba(246,239,234,0.1);
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(246,239,234,0.85);
+}
+.decoded-list li:last-child { border-bottom: 1px solid rgba(246,239,234,0.1); }
+.decoded-list .what {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--signal-light);
+  font-weight: 600;
+}
+
+/* ─── ARCHETYPE / LIST CARDS ─── */
+.archetype {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  align-items: baseline;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(26,20,16,0.1);
+}
+.page.dark .archetype { border-bottom-color: rgba(246,239,234,0.1); }
+.archetype-num {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 1px;
+  color: var(--signal);
+  font-weight: 400;
+}
+.page.dark .archetype-num { color: var(--signal-light); }
+.archetype-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: -0.2px;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+.page.dark .archetype-name { color: var(--rose-linen); }
+.archetype-still {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--signal);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.page.dark .archetype-still { color: var(--signal-light); }
+.archetype-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.page.dark .archetype-desc { color: rgba(246,239,234,0.78); }
+
+/* ─── BANNED LIST ─── */
+.banned-list { list-style: none; margin-top: 24px; }
+.banned-list li {
+  padding: 12px 0;
+  padding-left: 28px;
+  position: relative;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  border-bottom: 1px solid rgba(26,20,16,0.08);
+}
+.page.dark .banned-list li {
+  color: rgba(246,239,234,0.78);
+  border-bottom-color: rgba(246,239,234,0.08);
+}
+.banned-list li::before {
+  content: "×";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  color: var(--signal);
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+/* ─── TIER BLOCKS (artifact section) ─── */
+.tier {
+  background: rgba(246,239,234,0.04);
+  border-left: 3px solid var(--signal-light);
+  padding: 28px 32px;
+  margin: 24px 0;
+}
+.page:not(.dark) .tier {
+  background: var(--cream);
+  border-left-color: var(--signal);
+}
+.tier-label {
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--signal-light);
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+.page:not(.dark) .tier-label { color: var(--signal); }
+.tier-name {
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 1;
+  letter-spacing: -0.2px;
+  color: var(--rose-linen);
+  margin-bottom: 12px;
+  font-weight: 400;
+}
+.page:not(.dark) .tier-name { color: var(--ink); }
+.tier p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(246,239,234,0.82);
+  max-width: 640px;
+}
+.page:not(.dark) .tier p { color: var(--ink-soft); }
+
+/* ─── COIN FEATURE BLOCK ─── */
+.coin-feature {
+  margin: 56px 0 40px;
+  background: #0F0B07;
+  padding: 48px 40px 36px;
+  border: 1px solid rgba(246,239,234,0.08);
+}
+.coin-feature img {
+  width: 100%;
+  max-width: 760px;
+  height: auto;
+  display: block;
+  margin: 0 auto 36px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.55);
+}
+.coin-feature .coin-caption {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 32px;
+  align-items: start;
+  max-width: 760px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(246,239,234,0.12);
+}
+.coin-feature .filename {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--signal-light);
+  font-weight: 600;
+}
+.coin-feature h4 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 1.05;
+  letter-spacing: -0.2px;
+  color: var(--rose-linen);
+  margin-bottom: 12px;
+  font-weight: 400;
+}
+.coin-feature p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(246,239,234,0.82);
+  margin-bottom: 10px;
+}
+@media (max-width: 720px) {
+  .coin-feature { padding: 32px 22px 24px; }
+  .coin-feature .coin-caption { grid-template-columns: 1fr; gap: 14px; }
+}
+
+/* ─── REFERENCE SHELF ─── */
+.ref-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 40px;
+  margin-top: 32px;
+}
+.ref-item {
+  padding: 12px 0;
+  border-top: 1px solid rgba(26,20,16,0.1);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.page.dark .ref-item { border-top-color: rgba(246,239,234,0.1); }
+.ref-item strong {
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: -0.2px;
+  color: var(--ink);
+  font-weight: 400;
+  display: block;
+  margin-bottom: 2px;
+}
+.page.dark .ref-item strong { color: var(--rose-linen); }
+.ref-item span { color: var(--ink-soft); }
+.page.dark .ref-item span { color: rgba(246,239,234,0.78); }
+
+/* ─── TOC ─── */
+.toc {
+  background: var(--cream);
+  padding: 96px 56px;
+  border-top: 1px solid rgba(26,20,16,0.08);
+  border-bottom: 1px solid rgba(26,20,16,0.08);
+}
+.toc-inner { max-width: 820px; margin: 0 auto; }
+.toc h3 {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+.toc-list { list-style: none; }
+.toc-list li {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  align-items: baseline;
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(26,20,16,0.1);
+}
+.toc-list li:last-child { border-bottom: none; }
+.toc-num {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: var(--signal);
+  font-weight: 400;
+}
+.toc-name {
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: -0.2px;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+.toc-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+/* ─── CLOSING LINE ─── */
+.closing {
+  background: var(--deep-evening);
+  color: var(--rose-linen);
+  padding: 120px 56px;
+  text-align: center;
+}
+.closing-text {
+  font-family: var(--font-display);
+  font-size: 56px;
+  line-height: 1.05;
+  letter-spacing: -0.4px;
+  max-width: 720px;
+  margin: 0 auto;
+  font-weight: 400;
+}
+.closing-text .accent { color: var(--signal-light); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--deep-evening);
+  color: rgba(246,239,234,0.55);
+  padding: 64px 56px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border-top: 1px solid rgba(246,239,234,0.06);
+}
+footer .footer-line {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: rgba(246,239,234,0.75);
+}
+
+@media (max-width: 820px) {
+  .page, .toc { padding: 64px 28px; }
+  .closing { padding: 80px 28px; }
+  .cover-title { font-size: 64px; }
+  h2 { font-size: 44px; }
+  .principle h3 { font-size: 24px; }
+  .canonical-frame { grid-template-columns: 1fr; gap: 32px; }
+  .ref-grid { grid-template-columns: 1fr; }
+  .closing-text { font-size: 38px; }
+  .toc-list li { grid-template-columns: 40px 1fr; gap: 16px; }
+  .archetype { grid-template-columns: 40px 1fr; gap: 14px; }
+}
+
+/* ─── PASSWORD GATE ─── */
+#gate { position: fixed; inset: 0; background: #1A1410; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; color: #F6EFEA; padding: 40px; text-align: center; }
+#gate .gate-overline { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #AD4236; margin-bottom: 16px; font-weight: 600; }
+#gate .gate-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 72px; color: #AD4236; line-height: 0.9; margin-bottom: 32px; letter-spacing: -1.6px; text-transform: lowercase; }
+#gate .gate-title .accent { color: #F6EFEA; }
+#gate .gate-subtitle { font-size: 14px; opacity: 0.6; margin-bottom: 32px; letter-spacing: 1px; }
+#gate form { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+#gate input { background: rgba(246,239,234,0.08); border: 1px solid rgba(246,239,234,0.2); border-radius: 6px; color: #F6EFEA; padding: 14px 20px; font-size: 15px; font-family: inherit; width: 280px; text-align: center; letter-spacing: 1px; outline: none; transition: border-color 0.2s; }
+#gate input:focus { border-color: #AD4236; }
+#gate button { background: #AD4236; color: #F6EFEA; border: none; border-radius: 6px; padding: 12px 32px; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+#gate button:hover { background: #c4574b; }
+#gate .gate-error { color: #AD4236; font-size: 12px; margin-top: 8px; opacity: 0; transition: opacity 0.2s; letter-spacing: 1px; }
+#gate .gate-error.show { opacity: 1; }
+#gate .gate-footer { position: absolute; bottom: 40px; font-size: 10px; opacity: 0.3; letter-spacing: 3px; text-transform: uppercase; }
+body.locked { overflow: hidden; height: 100vh; }
+body.locked > section, body.locked > footer { display: none !important; }
+@media print { #gate { display: none !important; } }
+</style>
+</head>
+<body class="locked">
+
+<!-- ═══════════════════ PASSWORD GATE ═══════════════════ -->
+<div id="gate">
+  <div class="gate-overline">INSDR Wellness — the cellcare company &middot; Confidential</div>
+  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="gate-subtitle">Enter password to view the visual register playbook.</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
+    <button type="submit">Enter</button>
+    <div class="gate-error" id="gate-error">Incorrect. Try again.</div>
+  </form>
+  <div class="gate-footer">Visual Register Playbook &mdash; Do not share.</div>
+</div>
+
+<!-- ═══════════════════ COVER ═══════════════════ -->
+<section class="cover">
+  <div class="cover-lockup">
+    <div class="cover-overline">INSDR Wellness — the cellcare company</div>
+    <div class="cover-insdr-line">internal · visual register · 2026</div>
+  </div>
+  <div class="cover-title">
+    STILL HERE.<br>
+    STILL HIMSELF.<br>
+    STILL READY.
+  </div>
+  <div class="cover-thesis">The thesis made visible.</div>
+  <div class="cover-subline">Foundation in one life. The body did the rest. He's still cool. This is how we cast it, frame it, and let the viewer decode it.</div>
+  <div class="cover-meta">signal · visual register playbook · v0.1 · 2026-05-19</div>
+</section>
+
+<!-- ═══════════════════ TOC ═══════════════════ -->
+<section class="toc">
+  <div class="toc-inner">
+    <h3>Contents</h3>
+    <ul class="toc-list">
+      <li>
+        <div class="toc-num">I</div>
+        <div>
+          <div class="toc-name">The Brief in One Word</div>
+          <div class="toc-desc">Still.</div>
+        </div>
+      </li>
+      <li>
+        <div class="toc-num">II</div>
+        <div>
+          <div class="toc-name">The Canonical Image</div>
+          <div class="toc-desc">The reference. Decoded.</div>
+        </div>
+      </li>
+      <li>
+        <div class="toc-num">III</div>
+        <div>
+          <div class="toc-name">The Gesture</div>
+          <div class="toc-desc">Gesture carries the attitude. The prop is interchangeable.</div>
+        </div>
+      </li>
+      <li>
+        <div class="toc-num">IV</div>
+        <div>
+          <div class="toc-name">Casting</div>
+          <div class="toc-desc">Bodies that earned their state, not engineered it.</div>
+        </div>
+      </li>
+      <li>
+        <div class="toc-num">V</div>
+        <div>
+          <div class="toc-name">Environment Grammar</div>
+          <div class="toc-desc">Rooms that hold a life.</div>
+        </div>
+      </li>
+      <li>
+        <div class="toc-num">VI</div>
+        <div>
+          <div class="toc-name">Artifact Grammar</div>
+          <div class="toc-desc">The decoded talisman. Worn. Held. Inherited.</div>
+        </div>
+      </li>
+      <li>
+        <div class="toc-num">VII</div>
+        <div>
+          <div class="toc-name">Decoding Posture</div>
+          <div class="toc-desc">No text on the image. The viewer does the work.</div>
+        </div>
+      </li>
+      <li>
+        <div class="toc-num">VIII</div>
+        <div>
+          <div class="toc-name">The Banned Register</div>
+          <div class="toc-desc">What this is not.</div>
+        </div>
+      </li>
+      <li>
+        <div class="toc-num">IX</div>
+        <div>
+          <div class="toc-name">Reference Shelf</div>
+          <div class="toc-desc">Visual cousins. For mood, not imitation.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════ §I — THE BRIEF IN ONE WORD ═══════════════════ -->
+<section class="page">
+  <div class="section-label">§I — The Brief</div>
+  <h2>One word.<br><span class="accent">Still.</span></h2>
+  <div class="section-open">
+    Every subject we cast, every room we shoot in, every artifact we frame answers a single sentence: <em>still ____</em>. Still here. Still himself. Still ready. Still doing the thing. The word collapses the brand thesis into a casting prompt. If a subject can't finish that sentence, they're not ours.
+  </div>
+
+  <div class="principle">
+    <h3>What "still" rejects</h3>
+    <p>"Still" is not <em>vital</em>, not <em>youthful</em>, not <em>optimized</em>, not <em>energized</em>. Those are achievement registers. They announce. "Still" doesn't announce. It registers a person who didn't quit, didn't pivot, didn't get replaced by their own optimization. The body kept showing up. The foundation held.</p>
+    <div class="kicker">You don't feel a foundation. You feel everything that stands on it.</div>
+  </div>
+
+  <div class="principle">
+    <h3>What "still" unlocks</h3>
+    <p>A 75-year-old is not the only answer — but a 75-year-old is the answer that makes the thesis impossible to misread. The longer the life on the body, the louder the proof. Younger subjects can pass the test, but they have to earn it on a different axis (skill, weather, hands, time-spent-doing).</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ §II — THE CANONICAL IMAGE ═══════════════════ -->
+<section class="page dark wide">
+  <div class="inner">
+    <div class="section-label">§II — The Canonical Image</div>
+    <h2>One image.<br><span class="accent">All of it.</span></h2>
+    <div class="section-open">
+      This is the reference. Not a campaign. Not a one-off. The register. Every casting decision, every location scout, every prop on a counter is judged against this frame. If we shoot something that doesn't share a parent with this image, it doesn't belong in the visual world.
+    </div>
+
+    <div class="canonical-frame">
+      <div>
+        <img src="visual_register/01_canonical_still_here.jpg" alt="Canonical reference: older man in 'Sweet' cap, sunglasses, gold pendant, white t-shirt, cigar held in mouth, horse-racing photographs on the walls behind." class="canonical-img">
+      </div>
+      <div class="canonical-meta">
+        <div class="filename">01 — still here</div>
+        <h4>The thesis made visible.</h4>
+        <ul class="decoded-list">
+          <li><span class="what">cap</span><span>"Sweet." A joke he's in on. He's not performing it; it's just what he wore today.</span></li>
+          <li><span class="what">sunglasses</span><span>Eyes hidden. He doesn't perform for the camera. The camera shows up.</span></li>
+          <li><span class="what">necklace</span><span>A small green object on a thin chain. His own, not ours. Worn long enough to be his.</span></li>
+          <li><span class="what">t-shirt</span><span>White. Unbranded. Worn. Not styled.</span></li>
+          <li><span class="what">in mouth</span><span>The gesture. Interchangeable prop. (See §III.)</span></li>
+          <li><span class="what">walls</span><span>Framed horse-racing photographs. Decades of them. The room holds a life.</span></li>
+          <li><span class="what">light</span><span>Warm, golden, interior. The room is not lit for us. It's how it is.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="principle">
+      <h3>Why this works</h3>
+      <p>The image gives you a person and a room. It does not give you a product, a claim, a caption, a CTA, or a body-position. The viewer arrives with no instructions and leaves with one read: <strong>he's still cool.</strong> Nothing was announced. Everything was decoded.</p>
+      <div class="kicker">Build a world. Invite them in. Let them decode it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ §III — THE GESTURE ═══════════════════ -->
+<section class="page">
+  <div class="section-label">§III — The Gesture</div>
+  <h2>Gesture carries the attitude.<br><span class="accent">The prop is interchangeable.</span></h2>
+  <div class="section-open">
+    The cigar is not load-bearing. What's load-bearing is the gesture: <em>something held casually in the mouth, while the body remains unconcerned with the camera.</em> James Dean held toothpicks. Cowboys held hay stalks. Sailors held matchsticks. The cigar is one option, not the option.
+  </div>
+
+  <div class="principle">
+    <h3>The lock</h3>
+    <p>What stays constant: <strong>mouth occupied, body relaxed, eyes obscured, no attempt to charm</strong>. That's the cool-guy archetype. It predates tobacco by a century.</p>
+    <p>What rotates: the object itself. Use whichever fits the subject and the surface.</p>
+  </div>
+
+  <div class="principle">
+    <h3>Sanctioned props</h3>
+    <p><strong>Cigar.</strong> Maximum attitude. Commits the brand to a "we don't moralize" position. Defensible — but choose it on purpose, not by accident. Comes with platform-ads and retailer-policy ripple. Reserve for editorial and brand-identity surfaces, not product pages.</p>
+    <p><strong>Toothpick.</strong> Safe default. Same gesture, zero category risk. James Dean / mid-century-Americana register. Works on any surface.</p>
+    <p><strong>Matchstick / unlit cigar stub.</strong> Reads as worn-in, tactile, slightly transgressive without committing the brand.</p>
+    <p><strong>Blade of grass, stem of wheat, pencil.</strong> Situational. Rural, work-coded, or studio-coded. Use when the subject's world supports it.</p>
+    <p><strong>Nothing at all.</strong> Closed mouth, jaw set, sunglasses doing the work. Always available. Never wrong.</p>
+    <div class="kicker">The attitude is in the body, not the object. The object is the carrier.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════ §IV — CASTING ═══════════════════ -->
+<section class="page">
+  <div class="section-label">§IV — Casting</div>
+  <h2>Bodies that <span class="accent">earned</span> their state.</h2>
+  <div class="section-open">
+    We don't cast wellness influencers. We don't cast optimized bodies. We cast people whose bodies carry their lives — hands that did things, posture that holds a story, skin that's been outside, frames that can't be cleanly slotted into a wellness demographic. The body should look <em>used in the right way</em>, not engineered.
+  </div>
+
+  <div class="principle">
+    <h3>The casting test</h3>
+    <p>Every subject answers <em>still ____</em> in one short sentence. If they can't, we don't shoot them. Examples below — the still-line is the brief; the rest is supporting detail.</p>
+  </div>
+
+  <div class="principle">
+    <h3>Moments, not endpoints</h3>
+    <p>The cast is not a progression toward one ideal age, one ideal body, one final state. It's a constellation of <strong>moments across one life</strong>. The 75-year-old isn't <em>where you're going</em>; he's <em>what one moment of one life looks like</em>. So is the 28-year-old line cook. So is the 60-year-old in the workshop. Each archetype below is a moment in time — none is the answer; all of them hold the same foundation underneath.</p>
+    <p>The viewer doesn't have to "see themselves in" any single subject. They have to feel that <em>Signal sees them in many phases of their own life</em>. The cast isn't a destination. It's a mirror at different angles.</p>
+  </div>
+
+  <div class="principle">
+    <h3>Each character brings their own</h3>
+    <p>Every subject we cast wears something personal — a chain, a watch, a ring, a bracelet, a medal, an old saint card on a string, a single earring. <strong>Different for each character. Their own, not ours.</strong> We never plant Signal-branded objects on the cast. We never standardize what they wear. We find people whose existing objects already carry meaning, and we let those objects appear in frame because they're already there.</p>
+    <div class="kicker">The brand's grammar is already in the world. Our job is to find it.</div>
+  </div>
+
+  <div class="archetype">
+    <div class="archetype-num">01</div>
+    <div>
+      <div class="archetype-name">The Racetrack Regular</div>
+      <div class="archetype-still">Still cool.</div>
+      <div class="archetype-desc">70s. Lived-in. Wears the same kind of t-shirt he wore at 35. Knows everyone at the diner. Sunglasses indoors. The canonical reference.</div>
+    </div>
+  </div>
+  <div class="archetype">
+    <div class="archetype-num">02</div>
+    <div>
+      <div class="archetype-name">The Workshop Mother</div>
+      <div class="archetype-still">Still making.</div>
+      <div class="archetype-desc">60s. Calloused hands. Apron. Works with her body every day, not for show. A ceramicist, a tailor, a chef who never went on TV. Strong, unbothered.</div>
+    </div>
+  </div>
+  <div class="archetype">
+    <div class="archetype-num">03</div>
+    <div>
+      <div class="archetype-name">The Boatman</div>
+      <div class="archetype-still">Still out.</div>
+      <div class="archetype-desc">40s–50s. Sun-leathered. Durable, not gym-fit. Lives on or near water. Hands tell you what he does before he opens his mouth.</div>
+    </div>
+  </div>
+  <div class="archetype">
+    <div class="archetype-num">04</div>
+    <div>
+      <div class="archetype-name">The Quiet Athlete</div>
+      <div class="archetype-still">Still in shape — for what, though?</div>
+      <div class="archetype-desc">30s–40s. Strong, but not the gym kind. A surfer, a hiker, a climber, a dancer past her prime who still moves. The body reads as <em>used</em>, not <em>optimized</em>.</div>
+    </div>
+  </div>
+  <div class="archetype">
+    <div class="archetype-num">05</div>
+    <div>
+      <div class="archetype-name">The Late-Twenties Craft Kid</div>
+      <div class="archetype-still">Still doing it the hard way.</div>
+      <div class="archetype-desc">28. Conspicuously not optimized. A line cook, a sound engineer, a musician, a tattooist. Carries the surface of his trade on him. Doesn't pose.</div>
+    </div>
+  </div>
+  <div class="archetype">
+    <div class="archetype-num">06</div>
+    <div>
+      <div class="archetype-name">The Grandmother Who Lifts</div>
+      <div class="archetype-still">Still strong.</div>
+      <div class="archetype-desc">65+. Quietly capable. Tension lives in the contrast between her face and her grip. Not "fit for her age" — just <em>fit</em>.</div>
+    </div>
+  </div>
+  <div class="archetype">
+    <div class="archetype-num">07</div>
+    <div>
+      <div class="archetype-name">The Inheritor</div>
+      <div class="archetype-still">Still wearing his father's.</div>
+      <div class="archetype-desc">Any age. The point is the object — a watch, a ring, a chain, an old saint card — that wasn't bought for the shoot. It belongs to him. (See §VI.)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ §V — ENVIRONMENT GRAMMAR ═══════════════════ -->
+<section class="page">
+  <div class="section-label">§V — Environment</div>
+  <h2>The room holds <span class="accent">a life.</span></h2>
+  <div class="section-open">
+    We don't shoot in studios. We don't shoot in white spaces. We shoot in rooms that already belong to the subject — rooms that hold their decades, their work, their family, their habits. The subject and the room are the same age. The room is not lit for us. We accept how it is.
+  </div>
+
+  <div class="principle">
+    <h3>The four conditions</h3>
+    <p><strong>Warm interior light.</strong> Tungsten, sun-through-window, table lamps. Never daylight-balanced cold. The world should feel like late afternoon, indoors, in a place that's been lived in.</p>
+    <p><strong>Walls that hold history.</strong> Framed photographs, working tools, books that have been read, memorabilia in a stack. The wall is the second character.</p>
+    <p><strong>Real rooms, not sets.</strong> No styled backdrops, no rented locations dressed for editorial. The room must belong to the subject, or someone like them. If we can't find it, we go find a different subject.</p>
+    <p><strong>The subject and the room belong to each other.</strong> If you removed the subject, the room would still be coherent. If you removed the room, the subject would still be coherent. Neither is a prop for the other.</p>
+  </div>
+
+  <div class="principle">
+    <h3>Environment archetypes</h3>
+    <p><strong>Memorabilia wall.</strong> Racetrack, sailing club, dive bar, family hallway, garage workshop. Frames stacked. Decades layered.</p>
+    <p><strong>Working room.</strong> Kitchen used daily, workshop with tools where they live, studio with materials in mid-use. Mess is welcome.</p>
+    <p><strong>Edge of weather.</strong> Porch, dock, doorway. The interior meets the outside. Light spills in. The subject is between.</p>
+    <p><strong>Inherited room.</strong> A room that's been in the family. Furniture older than the subject. The grandmother's chair.</p>
+    <div class="kicker">If the room could only exist because we built it, we built the wrong thing.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════ §VI — ARTIFACT GRAMMAR ═══════════════════ -->
+<section class="page dark">
+  <div class="inner">
+    <div class="section-label">§VI — Artifact Grammar</div>
+    <h2>The decoded <span class="accent">talisman.</span></h2>
+    <div class="section-open">
+      The single most important section of this playbook. An artifact is anything in the brand's world that <strong>carries a sign without announcing it</strong> — a small object that's legible to insiders, invisible to everyone else. The IPA wordmark is one. The packet front is one. The tray is one. The annual coin — this section's anchor — is one. The brand's world is built from artifacts, not logos.
+    </div>
+
+    <div class="principle">
+      <h3>The principle</h3>
+      <p>A logo asks to be recognized. An artifact asks to be decoded. The first is announcement; the second is invitation. Signal does not announce. Every object the brand puts into the world — and every object it accepts from a subject's life — must pass the same test: <em>does this read as belonging to a system, without spelling the system out?</em></p>
+      <div class="kicker">Authority is what others claim for you. The brand's job is to give them the artifact to claim it with.</div>
+    </div>
+
+    <div class="principle">
+      <h3>What makes an artifact Signal</h3>
+      <p><strong>It carries a sign in our vocabulary</strong> — IPA phonetic notation, traditional Chinese script, the SKU palette (Rose Linen / Signal Red / Deep Evening / cream), a specific geometry, a specific material (paperboard, frosted acetate, brushed metal, cellulose acetate).</p>
+      <p><strong>It looks used, not new.</strong> Patinated. Worn. The artifact is at its best the second decade you've owned it.</p>
+      <p><strong>It reads as personal, not promotional.</strong> It does not look like merch. It looks like something you'd keep in a drawer, carry in a pocket, hand to a child.</p>
+      <p><strong>It can be inherited.</strong> The artifact survives a lifetime. The packet does not. The coin does.</p>
+    </div>
+
+    <div class="principle">
+      <h3>Three tiers of artifact</h3>
+    </div>
+
+    <div class="tier">
+      <div class="tier-label">Tier 1 — Brand-canonical</div>
+      <div class="tier-name">The permanent objects.</div>
+      <p>The IPA wordmark <strong>/sɪɡˈnɑːl/</strong>. The packet front (color per SKU, no English). The paperboard tray + four frosted acetate dividers (D1: 治未病 vertical, D4: /sɪɡˈnɑːl/ horizontal). The SaS DECODE puzzle card. These exist whether or not a customer engages. They are the brand's standing language.</p>
+    </div>
+
+    <div class="tier">
+      <div class="tier-label">Tier 2 — Owned by the customer</div>
+      <div class="tier-name">The objects that travel.</div>
+      <p>Objects the customer acquires through use — never sold separately, never additive. The <strong>Travel Container</strong> (the daily carry). The <strong>SaS card</strong> (the gifting mechanism). The <strong>wax seal</strong> closing each letter. And at the end of Year I, the <strong>annual coin</strong>. These move from brand hands to customer hands and become <em>theirs</em>. Anything beyond this list drifts toward merch. Restraint is the discipline.</p>
+    </div>
+
+    <div class="tier">
+      <div class="tier-label">Tier 3 — Found in the image</div>
+      <div class="tier-name">The reverse-causality move.</div>
+      <p>The most important tier — and the one that changes how we cast. We do not plant Signal artifacts on subjects. We <strong>cast people who already wear things</strong> — chains, watches, rings, medals, saint cards. Different for each one. The green object on the canonical's chain wasn't planted; he was wearing it when we found him. That's the proof: the brand's grammar is already in the world. Our job is to find it, frame it, and let the viewer decode it.</p>
+    </div>
+
+    <div class="principle">
+      <h3>Inheritability — the §IX bridge</h3>
+      <p>The manifesto's §IX hero is <em>"Foundation in one life. Passed to the next."</em> Artifacts are how that line becomes a physical fact. A packet is consumed; it cannot be passed down. A coin can. A stack of coins definitely can. The wordmark, etched on something durable, can. <strong>The artifact catalogue should be evaluated, in part, by what can be inherited.</strong> If an object cannot survive the subject, it doesn't carry the §IX promise.</p>
+      <div class="kicker">Foundation in one life. Passed to the next. The artifact is the proof on the chain.</div>
+    </div>
+
+    <div class="principle">
+      <h3>The annual coin — the anchor</h3>
+      <p>The first physical artifact Signal mints. Not a product. Not a giveaway. Not a welcome gift. <strong>Earned by completing one full year of practice.</strong> Hand-cast metal — brushed brass, hand-cast bronze, or matte silver/nickel (render v0.1 below, in silver) — ~38mm diameter, ~3mm thick. The IPA wordmark <strong>/sɪɡˈnɑːl/</strong> deeply etched on the obverse, framed by a thin debossed inner rim. A Roman numeral year (I, II, III, V, X, XXV) on the reverse. Identical design across years; only the year-mark changes — like commemorative annual releases. Plain or lightly-reeded edge. Patinates with the hand that holds it.</p>
+    </div>
+
+    <div class="coin-feature">
+      <img src="visual_register/02_annual_coin_year_i.png" alt="Year I coin, matte silver finish, IPA wordmark /sig'nɑːl/ deeply embossed and centered on the obverse. Standing on edge on a worn wooden surface, warm window light, folded letters out of focus in the background.">
+      <div class="coin-caption">
+        <div class="filename">02 — Year I / render v0.1</div>
+        <div>
+          <h4>The first earned artifact.</h4>
+          <p>Year I obverse. The notation IS the mark — eight-tenths of the face. No logo, no English brand name, no decorative flourish. The reverse carries only the Roman numeral.</p>
+          <p>Patinates with handling — what the customer earns by Year V looks measurably different from what they earned by Year I. The collection becomes the proof. Material in flight: brass / bronze / matte silver, all live. Render shown in silver.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <h3>Year-one-or-nothing</h3>
+      <p>There is no day-30 token. No 90-day welcome chip. No half-year tease. <strong>If you don't make it to one year, you get nothing physical.</strong> That's the discipline. The coin's gravity comes from being hard to reach. Pre-Year-I rewards would dilute it. The threshold is the point.</p>
+      <div class="kicker">You don't get rewarded for going halfway.</div>
+    </div>
+
+    <div class="principle">
+      <h3>The annual ritual</h3>
+      <p>On the customer's anniversary, one envelope arrives. Inside: the year's coin. Sealed with a deep Signal-red wax stamp of the IPA glyph cluster. Once a year, every year the customer stays. The seal closes; the coin marks. Nothing else needs to be in the envelope.</p>
+      <p>After five years, the customer has a small stack — five coins, the years that came with them, the seals if they kept them. Tenure made physical. Time you can hold.</p>
+      <div class="kicker">Foundation in one life. Passed to the next. The coin is the chain.</div>
+    </div>
+
+    <div class="principle">
+      <h3>Supporting artifacts</h3>
+      <p><strong>The wax seal.</strong> SaS letters and the annual envelope close with a deep Signal-red wax seal stamped with the IPA glyph cluster /sɪɡˈnɑːl/. Tactile. Decoded. Worth keeping for the seal alone.</p>
+      <p><strong>The folded photograph — conditional.</strong> Considered for the Year-I envelope: an archival print of the §IX canonical visual-register image, small, framable. Kept only if it functions as the visual register made physical — not as gift-box delight.</p>
+    </div>
+
+    <div class="principle">
+      <h3>What we don't make</h3>
+      <p>No pendant. No ceramic vessel. No candle. No glass. No tote. No keychain. No engraved key fob. No anything additive to what's operationally necessary. The artifacts of Signal are the objects the brand <em>must</em> produce to operate the product and recognize tenure. Anything beyond that drifts toward lifestyle merch and dilutes the world.</p>
+      <p>Whatever the canonical subject — or any subject — wears stays a casting cue (Tier 3, §IV): we cast people who already wear something personal, different for each one. We never sell them what to wear and never standardize it.</p>
+      <div class="kicker">The world is built from objects the brand must produce, not the objects it could produce.</div>
+    </div>
+
+    <div class="principle">
+      <h3>Banned as artifact</h3>
+      <p>Logo merch. Brand t-shirts. Stickers. Anything that spells <em>Signal</em> or <em>INSDR</em> in Latin letters. Anything that announces. Anything that reads as promotional rather than personal. Anything that looks new in a way that's bragging.</p>
+    </div>
+
+    <div class="principle">
+      <h3>The artifact appearance rule</h3>
+      <p>An artifact appears in an image when it would already be there. Never as a prop. Never as a foreground subject. If the subject's hand happens to be near the tray, that's a frame. If we move the tray into the hand, that's a product shot — and we don't take product shots in the editorial register. <strong>The artifact is decoded by being incidental.</strong></p>
+      <div class="kicker">The brand never says "look at this." The viewer says, "I see it."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ §VII — DECODING POSTURE ═══════════════════ -->
+<section class="page">
+  <div class="section-label">§VII — Decoding Posture</div>
+  <h2>No text on the image.<br><span class="accent">Ever.</span></h2>
+  <div class="section-open">
+    A Signal image carries a person, a room, and at most one decoded artifact. It does not carry a headline, a caption, a tagline, a CTA, a product name, a price, a claim, or a brand mark. Captioning, if it happens at all, happens elsewhere — the line below, the next slide, the wall placard. The image's job is to be looked at, not read.
+  </div>
+
+  <div class="principle">
+    <h3>What this protects</h3>
+    <p>Two things. First, the brand's world stays a world — not a marketing surface. Second, the viewer's first encounter with the image is <strong>theirs to make sense of</strong>. We don't tell them what to feel. They figure it out. That moment of figuring-it-out is what creates ownership.</p>
+    <div class="kicker">Consistency is the new persuasion. We don't argue. We recur.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════ §VIII — THE BANNED REGISTER ═══════════════════ -->
+<section class="page">
+  <div class="section-label">§VIII — Banned</div>
+  <h2>What this is <span class="accent">not.</span></h2>
+  <div class="section-open">
+    A negative-space list. If a frame leans in any of these directions, stop shooting and reset. None of these are subjective calls — they are the visual category default Signal exists to refuse.
+  </div>
+
+  <ul class="banned-list">
+    <li><strong>The influencer pose.</strong> Hand on neck. Arched back. Lips parted. Half-smile to camera. Anything that reads "I am being photographed."</li>
+    <li><strong>Studio white-wall portrait.</strong> Seamless paper. Daylight-balanced softbox. Catalog framing.</li>
+    <li><strong>Gym selfie / gym mirror.</strong> Anything that frames the body as an optimization project.</li>
+    <li><strong>AARP-coded "vital senior."</strong> Older subjects shown as inspirational specimens of aging well. Patronizing. Not what we do.</li>
+    <li><strong>Before-and-after composition.</strong> Any structural promise of transformation.</li>
+    <li><strong>Bottle in hand / product-in-hand.</strong> The subject holding the packet, the tray, the pendant up to the camera. That's a product shot. Different register.</li>
+    <li><strong>Brand t-shirt or logo merch visible.</strong> No Signal-branded apparel in frame. Ever. (See §VI banned.)</li>
+    <li><strong>Smiling-at-camera with perfect teeth.</strong> Performative warmth. Not ours.</li>
+    <li><strong>Lifestyle props that don't decode.</strong> Generic mug, generic candle, generic plant. If a prop doesn't carry a sign, it's clutter.</li>
+    <li><strong>Captions burned into the image.</strong> No headline overlay. No watermark. No "Signal." in the corner.</li>
+  </ul>
+</section>
+
+<!-- ═══════════════════ §IX — REFERENCE SHELF ═══════════════════ -->
+<section class="page">
+  <div class="section-label">§IX — Reference Shelf</div>
+  <h2>Visual <span class="accent">cousins.</span></h2>
+  <div class="section-open">
+    For mood, not imitation. These are the photographers and brand worlds Signal's visual register is adjacent to — what we should feel like to a viewer who already knows them. None of them are us; all of them are in the family.
+  </div>
+
+  <div class="principle">
+    <h3>Photographers</h3>
+    <div class="ref-grid">
+      <div class="ref-item"><strong>Bryan Schutmaat</strong><span>Roadside-America portraits. Lived-in faces, durable rooms, characters with bite.</span></div>
+      <div class="ref-item"><strong>Larry Sultan</strong><span><em>Pictures from Home.</em> Interior light. Subject and room belonging to each other.</span></div>
+      <div class="ref-item"><strong>Stephen Shore</strong><span><em>American Surfaces.</em> The dignity of the everyday interior.</span></div>
+      <div class="ref-item"><strong>Jamie Hawkesworth</strong><span>Quiet portraits of strangers. The patience to wait for the frame.</span></div>
+      <div class="ref-item"><strong>Tyrone Lebon</strong><span>Texture, warmth, characters before composition.</span></div>
+      <div class="ref-item"><strong>Wim Wenders</strong><span>Portraits where the room is half the subject.</span></div>
+    </div>
+  </div>
+
+  <div class="principle">
+    <h3>Brand worlds with strong artifact grammar</h3>
+    <div class="ref-grid">
+      <div class="ref-item"><strong>Hermès orange box</strong><span>Pure identity, no logo needed. The object becomes the brand.</span></div>
+      <div class="ref-item"><strong>Le Labo</strong><span>Handwritten bottle labels. Decoded restraint.</span></div>
+      <div class="ref-item"><strong>A.P.C.</strong><span>Tiny label discipline. The brand whispered.</span></div>
+      <div class="ref-item"><strong>MUJI</strong><span>Absence-of-logo as the most identifiable mark.</span></div>
+      <div class="ref-item"><strong>Aesop</strong><span>Apothecary minimalism. Interior signage doing brand work.</span></div>
+      <div class="ref-item"><strong>Bottega Veneta</strong><span>Intrecciato weave — pattern as decoded mark, no logo required.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CLOSING ═══════════════════ -->
+<section class="closing">
+  <div class="closing-text">
+    Foundation in one life.<br>
+    The body did the rest.<br>
+    <span class="accent">He's still here.</span>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <div class="footer-line">INSDR Wellness — the cellcare company</div>
+  <div>visual register playbook · v0.1 · internal · 2026-05-19</div>
+</footer>
+
+<script>
+  (function() {
+    var PASS = "54321";
+    var gate = document.getElementById("gate");
+    var body = document.body;
+    if (sessionStorage.getItem("signal_unlocked") === "true") {
+      gate.style.display = "none";
+      body.classList.remove("locked");
+    }
+    window.checkPass = function(e) {
+      e.preventDefault();
+      var input = document.getElementById("gate-pass").value;
+      var err = document.getElementById("gate-error");
+      if (input === PASS) {
+        sessionStorage.setItem("signal_unlocked", "true");
+        gate.style.display = "none";
+        body.classList.remove("locked");
+      } else {
+        err.classList.add("show");
+        document.getElementById("gate-pass").value = "";
+        document.getElementById("gate-pass").focus();
+        setTimeout(function(){ err.classList.remove("show"); }, 2400);
+      }
+      return false;
+    };
+  })();
+</script>
+
+</body>
+</html>
