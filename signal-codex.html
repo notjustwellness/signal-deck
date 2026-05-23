@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INSDR Wellness — the cellcare company | The Signal Codex</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ─── BRAND FONT: Anguita Sans (self-hosted, primary display) ─── */
+@font-face {
+  font-family: 'Anguita Sans';
+  src: url('fonts/AnguitaSans.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --signal: #AD4236;
+  --signal-light: #C85D51;
+  --signal-deep: #7A2E26;
+  --deep-evening: #1A1410;
+  --rose-linen: #F6EFEA;
+  --rose-linen-deep: #EDE3D8;
+  --ink: #1A1410;
+  --ink-soft: rgba(26,20,16,0.72);
+  --ink-dim: rgba(26,20,16,0.5);
+  --font-display: 'Anguita Sans', 'Bebas Neue', Impact, sans-serif;
+  --font-editorial: 'Bebas Neue', 'Anguita Sans', Impact, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--rose-linen);
+  color: var(--ink);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 300;
+}
+
+/* ─── PAGES ─── */
+.page {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 96px 56px;
+}
+.page.dark {
+  background: var(--deep-evening);
+  color: var(--rose-linen);
+  max-width: none;
+  padding: 96px 56px;
+}
+.page.dark .inner {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* ─── COVER ─── */
+.cover {
+  min-height: 92vh;
+  background: var(--deep-evening);
+  color: var(--rose-linen);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 40px;
+  position: relative;
+}
+.cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(173,66,54,0.18), transparent 60%);
+  pointer-events: none;
+}
+.cover-lockup {
+  position: absolute;
+  top: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+}
+.cover-overline {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--signal-light);
+  font-weight: 700;
+}
+.cover-insdr-line {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(246,239,234,0.7);
+  font-weight: 500;
+}
+.cover-title {
+  font-family: var(--font-display);
+  font-size: 104px;
+  line-height: 0.92;
+  letter-spacing: -0.5px;
+  color: var(--rose-linen);
+  margin-bottom: 28px;
+  z-index: 2;
+  font-weight: 400;
+}
+.cover-thesis {
+  font-family: var(--font-body);
+  font-size: 22px;
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--signal-light);
+  font-weight: 400;
+  max-width: 720px;
+  margin-bottom: 18px;
+  z-index: 2;
+}
+.cover-subline {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(246,239,234,0.72);
+  max-width: 600px;
+  z-index: 2;
+}
+.cover-meta {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(246,239,234,0.4);
+  z-index: 2;
+}
+
+/* ─── SECTION LABELS ─── */
+.section-label {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+.page.dark .section-label { color: var(--signal-light); }
+
+/* ─── H2 ─── */
+h2 {
+  font-family: var(--font-display);
+  font-size: 56px;
+  line-height: 0.95;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  margin-bottom: 18px;
+  font-weight: 400;
+}
+.page.dark h2 { color: var(--rose-linen); }
+h2 .accent { color: var(--signal); }
+.page.dark h2 .accent { color: var(--signal-light); }
+
+/* ─── H3 ─── */
+h3.subhead {
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 1.0;
+  letter-spacing: -0.2px;
+  color: var(--ink);
+  margin-top: 56px;
+  margin-bottom: 18px;
+  font-weight: 400;
+}
+h3.subhead .accent { color: var(--signal); }
+
+/* ─── BODY PROSE ─── */
+.prose p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  max-width: 680px;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+.prose p strong { color: var(--ink); font-weight: 600; }
+.prose p em { color: var(--signal); font-style: italic; }
+
+/* ─── PRINCIPLE BLOCK (governing postures) ─── */
+.principle {
+  margin: 32px 0;
+  padding: 28px 0 28px 28px;
+  border-left: 2px solid var(--signal);
+  max-width: 680px;
+}
+.principle .principle-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1.1;
+  letter-spacing: -0.2px;
+  color: var(--ink);
+  margin-bottom: 12px;
+  font-weight: 400;
+}
+.principle p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin-bottom: 0;
+  font-weight: 300;
+}
+
+/* ─── DEDICATION ─── */
+.dedication {
+  margin-top: 72px;
+  padding-top: 36px;
+  border-top: 1px solid rgba(26,20,16,0.12);
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-style: italic;
+  color: var(--signal);
+  letter-spacing: 0.2px;
+  font-weight: 400;
+}
+
+/* ─── CANONICAL SENTENCE BLOCK ─── */
+.register-label {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 24px 0 10px;
+  max-width: 680px;
+  font-weight: 300;
+}
+.register-label strong { color: var(--ink); font-weight: 600; }
+.canonical {
+  margin: 0 0 28px;
+  padding: 18px 28px;
+  border-left: 3px solid var(--signal);
+  font-family: var(--font-body);
+  font-size: 22px;
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--signal);
+  font-weight: 400;
+  max-width: 680px;
+}
+
+/* ─── KICKER LINE (italic accent that closes a section) ─── */
+.kicker-line {
+  margin: 28px 0 0;
+  padding-left: 18px;
+  border-left: 2px solid var(--signal);
+  font-family: var(--font-body);
+  font-size: 19px;
+  font-style: italic;
+  color: var(--signal);
+  font-weight: 500;
+  line-height: 1.4;
+  max-width: 640px;
+}
+
+/* ─── REJECTED BRAND-COPY EXAMPLE (lines the brand will NOT write) ─── */
+.rejected-example {
+  margin: 8px 0 24px;
+  padding: 14px 22px;
+  border-left: 3px solid rgba(26,20,16,0.22);
+  background: rgba(26,20,16,0.035);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--ink-dim);
+  font-weight: 400;
+  max-width: 680px;
+}
+
+/* ─── CUSTOMER VOICE (objections / rage triggers in customer's own words) ─── */
+.customer-voice {
+  margin: 12px 0 18px;
+  padding: 4px 22px;
+  border-left: 2px dashed var(--signal-light);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--signal-deep);
+  font-weight: 400;
+  max-width: 680px;
+}
+
+/* ─── COLOR SWATCH BLOCK (Ch 03 §1) ─── */
+.swatch-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0 32px;
+  max-width: 680px;
+}
+.swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 18px;
+  border: 1px solid rgba(26,20,16,0.08);
+  border-radius: 4px;
+  background: var(--rose-linen);
+}
+.swatch .chip {
+  width: 100%;
+  height: 88px;
+  border-radius: 3px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(26,20,16,0.05);
+}
+.swatch .chip.signal-red { background: var(--signal); }
+.swatch .chip.rose-linen { background: var(--rose-linen); border: 1px solid rgba(26,20,16,0.15); }
+.swatch .chip.deep-evening { background: var(--deep-evening); }
+.swatch .swatch-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  color: var(--ink);
+  margin-bottom: 4px;
+  text-transform: lowercase;
+}
+.swatch .swatch-hex {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: var(--ink-dim);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* ─── PACKET CLUSTER (Ch 03 §1 — 3 SKUs, front+back per row, matches manifesto) ─── */
+.packet-cluster {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin: 20px 0 8px;
+  max-width: 680px;
+}
+.packet-row {
+  display: flex;
+  flex-direction: column;
+}
+.packet-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.packet-duo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 3px;
+  background: var(--rose-linen);
+}
+.packet-row.scaled .packet-duo img {
+  transform: scale(0.85);
+  transform-origin: center;
+  object-fit: contain;
+}
+.packet-row .packet-caption {
+  font-family: var(--font-body);
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  color: var(--ink-soft);
+  margin-top: 10px;
+  font-style: italic;
+  font-weight: 400;
+}
+.stale-flag {
+  margin: 6px 0 28px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-style: italic;
+  color: var(--ink-dim);
+  line-height: 1.45;
+  max-width: 680px;
+}
+
+/* ─── FULL-WIDTH IMAGE EMBED (Ch 03 §3 vessel composite) ─── */
+.image-block {
+  margin: 24px 0 14px;
+  max-width: 680px;
+}
+.image-block img {
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+  border: 1px solid rgba(26,20,16,0.06);
+}
+.image-block .caption {
+  margin-top: 10px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ink-dim);
+  letter-spacing: 0.3px;
+}
+
+/* ─── INLINE WORDMARK (matches deck wordmark canonical) ─── */
+.wm {
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--signal);
+  letter-spacing: -0.3px;
+}
+.wm .accent { color: var(--rose-linen-deep); }
+
+/* ─── WORDMARK SPECIMEN BLOCK (dark bg, two-color canonical) ─── */
+.wordmark-specimen {
+  background: var(--deep-evening);
+  padding: 44px 24px;
+  text-align: center;
+  margin: 24px 0 14px;
+  border-radius: 3px;
+  max-width: 680px;
+}
+.wordmark-specimen .wm-lg {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 52px;
+  color: var(--signal);
+  letter-spacing: -1.2px;
+  line-height: 1;
+  display: inline-block;
+}
+.wordmark-specimen .wm-lg .accent { color: var(--rose-linen); }
+.wordmark-specimen .specimen-caption {
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  color: rgba(246,239,234,0.5);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ─── FONT SPECIMEN (Ch 03 §2 — show the three faces inline) ─── */
+.font-specimen-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0 32px;
+  max-width: 680px;
+}
+.font-specimen {
+  padding: 18px 16px;
+  background: var(--rose-linen);
+  border: 1px solid rgba(26,20,16,0.08);
+  border-radius: 4px;
+}
+.font-specimen .sample {
+  font-size: 36px;
+  line-height: 1;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.font-specimen .sample.anguita { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.5px; }
+.font-specimen .sample.bebas { font-family: 'Bebas Neue', 'Helvetica Neue', sans-serif; font-weight: 400; letter-spacing: 0.5px; }
+.font-specimen .sample.jakarta { font-family: var(--font-body); font-weight: 300; letter-spacing: -0.5px; font-size: 28px; }
+.font-specimen .face-name {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+@media (max-width: 720px) {
+  .swatch-row, .packet-cluster { grid-template-columns: 1fr; }
+}
+
+/* ─── TOC ─── */
+.toc {
+  background: var(--rose-linen-deep);
+  padding: 96px 56px;
+  border-top: 1px solid rgba(26,20,16,0.08);
+  border-bottom: 1px solid rgba(26,20,16,0.08);
+}
+.toc-inner { max-width: 820px; margin: 0 auto; }
+.toc h3 {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+.toc-list { list-style: none; }
+.toc-list li {
+  display: grid;
+  grid-template-columns: 60px 1fr 90px;
+  align-items: baseline;
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(26,20,16,0.1);
+}
+.toc-list li:last-child { border-bottom: none; }
+.toc-num {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: var(--signal);
+  font-weight: 400;
+}
+.toc-name {
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: -0.2px;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+.toc-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+.toc-status {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: right;
+  font-weight: 600;
+  color: var(--ink-dim);
+}
+.toc-status.draft { color: var(--signal); }
+.toc-status.pending { color: var(--ink-dim); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--deep-evening);
+  color: rgba(246,239,234,0.55);
+  padding: 64px 56px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+footer .footer-line {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: rgba(246,239,234,0.75);
+}
+
+@media (max-width: 720px) {
+  .page, .toc { padding: 64px 28px; }
+  .cover-title { font-size: 64px; }
+  h2 { font-size: 40px; }
+  h3.subhead { font-size: 22px; }
+  .toc-list li { grid-template-columns: 40px 1fr; gap: 16px; }
+  .toc-list li .toc-status { display: none; }
+}
+
+/* ─── PASSWORD GATE ─── */
+#gate { position: fixed; inset: 0; background: #1A1410; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; color: #F6EFEA; padding: 40px; text-align: center; }
+#gate .gate-overline { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #AD4236; margin-bottom: 16px; font-weight: 600; }
+#gate .gate-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 72px; color: #AD4236; line-height: 0.9; margin-bottom: 32px; letter-spacing: -1.6px; text-transform: lowercase; }
+#gate .gate-title .accent { color: #F6EFEA; }
+#gate .gate-subtitle { font-size: 14px; opacity: 0.6; margin-bottom: 32px; letter-spacing: 1px; }
+#gate form { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+#gate input { background: rgba(246,239,234,0.08); border: 1px solid rgba(246,239,234,0.2); border-radius: 6px; color: #F6EFEA; padding: 14px 20px; font-size: 15px; font-family: inherit; width: 280px; text-align: center; letter-spacing: 1px; outline: none; transition: border-color 0.2s; }
+#gate input:focus { border-color: #AD4236; }
+#gate button { background: #AD4236; color: #F6EFEA; border: none; border-radius: 6px; padding: 12px 32px; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+#gate button:hover { background: #c4574b; }
+#gate .gate-error { color: #AD4236; font-size: 12px; margin-top: 8px; opacity: 0; transition: opacity 0.2s; letter-spacing: 1px; }
+#gate .gate-error.show { opacity: 1; }
+#gate .gate-footer { position: absolute; bottom: 40px; font-size: 10px; opacity: 0.3; letter-spacing: 3px; text-transform: uppercase; }
+body.locked { overflow: hidden; height: 100vh; }
+body.locked > section, body.locked > footer { display: none !important; }
+@media print { #gate { display: none !important; } }
+</style>
+</head>
+<body class="locked">
+
+<!-- ═══════════════════ PASSWORD GATE ═══════════════════ -->
+<div id="gate">
+  <div class="gate-overline">INSDR Wellness — the cellcare company &middot; Confidential</div>
+  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="gate-subtitle">Enter password to view the signal codex.</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
+    <button type="submit">Enter</button>
+    <div class="gate-error" id="gate-error">Incorrect. Try again.</div>
+  </form>
+  <div class="gate-footer">The Signal Codex &mdash; Do not share.</div>
+</div>
+
+<!-- ═══════════════════ COVER ═══════════════════ -->
+<section class="cover">
+  <div class="cover-lockup">
+    <div class="cover-overline">INSDR Wellness — the cellcare company</div>
+    <div class="cover-insdr-line">internal · brand bible · 2026</div>
+  </div>
+  <div class="cover-title">
+    THE<br>
+    SIGNAL<br>
+    CODEX
+  </div>
+  <div class="cover-thesis">For the people building the world.</div>
+  <div class="cover-subline">A decoding document. The thesis, the voice, the manifesto, the product architecture, the operational discipline, the customer ritual, the defense — held in one cover.</div>
+  <div class="cover-meta">signal codex · v1.0 · chapters 00–09 · 2026-05-23</div>
+</section>
+
+<!-- ═══════════════════ TOC ═══════════════════ -->
+<section class="toc">
+  <div class="toc-inner">
+    <h3>Contents</h3>
+    <ul class="toc-list">
+      <li>
+        <div class="toc-num">00</div>
+        <div>
+          <div class="toc-name">Foreword</div>
+          <div class="toc-desc">Why this exists. How to read it.</div>
+        </div>
+        <div class="toc-status draft">Draft</div>
+      </li>
+      <li>
+        <div class="toc-num">01</div>
+        <div>
+          <div class="toc-name">The Thesis</div>
+          <div class="toc-desc">Category creation, canonical sentences, the triad.</div>
+        </div>
+        <div class="toc-status draft">Draft</div>
+      </li>
+      <li>
+        <div class="toc-num">02</div>
+        <div>
+          <div class="toc-name">The Voice</div>
+          <div class="toc-desc">Language laws, registers, owned objections.</div>
+        </div>
+        <div class="toc-status draft">Draft</div>
+      </li>
+      <li>
+        <div class="toc-num">03</div>
+        <div>
+          <div class="toc-name">The Visual System</div>
+          <div class="toc-desc">Color, wordmark, packet, tray, coin, register.</div>
+        </div>
+        <div class="toc-status draft">Draft</div>
+      </li>
+      <li>
+        <div class="toc-num">04</div>
+        <div>
+          <div class="toc-name">Product Architecture</div>
+          <div class="toc-desc">N°001 foundation · N°002 daily fuel · N°003 evening practice.</div>
+        </div>
+        <div class="toc-status draft">Draft</div>
+      </li>
+      <li>
+        <div class="toc-num">05</div>
+        <div>
+          <div class="toc-name">The Manifesto</div>
+          <div class="toc-desc">§I–§XIII, the world, the codex compendium.</div>
+        </div>
+        <div class="toc-status draft">Draft</div>
+      </li>
+      <li>
+        <div class="toc-num">06</div>
+        <div>
+          <div class="toc-name">Operational Discipline</div>
+          <div class="toc-desc">Marketing playbook + methodological feedback layer.</div>
+        </div>
+        <div class="toc-status draft">Draft</div>
+      </li>
+      <li>
+        <div class="toc-num">07</div>
+        <div>
+          <div class="toc-name">Customer Experience &amp; Ritual</div>
+          <div class="toc-desc">30-day cycle, the practice, coin, gifting.</div>
+        </div>
+        <div class="toc-status draft">Draft</div>
+      </li>
+      <li>
+        <div class="toc-num">08</div>
+        <div>
+          <div class="toc-name">Defensive / IP</div>
+          <div class="toc-desc">Brand architecture, carve-outs, filings.</div>
+        </div>
+        <div class="toc-status draft">Draft</div>
+      </li>
+      <li>
+        <div class="toc-num">09</div>
+        <div>
+          <div class="toc-name">Reference Architecture</div>
+          <div class="toc-desc">Surfaces, repos, assets, memory system.</div>
+        </div>
+        <div class="toc-status draft">Draft</div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════ 00 — FOREWORD ═══════════════════ -->
+<section class="page" id="ch00">
+  <div class="section-label">Chapter 00</div>
+  <h2>Foreword</h2>
+  <div class="prose" style="margin-top:32px;">
+    <p>A codex is a decoding document. It's written for the people already inside the work — the ones who need to remember why.</p>
+    <p>This is one.</p>
+    <p>INSDR Wellness is a company building a category called cellcare. Signal is the first product in that category. The work of the brand — the manifesto, the voice, the visual system, the product architecture, the operational discipline, the customer ritual, the defense — is held in the chapters that follow. None of it is meant for the consumer. The consumer meets signal through the world the brand builds around it. This document is for the people building the world.</p>
+    <p>What follows is two kinds of writing held in one cover. The Visual System chapter is reference — colors, wordmark, packet typography, packaging law. It tells you how to ship. Every other chapter is the rest of the codex — what the brand believes, what it refuses, what holds together when no one is watching. It tells you why.</p>
+
+    <h3 class="subhead">What governs <span class="accent">everything else</span></h3>
+    <p>Two principles sit upstream of every chapter that follows. They are the reason the codex was written this way.</p>
+
+    <div class="principle">
+      <div class="principle-title">Build a world. Invite them in. Let them decode it.</div>
+      <p>The brand earns its authority. It does not announce it. The IPA wordmark, the decode card, the packet front — every artifact in the signal system rewards a second look. None of them explains itself. Customers who stay long enough come to understand the system on their own.</p>
+    </div>
+
+    <div class="principle">
+      <div class="principle-title">AI is plumbing, not voice.</div>
+      <p>AI organizes. AI retrieves. AI accelerates. AI does not write copy, captions, hooks, briefs, DMs, or emails. The voice in every customer-facing surface is human, every time.</p>
+    </div>
+
+    <h3 class="subhead">Three names, <span class="accent">used precisely</span></h3>
+    <p><strong>INSDR Wellness</strong> is the company. <strong>Cellcare</strong> is the category. <strong>Signal</strong> is the product. Inside this codex, the three labels are used in that hierarchy — not interchangeably, not collapsed.</p>
+    <p>Cellcare is not used in customer-facing copy. Consumers receive the brand through three plain English words instead: <strong>foundation</strong> (what signal is), <strong>the practice</strong> (what taking it is), <strong>30-day cycle</strong> (the time it takes). The codex sets the rules for when each is used.</p>
+
+    <h3 class="subhead">How to <span class="accent">read</span></h3>
+    <p>The core chapters — Voice, Product Architecture, Manifesto, Operational Discipline — reinforce each other and can be read in any order. The reference chapters — Defensive/IP, Reference Architecture — are addressed when needed.</p>
+    <p>The codex is versioned. When a canonical line changes, the prior version is logged, not erased. The brand moves forward in deliberate updates, never silent rewrites.</p>
+    <p>If this document is doing its job, the reader closes it primed.</p>
+
+    <div class="dedication">For the people building the world.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 01 — THE THESIS ═══════════════════ -->
+<section class="page" id="ch01">
+  <div class="section-label">Chapter 01</div>
+  <h2>The Thesis</h2>
+  <div class="prose" style="margin-top:32px;">
+
+    <h3 class="subhead">§1 &mdash; The promise <span class="accent">that doesn't land</span></h3>
+    <p>Every week, somewhere, someone takes the first sip of a wellness drink that says it will give them energy. They wait. The drink claims to support eight body systems at once and lists every ingredient on the label and says nothing about the dose of any of them. They do not feel energy. They assume the failure is theirs. The label has told them what to expect; when the energy doesn't show up, the only thing left to blame is themselves — their lifestyle, their genetics, their stress.</p>
+    <p>This is the failure pattern at the center of the wellness category. The brands at the top of the category have sold this exact arrangement to millions of customers. They keep doing it because the math works for their margins: the dose is too low to do anything, but the marketing is high enough to convert.</p>
+    <p>Signal exists because the answer is not a better outcome. The answer is a different category.</p>
+
+    <h3 class="subhead">§2 &mdash; Why the outcomes <span class="accent">don't arrive</span></h3>
+    <p>The mistake is architectural. Outcomes &mdash; energy, focus, glow, mood, sleep &mdash; are downstream. The body produces them when the substrate beneath them is intact: mineral status, methylation, ATP machinery, the slow biochemistry of being a person. Outcomes are what the substrate does when it is fed. They are not the thing itself.</p>
+    <p>Most products in the category do not deliver enough substrate to move the biochemistry. The dose is too low to matter, the form isn't absorbed, or the proprietary blend hides whether either is true. The customer takes the product. The substrate doesn't shift. The outcomes don't arrive. The brand keeps charging. The customer churns. The next brand offers a new outcome &mdash; the same mistake at a different angle.</p>
+    <p>The biochemistry behaves like a dose-response curve that plateaus hard. Correcting an actual deficit produces a real, visible effect. Pushing a replete system higher produces nothing. Almost all the impressive "energy" testimonials in the category are deficiency corrections marketed as enhancements.</p>
+    <p>The category compounds this by stacking promises. A single product is sold as supporting brain, sleep, gut, mood, immunity, skin, longevity, energy &mdash; eight things at once, because attention rewards breadth and the product can't deliver depth. Eight promises become eight quiet failures the customer files away as their own.</p>
+    <p>The category that gives up on selling outcomes and commits to building the substrate beneath them is a different category. INSDR Wellness names it cellcare &mdash; internal vocabulary, defensive trademark. The consumer meets it through plainer words (§5). The discipline of the work does not change.</p>
+    <p>The upstream question &mdash; which deficit do you actually have? &mdash; would require a targeted blood test before a recommendation. The category refuses to ask. Signal answers in the opposite direction: build the substrate every body uses, in real doses, with the four-or-five inputs the science actually defends.</p>
+    <div class="kicker-line">You don't feel a foundation. You feel everything that stands on it.</div>
+
+    <h3 class="subhead">§3 &mdash; The <span class="accent">canonical sentences</span></h3>
+    <p>Before the customer-facing thesis, there is the architectural one:</p>
+    <div class="canonical">Push the output, you get marketing. Remove the constraint, you get foundation.</div>
+    <p>The brand operates on the second clause.</p>
+    <p>The customer-facing thesis compresses into two sentences. Both are locked. Each is used in a different context.</p>
+    <div class="register-label">For <strong>long-form surfaces</strong> &mdash; the manifesto, the investor read, the consumer deep-read &mdash; the brand uses:</div>
+    <div class="canonical">Signal is the foundation everything else stands on.</div>
+    <div class="register-label">For <strong>short-form surfaces</strong> &mdash; landing pages, packaging, the captions a customer reads in three seconds &mdash; the brand uses:</div>
+    <div class="canonical">Foundation first. Everything stacks.</div>
+    <p>The two customer-facing sentences share one structure: a primary act, then everything else. The brand never writes one without holding the other in mind. That is what separates a canonical sentence from a slogan. A slogan is a piece of copy that can be replaced when the campaign ends. A canonical sentence is load-bearing &mdash; remove it and the surrounding work stops standing.</p>
+
+    <h3 class="subhead">§4 &mdash; The word for <span class="accent">what's left behind</span></h3>
+    <p>A brand can be named three ways: by what it is, by what it does, and by what it leaves behind in the body of the person who uses it. The third is the most important, because the customer remembers it after they have forgotten everything else.</p>
+    <p>The word for what signal leaves behind is <strong>primed.</strong></p>
+    <p>Primed is the state of having already done the work the day will require. A runner stretched before the first kilometer. A musician with hands on the keys before the first note. A surgeon scrubbed in before the first cut. The performance has not started yet, and already the body is ready to begin. That is what the substrate makes possible.</p>
+    <p>What primed is not: achievement (a result), optimization (a metric), biohack (an intervention), energy (an effect), focus (a state), edge (a contrast). These nearby words are banned from describing how Signal makes a person feel. They describe what the customer might do <em>with</em> the floor; they cannot replace the floor itself.</p>
+    <p>If a piece of copy leaves the reader feeling sharp, hyped, or behind &mdash; the copy is wrong. If it leaves the reader primed &mdash; the copy is right.</p>
+
+    <h3 class="subhead">§5 &mdash; The <span class="accent">customer-facing triad</span></h3>
+    <p>The internal name is cellcare. It does not appear on customer-facing surfaces. The consumer meets the brand through three plain English words, each holding one job and not the other two.</p>
+    <p><strong>Foundation.</strong> What signal is. The product's position in the customer's day. Headlines, packaging, anywhere the question is <em>what is this thing?</em></p>
+    <p><strong>The practice.</strong> What taking it is. The behavior register. Ritual surfaces &mdash; the manifesto, the transmission moments, the email after a customer's first 30-day cycle.</p>
+    <p><strong>30-day cycle.</strong> The time the brand operates on. Anywhere the customer asks how long this will take, how often they re-up, when they should expect to notice anything. The brand's answer to <em>"how soon?"</em> is <em>"a month to feel built on. A lifetime to feel built up."</em></p>
+    <p>The triad is not three synonyms for cellcare. The triad is a translation &mdash; internal vocabulary made consumer-facing. The codex sets the rules for when each is used.</p>
+
+    <h3 class="subhead">§6 &mdash; <span class="accent">The world</span></h3>
+    <p>Underneath the thesis is a five-question structure the brand has built up over time, called the World Codex. It is the locked answer set to the foundational questions every category-creating brand has to answer for itself before it can answer them for a customer. The conflict the brand stands inside. The cultural anchors it draws from. The hero it speaks to and the antagonist it stands against. The language laws and the visual laws. The measure of time the brand keeps.</p>
+    <p>The full version lives in <strong>Chapter 05 &mdash; The Manifesto.</strong> This section is the pointer. Every chapter that follows is a downstream answer to one of those five questions.</p>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ 02 — THE VOICE ═══════════════════ -->
+<section class="page" id="ch02">
+  <div class="section-label">Chapter 02</div>
+  <h2>The Voice</h2>
+  <div class="prose" style="margin-top:32px;">
+
+    <h3 class="subhead">§1 &mdash; <span class="accent">The three registers</span></h3>
+    <p>Here is a sentence the brand will not write:</p>
+    <div class="rejected-example">Discover the daily ritual that fuels your most optimized self.</div>
+    <p>Six words in, the line has already failed. <em>Discover</em> is a marketing-style command. <em>Fuels</em> is effect-language. <em>Optimized self</em> is performance-language and outcome-suffix at once. The line is not in any register the brand owns.</p>
+    <p>The brand owns three. <strong>Ritual</strong> is slow and ceremonial &mdash; manifesto, the email after a customer's first 30-day cycle, the annual envelope. <strong>Routine</strong> is everyday and instructional &mdash; packaging, dosing card, dashboard. <strong>Category-defining</strong> is manifesto-grade and thesis-shaped &mdash; press release, investor read, SuppCo profile, deck. The rhythm and tone shift across the three. The line above lands in none of them; it lands in a fourth register the brand refuses.</p>
+    <p>If you cannot place a line in one of the three, the line is the wrong line.</p>
+
+    <h3 class="subhead">§2 &mdash; <span class="accent">What the brand will not say</span></h3>
+    <p>Here is a paragraph the brand will not write:</p>
+    <div class="rejected-example">Unlock peak performance with a science-backed energy boost. Our breakthrough formula optimizes mental focus and gives you the edge to win the day.</div>
+    <p>Twenty-five words. Eight banned terms. <em>Unlock, peak performance, energy boost, optimizes, focus, edge, win</em> &mdash; each one carries the failure pattern named in Chapter 01.</p>
+    <p>The four clusters of banned language:</p>
+    <p><strong>Effect-language.</strong> <em>Energy, focus, edge, clarity, alertness, glow.</em> These are downstream outcomes. The brand describes the substrate instead.</p>
+    <p><strong>Hype-language.</strong> <em>Boost, supercharge, unlock, transform, hack, biohack.</em> The verbs of a category that has overpromised for a decade.</p>
+    <p><strong>Performance-language.</strong> <em>Peak performance, optimize, optimization, achievement, win.</em> Pulls toward supplement-bro gravity. Makes the customer the object of the brand's evaluation.</p>
+    <p><strong>Outcome-suffix language.</strong> <em>-Boosting, -enhancing, -optimizing.</em> Smaller siblings of effect-language.</p>
+    <p>The list is not exhaustive. The principle is: any word that promises an effect the brand cannot honestly deliver, or pulls the voice toward a register the brand refuses, is banned.</p>
+
+    <h3 class="subhead">§3 &mdash; <span class="accent">The canonical sentences</span></h3>
+    <p>Here is a sentence the brand wants to write but doesn't have to invent:</p>
+    <div class="rejected-example">Signal supports your daily routine.</div>
+    <p>The line is harmless. It is also useless. It says nothing the brand has not already locked in a stronger sentence. When you need to say what signal does for the customer's day, you do not write a new line. You reach into the canonical library.</p>
+    <p>The library has seven sentences. Two are positioning canonicals locked in <strong>Chapter 01 §3</strong> (<em>"Signal is the foundation everything else stands on."</em> and <em>"Foundation first. Everything stacks."</em>). The remaining five live at the voice level:</p>
+    <div class="canonical">Eat real food. Take real doses.</div>
+    <div class="register-label">The food-objection canonical; concrete twin to <em>"Foundation first. Everything stacks."</em></div>
+    <div class="canonical">We name the dose. Not the outcome.</div>
+    <div class="register-label">Long-form trust contexts.</div>
+    <div class="canonical">Function over fiction.</div>
+    <div class="register-label">Three-word brand tagline. The compressed form of <em>"We name the dose. Not the outcome."</em></div>
+    <div class="canonical">One tap to start. One tap to stop.</div>
+    <div class="register-label">Subscription-billing canonical. An operational promise that has to be true in practice, not a slogan; the cancel flow must actually be one tap.</div>
+    <div class="canonical">Real ingredients. Real doses. No marketing science.</div>
+    <div class="register-label">Closer for surfaces that address trust. Threads the word <em>dose</em> through the food, trust, and closer canonicals as vocabulary discipline.</div>
+    <p>Every line the brand publishes at headline weight is downstream of one of these seven. Most "new" lines are reinventions of canonicals that already do the job better.</p>
+
+    <h3 class="subhead">§4 &mdash; <span class="accent">The two owned objections</span></h3>
+    <p>Here are two customer sentences most wellness brands dodge:</p>
+    <div class="customer-voice">I can just eat real food.</div>
+    <div class="customer-voice">How do I know any of this is real?</div>
+    <p>Most of the category answers the first by ignoring it and the second by escalating adjectives. The brand answers both up front.</p>
+    <p><strong>On food.</strong> Agree first. Food is the substrate. The substrate is what matters. Then draw the math: creatine 5g a day is roughly 1.5 pounds of red meat; magnesium absorbed at ~80% in bisglycinate form versus ~4% in oxide; methylation depends on a B-vitamin form ~40% of the population's genetics cannot use efficiently. Canonical: <em>"Eat real food. Take real doses."</em> Closer: <em>"Wash your face. Eat real food. Take signal. Three daily practices that don't replace each other."</em></p>
+    <p><strong>On trust.</strong> Answer with structure, not adjectives. <em>"One tap to start. One tap to stop."</em> Doses named, not buried. <em>"We name the dose. Not the outcome."</em> Close with <em>"Real ingredients. Real doses. No marketing science."</em></p>
+    <div class="kicker-line">The job is not to win the objection. The job is to retire it.</div>
+
+    <h3 class="subhead">§5 &mdash; <span class="accent">Two tests for vetting a line</span></h3>
+    <p>Here are two lines that look fine. Both are wrong.</p>
+    <div class="rejected-example">Clinically optimized to support your most ambitious days.</div>
+    <p>This line fails the <strong>consumer-skeptic test.</strong> Read it as a person who has been overpromised by wellness brands for a decade. The line is marketing science wearing a lab coat. It tries to silence the reader's doubt instead of leaving room for it. The pass version: <em>"A month to feel built on. A lifetime to feel built up."</em></p>
+    <div class="rejected-example">Signal — the science-backed cellular wellness brand for high performers.</div>
+    <p>This line fails the <strong>build-a-world test.</strong> Read it as a person who has not been told what the brand thinks of itself. The line explains too much &mdash; laying everything out up front, claiming authority instead of earning it. The pass version: <em>"/sɪɡˈnɑːl/"</em></p>
+    <p>Every line passes both tests before it ships. A line that fails either is rewritten or cut.</p>
+
+    <h3 class="subhead">§6 &mdash; <span class="accent">Pointer to Chapter 06</span></h3>
+    <p>This chapter covered what the brand says and how it sounds. <strong>Chapter 06 &mdash; Operational Discipline</strong> covers where the brand publishes, how often, on what cadence, who decides. The marketing playbook, the <em>AI-is-plumbing</em> rule, the <em>build-a-world / decode-it</em> posture in full, and the content audit are all there. Read it next when writing copy in the wild.</p>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ 03 — THE VISUAL SYSTEM ═══════════════════ -->
+<section class="page" id="ch03">
+  <div class="section-label">Chapter 03</div>
+  <h2>The Visual System</h2>
+  <div class="prose" style="margin-top:32px;">
+
+    <h3 class="subhead">§1 &mdash; <span class="accent">The color system</span></h3>
+    <p>Hold a signal packet in your hand. Press the foil flat. The red has weight &mdash; it is not a screen color but a <em>paper</em> color, the color of matte stock that has absorbed the dye instead of sitting on top of it. Now look at the tray underneath. The red is the same hue, but the material is paperboard, not foil &mdash; so the light returns differently. The brand's red is not one color. It is the same color rendered across three materials, each of which holds it slightly differently.</p>
+
+    <div class="packet-cluster">
+      <div class="packet-row">
+        <div class="packet-duo">
+          <img src="signal_packet_front.png" alt="signal N°001 front — matte red foil, 'send the right' headline in black with debossed IPA wordmark /sɪɡˈnɑːl/">
+          <img src="signal_n002_back.png" alt="signal N°001 back — clear AlOx film showing two chews stacked: amber substrate above, red keystone below; 'CONTAINS: 2 CHEWS' panel at bottom">
+        </div>
+        <div class="packet-caption">signal N°001 &mdash; the foundation &middot; one substrate + one keystone chew</div>
+      </div>
+      <div class="packet-row scaled">
+        <div class="packet-duo">
+          <img src="signal_n001_front.png" alt="signal N°002 front — matte rose-linen foil, 'send the right' headline in signal red with debossed IPA wordmark /sɪɡˈnɑːl/">
+          <img src="signal_n001_back_v2.png" alt="signal N°002 back — clear AlOx film showing two cream pearl chews side-by-side; silver foil packet edges">
+        </div>
+        <div class="packet-caption">signal N°002 &mdash; the daily fuel &middot; two pearl chews</div>
+      </div>
+      <div class="packet-row scaled">
+        <div class="packet-duo">
+          <img src="signal_n003_front.png" alt="signal N°003 front — matte deep-evening foil, 'send the right' headline in cream with debossed IPA wordmark /sɪɡˈnɑːl/">
+          <img src="signal_n003_back.png" alt="signal N°003 back — clear AlOx film showing two soft lavender chews stacked vertically; 'CONTAINS: 2 CHEWS' panel at bottom">
+        </div>
+        <div class="packet-caption">signal N°003 &mdash; the evening practice &middot; two lavender chews</div>
+      </div>
+    </div>
+    <p>The brand uses three colors. No fourth.</p>
+
+    <div class="swatch-row">
+      <div class="swatch"><div class="chip signal-red"></div><div class="swatch-name">signal red</div><div class="swatch-hex">#AD4236</div></div>
+      <div class="swatch"><div class="chip rose-linen"></div><div class="swatch-name">rose linen</div><div class="swatch-hex">#F6EFEA</div></div>
+      <div class="swatch"><div class="chip deep-evening"></div><div class="swatch-name">deep evening</div><div class="swatch-hex">#1A1410</div></div>
+    </div>
+
+    <p><strong>Signal Red</strong> is the keystone. It's the recognition color &mdash; from across a kitchen, the eye finds signal before the mind reads it. The wordmark. The tray. The packet. The mailer. The cover of the manifesto.</p>
+    <p><strong>Rose Linen</strong> is the warm-neutral. N°001 packets. Long-form prose backgrounds. Paper left in sun. Also the mid-tone color &mdash; cards, quieter background surfaces, the codex's contents page.</p>
+    <p><strong>Deep Evening</strong> is the dark color. N°003 packets. Dark-mode pages. The gate. The color the brand wears in its serious moments.</p>
+
+    <h3 class="subhead">§2 &mdash; <span class="accent">Wordmark and typography</span></h3>
+    <p>The first time a customer reads the wordmark, they read it out loud. The slashes mean <em>pronounce this.</em> The phonetic marks mean <em>this is how.</em> <em>/sɪɡˈnɑːl/</em> is not a logo. It is a pronunciation lesson the brand quietly insists on. The letters render in Signal Red; the IPA notation (/, ˈ, ː) recedes into Rose Linen &mdash; phonetic grammar that frames the word without competing with it.</p>
+
+    <div class="wordmark-specimen">
+      <div class="wm-lg"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+      <div class="specimen-caption">canonical wordmark · Plus Jakarta Sans 700 · two-color</div>
+    </div>
+
+    <p>The wordmark is set in <strong>Plus Jakarta Sans 700</strong> &mdash; the only brand font with the glyphs it needs. The other two faces in the system have ~362 and ~110 glyphs respectively, and neither covers IPA Extensions; if the wordmark were set in either, the visible result would be four characters in the brand face and five in whatever generic system font the browser fell back to. Using Plus Jakarta is the honest choice.</p>
+
+    <p>Three typefaces carry the system:</p>
+
+    <div class="font-specimen-row">
+      <div class="font-specimen"><div class="sample anguita">signal</div><div class="face-name">Anguita Sans · 900</div></div>
+      <div class="font-specimen"><div class="sample bebas">SIGNAL</div><div class="face-name">Bebas Neue · 400</div></div>
+      <div class="font-specimen"><div class="sample jakarta">signal</div><div class="face-name">Plus Jakarta · 300</div></div>
+    </div>
+
+    <p><strong>Anguita Sans</strong> is the primary display face. The brand's logo font. Anguita Sans Black is what shows up on headlines, section labels, card titles, the cover. Self-hosted from Latinotype (<code>fonts/AnguitaSans.otf</code>). Weight 900 only &mdash; there is no italic; the brand earns emphasis through color and size, not slant.</p>
+
+    <p><strong>Bebas Neue</strong> is the secondary display face. Tall, condensed, geometric &mdash; the contrast to Anguita's broader display weight. Bebas does the headline accents, the stylized "I" in "INSDR Wellness," moments where tall, narrow letters are the point.</p>
+
+    <p><strong>Plus Jakarta Sans</strong> is the body face &mdash; and the wordmark face. Body prose, captions, footer text, register labels. Default weight 300 &mdash; light, generous in the white space inside each letter, designed to be read at length. And in weight 700, the IPA wordmark.</p>
+
+    <p>The three-font system above is the complete type system. <strong>There is no fourth font for "editorial warmth."</strong> Contrast lives in weight, scale, color, and the wordmark exception.</p>
+
+    <h3 class="subhead">§3 &mdash; <span class="accent">The packaging system</span></h3>
+    <p>A kraft-colored box arrives on the counter. The customer's address is printed directly on the box &mdash; no separate sleeve, no shipping label band, subtle layer of marketing packaging. Open the box. The tray slides out &mdash; low walls, signal-red matte paperboard, ~230 by 70 millimeters. Thirty packets stand on edge between four full-height frosted acetate dividers. The top is open. The product is visible the moment the box is opened.</p>
+
+    <div class="image-block">
+      <img src="signal_vessel_paperboard_2026_05_04.png" alt="the vessel arriving — kraft outer and paperboard tray on the counter">
+      <div class="caption">the vessel arriving &mdash; kraft outer and paperboard tray on the counter</div>
+    </div>
+
+    <p>The tray is the canonical product format. Same shape every time, regardless of which SKU and regardless of which order in the customer's history. The only thing that varies is the color of the individual packages (Rose Linen for N°001, Signal Red for N°002, Deep Evening for N°003).</p>
+
+    <p>Four full-height frosted acetate dividers run along the long side of the tray. Each carries a decode artifact from the brand's visual system &mdash; IPA wordmark variants, surface marks, or intentional silence. Light incision, no ink, frosted acetate; the etching is visible only from the side, at a low angle. The dividers are the tray's quietest decode layer.</p>
+
+    <p>Three rules guide every packaging decision:</p>
+    <p><strong>Cost #1.</strong> Per-unit cost ~$0.95&ndash;1.55. Default to the cheaper option unless function loses.</p>
+    <p><strong>Red Dot worthy.</strong> Mono-material where possible. No glue. Mechanism over decoration. Print only where it informs.</p>
+    <p><strong>Supplement-cliché-breaker.</strong> No bottles. No childproof caps. No bro labels. Reference class: Aesop / MUJI / Le Labo &mdash; not GNC.</p>
+
+    <h3 class="subhead">§4 &mdash; <span class="accent">The load-bearing artifacts</span></h3>
+    <p>Three objects in the system carry meaning beyond their function. Each was designed to reward a closer look.</p>
+
+    <p>The first is the <strong>IPA wordmark</strong> itself. Held against the packet front, it is a label. Debossed into the empty tray floor, revealed only at the end of a 30-day cycle, it is a quiet end-marker. Etched into a frosted acetate divider, lit from the side, it is a found-not-planted artifact for the customer who looks. Same wordmark, three contexts, three different jobs.</p>
+
+    <p>The second is the <strong>annual coin.</strong> Brushed metal, ~38mm in diameter, IPA wordmark on the face, Roman year on the reverse. Arrives in a small kraft paperboard box, closed with a Signal-red wax seal stamped with the IPA glyph cluster pressed onto the lid. Earned by completing a year of the practice. Year I or nothing. Never sold. Never upsold. The coin is the brand's tenure recognition object &mdash; what the customer holds in their hand at the end of a year that they could not have held a year before.</p>
+
+    <p>The third is the <strong>decode card.</strong> It is the artifact inside the Send a Signal envelope &mdash; the brand's $5 physical-mail demo, available at checkout to any customer who has just committed to their own order. The card is A6, folded, mounted with one foundation packet on four corner slits and packed with an A7 insert that teaches what signal is. No personalization. No sender note. The CTA on every card reads the same way: <em>YOUR TURN &rarr; SEND A SIGNAL.</em> The card carries the brand's deepest voice register: a short body of copy framing the gift as care arriving from inside the practice, closed by the line <em>/sɪɡˈnɑːl/ received.</em> The "decode" is what the recipient does with it &mdash; the brand's register is not explained, the gift's meaning is not announced. The recipient reads it, understands it as care arriving without performance, and is invited to send their own.</p>
+
+    <p>What makes an artifact load-bearing: meaning the customer earns by encountering it more than once. Decorative objects are not load-bearing; they're additions. The brand commissions objects that operate the product, carry the practice forward, recognize tenure, or pass the merch selection criteria &mdash; deeper meaning than decoration, something specific, something the rest of the brand cannot say.</p>
+
+    <h3 class="subhead">§5 &mdash; <span class="accent">The visual register</span></h3>
+    <p>The brand's visual register is the hold: quiet persistence in routine work. Effort that has become habit, not effort being performed. Realistic and raw.</p>
+
+    <p>The work is the subject; the body is not. Posture is whatever the work produced. Light is whatever the situation offers. The brand documents continuation &mdash; not aspiration, not transformation, not lifestyle.</p>
+
+    <p>The antithesis is wellness-and-influencer imagery: bodies as objects of evaluation, performance staged as outcome, aspiration presented as identity. The brand refuses this register. The customer is the subject of the practice, not the object of a photo.</p>
+
+    <p>The full register doctrine &mdash; the load-bearing artifact tiers (T1 canonical / T2 customer-owned / T3 reverse-causality found-not-planted) &mdash; lives in the <strong>Visual Register Playbook</strong> at <code>notjustwellness.github.io/signal-deck/visual-register-playbook.html</code> (password <code>54321</code>).</p>
+
+    <h3 class="subhead">§6 &mdash; <span class="accent">The format</span></h3>
+    <p>The brand's primary visual format is first person. Camera = the subject's eyes. The film holds approximately 30 seconds of a daily situation, with Signal landing as a single beat inside it. Raw. Unstaged. Ambient.</p>
+
+    <p>The body is not in frame because the body is not the subject. The viewer doesn't watch someone live the practice &mdash; they live it themselves. Aspiration cannot stage what it cannot show.</p>
+
+    <p>No single 30-second sequence is canonical. The situation varies &mdash; the morning, the kitchen, the walk, the room before bed. Other people may appear in frame: a partner, a child, a friend. Their dialogue can be unhurried, even playful, as long as the world it lives in is the brand's.</p>
+
+    <p>Stills are allowed in support of the primary format, first-person-framed where possible. Other formats &mdash; third-person, product shots, founder content &mdash; are allowed only when they serve the primary; never as the primary.</p>
+
+    <h3 class="subhead">§7 &mdash; <span class="accent">What the brand will not show</span></h3>
+    <p>Walk past a competitor's display in a Whole Foods. Notice the visual language: the smiling-too-hard model, the abstract gradient mountain ranges, the hand-holding-product shot, the marketing-as-science chart. Each of those visuals carries the same failure pattern as the copy in Chapter 02. The brand refuses them &mdash; not because they are ugly, but because they tell the wrong story.</p>
+
+    <p>Four representative refusals:</p>
+
+    <p><strong>The lab-coat appeal-to-authority.</strong> White coats, microscopes, gloved hands holding beakers. Authority performed, not earned.</p>
+
+    <p><strong>The before-and-after body.</strong> Transformation-arc imagery; body change as promise. The brand does not evaluate bodies.</p>
+
+    <p><strong>The aspirational-lifestyle shot.</strong> Golden-hour yoga, hand-on-hip confidence, smiling-too-hard models holding the product. The customer is the object of the photo, not the subject of the practice.</p>
+
+    <p><strong>Borrowed-authority Mandarin / Chinese characters as decoration.</strong> Western brands appropriating Chinese characters for "ancient wisdom" cred. The brand uses no foreign-language ornament; it cannot tolerate the cliché in others.</p>
+
+    <h3 class="subhead">§8 &mdash; <span class="accent">Pointer</span></h3>
+    <p>The chapter covered what the brand looks like. <strong>Chapter 04 &mdash; Product Architecture</strong> covers what the brand makes &mdash; the formulation, SKU sequencing, dose detail, biochemistry. The visuals here need the products in Chapter 04 to give them something to render.</p>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ 04 — PRODUCT ARCHITECTURE ═══════════════════ -->
+<section class="page" id="ch04">
+  <div class="section-label">Chapter 04</div>
+  <h2>Product Architecture</h2>
+  <div class="prose" style="margin-top:32px;">
+
+    <h3 class="subhead">§1 &mdash; <span class="accent">The three layers</span></h3>
+    <p>Three SKUs. Each one a different layer of upstream work.</p>
+    <p>The architecture is not three flavors of the same product. It is three different jobs. <strong>N°001 is the foundation</strong> &mdash; a multi-active dual-chew that conditions the cellular substrate the body's other systems run on. <strong>N°002 is the daily fuel</strong> &mdash; a 5-active ATP-machinery chew that recycles, activates, and feeds the energy currency the cell spends. <strong>N°003 is the evening practice</strong> &mdash; a 5-active overnight chew that supports the maintenance work the body does while it sleeps.</p>
+    <p>The order matters. Foundation comes first because the substrate has to be conditioned before fuel and maintenance can act on it. A daily ATP stack landing on a magnesium-depleted, mitochondrially-stressed cell is pushing harder on a system that hasn't been prepared to receive it. Foundation first; everything stacks.</p>
+    <p>This is the architectural canonical from Chapter 01 made physical:</p>
+    <div class="canonical">Push the output, you get marketing. Remove the constraint, you get foundation.</div>
+    <p>The three SKUs name the three layers where constraints get removed.</p>
+
+    <h3 class="subhead">§2 &mdash; N°001 &mdash; <span class="accent">the foundation</span></h3>
+    <p>N°001 is a dual-chew packet. One substrate chew. One keystone chew. Eight branded actives across the two.</p>
+    <p>The keystone chew &mdash; the red one &mdash; carries the ionic activators and the mitochondrial protectors. Albion TRAACS® magnesium bisglycinate at roughly 200 mg elemental, the form the cell needs to activate ATP. AstaZine® astaxanthin for membrane protection. Kaneka QH® ubiquinol for the electron transport chain. MitoPrime™ ergothioneine for redox stability. And sensory-dose cofactors &mdash; Suntheanine®, N-Acetyl L-Tyrosine, L-citrulline &mdash; that shape the felt character of the chew without driving the claim.</p>
+    <p>The substrate chew &mdash; the amber one &mdash; carries the upstream conditioners. BioPQQ® for mitochondrial biogenesis. SpermidineLIFE® for autophagy. An active-form B-complex for methylation and energy metabolism. Gingerol to support gastric tolerance and absorption.</p>
+    <p>The biochemistry-honest claim is the one that earns N°001 the word <em>foundation</em>: the multi-system actives in this packet biochemically condition the substrate that everything else stacks on. The cell's mitochondrial density, autophagy load, redox state, and Mg-ATP activation are all upstream of what a creatine or a betaine or a urolithin can do. Condition the substrate; the downstream work compounds.</p>
+    <p>Magnesium form: bisglycinate. The cell needs to activate.</p>
+    <p>Launch: Q4 2026. Founder's Price locks for the first 500 names on the waitlist.</p>
+    <div class="packet-cluster">
+      <div class="packet-row">
+        <div class="packet-duo">
+          <img src="signal_packet_front.png" alt="signal N°001 front — matte red foil, 'send the right' headline in black with debossed IPA wordmark /sɪɡˈnɑːl/">
+          <img src="signal_n002_back.png" alt="signal N°001 back — clear AlOx film showing two chews stacked: amber substrate above, red keystone below">
+        </div>
+        <div class="packet-caption">signal N°001 &mdash; the foundation &middot; one substrate + one keystone chew</div>
+      </div>
+    </div>
+    <div class="stale-flag">Image asset queued for regeneration. Current renders carry pre-cascade typography and labels from the prior SKU numbering.</div>
+
+    <h3 class="subhead">§3 &mdash; N°002 &mdash; <span class="accent">the daily fuel</span></h3>
+    <p>N°002 is a two-chew packet. Both pearl, both the same. 5 branded actives. One job: ATP-machinery.</p>
+    <p>NNB Pürest Creatine™ recycles ATP. Albion TRAACS® magnesium bisglycinate activates it. Bioenergy Ribose® feeds it. BetaPower® Betaine (TMG) builds it. An active-form methylated B-complex enables every step of the cycle.</p>
+    <p>The category-default shorthand for this stack is <em>"creatine and magnesium"</em> &mdash; and the category-default is wrong. The stack is five actives, not two. Creatine and magnesium are the lead pair the SuppCo data validates; the other three are the cofactor work that lets the lead pair work at the dose printed on the label. Naming only the lead pair misrepresents the product as a 2-active SKU when it is a 5-active one. The brand never reduces.</p>
+    <p>This is the SKU the daily-stack literature already concentrates on. The user already takes creatine. The user already takes magnesium. The brand's argument is not that the user should take a different stack; it is that the stack the user already takes is missing the three cofactors the lead pair needs to operate at the dose printed on the label. N°002 is the version of the daily fuel that is honest about what the lead pair requires.</p>
+    <p>Magnesium form: bisglycinate. Same as the foundation &mdash; the cell needs to activate.</p>
+    <p>Launch: 2027. Stacks underneath N°001.</p>
+    <div class="packet-cluster">
+      <div class="packet-row scaled">
+        <div class="packet-duo">
+          <img src="signal_n001_front.png" alt="signal N°002 front — matte rose-linen foil, 'send the right' headline in signal red with debossed IPA wordmark /sɪɡˈnɑːl/">
+          <img src="signal_n001_back_v2.png" alt="signal N°002 back — clear AlOx film showing two cream pearl chews side-by-side">
+        </div>
+        <div class="packet-caption">signal N°002 &mdash; the daily fuel &middot; two pearl chews</div>
+      </div>
+    </div>
+    <div class="stale-flag">Image asset queued for regeneration. Current renders carry pre-cascade typography and labels from the prior SKU numbering.</div>
+
+    <h3 class="subhead">§4 &mdash; N°003 &mdash; <span class="accent">the evening practice</span></h3>
+    <p>N°003 is a two-chew packet for the overnight window. 5 branded actives. One job: maintenance.</p>
+    <p>Mitopure® Urolithin A drives mitophagy &mdash; the cellular cleanup that removes the mitochondria that have stopped working. Magtein® magnesium L-threonate crosses the blood-brain barrier and supports brain-tissue magnesium, NMDA-receptor gating, and sleep architecture. Glycine supports inhibitory signaling and sleep latency. Taurine supports osmoregulation and overnight ion homeostasis. Apigenin supports the molecular work the body does during the parasympathetic window.</p>
+    <p>Magnesium form: L-threonate. Same element as the foundation and the daily fuel, different form, different job. The cell needs to settle.</p>
+    <p>This is the unifying principle: <strong>magnesium is in every signal SKU, in the form that fits the layer.</strong> Bisglycinate in the foundation and the daily fuel, where the cell needs to activate. L-threonate in the evening practice, where the cell needs to settle. Same currency, three layers' worth of work.</p>
+    <p>Launch: 2028.</p>
+    <div class="packet-cluster">
+      <div class="packet-row scaled">
+        <div class="packet-duo">
+          <img src="signal_n003_front.png" alt="signal N°003 front — matte deep-evening foil, 'send the right' headline in cream with debossed IPA wordmark /sɪɡˈnɑːl/">
+          <img src="signal_n003_back.png" alt="signal N°003 back — clear AlOx film showing two soft lavender chews stacked vertically">
+        </div>
+        <div class="packet-caption">signal N°003 &mdash; the evening practice &middot; two lavender chews</div>
+      </div>
+    </div>
+    <div class="stale-flag">Image asset queued for regeneration. Current renders carry pre-cascade typography and labels from the prior SKU numbering.</div>
+
+    <h3 class="subhead">§5 &mdash; What the brand <span class="accent">refuses to add</span></h3>
+    <p>The discipline that lets the brand call itself <em>foundation</em> is not the list of what it carries. It is the list of what it refuses to carry until the evidence is honest.</p>
+    <p><strong>NAD⁺ precursors &mdash; NMN and NR &mdash; are not in the architecture.</strong> They are scientifically interesting. They are biomarker-validated. They are also functionally unproven enough that any brand selling them as foundational is overclaiming. The brand files them as experimental, not foundational. If the evidence base matures, the position can move. Until then, the architecture does not pretend.</p>
+    <p><strong>Iron, iodine, and the thyroid-related nutrients are not in the architecture.</strong> These are tested-before-supplemented. A person with normal ferritin who supplements iron can do real harm. A person with normal thyroid function who supplements iodine can do real harm. The category sells these blind because they sell. The brand sends the customer to a blood test instead, and the brand says so on the label.</p>
+    <p><strong>The architecture does not chase sleep with a supplement.</strong> The honest answer for many of the category's customers is <em>"your numbers are fine, fix your sleep instead."</em> The brand is willing to send a customer away when the right intervention is not a SKU it makes. This is not a marketing line. It is the discipline that lets <em>foundation</em> mean what it claims.</p>
+    <p>The architecture is upstream. Push the output, you get marketing. Remove the constraint, you get foundation.</p>
+
+    <h3 class="subhead">§6 &mdash; <span class="accent">Pointer to Chapter 05</span></h3>
+    <p>This chapter covered what the brand makes. <strong>Chapter 05 &mdash; The Manifesto</strong> covers the world the products live inside &mdash; the customer-facing argument, the 30-day cycle, the practice, the antagonist, the kicker that closes the door on the category. The architecture in Chapter 04 is what every claim in Chapter 05 rests on. Read it next when the architecture needs to defend itself in language.</p>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ 05 — THE MANIFESTO ═══════════════════ -->
+<section class="page" id="ch05">
+  <div class="section-label">Chapter 05</div>
+  <h2>The Manifesto</h2>
+  <div class="prose" style="margin-top:32px;">
+
+    <h3 class="subhead">§1 &mdash; <span class="accent">How to read this chapter</span></h3>
+    <p>The manifesto is the customer-facing canonical artifact. Thirteen sections, named §I through §XIII, written for the reader who has never heard of signal and may never read another page of the brand's writing.</p>
+    <p>This chapter is the codex view of that manifesto. It walks the codex-reader through all thirteen sections, names the locked H2 and opening line for each one, and adds codex-layer commentary on what argument the section carries &mdash; the load-bearing structural job each section does inside the whole, not the prose itself.</p>
+    <p>The manifesto reads forward. The codex reads down. Both readings are correct.</p>
+    <p><strong>The drift discipline:</strong> if this chapter and the live manifesto disagree, the codex wins. The codex names the load-bearing positions; the manifesto is the surface that carries them to the customer. When the surface drifts, the surface updates.</p>
+    <p><strong>Mandarin parallels:</strong> the live manifesto carries Mandarin parallel blocks for every section. Phase 1 of the brand is US-launch only; this chapter is English. The Mandarin lives in the production artifact for the future expansion window.</p>
+
+    <h3 class="subhead">§2 &mdash; <span class="accent">The thirteen sections</span></h3>
+
+    <p><strong>§I &mdash; The Category.</strong> H2: <em>"You have a skincare ritual. Why wouldn't you have one for your cells?"</em> Opening: <em>"Skincare is the daily practice for the surface of you. Signal is the daily practice for the inside &mdash; the cells that run every system in your body."</em> The section answers the category question by mirroring an existing daily category the customer has already accepted. The argument is not new biology; it is the analogous behavioral logic. Skincare made a $150B category by teaching the word <em>routine</em>. Signal makes the same move for what is underneath the surface.</p>
+
+    <p><strong>§II &mdash; On Trust.</strong> H2: <em>"Two questions before any mechanism claim."</em> Opening: <em>"Before we tell you what signal does, we owe you the two answers most supplement brands skip. They're not garnish. They're the entry condition."</em> The section pre-empts the two rage triggers the brutal market-fit assessment flagged as the category's #1 and #2 unanswered objections &mdash; billing hostility and claims theater. Four canonicals land here: <em>"One tap to start. One tap to stop." · "We name the dose. Not the outcome." · "Function over fiction." · "Real ingredients. Real doses. No marketing science."</em> Trust is the entry condition; the rest of the manifesto cannot earn its claims without it.</p>
+
+    <p><strong>§III &mdash; The Mechanism.</strong> H2: <em>"Your cells run on energy. Energy runs on magnesium."</em> Opening: <em>"Every cell in your body runs on ATP &mdash; the molecule that powers everything cells do. Repair DNA. Build proteins. Fire a thought. But ATP doesn't work alone. It only does its job when magnesium is attached to it."</em> The section grounds the brand's biochemistry claim in the one ion the cell cannot operate without. The dark-background treatment is a deliberate register shift &mdash; this is the section the manifesto wants the customer to feel the weight of. It also names the per-SKU Mg form discipline: bisglycinate in the foundation and the daily fuel, L-threonate in the evening practice.</p>
+
+    <p><strong>§IV &mdash; What We're Shipping.</strong> H2: <em>"Signal launches in layers."</em> Card row: N°001 (Q4 2026, the foundation) · N°002 (2027, the daily fuel) · N°003 (2028, the evening practice). The section is the product-architecture pointer. The codex expands the formulation detail in Chapter 04. Here the section's job is the layered-launch register &mdash; the brand is not shipping one product and adding to it; the brand is shipping a foundation that fuel and maintenance stack underneath in time.</p>
+
+    <p><strong>§V &mdash; The Vessel.</strong> H2: <em>"Designed for the counter. Not the cabinet."</em> Opening: <em>"Most supplements lose to geography. They get tucked into a cabinet, then a drawer, then forgotten. The product you don't see is the product you stop taking."</em> The section is the case for the format. Adherence is a retention problem; geography is the lever. The vessel is engineered to live on a counter the way a moisturizer does. The argument crosses over to Chapter 03's tray and packet system without reproducing the visual detail.</p>
+
+    <p><strong>§VI &mdash; The Formulation.</strong> H2: <em>"Four keystones. Named. Dosed. On label."</em> Opening: <em>"The foundation keystone chew &mdash; the red one &mdash; carries one ionic activator plus three mitochondrial protectors."</em> The section names the four keystones inside the N°001 red chew. Each is a registered ingredient brand with peer-reviewed evidence at the dose printed on the label. The section closes on the <em>mechanism only, no outcome claims</em> discipline &mdash; the brand describes what the cell uses, not what the customer feels.</p>
+
+    <p><strong>§VII &mdash; Why Now.</strong> H2: <em>"The architecture is validated. The category is open."</em> Opening: <em>"In April 2026, Unilever acquired Grüns &mdash; a daily-greens packet brand, three years old, packet-in-container format &mdash; for $1.2 billion."</em> The section is the timing argument for the investor and partner reader. Grüns at $1.2B validates the format; the 2025 Weissig review validates the upstream-mechanism category narrative. The section names the AG1 / IM8 alpha and refuses to compete with them &mdash; signal sits underneath, not beside. Three moats are named: Send a Signal, the sound bite, the multi-phase flavor profile. Patents are table stakes; these are what competitors cannot retroactively assemble.</p>
+
+    <p><strong>§VIII &mdash; The Practice.</strong> H2: <em>"Signal is the bricks and mortar. You are the architect."</em> Opening: <em>"Most brands sell you the whole answer. We don't. Signal is necessary, but not sufficient."</em> The section is the brand's refusal to oversell. The chew is one part of the practice; food, sleep, and movement are the rest. The section's job is to install the word <em>practice</em> and the discipline that comes with it &mdash; the customer who buys a practice is more durable than the customer who buys a promise.</p>
+
+    <p><strong>§IX &mdash; What You'll Feel.</strong> H2: <em>"Signal doesn't tingle. That's the whole point."</em> Opening: <em>"You don't feel your moisturizer working. You wouldn't stop using it. Skincare's job is upkeep &mdash; the felt-outcome stuff is what you go to a dermatologist for."</em> The section pre-empts the felt-effect objection. The category teaches the customer to expect a sensation; the brand teaches them to expect a daily act. The receipt is the chew itself, not the felt outcome. The section is the brand's clearest refusal of the stimulant-placebo-90-day-mistake triad the category sells.</p>
+
+    <p><strong>§X &mdash; On Food.</strong> H2: <em>"Eat real food. Take real doses."</em> Opening: <em>"You should eat real food. We agree."</em> The section is the answer to the <em>"I can just eat real food"</em> objection. Three math beats break the argument: creatine 5 g/day lives in 1.5 lb of red meat · soil magnesium has fallen 25&ndash;50% since the 1950s · the MTHFR slow allele affects roughly 40% of the population and cannot activate folic acid efficiently. The closer threads the discipline through every concession: <em>"Wash your face. Eat real food. Take signal. Three daily practices that don't replace each other."</em></p>
+
+    <p><strong>§XI &mdash; How It Spreads.</strong> H2: <em>"Foundation in one life. Passed to the next."</em> Opening: <em>"This is a new daily practice. Every new practice needs a vocabulary, and a reason to start before the proof is in. Send a Signal gives both."</em> The section names the brand's category-creation mechanic. A customer already inside the practice can Send a Signal to one or two people closest to them &mdash; at checkout, after committing to their own order. $5 per send &mdash; a price engineered to be honest &mdash; pays for one packet, mounted on a cream card, with an A7 insert that teaches what signal is. No personalization, no sender note &mdash; just the signal arriving at a doorstep. The CTA on every card reads the same way: <em>YOUR TURN &rarr; SEND A SIGNAL.</em> The packet is the format demo, not the answer; the mechanism is what happens once signal enters the recipient's daily practice. Acquisition channel and category-creation engine in one mechanic.</p>
+
+    <p><strong>§XII &mdash; The World Beneath.</strong> H2: <em>"The brand has a second voice. Some will hear it."</em> Opening: <em>"Look at a packet. The wordmark &mdash; /sɪɡˈnɑːl/ &mdash; isn't decoration. It's a phonetic instruction."</em> The section is the brand's decode-it posture made visible. Hidden references on the packet, the divider, the Send a Signal card &mdash; none of them explained on the homepage. The customer who finds it, finds it. The customer who doesn't has a great daily foundation. Both readings are correct. This is the section the <em>build a world, let them decode it</em> discipline points to.</p>
+
+    <p><strong>§XIII &mdash; Who's Doing It.</strong> H2: <em>"INSDR Wellness builds the foundation everything else stands on."</em> The closing section is the corporate-attribution mode of the brand architecture discipline &mdash; INSDR Wellness as the company, signal as the product, the foundation as the brand position. The section closes the manifesto and points forward to the practice the customer is invited to begin: <em>"Start the practice."</em></p>
+
+    <h3 class="subhead">§3 &mdash; <span class="accent">The canonical thread</span></h3>
+    <p>The canonical-sentence library threads through the manifesto without being announced. Eight canonicals land across the thirteen sections:</p>
+    <ul>
+      <li><em>"Signal is the foundation everything else stands on."</em> (B) &mdash; §I body · §VIII close · §XIII H2</li>
+      <li><em>"Foundation first. Everything stacks."</em> (C) &mdash; §IV layered-launch logic · §VIII pacing</li>
+      <li><em>"Push the output, you get marketing. Remove the constraint, you get foundation."</em> (architectural) &mdash; §III closer pullquote · also lives in Chapter 01 §3</li>
+      <li><em>"One tap to start. One tap to stop."</em> (A) &mdash; §II billing-trust pullquote</li>
+      <li><em>"We name the dose. Not the outcome."</em> (D-a) &mdash; §II claims-theater pullquote</li>
+      <li><em>"Function over fiction."</em> (D-e) &mdash; §II claims-discipline pullquote</li>
+      <li><em>"Real ingredients. Real doses. No marketing science."</em> (E-update) &mdash; §II closer pullquote</li>
+      <li><em>"Eat real food. Take real doses."</em> (D) &mdash; §X H2</li>
+    </ul>
+    <p>Eight canonicals across thirteen sections is not arbitrary. The brand uses canonical sentences as load-bearing punctuation &mdash; each one closes an argument or opens one, never decorates. When a canonical retires, the manifesto loses a structural beam; the codex's job is to know which beam holds which weight.</p>
+
+    <h3 class="subhead">§4 &mdash; <span class="accent">Drift discipline</span></h3>
+    <p>The codex names the load-bearing positions. The manifesto carries those positions to the customer. When the surface drifts &mdash; a section gets rewritten, a canonical relocates, a pullquote changes &mdash; the question is which document carries the brand. The codex does.</p>
+    <p><strong>When this chapter and the live manifesto disagree:</strong> the manifesto updates. Not by mechanical sync, but by re-deciding which version is the brand. If the new version of the manifesto is right, the codex's underlying source (the chapter that holds the canonical, the brand-architecture rule, the time vocabulary) updates first. The manifesto follows from the source.</p>
+    <p><strong>When a canonical retires:</strong> the codex retires it in the chapter where it was locked. The manifesto then has the next deploy window to swap in the replacement. The brand never carries a retired canonical in customer-facing copy; the codex annotates the change in the source chapter, never as a retirement footnote in the manifesto.</p>
+    <p>This is the no-drift discipline. See Chapter 06 §3 for the operational version of the same rule.</p>
+
+    <h3 class="subhead">§5 &mdash; <span class="accent">Pointer to Chapter 06</span></h3>
+    <p>This chapter covered the customer-facing argument. <strong>Chapter 06 &mdash; Operational Discipline</strong> covers where that argument gets published, on what cadence, on which surfaces, with which approvals &mdash; the marketing playbook, the build-a-world / decode-it posture in full, the AI-is-plumbing rule, the content audit. Read it next when writing copy in the wild.</p>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ 06 — OPERATIONAL DISCIPLINE ═══════════════════ -->
+<section class="page" id="ch06">
+  <div class="section-label">Chapter 06</div>
+  <h2>Operational Discipline</h2>
+  <div class="prose" style="margin-top:32px;">
+
+    <h3 class="subhead">§1 &mdash; <span class="accent">How to read this chapter</span></h3>
+    <p>The marketing playbook is the brand's operational doctrine &mdash; what gets published, on what cadence, on which surfaces, with which discipline. Nine sections, named §I through §IX. Together they answer the question the codex itself does not answer: <em>given the thesis, the voice, the visual system, the products, and the manifesto &mdash; how does the brand actually run?</em></p>
+    <p>This chapter is the codex view of that playbook. It walks the codex-reader through all nine sections, names the locked H2 and opening line for each one, and adds codex-layer commentary on what discipline each section installs.</p>
+    <p>Three meta-rules sit above the playbook's section structure &mdash; rules that operate across every section rather than inside any single one. Those live in §3 of this chapter.</p>
+    <p>The drift discipline is the same one Chapter 05 §4 established: when this chapter and the live playbook disagree, the codex wins. The codex names the operational positions; the playbook reflects them. When the playbook drifts, the playbook updates.</p>
+
+    <h3 class="subhead">§2 &mdash; <span class="accent">The nine sections</span></h3>
+
+    <p><strong>§I &mdash; The Five.</strong> H2: <em>"The unbreakable values."</em> Opening: <em>"Five values. The shape of every world we build. Equally weighted. None compensates for another. If a piece of work fails one, it fails all five."</em> The section names the five operational values: <strong>Clarity</strong> · <strong>Usefulness</strong> · <strong>Honesty</strong> · <strong>Consistency</strong> · <strong>Earned Authority.</strong> Each carries a kicker. The kickers are operational &mdash; <em>"If a sentence needs a second read, cut it in half." · "Six seconds, one thing learned." · "If you'd cringe seeing it next to the evidence, don't ship it." · "Consistency is the new persuasion." · "Authority is given. We earn the right to receive it."</em> The section closes on the brand-level claim: authenticity is not a sixth value; it is what the other five make.</p>
+
+    <p><strong>§II &mdash; The Posture.</strong> H2: <em>"We build a world. We don't pitch."</em> Opening: <em>"You can't sell anyone anything anymore. The phone in their pocket counter-arguments any pitch in real time."</em> The section installs the marketing posture as world-building. Six sub-principles govern it: build a world and invite people in · curiosity over persuasion · scarcity as posture not tactic · authority given not announced · constant low-lift presence not campaigns · six months before any pitch. The section's load-bearing kicker: <em>"If a stranger has to be asked, we asked too soon."</em></p>
+
+    <p><strong>§III &mdash; The Layers.</strong> H2: <em>"Universal first. Decoded second."</em> Opening: <em>"Every world has surface and depth. Most readers experience the surface; some find the decode; fewer go deep. All three readings are valid. None is required."</em> The section installs the layered-decoding discipline: the brand's identity compounds over time because the customer who finds a deeper layer feels like an insider for noticing it. The surface is the entry condition; the decode is the reward; the deep reading is for the few who go further. Each layer is independently complete. Specific examples of the decode mechanic live in the playbook; the codex holds the principle.</p>
+
+    <p><strong>§IV &mdash; Every Piece.</strong> H2: <em>"Every piece is a doorway. Build it accordingly."</em> Opening: <em>"We don't think in campaigns or assets. We think in pieces &mdash; daily, light, fast, shot from where we already are."</em> Five rules govern every piece regardless of channel: <strong>six-second teach</strong> (the test, not the constraint) · <strong>product in the first two seconds</strong> · <strong>shot on a phone, feels native</strong> · <strong>the hook can't be guessable</strong> · <strong>same message, different format, every place.</strong> The section closes the loop on §II's posture by making the rules concrete: pieces, not campaigns. Daily, not bursts.</p>
+
+    <p><strong>§V &mdash; Claimed By Others.</strong> H2: <em>"A brand can't claim its way into credibility. It has to be claimed by other people."</em> Opening: <em>"Authority used to come from megaphones. Now it comes from the absence of one."</em> The section installs the credibility discipline. Five sub-principles: real people in real places repeatedly · specific over generic · third-party unpaid · Send a Signal as gift not affiliate · no undisclosed presence. The section names the asymmetry: a creator we didn't pay carries trust a paid one cannot manufacture. <em>"If we paid for the proof, it isn't proof."</em></p>
+
+    <p><strong>§VI &mdash; What We Refuse.</strong> H2: <em>"The shortest list is also the most important."</em> Opening: <em>"Most brand failures aren't from missing what to do; they're from not refusing what's easy."</em> Nine refusals: no hero shots or brand films · no announced authority · no campaigns · no exciting sells · no guessable hooks · no banned vocabulary · no subscription traps · no founder-as-protagonist · AI is not the voice. The section is the operational counterpart to Chapter 02 §2's voice-level banned vocabulary &mdash; the same discipline applied to behavior instead of language.</p>
+
+    <p><strong>§VII &mdash; Where We Live.</strong> H2: <em>"Channels are world-extensions. Not megaphones."</em> Opening: <em>"Each channel is a different room of the same world. The voice doesn't change between rooms. The cadence does."</em> Five channel principles: organic social (the daily presence &mdash; three to seven pieces a week) · email and SMS (the receipt &mdash; extensions of the world, not discount engines) · PR and partnerships (where authority is claimed, never pitched for vanity) · retail (where the brand becomes physical, a shelf is a touchpoint not a transaction) · Send a Signal (the gifting channel &mdash; not volume acquisition; compounds the customers the brand already wants most).</p>
+
+    <p><strong>§VIII &mdash; The Audit.</strong> H2: <em>"Twenty questions. Score each 1&ndash;5."</em> Opening: <em>"The playbook is the principle. The audit is the test. Run any piece through these twenty before it ships &mdash; or run a current campaign through them when something feels off."</em> Twenty questions across five categories &mdash; <strong>Hook &amp; Messaging</strong> · <strong>Content Format</strong> · <strong>Authority Signals</strong> · <strong>Channel Strategy</strong> · <strong>Proof &amp; Consistency</strong> &mdash; each with four questions, scored 1&ndash;5. Score bands: <strong>80&ndash;100</strong> brand operating at full discipline · <strong>60&ndash;79</strong> category leader on most axes, one or two need attention · <strong>40&ndash;59</strong> category default creeping in · <strong>below 40</strong> don't ship. The audit is the brand's continuous self-test; the playbook's principles compile into the questions; the questions compile into a number.</p>
+
+    <p><strong>§IX &mdash; Owned Objections.</strong> H2: <em>"The questions we answer before they're asked."</em> Opening: <em>"Every category-creation brand earns trust by owning the legitimate skepticism, not deflecting it."</em> The section is a working set of canonical-grade answers to the top consumer rage triggers. First entry: <em>"Just eat real food"</em> &mdash; canonical <em>"Eat real food. Take real doses."</em> with supporting math (creatine 5g lives in 1.5 lb red meat · Mg bisglycinate ~80% absorption vs oxide ~4% · MTHFR slow allele ~40% · methylated B-complex). The brand's owned-objections discipline also lives in Chapter 02 §4 (voice level) and manifesto §II and §X (deploy level). The playbook's §IX is the working catalogue &mdash; entries are added as canonicals lock.</p>
+
+    <h3 class="subhead">§3 &mdash; <span class="accent">The governing rules</span></h3>
+    <p>Three rules sit above the playbook's section structure. They are not section content; they are how the playbook operates across every section.</p>
+    <p><strong>AI is plumbing, not voice.</strong> AI does not originate copy. AI does not speak for the brand. Every brand-facing touchpoint &mdash; a caption, a comment reply, a packet insert, a creator brief, a DM, an email subject line, an SMS, a script, a hook &mdash; originates with a human who has the lived context to mean it. AI is allowed to refine human work: tighten a sentence, catch a redundancy, suggest a sharper cadence. The original idea, the original sentence, the original frame must come from a human first. The kicker: <em>"AI doesn't get to start the sentence."</em> This rule lives at the playbook §VI level but governs every section.</p>
+    <p><strong>World-building, not pitching.</strong> The brand never pitches. The brand builds a world worth walking into and lets the right people walk in. The packet front carries no claim. The chew is the receipt. The IPA is the cipher; the manifesto is the long read for whoever wants it. Every layer rewards attention; nothing demands it. This is §II's posture made operational across every other section &mdash; the layered structure of §III, the doorway logic of §IV, the absence of announced authority in §V and §VI all derive from this rule.</p>
+    <p><strong>Intentional artifact discipline.</strong> The brand commissions objects across four buckets: <strong>operational</strong> (necessary to use the product), <strong>practice-carrier</strong> (carry the practice forward between customers, like the decode card), <strong>recognition</strong> (earned through tenure, like the annual coin), and <strong>merch</strong> (allowed under a selection-criteria filter). Merchandise is a part of customer engagement; the brand commissions it deliberately. Every merch piece must clear three criteria: (a) deeper meaning than decoration &mdash; the piece is <em>about</em> something specific, not the brand's name pasted on a category-default object; (b) something specific &mdash; it names a particular thing the brand owns; (c) something the rest of the brand cannot say &mdash; it exists because the manifesto, the packet, the playbook, the codex can't carry what it carries. The category-default failure mode &mdash; the brand's name pasted on a hoodie or mug for the sake of revenue &mdash; remains banned, not because merch is forbidden but because such pieces fail the criteria. The kicker: <em>"Logo on a thing is not a thing."</em></p>
+
+    <h3 class="subhead">§4 &mdash; <span class="accent">Drift discipline</span></h3>
+    <p>The drift discipline is the same one Chapter 05 §4 established. The codex names the load-bearing operational positions; the playbook reflects them. When the playbook drifts &mdash; a section gets rewritten, a refusal retires, a channel principle changes &mdash; the playbook updates from the codex source, not the other way around.</p>
+    <p>When a new operational rule earns its place, it is locked first in the feedback-memory layer (the working source-of-truth between sessions), then surfaces in this chapter's source paragraph, then cascades into the live playbook. See Chapter 05 §4 for the full discipline.</p>
+
+    <h3 class="subhead">§5 &mdash; <span class="accent">Pointer to Chapter 07</span></h3>
+    <p>This chapter covered how the brand runs. <strong>Chapter 07 &mdash; Customer Experience &amp; Ritual</strong> covers what happens to the customer inside the brand &mdash; the 30-day cycle, the practice, the annual coin, the gifting moment, the artifacts the customer holds. The operational discipline in Chapter 06 is what makes the ritual in Chapter 07 land consistently across every customer touchpoint.</p>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ 07 — CUSTOMER EXPERIENCE & RITUAL ═══════════════════ -->
+<section class="page" id="ch07">
+  <div class="section-label">Chapter 07</div>
+  <h2>Customer Experience &amp; Ritual</h2>
+  <div class="prose" style="margin-top:32px;">
+
+    <h3 class="subhead">§1 &mdash; <span class="accent">How to read this chapter</span></h3>
+    <p>The customer experience is what happens to a person inside the brand. Not the marketing they see before they buy, not the product they hold once they have it &mdash; the texture of being a customer, day to day, cycle to cycle, year to year.</p>
+    <p>This chapter walks that experience chronologically. The 30-day cycle as the quantum. The daily practice as the texture. Send a Signal as the gifting moment. Year I as the recognition. The lifetime register as the horizon every part of the experience eventually answers to.</p>
+    <p>Three disciplines from earlier chapters compound here: the customer-facing language triad from Chapter 01 §5 (foundation · the practice · 30-day cycle), the intentional artifact discipline from Chapter 06 §3 (operational · practice-carrier · recognition · merch under selection criteria), and the time vocabulary locked by the World Codex (30 days · a lifetime). The chapter does not re-derive them; it lands them on the customer.</p>
+
+    <h3 class="subhead">§2 &mdash; <span class="accent">The 30-day cycle</span></h3>
+    <p>The brand operates on a single time unit. One cycle is thirty days. One order is one cycle. One cycle is the unit of measurable foundation-laying.</p>
+    <p>The customer who asks <em>"how long until I notice anything?"</em> gets the brand's locked answer:</p>
+    <div class="canonical">A month to feel built on. A lifetime to feel built up.</div>
+    <p>Two clauses. The first names the concrete anchor &mdash; the cycle the customer is paying for, the time the biochemistry needs, the order cadence the brand operates on. The second names the horizon &mdash; the timescale the brand actually lives in.</p>
+    <p>The line works as a refusal of the felt-fast register. Anything under thirty days is out for customer-facing surfaces; promises of <em>"feel it in a week" · "noticeable in days"</em> belong to a category the brand exists to refuse. The customer the brand wants is one who accepts the longer timescale because the architectural claim makes the longer timescale honest.</p>
+    <p>The cycle is also the brand's reorder cadence. Day 30 is the LTV gate. The cycle is the unit of measurable retention. The customer doesn't perform progress; the cycle does the measuring.</p>
+
+    <h3 class="subhead">§3 &mdash; <span class="accent">The practice</span></h3>
+    <p>The practice is what taking signal <em>is.</em> Daily. Quiet. The chew, the packet, the tray, the counter. The customer's morning has a new beat inside it; the brand's job is to make that beat feel as obvious as the rest of the morning.</p>
+    <p>The customer holds four operational artifacts in the first cycle. <strong>The packet</strong> &mdash; N°001, foundation, dual chew. <strong>The tray</strong> &mdash; the paperboard vessel that lives on the counter, sized to the cycle, refilled each month. <strong>The dividers</strong> &mdash; four frosted acetate slips inside the tray, one of which carries the IPA wordmark; the customer who looks finds it. <strong>The Travel Container</strong> &mdash; the daily carry, acquired through use, the artifact that makes the practice portable.</p>
+    <p>None of these is sold separately. None is additive to the product. They are what the practice requires; they exist because the practice requires them. The intentional artifact discipline from Chapter 06 §3 governs every one: operational by design, not by accident.</p>
+    <p>The customer who runs the practice for thirty days has done one cycle. The customer who runs it for ninety has done three. The brand's time vocabulary stays at one resolution: cycles. The customer is not asked to track anything finer than that. The cycle is the receipt.</p>
+
+    <h3 class="subhead">§4 &mdash; <span class="accent">Send a Signal</span></h3>
+    <p>A customer who has just committed to their own order &mdash; first-time or reorder &mdash; is offered, at checkout, the option to Send a Signal to one or two people closest to them.</p>
+    <p>Send a Signal is gifting, not marketing. The recipient register is intimate: a sister, a partner, a parent, a best friend. Not a contact list. Not a referral chain. The customer who sends is not running an acquisition channel for the brand; the customer is extending their own order to people in their daily life.</p>
+    <p>The mechanic is operationally light. <strong>$5 per send</strong> &mdash; a price engineered to be honest against premium-gifting analogs that start at $25. One packet, mounted on a cream card, with an A7 insert that teaches what signal is. No personalization. No sender note. The CTA on every card reads the same way: <em>YOUR TURN &rarr; SEND A SIGNAL.</em></p>
+    <p>The program economics carry the gifting register through the back end. <strong>Earned credits</strong> &mdash; every order ships with one to three free Send a Signal credits, so the customer's first send carries no cash friction at the highest-intent moment. <strong>Reciprocity loop</strong> &mdash; when a recipient converts to their own order, the sender gets a credit back. The brand absorbs the first send and rewards the relationship that makes a second send make sense.</p>
+    <p>The KPI is <em>recipient conversion rate</em>, not sends per month. The right metric for a gifting channel is whether the people who receive it become customers &mdash; not whether the channel produces volume. Send a Signal compounds the customer base the brand already wants most; it does not substitute for the channels that build it. Volume comes from organic, content, retail, and paid.</p>
+    <p>The closer register, threaded through the card copy: care arriving from inside the practice.</p>
+
+    <h3 class="subhead">§5 &mdash; <span class="accent">Year I and beyond</span></h3>
+    <p>The brand's only physical recognition artifact arrives at the customer's anniversary. One year of the practice. One coin.</p>
+    <p><strong>The annual coin</strong> is brushed metal &mdash; matte silver in the canonical render, brass and bronze still in flight as material directions &mdash; about 38 mm across, 3 mm thick. The IPA wordmark <em>(/sɪɡˈnɑːl/)</em> is deeply etched on the obverse, framed by a thin debossed inner rim. A Roman numeral year sits on the reverse: I, II, III, V, X, XXV. Identical design across years; only the year changes. The coin patinates with handling. What the customer earns by Year V looks measurably different from what they earned by Year I.</p>
+    <p>The coin arrives in a small kraft paperboard box, closed with a deep Signal-red wax seal stamped with the IPA glyph cluster pressed onto the lid. The kraft format reads as material continuity with the existing tray vessel &mdash; not as special packaging. After five years, the customer has a small stack: five coins, five boxes, the years that came with them.</p>
+    <p><strong>Year-one-or-nothing.</strong> This is the discipline that makes the coin honest. There is no day-30 trinket. No ninety-day welcome chip. No half-year tease. The customer who does not make it to one year gets nothing physical. The pre-Year-I cadence is intentionally empty. The threshold is the point.</p>
+    <div class="canonical">You don't get rewarded for going halfway.</div>
+    <p>The kicker holds at multiple layers. The customer who has been in the practice for forty weeks does not get four-tenths of a coin. The brand does not partial-reward effort that hasn't compounded. The reward is the threshold; the threshold is what makes the reward mean something.</p>
+    <p>After Year I, the customer is inside a recognized tenure. The next coin is twelve months out. The stack grows annually. The brand's lifetime register from manifesto §XI lives here: <em>"Foundation in one life. Passed to the next."</em> A coin is what survives the practice when the packet does not. A stack of coins is tenure made physical. Time the customer can hold.</p>
+
+    <h3 class="subhead">§6 &mdash; <span class="accent">Pointer to Chapter 08</span></h3>
+    <p>This chapter covered what the customer experiences. <strong>Chapter 08 &mdash; Defensive / IP</strong> covers what the brand has filed, owns, and protects &mdash; the brand-architecture lockup carve-outs, the USPTO defensive marks, the cellcare trademark posture, the IPA wordmark and the visual system as proprietary identity. The customer never sees most of Chapter 08. The chapter exists to make sure no one else can mistake what the brand owns.</p>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ 08 — DEFENSIVE / IP ═══════════════════ -->
+<section class="page" id="ch08">
+  <div class="section-label">Chapter 08</div>
+  <h2>Defensive / IP</h2>
+  <div class="prose" style="margin-top:32px;">
+
+    <h3 class="subhead">§1 &mdash; <span class="accent">What defensive work secures</span></h3>
+    <p>The customer never sees most of this chapter. The chapter exists to make sure no one else can mistake what the brand owns.</p>
+    <p>Defensive work secures four things. First, the <strong>brand architecture</strong> &mdash; the three-level hierarchy that lets the company, the category, and the product each do its own job without collapsing into the others. Second, the <strong>visible identity</strong> &mdash; the IPA wordmark, the color system, the packet, the tray, the coin &mdash; the typographic and material grammar that, taken together, makes any signal artifact recognizable on sight. Third, the <strong>trademark posture</strong> &mdash; the defensive filings that hold both the visible marks and the descriptors a competitor might otherwise occupy. Fourth, the <strong>customer-facing language</strong> &mdash; the triad of foundation, the practice, and the 30-day cycle that protects the brand by giving the consumer plain English where the category would otherwise default to an opaque category word.</p>
+    <p>The chapter walks each in order. The brand's defensive posture is not aggressive. It is deliberate.</p>
+
+    <h3 class="subhead">§2 &mdash; <span class="accent">The hierarchy and the three sanctioned patterns</span></h3>
+    <p>The brand operates on a three-level hierarchy:</p>
+    <div class="canonical">INSDR Wellness (the company) &rarr; cellcare (the category we're building) &rarr; signal (our first product brand within it).</div>
+    <p>Three things, three levels. The brand's discipline is to keep them visibly separate. The failure mode is the smush &mdash; collapsing two levels into one, treating <em>"INSDR signal"</em> as if it were a single brand name, or letting the category descriptor drift into product-name territory.</p>
+    <p>When both names appear in the same sentence, the brand allows three patterns and no others:</p>
+    <ul>
+      <li><strong>Corporate-led.</strong> <em>"INSDR Wellness, the cellcare company, makes signal &mdash; the first cellcare chew."</em> Used for press, investor intros, B2B.</li>
+      <li><strong>Product-led.</strong> <em>"signal is the cellcare chew from INSDR Wellness &mdash; the cellcare company."</em> Used for product PR, about pages.</li>
+      <li><strong>Category-led.</strong> <em>"cellcare is the category INSDR Wellness is building. signal is its first product."</em> Used for manifesto, world-building, founder narrative.</li>
+    </ul>
+    <p>Four banned constructions in marketing copy:</p>
+    <ul>
+      <li><em>"INSDR signal"</em> &mdash; different levels, can't be smushed.</li>
+      <li><em>"signal by INSDR Wellness"</em> as a hero or wordmark pairing &mdash; footer-only attribution.</li>
+      <li><em>"INSDR Wellness &mdash; the cellcare brand"</em> &mdash; INSDR is the <em>company</em>, cellcare is the <em>category</em>, signal is the <em>brand</em>; the construction blurs all three.</li>
+      <li><em>"INSDR's signal..."</em> possessive &mdash; corporate-y, kills the brand voice.</li>
+    </ul>
+    <p>The rule does not soften by surface. Marketing copy bans the smushes; trademark filings, by contrast, deliberately register some of them (see §4). The two layers operate on different rules for the same reason: marketing earns trust by holding distinctions; trademarks earn protection by occupying every adjacent variant.</p>
+
+    <h3 class="subhead">§3 &mdash; <span class="accent">The wordmark and visual identity as registered IP</span></h3>
+    <p>The most visible piece of brand identity is the <strong>IPA wordmark</strong> &mdash; <em>(/sɪɡˈnɑːl/)</em>. Held against the packet front, it is a label. Debossed into the empty tray floor, revealed at the end of a 30-day cycle, it is a quiet end-marker. Etched into a frosted acetate divider, lit from the side, it is a found-not-planted artifact for the customer who looks. Etched into the obverse of the annual coin, it is the year's signature.</p>
+    <p>The wordmark is also a registered defensive filing. The brand treats it not only as a typographic convention but as protected IP &mdash; the visible identity that, once filed, cannot be lifted by a competitor in the cellcare or adjacent supplement categories.</p>
+    <p>Beyond the wordmark, the visual identity carries three additional load-bearing pieces. The <strong>packet color system</strong> &mdash; Signal Red for N°001 foundation, Rose Linen for N°002 daily fuel, Deep Evening for N°003 evening practice &mdash; establishes the SKU-to-color mapping that the brand owns by repetition. The <strong>tray and the four frosted acetate dividers</strong> establish the counter format the customer keeps. The <strong>annual coin</strong> &mdash; matte silver, IPA wordmark obverse, Roman year reverse &mdash; establishes the recognition object the brand mints, never sells.</p>
+    <p>Each piece compounds the others. The defensive filings hold the visible marks; the customer's daily encounter with them holds the meaning.</p>
+
+    <h3 class="subhead">§4 &mdash; <span class="accent">The defensive trademark posture</span></h3>
+    <p>The brand's defensive trademark program covers eight marks across two tiers &mdash; the visible identity that lives in customer-facing surfaces and the defensive descriptors that prevent competitor occupation.</p>
+    <p><strong>Tier 1 &mdash; Visible identity:</strong></p>
+    <ul>
+      <li><strong>/sɪɡˈnɑːl/</strong> (the IPA wordmark) &mdash; the brand's visible name as registered IP.</li>
+    </ul>
+    <p><strong>Tier 2 &mdash; Defensive descriptors and house marks:</strong></p>
+    <ul>
+      <li><strong>INSDR SIGNAL</strong> &mdash; Class 5 standard-character word mark; overcomes 2(d) likelihood-of-confusion refusals on the bare word <em>signal</em> in a crowded class.</li>
+      <li><strong>SIGNAL BY INSDR</strong> &mdash; defensive house-mark compound.</li>
+      <li><strong>INSDR CELLCARE</strong> &mdash; defensive mark parallel to <em>INSDR SIGNAL</em> at the category level.</li>
+      <li><strong>CELLCARE</strong> &mdash; single-word defensive mark protecting the category descriptor.</li>
+      <li><strong>SIGNAL CELLCARE</strong> &mdash; defensive compound.</li>
+      <li><strong>INSDR Wellness &mdash; the cellcare brand</strong> &mdash; defensive against descriptor use by adjacent supplement brands.</li>
+      <li><strong>INSDR Wellness &mdash; the cellcare company</strong> &mdash; defensive against corporate-descriptor variant.</li>
+    </ul>
+    <p>The Tier 2 filings are legal strategy, not consumer copy. The marketing-side bans on <em>"INSDR signal"</em> and <em>"INSDR Wellness &mdash; the cellcare brand"</em> (see §2) still apply. The filings exist on USPTO paper to occupy the adjacent territory a competitor might otherwise enter; the visible marketing brand remains <em>signal</em> and the IPA wordmark.</p>
+    <p>This is the carve-out doctrine in operation: <strong>trademark filings ≠ marketing wordmark.</strong> The brand can hold both &mdash; a customer-facing identity that is disciplined about what it says, and a defensive footprint that is comprehensive about what it owns.</p>
+
+    <h3 class="subhead">§5 &mdash; <span class="accent">The customer-facing triad as a protective decision</span></h3>
+    <p>The brand also protects itself by what it refuses to require the customer to learn.</p>
+    <p>In 2026 the brand made a deliberate move: the category word <em>cellcare</em> was demoted from customer-facing copy. Brutal market-fit research found that the descriptor was SEO-occupied by four incumbents; trade press had settled on <em>"cellness"</em> not cellcare; zero meaningful consumer discourse on Reddit or TikTok used cellcare as a category descriptor. The word was overloaded &mdash; trying to name a category, imply a user, and set a cadence &mdash; and the customer had to decode all three meanings from one unfamiliar term.</p>
+    <p>The replacement is the <strong>customer-facing triad</strong> &mdash; three native English nouns, each doing one job:</p>
+    <ul>
+      <li><strong>foundation</strong> &mdash; what signal is (positioning).</li>
+      <li><strong>the practice</strong> &mdash; what taking signal is (behavior register).</li>
+      <li><strong>30-day cycle</strong> &mdash; how the rhythm works (time vocabulary).</li>
+    </ul>
+    <p>Cellcare remains in the brand's internal taxonomy, defensive trademark program, corporate footer, and sales architecture. It does not appear in customer-facing copy. The protective logic is symmetric to the trademark posture: the brand owns the word on USPTO paper but refuses to require the customer to learn it.</p>
+    <p>The triad is the most strategically load-bearing protection in this chapter. A category descriptor a competitor can steal is fragile. A category descriptor the brand has filed defensively <em>and</em> removed from customer-facing copy is doubly protected &mdash; it cannot be ranked against by a competitor's marketing, and it cannot be taken on USPTO paper.</p>
+
+    <h3 class="subhead">§6 &mdash; <span class="accent">Pointer to Chapter 09</span></h3>
+    <p>This chapter covered what the brand owns. <strong>Chapter 09 &mdash; Reference Architecture</strong> is the index &mdash; the catalogue of surfaces, repositories, assets, and the memory system that holds everything. It is the only chapter the codex-reader uses primarily by lookup rather than by sequential reading. It closes the doctrinal core; what follows is the reference shelf.</p>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ 09 — REFERENCE ARCHITECTURE ═══════════════════ -->
+<section class="page" id="ch09">
+  <div class="section-label">Chapter 09</div>
+  <h2>Reference Architecture</h2>
+  <div class="prose" style="margin-top:32px;">
+
+    <h3 class="subhead">§1 &mdash; <span class="accent">How to use this chapter</span></h3>
+    <p>This is the index. The codex-reader uses this chapter by lookup rather than by sequential reading. When a piece of work needs a URL, a repository, an asset, a memory file, or an external reference, the entry lives here.</p>
+    <p>Six categories of references compound across the brand. Each gets a section.</p>
+    <p>The chapter does not carry doctrine. It carries paths. Where doctrine has been compiled across Chapters 00 through 08, this chapter is the shelf.</p>
+
+    <h3 class="subhead">§2 &mdash; <span class="accent">Surfaces</span></h3>
+    <p>The brand's deployed surfaces live under a single GitHub Pages domain (<code>notjustwellness.github.io</code>) and one custom corporate domain (<code>insdrwellness.com</code>).</p>
+    <ul>
+      <li><strong><code>notjustwellness.github.io/signal-deck/</code></strong> &mdash; the deck repo. Hosts the codex, the brand identity guidelines, the brand manifesto, the marketing playbook, the operational spine, and the visual register playbook. Subpath <code>/v5/</code> carries the v5 investor concept deck + appendices.</li>
+      <li><strong><code>notjustwellness.github.io/signal-consumer/</code></strong> &mdash; the consumer-facing landing site.</li>
+      <li><strong><code>notjustwellness.github.io/signal-investor/</code></strong> &mdash; the investor deck.</li>
+      <li><strong><code>notjustwellness.github.io/signal-teaser/</code></strong> &mdash; the teaser landing.</li>
+      <li><strong><code>insdrwellness.com</code></strong> &mdash; the corporate domain. Subpath <code>/send</code> is the Send a Signal landing.</li>
+    </ul>
+    <p>All deployed surfaces are gated by the same password: <strong><code>54321</code></strong>.</p>
+
+    <h3 class="subhead">§3 &mdash; <span class="accent">Repositories</span></h3>
+    <p>Five git repositories carry the brand. The source repository is local; the four deployed repositories mirror specific surfaces.</p>
+    <ul>
+      <li><strong><code>billion_dollar_idea</code></strong> &mdash; the source repository. Local working directory. Carries every document the brand writes before it ships to the deployed repos. The codex lives here. Most session work happens here.</li>
+      <li><strong><code>signal-deck</code></strong> &mdash; deck deploy mirror. Push from source → live at <code>notjustwellness.github.io/signal-deck/</code>.</li>
+      <li><strong><code>signal-consumer</code></strong> &mdash; consumer landing deploy mirror.</li>
+      <li><strong><code>signal-investor</code></strong> &mdash; investor deck deploy mirror.</li>
+      <li><strong><code>signal-teaser</code></strong> &mdash; teaser landing deploy mirror.</li>
+    </ul>
+    <p>The pattern is consistent: source-side edits commit to <code>billion_dollar_idea</code> first; cascade pushes to the deployed mirrors are user-driven, not automatic.</p>
+
+    <h3 class="subhead">§4 &mdash; <span class="accent">Documents</span></h3>
+    <p>The brand maintains seven canonical internal documents. Six live on signal-deck under password <code>54321</code>; one is the codex you are reading.</p>
+    <ul>
+      <li><strong>The Signal Codex</strong> (<code>signal_codex.html</code> / <code>signal_codex.pdf</code>) &mdash; this document. The 10-chapter brand bible. Audience 2B (internal + NDA partners/investors).</li>
+      <li><strong>Brand manifesto</strong> (<code>brand-manifesto.html</code>) &mdash; the customer-facing canonical artifact. 13 sections (§I–§XIII). Covered by Chapter 05.</li>
+      <li><strong>Brand Identity Guidelines</strong> (<code>brand-identity.html</code>) &mdash; the visual identity reference. Nine pages covering pronunciation (sig-NAHL / <code>/sɪɡˈnɑːl/</code>), four approved wordmark variants, the three-color palette, the typography stack (Anguita Sans / Bebas Neue / Plus Jakarta Sans), do/don't rules, clear space and minimum sizes, and a trademark brief. Overlaps deliberately with Chapter 03 (visual system) and Chapter 08 (defensive / IP).</li>
+      <li><strong>Marketing playbook</strong> (<code>marketing-playbook.html</code>) &mdash; the marketing operational doctrine. 9 sections (§I–§IX). Covered by Chapter 06.</li>
+      <li><strong>Operational Spine</strong> (<code>operational-spine.html</code>) &mdash; the backend operational doctrine. Covers the upstream supply chain (Zone Halo → CMO → packaging → fulfillment), the customer journey (forward flow, unboxing, onboarding loop, reorder loop, exception flow), the always-on operating layer (entity, banking, founders, customer service, lifecycle, analytics, compliance), and the vendor stack. Not covered by a dedicated codex chapter; referenced where operational decisions surface in Chapters 04, 06, and 07.</li>
+      <li><strong>Visual register playbook</strong> (<code>visual-register-playbook.html</code>) &mdash; casting and artifact grammar. Covered by Chapter 03.</li>
+      <li><strong>V5 Investor Concept Deck</strong> (<code>v5/index.html</code> + <code>v5/appendices.html</code>) &mdash; the full investor concept deck with appendices, on the signal-deck <code>/v5/</code> subpath. Separate from the standalone investor surface at <code>signal-investor/</code>: the v5 deck is the deeper concept compendium; the standalone investor surface is the lighter investor-facing landing.</li>
+    </ul>
+
+    <h3 class="subhead">§5 &mdash; <span class="accent">Visual assets</span></h3>
+    <p>The brand's visual production assets live in the source repository under <code>visual_register/</code> and at the source-repo root. The asset inventory:</p>
+    <ul>
+      <li><strong>Packet renders</strong> &mdash; front and back for N°001, N°002, N°003. Current customer-facing renders are tracked through the cellcare→triad cascade + SKU rename + image-regen workstream.</li>
+      <li><strong>Tray and vessel renders</strong> &mdash; <code>signal_vessel_paperboard_2026_05_04.png</code> is the canonical kraft outer + tray-on-counter composite.</li>
+      <li><strong>Annual coin</strong> &mdash; <code>visual_register/02_annual_coin_year_i.png</code> is the canonical Year I render (matte silver finish).</li>
+      <li><strong>Send a Signal cards</strong> &mdash; <code>sas_envelope.png</code>, <code>sas_card_outer.png</code>, <code>sas_card_inside.png</code>, <code>sas_a7_insert.png</code>. Some carry pre-Phase-1 typography; image regen workstream tracked separately.</li>
+    </ul>
+    <p>Three brand fonts:</p>
+    <ul>
+      <li><strong>Anguita Sans</strong> (primary display) &mdash; self-hosted, weight 900. No IPA coverage.</li>
+      <li><strong>Bebas Neue</strong> (secondary display).</li>
+      <li><strong>Plus Jakarta Sans</strong> (body + IPA wordmark).</li>
+    </ul>
+
+    <h3 class="subhead">§6 &mdash; <span class="accent">Memory system</span></h3>
+    <p>The brand operates a persistent file-based memory system that holds context between sessions.</p>
+    <ul>
+      <li><strong>Location:</strong> <code>/Users/damon/.claude/projects/-Users-damon-Desktop-DEV--PROJECTS-billion-dollar-idea/memory/</code></li>
+      <li><strong>Index:</strong> <code>MEMORY.md</code> &mdash; loaded into every session context. Contains one-line pointers to topical memory files.</li>
+      <li><strong>File types:</strong> four &mdash; <strong>user</strong> (who the user is, how they work), <strong>feedback</strong> (guidance on how to approach work, both corrections and confirmations), <strong>project</strong> (ongoing work, goals, decisions), <strong>reference</strong> (pointers to external systems).</li>
+      <li><strong>Volume:</strong> approximately 300 files as of 2026-05-23. Growing.</li>
+    </ul>
+    <p>Memory files are written in markdown with frontmatter. They link to each other with <code>[[name-slug]]</code> cross-references. The system is the brand's working source-of-truth between sessions; it precedes the codex chronologically and informs every chapter that has been compiled into it.</p>
+
+    <h3 class="subhead">§7 &mdash; <span class="accent">External references</span></h3>
+    <p>Five external systems carry brand-adjacent information.</p>
+    <ul>
+      <li><strong>USPTO TESS</strong> &mdash; public trademark search. Used for verifying the status of the 8-mark defensive trademark inventory (Chapter 08 §4).</li>
+      <li><strong>SuppCo</strong> &mdash; supplement-tracking app. The stacker concentration data that drives the N°002 daily-fuel positioning argument (Chapter 04 §3).</li>
+      <li><strong>Zone Halo</strong> &mdash; contract formulator. Chair-of-record for matrix-loading questions, dose verification, formulation production.</li>
+      <li><strong>Ingredient brand sources</strong> &mdash; NNB Pürest Creatine, Albion TRAACS, BetaPower, Bioenergy Ribose, BioPQQ, SpermidineLIFE, AstaZine, Kaneka QH, MitoPrime, Mitopure, Magtein. Each holds its own peer-reviewed evidence at the dose printed on the packet label.</li>
+      <li><strong>Competitive intelligence references</strong> &mdash; Function Health · IM8 · AG1 · Create Wellness · ARMRA · Olipop · Liquid Death. Their failure patterns, validation moves, and category-creation precedents inform the brand's positioning (Chapters 01, 06, 07).</li>
+    </ul>
+    <p>External addresses for brand correspondence: <code>damon.sun@insdrwellness.com</code> · social handle <code>@chew_signal</code>.</p>
+
+    <h3 class="subhead">§8 &mdash; <span class="accent">Closing register</span></h3>
+    <p>This chapter closes the codex.</p>
+    <p>What follows the reference shelf is the work &mdash; every chapter the codex compiled, every artifact the brand produced, every customer the brand earns. The chapters do not have to be read in order. The doctrinal core (Chapters 01&ndash;04) compounds with the operational core (Chapters 05&ndash;07). The defensive layer (Chapter 08) makes the rest defensible. The reference shelf (Chapter 09) lets the work continue.</p>
+    <div class="canonical"><em>For the people building the world.</em></div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <div class="footer-line">INSDR Wellness — the cellcare company</div>
+  <div>the signal codex · v1.0 · chapters 00–09 · internal · 2026</div>
+</footer>
+
+<script>
+  (function() {
+    var PASS = "54321";
+    var gate = document.getElementById("gate");
+    var body = document.body;
+    if (sessionStorage.getItem("signal_unlocked") === "true") {
+      gate.style.display = "none";
+      body.classList.remove("locked");
+    }
+    window.checkPass = function(e) {
+      e.preventDefault();
+      var input = document.getElementById("gate-pass").value;
+      var err = document.getElementById("gate-error");
+      if (input === PASS) {
+        sessionStorage.setItem("signal_unlocked", "true");
+        gate.style.display = "none";
+        body.classList.remove("locked");
+      } else {
+        err.classList.add("show");
+        document.getElementById("gate-pass").value = "";
+        document.getElementById("gate-pass").focus();
+        setTimeout(function(){ err.classList.remove("show"); }, 2400);
+      }
+      return false;
+    };
+  })();
+</script>
+
+</body>
+</html>
