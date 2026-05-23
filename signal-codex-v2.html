@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Signal Codex · v2 sample · 2026-05-23</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Anguita Sans';
+  src: url('fonts/AnguitaSans.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --signal: #AD4236;
+  --signal-light: #C85D51;
+  --signal-deep: #7A2E26;
+  --deep-evening: #1A1410;
+  --rose-linen: #F6EFEA;
+  --rose-linen-deep: #EDE3D8;
+  --paper: #FBF8F4;
+  --ink: #2A2520;
+  --mute: rgba(42, 37, 32, 0.6);
+  --mute-light: rgba(246, 239, 234, 0.6);
+  --rule: rgba(42, 37, 32, 0.16);
+  --rule-dark: rgba(246, 239, 234, 0.18);
+  --font-display: 'Anguita Sans', 'Bebas Neue', Impact, sans-serif;
+  --font-editorial: 'Bebas Neue', Impact, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.55;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GATE
+═══════════════════════════════════════════════════════════════ */
+#gate {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--deep-evening); color: var(--rose-linen);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  z-index: 100; padding: 32px;
+}
+#gate h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(48px, 8vw, 96px); margin: 0 0 12px; letter-spacing: -0.01em; text-transform: uppercase; }
+#gate .gate-sub { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.5; margin-bottom: 56px; }
+#gate input {
+  background: transparent; border: none; border-bottom: 1px solid rgba(246,239,234,0.3);
+  color: var(--rose-linen); padding: 8px 16px; font-size: 16px; text-align: center;
+  width: 220px; outline: none; font-family: var(--font-body);
+  letter-spacing: 4px;
+}
+#gate input:focus { border-bottom-color: var(--signal); }
+#gate .gate-error { color: var(--signal-light); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-top: 16px; height: 14px; opacity: 0; transition: opacity 0.2s; }
+#gate .gate-error.show { opacity: 1; }
+#gate .gate-footer { position: absolute; bottom: 40px; font-size: 10px; opacity: 0.3; letter-spacing: 3px; text-transform: uppercase; }
+body.locked { overflow: hidden; height: 100vh; }
+body.locked > section, body.locked > footer { display: none !important; }
+@media print { #gate { display: none !important; } }
+
+/* ═══════════════════════════════════════════════════════════════
+   COVER
+═══════════════════════════════════════════════════════════════ */
+.cover {
+  background: var(--deep-evening);
+  color: var(--rose-linen);
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 64px 8vw;
+}
+.cover-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.cover-top .label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; opacity: 0.45; }
+.cover-mark { font-family: var(--font-body); font-weight: 700; font-size: 14px; color: var(--rose-linen); }
+.cover-mark .accent { color: var(--signal-light); }
+
+.cover-center {
+  flex: 1; display: flex; flex-direction: column; justify-content: center;
+}
+.cover-h1 {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(72px, 14vw, 220px);
+  line-height: 0.85; letter-spacing: -0.02em; margin: 0;
+  text-transform: uppercase;
+  color: var(--rose-linen);
+}
+.cover-h1 .accent { color: var(--signal); }
+.cover-sub {
+  font-family: var(--font-editorial); font-weight: 400;
+  font-size: clamp(20px, 3vw, 36px);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  margin-top: 28px; color: var(--signal-light);
+}
+.cover-thesis {
+  font-family: var(--font-body); font-weight: 300; font-style: italic;
+  font-size: clamp(15px, 1.6vw, 19px);
+  line-height: 1.5; max-width: 560px;
+  color: var(--rose-linen); opacity: 0.78;
+  margin-top: 56px;
+}
+.cover-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+.cover-meta { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.5; }
+.cover-meta .accent { color: var(--signal-light); }
+
+/* ═══════════════════════════════════════════════════════════════
+   CHAPTER OPENER (FULL-BLEED, MAGAZINE-STYLE)
+═══════════════════════════════════════════════════════════════ */
+.chapter-opener {
+  background: var(--rose-linen-deep);
+  min-height: 80vh;
+  padding: 80px 8vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.chapter-opener.dark { background: var(--deep-evening); color: var(--rose-linen); }
+.opener-number {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(180px, 32vw, 480px);
+  line-height: 0.8; letter-spacing: -0.05em;
+  color: var(--signal); margin: 0;
+}
+.chapter-opener.dark .opener-number { color: var(--signal-light); }
+.opener-meta { display: flex; flex-direction: column; gap: 24px; }
+.opener-meta .label { font-family: var(--font-editorial); font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: var(--signal); }
+.chapter-opener.dark .opener-meta .label { color: var(--signal-light); }
+.opener-title {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(40px, 5.5vw, 84px); line-height: 0.95; letter-spacing: -0.02em;
+  margin: 0; text-transform: uppercase;
+}
+.opener-lead {
+  font-family: var(--font-body); font-weight: 300; font-style: italic;
+  font-size: clamp(16px, 1.8vw, 22px); line-height: 1.5;
+  color: var(--ink); opacity: 0.78; max-width: 460px;
+}
+.chapter-opener.dark .opener-lead { color: var(--rose-linen); opacity: 0.78; }
+
+@media (max-width: 900px) {
+  .chapter-opener { grid-template-columns: 1fr; min-height: auto; padding: 64px 6vw; }
+  .opener-number { font-size: clamp(140px, 38vw, 260px); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MAGAZINE-SPREAD PAGE — MAIN COLUMN + MARGINALIA
+═══════════════════════════════════════════════════════════════ */
+.spread {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 96px 8vw;
+  display: grid;
+  grid-template-columns: minmax(0, 680px) 220px;
+  column-gap: 64px;
+}
+.spread.no-margin { grid-template-columns: minmax(0, 680px); }
+.spread.dark { background: var(--deep-evening); color: var(--rose-linen); max-width: none; padding-left: 8vw; padding-right: 8vw; }
+.spread.dark-wide { background: var(--deep-evening); color: var(--rose-linen); max-width: none; padding-left: 8vw; padding-right: 8vw; }
+.spread.tinted { background: var(--rose-linen-deep); max-width: none; padding-left: 8vw; padding-right: 8vw; }
+.spread.tinted .main-col, .spread.tinted .margin-col { max-width: 680px; }
+.spread.tinted { display: block; }
+.spread.tinted .inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 680px) 220px; column-gap: 64px; }
+.spread.dark .main-col, .spread.dark-wide .main-col { color: var(--rose-linen); }
+.spread.dark, .spread.dark-wide { display: block; }
+.spread.dark .inner, .spread.dark-wide .inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 680px) 220px; column-gap: 64px; }
+.spread.dark.no-margin .inner, .spread.dark-wide.no-margin .inner { grid-template-columns: minmax(0, 760px); }
+
+.main-col { grid-column: 1; min-width: 0; }
+.margin-col { grid-column: 2; padding-top: 8px; }
+
+.section-tag {
+  font-family: var(--font-editorial);
+  font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--signal);
+  margin-bottom: 16px;
+  display: block;
+}
+.spread.dark .section-tag, .spread.dark-wide .section-tag { color: var(--signal-light); }
+
+.section-h2 {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(32px, 4vw, 56px);
+  line-height: 1.0; letter-spacing: -0.015em;
+  margin: 0 0 36px;
+  text-transform: uppercase;
+}
+.section-h2 .accent { color: var(--signal); }
+.spread.dark .section-h2 .accent, .spread.dark-wide .section-h2 .accent { color: var(--signal-light); }
+
+.lead-p {
+  font-family: var(--font-body); font-weight: 300;
+  font-size: 19px; line-height: 1.55;
+  margin: 0 0 24px;
+  color: inherit;
+}
+.spread.dark .lead-p, .spread.dark-wide .lead-p { color: var(--rose-linen); opacity: 0.92; }
+
+.main-col p {
+  font-family: var(--font-body); font-weight: 300;
+  font-size: 16px; line-height: 1.65;
+  margin: 0 0 18px;
+}
+.main-col p strong { font-weight: 600; }
+.main-col p em { font-style: italic; }
+
+/* ═══════════════════════════════════════════════════════════════
+   INLINE BRAND VOCAB — the .term highlight
+═══════════════════════════════════════════════════════════════ */
+.term {
+  font-weight: 600;
+  color: var(--signal);
+  font-style: normal;
+  font-variant-numeric: oldstyle-nums;
+}
+.spread.dark .term, .spread.dark-wide .term { color: var(--signal-light); }
+
+/* ═══════════════════════════════════════════════════════════════
+   MARGINALIA
+═══════════════════════════════════════════════════════════════ */
+.aside {
+  border-left: 2px solid var(--signal);
+  padding: 4px 0 4px 16px;
+  margin: 0 0 32px;
+  font-family: var(--font-body);
+}
+.spread.dark .aside, .spread.dark-wide .aside { border-left-color: var(--signal-light); }
+.aside-label {
+  font-family: var(--font-editorial);
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--signal); margin-bottom: 8px;
+}
+.spread.dark .aside-label, .spread.dark-wide .aside-label { color: var(--signal-light); }
+.aside-body {
+  font-size: 14px; font-weight: 300; line-height: 1.55;
+  color: inherit; opacity: 0.86;
+}
+.aside-body em { font-style: italic; }
+.aside-body strong { font-weight: 600; }
+.aside-body.canonical {
+  font-family: var(--font-body); font-weight: 400; font-style: italic;
+  font-size: 16px; line-height: 1.45;
+}
+.aside-body ul { padding: 0; list-style: none; margin: 0; }
+.aside-body ul li { padding: 4px 0; border-bottom: 1px dotted var(--rule); font-size: 13px; }
+.aside-body ul li:last-child { border-bottom: none; }
+.spread.dark .aside-body ul li, .spread.dark-wide .aside-body ul li { border-bottom-color: var(--rule-dark); }
+.aside-body ul li .stat-num {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: 18px; line-height: 1; color: var(--signal); margin-right: 8px;
+  display: inline-block; min-width: 22px;
+}
+.spread.dark .aside-body ul li .stat-num, .spread.dark-wide .aside-body ul li .stat-num { color: var(--signal-light); }
+
+/* margin-quote — large pull-quote in marginalia */
+.margin-quote {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: 32px; line-height: 0.92; letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin: 0 0 32px;
+  padding: 0;
+}
+.spread.dark .margin-quote, .spread.dark-wide .margin-quote { color: var(--signal-light); }
+
+/* ═══════════════════════════════════════════════════════════════
+   PULLQUOTES (FULL-WIDTH CANONICAL)
+═══════════════════════════════════════════════════════════════ */
+.pullquote-band {
+  background: var(--signal);
+  color: var(--rose-linen);
+  padding: 80px 8vw;
+  margin: 64px 0;
+}
+.pullquote-band .pull {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.0; letter-spacing: -0.01em;
+  text-transform: uppercase;
+  max-width: 900px; margin: 0 auto;
+  text-align: center;
+}
+.pullquote-band .pull-attr {
+  font-family: var(--font-editorial); font-size: 11px;
+  letter-spacing: 4px; text-transform: uppercase;
+  text-align: center; margin-top: 24px; opacity: 0.7;
+}
+
+.pullquote-inline {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(28px, 3.5vw, 44px); line-height: 1.05; letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin: 40px 0;
+  text-align: left;
+}
+.spread.dark .pullquote-inline, .spread.dark-wide .pullquote-inline { color: var(--signal-light); }
+
+/* ═══════════════════════════════════════════════════════════════
+   PRINCIPLE BLOCKS
+═══════════════════════════════════════════════════════════════ */
+.principle-block {
+  background: var(--rose-linen-deep);
+  border-left: 4px solid var(--signal);
+  padding: 28px 32px;
+  margin: 24px 0;
+}
+.spread.dark .principle-block, .spread.dark-wide .principle-block {
+  background: rgba(246,239,234,0.06);
+  border-left-color: var(--signal-light);
+}
+.principle-title {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: 22px; line-height: 1.1; letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--signal); margin-bottom: 12px;
+}
+.spread.dark .principle-title, .spread.dark-wide .principle-title { color: var(--signal-light); }
+.principle-block p { margin-bottom: 0; }
+
+.dedication {
+  font-family: var(--font-body); font-weight: 300; font-style: italic;
+  font-size: 22px; line-height: 1.4;
+  text-align: center;
+  color: var(--signal);
+  padding: 64px 0 32px;
+  letter-spacing: 0.005em;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FULL-BLEED IMAGE
+═══════════════════════════════════════════════════════════════ */
+.full-bleed {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+.full-bleed img { width: 100%; height: auto; display: block; }
+.full-bleed-caption {
+  font-family: var(--font-editorial);
+  font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--mute);
+  text-align: center; padding: 16px 8vw 24px;
+  background: var(--paper);
+}
+.spread.dark + .full-bleed .full-bleed-caption, .full-bleed.on-dark .full-bleed-caption {
+  background: var(--deep-evening); color: var(--mute-light);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SWATCHES
+═══════════════════════════════════════════════════════════════ */
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 40px 0;
+}
+.swatch-card {
+  background: var(--paper);
+  padding: 0;
+  border: 1px solid var(--rule);
+}
+.spread.dark .swatch-card, .spread.dark-wide .swatch-card { background: rgba(246,239,234,0.04); border-color: var(--rule-dark); }
+.swatch-chip { height: 160px; }
+.swatch-chip.signal-red { background: var(--signal); }
+.swatch-chip.rose-linen { background: var(--rose-linen); border-bottom: 1px solid var(--rule); }
+.swatch-chip.deep-evening { background: var(--deep-evening); }
+.swatch-info { padding: 16px 20px; }
+.swatch-info-name { font-family: var(--font-editorial); font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: var(--signal); margin-bottom: 4px; }
+.spread.dark .swatch-info-name, .spread.dark-wide .swatch-info-name { color: var(--signal-light); }
+.swatch-info-hex { font-family: var(--font-body); font-size: 13px; font-weight: 400; opacity: 0.6; }
+
+/* ═══════════════════════════════════════════════════════════════
+   WORDMARK SPECIMEN
+═══════════════════════════════════════════════════════════════ */
+.wordmark-specimen-v2 {
+  background: var(--deep-evening);
+  color: var(--rose-linen);
+  padding: 80px 32px 64px;
+  margin: 32px 0 32px -8vw;
+  width: calc(100% + 16vw);
+  text-align: center;
+}
+.wordmark-specimen-v2 .wm {
+  font-family: var(--font-body); font-weight: 700;
+  font-size: clamp(56px, 9vw, 132px);
+  letter-spacing: -0.005em; line-height: 1;
+  color: var(--rose-linen);
+}
+.wordmark-specimen-v2 .wm .accent { color: var(--signal-light); }
+.wordmark-specimen-v2 .spec-caption {
+  font-family: var(--font-editorial); font-size: 12px;
+  letter-spacing: 4px; text-transform: uppercase;
+  margin-top: 32px; opacity: 0.55;
+}
+
+/* Font specimens */
+.font-specimens {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin: 40px 0;
+  padding: 32px 0;
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+}
+.spread.dark .font-specimens, .spread.dark-wide .font-specimens { border-color: var(--rule-dark); }
+.font-card { text-align: center; }
+.font-card .sample {
+  font-size: 56px; line-height: 1; color: var(--ink);
+  margin-bottom: 16px;
+}
+.spread.dark .font-card .sample, .spread.dark-wide .font-card .sample { color: var(--rose-linen); }
+.font-card .sample.anguita { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; }
+.font-card .sample.bebas { font-family: var(--font-editorial); font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; }
+.font-card .sample.jakarta { font-family: var(--font-body); font-weight: 300; }
+.font-card .face-name {
+  font-family: var(--font-editorial); font-size: 11px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--signal); opacity: 0.8;
+}
+.spread.dark .font-card .face-name, .spread.dark-wide .font-card .face-name { color: var(--signal-light); }
+
+/* ═══════════════════════════════════════════════════════════════
+   PACKET CLUSTER (CARRIED FROM V1)
+═══════════════════════════════════════════════════════════════ */
+.packet-cluster { display: flex; flex-direction: column; gap: 32px; margin: 40px 0; }
+.packet-row { display: flex; flex-direction: column; gap: 12px; }
+.packet-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.packet-duo img { width: 100%; aspect-ratio: 4/5; object-fit: cover; background: var(--rose-linen); border-radius: 2px; }
+.packet-row.scaled .packet-duo img { transform: scale(0.85); object-fit: contain; }
+.packet-caption {
+  font-family: var(--font-body); font-style: italic; font-size: 13px;
+  color: var(--mute); text-align: center;
+}
+.spread.dark .packet-caption, .spread.dark-wide .packet-caption { color: var(--mute-light); }
+
+/* ═══════════════════════════════════════════════════════════════
+   IMAGE BLOCK (CARRIED FROM V1)
+═══════════════════════════════════════════════════════════════ */
+.image-block { margin: 40px 0; }
+.image-block img { width: 100%; height: auto; display: block; }
+.image-block .caption {
+  font-family: var(--font-editorial); font-size: 12px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--mute); padding-top: 12px;
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ENTRAINMENT DEMO (PORTED FROM V1.5)
+═══════════════════════════════════════════════════════════════ */
+.entrainment-demo { margin: 48px 0; padding: 80px 32px 64px; background: var(--deep-evening); border-radius: 4px; text-align: center; }
+.entrainment-trigger { background: transparent; border: 1px solid rgba(246,239,234,0.12); cursor: pointer; padding: 40px 56px; display: inline-block; position: relative; border-radius: 4px; transition: border-color 0.2s, background 0.2s; }
+.entrainment-trigger:hover { border-color: rgba(246,239,234,0.28); background: rgba(246,239,234,0.03); }
+.entrainment-trigger:focus-visible { outline: 2px solid var(--signal-light); outline-offset: 4px; }
+.entrainment-stack { display: inline-block; position: relative; color: var(--rose-linen); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: clamp(40px, 7vw, 72px); letter-spacing: -0.01em; line-height: 1; }
+.entrainment-stack .accent { color: var(--signal-light); }
+.entrainment-ghost-left, .entrainment-ghost-right { display: block; will-change: transform, opacity; transition: transform 0.2s linear, opacity 0.2s linear; opacity: 0.5; }
+.entrainment-ghost-left { transform: translateX(-7px); }
+.entrainment-ghost-right { position: absolute; top: 0; left: 0; right: 0; transform: translateX(7px); }
+.entrainment-caption { margin-top: 32px; color: var(--rose-linen); opacity: 0.55; font-size: 13px; letter-spacing: 0.02em; font-style: italic; font-family: 'Plus Jakarta Sans', sans-serif; }
+.entrainment-caption .sub { display: block; margin-top: 6px; opacity: 0.7; font-size: 11px; letter-spacing: 0.05em; font-style: normal; text-transform: uppercase; }
+@media (prefers-reduced-motion: reduce) { .entrainment-ghost-left, .entrainment-ghost-right { transform: translateX(0) !important; opacity: 1 !important; transition: none !important; } }
+
+/* ═══════════════════════════════════════════════════════════════
+   RULES BLOCK (3 packaging rules)
+═══════════════════════════════════════════════════════════════ */
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin: 40px 0;
+}
+.rule-card {
+  padding: 24px;
+  border-top: 2px solid var(--signal);
+}
+.rule-num {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: 48px; line-height: 1; color: var(--signal); margin-bottom: 8px;
+}
+.rule-name {
+  font-family: var(--font-editorial); font-size: 14px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--ink); margin-bottom: 12px;
+}
+.rule-body { font-size: 14px; line-height: 1.5; }
+
+/* ═══════════════════════════════════════════════════════════════
+   REFUSALS LIST (Ch 03 §7)
+═══════════════════════════════════════════════════════════════ */
+.refusals { margin: 32px 0; }
+.refusal {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+}
+.refusal:last-child { border-bottom: none; }
+.refusal-num {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: 56px; line-height: 1; color: var(--signal);
+}
+.refusal-body strong {
+  font-family: var(--font-editorial); font-size: 14px;
+  letter-spacing: 3px; text-transform: uppercase;
+  display: block; margin-bottom: 8px; color: var(--ink); font-weight: 400;
+}
+.refusal-body p { font-size: 15px; margin: 0; }
+
+/* ═══════════════════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════════════════ */
+footer.codex-footer {
+  background: var(--deep-evening); color: var(--rose-linen);
+  padding: 48px 8vw;
+  font-family: var(--font-editorial); font-size: 11px;
+  letter-spacing: 3px; text-transform: uppercase;
+  text-align: center; opacity: 0.45;
+}
+footer.codex-footer .accent { color: var(--signal-light); }
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE
+═══════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .spread, .spread .inner, .spread.dark .inner, .spread.dark-wide .inner, .spread.tinted .inner {
+    grid-template-columns: 1fr !important;
+    column-gap: 0;
+  }
+  .margin-col {
+    border-top: 2px solid var(--signal); padding-top: 24px; margin-top: 32px;
+  }
+  .swatch-grid, .font-specimens, .rules-grid { grid-template-columns: 1fr; }
+  .wordmark-specimen-v2 { margin-left: -6vw; width: calc(100% + 12vw); padding: 48px 24px; }
+  .refusal { grid-template-columns: 60px 1fr; gap: 16px; }
+  .refusal-num { font-size: 40px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PRINT (PDF GEN)
+═══════════════════════════════════════════════════════════════ */
+@media print {
+  body { background: white; color: black; }
+  .spread, .spread .inner, .spread.dark .inner, .spread.dark-wide .inner, .spread.tinted .inner {
+    grid-template-columns: 1fr !important;
+    page-break-inside: avoid;
+  }
+  .margin-col { border-top: 1px solid #888; padding-top: 16px; margin-top: 16px; }
+  .cover, .chapter-opener, .spread.dark, .spread.dark-wide { color: black !important; background: white !important; }
+  .opener-number, .cover-h1 { color: black !important; }
+  .pullquote-band { background: white !important; color: black !important; padding: 32px 0; }
+  .pullquote-band .pull { color: black; }
+  .entrainment-ghost-left { display: none !important; }
+  .entrainment-ghost-right { position: static !important; opacity: 1 !important; transform: none !important; }
+  .entrainment-trigger { border: none !important; padding: 0 !important; }
+  .entrainment-caption { display: none !important; }
+  .entrainment-demo { background: transparent !important; padding: 16px 0 !important; }
+  .wordmark-specimen-v2 { background: white !important; color: black !important; margin: 16px 0; width: 100%; padding: 24px 0; }
+  .wordmark-specimen-v2 .wm { color: black; }
+  .full-bleed-caption { background: white !important; color: black !important; }
+}
+</style>
+</head>
+<body class="locked">
+
+<!-- ═══════════════════ GATE ═══════════════════ -->
+<div id="gate">
+  <h1>signal codex</h1>
+  <div class="gate-sub">v2 sample · internal · 2026</div>
+  <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
+  <div class="gate-error" id="gate-error">access denied</div>
+  <div class="gate-footer">insdr wellness · the cellcare company</div>
+</div>
+
+<!-- ═══════════════════ COVER ═══════════════════ -->
+<section class="cover">
+  <div class="cover-top">
+    <div class="label">v2 sample</div>
+    <div class="cover-mark"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  </div>
+  <div class="cover-center">
+    <h1 class="cover-h1">The<br>Signal<br><span class="accent">Codex.</span></h1>
+    <div class="cover-sub">A decoding document.</div>
+    <div class="cover-thesis">Written for the people already inside the work — the ones who need to remember why. None of this is meant for the consumer. The consumer meets signal through the world the brand builds around it. This document is for the people building the world.</div>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-meta">insdr wellness · the <span class="accent">cellcare</span> company</div>
+    <div class="cover-meta">v2 · sample · chapters 00 + 03 · 2026</div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CHAPTER 00 — OPENER ═══════════════════ -->
+<section class="chapter-opener">
+  <div class="opener-number">00</div>
+  <div class="opener-meta">
+    <div class="label">Chapter Zero</div>
+    <h2 class="opener-title">Foreword.</h2>
+    <p class="opener-lead"><em>A codex is a decoding document. It's written for the people already inside the work — the ones who need to remember why. This is one.</em></p>
+  </div>
+</section>
+
+<!-- ═══════════════════ CHAPTER 00 — PROSE ═══════════════════ -->
+<section class="spread">
+  <div class="main-col">
+    <div class="section-tag">§1 — What this is</div>
+    <p class="lead-p"><span class="term">INSDR Wellness</span> is a company building a category called <span class="term">cellcare</span>. <span class="term">Signal</span> is the first product in that category.</p>
+    <p>The work of the brand — the manifesto, the voice, the visual system, the product architecture, the operational discipline, the customer ritual, the defense — is held in the chapters that follow. None of it is meant for the consumer. The consumer meets <span class="term">signal</span> through the world the brand builds around it. This document is for the people building the world.</p>
+    <p>What follows is two kinds of writing held in one cover. The Visual System chapter is reference — colors, wordmark, packet typography, packaging law. It tells you how to ship. Every other chapter is the rest of the codex — what the brand believes, what it refuses, what holds together when no one is watching. It tells you why.</p>
+  </div>
+  <aside class="margin-col">
+    <div class="aside">
+      <div class="aside-label">Three names</div>
+      <div class="aside-body">
+        <ul>
+          <li><strong>INSDR Wellness</strong> — the company</li>
+          <li><strong>cellcare</strong> — the category</li>
+          <li><strong>signal</strong> — the product</li>
+        </ul>
+      </div>
+    </div>
+    <div class="aside">
+      <div class="aside-label">Remember</div>
+      <div class="aside-body">The audience is internal. Partners and investors under NDA. Never the consumer.</div>
+    </div>
+  </aside>
+</section>
+
+<!-- ═══════════════════ CH 00 — TWO GOVERNING PRINCIPLES ═══════════════════ -->
+<section class="spread tinted">
+  <div class="inner">
+    <div class="main-col">
+      <div class="section-tag">§2 — What governs everything else</div>
+      <h3 class="section-h2">Two principles <span class="accent">upstream</span> of every chapter.</h3>
+      <p class="lead-p">They are the reason the codex was written this way.</p>
+      <div class="principle-block">
+        <div class="principle-title">Build a world. Invite them in. Let them decode it.</div>
+        <p>The brand earns its authority. It does not announce it. The IPA wordmark, the decode card, the packet front — every artifact in the signal system rewards a second look. None of them explains itself. Customers who stay long enough come to understand the system on their own.</p>
+      </div>
+      <div class="principle-block">
+        <div class="principle-title">AI is plumbing, not voice.</div>
+        <p>AI organizes. AI retrieves. AI accelerates. AI does not write copy, captions, hooks, briefs, DMs, or emails. The voice in every customer-facing surface is human, every time.</p>
+      </div>
+    </div>
+    <aside class="margin-col">
+      <div class="margin-quote">A second look<br>is the brand's<br>only marketing.</div>
+      <div class="aside">
+        <div class="aside-label">Kicker</div>
+        <div class="aside-body canonical">"AI doesn't get to start the sentence."</div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH 00 — THE TRIAD ═══════════════════ -->
+<section class="spread">
+  <div class="main-col">
+    <div class="section-tag">§3 — Three names, used precisely</div>
+    <h3 class="section-h2">The translation, not <span class="accent">three synonyms</span>.</h3>
+    <p><span class="term">Cellcare</span> is not used in customer-facing copy. Consumers receive the brand through three plain English words instead.</p>
+    <p><span class="term">Foundation</span> — what signal is.</p>
+    <p><span class="term">The practice</span> — what taking it is.</p>
+    <p><span class="term">30-day cycle</span> — the time it takes.</p>
+    <p>The codex sets the rules for when each is used. The triad is a translation — internal vocabulary made consumer-facing.</p>
+  </div>
+  <aside class="margin-col">
+    <div class="aside">
+      <div class="aside-label">Customer hears</div>
+      <div class="aside-body">
+        <ul>
+          <li><strong>foundation</strong> — positioning</li>
+          <li><strong>the practice</strong> — behavior register</li>
+          <li><strong>30-day cycle</strong> — time</li>
+        </ul>
+      </div>
+    </div>
+    <div class="aside">
+      <div class="aside-label">Time canonical</div>
+      <div class="aside-body canonical">"A month to feel built on. A lifetime to feel built up."</div>
+    </div>
+  </aside>
+</section>
+
+<!-- ═══════════════════ CH 00 — HOW TO READ ═══════════════════ -->
+<section class="spread no-margin">
+  <div class="main-col">
+    <div class="section-tag">§4 — How to read</div>
+    <h3 class="section-h2">The reader closes it <span class="accent">primed.</span></h3>
+    <p>The core chapters — Voice, Product Architecture, Manifesto, Operational Discipline — reinforce each other and can be read in any order. The reference chapters — Defensive/IP, Reference Architecture — are addressed when needed.</p>
+    <p>The codex is versioned. When a canonical line changes, the prior version is logged, not erased. The brand moves forward in deliberate updates, never silent rewrites.</p>
+    <p>If this document is doing its job, the reader closes it <span class="term">primed</span>.</p>
+    <div class="dedication">For the people building the world.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CHAPTER 03 — OPENER ═══════════════════ -->
+<section class="chapter-opener dark">
+  <div class="opener-number">03</div>
+  <div class="opener-meta">
+    <div class="label">Chapter Three</div>
+    <h2 class="opener-title">The Visual System.</h2>
+    <p class="opener-lead"><em>What the brand looks like. Hold a packet, press the foil flat — the red has weight. Three colors. Three fonts. Four load-bearing artifacts. One sonic asset.</em></p>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH 03 §1 — COLOR SYSTEM ═══════════════════ -->
+<section class="spread">
+  <div class="main-col">
+    <div class="section-tag">§1 — The color system</div>
+    <h3 class="section-h2">The brand uses <span class="accent">three colors.</span> No fourth.</h3>
+    <p class="lead-p">Hold a <span class="term">signal</span> packet in your hand. Press the foil flat. The red has weight — it is not a screen color but a <em>paper</em> color, the color of matte stock that has absorbed the dye instead of sitting on top of it.</p>
+    <p>Now look at the tray underneath. The red is the same hue, but the material is paperboard, not foil — so the light returns differently. The brand's red is not one color. It is the same color rendered across three materials, each of which holds it slightly differently.</p>
+    <div class="packet-cluster">
+      <div class="packet-row">
+        <div class="packet-duo">
+          <img src="signal_packet_front.png" alt="signal N°001 front — matte red foil with debossed wordmark">
+          <img src="signal_n002_back.png" alt="signal N°001 back — clear AlOx film showing two chews stacked">
+        </div>
+        <div class="packet-caption">signal N°001 — the foundation · one substrate + one keystone chew</div>
+      </div>
+      <div class="packet-row scaled">
+        <div class="packet-duo">
+          <img src="signal_n001_front.png" alt="signal N°002 front — matte rose-linen foil">
+          <img src="signal_n001_back_v2.png" alt="signal N°002 back — cream pearl chews side by side">
+        </div>
+        <div class="packet-caption">signal N°002 — the daily fuel · two pearl chews</div>
+      </div>
+      <div class="packet-row scaled">
+        <div class="packet-duo">
+          <img src="signal_n003_front.png" alt="signal N°003 front — matte deep-evening foil">
+          <img src="signal_n003_back.png" alt="signal N°003 back — lavender chews stacked vertically">
+        </div>
+        <div class="packet-caption">signal N°003 — the evening practice · two lavender chews</div>
+      </div>
+    </div>
+    <div class="swatch-grid">
+      <div class="swatch-card"><div class="swatch-chip signal-red"></div><div class="swatch-info"><div class="swatch-info-name">Signal Red</div><div class="swatch-info-hex">#AD4236</div></div></div>
+      <div class="swatch-card"><div class="swatch-chip rose-linen"></div><div class="swatch-info"><div class="swatch-info-name">Rose Linen</div><div class="swatch-info-hex">#F6EFEA</div></div></div>
+      <div class="swatch-card"><div class="swatch-chip deep-evening"></div><div class="swatch-info"><div class="swatch-info-name">Deep Evening</div><div class="swatch-info-hex">#1A1410</div></div></div>
+    </div>
+    <p><strong>Signal Red</strong> is the keystone. It is the recognition color — from across a kitchen, the eye finds <span class="term">signal</span> before the mind reads it. The wordmark. The tray. The packet. The mailer. The cover of the manifesto.</p>
+    <p><strong>Rose Linen</strong> is the warm-neutral. N°001 packets. Long-form prose backgrounds. Paper left in sun. Also the mid-tone color — cards, quieter background surfaces.</p>
+    <p><strong>Deep Evening</strong> is the dark color. N°003 packets. Dark-mode pages. The gate. The color the brand wears in its serious moments.</p>
+  </div>
+  <aside class="margin-col">
+    <div class="aside">
+      <div class="aside-label">Commit to memory</div>
+      <div class="aside-body">
+        <ul>
+          <li><span class="stat-num">3</span> colors total</li>
+          <li><span class="stat-num">0</span> fourth color</li>
+          <li><span class="stat-num">1</span> recognition color</li>
+        </ul>
+      </div>
+    </div>
+    <div class="aside">
+      <div class="aside-label">Discipline</div>
+      <div class="aside-body">The brand's red is not one color. It is the same color rendered across three materials.</div>
+    </div>
+    <div class="aside">
+      <div class="aside-label">Retired</div>
+      <div class="aside-body">Cream was dropped 2026-05-21. Rose Linen Deep absorbed the mid-tone slot.</div>
+    </div>
+  </aside>
+</section>
+
+<!-- ═══════════════════ CH 03 §2 — WORDMARK ═══════════════════ -->
+<section class="spread">
+  <div class="main-col">
+    <div class="section-tag">§2 — Wordmark and typography</div>
+    <h3 class="section-h2">The slashes mean <span class="accent">pronounce this.</span></h3>
+    <p class="lead-p">The first time a customer reads the wordmark, they read it out loud. The phonetic marks mean <em>this is how.</em></p>
+    <p><em>/sɪɡˈnɑːl/</em> is not a logo. It is a pronunciation lesson the brand quietly insists on. The letters render in Signal Red; the IPA notation (/, ˈ, ː) recedes into Rose Linen — phonetic grammar that frames the word without competing with it.</p>
+  </div>
+  <aside class="margin-col">
+    <div class="aside">
+      <div class="aside-label">Spoken</div>
+      <div class="aside-body canonical">sig-NAHL.<br>Second syllable carries the weight. The first is light.</div>
+    </div>
+    <div class="aside">
+      <div class="aside-label">Set in</div>
+      <div class="aside-body">Plus Jakarta Sans 700. The only brand face with IPA glyph coverage.</div>
+    </div>
+  </aside>
+</section>
+
+<div class="wordmark-specimen-v2">
+  <div class="wm"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="spec-caption">canonical wordmark · plus jakarta sans 700 · two-color</div>
+</div>
+
+<section class="spread">
+  <div class="main-col">
+    <p>The wordmark is set in <strong>Plus Jakarta Sans 700</strong> — the only brand font with the glyphs it needs. The other two faces in the system have ~362 and ~110 glyphs respectively, and neither covers IPA Extensions; if the wordmark were set in either, the visible result would be four characters in the brand face and five in whatever generic system font the browser fell back to. Using Plus Jakarta is the honest choice.</p>
+    <p>Three typefaces carry the system:</p>
+    <div class="font-specimens">
+      <div class="font-card"><div class="sample anguita">signal</div><div class="face-name">Anguita · 900</div></div>
+      <div class="font-card"><div class="sample bebas">SIGNAL</div><div class="face-name">Bebas · 400</div></div>
+      <div class="font-card"><div class="sample jakarta">signal</div><div class="face-name">Jakarta · 300</div></div>
+    </div>
+    <p><strong>Anguita Sans</strong> is the primary display face. The brand's logo font. Headlines, section labels, card titles, the cover. Self-hosted from Latinotype. Weight 900 only — no italic; the brand earns emphasis through color and size, not slant.</p>
+    <p><strong>Bebas Neue</strong> is the secondary display face. Tall, condensed, geometric — contrast to Anguita's broader display weight. Headline accents, the stylized "I" in INSDR Wellness, moments where tall, narrow letters are the point.</p>
+    <p><strong>Plus Jakarta Sans</strong> is the body face — and the wordmark face. Body prose, captions, footer text, register labels. Default weight 300 — light, generous in the white space inside each letter, designed to be read at length. In weight 700, the IPA wordmark.</p>
+    <p>The three-font system above is the complete type system. <strong>There is no fourth font for "editorial warmth."</strong> Contrast lives in weight, scale, color, and the wordmark exception.</p>
+  </div>
+  <aside class="margin-col">
+    <div class="aside">
+      <div class="aside-label">Commit to memory</div>
+      <div class="aside-body">
+        <ul>
+          <li><span class="stat-num">3</span> typefaces total</li>
+          <li><span class="stat-num">0</span> fourth font</li>
+          <li><span class="stat-num">2</span> colors per wordmark</li>
+        </ul>
+      </div>
+    </div>
+    <div class="margin-quote">No italic.<br>Contrast lives<br>elsewhere.</div>
+  </aside>
+</section>
+
+<!-- ═══════════════════ CH 03 §3 — PACKAGING ═══════════════════ -->
+<section class="spread">
+  <div class="main-col">
+    <div class="section-tag">§3 — The packaging system</div>
+    <h3 class="section-h2">A kraft-colored box <span class="accent">arrives on the counter.</span></h3>
+    <p class="lead-p">The customer's address is printed directly on the box — no separate sleeve, no shipping label band, subtle layer of marketing packaging.</p>
+    <p>The box is two pieces: a slip-off lid with a snug friction fit, and a base whose four side panels are hinged at the bottom and scored to bias outward. The lid's interior walls hold the four panels upright while the box is sealed.</p>
+    <p>The customer lifts the lid. The friction releases. The four panels fold outward and lay flat around the tray. The tray is revealed standing upright on the counter — low walls, signal-red matte paperboard, ~230 by 70 millimeters. Thirty packets stand on edge between four full-height frosted acetate dividers. The top is open. The product is visible the moment the lid is off. The interior faces of the four panels are a reveal surface — what the customer reads at the moment of opening.</p>
+  </div>
+  <aside class="margin-col">
+    <div class="aside">
+      <div class="aside-label">Mechanic</div>
+      <div class="aside-body">
+        <ul>
+          <li><span class="stat-num">2</span> pieces (lid + base)</li>
+          <li><span class="stat-num">4</span> panels, bottom-hinged</li>
+          <li><span class="stat-num">30</span> packets on edge</li>
+          <li><span class="stat-num">4</span> acetate dividers</li>
+        </ul>
+      </div>
+    </div>
+    <div class="aside">
+      <div class="aside-label">Discipline</div>
+      <div class="aside-body">The tray does not move during the reveal. The packaging falls away around it.</div>
+    </div>
+  </aside>
+</section>
+
+<div class="full-bleed">
+  <img src="signal_vessel_petalfold_2026_05_23.png" alt="the kraft outer at the reveal moment — lid lifted, four panels fallen outward, the signal-red tray standing upright at center">
+  <div class="full-bleed-caption">the reveal moment — kraft outer's four panels fallen outward, the tray standing</div>
+</div>
+
+<section class="spread">
+  <div class="main-col">
+    <p>The tray is the canonical product format. Same shape every time, regardless of which SKU and regardless of which order in the customer's history. The only thing that varies is the color of the individual packages (Rose Linen for N°001, Signal Red for N°002, Deep Evening for N°003).</p>
+    <p>Four full-height frosted acetate dividers run along the long side of the tray. Each carries a decode artifact from the brand's visual system — IPA wordmark variants, surface marks, or intentional silence. Light incision, no ink, frosted acetate; the etching is visible only from the side, at a low angle. The dividers are the tray's quietest decode layer.</p>
+    <p>Three rules guide every packaging decision:</p>
+    <div class="rules-grid">
+      <div class="rule-card">
+        <div class="rule-num">1</div>
+        <div class="rule-name">Cost #1</div>
+        <div class="rule-body">Per-unit cost ~$0.95–1.55. Default to the cheaper option unless function loses.</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">2</div>
+        <div class="rule-name">Red Dot worthy</div>
+        <div class="rule-body">Mono-material where possible. No glue. Mechanism over decoration. Print only where it informs.</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">3</div>
+        <div class="rule-name">Cliché-breaker</div>
+        <div class="rule-body">No bottles. No childproof caps. No bro labels. Reference: Aesop / MUJI / Le Labo — not GNC.</div>
+      </div>
+    </div>
+  </div>
+  <aside class="margin-col">
+    <div class="aside">
+      <div class="aside-label">Same shape, always</div>
+      <div class="aside-body">No "first order vs reorder." Every shipment looks identical, regardless of cycle number.</div>
+    </div>
+    <div class="aside">
+      <div class="aside-label">Per-order cost</div>
+      <div class="aside-body"><span class="stat-num">$0.95–1.55</span></div>
+    </div>
+  </aside>
+</section>
+
+<!-- ═══════════════════ CH 03 §4 — LOAD-BEARING ARTIFACTS ═══════════════════ -->
+<section class="spread tinted">
+  <div class="inner">
+    <div class="main-col">
+      <div class="section-tag">§4 — The load-bearing artifacts</div>
+      <h3 class="section-h2"><span class="accent">Four objects</span> reward a closer look.</h3>
+      <p class="lead-p">Each was designed so that meaning compounds with re-encounter.</p>
+      <p>The first is the <strong>IPA wordmark</strong> itself. Held against the packet front, it is a label. Debossed into the empty tray floor, revealed only at the end of a 30-day cycle, it is a quiet end-marker. Etched into a frosted acetate divider, lit from the side, it is a found-not-planted artifact for the customer who looks. Same wordmark, three contexts, three different jobs.</p>
+      <p>The second is the <strong>annual coin.</strong> Brushed metal, ~38mm in diameter, IPA wordmark on the face, Roman year on the reverse. Arrives in a small kraft paperboard box, closed with a Signal-red wax seal stamped with the IPA glyph cluster pressed onto the lid. Earned by completing a year of the <span class="term">practice</span>. Year I or nothing. Never sold. Never upsold.</p>
+      <p>The third is the <strong>decode card.</strong> The artifact inside the Send a Signal envelope — the brand's $5 physical-mail demo, available at checkout to any customer who has just committed to their own order. A6, folded, mounted with one foundation packet on four corner slits and packed with an A7 insert that teaches what signal is. No personalization. No sender note. The CTA on every card reads the same way: <em>YOUR TURN → SEND A SIGNAL.</em></p>
+      <p>The fourth is the <strong><span class="term">entrainment</span> wordmark and signal sound</strong>, paired. On the manifesto's first frame, two wordmark ghosts sit at a slight horizontal offset — the brand mark is doubled, out of register. Two audio tones play at the same moment, 10 Hz apart, audible as a beat pattern. Over about two seconds, both converge in lockstep — the tones drift to unison on A4, the ghosts drift to perfect alignment. The logo reaches clear exactly as the sound fades. Heard once at the first ritual; recalled across every subsequent one. The brand calls the mechanic <span class="term">entrainment</span> — physiological pull made audible and visible at the same time.</p>
+    </div>
+    <aside class="margin-col">
+      <div class="aside">
+        <div class="aside-label">The four</div>
+        <div class="aside-body">
+          <ul>
+            <li><span class="stat-num">1</span> IPA wordmark</li>
+            <li><span class="stat-num">2</span> annual coin</li>
+            <li><span class="stat-num">3</span> decode card</li>
+            <li><span class="stat-num">4</span> entrainment + sound</li>
+          </ul>
+        </div>
+      </div>
+      <div class="aside">
+        <div class="aside-label">Test</div>
+        <div class="aside-body">Decorative objects are not load-bearing. Meaning the customer earns by encountering more than once — that is the test.</div>
+      </div>
+      <div class="margin-quote">Logo on a thing<br>is not a thing.</div>
+    </aside>
+  </div>
+</section>
+
+<!-- ═══════════════════ THE ENTRAINMENT DEMO ═══════════════════ -->
+<div class="entrainment-demo">
+  <button class="entrainment-trigger" type="button" id="entrainmentTrigger" aria-label="Play the entrainment wordmark and signal sound">
+    <span class="entrainment-stack">
+      <span class="entrainment-ghost-left" aria-hidden="true"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></span>
+      <span class="entrainment-ghost-right" aria-label="signal"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></span>
+    </span>
+  </button>
+  <div class="entrainment-caption">the asset itself, inline<span class="sub">click the wordmark to fire</span></div>
+</div>
+
+<!-- ═══════════════════ CH 03 §5 — VISUAL REGISTER ═══════════════════ -->
+<section class="spread dark">
+  <div class="inner">
+    <div class="main-col">
+      <div class="section-tag">§5 — The visual register</div>
+      <h3 class="section-h2">The work is the subject. <span class="accent">The body is not.</span></h3>
+      <p class="lead-p">The brand's visual register is <span class="term">the hold</span>: quiet persistence in routine work. Effort that has become habit, not effort being performed. Realistic and raw.</p>
+      <p>Posture is whatever the work produced. Light is whatever the situation offers. The brand documents continuation — not aspiration, not transformation, not lifestyle.</p>
+      <p>The antithesis is wellness-and-influencer imagery: bodies as objects of evaluation, performance staged as outcome, aspiration presented as identity. The brand refuses this register. The customer is the subject of the <span class="term">practice</span>, not the object of a photo.</p>
+      <p>The full register doctrine — the load-bearing artifact tiers (T1 canonical / T2 customer-owned / T3 reverse-causality found-not-planted) — lives in the <strong>Visual Register Playbook</strong>.</p>
+    </div>
+    <aside class="margin-col">
+      <div class="aside">
+        <div class="aside-label">Kicker</div>
+        <div class="aside-body canonical">"Signal's anti-wellness isn't anti-effort. It's anti-performance of effort."</div>
+      </div>
+      <div class="aside">
+        <div class="aside-label">Refuses</div>
+        <div class="aside-body">Bodies as objects. Aspiration as identity. The morning-routine feed. The before-and-after.</div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH 03 §6 — THE FORMAT (PULLQUOTE BAND) ═══════════════════ -->
+<div class="pullquote-band">
+  <div class="pull">The format is the canon.<br>Not a film.</div>
+  <div class="pull-attr">§6 — the format</div>
+</div>
+
+<section class="spread">
+  <div class="main-col">
+    <div class="section-tag">§6 — The format</div>
+    <p class="lead-p">The brand's primary visual format is <strong>first person</strong>. Camera = the subject's eyes. The film holds approximately 30 seconds of a daily situation, with <span class="term">signal</span> landing as a single beat inside it. Raw. Unstaged. Ambient.</p>
+    <p>The body is not in frame because the body is not the subject. The viewer doesn't watch someone live the <span class="term">practice</span> — they live it themselves. Aspiration cannot stage what it cannot show.</p>
+    <p>No single 30-second sequence is canonical. The situation varies — the morning, the kitchen, the walk, the room before bed. Other people may appear in frame: a partner, a child, a friend. Their dialogue can be unhurried, even playful, as long as the world it lives in is the brand's.</p>
+    <p>Stills are allowed in support of the primary format, first-person-framed where possible. Other formats — third-person, product shots, founder content — are allowed only when they serve the primary; never as the primary.</p>
+  </div>
+  <aside class="margin-col">
+    <div class="aside">
+      <div class="aside-label">Commit to memory</div>
+      <div class="aside-body">
+        <ul>
+          <li><span class="stat-num">1</span>st person POV</li>
+          <li><span class="stat-num">30</span>s per situation</li>
+          <li><span class="stat-num">1</span> beat for the chew</li>
+          <li><span class="stat-num">0</span> staged frames</li>
+        </ul>
+      </div>
+    </div>
+    <div class="aside">
+      <div class="aside-label">Allowed in support</div>
+      <div class="aside-body">Stills, first-person framed. Third-person and product shots, only when they serve the primary.</div>
+    </div>
+  </aside>
+</section>
+
+<!-- ═══════════════════ CH 03 §7 — WHAT BRAND WILL NOT SHOW ═══════════════════ -->
+<section class="spread no-margin">
+  <div class="main-col">
+    <div class="section-tag">§7 — What the brand will not show</div>
+    <h3 class="section-h2">Four <span class="accent">refusals.</span></h3>
+    <p class="lead-p">Walk past a competitor's display in a Whole Foods. Notice the visual language: the smiling-too-hard model, the abstract gradient mountain ranges, the hand-holding-product shot, the marketing-as-science chart.</p>
+    <p>Each carries the same failure pattern as the copy in Chapter 02. The brand refuses them — not because they are ugly, but because they tell the wrong story.</p>
+    <div class="refusals">
+      <div class="refusal">
+        <div class="refusal-num">01</div>
+        <div class="refusal-body">
+          <strong>The lab-coat appeal-to-authority.</strong>
+          <p>White coats, microscopes, gloved hands holding beakers. Authority performed, not earned.</p>
+        </div>
+      </div>
+      <div class="refusal">
+        <div class="refusal-num">02</div>
+        <div class="refusal-body">
+          <strong>The before-and-after body.</strong>
+          <p>Transformation-arc imagery; body change as promise. The brand does not evaluate bodies.</p>
+        </div>
+      </div>
+      <div class="refusal">
+        <div class="refusal-num">03</div>
+        <div class="refusal-body">
+          <strong>The aspirational-lifestyle shot.</strong>
+          <p>Golden-hour yoga, hand-on-hip confidence, smiling-too-hard models holding the product. The customer is the object of the photo, not the subject of the practice.</p>
+        </div>
+      </div>
+      <div class="refusal">
+        <div class="refusal-num">04</div>
+        <div class="refusal-body">
+          <strong>Borrowed-authority Mandarin / Chinese characters as decoration.</strong>
+          <p>Western brands appropriating Chinese characters for "ancient wisdom" cred. The brand uses no foreign-language ornament; it cannot tolerate the cliché in others.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CH 03 §8 — POINTER ═══════════════════ -->
+<section class="spread no-margin">
+  <div class="main-col">
+    <div class="section-tag">§8 — Pointer</div>
+    <p class="lead-p">The chapter covered what the brand looks like. <strong>Chapter 04 — Product Architecture</strong> covers what the brand makes — the formulation, SKU sequencing, dose detail, biochemistry. The visuals here need the products in Chapter 04 to give them something to render.</p>
+    <div class="dedication">v2 sample · end of chapter 03</div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer class="codex-footer">
+  the signal codex · <span class="accent">v2 sample</span> · chapters 00 + 03 · internal · 2026
+</footer>
+
+<!-- ═══════════════════ GATE SCRIPT ═══════════════════ -->
+<script>
+  (function(){
+    const PASS = "54321";
+    const body = document.body;
+    const input = document.getElementById("gate-pass");
+    const err = document.getElementById("gate-error");
+    function unlock(){
+      body.classList.remove("locked");
+      document.getElementById("gate").style.display = "none";
+    }
+    input.addEventListener("keydown", function(e){
+      if (e.key === "Enter") {
+        e.preventDefault();
+        if (input.value === PASS) {
+          unlock();
+        } else {
+          err.classList.add("show");
+          setTimeout(function(){ err.classList.remove("show"); }, 2400);
+          input.value = "";
+        }
+      }
+    });
+  })();
+</script>
+
+<!-- ═══════════════════ ENTRAINMENT DEMO ENGINE ═══════════════════ -->
+<script>
+  /* Same engine as v1.5. Click-to-fire, replayable. */
+  (function() {
+    const DRIFT_DURATION = 2.0;
+    const HOLD_DURATION = 0.8;
+    const DECAY_DURATION = 2.5;
+    const LANDING_PITCH = 440;
+    const INITIAL_OFFSET = 10;
+    const VISUAL_CONVERGENCE_DURATION = DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION;
+    let audioCtx = null;
+    let isPlaying = false;
+    const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function getCtx() {
+      if (!audioCtx) {
+        try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+        catch (e) { return null; }
+      }
+      return audioCtx;
+    }
+    function resetGhosts(instant) {
+      const gL = document.querySelector('.entrainment-ghost-left');
+      const gR = document.querySelector('.entrainment-ghost-right');
+      if (!gL || !gR) return;
+      if (instant) { gL.style.transition = 'none'; gR.style.transition = 'none'; }
+      gL.style.transform = 'translateX(-7px)'; gR.style.transform = 'translateX(7px)';
+      gL.style.opacity = '0.5'; gR.style.opacity = '0.5';
+    }
+    function runVisualConvergence() {
+      if (reducedMotion) return;
+      const gL = document.querySelector('.entrainment-ghost-left');
+      const gR = document.querySelector('.entrainment-ghost-right');
+      if (!gL || !gR) return;
+      resetGhosts(true); void gL.offsetWidth;
+      const visualMs = VISUAL_CONVERGENCE_DURATION * 1000;
+      gL.style.transition = 'transform ' + visualMs + 'ms cubic-bezier(0.45, 0, 0.2, 1), opacity ' + visualMs + 'ms ease';
+      gR.style.transition = 'transform ' + visualMs + 'ms cubic-bezier(0.45, 0, 0.2, 1), opacity ' + visualMs + 'ms ease';
+      gL.style.transform = 'translateX(0)'; gR.style.transform = 'translateX(0)';
+      gL.style.opacity = '1'; gR.style.opacity = '1';
+      setTimeout(function() { resetGhosts(false); }, visualMs + 400);
+    }
+    function playEntrainmentEvent() {
+      const ctx = getCtx(); if (!ctx) return;
+      if (ctx.state === 'suspended') ctx.resume();
+      const t = ctx.currentTime + 0.02;
+      const master = ctx.createGain();
+      master.gain.setValueAtTime(0.0001, t);
+      master.gain.exponentialRampToValueAtTime(0.35, t + 0.25);
+      master.gain.setValueAtTime(0.35, t + DRIFT_DURATION);
+      master.gain.setValueAtTime(0.35, t + DRIFT_DURATION + HOLD_DURATION);
+      master.gain.exponentialRampToValueAtTime(0.0001, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION);
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(1400, t);
+      filter.frequency.linearRampToValueAtTime(2400, t + DRIFT_DURATION);
+      filter.frequency.linearRampToValueAtTime(1600, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION * 0.6);
+      filter.Q.value = 0.5;
+      master.connect(filter); filter.connect(ctx.destination);
+      const stereo = ctx.createChannelMerger(2);
+      const leftBus = ctx.createGain(); leftBus.gain.value = 1.0;
+      const rightBus = ctx.createGain(); rightBus.gain.value = 1.0;
+      leftBus.connect(stereo, 0, 0); rightBus.connect(stereo, 0, 1);
+      stereo.connect(master);
+      const oscA = ctx.createOscillator(); oscA.type = 'sine';
+      oscA.frequency.setValueAtTime(LANDING_PITCH, t);
+      const gA = ctx.createGain(); gA.gain.value = 0.55;
+      oscA.connect(gA); gA.connect(leftBus);
+      const oscB = ctx.createOscillator(); oscB.type = 'sine';
+      oscB.frequency.setValueAtTime(LANDING_PITCH + INITIAL_OFFSET, t);
+      oscB.frequency.linearRampToValueAtTime(LANDING_PITCH, t + DRIFT_DURATION);
+      const gB = ctx.createGain(); gB.gain.value = 0.55;
+      oscB.connect(gB); gB.connect(rightBus);
+      const oscSub = ctx.createOscillator(); oscSub.type = 'sine';
+      oscSub.frequency.value = LANDING_PITCH / 2;
+      const gSub = ctx.createGain();
+      gSub.gain.setValueAtTime(0, t);
+      gSub.gain.setValueAtTime(0, t + DRIFT_DURATION * 0.7);
+      gSub.gain.linearRampToValueAtTime(0.28, t + DRIFT_DURATION);
+      gSub.gain.exponentialRampToValueAtTime(0.001, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION);
+      oscSub.connect(gSub); gSub.connect(leftBus); gSub.connect(rightBus);
+      const oscTop = ctx.createOscillator(); oscTop.type = 'sine';
+      oscTop.frequency.value = LANDING_PITCH * 2;
+      const gTop = ctx.createGain();
+      gTop.gain.setValueAtTime(0, t);
+      gTop.gain.setValueAtTime(0, t + DRIFT_DURATION * 0.85);
+      gTop.gain.linearRampToValueAtTime(0.09, t + DRIFT_DURATION + 0.15);
+      gTop.gain.exponentialRampToValueAtTime(0.0001, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION * 0.8);
+      oscTop.connect(gTop); gTop.connect(leftBus); gTop.connect(rightBus);
+      const dL = ctx.createDelay(3); dL.delayTime.value = 0.47;
+      const dR = ctx.createDelay(3); dR.delayTime.value = 0.68;
+      const dLg = ctx.createGain(); dLg.gain.value = 0.22;
+      const dRg = ctx.createGain(); dRg.gain.value = 0.18;
+      const dMerger = ctx.createChannelMerger(2);
+      master.connect(dL); dL.connect(dLg); dLg.connect(dMerger, 0, 0);
+      master.connect(dR); dR.connect(dRg); dRg.connect(dMerger, 0, 1);
+      dMerger.connect(ctx.destination);
+      const stopT = t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION + 0.2;
+      [oscA, oscB, oscSub, oscTop].forEach(function(o) { o.start(t); o.stop(stopT); });
+    }
+    function fireOnce() {
+      if (isPlaying) return;
+      isPlaying = true;
+      runVisualConvergence(); playEntrainmentEvent();
+      setTimeout(function() { isPlaying = false; }, VISUAL_CONVERGENCE_DURATION * 1000 + 300);
+    }
+    function init() {
+      const trigger = document.getElementById('entrainmentTrigger');
+      if (!trigger) return;
+      resetGhosts(true);
+      trigger.addEventListener('click', fireOnce);
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else { init(); }
+  })();
+</script>
+
+</body>
+</html>
