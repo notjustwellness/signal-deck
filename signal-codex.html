@@ -596,6 +596,21 @@ footer .footer-line {
 body.locked { overflow: hidden; height: 100vh; }
 body.locked > section, body.locked > footer { display: none !important; }
 @media print { #gate { display: none !important; } }
+
+/* ─── ENTRAINMENT DEMO (Ch 03 §4) — live wordmark + signal sound ─── */
+.entrainment-demo { margin: 48px 0; padding: 64px 32px 56px; background: var(--deep-evening); border-radius: 4px; text-align: center; }
+.entrainment-trigger { background: transparent; border: 1px solid rgba(246,239,234,0.12); cursor: pointer; padding: 32px 48px; display: inline-block; position: relative; border-radius: 4px; transition: border-color 0.2s, background 0.2s; }
+.entrainment-trigger:hover { border-color: rgba(246,239,234,0.28); background: rgba(246,239,234,0.03); }
+.entrainment-trigger:focus-visible { outline: 2px solid var(--signal-light); outline-offset: 4px; }
+.entrainment-stack { display: inline-block; position: relative; color: var(--rose-linen); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: clamp(32px, 6vw, 60px); letter-spacing: -0.01em; line-height: 1; }
+.entrainment-stack .accent { color: var(--signal); }
+.entrainment-ghost-left, .entrainment-ghost-right { display: block; will-change: transform, opacity; transition: transform 0.2s linear, opacity 0.2s linear; opacity: 0.5; }
+.entrainment-ghost-left { transform: translateX(-7px); }
+.entrainment-ghost-right { position: absolute; top: 0; left: 0; right: 0; transform: translateX(7px); }
+.entrainment-caption { margin-top: 28px; color: var(--rose-linen); opacity: 0.55; font-size: 13px; letter-spacing: 0.02em; font-style: italic; font-family: 'Plus Jakarta Sans', sans-serif; }
+.entrainment-caption .sub { display: block; margin-top: 6px; opacity: 0.7; font-size: 11px; letter-spacing: 0.05em; font-style: normal; text-transform: uppercase; }
+@media (prefers-reduced-motion: reduce) { .entrainment-ghost-left, .entrainment-ghost-right { transform: translateX(0) !important; opacity: 1 !important; transition: none !important; } }
+@media print { .entrainment-ghost-left { display: none !important; } .entrainment-ghost-right { position: static !important; opacity: 1 !important; transform: none !important; } .entrainment-trigger { border: none !important; padding: 0 !important; } .entrainment-caption { display: none !important; } .entrainment-demo { background: transparent !important; padding: 24px 0 !important; } }
 </style>
 </head>
 <body class="locked">
@@ -626,7 +641,7 @@ body.locked > section, body.locked > footer { display: none !important; }
   </div>
   <div class="cover-thesis">For the people building the world.</div>
   <div class="cover-subline">A decoding document. The thesis, the voice, the manifesto, the product architecture, the operational discipline, the customer ritual, the defense — held in one cover.</div>
-  <div class="cover-meta">signal codex · v1.2 · chapters 00–09 · 2026-05-23</div>
+  <div class="cover-meta">signal codex · v1.3 · chapters 00–09 · 2026-05-23</div>
 </section>
 
 <!-- ═══════════════════ TOC ═══════════════════ -->
@@ -969,6 +984,16 @@ body.locked > section, body.locked > footer { display: none !important; }
     <p>The third is the <strong>decode card.</strong> It is the artifact inside the Send a Signal envelope &mdash; the brand's $5 physical-mail demo, available at checkout to any customer who has just committed to their own order. The card is A6, folded, mounted with one foundation packet on four corner slits and packed with an A7 insert that teaches what signal is. No personalization. No sender note. The CTA on every card reads the same way: <em>YOUR TURN &rarr; SEND A SIGNAL.</em> The card carries the brand's deepest voice register: a short body of copy framing the gift as care arriving from inside the practice, closed by the line <em>/sɪɡˈnɑːl/ received.</em> The "decode" is what the recipient does with it &mdash; the brand's register is not explained, the gift's meaning is not announced. The recipient reads it, understands it as care arriving without performance, and is invited to send their own.</p>
 
     <p>The fourth is the <strong>entrainment wordmark and signal sound</strong>, paired. On the manifesto's first frame, two wordmark ghosts sit at a slight horizontal offset &mdash; the brand mark is doubled, out of register. Two audio tones play at the same moment, 10 Hz apart, audible as a beat pattern. Over about two seconds, both converge in lockstep &mdash; the tones drift to unison on A4, the ghosts drift to perfect alignment. The logo reaches clear exactly as the sound fades. Heard once at the first ritual; recalled across every subsequent one. The brand calls the mechanic <em>entrainment</em> &mdash; physiological pull made audible and visible at the same time.</p>
+
+    <div class="entrainment-demo">
+      <button class="entrainment-trigger" type="button" id="entrainmentTrigger" aria-label="Play the entrainment wordmark and signal sound">
+        <span class="entrainment-stack">
+          <span class="entrainment-ghost-left" aria-hidden="true"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></span>
+          <span class="entrainment-ghost-right" aria-label="signal"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></span>
+        </span>
+      </button>
+      <div class="entrainment-caption">the asset itself, inline<span class="sub">click the wordmark to fire</span></div>
+    </div>
 
     <p>What makes an artifact load-bearing: meaning the customer earns by encountering it more than once. Decorative objects are not load-bearing; they're additions. The brand commissions objects that operate the product, carry the practice forward, recognize tenure, or pass the merch selection criteria &mdash; deeper meaning than decoration, something specific, something the rest of the brand cannot say.</p>
 
@@ -1418,7 +1443,7 @@ body.locked > section, body.locked > footer { display: none !important; }
 <!-- ═══════════════════ FOOTER ═══════════════════ -->
 <footer>
   <div class="footer-line">INSDR Wellness — the cellcare company</div>
-  <div>the signal codex · v1.2 · chapters 00–09 · internal · 2026</div>
+  <div>the signal codex · v1.3 · chapters 00–09 · internal · 2026</div>
 </footer>
 
 <script>
@@ -1446,6 +1471,161 @@ body.locked > section, body.locked > footer { display: none !important; }
       }
       return false;
     };
+  })();
+</script>
+
+<!-- ═══════════════════ ENTRAINMENT DEMO ENGINE (Ch 03 §4) ═══════════════════ -->
+<script>
+  /* Codex demonstration of the entrainment wordmark + signal sound.
+     Ported from brand_manifesto.html — keep audio params in sync with that surface.
+     Differences from manifesto: click-to-fire (not cover-IO-fire), replayable, no mute-toggle UI. */
+  (function() {
+    const DRIFT_DURATION = 2.0;
+    const HOLD_DURATION = 0.8;
+    const DECAY_DURATION = 2.5;
+    const LANDING_PITCH = 440;      // A4
+    const INITIAL_OFFSET = 10;       // Hz — beat pattern before drift
+    const VISUAL_CONVERGENCE_DURATION = DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION;
+
+    let audioCtx = null;
+    let isPlaying = false;
+    const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function getCtx() {
+      if (!audioCtx) {
+        try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+        catch (e) { return null; }
+      }
+      return audioCtx;
+    }
+
+    function resetGhosts(instant) {
+      const gL = document.querySelector('.entrainment-ghost-left');
+      const gR = document.querySelector('.entrainment-ghost-right');
+      if (!gL || !gR) return;
+      if (instant) {
+        gL.style.transition = 'none';
+        gR.style.transition = 'none';
+      }
+      gL.style.transform = 'translateX(-7px)';
+      gR.style.transform = 'translateX(7px)';
+      gL.style.opacity = '0.5';
+      gR.style.opacity = '0.5';
+    }
+
+    function runVisualConvergence() {
+      if (reducedMotion) return;
+      const gL = document.querySelector('.entrainment-ghost-left');
+      const gR = document.querySelector('.entrainment-ghost-right');
+      if (!gL || !gR) return;
+      resetGhosts(true);
+      void gL.offsetWidth;
+      const visualMs = VISUAL_CONVERGENCE_DURATION * 1000;
+      gL.style.transition = 'transform ' + visualMs + 'ms cubic-bezier(0.45, 0, 0.2, 1), opacity ' + visualMs + 'ms ease';
+      gR.style.transition = 'transform ' + visualMs + 'ms cubic-bezier(0.45, 0, 0.2, 1), opacity ' + visualMs + 'ms ease';
+      gL.style.transform = 'translateX(0)';
+      gR.style.transform = 'translateX(0)';
+      gL.style.opacity = '1';
+      gR.style.opacity = '1';
+      // After the visual settles, restore the doubled resting state so the demo is replayable.
+      setTimeout(function() { resetGhosts(false); }, visualMs + 400);
+    }
+
+    function playEntrainmentEvent() {
+      const ctx = getCtx();
+      if (!ctx) return;
+      if (ctx.state === 'suspended') ctx.resume();
+      const t = ctx.currentTime + 0.02;
+
+      const master = ctx.createGain();
+      master.gain.setValueAtTime(0.0001, t);
+      master.gain.exponentialRampToValueAtTime(0.35, t + 0.25);
+      master.gain.setValueAtTime(0.35, t + DRIFT_DURATION);
+      master.gain.setValueAtTime(0.35, t + DRIFT_DURATION + HOLD_DURATION);
+      master.gain.exponentialRampToValueAtTime(0.0001, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION);
+
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(1400, t);
+      filter.frequency.linearRampToValueAtTime(2400, t + DRIFT_DURATION);
+      filter.frequency.linearRampToValueAtTime(1600, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION * 0.6);
+      filter.Q.value = 0.5;
+      master.connect(filter);
+      filter.connect(ctx.destination);
+
+      const stereo = ctx.createChannelMerger(2);
+      const leftBus = ctx.createGain(); leftBus.gain.value = 1.0;
+      const rightBus = ctx.createGain(); rightBus.gain.value = 1.0;
+      leftBus.connect(stereo, 0, 0);
+      rightBus.connect(stereo, 0, 1);
+      stereo.connect(master);
+
+      const oscA = ctx.createOscillator();
+      oscA.type = 'sine';
+      oscA.frequency.setValueAtTime(LANDING_PITCH, t);
+      const gA = ctx.createGain(); gA.gain.value = 0.55;
+      oscA.connect(gA); gA.connect(leftBus);
+
+      const oscB = ctx.createOscillator();
+      oscB.type = 'sine';
+      oscB.frequency.setValueAtTime(LANDING_PITCH + INITIAL_OFFSET, t);
+      oscB.frequency.linearRampToValueAtTime(LANDING_PITCH, t + DRIFT_DURATION);
+      const gB = ctx.createGain(); gB.gain.value = 0.55;
+      oscB.connect(gB); gB.connect(rightBus);
+
+      const oscSub = ctx.createOscillator();
+      oscSub.type = 'sine';
+      oscSub.frequency.value = LANDING_PITCH / 2;
+      const gSub = ctx.createGain();
+      gSub.gain.setValueAtTime(0, t);
+      gSub.gain.setValueAtTime(0, t + DRIFT_DURATION * 0.7);
+      gSub.gain.linearRampToValueAtTime(0.28, t + DRIFT_DURATION);
+      gSub.gain.exponentialRampToValueAtTime(0.001, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION);
+      oscSub.connect(gSub); gSub.connect(leftBus); gSub.connect(rightBus);
+
+      const oscTop = ctx.createOscillator();
+      oscTop.type = 'sine';
+      oscTop.frequency.value = LANDING_PITCH * 2;
+      const gTop = ctx.createGain();
+      gTop.gain.setValueAtTime(0, t);
+      gTop.gain.setValueAtTime(0, t + DRIFT_DURATION * 0.85);
+      gTop.gain.linearRampToValueAtTime(0.09, t + DRIFT_DURATION + 0.15);
+      gTop.gain.exponentialRampToValueAtTime(0.0001, t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION * 0.8);
+      oscTop.connect(gTop); gTop.connect(leftBus); gTop.connect(rightBus);
+
+      const dL = ctx.createDelay(3); dL.delayTime.value = 0.47;
+      const dR = ctx.createDelay(3); dR.delayTime.value = 0.68;
+      const dLg = ctx.createGain(); dLg.gain.value = 0.22;
+      const dRg = ctx.createGain(); dRg.gain.value = 0.18;
+      const dMerger = ctx.createChannelMerger(2);
+      master.connect(dL); dL.connect(dLg); dLg.connect(dMerger, 0, 0);
+      master.connect(dR); dR.connect(dRg); dRg.connect(dMerger, 0, 1);
+      dMerger.connect(ctx.destination);
+
+      const stopT = t + DRIFT_DURATION + HOLD_DURATION + DECAY_DURATION + 0.2;
+      [oscA, oscB, oscSub, oscTop].forEach(function(o) { o.start(t); o.stop(stopT); });
+    }
+
+    function fireOnce() {
+      if (isPlaying) return;
+      isPlaying = true;
+      runVisualConvergence();
+      playEntrainmentEvent();
+      setTimeout(function() { isPlaying = false; }, VISUAL_CONVERGENCE_DURATION * 1000 + 300);
+    }
+
+    function init() {
+      const trigger = document.getElementById('entrainmentTrigger');
+      if (!trigger) return;
+      resetGhosts(true);
+      trigger.addEventListener('click', fireOnce);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
   })();
 </script>
 
