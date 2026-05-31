@@ -6,8 +6,9 @@
 <title>The Signal Codex · v2 sample · 2026-05-23</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* Self-host Anguita + Bebas fallbacks; Bebas Neue + Oswald also from Google Fonts above. */
 @font-face {
   font-family: 'Anguita Sans';
   src: url('fonts/AnguitaSans.otf') format('opentype');
@@ -15,37 +16,62 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face { font-family: 'Bebas Neue Local'; src: url('fonts/BebasNeue-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
 
 :root {
-  --signal: #AD4236;
-  --signal-light: #C85D51;
-  --signal-deep: #7A2E26;
-  --deep-evening: #4A2540;
-  --rose-linen: #F6EFEA;
-  --rose-linen-deep: #EDE3D8;
-  --paper: #FBF8F4;
-  --ink: #2A2520;
-  --mute: rgba(42, 37, 32, 0.6);
-  --mute-light: rgba(246, 239, 234, 0.6);
-  --rule: rgba(42, 37, 32, 0.16);
-  --rule-dark: rgba(246, 239, 234, 0.18);
-  --font-display: 'Anguita Sans', 'Bebas Neue', Impact, sans-serif;
-  --font-editorial: 'Bebas Neue', Impact, sans-serif;
+  /* ───── B-HYBRID · DARK cinematic sepia + ONE disciplined red ───── */
+  /* matched to signal_brand_kit.html — tuned to the cover photograph */
+  --red: #AD4236;            /* the single accent: bracket signature, key focal mark */
+  --red-deep: #7A2E26;
+  --espresso: #241B17;       /* deepest ground (the photo's shadow) */
+  --espresso-soft: #2E2420;  /* default section ground */
+  --coffee: #3A2E28;         /* panel / mid surface */
+  --taupe: #A2917F;          /* quiet accent: eyebrows, tags, terms, rules */
+  --taupe-light: #BBAD9F;
+  --bone: #D8CCC1;           /* primary light — text + figures on dark */
+  --bone-dim: #B7A899;
+  /* legacy tokens repurposed for the DARK default (light text, dark grounds) */
+  --signal: var(--taupe);            /* the many small accents go quiet taupe */
+  --signal-light: var(--taupe-light);
+  --signal-deep: var(--coffee);
+  --deep-evening: var(--espresso);   /* darkest feature bands */
+  --rose-linen: var(--bone);         /* "the light color" used as text on dark */
+  --rose-linen-deep: var(--coffee);  /* tinted bands → mid surface */
+  --paper: var(--espresso-soft);     /* DEFAULT body ground is now dark */
+  --ink: var(--bone);                /* DEFAULT TEXT is now light bone */
+  --mute: rgba(216, 204, 193, 0.6);
+  --mute-light: rgba(216, 204, 193, 0.55);
+  --rule: rgba(216, 204, 193, 0.14);
+  --rule-dark: rgba(216, 204, 193, 0.16);
+  --font-display: 'Bebas Neue', 'Bebas Neue Local', 'Oswald', Impact, sans-serif;
+  --font-editorial: 'Oswald', 'Bebas Neue', 'Bebas Neue Local', sans-serif;
   --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+html { background: var(--espresso); }
 body {
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   color: var(--ink);
-  background: var(--paper);
-  line-height: 1.55;
+  background: var(--espresso-soft);
+  line-height: 1.6;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  position: relative;
+}
+/* ─── photographic atmosphere: film grain + warm vignette (evokes the cover image) ─── */
+body::after {
+  content:""; position: fixed; inset:0; z-index: 200; pointer-events:none; opacity:0.05;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
+  mix-blend-mode: overlay;
+}
+body::before {
+  content:""; position: fixed; inset:0; z-index: 199; pointer-events:none;
+  background: radial-gradient(120% 90% at 50% 32%, transparent 52%, rgba(15,10,8,0.42) 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -76,45 +102,42 @@ body.locked > section, body.locked > footer { display: none !important; }
 /* ═══════════════════════════════════════════════════════════════
    COVER
 ═══════════════════════════════════════════════════════════════ */
+/* full-frame cover — the "it's a sign" photograph spans the entire opening frame */
 .cover {
-  background: var(--deep-evening);
-  color: var(--rose-linen);
+  position: relative;
+  min-height: 100vh;
+  background: var(--espresso);
+  color: var(--bone);
+  overflow: hidden;
+}
+.cover-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+.cover-scrim {
+  position: relative; z-index: 2;
   min-height: 100vh;
   display: flex; flex-direction: column; justify-content: space-between;
-  padding: 64px 8vw;
+  padding: 48px 8vw 56px;
+  background: linear-gradient(180deg, rgba(18,12,10,0.46) 0%, rgba(18,12,10,0.05) 24%, rgba(18,12,10,0) 50%, rgba(18,12,10,0.78) 100%);
 }
 .cover-top { display: flex; justify-content: space-between; align-items: flex-start; }
-.cover-top .label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; opacity: 0.45; }
-.cover-mark { font-family: var(--font-body); font-weight: 700; font-size: 14px; color: var(--rose-linen); }
-.cover-mark .accent { color: var(--signal-light); }
-
-.cover-center {
-  flex: 1; display: flex; flex-direction: column; justify-content: center;
+.cover-top .label { font-family: var(--font-editorial); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--bone); opacity: 0.7; }
+.cover-mark { font-family: var(--font-body); font-weight: 600; font-size: 13px; letter-spacing: 1px; color: var(--bone); opacity: 0.82; }
+.cover-mark .accent { color: var(--red); }
+.cover-foot { }
+.cover-title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(40px, 7vw, 96px);
+  line-height: 0.92; letter-spacing: 1px; margin: 0 0 14px;
+  text-transform: uppercase; color: var(--bone);
+  text-shadow: 0 2px 40px rgba(0,0,0,0.7);
 }
-.cover-h1 {
-  font-family: var(--font-display); font-weight: 900;
-  font-size: clamp(72px, 14vw, 220px);
-  line-height: 0.85; letter-spacing: -0.02em; margin: 0;
-  text-transform: uppercase;
-  color: var(--rose-linen);
-}
-.cover-h1 .accent { color: var(--signal); }
-.cover-sub {
-  font-family: var(--font-editorial); font-weight: 400;
-  font-size: clamp(20px, 3vw, 36px);
-  letter-spacing: 0.06em; text-transform: uppercase;
-  margin-top: 28px; color: var(--signal-light);
-}
-.cover-thesis {
-  font-family: var(--font-body); font-weight: 300; font-style: italic;
-  font-size: clamp(15px, 1.6vw, 19px);
-  line-height: 1.5; max-width: 560px;
-  color: var(--rose-linen); opacity: 0.78;
-  margin-top: 56px;
-}
-.cover-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
-.cover-meta { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.5; }
-.cover-meta .accent { color: var(--signal-light); }
+.cover-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
+.cover-meta { font-family: var(--font-editorial); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--bone); opacity: 0.62; }
+.cover-meta .accent { color: var(--red); opacity: 1; }
 
 /* ═══════════════════════════════════════════════════════════════
    CHAPTER OPENER (FULL-BLEED, MAGAZINE-STYLE)
@@ -202,7 +225,7 @@ body.locked > section, body.locked > footer { display: none !important; }
 .spread.dark .section-h2 .accent, .spread.dark-wide .section-h2 .accent { color: var(--signal-light); }
 
 .lead-p {
-  font-family: var(--font-body); font-weight: 300;
+  font-family: var(--font-body); font-weight: 400;
   font-size: 19px; line-height: 1.55;
   margin: 0 0 24px;
   color: inherit;
@@ -210,7 +233,7 @@ body.locked > section, body.locked > footer { display: none !important; }
 .spread.dark .lead-p, .spread.dark-wide .lead-p { color: var(--rose-linen); opacity: 0.92; }
 
 .main-col p {
-  font-family: var(--font-body); font-weight: 300;
+  font-family: var(--font-body); font-weight: 400;
   font-size: 16px; line-height: 1.65;
   margin: 0 0 18px;
 }
@@ -295,18 +318,22 @@ a.doc-link:hover { border-bottom-color: var(--signal); }
    PULLQUOTES (FULL-WIDTH CANONICAL)
 ═══════════════════════════════════════════════════════════════ */
 .pullquote-band {
-  background: var(--signal);
-  color: var(--rose-linen);
+  background-image: linear-gradient(rgba(20,14,11,0.56), rgba(20,14,11,0.8)), url('signal_grain_b.png');
+  background-size: cover; background-position: 50% 38%; background-repeat: no-repeat;
+  color: var(--bone);
   padding: 80px 8vw;
   margin: 64px 0;
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  position: relative;
 }
 .pullquote-band .pull {
   font-family: var(--font-display); font-weight: 900;
   font-size: clamp(36px, 5vw, 64px);
-  line-height: 1.0; letter-spacing: -0.01em;
+  line-height: 1.0; letter-spacing: 0.01em;
   text-transform: uppercase;
   max-width: 900px; margin: 0 auto;
   text-align: center;
+  text-shadow: 0 2px 30px rgba(0,0,0,0.6);
 }
 .pullquote-band .pull-attr {
   font-family: var(--font-editorial); font-size: 11px;
@@ -422,6 +449,15 @@ a.doc-link:hover { border-bottom-color: var(--signal); }
   letter-spacing: 4px; text-transform: uppercase;
   margin-top: 32px; opacity: 0.55;
 }
+/* traced serif wordmark — recolorable groups (ported from signal_brand_kit.html) */
+.wm-art { width: 100%; height: auto; display: block; }
+.wm-art .wm-accent { fill: var(--bone); }
+.wm-art .wm-sign, .wm-art .wm-tail { fill: var(--bone); }     /* fallback */
+.wm-sig .wm-accent { fill: var(--red); }                       /* the red-bracket signature */
+/* SIGN sits a hair above the a·l tail (~Δ10) — present, still subtle */
+.sign-lighter .wm-sign { fill: #DED2C9; } .sign-lighter .wm-tail { fill: #D0C3B9; }
+.wm-sig.sign-lighter .wm-accent { fill: var(--red); }
+.wm-specimen-art { max-width: 520px; margin: 0 auto; }
 
 /* Font specimens */
 .font-specimens {
@@ -456,6 +492,13 @@ a.doc-link:hover { border-bottom-color: var(--signal); }
 .packet-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .packet-duo img { width: 100%; aspect-ratio: 4/5; object-fit: cover; background: var(--rose-linen); border-radius: 2px; }
 .packet-row.scaled .packet-duo img { transform: scale(0.85); object-fit: contain; }
+/* image placeholder — "image to be updated" (ported from signal_brand_kit.html) */
+.img-ph { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; min-height:230px; padding:30px 24px; background: var(--coffee); border:1px dashed rgba(216,204,193,0.30); border-radius:2px; color: var(--ink-dim); font-size:10.5px; letter-spacing:2px; text-transform:uppercase; line-height:1.7; }
+.img-ph b { display:block; color: var(--taupe); font-size:12px; letter-spacing:2.5px; margin-bottom:5px; }
+.img-ph .ph-mark { font-size:22px; color: rgba(216,204,193,0.32); margin-bottom:10px; line-height:1; }
+.packet-duo { align-items: stretch; }
+.packet-duo .img-ph { height: 100%; min-height: 230px; }
+.packet-row.scaled .packet-duo .img-ph { transform: scale(0.85); }
 .packet-caption {
   font-family: var(--font-body); font-style: italic; font-size: 13px;
   color: var(--mute); text-align: center;
@@ -483,6 +526,7 @@ a.doc-link:hover { border-bottom-color: var(--signal); }
 .entrainment-trigger:focus-visible { outline: 2px solid var(--signal-light); outline-offset: 4px; }
 .entrainment-stack { display: inline-block; position: relative; color: var(--rose-linen); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: clamp(40px, 7vw, 72px); letter-spacing: -0.01em; line-height: 1; }
 .entrainment-stack .accent { color: var(--signal-light); }
+.entrainment-stack .wm-art { width: clamp(280px, 56vw, 440px); height: auto; display: block; }
 .entrainment-ghost-left, .entrainment-ghost-right { display: block; will-change: transform, opacity; transition: transform 0.2s linear, opacity 0.2s linear; opacity: 0.5; }
 .entrainment-ghost-left { transform: translateX(-7px); }
 .entrainment-ghost-right { position: absolute; top: 0; left: 0; right: 0; transform: translateX(7px); }
@@ -541,6 +585,31 @@ a.doc-link:hover { border-bottom-color: var(--signal); }
 /* ═══════════════════════════════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════
+   CLOSING POSTER — the full brand photograph (uncropped)
+═══════════════════════════════════════════════════════════════ */
+.poster-band {
+  background: var(--espresso);
+  max-width: none;
+  padding: 88px 8vw 96px;
+  display: flex; flex-direction: column; align-items: center;
+  border-top: 1px solid var(--rule);
+}
+.poster-band .poster-eyebrow {
+  font-family: var(--font-editorial); font-size: 12px;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--taupe); margin-bottom: 28px;
+}
+.poster-full {
+  display: block; width: 100%; max-width: 460px; height: auto;
+  box-shadow: 0 34px 90px rgba(0,0,0,0.62);
+}
+@media print {
+  .poster-band { padding: 24px 0; background: white !important; }
+  .poster-band .poster-eyebrow { color: #555 !important; }
+  .poster-full { box-shadow: none !important; max-width: 340px; }
+}
+
 footer.codex-footer {
   background: var(--deep-evening); color: var(--rose-linen);
   padding: 48px 8vw;
@@ -578,7 +647,10 @@ footer.codex-footer .accent { color: var(--signal-light); }
   }
   .margin-col { border-top: 1px solid #888; padding-top: 16px; margin-top: 16px; }
   .cover, .chapter-opener, .spread.dark, .spread.dark-wide { color: black !important; background: white !important; }
-  .opener-number, .cover-h1 { color: black !important; }
+  .cover-bg { display: none !important; }
+  .cover-scrim { background: none !important; padding-top: 64px !important; }
+  .opener-number, .cover-title { color: black !important; }
+  .cover-title, .cover-meta, .cover-mark { color: black !important; opacity: 1 !important; text-shadow: none !important; }
   .pullquote-band { background: white !important; color: black !important; padding: 32px 0; }
   .pullquote-band .pull { color: black; }
   .entrainment-ghost-left { display: none !important; }
@@ -603,20 +675,21 @@ footer.codex-footer .accent { color: var(--signal-light); }
   <div class="gate-footer">insdr wellness · the cellcare company</div>
 </div>
 
-<!-- ═══════════════════ COVER ═══════════════════ -->
+<!-- ═══════════════════ COVER — full-frame "it's a sign" photograph ═══════════════════ -->
 <section class="cover">
-  <div class="cover-top">
-    <div class="label">v2 sample</div>
-    <div class="cover-mark"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
-  </div>
-  <div class="cover-center">
-    <h1 class="cover-h1">The<br>Signal<br><span class="accent">Codex.</span></h1>
-    <div class="cover-sub">A decoding document.</div>
-    <div class="cover-thesis">Written for the people already inside the work — the ones who need to remember why. None of this is meant for the consumer. The consumer meets signal through the world the brand builds around it. This document is for the people building the world.</div>
-  </div>
-  <div class="cover-bottom">
-    <div class="cover-meta">insdr wellness · the <span class="accent">cellcare</span> company</div>
-    <div class="cover-meta">v3.2 · chapters 00–09 · 2026-05-30</div>
+  <img class="cover-bg" src="signal_cover_portrait.png" alt="signal — the cover photograph; the serif wordmark reads signal, then sign">
+  <div class="cover-scrim">
+    <div class="cover-top">
+      <div class="cover-mark"><span class="accent">/</span> sɪgnɑːl <span class="accent">/</span></div>
+      <div class="label">internal · confidential</div>
+    </div>
+    <div class="cover-foot">
+      <h1 class="cover-title">The Signal Codex</h1>
+      <div class="cover-bottom">
+        <div class="cover-meta">insdr wellness · the <span class="accent">cellcare</span> company</div>
+        <div class="cover-meta">v3.2 · chapters 00–09 · 2026-05-30</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1098,7 +1171,7 @@ footer.codex-footer .accent { color: var(--signal-light); }
   <div class="opener-meta">
     <div class="label">Chapter Three</div>
     <h2 class="opener-title">The Visual System.</h2>
-    <p class="opener-lead"><em>What the brand looks like. Hold a packet, press the foil flat — the red has weight. Three colors. Three fonts. Four load-bearing artifacts. One sonic asset.</em></p>
+    <p class="opener-lead"><em>What the brand looks like. Hold a packet, press the foil flat — the red has weight. One hue, four values, one red. Three fonts. Four load-bearing artifacts. One sonic asset.</em></p>
   </div>
 </section>
 
@@ -1106,59 +1179,64 @@ footer.codex-footer .accent { color: var(--signal-light); }
 <section class="spread">
   <div class="main-col">
     <div class="section-tag">§1 — The color system</div>
-    <h3 class="section-h2">The brand uses <span class="accent">three colors.</span> No fourth.</h3>
-    <p class="lead-p">Hold a <span class="term">signal</span> packet in your hand. Press the foil flat. The red has weight — it is not a screen color but a <em>paper</em> color, the color of matte paper that has absorbed the dye instead of sitting on top of it.</p>
-    <p>Now look at the tray underneath. The red is the same color, but the material is paperboard, not foil — so the light returns differently. The brand's red is not one color. It is the same color shown across three materials, each one holding it slightly differently.</p>
+    <h3 class="section-h2">One hue. <span class="accent">Four values. One red.</span></h3>
+    <p class="lead-p">The brand's field is a warm sepia monochrome drawn straight from the brand photograph — espresso to bone, all on a single warm axis. Cinematic, hushed, adult. Then one disciplined accent: <span class="term">Signal Red</span>, used once per surface and never twice.</p>
+    <p>Hold a <span class="term">signal</span> packet in your hand. Press the foil flat. The red has weight — it is not a screen color but a <em>paper</em> color, the color of matte paper that has absorbed the dye instead of sitting on top of it. That red is the brand's single accent. Everything around it — the page, the panels, the figures, the wordmark's letters — lives on the sepia axis.</p>
     <div class="packet-cluster">
       <div class="packet-row">
         <div class="packet-duo">
-          <img src="signal_n001_front.png" alt="signal N°001 front — matte red foil with debossed wordmark">
+          <div class="img-ph"><span class="ph-mark">⟳</span><b>N°001 packet front</b>image to be updated</div>
           <img src="signal_n001_back_v2.png" alt="signal N°001 back — clear AlOx film showing two chews stacked">
         </div>
         <div class="packet-caption">signal N°001 — the foundation · one substrate + one keystone chew</div>
       </div>
       <div class="packet-row scaled">
         <div class="packet-duo">
-          <img src="signal_n002_front.jpg" alt="signal N°002 front — matte rose-linen foil">
+          <div class="img-ph"><span class="ph-mark">⟳</span><b>N°002 packet front</b>image to be updated</div>
           <img src="signal_n002_back.png" alt="signal N°002 back — cream pearl chews side by side">
         </div>
         <div class="packet-caption">signal N°002 — the daily fuel · two pearl chews</div>
       </div>
       <div class="packet-row scaled">
         <div class="packet-duo">
-          <img src="signal_n003_front.png" alt="signal N°003 front — matte deep-evening foil">
+          <div class="img-ph"><span class="ph-mark">⟳</span><b>N°003 packet front</b>image to be updated</div>
           <img src="signal_n003_back.png" alt="signal N°003 back — lavender chews stacked vertically">
         </div>
         <div class="packet-caption">signal N°003 — the evening practice · two lavender chews</div>
       </div>
     </div>
-    <div class="swatch-grid">
-      <div class="swatch-card"><div class="swatch-chip signal-red"></div><div class="swatch-info"><div class="swatch-info-name">Signal Red</div><div class="swatch-info-hex">#AD4236</div></div></div>
-      <div class="swatch-card"><div class="swatch-chip rose-linen"></div><div class="swatch-info"><div class="swatch-info-name">Rose Linen</div><div class="swatch-info-hex">#F6EFEA</div></div></div>
-      <div class="swatch-card"><div class="swatch-chip deep-evening"></div><div class="swatch-info"><div class="swatch-info-name">Deep Evening</div><div class="swatch-info-hex">#4A2540</div></div></div>
+    <div class="swatch-grid" style="grid-template-columns:repeat(4,1fr)">
+      <div class="swatch-card"><div class="swatch-chip" style="background:#241B17;"></div><div class="swatch-info"><div class="swatch-info-name">Espresso</div><div class="swatch-info-hex">#241B17</div></div></div>
+      <div class="swatch-card"><div class="swatch-chip" style="background:#3A2E28;"></div><div class="swatch-info"><div class="swatch-info-name">Coffee</div><div class="swatch-info-hex">#3A2E28</div></div></div>
+      <div class="swatch-card"><div class="swatch-chip" style="background:#A2917F;"></div><div class="swatch-info"><div class="swatch-info-name">Taupe</div><div class="swatch-info-hex">#A2917F</div></div></div>
+      <div class="swatch-card"><div class="swatch-chip" style="background:#D8CCC1;border-bottom:1px solid var(--rule);"></div><div class="swatch-info"><div class="swatch-info-name">Bone</div><div class="swatch-info-hex">#D8CCC1</div></div></div>
     </div>
-    <p><strong>Signal Red</strong> is the keystone. It is the recognition color — from across a kitchen, the eye finds <span class="term">signal</span> before the mind reads it. The wordmark. The tray. The packet. The mailer. The cover of the manifesto.</p>
-    <p><strong>Rose Linen</strong> is the warm-neutral. N°001 packets. Long-form prose backgrounds. Paper left in sun. Also the mid-tone color — cards, quieter background surfaces.</p>
-    <p><strong>Deep Evening</strong> is the dark color. N°003 packets. Dark-mode pages. The gate. The color the brand wears in its serious moments.</p>
+    <div class="swatch-grid" style="grid-template-columns:1fr;margin-top:24px;">
+      <div class="swatch-card"><div class="swatch-chip" style="background:#AD4236;height:96px;"></div><div class="swatch-info"><div class="swatch-info-name" style="color:#AD4236;">Signal Red</div><div class="swatch-info-hex">#AD4236 · rgb(173, 66, 54) · the single accent</div></div></div>
+    </div>
+    <p><strong>Espresso (#241B17)</strong> is the ground — the page, dark surfaces, the packet field, the wordmark's home. <strong>Coffee (#3A2E28)</strong> is the mid — panels, cards, second-level surfaces. <strong>Taupe (#A2917F)</strong> is the quiet accent — eyebrows, section tags, rules, secondary text. <strong>Bone (#D8CCC1)</strong> is the light — body text and figures on dark, the wordmark's letters, headlines.</p>
+    <p><strong>Signal Red</strong> is the keystone — the recognition color. From across a kitchen, the eye finds <span class="term">signal</span> before the mind reads it. But it is a signal, not a default: <strong>one per surface, never two.</strong> On a surface with the wordmark, red is the brackets. On a packet, red is the SKU index. On web, red is the one CTA. Keep it rare and it stays loud.</p>
+    <p><strong>The packets carry one more layer.</strong> The brand's surfaces — this codex, the deck, the website, the cover — run the sepia system. Each <span class="term">signal</span> packet additionally wears its SKU index color: <strong>Signal Red for N°001</strong>, <strong>Rose Linen for N°002</strong>, <strong>Deep Evening for N°003</strong>. Whether the packet field eventually collapses fully into the sepia system — with the red SKU number alone doing the index work — is the open packaging question (see §3).</p>
+    <p><strong>What the brand never uses:</strong> never pure white (#FFFFFF — too clinical; use Bone), never pure black (#000000 — too cold; use Espresso), never a second hue on a surface, never two reds. No gradients except the photographic vignette and film grain that give the system its cinematic feel.</p>
   </div>
   <aside class="margin-col">
     <div class="aside">
       <div class="aside-label">Commit to memory</div>
       <div class="aside-body">
         <ul>
-          <li><span class="stat-num">3</span> colors total</li>
-          <li><span class="stat-num">0</span> fourth color</li>
-          <li><span class="stat-num">1</span> recognition color</li>
+          <li><span class="stat-num">1</span> hue — warm sepia</li>
+          <li><span class="stat-num">4</span> values, one axis</li>
+          <li><span class="stat-num">1</span> red, once per surface</li>
         </ul>
       </div>
     </div>
     <div class="aside">
       <div class="aside-label">Discipline</div>
-      <div class="aside-body">The brand's red is not one color. It is the same color rendered across three materials.</div>
+      <div class="aside-body">One red per surface, never two. The field is monochrome; the accent is the exception.</div>
     </div>
     <div class="aside">
-      <div class="aside-label">Retired</div>
-      <div class="aside-body">Cream was dropped 2026-05-21. Rose Linen Deep absorbed the mid-tone slot.</div>
+      <div class="aside-label">Repaletted</div>
+      <div class="aside-body">The aubergine "Deep Evening" identity gave way to the warm-sepia B-hybrid on 2026-05-31, drawn from the brand photograph. Earlier still, Cream was dropped 2026-05-21.</div>
     </div>
   </aside>
 </section>
@@ -1169,7 +1247,7 @@ footer.codex-footer .accent { color: var(--signal-light); }
     <div class="section-tag">§2 — Wordmark and typography</div>
     <h3 class="section-h2">The slashes mean <span class="accent">pronounce this.</span></h3>
     <p class="lead-p">The first time a customer reads the wordmark, they read it out loud. The phonetic marks mean <em>this is how.</em></p>
-    <p><em>/sɪɡˈnɑːl/</em> is not a logo. It is a pronunciation lesson the brand quietly insists on. The letters appear in Signal Red; the IPA marks (/, ˈ, ː) fade into Rose Linen — phonetic notation that frames the word without competing with it.</p>
+    <p><em>/ sɪgnɑːl /</em> is not a logo. It is a pronunciation lesson the brand quietly insists on. The canonical wordmark is <strong>traced from the brand photograph</strong> — a true phonetic serif (single-story <em>g</em>, turned-alpha <em>ɑ</em>, the length mark <em>ː</em>), not a system font. The letters are <strong>bone</strong>; the brackets carry the one hit of <span class="term">Signal Red</span> — the bracket signature, the one red on the surface. Within the letters, <em>s ɪ g n</em> sits a hair brighter than the <em>a ː l</em> tail: at a glance it reads <em>signal</em>; on a second look, <em>sign</em>.</p>
   </div>
   <aside class="margin-col">
     <div class="aside">
@@ -1177,30 +1255,117 @@ footer.codex-footer .accent { color: var(--signal-light); }
       <div class="aside-body canonical">sig-NAHL.<br>Second syllable carries the weight. The first is light.</div>
     </div>
     <div class="aside">
-      <div class="aside-label">Set in</div>
-      <div class="aside-body">Plus Jakarta Sans 700. The only brand font that includes IPA characters.</div>
+      <div class="aside-label">Drawn, not set</div>
+      <div class="aside-body">Fixed vector artwork traced from the brand photograph — a phonetic serif, not a live font. Never re-typeset it.</div>
+    </div>
+    <div class="aside">
+      <div class="aside-label">It's a sign</div>
+      <div class="aside-body">The <em>sɪgn</em> reads a hair brighter than the tail — <em>signal</em>, then <em>sign</em>.</div>
     </div>
   </aside>
 </section>
 
 <div class="wordmark-specimen-v2">
-  <div class="wm"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
-  <div class="spec-caption">canonical wordmark · plus jakarta sans 700 · two-color</div>
+  <div class="wm-specimen-art wm-sig sign-lighter"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3114.000000 696.000000" class="wm-art" role="img" aria-label="signal" shape-rendering="geometricPrecision"><g transform="translate(0.000000,696.000000) scale(0.100000,-0.100000)"><g class="wm-accent"><path d="M6051 5613 c-14 -13 -56 -124 -136 -363 -63 -190 -133 -397 -155
+-460 -23 -63 -49 -140 -59 -170 -11 -30 -39 -111 -63 -180 -60 -168 -108 -311
+-153 -455 -20 -66 -48 -149 -60 -185 -39 -109 -66 -192 -85 -260 -10 -36 -23
+-78 -30 -95 -7 -16 -20 -57 -30 -90 -10 -33 -32 -96 -49 -140 -16 -44 -46
+-123 -66 -175 -44 -117 -100 -275 -125 -355 -24 -78 -67 -200 -78 -223 -20
+-38 -22 -70 -6 -86 17 -17 148 -23 172 -8 18 12 86 202 212 592 43 135 97 295
+119 355 23 61 59 162 81 225 22 63 62 178 90 255 50 140 147 424 233 690 26
+77 62 185 82 240 68 191 96 271 171 500 42 127 86 251 100 276 26 51 31 98 12
+117 -20 20 -152 16 -177 -5z"/><path d="M24965 5620 c-54 -5 -61 -8 -82 -38 -12 -19 -33 -68 -47 -110 -14
+-43 -38 -113 -54 -157 -66 -179 -105 -293 -122 -350 -10 -33 -35 -105 -55
+-160 -20 -55 -49 -138 -65 -185 -16 -47 -42 -123 -60 -170 -17 -47 -44 -121
+-60 -165 -16 -44 -45 -123 -65 -175 -35 -94 -164 -472 -183 -540 -10 -32 -56
+-162 -119 -335 -110 -301 -216 -602 -238 -678 -12 -42 -27 -83 -33 -90 -18
+-23 -23 -72 -9 -91 11 -15 30 -20 84 -23 91 -4 102 6 141 122 17 50 58 169 92
+265 34 96 86 247 116 335 29 88 70 203 89 255 92 245 108 290 130 355 13 39
+28 84 34 100 14 37 136 407 150 455 6 19 29 87 51 150 22 63 51 147 65 185 28
+81 71 204 115 325 54 150 180 528 180 541 0 7 12 36 26 66 29 62 29 103 -1
+112 -11 3 -47 4 -80 1z"/></g><g class="wm-sign"><path d="M7852 4559 c-73 -11 -197 -58 -264 -100 -68 -44 -132 -118 -168 -195
+-98 -209 -40 -446 146 -593 109 -86 205 -131 539 -253 158 -58 284 -161 311
+-255 49 -168 -6 -288 -166 -365 -58 -29 -76 -32 -175 -36 -260 -9 -418 80
+-520 293 -25 53 -51 123 -58 157 -9 47 -18 66 -39 81 -23 17 -31 19 -53 9 -14
+-7 -29 -22 -33 -34 -4 -13 -5 -150 -2 -306 6 -344 3 -337 125 -256 84 55 92
+54 246 -4 126 -49 199 -62 334 -62 114 1 159 9 266 50 136 52 211 106 286 204
+88 117 121 239 98 369 -15 88 -32 128 -78 193 -82 114 -205 190 -487 299 -52
+21 -113 45 -135 55 -22 10 -51 21 -65 25 -14 4 -64 28 -113 52 -176 91 -231
+212 -172 384 18 53 79 117 145 151 41 21 58 23 180 23 133 0 136 -1 207 -34
+123 -57 231 -191 273 -334 27 -95 35 -107 75 -107 21 0 37 6 43 16 5 9 7 129
+4 267 -4 268 -10 297 -54 297 -11 0 -40 -18 -64 -40 -24 -22 -50 -40 -59 -40
+-8 0 -59 18 -112 39 -135 55 -301 72 -461 50z"/><path d="M9833 4515 c-31 -22 -30 -60 2 -81 14 -9 59 -20 101 -25 91 -10 141
+-33 170 -76 31 -47 38 -216 32 -871 l-5 -543 -29 -42 c-38 -54 -85 -76 -184
+-86 -44 -5 -87 -14 -95 -21 -23 -19 -18 -57 9 -75 21 -14 80 -16 482 -14 280
+1 464 6 472 12 15 12 16 59 0 75 -7 7 -28 12 -47 12 -19 0 -63 5 -99 11 -77
+14 -135 59 -152 117 -13 50 -13 1301 1 1361 21 92 72 128 198 142 59 7 80 13
+94 30 20 25 21 40 5 61 -12 14 -68 17 -473 23 -416 6 -462 5 -482 -10z"/><path d="M12519 4554 c-84 -15 -206 -59 -273 -98 -124 -73 -205 -165 -264
+-301 -31 -70 -36 -93 -40 -182 -7 -159 23 -269 104 -378 32 -44 121 -129 172
+-164 54 -37 37 -83 -45 -125 -56 -28 -159 -140 -177 -192 -21 -63 -20 -149 3
+-199 21 -47 90 -111 156 -145 39 -20 46 -28 43 -49 -2 -21 -17 -33 -68 -61
+-149 -79 -221 -142 -266 -231 -30 -60 -34 -78 -34 -144 0 -86 17 -130 76 -195
+81 -89 210 -147 419 -186 137 -27 169 -29 370 -28 213 0 224 1 345 32 220 55
+345 116 448 220 91 90 133 182 140 303 13 228 -69 376 -255 465 -127 60 -263
+77 -703 89 -129 4 -266 11 -303 15 -82 10 -136 42 -162 96 -26 56 -10 98 69
+172 87 81 111 88 211 62 172 -44 414 -17 577 66 180 91 286 211 329 376 45
+166 19 347 -66 461 -49 66 -53 78 -30 97 12 10 46 11 166 2 147 -11 177 -9
+191 12 4 6 8 50 8 99 0 74 -3 90 -20 107 -26 26 -40 25 -127 -5 -77 -26 -171
+-47 -299 -66 -75 -11 -86 -10 -155 11 -41 12 -87 29 -103 37 -75 39 -297 53
+-437 27z m308 -130 c112 -54 178 -145 218 -299 37 -142 36 -287 -4 -417 -62
+-207 -171 -294 -366 -290 -78 1 -97 5 -152 32 -108 53 -189 176 -224 337 -18
+86 -16 285 4 360 57 214 190 319 390 309 59 -3 92 -11 134 -32z m-84 -1744
+c253 -9 398 -22 467 -40 48 -13 111 -61 146 -111 26 -38 29 -50 28 -120 -1
+-97 -26 -152 -104 -230 -151 -152 -463 -216 -779 -159 -176 32 -284 95 -351
+206 -33 55 -35 63 -35 149 0 65 5 98 17 120 29 53 101 127 163 168 58 38 62
+39 125 33 36 -3 181 -10 323 -16z"/><path d="M15175 4558 c-16 -5 -52 -13 -80 -18 -27 -5 -93 -18 -145 -29 -52
+-11 -137 -24 -187 -29 -103 -10 -143 -29 -143 -66 0 -37 24 -49 108 -51 80 -2
+122 -16 155 -53 45 -50 46 -63 46 -717 0 -341 -4 -640 -8 -664 -17 -87 -76
+-130 -191 -140 -37 -4 -75 -13 -84 -20 -23 -19 -21 -68 4 -81 12 -7 159 -10
+417 -11 219 0 410 0 425 -1 34 -1 58 18 58 47 0 34 -31 55 -81 55 -91 0 -160
+37 -197 104 -16 28 -17 77 -14 574 l2 543 25 48 c30 60 168 191 250 236 82 46
+180 68 280 63 137 -7 219 -58 277 -173 28 -53 32 -73 37 -175 4 -63 4 -339 1
+-612 -5 -485 -5 -497 -26 -525 -32 -42 -73 -62 -159 -76 -62 -9 -81 -17 -93
+-35 -11 -18 -12 -28 -4 -47 l11 -23 437 -1 c312 -1 441 2 450 10 21 18 17 57
+-8 73 -13 8 -50 17 -84 21 -79 9 -134 39 -159 90 -19 39 -20 60 -20 635 l0
+595 -24 80 c-31 104 -71 173 -141 243 -113 113 -257 156 -446 135 -175 -20
+-327 -102 -480 -261 -127 -132 -129 -131 -129 73 -1 88 -4 165 -8 171 -10 17
+-38 22 -72 12z"/></g><g class="wm-tail"><path d="M18395 4555 c-78 -17 -218 -83 -293 -140 -76 -57 -181 -168 -228
+-242 -40 -62 -114 -221 -114 -245 0 -8 -10 -50 -22 -94 -20 -71 -23 -101 -22
+-284 0 -195 2 -211 32 -332 37 -149 74 -229 146 -313 151 -178 324 -265 527
+-265 59 0 156 16 174 30 6 4 29 14 53 24 101 39 226 142 315 259 47 62 73 45
+87 -55 26 -178 88 -242 235 -241 81 1 125 14 328 94 69 26 92 54 82 99 -13 59
+-56 76 -116 44 -37 -19 -139 -20 -168 -3 -49 31 -51 52 -51 599 0 614 15 834
+65 930 21 40 20 97 -2 108 -10 5 -71 8 -136 7 -144 -2 -152 -7 -166 -111 -14
+-94 -18 -104 -48 -104 -18 0 -48 21 -98 69 -158 150 -373 211 -580 166z m338
+-158 c76 -35 184 -141 225 -223 66 -130 67 -142 66 -541 l-1 -361 -36 -76
+c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
+368 -26 95 -27 111 -27 325 0 214 2 231 29 339 64 254 169 394 343 457 91 33
+200 30 286 -9z"/><path d="M20292 4364 c-20 -13 -23 -22 -18 -48 9 -43 140 -307 172 -345 52
+-62 76 -39 183 178 74 150 87 202 54 219 -10 5 -97 10 -193 11 -149 1 -179 -1
+-198 -15z"/><path d="M20468 3240 c-33 -20 -143 -214 -188 -332 -25 -66 -26 -104 -2 -116
+9 -5 111 -9 225 -8 218 2 226 4 227 47 0 50 -171 370 -218 407 -19 14 -22 14
+-44 2z"/><path d="M21950 5550 c-101 -30 -309 -75 -399 -85 -66 -8 -91 -20 -91 -45 0
+-30 39 -50 95 -50 81 0 145 -24 190 -70 l40 -41 3 -1162 c2 -804 0 -1173 -8
+-1199 -6 -20 -22 -46 -37 -58 -38 -30 -139 -57 -225 -59 -10 -1 -25 -12 -34
+-26 -14 -21 -15 -31 -6 -51 l12 -24 428 0 c236 1 440 -2 454 -5 40 -10 68 10
+68 48 0 42 -15 57 -57 57 -44 0 -132 19 -165 36 -15 8 -39 31 -53 51 l-25 38
+0 1325 c0 1018 -3 1329 -12 1338 -19 19 -75 13 -178 -18z"/></g></g></svg></div>
+  <div class="spec-caption">canonical wordmark · traced serif · bone letters · red brackets</div>
 </div>
 
 <section class="spread">
   <div class="main-col">
-    <p>The wordmark is set in <strong>Plus Jakarta Sans 700</strong> — the only brand font with the characters it needs. The other two fonts in the system have about 362 and 110 characters respectively, and neither has IPA characters. If the wordmark used either of those fonts, the visible result would be four characters in the brand font and five in whatever generic system font the browser used instead. Using Plus Jakarta is the honest choice.</p>
+    <p>The wordmark is <strong>not type at all</strong> — it is fixed vector artwork traced from the brand photograph (see §2 above), and it is never re-typeset in a live font. The three live typefaces below carry everything else.</p>
     <p>Three typefaces carry the system:</p>
     <div class="font-specimens">
-      <div class="font-card"><div class="sample anguita">signal</div><div class="face-name">Anguita · 900</div></div>
-      <div class="font-card"><div class="sample bebas">SIGNAL</div><div class="face-name">Bebas · 400</div></div>
-      <div class="font-card"><div class="sample jakarta">signal</div><div class="face-name">Jakarta · 300</div></div>
+      <div class="font-card"><div class="sample anguita">signal</div><div class="face-name">Bebas Neue · display</div></div>
+      <div class="font-card"><div class="sample bebas" style="text-transform:none;">Signal</div><div class="face-name">Oswald · editorial</div></div>
+      <div class="font-card"><div class="sample jakarta">signal</div><div class="face-name">Plus Jakarta · body</div></div>
     </div>
-    <p><strong>Anguita Sans</strong> is the primary headline font. The brand's logo font. Headlines, section labels, card titles, the cover. Self-hosted from Latinotype. Weight 900 only — no italic; the brand earns emphasis through color and size, not italics.</p>
-    <p><strong>Bebas Neue</strong> is the secondary headline font. Tall, narrow, simple-shaped — contrast to Anguita's wider headline style. Headline accents, the stylized "I" in INSDR Wellness, moments where tall, narrow letters are the point.</p>
-    <p><strong>Plus Jakarta Sans</strong> is the body font — and the wordmark font. Body prose, captions, footer text, aside labels. Default weight 300 — light, generous in the white space inside each letter, designed to be read at length. In weight 700, the IPA wordmark.</p>
-    <p>The three-font system above is the complete font system. <strong>There is no fourth font for "editorial warmth."</strong> Contrast lives in weight, scale, color, and the wordmark exception.</p>
+    <p><strong>Bebas Neue</strong> is the display face. Tall, condensed, all-caps — it carries every headline across the deck, the website, packaging, and this codex, matched to the photograph's cinematic mood. Bebas has no lowercase, so display runs in caps; the lowercase voice lives on in the body copy and the serif wordmark. Google Fonts. A display face only, never body.</p>
+    <p><strong>Oswald</strong> is the editorial secondary. A condensed gothic in the Bebas family but with a full weight range and true lowercase — so it differentiates from the display face and carries overlines, section labels, eyebrows, and small editorial callouts. Google Fonts.</p>
+    <p><strong>Plus Jakarta Sans</strong> is the body font. Clean, modern, readable at every size — quiet bone on espresso. All body prose, captions, footer text, aside labels, tables. It carries all reading text; it does <em>not</em> carry the wordmark. Google Fonts.</p>
+    <p>That is the complete font system. <strong>There is no fourth font for "editorial warmth."</strong> Contrast lives in weight, scale, color, and the traced-wordmark exception.</p>
   </div>
   <aside class="margin-col">
     <div class="aside">
@@ -1209,11 +1374,11 @@ footer.codex-footer .accent { color: var(--signal-light); }
         <ul>
           <li><span class="stat-num">3</span> typefaces total</li>
           <li><span class="stat-num">0</span> fourth font</li>
-          <li><span class="stat-num">2</span> colors per wordmark</li>
+          <li><span class="stat-num">1</span> traced wordmark (not type)</li>
         </ul>
       </div>
     </div>
-    <div class="margin-quote">No italic.<br>Contrast lives<br>elsewhere.</div>
+    <div class="margin-quote">The wordmark<br>is drawn,<br>not set.</div>
   </aside>
 </section>
 
@@ -1252,7 +1417,7 @@ footer.codex-footer .accent { color: var(--signal-light); }
 
 <section class="spread">
   <div class="main-col">
-    <p>The tray is the standard product format. Same shape every time, regardless of which SKU and regardless of which order in the customer's history. The only thing that varies is the color of the individual packages (Rose Linen for N°001, Signal Red for N°002, Deep Evening for N°003).</p>
+    <p>The tray is the standard product format. Same shape every time, regardless of which SKU and regardless of which order in the customer's history. The only thing that varies is the SKU index color of the individual packages (Signal Red for N°001, Rose Linen for N°002, Deep Evening for N°003).</p>
     <p>Four full-height frosted acetate dividers run along the long side of the tray. Each carries a decode artifact from the brand's visual system — IPA wordmark variants, surface marks, or intentional silence. Shallow etching, no ink, frosted acetate; the etching is visible only from the side, at a low angle. The dividers are the tray's quietest decode layer.</p>
     <p>Three rules guide every packaging decision:</p>
     <div class="rules-grid">
@@ -1322,8 +1487,174 @@ footer.codex-footer .accent { color: var(--signal-light); }
 <div class="entrainment-demo">
   <button class="entrainment-trigger" type="button" id="entrainmentTrigger" aria-label="Play the entrainment wordmark and signal sound">
     <span class="entrainment-stack">
-      <span class="entrainment-ghost-left" aria-hidden="true"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></span>
-      <span class="entrainment-ghost-right" aria-label="signal"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></span>
+      <span class="entrainment-ghost-left wm-sig sign-lighter" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3114.000000 696.000000" class="wm-art" role="img" aria-label="signal" shape-rendering="geometricPrecision"><g transform="translate(0.000000,696.000000) scale(0.100000,-0.100000)"><g class="wm-accent"><path d="M6051 5613 c-14 -13 -56 -124 -136 -363 -63 -190 -133 -397 -155
+-460 -23 -63 -49 -140 -59 -170 -11 -30 -39 -111 -63 -180 -60 -168 -108 -311
+-153 -455 -20 -66 -48 -149 -60 -185 -39 -109 -66 -192 -85 -260 -10 -36 -23
+-78 -30 -95 -7 -16 -20 -57 -30 -90 -10 -33 -32 -96 -49 -140 -16 -44 -46
+-123 -66 -175 -44 -117 -100 -275 -125 -355 -24 -78 -67 -200 -78 -223 -20
+-38 -22 -70 -6 -86 17 -17 148 -23 172 -8 18 12 86 202 212 592 43 135 97 295
+119 355 23 61 59 162 81 225 22 63 62 178 90 255 50 140 147 424 233 690 26
+77 62 185 82 240 68 191 96 271 171 500 42 127 86 251 100 276 26 51 31 98 12
+117 -20 20 -152 16 -177 -5z"/><path d="M24965 5620 c-54 -5 -61 -8 -82 -38 -12 -19 -33 -68 -47 -110 -14
+-43 -38 -113 -54 -157 -66 -179 -105 -293 -122 -350 -10 -33 -35 -105 -55
+-160 -20 -55 -49 -138 -65 -185 -16 -47 -42 -123 -60 -170 -17 -47 -44 -121
+-60 -165 -16 -44 -45 -123 -65 -175 -35 -94 -164 -472 -183 -540 -10 -32 -56
+-162 -119 -335 -110 -301 -216 -602 -238 -678 -12 -42 -27 -83 -33 -90 -18
+-23 -23 -72 -9 -91 11 -15 30 -20 84 -23 91 -4 102 6 141 122 17 50 58 169 92
+265 34 96 86 247 116 335 29 88 70 203 89 255 92 245 108 290 130 355 13 39
+28 84 34 100 14 37 136 407 150 455 6 19 29 87 51 150 22 63 51 147 65 185 28
+81 71 204 115 325 54 150 180 528 180 541 0 7 12 36 26 66 29 62 29 103 -1
+112 -11 3 -47 4 -80 1z"/></g><g class="wm-sign"><path d="M7852 4559 c-73 -11 -197 -58 -264 -100 -68 -44 -132 -118 -168 -195
+-98 -209 -40 -446 146 -593 109 -86 205 -131 539 -253 158 -58 284 -161 311
+-255 49 -168 -6 -288 -166 -365 -58 -29 -76 -32 -175 -36 -260 -9 -418 80
+-520 293 -25 53 -51 123 -58 157 -9 47 -18 66 -39 81 -23 17 -31 19 -53 9 -14
+-7 -29 -22 -33 -34 -4 -13 -5 -150 -2 -306 6 -344 3 -337 125 -256 84 55 92
+54 246 -4 126 -49 199 -62 334 -62 114 1 159 9 266 50 136 52 211 106 286 204
+88 117 121 239 98 369 -15 88 -32 128 -78 193 -82 114 -205 190 -487 299 -52
+21 -113 45 -135 55 -22 10 -51 21 -65 25 -14 4 -64 28 -113 52 -176 91 -231
+212 -172 384 18 53 79 117 145 151 41 21 58 23 180 23 133 0 136 -1 207 -34
+123 -57 231 -191 273 -334 27 -95 35 -107 75 -107 21 0 37 6 43 16 5 9 7 129
+4 267 -4 268 -10 297 -54 297 -11 0 -40 -18 -64 -40 -24 -22 -50 -40 -59 -40
+-8 0 -59 18 -112 39 -135 55 -301 72 -461 50z"/><path d="M9833 4515 c-31 -22 -30 -60 2 -81 14 -9 59 -20 101 -25 91 -10 141
+-33 170 -76 31 -47 38 -216 32 -871 l-5 -543 -29 -42 c-38 -54 -85 -76 -184
+-86 -44 -5 -87 -14 -95 -21 -23 -19 -18 -57 9 -75 21 -14 80 -16 482 -14 280
+1 464 6 472 12 15 12 16 59 0 75 -7 7 -28 12 -47 12 -19 0 -63 5 -99 11 -77
+14 -135 59 -152 117 -13 50 -13 1301 1 1361 21 92 72 128 198 142 59 7 80 13
+94 30 20 25 21 40 5 61 -12 14 -68 17 -473 23 -416 6 -462 5 -482 -10z"/><path d="M12519 4554 c-84 -15 -206 -59 -273 -98 -124 -73 -205 -165 -264
+-301 -31 -70 -36 -93 -40 -182 -7 -159 23 -269 104 -378 32 -44 121 -129 172
+-164 54 -37 37 -83 -45 -125 -56 -28 -159 -140 -177 -192 -21 -63 -20 -149 3
+-199 21 -47 90 -111 156 -145 39 -20 46 -28 43 -49 -2 -21 -17 -33 -68 -61
+-149 -79 -221 -142 -266 -231 -30 -60 -34 -78 -34 -144 0 -86 17 -130 76 -195
+81 -89 210 -147 419 -186 137 -27 169 -29 370 -28 213 0 224 1 345 32 220 55
+345 116 448 220 91 90 133 182 140 303 13 228 -69 376 -255 465 -127 60 -263
+77 -703 89 -129 4 -266 11 -303 15 -82 10 -136 42 -162 96 -26 56 -10 98 69
+172 87 81 111 88 211 62 172 -44 414 -17 577 66 180 91 286 211 329 376 45
+166 19 347 -66 461 -49 66 -53 78 -30 97 12 10 46 11 166 2 147 -11 177 -9
+191 12 4 6 8 50 8 99 0 74 -3 90 -20 107 -26 26 -40 25 -127 -5 -77 -26 -171
+-47 -299 -66 -75 -11 -86 -10 -155 11 -41 12 -87 29 -103 37 -75 39 -297 53
+-437 27z m308 -130 c112 -54 178 -145 218 -299 37 -142 36 -287 -4 -417 -62
+-207 -171 -294 -366 -290 -78 1 -97 5 -152 32 -108 53 -189 176 -224 337 -18
+86 -16 285 4 360 57 214 190 319 390 309 59 -3 92 -11 134 -32z m-84 -1744
+c253 -9 398 -22 467 -40 48 -13 111 -61 146 -111 26 -38 29 -50 28 -120 -1
+-97 -26 -152 -104 -230 -151 -152 -463 -216 -779 -159 -176 32 -284 95 -351
+206 -33 55 -35 63 -35 149 0 65 5 98 17 120 29 53 101 127 163 168 58 38 62
+39 125 33 36 -3 181 -10 323 -16z"/><path d="M15175 4558 c-16 -5 -52 -13 -80 -18 -27 -5 -93 -18 -145 -29 -52
+-11 -137 -24 -187 -29 -103 -10 -143 -29 -143 -66 0 -37 24 -49 108 -51 80 -2
+122 -16 155 -53 45 -50 46 -63 46 -717 0 -341 -4 -640 -8 -664 -17 -87 -76
+-130 -191 -140 -37 -4 -75 -13 -84 -20 -23 -19 -21 -68 4 -81 12 -7 159 -10
+417 -11 219 0 410 0 425 -1 34 -1 58 18 58 47 0 34 -31 55 -81 55 -91 0 -160
+37 -197 104 -16 28 -17 77 -14 574 l2 543 25 48 c30 60 168 191 250 236 82 46
+180 68 280 63 137 -7 219 -58 277 -173 28 -53 32 -73 37 -175 4 -63 4 -339 1
+-612 -5 -485 -5 -497 -26 -525 -32 -42 -73 -62 -159 -76 -62 -9 -81 -17 -93
+-35 -11 -18 -12 -28 -4 -47 l11 -23 437 -1 c312 -1 441 2 450 10 21 18 17 57
+-8 73 -13 8 -50 17 -84 21 -79 9 -134 39 -159 90 -19 39 -20 60 -20 635 l0
+595 -24 80 c-31 104 -71 173 -141 243 -113 113 -257 156 -446 135 -175 -20
+-327 -102 -480 -261 -127 -132 -129 -131 -129 73 -1 88 -4 165 -8 171 -10 17
+-38 22 -72 12z"/></g><g class="wm-tail"><path d="M18395 4555 c-78 -17 -218 -83 -293 -140 -76 -57 -181 -168 -228
+-242 -40 -62 -114 -221 -114 -245 0 -8 -10 -50 -22 -94 -20 -71 -23 -101 -22
+-284 0 -195 2 -211 32 -332 37 -149 74 -229 146 -313 151 -178 324 -265 527
+-265 59 0 156 16 174 30 6 4 29 14 53 24 101 39 226 142 315 259 47 62 73 45
+87 -55 26 -178 88 -242 235 -241 81 1 125 14 328 94 69 26 92 54 82 99 -13 59
+-56 76 -116 44 -37 -19 -139 -20 -168 -3 -49 31 -51 52 -51 599 0 614 15 834
+65 930 21 40 20 97 -2 108 -10 5 -71 8 -136 7 -144 -2 -152 -7 -166 -111 -14
+-94 -18 -104 -48 -104 -18 0 -48 21 -98 69 -158 150 -373 211 -580 166z m338
+-158 c76 -35 184 -141 225 -223 66 -130 67 -142 66 -541 l-1 -361 -36 -76
+c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
+368 -26 95 -27 111 -27 325 0 214 2 231 29 339 64 254 169 394 343 457 91 33
+200 30 286 -9z"/><path d="M20292 4364 c-20 -13 -23 -22 -18 -48 9 -43 140 -307 172 -345 52
+-62 76 -39 183 178 74 150 87 202 54 219 -10 5 -97 10 -193 11 -149 1 -179 -1
+-198 -15z"/><path d="M20468 3240 c-33 -20 -143 -214 -188 -332 -25 -66 -26 -104 -2 -116
+9 -5 111 -9 225 -8 218 2 226 4 227 47 0 50 -171 370 -218 407 -19 14 -22 14
+-44 2z"/><path d="M21950 5550 c-101 -30 -309 -75 -399 -85 -66 -8 -91 -20 -91 -45 0
+-30 39 -50 95 -50 81 0 145 -24 190 -70 l40 -41 3 -1162 c2 -804 0 -1173 -8
+-1199 -6 -20 -22 -46 -37 -58 -38 -30 -139 -57 -225 -59 -10 -1 -25 -12 -34
+-26 -14 -21 -15 -31 -6 -51 l12 -24 428 0 c236 1 440 -2 454 -5 40 -10 68 10
+68 48 0 42 -15 57 -57 57 -44 0 -132 19 -165 36 -15 8 -39 31 -53 51 l-25 38
+0 1325 c0 1018 -3 1329 -12 1338 -19 19 -75 13 -178 -18z"/></g></g></svg></span>
+      <span class="entrainment-ghost-right wm-sig sign-lighter" aria-label="signal"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3114.000000 696.000000" class="wm-art" role="img" aria-label="signal" shape-rendering="geometricPrecision"><g transform="translate(0.000000,696.000000) scale(0.100000,-0.100000)"><g class="wm-accent"><path d="M6051 5613 c-14 -13 -56 -124 -136 -363 -63 -190 -133 -397 -155
+-460 -23 -63 -49 -140 -59 -170 -11 -30 -39 -111 -63 -180 -60 -168 -108 -311
+-153 -455 -20 -66 -48 -149 -60 -185 -39 -109 -66 -192 -85 -260 -10 -36 -23
+-78 -30 -95 -7 -16 -20 -57 -30 -90 -10 -33 -32 -96 -49 -140 -16 -44 -46
+-123 -66 -175 -44 -117 -100 -275 -125 -355 -24 -78 -67 -200 -78 -223 -20
+-38 -22 -70 -6 -86 17 -17 148 -23 172 -8 18 12 86 202 212 592 43 135 97 295
+119 355 23 61 59 162 81 225 22 63 62 178 90 255 50 140 147 424 233 690 26
+77 62 185 82 240 68 191 96 271 171 500 42 127 86 251 100 276 26 51 31 98 12
+117 -20 20 -152 16 -177 -5z"/><path d="M24965 5620 c-54 -5 -61 -8 -82 -38 -12 -19 -33 -68 -47 -110 -14
+-43 -38 -113 -54 -157 -66 -179 -105 -293 -122 -350 -10 -33 -35 -105 -55
+-160 -20 -55 -49 -138 -65 -185 -16 -47 -42 -123 -60 -170 -17 -47 -44 -121
+-60 -165 -16 -44 -45 -123 -65 -175 -35 -94 -164 -472 -183 -540 -10 -32 -56
+-162 -119 -335 -110 -301 -216 -602 -238 -678 -12 -42 -27 -83 -33 -90 -18
+-23 -23 -72 -9 -91 11 -15 30 -20 84 -23 91 -4 102 6 141 122 17 50 58 169 92
+265 34 96 86 247 116 335 29 88 70 203 89 255 92 245 108 290 130 355 13 39
+28 84 34 100 14 37 136 407 150 455 6 19 29 87 51 150 22 63 51 147 65 185 28
+81 71 204 115 325 54 150 180 528 180 541 0 7 12 36 26 66 29 62 29 103 -1
+112 -11 3 -47 4 -80 1z"/></g><g class="wm-sign"><path d="M7852 4559 c-73 -11 -197 -58 -264 -100 -68 -44 -132 -118 -168 -195
+-98 -209 -40 -446 146 -593 109 -86 205 -131 539 -253 158 -58 284 -161 311
+-255 49 -168 -6 -288 -166 -365 -58 -29 -76 -32 -175 -36 -260 -9 -418 80
+-520 293 -25 53 -51 123 -58 157 -9 47 -18 66 -39 81 -23 17 -31 19 -53 9 -14
+-7 -29 -22 -33 -34 -4 -13 -5 -150 -2 -306 6 -344 3 -337 125 -256 84 55 92
+54 246 -4 126 -49 199 -62 334 -62 114 1 159 9 266 50 136 52 211 106 286 204
+88 117 121 239 98 369 -15 88 -32 128 -78 193 -82 114 -205 190 -487 299 -52
+21 -113 45 -135 55 -22 10 -51 21 -65 25 -14 4 -64 28 -113 52 -176 91 -231
+212 -172 384 18 53 79 117 145 151 41 21 58 23 180 23 133 0 136 -1 207 -34
+123 -57 231 -191 273 -334 27 -95 35 -107 75 -107 21 0 37 6 43 16 5 9 7 129
+4 267 -4 268 -10 297 -54 297 -11 0 -40 -18 -64 -40 -24 -22 -50 -40 -59 -40
+-8 0 -59 18 -112 39 -135 55 -301 72 -461 50z"/><path d="M9833 4515 c-31 -22 -30 -60 2 -81 14 -9 59 -20 101 -25 91 -10 141
+-33 170 -76 31 -47 38 -216 32 -871 l-5 -543 -29 -42 c-38 -54 -85 -76 -184
+-86 -44 -5 -87 -14 -95 -21 -23 -19 -18 -57 9 -75 21 -14 80 -16 482 -14 280
+1 464 6 472 12 15 12 16 59 0 75 -7 7 -28 12 -47 12 -19 0 -63 5 -99 11 -77
+14 -135 59 -152 117 -13 50 -13 1301 1 1361 21 92 72 128 198 142 59 7 80 13
+94 30 20 25 21 40 5 61 -12 14 -68 17 -473 23 -416 6 -462 5 -482 -10z"/><path d="M12519 4554 c-84 -15 -206 -59 -273 -98 -124 -73 -205 -165 -264
+-301 -31 -70 -36 -93 -40 -182 -7 -159 23 -269 104 -378 32 -44 121 -129 172
+-164 54 -37 37 -83 -45 -125 -56 -28 -159 -140 -177 -192 -21 -63 -20 -149 3
+-199 21 -47 90 -111 156 -145 39 -20 46 -28 43 -49 -2 -21 -17 -33 -68 -61
+-149 -79 -221 -142 -266 -231 -30 -60 -34 -78 -34 -144 0 -86 17 -130 76 -195
+81 -89 210 -147 419 -186 137 -27 169 -29 370 -28 213 0 224 1 345 32 220 55
+345 116 448 220 91 90 133 182 140 303 13 228 -69 376 -255 465 -127 60 -263
+77 -703 89 -129 4 -266 11 -303 15 -82 10 -136 42 -162 96 -26 56 -10 98 69
+172 87 81 111 88 211 62 172 -44 414 -17 577 66 180 91 286 211 329 376 45
+166 19 347 -66 461 -49 66 -53 78 -30 97 12 10 46 11 166 2 147 -11 177 -9
+191 12 4 6 8 50 8 99 0 74 -3 90 -20 107 -26 26 -40 25 -127 -5 -77 -26 -171
+-47 -299 -66 -75 -11 -86 -10 -155 11 -41 12 -87 29 -103 37 -75 39 -297 53
+-437 27z m308 -130 c112 -54 178 -145 218 -299 37 -142 36 -287 -4 -417 -62
+-207 -171 -294 -366 -290 -78 1 -97 5 -152 32 -108 53 -189 176 -224 337 -18
+86 -16 285 4 360 57 214 190 319 390 309 59 -3 92 -11 134 -32z m-84 -1744
+c253 -9 398 -22 467 -40 48 -13 111 -61 146 -111 26 -38 29 -50 28 -120 -1
+-97 -26 -152 -104 -230 -151 -152 -463 -216 -779 -159 -176 32 -284 95 -351
+206 -33 55 -35 63 -35 149 0 65 5 98 17 120 29 53 101 127 163 168 58 38 62
+39 125 33 36 -3 181 -10 323 -16z"/><path d="M15175 4558 c-16 -5 -52 -13 -80 -18 -27 -5 -93 -18 -145 -29 -52
+-11 -137 -24 -187 -29 -103 -10 -143 -29 -143 -66 0 -37 24 -49 108 -51 80 -2
+122 -16 155 -53 45 -50 46 -63 46 -717 0 -341 -4 -640 -8 -664 -17 -87 -76
+-130 -191 -140 -37 -4 -75 -13 -84 -20 -23 -19 -21 -68 4 -81 12 -7 159 -10
+417 -11 219 0 410 0 425 -1 34 -1 58 18 58 47 0 34 -31 55 -81 55 -91 0 -160
+37 -197 104 -16 28 -17 77 -14 574 l2 543 25 48 c30 60 168 191 250 236 82 46
+180 68 280 63 137 -7 219 -58 277 -173 28 -53 32 -73 37 -175 4 -63 4 -339 1
+-612 -5 -485 -5 -497 -26 -525 -32 -42 -73 -62 -159 -76 -62 -9 -81 -17 -93
+-35 -11 -18 -12 -28 -4 -47 l11 -23 437 -1 c312 -1 441 2 450 10 21 18 17 57
+-8 73 -13 8 -50 17 -84 21 -79 9 -134 39 -159 90 -19 39 -20 60 -20 635 l0
+595 -24 80 c-31 104 -71 173 -141 243 -113 113 -257 156 -446 135 -175 -20
+-327 -102 -480 -261 -127 -132 -129 -131 -129 73 -1 88 -4 165 -8 171 -10 17
+-38 22 -72 12z"/></g><g class="wm-tail"><path d="M18395 4555 c-78 -17 -218 -83 -293 -140 -76 -57 -181 -168 -228
+-242 -40 -62 -114 -221 -114 -245 0 -8 -10 -50 -22 -94 -20 -71 -23 -101 -22
+-284 0 -195 2 -211 32 -332 37 -149 74 -229 146 -313 151 -178 324 -265 527
+-265 59 0 156 16 174 30 6 4 29 14 53 24 101 39 226 142 315 259 47 62 73 45
+87 -55 26 -178 88 -242 235 -241 81 1 125 14 328 94 69 26 92 54 82 99 -13 59
+-56 76 -116 44 -37 -19 -139 -20 -168 -3 -49 31 -51 52 -51 599 0 614 15 834
+65 930 21 40 20 97 -2 108 -10 5 -71 8 -136 7 -144 -2 -152 -7 -166 -111 -14
+-94 -18 -104 -48 -104 -18 0 -48 21 -98 69 -158 150 -373 211 -580 166z m338
+-158 c76 -35 184 -141 225 -223 66 -130 67 -142 66 -541 l-1 -361 -36 -76
+c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
+368 -26 95 -27 111 -27 325 0 214 2 231 29 339 64 254 169 394 343 457 91 33
+200 30 286 -9z"/><path d="M20292 4364 c-20 -13 -23 -22 -18 -48 9 -43 140 -307 172 -345 52
+-62 76 -39 183 178 74 150 87 202 54 219 -10 5 -97 10 -193 11 -149 1 -179 -1
+-198 -15z"/><path d="M20468 3240 c-33 -20 -143 -214 -188 -332 -25 -66 -26 -104 -2 -116
+9 -5 111 -9 225 -8 218 2 226 4 227 47 0 50 -171 370 -218 407 -19 14 -22 14
+-44 2z"/><path d="M21950 5550 c-101 -30 -309 -75 -399 -85 -66 -8 -91 -20 -91 -45 0
+-30 39 -50 95 -50 81 0 145 -24 190 -70 l40 -41 3 -1162 c2 -804 0 -1173 -8
+-1199 -6 -20 -22 -46 -37 -58 -38 -30 -139 -57 -225 -59 -10 -1 -25 -12 -34
+-26 -14 -21 -15 -31 -6 -51 l12 -24 428 0 c236 1 440 -2 454 -5 40 -10 68 10
+68 48 0 42 -15 57 -57 57 -44 0 -132 19 -165 36 -15 8 -39 31 -53 51 l-25 38
+0 1325 c0 1018 -3 1329 -12 1338 -19 19 -75 13 -178 -18z"/></g></g></svg></span>
     </span>
   </button>
   <div class="entrainment-caption">the asset itself, inline<span class="sub">click the wordmark to fire</span></div>
@@ -2416,7 +2747,7 @@ footer.codex-footer .accent { color: var(--signal-light); }
     <p><strong>Tray and vessel renders</strong> — <code>signal_vessel_paperboard_2026_05_04.png</code> (steady-state) and <code>signal_vessel_petalfold_2026_05_23.png</code> (petal-fold reveal moment).</p>
     <p><strong>Annual coin</strong> — <code>visual_register/02_annual_coin_year_i.png</code> is the canonical Year I render (matte silver finish).</p>
     <p><strong>Send a Signal cards</strong> — <code>sas_envelope.png</code>, <code>sas_card_outer.png</code>, <code>sas_card_inside.png</code>, <code>sas_a7_insert.png</code>.</p>
-    <p>Three brand fonts: <strong>Anguita Sans</strong> (primary display, self-hosted, weight 900) · <strong>Bebas Neue</strong> (secondary display) · <strong>Plus Jakarta Sans</strong> (body + IPA wordmark).</p>
+    <p>Three brand fonts: <strong>Bebas Neue</strong> (display, all-caps) · <strong>Oswald</strong> (editorial secondary) · <strong>Plus Jakarta Sans</strong> (body). The wordmark is traced vector artwork, not a live font.</p>
     <div class="section-tag" style="margin-top:40px;">§6 — Memory system</div>
     <p>The brand operates a persistent file-based memory system that holds context between sessions.</p>
     <p><strong>Location:</strong> <code>/Users/damon/.claude/projects/-Users-damon-Desktop-DEV--PROJECTS-billion-dollar-idea/memory/</code></p>
@@ -2430,9 +2761,9 @@ footer.codex-footer .accent { color: var(--signal-light); }
       <div class="aside-label">Three brand fonts</div>
       <div class="aside-body">
         <ul>
-          <li><strong>Anguita Sans</strong> — display</li>
-          <li><strong>Bebas Neue</strong> — editorial</li>
-          <li><strong>Plus Jakarta Sans</strong> — body + IPA</li>
+          <li><strong>Bebas Neue</strong> — display</li>
+          <li><strong>Oswald</strong> — editorial</li>
+          <li><strong>Plus Jakarta Sans</strong> — body</li>
         </ul>
       </div>
     </div>
@@ -2480,6 +2811,12 @@ footer.codex-footer .accent { color: var(--signal-light); }
     <div class="dedication">For the people building the world.</div>
   </div>
 </section>
+
+<!-- ═══════════════════ CLOSING POSTER — full brand photograph ═══════════════════ -->
+<div class="poster-band">
+  <div class="poster-eyebrow">the brand photograph</div>
+  <img class="poster-full" src="signal_cover_portrait.png" alt="signal — the brand photograph: a woman, eyes closed, caught in motion under warm sepia light; the master-tagline lockup beneath reads 'send the right / sɪgnɑːl /'">
+</div>
 
 <!-- ═══════════════════ FOOTER ═══════════════════ -->
 <footer class="codex-footer">
