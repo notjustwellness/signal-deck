@@ -6,17 +6,17 @@
 <title>signal — appendices v5 (cellular energy thesis)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   /* --- PASSWORD GATE --- */
-  #gate { position: fixed; inset: 0; background: #4A2540; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; color: #F6EFEA; }
+  #gate { position: fixed; inset: 0; background: #241B17; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; color: #D8CCC1; }
   #gate .gate-overline { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #AD4236; margin-bottom: 16px; font-weight: 600; }
   #gate .gate-title { font-family: 'Anguita Sans', 'Bebas Neue', Impact, sans-serif; font-size: 96px; font-weight: 900; color: #AD4236; line-height: 0.9; margin-bottom: 12px; letter-spacing: -1px; text-transform: lowercase; }
   #gate .gate-subtitle { font-size: 14px; opacity: 0.6; margin-bottom: 32px; letter-spacing: 1px; }
   #gate form { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-  #gate input { background: rgba(246,239,234,0.08); border: 1px solid rgba(246,239,234,0.2); border-radius: 6px; color: #F6EFEA; padding: 14px 20px; font-size: 15px; font-family: inherit; width: 280px; text-align: center; letter-spacing: 1px; outline: none; transition: border-color 0.2s; }
+  #gate input { background: rgba(246,239,234,0.08); border: 1px solid rgba(246,239,234,0.2); border-radius: 6px; color: #D8CCC1; padding: 14px 20px; font-size: 15px; font-family: inherit; width: 280px; text-align: center; letter-spacing: 1px; outline: none; transition: border-color 0.2s; }
   #gate input:focus { border-color: #AD4236; }
-  #gate button { background: #AD4236; color: #F6EFEA; border: none; border-radius: 6px; padding: 12px 32px; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+  #gate button { background: #AD4236; color: #D8CCC1; border: none; border-radius: 6px; padding: 12px 32px; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.2s; }
   #gate button:hover { background: #c4574b; }
   #gate .gate-error { color: #AD4236; font-size: 12px; margin-top: 8px; opacity: 0; transition: opacity 0.2s; letter-spacing: 1px; }
   #gate .gate-error.show { opacity: 1; }
@@ -52,9 +52,9 @@
   @font-face { font-family: 'Anguita Sans'; src: url('fonts/AnguitaSans.otf') format('opentype'); font-weight: 900; font-style: normal; font-display: swap; }
   @font-face { font-family: 'Bebas Neue'; src: url('fonts/BebasNeue-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
 
-  :root { --signal: #AD4236; --signal-light: #c4574b; --rose-linen: #F6EFEA; --deep-evening: #4A2540; --deep-evening-soft: #5A3550; --font-display: 'Anguita Sans', 'Bebas Neue', Impact, sans-serif; --font-editorial: 'Bebas Neue', 'Anguita Sans', Impact, sans-serif; --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; }
+  :root { --signal: #A2917F; --signal-light: #BBAD9F; --red: #AD4236; --red-deep: #7A2E26; --espresso: #241B17; --espresso-soft: #2E2420; --coffee: #3A2E28; --taupe: #A2917F; --bone: #D8CCC1; --bone-dim: #B7A899; --rose-linen: #D8CCC1; --deep-evening: #241B17; --deep-evening-soft: #3A2E28; --font-display: 'Bebas Neue', 'Oswald', Impact, sans-serif; --font-editorial: 'Oswald', 'Bebas Neue', sans-serif; --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: var(--font-body); background: var(--rose-linen); color: var(--deep-evening); line-height: 1.6; -webkit-font-smoothing: antialiased; font-weight: 400; }
+  body { font-family: var(--font-body); background: var(--espresso-soft); color: var(--rose-linen); line-height: 1.6; -webkit-font-smoothing: antialiased; font-weight: 400; }
 
   .cover { min-height: 100vh; background: var(--deep-evening); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 40px; position: relative; }
   .cover::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(173,66,54,0.15) 0%, transparent 70%); }
@@ -66,7 +66,7 @@
 
   .slide { min-height: 100vh; padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; max-width: 1200px; margin: 0 auto; page-break-before: always; }
   .slide-dark { background: var(--deep-evening); color: var(--rose-linen); max-width: none; padding: 80px 10%; }
-  .slide-signal { background: var(--signal); color: var(--rose-linen); max-width: none; padding: 80px 10%; }
+  .slide-signal { background: var(--coffee); color: var(--rose-linen); max-width: none; padding: 80px 10%; }
 
   .section-label { font-family: var(--font-body); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--signal); margin-bottom: 16px; font-weight: 600; }
   .slide-dark .section-label { color: rgba(246,239,234,0.5); }
@@ -74,11 +74,11 @@
   .slide h3 { font-family: var(--font-display); font-size: 32px; font-weight: 900; margin-bottom: 20px; margin-top: 40px; letter-spacing: -0.5px; text-transform: lowercase; }
   .slide p { font-family: var(--font-body); font-size: 17px; line-height: 1.7; margin-bottom: 20px; max-width: 800px; font-weight: 400; }
   .slide-dark p { opacity: 0.9; }
-  .highlight { color: var(--signal); font-weight: 500; }
-  .slide-dark .highlight { color: #fff; font-weight: 500; }
+  .highlight { color: var(--red); font-weight: 500; }
+  .slide-dark .highlight { color: var(--rose-linen); font-weight: 500; }
 
   .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 32px 0; }
-  .card { background: white; border-radius: 12px; padding: 32px; box-shadow: 0 2px 20px rgba(26,20,16,0.06); }
+  .card { background: var(--coffee); border-radius: 12px; padding: 32px; box-shadow: 0 2px 20px rgba(26,20,16,0.06); }
   .slide-dark .card { background: var(--deep-evening-soft); box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
   .card .card-label { font-family: var(--font-body); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--signal); margin-bottom: 8px; font-weight: 700; }
   .card h4 { font-family: var(--font-display); font-size: 22px; font-weight: 900; margin-bottom: 12px; letter-spacing: -0.3px; text-transform: lowercase; line-height: 1.1; }
@@ -90,7 +90,7 @@
   .slide-dark th { border-bottom-color: var(--signal); color: var(--signal-light); }
   .slide-dark td { border-bottom-color: rgba(246,239,234,0.08); }
 
-  .layer { background: white; border-radius: 12px; padding: 32px; margin: 16px 0; border-left: 4px solid var(--signal); box-shadow: 0 2px 12px rgba(26,20,16,0.04); }
+  .layer { background: var(--coffee); border-radius: 12px; padding: 32px; margin: 16px 0; border-left: 4px solid var(--signal); box-shadow: 0 2px 12px rgba(26,20,16,0.04); }
   .layer-name { font-family: var(--font-body); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--signal); font-weight: 700; margin-bottom: 4px; }
   .layer h4 { font-family: var(--font-display); font-size: 24px; font-weight: 900; margin-bottom: 12px; letter-spacing: -0.5px; text-transform: lowercase; }
 
@@ -115,7 +115,7 @@
 <!-- ==================== PASSWORD GATE ==================== -->
 <div id="gate">
   <div class="gate-overline">INSDR Wellness &mdash; Confidential</div>
-  <div class="gate-title" aria-label="signal" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; letter-spacing: -2px;"><span style="color: #F6EFEA;">/</span>sɪɡ<span style="color: #F6EFEA;">ˈ</span>nɑ<span style="color: #F6EFEA;">ː</span>l<span style="color: #F6EFEA;">/</span></div>
+  <div class="gate-title" aria-label="signal" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; letter-spacing: -2px;"><span style="color: #D8CCC1;">/</span>sɪɡ<span style="color: #D8CCC1;">ˈ</span>nɑ<span style="color: #D8CCC1;">ː</span>l<span style="color: #D8CCC1;">/</span></div>
   <div class="gate-subtitle">Enter password to view.</div>
   <form onsubmit="return checkPass(event)">
     <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
@@ -566,7 +566,7 @@
     <div class="card">
       <div class="card-label">The Container</div>
       <h4>30 packets per box.</h4>
-      <p>Deep Evening (#4A2540) primary container. 30 packets per box = 30-day supply at 1 packet/day. Recyclable paperboard with foil-stamped wordmark. Premium unboxing without plastic clamshell. Monthly cadence matches how consumers think about subscriptions.</p>
+      <p>Deep Evening (#241B17) primary container. 30 packets per box = 30-day supply at 1 packet/day. Recyclable paperboard with foil-stamped wordmark. Premium unboxing without plastic clamshell. Monthly cadence matches how consumers think about subscriptions.</p>
     </div>
   </div>
 

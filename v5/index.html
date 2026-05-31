@@ -6,19 +6,19 @@
 <title>signal — concept deck v5 (Path A: cellular energy thesis)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   /* --- PASSWORD GATE --- */
-  #gate { position: fixed; inset: 0; background: #4A2540; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; color: #F6EFEA; }
+  #gate { position: fixed; inset: 0; background: #241B17; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; color: #D8CCC1; }
   #gate .gate-overline { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #AD4236; margin-bottom: 16px; font-weight: 600; }
   #gate .gate-title { font-family: 'Anguita Sans', 'Bebas Neue', Impact, sans-serif; font-size: 96px; font-weight: 900; color: #AD4236; line-height: 0.9; margin-bottom: 12px; letter-spacing: -1px; text-transform: lowercase; }
   #gate .gate-subtitle { font-size: 14px; opacity: 0.6; margin-bottom: 12px; letter-spacing: 1px; }
   #gate .gate-hint { font-size: 13px; color: #AD4236; margin-bottom: 32px; letter-spacing: 2px; font-family: 'Plus Jakarta Sans', sans-serif; }
   #gate .gate-hint strong { font-weight: 700; letter-spacing: 3px; }
   #gate form { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-  #gate input { background: rgba(246,239,234,0.08); border: 1px solid rgba(246,239,234,0.2); border-radius: 6px; color: #F6EFEA; padding: 14px 20px; font-size: 15px; font-family: inherit; width: 280px; text-align: center; letter-spacing: 1px; outline: none; transition: border-color 0.2s; }
+  #gate input { background: rgba(246,239,234,0.08); border: 1px solid rgba(246,239,234,0.2); border-radius: 6px; color: #D8CCC1; padding: 14px 20px; font-size: 15px; font-family: inherit; width: 280px; text-align: center; letter-spacing: 1px; outline: none; transition: border-color 0.2s; }
   #gate input:focus { border-color: #AD4236; }
-  #gate button { background: #AD4236; color: #F6EFEA; border: none; border-radius: 6px; padding: 12px 32px; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+  #gate button { background: #AD4236; color: #D8CCC1; border: none; border-radius: 6px; padding: 12px 32px; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.2s; }
   #gate button:hover { background: #c4574b; }
   #gate .gate-error { color: #AD4236; font-size: 12px; margin-top: 8px; opacity: 0; transition: opacity 0.2s; letter-spacing: 1px; }
   #gate .gate-error.show { opacity: 1; }
@@ -56,17 +56,20 @@
   @font-face { font-family: 'Bebas Neue'; src: url('fonts/BebasNeue-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
 
   :root {
-    --signal: #AD4236;
-    --signal-light: #c4574b;
-    --rose-linen: #F6EFEA;
-    --deep-evening: #4A2540;
-    --deep-evening-soft: #5A3550;
-    --font-display: 'Anguita Sans', 'Bebas Neue', Impact, sans-serif;
-    --font-editorial: 'Bebas Neue', 'Anguita Sans', Impact, sans-serif;
+    --signal: #A2917F;
+    --signal-light: #BBAD9F;
+    --red: #AD4236; --red-deep: #7A2E26;
+    --espresso: #241B17; --espresso-soft: #2E2420; --coffee: #3A2E28;
+    --taupe: #A2917F; --taupe-light: #BBAD9F; --bone: #D8CCC1; --bone-dim: #B7A899;
+    --rose-linen: #D8CCC1;
+    --deep-evening: #241B17;
+    --deep-evening-soft: #3A2E28;
+    --font-display: 'Bebas Neue', 'Oswald', Impact, sans-serif;
+    --font-editorial: 'Oswald', 'Bebas Neue', sans-serif;
     --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: var(--font-body); background: var(--rose-linen); color: var(--deep-evening); line-height: 1.6; -webkit-font-smoothing: antialiased; font-weight: 400; }
+  body { font-family: var(--font-body); background: var(--espresso-soft); color: var(--rose-linen); line-height: 1.6; -webkit-font-smoothing: antialiased; font-weight: 400; }
 
   .cover { min-height: 100vh; background: var(--deep-evening); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 40px; position: relative; overflow: hidden; }
   .cover::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(173,66,54,0.15) 0%, transparent 70%); }
@@ -77,6 +80,14 @@
   .wordmark-ghost.ghost-right { position: absolute; top: 0; left: 0; right: 0; transform: translateX(7px); }
   @media (prefers-reduced-motion: reduce) { .wordmark-ghost { transform: translateX(0) !important; transition: none !important; } }
   @media print { .wordmark-ghost.ghost-left { display: none !important; } .wordmark-ghost.ghost-right { position: static !important; opacity: 1 !important; transform: none !important; } }
+  .wm-art { width: 100%; height: auto; display: block; }
+  .wm-art .wm-accent { fill: var(--bone); }
+  .wm-art .wm-sign, .wm-art .wm-tail { fill: var(--bone); }
+  .wm-sig .wm-accent { fill: var(--red); }
+  .sign-lighter .wm-sign { fill: #DED2C9; } .sign-lighter .wm-tail { fill: #D0C3B9; }
+  .wm-sig.sign-lighter .wm-accent { fill: var(--red); }
+  .wordmark-container { width: clamp(300px, 60vw, 520px); }
+  .wordmark-ghost .wm-art { width: 100%; }
 
   @keyframes breathe {
     0%, 100% { transform: scale(1); opacity: 0.9; }
@@ -90,7 +101,7 @@
 
   .slide { min-height: 100vh; padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; max-width: 1200px; margin: 0 auto; page-break-before: always; }
   .slide-dark { background: var(--deep-evening); color: var(--rose-linen); max-width: none; padding: 80px 10%; }
-  .slide-signal { background: var(--signal); color: var(--rose-linen); max-width: none; padding: 80px 10%; }
+  .slide-signal { background: var(--coffee); color: var(--rose-linen); max-width: none; padding: 80px 10%; }
 
   .section-label { font-family: var(--font-body); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--signal); margin-bottom: 16px; font-weight: 600; }
   .slide-dark .section-label, .slide-signal .section-label { color: rgba(246,239,234,0.5); }
@@ -98,11 +109,11 @@
   .slide h3 { font-family: var(--font-display); font-size: 32px; font-weight: 900; margin-bottom: 20px; margin-top: 40px; letter-spacing: -0.5px; text-transform: lowercase; }
   .slide p { font-family: var(--font-body); font-size: 17px; line-height: 1.7; margin-bottom: 20px; max-width: 800px; font-weight: 400; }
   .slide-dark p, .slide-signal p { opacity: 0.9; }
-  .highlight { color: var(--signal); font-weight: 500; }
-  .slide-dark .highlight, .slide-signal .highlight { color: #fff; font-weight: 500; }
+  .highlight { color: var(--red); font-weight: 500; }
+  .slide-dark .highlight, .slide-signal .highlight { color: var(--rose-linen); font-weight: 500; }
 
   .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 32px 0; }
-  .card { background: white; border-radius: 12px; padding: 32px; box-shadow: 0 2px 20px rgba(26,20,16,0.06); }
+  .card { background: var(--coffee); border-radius: 12px; padding: 32px; box-shadow: 0 2px 20px rgba(26,20,16,0.06); }
   .slide-dark .card { background: var(--deep-evening-soft); box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
   .card .card-label { font-family: var(--font-body); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--signal); margin-bottom: 8px; font-weight: 700; }
   .card h4 { font-family: var(--font-display); font-size: 22px; font-weight: 900; margin-bottom: 12px; letter-spacing: -0.3px; text-transform: lowercase; line-height: 1.1; }
@@ -146,7 +157,7 @@
 <!-- ==================== PASSWORD GATE ==================== -->
 <div id="gate">
   <div class="gate-overline">INSDR Wellness &middot; Confidential</div>
-  <div class="gate-title" aria-label="signal" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; letter-spacing: -2px;"><span style="color: #F6EFEA;">/</span>sɪɡ<span style="color: #F6EFEA;">ˈ</span>nɑ<span style="color: #F6EFEA;">ː</span>l<span style="color: #F6EFEA;">/</span></div>
+  <div class="gate-title" aria-label="signal" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; letter-spacing: -2px;"><span style="color: #D8CCC1;">/</span>sɪɡ<span style="color: #D8CCC1;">ˈ</span>nɑ<span style="color: #D8CCC1;">ː</span>l<span style="color: #D8CCC1;">/</span></div>
   <div class="gate-subtitle">Enter password to view.</div>
   <form onsubmit="return checkPass(event)">
     <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
@@ -189,8 +200,174 @@
 <section class="cover">
   <div class="cover-overline">send the right</div>
   <div class="wordmark-container">
-    <h1 class="wordmark-ghost ghost-left" aria-hidden="true" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 100px; letter-spacing: -3px;"><span style="color: var(--rose-linen);">/</span>sɪɡ<span style="color: var(--rose-linen);">ˈ</span>nɑ<span style="color: var(--rose-linen);">ː</span>l<span style="color: var(--rose-linen);">/</span></h1>
-    <h1 class="wordmark-ghost ghost-right" aria-label="signal" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 100px; letter-spacing: -3px;"><span style="color: var(--rose-linen);">/</span>sɪɡ<span style="color: var(--rose-linen);">ˈ</span>nɑ<span style="color: var(--rose-linen);">ː</span>l<span style="color: var(--rose-linen);">/</span></h1>
+    <h1 class="wordmark-ghost ghost-left wm-sig sign-lighter" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3114.000000 696.000000" class="wm-art" role="img" aria-label="signal" shape-rendering="geometricPrecision"><g transform="translate(0.000000,696.000000) scale(0.100000,-0.100000)"><g class="wm-accent"><path d="M6051 5613 c-14 -13 -56 -124 -136 -363 -63 -190 -133 -397 -155
+-460 -23 -63 -49 -140 -59 -170 -11 -30 -39 -111 -63 -180 -60 -168 -108 -311
+-153 -455 -20 -66 -48 -149 -60 -185 -39 -109 -66 -192 -85 -260 -10 -36 -23
+-78 -30 -95 -7 -16 -20 -57 -30 -90 -10 -33 -32 -96 -49 -140 -16 -44 -46
+-123 -66 -175 -44 -117 -100 -275 -125 -355 -24 -78 -67 -200 -78 -223 -20
+-38 -22 -70 -6 -86 17 -17 148 -23 172 -8 18 12 86 202 212 592 43 135 97 295
+119 355 23 61 59 162 81 225 22 63 62 178 90 255 50 140 147 424 233 690 26
+77 62 185 82 240 68 191 96 271 171 500 42 127 86 251 100 276 26 51 31 98 12
+117 -20 20 -152 16 -177 -5z"/><path d="M24965 5620 c-54 -5 -61 -8 -82 -38 -12 -19 -33 -68 -47 -110 -14
+-43 -38 -113 -54 -157 -66 -179 -105 -293 -122 -350 -10 -33 -35 -105 -55
+-160 -20 -55 -49 -138 -65 -185 -16 -47 -42 -123 -60 -170 -17 -47 -44 -121
+-60 -165 -16 -44 -45 -123 -65 -175 -35 -94 -164 -472 -183 -540 -10 -32 -56
+-162 -119 -335 -110 -301 -216 -602 -238 -678 -12 -42 -27 -83 -33 -90 -18
+-23 -23 -72 -9 -91 11 -15 30 -20 84 -23 91 -4 102 6 141 122 17 50 58 169 92
+265 34 96 86 247 116 335 29 88 70 203 89 255 92 245 108 290 130 355 13 39
+28 84 34 100 14 37 136 407 150 455 6 19 29 87 51 150 22 63 51 147 65 185 28
+81 71 204 115 325 54 150 180 528 180 541 0 7 12 36 26 66 29 62 29 103 -1
+112 -11 3 -47 4 -80 1z"/></g><g class="wm-sign"><path d="M7852 4559 c-73 -11 -197 -58 -264 -100 -68 -44 -132 -118 -168 -195
+-98 -209 -40 -446 146 -593 109 -86 205 -131 539 -253 158 -58 284 -161 311
+-255 49 -168 -6 -288 -166 -365 -58 -29 -76 -32 -175 -36 -260 -9 -418 80
+-520 293 -25 53 -51 123 -58 157 -9 47 -18 66 -39 81 -23 17 -31 19 -53 9 -14
+-7 -29 -22 -33 -34 -4 -13 -5 -150 -2 -306 6 -344 3 -337 125 -256 84 55 92
+54 246 -4 126 -49 199 -62 334 -62 114 1 159 9 266 50 136 52 211 106 286 204
+88 117 121 239 98 369 -15 88 -32 128 -78 193 -82 114 -205 190 -487 299 -52
+21 -113 45 -135 55 -22 10 -51 21 -65 25 -14 4 -64 28 -113 52 -176 91 -231
+212 -172 384 18 53 79 117 145 151 41 21 58 23 180 23 133 0 136 -1 207 -34
+123 -57 231 -191 273 -334 27 -95 35 -107 75 -107 21 0 37 6 43 16 5 9 7 129
+4 267 -4 268 -10 297 -54 297 -11 0 -40 -18 -64 -40 -24 -22 -50 -40 -59 -40
+-8 0 -59 18 -112 39 -135 55 -301 72 -461 50z"/><path d="M9833 4515 c-31 -22 -30 -60 2 -81 14 -9 59 -20 101 -25 91 -10 141
+-33 170 -76 31 -47 38 -216 32 -871 l-5 -543 -29 -42 c-38 -54 -85 -76 -184
+-86 -44 -5 -87 -14 -95 -21 -23 -19 -18 -57 9 -75 21 -14 80 -16 482 -14 280
+1 464 6 472 12 15 12 16 59 0 75 -7 7 -28 12 -47 12 -19 0 -63 5 -99 11 -77
+14 -135 59 -152 117 -13 50 -13 1301 1 1361 21 92 72 128 198 142 59 7 80 13
+94 30 20 25 21 40 5 61 -12 14 -68 17 -473 23 -416 6 -462 5 -482 -10z"/><path d="M12519 4554 c-84 -15 -206 -59 -273 -98 -124 -73 -205 -165 -264
+-301 -31 -70 -36 -93 -40 -182 -7 -159 23 -269 104 -378 32 -44 121 -129 172
+-164 54 -37 37 -83 -45 -125 -56 -28 -159 -140 -177 -192 -21 -63 -20 -149 3
+-199 21 -47 90 -111 156 -145 39 -20 46 -28 43 -49 -2 -21 -17 -33 -68 -61
+-149 -79 -221 -142 -266 -231 -30 -60 -34 -78 -34 -144 0 -86 17 -130 76 -195
+81 -89 210 -147 419 -186 137 -27 169 -29 370 -28 213 0 224 1 345 32 220 55
+345 116 448 220 91 90 133 182 140 303 13 228 -69 376 -255 465 -127 60 -263
+77 -703 89 -129 4 -266 11 -303 15 -82 10 -136 42 -162 96 -26 56 -10 98 69
+172 87 81 111 88 211 62 172 -44 414 -17 577 66 180 91 286 211 329 376 45
+166 19 347 -66 461 -49 66 -53 78 -30 97 12 10 46 11 166 2 147 -11 177 -9
+191 12 4 6 8 50 8 99 0 74 -3 90 -20 107 -26 26 -40 25 -127 -5 -77 -26 -171
+-47 -299 -66 -75 -11 -86 -10 -155 11 -41 12 -87 29 -103 37 -75 39 -297 53
+-437 27z m308 -130 c112 -54 178 -145 218 -299 37 -142 36 -287 -4 -417 -62
+-207 -171 -294 -366 -290 -78 1 -97 5 -152 32 -108 53 -189 176 -224 337 -18
+86 -16 285 4 360 57 214 190 319 390 309 59 -3 92 -11 134 -32z m-84 -1744
+c253 -9 398 -22 467 -40 48 -13 111 -61 146 -111 26 -38 29 -50 28 -120 -1
+-97 -26 -152 -104 -230 -151 -152 -463 -216 -779 -159 -176 32 -284 95 -351
+206 -33 55 -35 63 -35 149 0 65 5 98 17 120 29 53 101 127 163 168 58 38 62
+39 125 33 36 -3 181 -10 323 -16z"/><path d="M15175 4558 c-16 -5 -52 -13 -80 -18 -27 -5 -93 -18 -145 -29 -52
+-11 -137 -24 -187 -29 -103 -10 -143 -29 -143 -66 0 -37 24 -49 108 -51 80 -2
+122 -16 155 -53 45 -50 46 -63 46 -717 0 -341 -4 -640 -8 -664 -17 -87 -76
+-130 -191 -140 -37 -4 -75 -13 -84 -20 -23 -19 -21 -68 4 -81 12 -7 159 -10
+417 -11 219 0 410 0 425 -1 34 -1 58 18 58 47 0 34 -31 55 -81 55 -91 0 -160
+37 -197 104 -16 28 -17 77 -14 574 l2 543 25 48 c30 60 168 191 250 236 82 46
+180 68 280 63 137 -7 219 -58 277 -173 28 -53 32 -73 37 -175 4 -63 4 -339 1
+-612 -5 -485 -5 -497 -26 -525 -32 -42 -73 -62 -159 -76 -62 -9 -81 -17 -93
+-35 -11 -18 -12 -28 -4 -47 l11 -23 437 -1 c312 -1 441 2 450 10 21 18 17 57
+-8 73 -13 8 -50 17 -84 21 -79 9 -134 39 -159 90 -19 39 -20 60 -20 635 l0
+595 -24 80 c-31 104 -71 173 -141 243 -113 113 -257 156 -446 135 -175 -20
+-327 -102 -480 -261 -127 -132 -129 -131 -129 73 -1 88 -4 165 -8 171 -10 17
+-38 22 -72 12z"/></g><g class="wm-tail"><path d="M18395 4555 c-78 -17 -218 -83 -293 -140 -76 -57 -181 -168 -228
+-242 -40 -62 -114 -221 -114 -245 0 -8 -10 -50 -22 -94 -20 -71 -23 -101 -22
+-284 0 -195 2 -211 32 -332 37 -149 74 -229 146 -313 151 -178 324 -265 527
+-265 59 0 156 16 174 30 6 4 29 14 53 24 101 39 226 142 315 259 47 62 73 45
+87 -55 26 -178 88 -242 235 -241 81 1 125 14 328 94 69 26 92 54 82 99 -13 59
+-56 76 -116 44 -37 -19 -139 -20 -168 -3 -49 31 -51 52 -51 599 0 614 15 834
+65 930 21 40 20 97 -2 108 -10 5 -71 8 -136 7 -144 -2 -152 -7 -166 -111 -14
+-94 -18 -104 -48 -104 -18 0 -48 21 -98 69 -158 150 -373 211 -580 166z m338
+-158 c76 -35 184 -141 225 -223 66 -130 67 -142 66 -541 l-1 -361 -36 -76
+c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
+368 -26 95 -27 111 -27 325 0 214 2 231 29 339 64 254 169 394 343 457 91 33
+200 30 286 -9z"/><path d="M20292 4364 c-20 -13 -23 -22 -18 -48 9 -43 140 -307 172 -345 52
+-62 76 -39 183 178 74 150 87 202 54 219 -10 5 -97 10 -193 11 -149 1 -179 -1
+-198 -15z"/><path d="M20468 3240 c-33 -20 -143 -214 -188 -332 -25 -66 -26 -104 -2 -116
+9 -5 111 -9 225 -8 218 2 226 4 227 47 0 50 -171 370 -218 407 -19 14 -22 14
+-44 2z"/><path d="M21950 5550 c-101 -30 -309 -75 -399 -85 -66 -8 -91 -20 -91 -45 0
+-30 39 -50 95 -50 81 0 145 -24 190 -70 l40 -41 3 -1162 c2 -804 0 -1173 -8
+-1199 -6 -20 -22 -46 -37 -58 -38 -30 -139 -57 -225 -59 -10 -1 -25 -12 -34
+-26 -14 -21 -15 -31 -6 -51 l12 -24 428 0 c236 1 440 -2 454 -5 40 -10 68 10
+68 48 0 42 -15 57 -57 57 -44 0 -132 19 -165 36 -15 8 -39 31 -53 51 l-25 38
+0 1325 c0 1018 -3 1329 -12 1338 -19 19 -75 13 -178 -18z"/></g></g></svg></h1>
+    <h1 class="wordmark-ghost ghost-right wm-sig sign-lighter" aria-label="signal"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3114.000000 696.000000" class="wm-art" role="img" aria-label="signal" shape-rendering="geometricPrecision"><g transform="translate(0.000000,696.000000) scale(0.100000,-0.100000)"><g class="wm-accent"><path d="M6051 5613 c-14 -13 -56 -124 -136 -363 -63 -190 -133 -397 -155
+-460 -23 -63 -49 -140 -59 -170 -11 -30 -39 -111 -63 -180 -60 -168 -108 -311
+-153 -455 -20 -66 -48 -149 -60 -185 -39 -109 -66 -192 -85 -260 -10 -36 -23
+-78 -30 -95 -7 -16 -20 -57 -30 -90 -10 -33 -32 -96 -49 -140 -16 -44 -46
+-123 -66 -175 -44 -117 -100 -275 -125 -355 -24 -78 -67 -200 -78 -223 -20
+-38 -22 -70 -6 -86 17 -17 148 -23 172 -8 18 12 86 202 212 592 43 135 97 295
+119 355 23 61 59 162 81 225 22 63 62 178 90 255 50 140 147 424 233 690 26
+77 62 185 82 240 68 191 96 271 171 500 42 127 86 251 100 276 26 51 31 98 12
+117 -20 20 -152 16 -177 -5z"/><path d="M24965 5620 c-54 -5 -61 -8 -82 -38 -12 -19 -33 -68 -47 -110 -14
+-43 -38 -113 -54 -157 -66 -179 -105 -293 -122 -350 -10 -33 -35 -105 -55
+-160 -20 -55 -49 -138 -65 -185 -16 -47 -42 -123 -60 -170 -17 -47 -44 -121
+-60 -165 -16 -44 -45 -123 -65 -175 -35 -94 -164 -472 -183 -540 -10 -32 -56
+-162 -119 -335 -110 -301 -216 -602 -238 -678 -12 -42 -27 -83 -33 -90 -18
+-23 -23 -72 -9 -91 11 -15 30 -20 84 -23 91 -4 102 6 141 122 17 50 58 169 92
+265 34 96 86 247 116 335 29 88 70 203 89 255 92 245 108 290 130 355 13 39
+28 84 34 100 14 37 136 407 150 455 6 19 29 87 51 150 22 63 51 147 65 185 28
+81 71 204 115 325 54 150 180 528 180 541 0 7 12 36 26 66 29 62 29 103 -1
+112 -11 3 -47 4 -80 1z"/></g><g class="wm-sign"><path d="M7852 4559 c-73 -11 -197 -58 -264 -100 -68 -44 -132 -118 -168 -195
+-98 -209 -40 -446 146 -593 109 -86 205 -131 539 -253 158 -58 284 -161 311
+-255 49 -168 -6 -288 -166 -365 -58 -29 -76 -32 -175 -36 -260 -9 -418 80
+-520 293 -25 53 -51 123 -58 157 -9 47 -18 66 -39 81 -23 17 -31 19 -53 9 -14
+-7 -29 -22 -33 -34 -4 -13 -5 -150 -2 -306 6 -344 3 -337 125 -256 84 55 92
+54 246 -4 126 -49 199 -62 334 -62 114 1 159 9 266 50 136 52 211 106 286 204
+88 117 121 239 98 369 -15 88 -32 128 -78 193 -82 114 -205 190 -487 299 -52
+21 -113 45 -135 55 -22 10 -51 21 -65 25 -14 4 -64 28 -113 52 -176 91 -231
+212 -172 384 18 53 79 117 145 151 41 21 58 23 180 23 133 0 136 -1 207 -34
+123 -57 231 -191 273 -334 27 -95 35 -107 75 -107 21 0 37 6 43 16 5 9 7 129
+4 267 -4 268 -10 297 -54 297 -11 0 -40 -18 -64 -40 -24 -22 -50 -40 -59 -40
+-8 0 -59 18 -112 39 -135 55 -301 72 -461 50z"/><path d="M9833 4515 c-31 -22 -30 -60 2 -81 14 -9 59 -20 101 -25 91 -10 141
+-33 170 -76 31 -47 38 -216 32 -871 l-5 -543 -29 -42 c-38 -54 -85 -76 -184
+-86 -44 -5 -87 -14 -95 -21 -23 -19 -18 -57 9 -75 21 -14 80 -16 482 -14 280
+1 464 6 472 12 15 12 16 59 0 75 -7 7 -28 12 -47 12 -19 0 -63 5 -99 11 -77
+14 -135 59 -152 117 -13 50 -13 1301 1 1361 21 92 72 128 198 142 59 7 80 13
+94 30 20 25 21 40 5 61 -12 14 -68 17 -473 23 -416 6 -462 5 -482 -10z"/><path d="M12519 4554 c-84 -15 -206 -59 -273 -98 -124 -73 -205 -165 -264
+-301 -31 -70 -36 -93 -40 -182 -7 -159 23 -269 104 -378 32 -44 121 -129 172
+-164 54 -37 37 -83 -45 -125 -56 -28 -159 -140 -177 -192 -21 -63 -20 -149 3
+-199 21 -47 90 -111 156 -145 39 -20 46 -28 43 -49 -2 -21 -17 -33 -68 -61
+-149 -79 -221 -142 -266 -231 -30 -60 -34 -78 -34 -144 0 -86 17 -130 76 -195
+81 -89 210 -147 419 -186 137 -27 169 -29 370 -28 213 0 224 1 345 32 220 55
+345 116 448 220 91 90 133 182 140 303 13 228 -69 376 -255 465 -127 60 -263
+77 -703 89 -129 4 -266 11 -303 15 -82 10 -136 42 -162 96 -26 56 -10 98 69
+172 87 81 111 88 211 62 172 -44 414 -17 577 66 180 91 286 211 329 376 45
+166 19 347 -66 461 -49 66 -53 78 -30 97 12 10 46 11 166 2 147 -11 177 -9
+191 12 4 6 8 50 8 99 0 74 -3 90 -20 107 -26 26 -40 25 -127 -5 -77 -26 -171
+-47 -299 -66 -75 -11 -86 -10 -155 11 -41 12 -87 29 -103 37 -75 39 -297 53
+-437 27z m308 -130 c112 -54 178 -145 218 -299 37 -142 36 -287 -4 -417 -62
+-207 -171 -294 -366 -290 -78 1 -97 5 -152 32 -108 53 -189 176 -224 337 -18
+86 -16 285 4 360 57 214 190 319 390 309 59 -3 92 -11 134 -32z m-84 -1744
+c253 -9 398 -22 467 -40 48 -13 111 -61 146 -111 26 -38 29 -50 28 -120 -1
+-97 -26 -152 -104 -230 -151 -152 -463 -216 -779 -159 -176 32 -284 95 -351
+206 -33 55 -35 63 -35 149 0 65 5 98 17 120 29 53 101 127 163 168 58 38 62
+39 125 33 36 -3 181 -10 323 -16z"/><path d="M15175 4558 c-16 -5 -52 -13 -80 -18 -27 -5 -93 -18 -145 -29 -52
+-11 -137 -24 -187 -29 -103 -10 -143 -29 -143 -66 0 -37 24 -49 108 -51 80 -2
+122 -16 155 -53 45 -50 46 -63 46 -717 0 -341 -4 -640 -8 -664 -17 -87 -76
+-130 -191 -140 -37 -4 -75 -13 -84 -20 -23 -19 -21 -68 4 -81 12 -7 159 -10
+417 -11 219 0 410 0 425 -1 34 -1 58 18 58 47 0 34 -31 55 -81 55 -91 0 -160
+37 -197 104 -16 28 -17 77 -14 574 l2 543 25 48 c30 60 168 191 250 236 82 46
+180 68 280 63 137 -7 219 -58 277 -173 28 -53 32 -73 37 -175 4 -63 4 -339 1
+-612 -5 -485 -5 -497 -26 -525 -32 -42 -73 -62 -159 -76 -62 -9 -81 -17 -93
+-35 -11 -18 -12 -28 -4 -47 l11 -23 437 -1 c312 -1 441 2 450 10 21 18 17 57
+-8 73 -13 8 -50 17 -84 21 -79 9 -134 39 -159 90 -19 39 -20 60 -20 635 l0
+595 -24 80 c-31 104 -71 173 -141 243 -113 113 -257 156 -446 135 -175 -20
+-327 -102 -480 -261 -127 -132 -129 -131 -129 73 -1 88 -4 165 -8 171 -10 17
+-38 22 -72 12z"/></g><g class="wm-tail"><path d="M18395 4555 c-78 -17 -218 -83 -293 -140 -76 -57 -181 -168 -228
+-242 -40 -62 -114 -221 -114 -245 0 -8 -10 -50 -22 -94 -20 -71 -23 -101 -22
+-284 0 -195 2 -211 32 -332 37 -149 74 -229 146 -313 151 -178 324 -265 527
+-265 59 0 156 16 174 30 6 4 29 14 53 24 101 39 226 142 315 259 47 62 73 45
+87 -55 26 -178 88 -242 235 -241 81 1 125 14 328 94 69 26 92 54 82 99 -13 59
+-56 76 -116 44 -37 -19 -139 -20 -168 -3 -49 31 -51 52 -51 599 0 614 15 834
+65 930 21 40 20 97 -2 108 -10 5 -71 8 -136 7 -144 -2 -152 -7 -166 -111 -14
+-94 -18 -104 -48 -104 -18 0 -48 21 -98 69 -158 150 -373 211 -580 166z m338
+-158 c76 -35 184 -141 225 -223 66 -130 67 -142 66 -541 l-1 -361 -36 -76
+c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
+368 -26 95 -27 111 -27 325 0 214 2 231 29 339 64 254 169 394 343 457 91 33
+200 30 286 -9z"/><path d="M20292 4364 c-20 -13 -23 -22 -18 -48 9 -43 140 -307 172 -345 52
+-62 76 -39 183 178 74 150 87 202 54 219 -10 5 -97 10 -193 11 -149 1 -179 -1
+-198 -15z"/><path d="M20468 3240 c-33 -20 -143 -214 -188 -332 -25 -66 -26 -104 -2 -116
+9 -5 111 -9 225 -8 218 2 226 4 227 47 0 50 -171 370 -218 407 -19 14 -22 14
+-44 2z"/><path d="M21950 5550 c-101 -30 -309 -75 -399 -85 -66 -8 -91 -20 -91 -45 0
+-30 39 -50 95 -50 81 0 145 -24 190 -70 l40 -41 3 -1162 c2 -804 0 -1173 -8
+-1199 -6 -20 -22 -46 -37 -58 -38 -30 -139 -57 -225 -59 -10 -1 -25 -12 -34
+-26 -14 -21 -15 -31 -6 -51 l12 -24 428 0 c236 1 440 -2 454 -5 40 -10 68 10
+68 48 0 42 -15 57 -57 57 -44 0 -132 19 -165 36 -15 8 -39 31 -53 51 l-25 38
+0 1325 c0 1018 -3 1329 -12 1338 -19 19 -75 13 -178 -18z"/></g></g></svg></h1>
   </div>
   <div class="tagline">the signal your cells are waiting for.</div>
   <div style="font-family: var(--font-body); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.78; font-weight: 700; margin-top: 18px; color: var(--signal);">the daily foundation &middot; INSDR Wellness</div>

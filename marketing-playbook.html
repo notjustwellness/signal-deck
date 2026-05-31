@@ -11,15 +11,15 @@
 
 <style>
 :root {
-  --signal: #AD4236;
-  --signal-light: #C85D51;
+  --signal: #A2917F;
+  --signal-light: #BBAD9F; --red: #AD4236; --red-deep: #7A2E26; --espresso: #241B17; --espresso-soft: #2E2420; --coffee: #3A2E28; --taupe: #A2917F; --taupe-light: #BBAD9F; --bone: #D8CCC1; --bone-dim: #B7A899;
   --signal-deep: #7A2E26;
-  --deep-evening: #4A2540;
-  --rose-linen: #F6EFEA;
-  --cream: #EFE5D1;
-  --cream-deep: #E5D7BC;
-  --ink: #1A1410;
-  --ink-soft: rgba(26,20,16,0.72);
+  --deep-evening: #241B17;
+  --rose-linen: #D8CCC1;
+  --cream: #3A2E28;
+  --cream-deep: #2E2420;
+  --ink: #D8CCC1;
+  --ink-soft: rgba(216,204,193,0.74);
   --ink-dim: rgba(26,20,16,0.5);
   --font-display: 'Bebas Neue', 'Helvetica Neue', sans-serif;
   --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -29,7 +29,7 @@
 html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-body);
-  background: var(--rose-linen);
+  background: var(--espresso-soft);
   color: var(--ink);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
@@ -380,15 +380,15 @@ footer .footer-line {
 }
 
 /* ─── PASSWORD GATE ─── */
-#gate { position: fixed; inset: 0; background: #4A2540; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; color: #F6EFEA; padding: 40px; text-align: center; }
+#gate { position: fixed; inset: 0; background: #241B17; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; color: #D8CCC1; padding: 40px; text-align: center; }
 #gate .gate-overline { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #AD4236; margin-bottom: 16px; font-weight: 600; }
 #gate .gate-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 72px; color: #AD4236; line-height: 0.9; margin-bottom: 32px; letter-spacing: -1.6px; text-transform: lowercase; }
-#gate .gate-title .accent { color: #F6EFEA; }
+#gate .gate-title .accent { color: #D8CCC1; }
 #gate .gate-subtitle { font-size: 14px; opacity: 0.6; margin-bottom: 32px; letter-spacing: 1px; }
 #gate form { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-#gate input { background: rgba(246,239,234,0.08); border: 1px solid rgba(246,239,234,0.2); border-radius: 6px; color: #F6EFEA; padding: 14px 20px; font-size: 15px; font-family: inherit; width: 280px; text-align: center; letter-spacing: 1px; outline: none; transition: border-color 0.2s; }
+#gate input { background: rgba(246,239,234,0.08); border: 1px solid rgba(246,239,234,0.2); border-radius: 6px; color: #D8CCC1; padding: 14px 20px; font-size: 15px; font-family: inherit; width: 280px; text-align: center; letter-spacing: 1px; outline: none; transition: border-color 0.2s; }
 #gate input:focus { border-color: #AD4236; }
-#gate button { background: #AD4236; color: #F6EFEA; border: none; border-radius: 6px; padding: 12px 32px; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+#gate button { background: #AD4236; color: #D8CCC1; border: none; border-radius: 6px; padding: 12px 32px; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.2s; }
 #gate button:hover { background: #c4574b; }
 #gate .gate-error { color: #AD4236; font-size: 12px; margin-top: 8px; opacity: 0; transition: opacity 0.2s; letter-spacing: 1px; }
 #gate .gate-error.show { opacity: 1; }
