@@ -601,8 +601,8 @@ a.doc-link:hover { border-bottom-color: var(--signal); }
   color: var(--taupe); margin-bottom: 28px;
 }
 .poster-full {
-  display: block; width: 100%; max-width: 460px; height: auto;
-  box-shadow: 0 34px 90px rgba(0,0,0,0.62);
+  display: block; width: auto; height: 82vh; max-height: 1180px;
+  max-width: 94vw; box-shadow: 0 34px 90px rgba(0,0,0,0.62);
 }
 @media print {
   .poster-band { padding: 24px 0; background: white !important; }
@@ -662,6 +662,10 @@ footer.codex-footer .accent { color: var(--signal-light); }
   .wordmark-specimen-v2 .wm { color: black; }
   .full-bleed-caption { background: white !important; color: black !important; }
 }
+
+  /* Brand standard: INSDR set as logo; cellcare ALWAYS Signal Red */
+  .insdr-logo{height:0.86em;width:auto;vertical-align:-0.06em; margin-right:0.16em;}
+  .cellcare{color:#AD4236}
 </style>
 </head>
 <body class="locked">
@@ -672,7 +676,7 @@ footer.codex-footer .accent { color: var(--signal-light); }
   <div class="gate-sub">v3.1 · internal · 2026</div>
   <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
   <div class="gate-error" id="gate-error">access denied</div>
-  <div class="gate-footer">insdr wellness · the cellcare company</div>
+  <div class="gate-footer"><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> wellness · the <span class="cellcare">cellcare</span> company</div>
 </div>
 
 <!-- ═══════════════════ COVER — full-frame "it's a sign" photograph ═══════════════════ -->
@@ -686,7 +690,7 @@ footer.codex-footer .accent { color: var(--signal-light); }
     <div class="cover-foot">
       <h1 class="cover-title">The Signal Codex</h1>
       <div class="cover-bottom">
-        <div class="cover-meta">insdr wellness · the <span class="accent">cellcare</span> company</div>
+        <div class="cover-meta"><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> wellness · the <span class="accent"><span class="cellcare">cellcare</span></span> company</div>
         <div class="cover-meta">v3.2 · chapters 00–09 · 2026-05-30</div>
       </div>
     </div>
@@ -707,7 +711,7 @@ footer.codex-footer .accent { color: var(--signal-light); }
 <section class="spread">
   <div class="main-col">
     <div class="section-tag">§1 — What this is</div>
-    <p class="lead-p"><span class="term">INSDR Wellness</span> is a company building a category called <span class="term">cellcare</span>. <span class="term">Signal</span> is the first product in that category.</p>
+    <p class="lead-p"><span class="term"><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness</span> is a parent company building a category called <span class="term"><span class="cellcare">cellcare</span></span>. <span class="term">Signal</span> is the first sub-brand, with products in that category.</p>
     <p>The work of the brand — the manifesto, the voice, the visual system, the product architecture, the operational discipline, the customer ritual, the defense — is held in the chapters that follow. None of it is meant for the consumer. The customer meets <span class="term">signal</span> through the world the brand builds around it. This document is for the people building the world.</p>
     <p>What follows is two kinds of writing held in one cover. The Visual System chapter is reference — colors, wordmark, packet typography, packaging law. It tells you how to ship. Every other chapter is the rest of the codex — what the brand believes, what it refuses, what holds together when no one is watching. It tells you why.</p>
   </div>
@@ -716,11 +720,15 @@ footer.codex-footer .accent { color: var(--signal-light); }
       <div class="aside-label">Three names</div>
       <div class="aside-body">
         <ul>
-          <li><strong>INSDR Wellness</strong> — the company</li>
-          <li><strong>cellcare</strong> — the category</li>
+          <li><strong><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness</strong> — the company</li>
+          <li><strong><span class="cellcare">cellcare</span></strong> — the category</li>
           <li><strong>signal</strong> — the product</li>
         </ul>
       </div>
+    </div>
+    <div class="aside">
+      <div class="aside-label">Rendering standard</div>
+      <div class="aside-body">Two rules hold everywhere — corpus and all future work. <strong>(1)</strong> The company name <strong><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness</strong> is always set as the INSDR logo lockup, never as type — <em>except</em> inside URLs, email addresses, code, or prose discussing the word or letters themselves (e.g. the trademark argument). Light logo on dark grounds, dark on light. <strong>(2)</strong> The category term <strong><span class="cellcare">cellcare</span></strong> always renders in Signal Red <span class="cellcare">#AD4236</span> — the one deliberate exception to <em>&ldquo;one red per surface, never two.&rdquo;</em> Sticky dot-navigation uses Signal Red.</div>
     </div>
     <div class="aside">
       <div class="aside-label">Remember</div>
@@ -741,15 +749,15 @@ footer.codex-footer .accent { color: var(--signal-light); }
         <p>The brand earns its authority. It does not announce it. The IPA wordmark, the decode card, the packet front — every artifact in the signal system rewards a second look. None of them explains itself. Customers who stay long enough come to understand the system on their own.</p>
       </div>
       <div class="principle-block">
-        <div class="principle-title">AI is plumbing, not voice.</div>
-        <p>AI organizes. AI retrieves. AI accelerates. AI does not write copy, captions, hooks, briefs, DMs, or emails. The voice in every customer-facing surface is human, every time.</p>
+        <div class="principle-title">AI is plumbing, not voice — for now.</div>
+        <p>Today, AI organizes, retrieves, accelerates, and refines — the voice in every customer-facing surface is human. But this is a stance, not dogma: as AI evolves, so does the way we use it. We don&rsquo;t hold a hard line for its own sake — we look for the most optimized fit for AI, and revisit it as the tools change.</p>
       </div>
     </div>
     <aside class="margin-col">
       <div class="margin-quote">A second look<br>is the brand's<br>only marketing.</div>
       <div class="aside">
         <div class="aside-label">Kicker</div>
-        <div class="aside-body canonical">"AI doesn't get to start the sentence."</div>
+        <div class="aside-body canonical">"Human-led today. The fit evolves."</div>
       </div>
     </aside>
   </div>
@@ -760,7 +768,7 @@ footer.codex-footer .accent { color: var(--signal-light); }
   <div class="main-col">
     <div class="section-tag">§3 — Three names, used precisely</div>
     <h3 class="section-h2">The translation, not <span class="accent">three synonyms</span>.</h3>
-    <p><span class="term">Cellcare</span> is not used in customer-facing copy. Customers receive the brand through three plain English words instead.</p>
+    <p><span class="term"><span class="cellcare">Cellcare</span></span> is not used in customer-facing copy. Customers receive the brand through three plain English words instead.</p>
     <p><span class="term">Foundation</span> — what signal is.</p>
     <p><span class="term">The practice</span> — what taking it is.</p>
     <p><span class="term">30-day cycle</span> — the time it takes.</p>
@@ -840,7 +848,7 @@ footer.codex-footer .accent { color: var(--signal-light); }
     <p>The biochemistry follows a simple rule. When the body is short on something, fixing the shortage produces a real, visible effect. When the body already has enough, adding more does nothing. Almost all the impressive "energy" stories in the category come from fixing shortages — but they get sold as upgrades.</p>
     <p>The category makes this worse by stacking promises. One product is sold as supporting brain, sleep, gut, mood, immunity, skin, longevity, and energy — eight things at once, because attention rewards breadth and the product cannot deliver depth. Eight promises become eight quiet failures, which the customer stores away as their own.</p>
     <p>The newest version of the mistake sells the test next to the product. Take a blood panel, start a blend, retest in ninety days, and watch a number move. Sometimes it moves. But the blend carries dozens of ingredients — for some products, ninety or more — at doses no one names. So even when something gets better, no one can say what made it better, or what in the body was short to begin with. Nothing was identified. Nothing was fixed. It is a band-aid over an output: the customer may feel better for a while, but walks away no smarter about their own body than the day they started.</p>
-    <p>A different category gives up on selling outcomes. It commits instead to building the substrate beneath them. <span class="term">INSDR Wellness</span> names this category <span class="term">cellcare</span> — used internally and as a defensive trademark. The customer meets it through plainer words (see §5). The discipline of the work stays the same.</p>
+    <p>A different category gives up on selling outcomes. It commits instead to building the substrate beneath them. <span class="term"><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness</span> names this category <span class="term"><span class="cellcare">cellcare</span></span> — used internally and as a defensive trademark. The customer meets it through plainer words (see §5). The discipline of the work stays the same.</p>
   </div>
   <aside class="margin-col">
     <div class="aside">
@@ -951,7 +959,7 @@ footer.codex-footer .accent { color: var(--signal-light); }
   <div class="main-col">
     <div class="section-tag">§5 — The customer-facing triad</div>
     <h3 class="section-h2">Three plain English words. <span class="accent">Each holds one job.</span></h3>
-    <p class="lead-p">The internal name is <span class="term">cellcare</span>. It does not appear on customer-facing surfaces. The customer meets the brand through three plain English words. Each one holds one job, and not the other two.</p>
+    <p class="lead-p">The internal name is <span class="term"><span class="cellcare">cellcare</span></span>. It does not appear on customer-facing surfaces. The customer meets the brand through three plain English words. Each one holds one job, and not the other two.</p>
     <p><strong><span class="term">Foundation</span>.</strong> What signal is. The product's place in the customer's day. Headlines, packaging, anywhere the question is <em>what is this thing?</em></p>
     <p><strong><span class="term">The practice</span>.</strong> What taking it is. The behavior register. Ritual surfaces — the manifesto, the transmission moments, the email after a customer's first 30-day cycle.</p>
     <p><strong><span class="term">30-day cycle</span>.</strong> The time the brand operates on. Anywhere the customer asks how long this will take, how often they reorder, when they should expect to notice anything. The brand's answer to <em>"how soon?"</em> is <em>"a month to feel built on. A lifetime to feel built up."</em></p>
@@ -1141,7 +1149,7 @@ footer.codex-footer .accent { color: var(--signal-light); }
     <div class="principle-block">
       <p><em>Signal — the science-backed cellular wellness brand for high performers.</em></p>
     </div>
-    <p>This line fails the <strong>build-a-world test.</strong> Read it as a person who has not been told what the brand thinks of itself. The line explains too much — laying everything out up front, claiming authority instead of earning it. The pass version: <em>"/sɪɡˈnɑːl/"</em></p>
+    <p>This line fails the <strong>build-a-world test.</strong> Read it as a person who has not been told what the brand thinks of itself. The line explains too much — laying everything out up front, claiming authority instead of earning it. The pass version: <em>"/ sɪgnɑːl /"</em></p>
     <p>Every line passes both tests before it is published. A line that fails either is rewritten or cut.</p>
   </div>
   <aside class="margin-col">
@@ -1251,8 +1259,8 @@ footer.codex-footer .accent { color: var(--signal-light); }
   </div>
   <aside class="margin-col">
     <div class="aside">
-      <div class="aside-label">Spoken</div>
-      <div class="aside-body canonical">sig-NAHL.<br>Second syllable carries the weight. The first is light.</div>
+      <div class="aside-label">Self-explanatory</div>
+      <div class="aside-body canonical">/ sɪgnɑːl / is the word in notation. You already know how to say it — the mark just shows it.</div>
     </div>
     <div class="aside">
       <div class="aside-label">Drawn, not set</div>
@@ -1988,7 +1996,7 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
     <p><strong>§X — On Food.</strong> H2: <em>"Eat real food. Take real doses."</em> Three math beats: creatine 5g = 1.5 lb red meat · soil Mg fallen 25–50% since 1950s · MTHFR slow allele ~40%. Closer: <em>"Wash your face. Eat real food. Take signal. Three daily practices that don't replace each other."</em></p>
     <p><strong>§XI — How It Spreads.</strong> H2: <em>"Foundation in one life. Passed to the next."</em> Send a Signal at checkout. $5 per send. CTA: <em>YOUR TURN → SEND A SIGNAL.</em></p>
     <p><strong>§XII — The World Beneath.</strong> H2: <em>"The brand has a second voice. Some will hear it."</em> The decode-it posture made visible.</p>
-    <p><strong>§XIII — Who's Doing It.</strong> H2: <em>"INSDR Wellness builds the foundation everything else stands on."</em> The closing section. Pointer forward: <em>"Start the practice."</em></p>
+    <p><strong>§XIII — Who's Doing It.</strong> H2: <em>"<img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness builds the foundation everything else stands on."</em> The closing section. Pointer forward: <em>"Start the practice."</em></p>
   </div>
   <aside class="margin-col">
     <div class="aside">
@@ -2144,8 +2152,8 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
       <h3 class="section-h2"><span class="accent">Four rules</span> above the playbook structure.</h3>
       <p class="lead-p">Not section content; how the playbook operates across every section.</p>
       <div class="principle-block">
-        <div class="principle-title">AI is plumbing, not voice.</div>
-        <p>AI does not originate copy. AI does not speak for the brand. Every brand-facing touchpoint — a caption, a comment reply, a packet insert, a creator brief, a DM, an email subject line, an SMS, a script, a hook — originates with a human who has the lived context to mean it. AI is allowed to refine human work. The original idea, the original sentence, the original frame must come from a human first. <em>"AI doesn't get to start the sentence."</em></p>
+        <div class="principle-title">AI is plumbing, not voice — for now.</div>
+        <p>Today, every brand-facing touchpoint — a caption, a comment reply, a packet insert, a creator brief, a DM, an email subject line, an SMS, a script, a hook — originates with a human who has the lived context to mean it. AI refines that work; it doesn&rsquo;t originate the copy or speak for the brand. But this is a stance, not dogma: as AI evolves, so does the way we use it, and we look for the most optimized fit rather than hold a hard line. <em>"Human-led today. The fit evolves."</em></p>
       </div>
       <div class="principle-block">
         <div class="principle-title">World-building, not pitching.</div>
@@ -2403,7 +2411,7 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
     <div class="section-tag">§6 — Year I and beyond</div>
     <h3 class="section-h2">One year of <span class="accent">the practice. One coin.</span></h3>
     <p class="lead-p">The brand's only physical recognition artifact arrives at the customer's anniversary. One year of the <span class="term">practice</span>. One coin.</p>
-    <p><strong>The annual coin</strong> is a real silver dollar — about 38 mm across, 3 mm thick, roughly one troy ounce of silver in the canonical mint. The IPA wordmark <em>(/sɪɡˈnɑːl/)</em> is deeply etched on the obverse, framed by a thin debossed inner rim. A Roman numeral year sits on the reverse: I, II, III, V, X, XXV. Identical design across years; only the year changes. The coin patinates with handling. What the customer earns by Year V looks measurably different from what they earned by Year I.</p>
+    <p><strong>The annual coin</strong> is a real silver dollar — about 38 mm across, 3 mm thick, roughly one troy ounce of silver in the canonical mint. The IPA wordmark <em>(/ sɪgnɑːl /)</em> is deeply etched on the obverse, framed by a thin debossed inner rim. A Roman numeral year sits on the reverse: I, II, III, V, X, XXV. Identical design across years; only the year changes. The coin patinates with handling. What the customer earns by Year V looks measurably different from what they earned by Year I.</p>
     <p>The coin arrives in a small kraft paperboard box, closed with a deep Signal-red wax seal that has the IPA marks pressed onto the lid. The kraft format matches the material of the existing tray vessel — not as special packaging. After five years, the customer has a small stack: five coins, five boxes, the years that came with them.</p>
     <p><strong>Year-one-or-nothing.</strong> This is the discipline that makes the coin honest. There is no day-30 trinket. No ninety-day welcome chip. No half-year tease. The customer who does not make it to one year gets nothing physical. The pre-Year-I cadence is intentionally empty. The threshold is the point.</p>
     <p><strong>Never announced.</strong> The coin is never sold and never promised. It arrives at month twelve. No marketing campaign. No prior mention. No countdown. The customer learns the coin exists when one shows up in the mail.</p>
@@ -2426,7 +2434,7 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
 </section>
 
 <div class="full-bleed">
-  <img src="visual_register/02_annual_coin_year_i.png" alt="signal annual coin — Year I, matte silver finish, IPA wordmark /sɪɡˈnɑːl/ deeply etched and centered on the obverse, framed by a thin debossed inner rim. Standing on edge on a worn wooden surface, warm window light, soft background.">
+  <img src="visual_register/02_annual_coin_year_i.png" alt="signal annual coin — Year I, matte silver finish, IPA wordmark / sɪgnɑːl / deeply etched and centered on the obverse, framed by a thin debossed inner rim. Standing on edge on a worn wooden surface, warm window light, soft background.">
   <div class="full-bleed-caption">the annual coin — Year I render, matte silver, IPA wordmark obverse</div>
 </div>
 
@@ -2484,13 +2492,13 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
     <div class="section-tag">§2 — The hierarchy and the three sanctioned patterns</div>
     <h3 class="section-h2">Three levels. <span class="accent">Visibly separate.</span></h3>
     <p class="lead-p">The brand operates on a three-level hierarchy:</p>
-    <div class="pullquote-inline">INSDR Wellness → cellcare → signal</div>
-    <p><strong><span class="term">INSDR Wellness</span></strong> (the company) → <strong><span class="term">cellcare</span></strong> (the category we're building) → <strong><span class="term">signal</span></strong> (our first product brand within it).</p>
+    <div class="pullquote-inline"><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness → <span class="cellcare">cellcare</span> → signal</div>
+    <p><strong><span class="term"><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness</span></strong> (the company) → <strong><span class="term"><span class="cellcare">cellcare</span></span></strong> (the category we're building) → <strong><span class="term">signal</span></strong> (our first product brand within it).</p>
     <p>Three things, three levels. The brand's discipline is to keep them visibly separate. The failure mode is the smush — collapsing two levels into one, treating <em>"INSDR signal"</em> as if it were a single brand name, or letting the category descriptor drift into product-name territory.</p>
     <p>When both names appear in the same sentence, the brand allows three patterns and no others:</p>
-    <p><strong>Corporate-led.</strong> <em>"INSDR Wellness, the cellcare company, makes signal — the first cellcare chew."</em> Used for press, investor intros, B2B.</p>
-    <p><strong>Product-led.</strong> <em>"signal is the cellcare chew from INSDR Wellness — the cellcare company."</em> Used for product PR, about pages.</p>
-    <p><strong>Category-led.</strong> <em>"cellcare is the category INSDR Wellness is building. signal is its first product."</em> Used for manifesto, world-building.</p>
+    <p><strong>Corporate-led.</strong> <em>"<img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness, the <span class="cellcare">cellcare</span> company, makes signal — the first <span class="cellcare">cellcare</span> chew."</em> Used for press, investor intros, B2B.</p>
+    <p><strong>Product-led.</strong> <em>"signal is the <span class="cellcare">cellcare</span> chew from <img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness — the <span class="cellcare">cellcare</span> company."</em> Used for product PR, about pages.</p>
+    <p><strong>Category-led.</strong> <em>"<span class="cellcare">cellcare</span> is the category <img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness is building. signal is its first product."</em> Used for manifesto, world-building.</p>
     <p>Four banned constructions in marketing copy:</p>
     <div class="refusals">
       <div class="refusal">
@@ -2499,11 +2507,11 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
       </div>
       <div class="refusal">
         <div class="refusal-num">02</div>
-        <div class="refusal-body"><strong>"signal by INSDR Wellness" as hero</strong><p>Footer-only attribution.</p></div>
+        <div class="refusal-body"><strong>"signal by <img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness" as hero</strong><p>Footer-only attribution.</p></div>
       </div>
       <div class="refusal">
         <div class="refusal-num">03</div>
-        <div class="refusal-body"><strong>"INSDR Wellness — the cellcare brand"</strong><p>INSDR is the company; cellcare is the category; signal is the brand. The construction blurs all three.</p></div>
+        <div class="refusal-body"><strong>"<img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness — the <span class="cellcare">cellcare</span> brand"</strong><p>INSDR is the company; <span class="cellcare">cellcare</span> is the category; signal is the brand. The construction blurs all three.</p></div>
       </div>
       <div class="refusal">
         <div class="refusal-num">04</div>
@@ -2533,10 +2541,10 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
     <div class="main-col">
       <div class="section-tag">§3 — The wordmark and visual identity as registered IP</div>
       <h3 class="section-h2">Visible filings. <span class="accent">Audible composition.</span></h3>
-      <p class="lead-p">The most visible piece of brand identity is the <strong>IPA wordmark</strong> — <em>(/sɪɡˈnɑːl/)</em>. Held against the packet front, it is a label. Debossed into the empty tray floor, revealed at the end of a 30-day cycle, it is a quiet end-marker. Etched into a frosted acetate divider, lit from the side, it is a found-not-planted artifact for the customer who looks. Etched into the obverse of the annual coin, it is the year's signature.</p>
-      <p>The wordmark is also a registered defensive filing. The brand treats it not only as a typographic convention but as protected IP — the visible identity that, once filed, cannot be lifted by a competitor in the cellcare or adjacent supplement categories.</p>
+      <p class="lead-p">The most visible piece of brand identity is the <strong>IPA wordmark</strong> — <em>(/ sɪgnɑːl /)</em>. Held against the packet front, it is a label. Debossed into the empty tray floor, revealed at the end of a 30-day cycle, it is a quiet end-marker. Etched into a frosted acetate divider, lit from the side, it is a found-not-planted artifact for the customer who looks. Etched into the obverse of the annual coin, it is the year's signature.</p>
+      <p>The wordmark is also a registered defensive filing. The brand treats it not only as a typographic convention but as protected IP — the visible identity that, once filed, cannot be lifted by a competitor in the <span class="cellcare">cellcare</span> or adjacent supplement categories.</p>
       <p>Beyond the wordmark, the visible identity carries three additional load-bearing pieces. The <strong>packet color system</strong> — Signal Red for N°001 foundation, Rose Linen for N°002 daily fuel, Deep Evening for N°003 evening practice — establishes the SKU-to-color mapping that the brand owns by repetition. The <strong>tray and the four frosted acetate dividers</strong> establish the counter format the customer keeps. The <strong>annual coin</strong> — matte silver, IPA wordmark obverse, Roman year reverse — establishes the recognition object the brand mints, never sells.</p>
-      <p>Beyond the visible identity, the brand owns a <strong>sonic asset</strong>. Two audio tones drift from 10 Hz apart to unison A4 over about two seconds. Short, specific, engineered to lock to memory on first encounter. The sound plays paired to the <span class="term">entrainment</span> wordmark on the manifesto's first frame (see Chapter 03 §4). The brand treats it as audible identity at the same defensive level as the wordmark — territory a competitor in the cellcare or adjacent supplement categories cannot piece together later.</p>
+      <p>Beyond the visible identity, the brand owns a <strong>sonic asset</strong>. Two audio tones drift from 10 Hz apart to unison A4 over about two seconds. Short, specific, engineered to lock to memory on first encounter. The sound plays paired to the <span class="term">entrainment</span> wordmark on the manifesto's first frame (see Chapter 03 §4). The brand treats it as audible identity at the same defensive level as the wordmark — territory a competitor in the <span class="cellcare">cellcare</span> or adjacent supplement categories cannot piece together later.</p>
       <p>Each piece compounds the others. The brand holds visible filings and audible composition; the customer's daily encounter with them holds the meaning.</p>
     </div>
     <aside class="margin-col">
@@ -2563,16 +2571,16 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
     <h3 class="section-h2">Eight marks. <span class="accent">Two tiers.</span></h3>
     <p class="lead-p">The brand's defensive trademark program covers eight marks across two tiers — the visible identity that lives in customer-facing surfaces and the defensive descriptors that prevent competitor occupation.</p>
     <p><strong>Tier 1 — Visible identity:</strong></p>
-    <p><strong>/sɪɡˈnɑːl/</strong> (the IPA wordmark) — the brand's visible name as registered IP.</p>
+    <p><strong>/ sɪgnɑːl /</strong> (the IPA wordmark) — the brand's visible name as registered IP.</p>
     <p><strong>Tier 2 — Defensive descriptors and house marks:</strong></p>
     <p><strong>INSDR SIGNAL</strong> — Class 5 standard-character word mark; overcomes 2(d) likelihood-of-confusion refusals on the bare word <em>signal</em> in a crowded class.</p>
     <p><strong>SIGNAL BY INSDR</strong> — defensive house-mark compound.</p>
-    <p><strong>INSDR CELLCARE</strong> — defensive mark parallel to <em>INSDR SIGNAL</em> at the category level.</p>
-    <p><strong>CELLCARE</strong> — single-word defensive mark protecting the category descriptor.</p>
-    <p><strong>SIGNAL CELLCARE</strong> — defensive compound.</p>
-    <p><strong>INSDR Wellness — the cellcare brand</strong> — defensive against descriptor use by adjacent supplement brands.</p>
-    <p><strong>INSDR Wellness — the cellcare company</strong> — defensive against corporate-descriptor variant.</p>
-    <p>The Tier 2 filings are legal strategy, not customer copy. The marketing-side bans on <em>"INSDR signal"</em> and <em>"INSDR Wellness — the cellcare brand"</em> (see §2) still apply. The filings exist on USPTO paper to occupy the adjacent territory a competitor might otherwise enter; the visible marketing brand remains <span class="term">signal</span> and the IPA wordmark.</p>
+    <p><strong>INSDR <span class="cellcare">CELLCARE</span></strong> — defensive mark parallel to <em>INSDR SIGNAL</em> at the category level.</p>
+    <p><strong><span class="cellcare">CELLCARE</span></strong> — single-word defensive mark protecting the category descriptor.</p>
+    <p><strong>SIGNAL <span class="cellcare">CELLCARE</span></strong> — defensive compound.</p>
+    <p><strong><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness — the <span class="cellcare">cellcare</span> brand</strong> — defensive against descriptor use by adjacent supplement brands.</p>
+    <p><strong><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness — the <span class="cellcare">cellcare</span> company</strong> — defensive against corporate-descriptor variant.</p>
+    <p>The Tier 2 filings are legal strategy, not customer copy. The marketing-side bans on <em>"INSDR signal"</em> and <em>"<img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness — the <span class="cellcare">cellcare</span> brand"</em> (see §2) still apply. The filings exist on USPTO paper to occupy the adjacent territory a competitor might otherwise enter; the visible marketing brand remains <span class="term">signal</span> and the IPA wordmark.</p>
     <p>This is the carve-out doctrine in operation: <strong>trademark filings ≠ marketing wordmark.</strong> The brand can hold both — a customer-facing identity that is disciplined about what it says, and a defensive footprint that is comprehensive about what it owns.</p>
   </div>
   <aside class="margin-col">
@@ -2580,14 +2588,14 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
       <div class="aside-label">8-mark inventory</div>
       <div class="aside-body">
         <ul>
-          <li><span class="stat-num">1</span> /sɪɡˈnɑːl/ (Tier 1)</li>
+          <li><span class="stat-num">1</span> / sɪgnɑːl / (Tier 1)</li>
           <li><span class="stat-num">2</span> INSDR SIGNAL</li>
           <li><span class="stat-num">3</span> SIGNAL BY INSDR</li>
-          <li><span class="stat-num">4</span> INSDR CELLCARE</li>
-          <li><span class="stat-num">5</span> CELLCARE</li>
-          <li><span class="stat-num">6</span> SIGNAL CELLCARE</li>
-          <li><span class="stat-num">7</span> INSDR Wellness — the cellcare brand</li>
-          <li><span class="stat-num">8</span> INSDR Wellness — the cellcare company</li>
+          <li><span class="stat-num">4</span> INSDR <span class="cellcare">CELLCARE</span></li>
+          <li><span class="stat-num">5</span> <span class="cellcare">CELLCARE</span></li>
+          <li><span class="stat-num">6</span> SIGNAL <span class="cellcare">CELLCARE</span></li>
+          <li><span class="stat-num">7</span> <img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness — the <span class="cellcare">cellcare</span> brand</li>
+          <li><span class="stat-num">8</span> <img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness — the <span class="cellcare">cellcare</span> company</li>
         </ul>
       </div>
     </div>
@@ -2603,13 +2611,13 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
   <div class="main-col">
     <div class="section-tag">§5 — The customer-facing triad as a protective decision</div>
     <h3 class="section-h2">The brand protects itself by <span class="accent">what it refuses to require.</span></h3>
-    <p class="lead-p">In 2026 the brand made a deliberate move: the category word <span class="term">cellcare</span> was demoted from customer-facing copy.</p>
-    <p>Brutal market-fit research found that the descriptor was SEO-occupied by four incumbents; trade press had settled on <em>"cellness"</em> not cellcare; zero meaningful consumer discourse on Reddit or TikTok used cellcare as a category descriptor. The word was overloaded — trying to name a category, imply a user, and set a cadence — and the customer had to decode all three meanings from one unfamiliar term.</p>
+    <p class="lead-p">In 2026 the brand made a deliberate move: the category word <span class="term"><span class="cellcare">cellcare</span></span> was demoted from customer-facing copy.</p>
+    <p>Brutal market-fit research found that the descriptor was SEO-occupied by four incumbents; trade press had settled on <em>"cellness"</em> not <span class="cellcare">cellcare</span>; zero meaningful consumer discourse on Reddit or TikTok used <span class="cellcare">cellcare</span> as a category descriptor. The word was overloaded — trying to name a category, imply a user, and set a cadence — and the customer had to decode all three meanings from one unfamiliar term.</p>
     <p>The replacement is the <strong>customer-facing triad</strong> — three native English nouns, each doing one job:</p>
     <p><strong><span class="term">foundation</span></strong> — what signal is (positioning).</p>
     <p><strong><span class="term">the practice</span></strong> — what taking signal is (behavior register).</p>
     <p><strong><span class="term">30-day cycle</span></strong> — how the rhythm works (time vocabulary).</p>
-    <p><span class="term">Cellcare</span> remains in the brand's internal classification, defensive trademark program, corporate footer, and sales architecture. It does not appear in customer-facing copy. The protective logic is symmetric to the trademark posture: the brand owns the word on USPTO paper but refuses to require the customer to learn it.</p>
+    <p><span class="term"><span class="cellcare">Cellcare</span></span> remains in the brand's internal classification, defensive trademark program, corporate footer, and sales architecture. It does not appear in customer-facing copy. The protective logic is symmetric to the trademark posture: the brand owns the word on USPTO paper but refuses to require the customer to learn it.</p>
     <p>The triad is the most strategically load-bearing protection in this chapter. A category descriptor a competitor can steal is fragile. A category descriptor the brand has filed defensively <em>and</em> removed from customer-facing copy is doubly protected — it cannot be ranked against by a competitor's marketing, and it cannot be taken on USPTO paper.</p>
   </div>
   <aside class="margin-col">
@@ -2743,7 +2751,7 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
   <div class="main-col">
     <div class="section-tag">§5 — Visual assets</div>
     <p>The brand's visual production assets live in the source repository under <code>visual_register/</code> and at the source-repo root. The asset inventory:</p>
-    <p><strong>Packet renders</strong> — front and back for N°001, N°002, N°003. Current customer-facing renders are tracked through the cellcare→triad cascade + SKU rename + image-regen workstream.</p>
+    <p><strong>Packet renders</strong> — front and back for N°001, N°002, N°003. Current customer-facing renders are tracked through the <span class="cellcare">cellcare</span>→triad cascade + SKU rename + image-regen workstream.</p>
     <p><strong>Tray and vessel renders</strong> — <code>signal_vessel_paperboard_2026_05_04.png</code> (steady-state) and <code>signal_vessel_petalfold_2026_05_23.png</code> (petal-fold reveal moment).</p>
     <p><strong>Annual coin</strong> — <code>visual_register/02_annual_coin_year_i.png</code> is the canonical Year I render (matte silver finish).</p>
     <p><strong>Send a Signal cards</strong> — <code>sas_envelope.png</code>, <code>sas_card_outer.png</code>, <code>sas_card_inside.png</code>, <code>sas_a7_insert.png</code>.</p>
@@ -2815,7 +2823,7 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
 <!-- ═══════════════════ CLOSING POSTER — full brand photograph ═══════════════════ -->
 <div class="poster-band">
   <div class="poster-eyebrow">the brand photograph</div>
-  <img class="poster-full" src="signal_cover_portrait.png" alt="signal — the brand photograph: a woman, eyes closed, caught in motion under warm sepia light; the master-tagline lockup beneath reads 'send the right / sɪgnɑːl /'">
+  <img class="poster-full" src="signal_signoff_poster.png" alt="signal — the brand photograph: a woman, eyes closed, caught in motion under warm sepia light; the master-tagline lockup beneath reads 'send the right / sɪgnɑːl /'">
 </div>
 
 <!-- ═══════════════════ FOOTER ═══════════════════ -->
