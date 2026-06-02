@@ -396,14 +396,18 @@ footer .footer-line {
 body.locked { overflow: hidden; height: 100vh; }
 body.locked > section, body.locked > footer { display: none !important; }
 @media print { #gate { display: none !important; } }
+
+  /* Brand standard: INSDR set as logo; cellcare ALWAYS Signal Red */
+  .insdr-logo{height:0.86em;width:auto;vertical-align:-0.06em; margin-right:0.16em;}
+  .cellcare{color:#AD4236}
 </style>
 </head>
 <body class="locked">
 
 <!-- ═══════════════════ PASSWORD GATE ═══════════════════ -->
 <div id="gate">
-  <div class="gate-overline">INSDR Wellness — the cellcare company &middot; Confidential</div>
-  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="gate-overline"><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness — the <span class="cellcare">cellcare</span> company &middot; Confidential</div>
+  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪgnɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
   <div class="gate-subtitle">Enter password to view the marketing playbook.</div>
   <form onsubmit="return checkPass(event)">
     <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
@@ -416,7 +420,7 @@ body.locked > section, body.locked > footer { display: none !important; }
 <!-- ═══════════════════ COVER ═══════════════════ -->
 <section class="cover">
   <div class="cover-lockup">
-    <div class="cover-overline">INSDR Wellness — the cellcare company</div>
+    <div class="cover-overline"><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness — the <span class="cellcare">cellcare</span> company</div>
     <div class="cover-insdr-line">internal · marketing playbook · 2026</div>
   </div>
   <div class="cover-title">
@@ -541,13 +545,13 @@ body.locked > section, body.locked > footer { display: none !important; }
 
     <div class="principle">
       <h3>We build a world. We invite people in.</h3>
-      <p>Marketing isn't a megaphone &mdash; it's an entrance. The work isn't to push messaging out; the work is to build a world worth walking into. Cellcare. The IPA wordmark. The /sɪɡˈnɑːl/ you send. A consumer who steps in finds detail, depth, layers &mdash; and starts to feel like an insider for noticing them. That feeling is the whole game.</p>
+      <p>Marketing isn't a megaphone &mdash; it's an entrance. The work isn't to push messaging out; the work is to build a world worth walking into. Cellcare. The IPA wordmark. The / sɪgnɑːl / you send. A consumer who steps in finds detail, depth, layers &mdash; and starts to feel like an insider for noticing them. That feeling is the whole game.</p>
       <div class="kicker">The world is the product. The product is just the doorway in.</div>
     </div>
 
     <div class="principle">
       <h3>Curiosity over persuasion.</h3>
-      <p>We don't explain the product. We make it interesting enough to be decoded. The packet front carries no claim, no CTA &mdash; just "send the right /sɪɡˈnɑːl/." The chew is the receipt; the IPA is the cipher; the manifesto is the long read for whoever wants it. Every layer rewards attention. Nothing demands it.</p>
+      <p>We don't explain the product. We make it interesting enough to be decoded. The packet front carries no claim, no CTA &mdash; just "send the right / sɪgnɑːl /." The chew is the receipt; the IPA is the cipher; the manifesto is the long read for whoever wants it. Every layer rewards attention. Nothing demands it.</p>
       <div class="kicker">People don't want to be sold to. They want to figure something out.</div>
     </div>
 
@@ -604,7 +608,7 @@ body.locked > section, body.locked > footer { display: none !important; }
 
   <div class="principle">
     <h3>How this plays out &mdash; four examples in action.</h3>
-    <p><strong>The IPA wordmark <em>/sɪɡˈnɑːl/</em>.</strong> Surface: a striking typographic mark. Decode: phonetic notation &mdash; the brand teaching you to say its name. The customer is inducted by speaking. No surface ever explains what IPA is.</p>
+    <p><strong>The IPA wordmark <em>/ sɪgnɑːl /</em>.</strong> Surface: a striking typographic mark. Decode: phonetic notation &mdash; the brand teaching you to say its name. The customer is inducted by speaking. No surface ever explains what IPA is.</p>
     <p><strong>The debossed wordmark on the empty tray floor.</strong> Surface: a clean kraft tray, depleted after thirty days. Decode: the brand has left a quiet end-marker only the customer who finished a full cycle ever sees. Not a packaging logo. Not a sticker. A piece of the form itself, found at the bottom of a completed practice.</p>
     <p><strong>The acetate divider etched with an IPA wordmark variant.</strong> Surface: a translucent divider inside the vessel, catching light from the side. Decode: a variant cut of the wordmark, etched into a material that holds typography differently than print. The customer who looks at the vessel from the right angle finds it. The customer who doesn't notice loses nothing.</p>
     <p><strong>Send a Signal as care passed along.</strong> Surface: a card sent to a friend. Decode: the brand has built gifting, not referral. The friend's gesture is the message; the brand never says &ldquo;refer.&rdquo; The card carries no incentive language, no discount code, no marketing surface &mdash; only a quiet typographic anchor that names the gesture without explaining it.</p>
@@ -740,11 +744,11 @@ body.locked > section, body.locked > footer { display: none !important; }
 
   <div class="principle">
     <h3>AI is not the voice.</h3>
-    <p>We're going to be unmistakable about this. <strong>AI does not originate our copy. AI does not speak for our brand. AI is not the content creator.</strong> AI does not sit between us and the consumer. AI is plumbing &mdash; it organizes calendars, cross-references documents, speeds up the back office, helps us see patterns in data we already have. That is the entire territory it's allowed to occupy.</p>
+    <p>We're going to be clear about this &mdash; for now. <strong>Today, AI does not originate our copy or speak for our brand; it is not the content creator, and it does not sit between us and the consumer.</strong> AI is plumbing &mdash; it organizes calendars, cross-references documents, speeds up the back office, helps us see patterns in data we already have. But this is a stance, not dogma: as AI evolves, so does the way we use it, and we'll always look for the most optimized fit rather than hold a hard line for its own sake.</p>
     <p>Every brand-facing touchpoint &mdash; a caption, a comment reply, a packet insert, a creator brief, a DM, an email subject line, an SMS, a script, a hook &mdash; <strong>originates with a human</strong> who has the lived context to mean it. Readers can spot AI-originated prose within a sentence: the em-dash overuse, the suspiciously even cadence, the hallucinated "studies show," the eight-fingered hands, the dialogue that sounds like nobody who has ever lived. The tells aren't subtle anymore. The moment a reader spots them, the brand becomes ambient noise.</p>
-    <p><strong>Origination versus refinement.</strong> AI is allowed to refine human work &mdash; tighten a sentence, catch a redundancy, suggest a sharper cadence, propose three variants of a line we already wrote. The original idea, the original sentence, the original frame must come from a human first. AI sharpens. AI doesn't start.</p>
+    <p><strong>Origination versus refinement.</strong> AI refines human work &mdash; tighten a sentence, catch a redundancy, suggest a sharper cadence, propose three variants of a line we already wrote. For now, the original idea, sentence, and frame come from a human first. AI sharpens. As the tools change, we revisit where AI fits.</p>
     <p>Authenticity is the only thing we can't fake. We don't try.</p>
-    <div class="kicker">AI doesn't get to start the sentence.</div>
+    <div class="kicker">Human-led today. The fit evolves.</div>
   </div>
 </section>
 
@@ -881,6 +885,14 @@ body.locked > section, body.locked > footer { display: none !important; }
   </div>
 
   <div class="principle">
+    <h3>&ldquo;Maybe I don&rsquo;t actually need supplements.&rdquo;</h3>
+    <p>The honest-tradeoff objection &mdash; not hostile, just clear-eyed. The customer is right to ask it, and a category-creation brand earns trust by conceding it rather than selling past it. The brand is willing to tell a customer their numbers are fine and to fix sleep instead: the discipline of selling foundation over output.</p>
+    <p><strong>Canonical:</strong> <strong>&ldquo;Maybe you don&rsquo;t. Most supplements chase a problem &mdash; foundation is the one thing worth taking before you have one.&rdquo;</strong> Concede the skepticism first, then distinguish foundation as the exception &mdash; not a fix for something already wrong, but the base everything else is built on.</p>
+    <p><strong>Closer register:</strong> <em>&ldquo;You might be right, and we&rsquo;ll say so &mdash; if your sleep, food, and movement are handled, that&rsquo;s the foundation, and you may not need us. Most people&rsquo;s aren&rsquo;t.&rdquo;</em></p>
+    <div class="kicker">Conceding the objection is what earns the trust; a defensive answer here would betray the foundation-over-output discipline.</div>
+  </div>
+
+  <div class="principle">
     <h3>Working set.</h3>
     <p>Future entries (per the 2026-05-21 honest-path-forward sequence): <strong>subscription billing hostility</strong> (the actual #1 consumer rage trigger; reinstated subscription 2026-05-19 makes one-click cancel UX load-bearing); <strong>&ldquo;marketing dressed as science&rdquo;</strong> (#2 rage trigger; post-AG1 Ashenden / Huberman damage / Care/of shutdown / Lemme weak-evidence climate); <strong>GLP-1 posture</strong> (beachhead or non-pursuit, pending strategic decision). Each gets a canonical sentence + supporting register when drafted.</p>
   </div>
@@ -888,7 +900,7 @@ body.locked > section, body.locked > footer { display: none !important; }
 
 <!-- ═══════════════════ FOOTER ═══════════════════ -->
 <footer>
-  <div class="footer-line">INSDR Wellness — the cellcare company</div>
+  <div class="footer-line"><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness — the <span class="cellcare">cellcare</span> company</div>
   <div>marketing playbook · v2.2 · internal · 2026</div>
 </footer>
 
