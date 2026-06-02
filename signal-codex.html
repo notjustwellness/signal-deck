@@ -591,23 +591,30 @@ a.doc-link:hover { border-bottom-color: var(--signal); }
 .poster-band {
   background: var(--espresso);
   max-width: none;
-  padding: 88px 8vw 96px;
-  display: flex; flex-direction: column; align-items: center;
+  padding: 0;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
   border-top: 1px solid var(--rule);
 }
 .poster-band .poster-eyebrow {
+  position: absolute; top: 40px; left: 0; right: 0; z-index: 2;
+  text-align: center;
   font-family: var(--font-editorial); font-size: 12px;
   letter-spacing: 4px; text-transform: uppercase;
-  color: var(--taupe); margin-bottom: 28px;
+  color: var(--bone); opacity: 0.72;
+  text-shadow: 0 1px 12px rgba(0,0,0,0.7);
 }
 .poster-full {
-  display: block; width: auto; height: 82vh; max-height: 1180px;
-  max-width: 94vw; box-shadow: 0 34px 90px rgba(0,0,0,0.62);
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
 }
 @media print {
-  .poster-band { padding: 24px 0; background: white !important; }
-  .poster-band .poster-eyebrow { color: #555 !important; }
-  .poster-full { box-shadow: none !important; max-width: 340px; }
+  .poster-band { padding: 24px 0; min-height: 0; background: white !important; }
+  .poster-band .poster-eyebrow { position: static; color: #555 !important; text-shadow: none; margin-bottom: 28px; }
+  .poster-full { position: static; width: 100%; height: auto; object-fit: contain; max-width: 340px; margin: 0 auto; }
 }
 
 footer.codex-footer {
@@ -681,7 +688,7 @@ footer.codex-footer .accent { color: var(--signal-light); }
 
 <!-- ═══════════════════ COVER — full-frame "it's a sign" photograph ═══════════════════ -->
 <section class="cover">
-  <img class="cover-bg" src="signal_cover_portrait.png" alt="signal — the cover photograph; the serif wordmark reads signal, then sign">
+  <img class="cover-bg" src="signal_signoff_poster.png" alt="signal — the cover photograph: a woman caught in motion under warm sepia light; the serif wordmark reads signal, then sign">
   <div class="cover-scrim">
     <div class="cover-top">
       <div class="cover-mark"><span class="accent">/</span> sɪgnɑːl <span class="accent">/</span></div>
@@ -2823,7 +2830,7 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
 <!-- ═══════════════════ CLOSING POSTER — full brand photograph ═══════════════════ -->
 <div class="poster-band">
   <div class="poster-eyebrow">the brand photograph</div>
-  <img class="poster-full" src="signal_signoff_poster.png" alt="signal — the brand photograph: a woman, eyes closed, caught in motion under warm sepia light; the master-tagline lockup beneath reads 'send the right / sɪgnɑːl /'">
+  <img class="poster-full" src="signal_cover_portrait.png" alt="signal — the closing brand photograph: a woman in motion under warm sepia light; the master-tagline lockup reads 'send the right / sɪgnɑːl /'">
 </div>
 
 <!-- ═══════════════════ FOOTER ═══════════════════ -->
