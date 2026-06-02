@@ -322,17 +322,21 @@
   .wm-art{width:100%;height:auto;display:block}
   .wm-art .wm-accent{fill:var(--bone)} .wm-art .wm-sign,.wm-art .wm-tail{fill:var(--bone)}
   .wm-sig .wm-accent{fill:var(--red)}
-  .sign-lighter .wm-sign{fill:#DED2C9} .sign-lighter .wm-tail{fill:#D0C3B9}
+  .sign-lighter .wm-sign{fill:#E6D9D0} .sign-lighter .wm-tail{fill:#C8BCB2}
   .wm-sig.sign-lighter .wm-accent{fill:var(--red)}
   .cover-wordmark.wm-sig{display:block;width:clamp(300px,52vw,480px);margin:0 auto}
+
+  /* Brand standard: INSDR set as logo; cellcare ALWAYS Signal Red */
+  .insdr-logo{height:0.86em;width:auto;vertical-align:-0.06em; margin-right:0.16em;}
+  .cellcare{color:#AD4236}
 </style>
 </head>
 <body class="locked">
 
 <!-- ==================== PASSWORD GATE ==================== -->
 <div id="gate">
-  <div class="gate-overline">INSDR Wellness &mdash; Confidential</div>
-  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="gate-overline"><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness &mdash; Confidential</div>
+  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪgnɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
   <div class="gate-subtitle">Enter password to view brand identity.</div>
   <form onsubmit="return checkPass(event)">
     <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
@@ -376,7 +380,7 @@
 
 <!-- ==================== PAGE 1 — COVER ==================== -->
 <section class="page cover">
-  <div class="cover-overline">INSDR Wellness &nbsp;·&nbsp; Confidential</div>
+  <div class="cover-overline"><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness &nbsp;·&nbsp; Confidential</div>
   <div class="wordmark cover-wordmark wm-sig sign-lighter" aria-label="signal"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3114.000000 696.000000" class="wm-art" role="img" aria-label="signal" shape-rendering="geometricPrecision"><g transform="translate(0.000000,696.000000) scale(0.100000,-0.100000)"><g class="wm-accent"><path d="M6051 5613 c-14 -13 -56 -124 -136 -363 -63 -190 -133 -397 -155
 -460 -23 -63 -49 -140 -59 -170 -11 -30 -39 -111 -63 -180 -60 -168 -108 -311
 -153 -455 -20 -66 -48 -149 -60 -185 -39 -109 -66 -192 -85 -260 -10 -36 -23
@@ -467,21 +471,15 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
 
 <!-- ==================== PAGE 2 — PRONUNCIATION ==================== -->
 <section class="page">
-  <div class="section-label">01 &nbsp;·&nbsp; How to say it</div>
-  <h2>Pronounced <span style="color: var(--signal);">sig-NAHL.</span></h2>
-  <p class="lead">The brand reads like a dictionary entry because it is one. <strong>/sɪɡˈnɑːl/</strong> is the International Phonetic Alphabet transcription of the word &ldquo;signal&rdquo; — the same notation a linguist or language teacher uses to show exact pronunciation.</p>
-  <p class="lead">Say it out loud: <strong>sig-NAHL</strong>. Stress on the second syllable. The &ldquo;i&rdquo; is short like in <em>sit</em>, the &ldquo;a&rdquo; is the long open vowel in <em>father</em>, and the final &ldquo;l&rdquo; is soft.</p>
+  <div class="section-label">01 &nbsp;·&nbsp; The IPA wordmark</div>
+  <h2>A <span style="color: var(--signal);">dictionary entry.</span></h2>
+  <p class="lead">The brand reads like a dictionary entry because it is one. <strong>/ sɪgnɑːl /</strong> is the International Phonetic Alphabet transcription of the word &ldquo;signal&rdquo; — the same notation a linguist or language teacher uses. The mark is self-explanatory; it doesn&rsquo;t need a pronunciation key.</p>
 
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 36px;">
-    <div style="padding: 24px; background: var(--coffee); border-radius: 6px; border: 1px solid rgba(26,20,16,0.08); text-align: center;">
-      <div class="section-label">IPA</div>
-      <div class="wordmark" aria-label="signal" style="font-size: 56px; letter-spacing: -1.6px;"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
-      <p class="small" style="margin-top: 10px;">The primary visible wordmark</p>
-    </div>
-    <div style="padding: 24px; background: var(--coffee); border-radius: 6px; border: 1px solid rgba(26,20,16,0.08); text-align: center;">
-      <div class="section-label">Phonetic</div>
-      <div style="font-family: var(--font-display); font-size: 56px; font-weight: 900; letter-spacing: -1.6px; color: var(--signal); line-height: 1;">sig-NAHL</div>
-      <p class="small" style="margin-top: 10px;">The spoken pronunciation guide</p>
+  <div style="margin-top: 36px;">
+    <div style="padding: 32px 24px; background: var(--coffee); border-radius: 6px; border: 1px solid rgba(26,20,16,0.08); text-align: center;">
+      <div class="section-label">The wordmark</div>
+      <div class="wordmark" aria-label="signal" style="font-size: 56px; letter-spacing: -1.6px;"><span class="accent">/</span>sɪgnɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+      <p class="small" style="margin-top: 10px;">The word &ldquo;signal&rdquo; rendered as its IPA transcription — the primary visible wordmark.</p>
     </div>
   </div>
 
@@ -505,7 +503,7 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
     <!-- A: Canonical two-color on dark -->
     <div class="wordmark-card">
       <div class="wordmark-card-display" style="background: var(--deep-evening);">
-        <span class="wordmark wordmark-lg" aria-label="signal"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></span>
+        <span class="wordmark wordmark-lg" aria-label="signal"><span class="accent">/</span>sɪgnɑ<span class="accent">ː</span>l<span class="accent">/</span></span>
       </div>
       <div class="wordmark-card-info">
         <div class="wordmark-card-label">A &nbsp;·&nbsp; Canonical</div>
@@ -517,7 +515,7 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
     <!-- B: Monochrome Signal red on Rose Linen -->
     <div class="wordmark-card">
       <div class="wordmark-card-display" style="background: var(--espresso-soft);">
-        <span class="wordmark wordmark-lg wordmark-monochrome" aria-label="signal"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></span>
+        <span class="wordmark wordmark-lg wordmark-monochrome" aria-label="signal"><span class="accent">/</span>sɪgnɑ<span class="accent">ː</span>l<span class="accent">/</span></span>
       </div>
       <div class="wordmark-card-info">
         <div class="wordmark-card-label">B &nbsp;·&nbsp; Monochrome red</div>
@@ -529,7 +527,7 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
     <!-- C: Monochrome Rose Linen on Signal red -->
     <div class="wordmark-card">
       <div class="wordmark-card-display" style="background: var(--signal);">
-        <span class="wordmark wordmark-lg wordmark-monochrome" aria-label="signal" style="color: var(--rose-linen);"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></span>
+        <span class="wordmark wordmark-lg wordmark-monochrome" aria-label="signal" style="color: var(--rose-linen);"><span class="accent">/</span>sɪgnɑ<span class="accent">ː</span>l<span class="accent">/</span></span>
       </div>
       <div class="wordmark-card-info">
         <div class="wordmark-card-label">C &nbsp;·&nbsp; Monochrome linen</div>
@@ -541,7 +539,7 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
     <!-- D: Monochrome Deep Evening on Rose Linen -->
     <div class="wordmark-card">
       <div class="wordmark-card-display" style="background: var(--espresso-soft);">
-        <span class="wordmark wordmark-lg wordmark-monochrome" aria-label="signal" style="color: var(--rose-linen);"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></span>
+        <span class="wordmark wordmark-lg wordmark-monochrome" aria-label="signal" style="color: var(--rose-linen);"><span class="accent">/</span>sɪgnɑ<span class="accent">ː</span>l<span class="accent">/</span></span>
       </div>
       <div class="wordmark-card-info">
         <div class="wordmark-card-label">D &nbsp;·&nbsp; Monochrome dark</div>
@@ -631,8 +629,8 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
 
   <div class="type-specimen">
     <div class="type-name">The IPA Wordmark Exception</div>
-    <div class="type-sample-wordmark" aria-label="signal">/sɪɡ<span style="color: var(--rose-linen);">ˈ</span>nɑ<span style="color: var(--rose-linen);">ː</span>l/</div>
-    <div class="type-role">Plus Jakarta Sans 700, not Anguita Sans. The two custom display faces (Anguita Sans, Bebas Neue) do not contain the IPA glyphs ɪ ɡ ˈ ɑ ː — verified via fontTools inspection. Plus Jakarta Sans has full Unicode coverage and is already part of the brand stack.</div>
+    <div class="type-sample-wordmark" aria-label="signal">/sɪgnɑ<span style="color: var(--rose-linen);">ː</span>l/</div>
+    <div class="type-role">Plus Jakarta Sans 700, not Anguita Sans. The two custom display faces (Anguita Sans, Bebas Neue) do not contain the IPA glyphs ɪ ɑ ː — verified via fontTools inspection. Plus Jakarta Sans has full Unicode coverage and is already part of the brand stack.</div>
   </div>
 
   <h3>Typography rules</h3>
@@ -672,14 +670,14 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
         <li>Recolor with anything outside the three-color palette</li>
         <li>Place on busy photographic backgrounds — use a solid surface color</li>
         <li>Use the written word &ldquo;signal&rdquo; (in Anguita Sans or otherwise) as the wordmark — the wordmark is always the IPA form</li>
-        <li>Remove the brackets or strip the IPA modifier characters (ˈ, ː)</li>
+        <li>Remove the brackets or strip the IPA length mark (ː)</li>
         <li>Render at less than the minimum size (see next page)</li>
       </ul>
     </div>
   </div>
 
   <h3>The brand WORD vs. the visible WORDMARK</h3>
-  <p>These are separate things. The brand <strong>word</strong> is still &ldquo;signal&rdquo; — used in spoken conversation, body copy, URLs, email addresses, legal documents, the master tagline &ldquo;send the right signal,&rdquo; and INSDR Wellness — the cellcare company references. The brand <strong>wordmark</strong> is the visible logo element: <em>/sɪɡˈnɑːl/</em> in Plus Jakarta Sans, two-color. The IPA exception applies only to the visible logo, not to every occurrence of the word &ldquo;signal&rdquo; in copy.</p>
+  <p>These are separate things. The brand <strong>word</strong> is still &ldquo;signal&rdquo; — used in spoken conversation, body copy, URLs, email addresses, legal documents, the master tagline &ldquo;send the right signal,&rdquo; and <img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness — the <span class="cellcare">cellcare</span> company references. The brand <strong>wordmark</strong> is the visible logo element: <em>/ sɪgnɑːl /</em> in Plus Jakarta Sans, two-color. The IPA exception applies only to the visible logo, not to every occurrence of the word &ldquo;signal&rdquo; in copy.</p>
 
   <div class="page-footer">
     <span>signal — Brand Identity Guidelines</span>
@@ -695,13 +693,13 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
 
   <div class="clearspace-box">
     <div class="clearspace-wordmark-wrap">
-      <span class="wordmark wordmark-md" aria-label="signal"><span class="accent" style="color: var(--signal-light);">/</span>sɪɡ<span class="accent" style="color: var(--signal-light);">ˈ</span>nɑ<span class="accent" style="color: var(--signal-light);">ː</span>l<span class="accent" style="color: var(--signal-light);">/</span></span>
+      <span class="wordmark wordmark-md" aria-label="signal"><span class="accent" style="color: var(--signal-light);">/</span>sɪgnɑ<span class="accent" style="color: var(--signal-light);">ː</span>l<span class="accent" style="color: var(--signal-light);">/</span></span>
     </div>
     <div class="clearspace-caption">Dashed rectangle represents the minimum clear-space zone. The small &ldquo;s&rdquo; marks at the corners show the unit of measure — the clear-space is the x-height of the wordmark&rsquo;s lowercase &ldquo;s.&rdquo;</div>
   </div>
 
   <h3>Minimum sizes</h3>
-  <p><strong>Digital:</strong> 120px wide minimum (enough to keep the IPA modifier characters readable at screen DPI). &nbsp;<strong>Print (business cards, letterhead):</strong> 1.2 inches wide minimum. &nbsp;<strong>Packaging (packet front):</strong> 0.9 inches wide minimum. &nbsp;<strong>Favicon / app icon:</strong> do NOT use the full IPA wordmark — use a single-character &ldquo;s&rdquo; or the upcoming monogram instead. The IPA wordmark is not legible at 32×32px or below.</p>
+  <p><strong>Digital:</strong> 120px wide minimum (enough to keep the IPA modifier characters readable at screen DPI). &nbsp;<strong>Print (business cards, letterhead):</strong> 1.2 inches wide minimum. &nbsp;<strong>Packaging (packet front):</strong> 0.9 inches wide minimum. &nbsp;<strong>Favicon / app icon:</strong> do NOT use the full IPA wordmark — use the /s/ monogram instead. The IPA wordmark is not legible at 32×32px or below.</p>
 
   <h3>Preferred sizes by context</h3>
   <table>
@@ -733,8 +731,8 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
     </div>
     <div>
       <h3 style="margin-top: 0;">The Travel Container &mdash; example application</h3>
-      <p>Matte red anodized aluminum body. Woven black mesh grille. IPA wordmark <em>/sɪɡˈnɑːl/</em> debossed in soft type on the lower red panel, signal-light against the matte surface. A tactile push button opens the compact. Universal MagSafe; phone-attached.</p>
-      <p>Notice what stays consistent with the screen rules: lowercase, IPA brackets retained, modifier characters (ˈ ː) preserved, two-color treatment carried over via the debossing depth and the matte/light surface contrast. Notice what adapts: no screen-DPI minimum applies; the wordmark sits at roughly 0.9 inches wide, matching the packet-front minimum.</p>
+      <p>Matte red anodized aluminum body. Woven black mesh grille. IPA wordmark <em>/ sɪgnɑːl /</em> debossed in soft type on the lower red panel, signal-light against the matte surface. A tactile push button opens the compact. Universal MagSafe; phone-attached.</p>
+      <p>Notice what stays consistent with the screen rules: lowercase, IPA brackets retained, the length mark (ː) preserved, two-color treatment carried over via the debossing depth and the matte/light surface contrast. Notice what adapts: no screen-DPI minimum applies; the wordmark sits at roughly 0.9 inches wide, matching the packet-front minimum.</p>
     </div>
   </div>
 
@@ -808,7 +806,7 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
       <td>Common word in a crowded class. Existing PST Vet compound mark in Class 005. Near-certain office action on likelihood-of-confusion or descriptiveness grounds. Possible, but slow and expensive.</td>
     </tr>
     <tr>
-      <td>Stylized IPA design mark <strong>/sɪɡˈnɑːl/</strong></td>
+      <td>Stylized IPA design mark <strong>/ sɪgnɑːl /</strong></td>
       <td><span class="likelihood-badge lb-mod">MODERATE</span></td>
       <td>Design marks are narrower in scope but easier to register. The IPA bracketing is genuinely unusual — no CPG competitor uses phonetic transcription as its primary wordmark. That unusualness is itself a distinctiveness argument.</td>
     </tr>
@@ -820,17 +818,17 @@ c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
   </table>
 
   <h3>Recommended mitigation strategy</h3>
-  <p><strong>File two applications in parallel:</strong> (1) &ldquo;INSDR SIGNAL&rdquo; as a standard-character word mark in Class 5, and (2) the stylized IPA /sɪɡˈnɑːl/ wordmark as a design mark in Class 5, with defensive filings in Class 3 (cosmetics) and Class 30 (confectionery) if budget permits. The word-mark filing ducks most likelihood-of-confusion refusals because INSDR is a novel coinage; the design mark locks down the visual identity. Combined cost: ~$700 government + $1,800 attorney = $2,500 for the core filings, or ~$4,500 for multi-class defensive coverage. <strong>Combined likelihood: MODERATE to MODERATE–HIGH.</strong></p>
+  <p><strong>File two applications in parallel:</strong> (1) &ldquo;INSDR SIGNAL&rdquo; as a standard-character word mark in Class 5, and (2) the stylized IPA / sɪgnɑːl / wordmark as a design mark in Class 5, with defensive filings in Class 3 (cosmetics) and Class 30 (confectionery) if budget permits. The word-mark filing ducks most likelihood-of-confusion refusals because INSDR is a novel coinage; the design mark locks down the visual identity. Combined cost: ~$700 government + $1,800 attorney = $2,500 for the core filings, or ~$4,500 for multi-class defensive coverage. <strong>Combined likelihood: MODERATE to MODERATE–HIGH.</strong></p>
 
   <h3>The honest bottom line</h3>
-  <p>Bare &ldquo;SIGNAL&rdquo; as a standard-character word mark in Class 5 is a hard filing. You&rsquo;re fighting a crowded class, a common English word, a famous tech mark in adjacent classes, and a global Unilever toothpaste that may or may not still have US paper on file. <strong>Do not file the bare word mark first.</strong> Do two things, in this order: <strong>(1)</strong> Pay $500–800 for an attorney knockout search on SIGNAL + SIGNL + phonetic variants in Classes 3/5/29/30/32 — this is the single highest-leverage spend before filing, and resolves the real question in 48 hours. <strong>(2)</strong> If the knockout is clean, file &ldquo;INSDR SIGNAL&rdquo; + the IPA /sɪɡˈnɑːl/ design mark, both in Class 5 ITU, with defensive filings in Class 3 and 30. Budget ~$4,500 all-in, timeline ~16 months to registration. Do not publicly launch or demo the final brand until the ITU is filed and the priority date is locked. Do not file before talking to a US trademark attorney.</p>
+  <p>Bare &ldquo;SIGNAL&rdquo; as a standard-character word mark in Class 5 is a hard filing. You&rsquo;re fighting a crowded class, a common English word, a famous tech mark in adjacent classes, and a global Unilever toothpaste that may or may not still have US paper on file. <strong>Do not file the bare word mark first.</strong> Do two things, in this order: <strong>(1)</strong> Pay $500–800 for an attorney knockout search on SIGNAL + SIGNL + phonetic variants in Classes 3/5/29/30/32 — this is the single highest-leverage spend before filing, and resolves the real question in 48 hours. <strong>(2)</strong> If the knockout is clean, file &ldquo;INSDR SIGNAL&rdquo; + the IPA / sɪgnɑːl / design mark, both in Class 5 ITU, with defensive filings in Class 3 and 30. Budget ~$4,500 all-in, timeline ~16 months to registration. Do not publicly launch or demo the final brand until the ITU is filed and the priority date is locked. Do not file before talking to a US trademark attorney.</p>
 
   <div class="tm-disclaimer">
     <strong>One more time, for the record:</strong> the content on pages 7–9 is research, not legal advice. It was compiled from publicly available USPTO summaries, Justia trademark records, Gerben IP reporting, and USPTO fee schedules. It is not a clearance, it is not an opinion of counsel, and it should not be relied on as a basis for any filing decision. Consult a qualified US trademark attorney.
   </div>
 
   <div class="page-footer">
-    <span>signal — Brand Identity Guidelines &nbsp;·&nbsp; INSDR Wellness — the cellcare company &nbsp;·&nbsp; Confidential</span>
+    <span>signal — Brand Identity Guidelines &nbsp;·&nbsp; <img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness — the <span class="cellcare">cellcare</span> company &nbsp;·&nbsp; Confidential</span>
     <span>Page 10</span>
   </div>
 </section>
