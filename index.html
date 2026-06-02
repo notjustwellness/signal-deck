@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <title>signal</title>
 <style>
-  html, body { margin: 0; padding: 0; height: 100%; background: #4A2540; color: #F6EFEA; font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; }
+  html, body { margin: 0; padding: 0; height: 100%; background: #241B17; color: #D8CCC1; font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; }
   body { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px; }
   .overline { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #AD4236; margin-bottom: 16px; font-weight: 600; }
   .wordmark { font-size: 96px; font-weight: 900; color: #AD4236; line-height: 0.9; margin-bottom: 16px; letter-spacing: -1px; text-transform: lowercase; font-family: Impact, sans-serif; }
@@ -14,29 +14,32 @@
   .footer { position: absolute; bottom: 40px; font-size: 10px; opacity: 0.3; letter-spacing: 3px; text-transform: uppercase; }
 
   /* ─── PASSWORD GATE ─── */
-  #gate { position: fixed; inset: 0; background: #4A2540; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; color: #F6EFEA; padding: 40px; text-align: center; }
+  #gate { position: fixed; inset: 0; background: #241B17; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; color: #D8CCC1; padding: 40px; text-align: center; }
   #gate .gate-overline { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #AD4236; margin-bottom: 16px; font-weight: 600; }
   #gate .gate-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 72px; color: #AD4236; line-height: 0.9; margin-bottom: 32px; letter-spacing: -1.6px; text-transform: lowercase; }
-  #gate .gate-title .accent { color: #F6EFEA; }
+  #gate .gate-title .accent { color: #D8CCC1; }
   #gate .gate-subtitle { font-size: 14px; opacity: 0.6; margin-bottom: 32px; letter-spacing: 1px; }
   #gate form { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-  #gate input { background: rgba(246,239,234,0.08); border: 1px solid rgba(246,239,234,0.2); border-radius: 6px; color: #F6EFEA; padding: 14px 20px; font-size: 15px; font-family: inherit; width: 280px; text-align: center; letter-spacing: 1px; outline: none; transition: border-color 0.2s; }
+  #gate input { background: rgba(246,239,234,0.08); border: 1px solid rgba(246,239,234,0.2); border-radius: 6px; color: #D8CCC1; padding: 14px 20px; font-size: 15px; font-family: inherit; width: 280px; text-align: center; letter-spacing: 1px; outline: none; transition: border-color 0.2s; }
   #gate input:focus { border-color: #AD4236; }
-  #gate button { background: #AD4236; color: #F6EFEA; border: none; border-radius: 6px; padding: 12px 32px; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+  #gate button { background: #AD4236; color: #D8CCC1; border: none; border-radius: 6px; padding: 12px 32px; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.2s; }
   #gate button:hover { background: #c4574b; }
   #gate .gate-error { color: #AD4236; font-size: 12px; margin-top: 8px; opacity: 0; transition: opacity 0.2s; letter-spacing: 1px; }
   #gate .gate-error.show { opacity: 1; }
   #gate .gate-footer { position: absolute; bottom: 40px; font-size: 10px; opacity: 0.3; letter-spacing: 3px; text-transform: uppercase; }
   body.locked { overflow: hidden; height: 100vh; }
   body.locked > div:not(#gate) { display: none !important; }
+
+  .insdr-logo{height:0.86em;width:auto;vertical-align:-0.06em;margin-right:0.16em;}
+  .cellcare{color:#AD4236;}
 </style>
 </head>
 <body class="locked">
 
 <!-- ═══════════════════ PASSWORD GATE ═══════════════════ -->
 <div id="gate">
-  <div class="gate-overline">INSDR Wellness — the cellcare company &middot; Confidential</div>
-  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="gate-overline"><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness — the <span class="cellcare">cellcare</span> company &middot; Confidential</div>
+  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪgnɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
   <div class="gate-subtitle">Enter password to continue.</div>
   <form onsubmit="return checkPass(event)">
     <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
@@ -46,7 +49,7 @@
   <div class="gate-footer">Do not share.</div>
 </div>
 
-<div class="overline">INSDR Wellness &mdash; the cellcare company</div>
+<div class="overline"><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness &mdash; the <span class="cellcare">cellcare</span> company</div>
 <div class="wordmark">signal</div>
 <div class="note">Decks live at known paths. If you don't know them, you don't need them.</div>
 <div class="footer">Do not share.</div>

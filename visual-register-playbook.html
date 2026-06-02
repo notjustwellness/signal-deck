@@ -584,14 +584,18 @@ footer .footer-line {
 body.locked { overflow: hidden; height: 100vh; }
 body.locked > section, body.locked > footer { display: none !important; }
 @media print { #gate { display: none !important; } }
+
+  /* Brand standard: INSDR set as logo; cellcare ALWAYS Signal Red */
+  .insdr-logo{height:0.86em;width:auto;vertical-align:-0.06em; margin-right:0.16em;}
+  .cellcare{color:#AD4236}
 </style>
 </head>
 <body class="locked">
 
 <!-- ═══════════════════ PASSWORD GATE ═══════════════════ -->
 <div id="gate">
-  <div class="gate-overline">INSDR Wellness — the cellcare company &middot; Confidential</div>
-  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪɡ<span class="accent">ˈ</span>nɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="gate-overline"><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness — the <span class="cellcare">cellcare</span> company &middot; Confidential</div>
+  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪgnɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
   <div class="gate-subtitle">Enter password to view the visual register playbook.</div>
   <form onsubmit="return checkPass(event)">
     <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
@@ -604,7 +608,7 @@ body.locked > section, body.locked > footer { display: none !important; }
 <!-- ═══════════════════ COVER ═══════════════════ -->
 <section class="cover">
   <div class="cover-lockup">
-    <div class="cover-overline">INSDR Wellness — the cellcare company</div>
+    <div class="cover-overline"><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness — the <span class="cellcare">cellcare</span> company</div>
     <div class="cover-insdr-line">internal · visual register · 2026</div>
   </div>
   <div class="cover-title">
@@ -881,7 +885,7 @@ body.locked > section, body.locked > footer { display: none !important; }
     <div class="tier">
       <div class="tier-label">Tier 1 — Brand-canonical</div>
       <div class="tier-name">The permanent objects.</div>
-      <p>The IPA wordmark <strong>/sɪɡˈnɑːl/</strong>. The packet front (color per SKU, no English). The paperboard tray + four frosted acetate dividers (D1: /sɪɡˈnɑːl/ variant cut, D4: /sɪɡˈnɑːl/ horizontal). The SaS DECODE puzzle card. These exist whether or not a customer engages. They are the brand's standing language.</p>
+      <p>The IPA wordmark <strong>/ sɪgnɑːl /</strong>. The packet front (color per SKU, no English). The paperboard tray + four frosted acetate dividers (D1: / sɪgnɑːl / variant cut, D4: / sɪgnɑːl / horizontal). The SaS DECODE puzzle card. These exist whether or not a customer engages. They are the brand's standing language.</p>
     </div>
 
     <div class="tier">
@@ -904,7 +908,7 @@ body.locked > section, body.locked > footer { display: none !important; }
 
     <div class="principle">
       <h3>The annual coin — the anchor</h3>
-      <p>The first physical artifact Signal mints. Not a product. Not a giveaway. Not a welcome gift. <strong>Earned by completing one full year of practice.</strong> Hand-cast metal — brushed brass, hand-cast bronze, or matte silver/nickel (render v0.1 below, in silver) — ~38mm diameter, ~3mm thick. The IPA wordmark <strong>/sɪɡˈnɑːl/</strong> deeply etched on the obverse, framed by a thin debossed inner rim. A Roman numeral year (I, II, III, V, X, XXV) on the reverse. Identical design across years; only the year-mark changes — like commemorative annual releases. Plain or lightly-reeded edge. Patinates with the hand that holds it.</p>
+      <p>The first physical artifact Signal mints. Not a product. Not a giveaway. Not a welcome gift. <strong>Earned by completing one full year of practice.</strong> Hand-cast metal — brushed brass, hand-cast bronze, or matte silver/nickel (render v0.1 below, in silver) — ~38mm diameter, ~3mm thick. The IPA wordmark <strong>/ sɪgnɑːl /</strong> deeply etched on the obverse, framed by a thin debossed inner rim. A Roman numeral year (I, II, III, V, X, XXV) on the reverse. Identical design across years; only the year-mark changes — like commemorative annual releases. Plain or lightly-reeded edge. Patinates with the hand that holds it.</p>
     </div>
 
     <div class="coin-feature">
@@ -934,7 +938,7 @@ body.locked > section, body.locked > footer { display: none !important; }
 
     <div class="principle">
       <h3>Supporting artifacts</h3>
-      <p><strong>The wax seal.</strong> SaS letters and the annual box close with a deep Signal-red wax seal stamped with the IPA glyph cluster /sɪɡˈnɑːl/. Tactile. Decoded. Worth keeping for the seal alone.</p>
+      <p><strong>The wax seal.</strong> SaS letters and the annual box close with a deep Signal-red wax seal stamped with the IPA glyph cluster / sɪgnɑːl /. Tactile. Decoded. Worth keeping for the seal alone.</p>
       <p><strong>The folded photograph — conditional.</strong> Considered for the Year-I envelope: an archival print of the canonical visual-register image (§III), small, framable. Kept only if it functions as the visual register made physical — not as gift-box delight.</p>
     </div>
 
@@ -1040,7 +1044,7 @@ body.locked > section, body.locked > footer { display: none !important; }
 
 <!-- ═══════════════════ FOOTER ═══════════════════ -->
 <footer>
-  <div class="footer-line">INSDR Wellness — the cellcare company</div>
+  <div class="footer-line"><img class="insdr-logo" src="logo/insdr_logo_light.png" alt="INSDR"> Wellness — the <span class="cellcare">cellcare</span> company</div>
   <div>visual register playbook · v0.5 · internal · 2026-05-24</div>
 </footer>
 
