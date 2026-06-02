@@ -104,7 +104,7 @@
 
   /* ─── COVER ─── */
   .cover { min-height: 100vh; background: var(--espresso); color: var(--bone); display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; padding: 34px 24px; position: relative; max-width: none; overflow: hidden; }
-  .cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; z-index: 0; }
+  .cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 50%; z-index: 0; }
   .cover-over { position: relative; z-index:1; font-size: 12px; letter-spacing: 5px; text-transform: uppercase; color: rgba(216,204,193,0.78); font-weight: 500; text-shadow: 0 1px 12px rgba(0,0,0,0.7); }
   .cover-foot { position: relative; z-index:1; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(216,204,193,0.6); text-shadow: 0 1px 12px rgba(0,0,0,0.7); }
   .cover-over .cc { color: var(--red); }
@@ -336,6 +336,7 @@
   .master-tagline { text-align:center; }
   .master-tagline .mt-line { font-family: var(--font-body); font-weight:500; font-size:22px; letter-spacing:0.3px; text-transform:lowercase; color: var(--bone); line-height:1.1; }
   .master-tagline .mt-wm { max-width:400px; margin:16px auto 0; }
+  .cover-bottom .master-tagline .mt-line { font-size:15px; }  /* cover lockup: ~30% smaller than the §06 instance */
 
   /* ─── PRINT / PDF ─── */
   @page { size: letter; margin: 0.5in; }
