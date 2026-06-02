@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signal — Unit Economics (Fundraising Stage)</title>
+<style>
+  :root{
+    --red:#AD4236;
+    --linen:#F6EFEA;
+    --evening:#1A1410;
+    --line:#e3d8d0;
+    --muted:#6f635c;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--linen);
+    color:var(--evening);
+    font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    line-height:1.6;
+    font-size:16px;
+  }
+  .page{
+    max-width:820px;
+    margin:0 auto;
+    padding:64px 56px 80px;
+    background:#fff;
+    box-shadow:0 1px 40px rgba(26,20,16,.06);
+  }
+  h1{
+    font-size:32px;line-height:1.15;margin:0 0 4px;
+    letter-spacing:-.01em;font-weight:700;
+  }
+  .prepared{color:var(--muted);font-size:13px;margin:0 0 28px;letter-spacing:.02em;}
+  h2{
+    font-size:13px;text-transform:uppercase;letter-spacing:.14em;
+    color:var(--red);font-weight:700;margin:38px 0 12px;
+    border-bottom:1px solid var(--line);padding-bottom:8px;
+  }
+  h3{font-size:15px;margin:22px 0 8px;font-weight:700;}
+  p{margin:0 0 14px;}
+  strong{font-weight:700;}
+  .callout{
+    background:var(--linen);
+    border-left:3px solid var(--red);
+    padding:16px 20px;border-radius:0 6px 6px 0;
+    margin:0 0 26px;font-size:14.5px;
+  }
+  .callout strong{color:var(--red);}
+  table{width:100%;border-collapse:collapse;margin:10px 0 18px;font-size:14.5px;}
+  caption{caption-side:top;text-align:left;font-weight:700;font-size:14px;margin-bottom:8px;}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);}
+  th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);}
+  td:last-child,th:last-child{text-align:right;}
+  tr.total td{font-weight:700;border-top:1.5px solid var(--evening);border-bottom:none;}
+  tr.sub td{font-weight:700;background:#faf6f3;}
+  ol,ul{margin:0 0 16px;padding-left:22px;}
+  li{margin:0 0 8px;}
+  .foot{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;font-style:italic;}
+  @media print{
+    body{background:#fff;}
+    .page{box-shadow:none;max-width:none;padding:0;}
+    h2{break-after:avoid;}
+    table,tr{break-inside:avoid;}
+  }
+  @media(max-width:640px){.page{padding:36px 22px;}h1{font-size:26px;}}
+  /* access gate (cosmetic — source is public; do not treat as security) */
+  #gate{position:fixed;inset:0;background:var(--evening);color:var(--linen);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1000;padding:32px;text-align:center;font-family:"Plus Jakarta Sans",-apple-system,sans-serif;}
+  #gate .gw{font-size:54px;font-weight:700;letter-spacing:.02em;margin:0 0 10px;}
+  #gate .gs{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#b7a899;margin-bottom:44px;}
+  #gate input{background:transparent;border:none;border-bottom:1px solid rgba(246,239,234,.35);color:var(--linen);padding:8px 16px;font-size:16px;text-align:center;width:220px;outline:none;letter-spacing:4px;font-family:inherit;}
+  #gate input:focus{border-bottom-color:var(--red);}
+  #gate .ge{color:#e0857a;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-top:16px;height:14px;opacity:0;transition:opacity .2s;}
+  #gate .ge.show{opacity:1;}
+  #gate .gf{position:absolute;bottom:38px;font-size:10px;opacity:.4;letter-spacing:3px;text-transform:uppercase;color:#b7a899;}
+</style>
+</head>
+<body>
+<div id="gate">
+  <div class="gw">signal</div>
+  <div class="gs">unit economics · confidential</div>
+  <input type="password" id="gpass" autocomplete="off" autofocus placeholder="password">
+  <div class="ge" id="gerr">access denied</div>
+  <div class="gf">INSDR Wellness · do not share</div>
+</div>
+<div class="page">
+
+  <h1>Signal — Unit Economics</h1>
+  <p class="prepared">Fundraising Stage · Prepared 2026-05-30 · Updated 2026-06-03 · INSDR Wellness Co. / Signal</p>
+
+  <div class="callout">
+    <strong>Read this first.</strong> Signal is <strong>pre-launch</strong>. Formulation is underway with our contract formulator (Zone Halo). The cost figures below are a <strong>bottom-up estimate</strong> — built from named branded suppliers and <strong>anchored by two real ingredient costs</strong> (MitoPrime® ergothioneine at $980/kg; creatine at $11/kg) plus a preliminary Zone Halo estimate on the daily-fuel SKU. They are <strong>not yet a fully validated quote</strong>; locking the hard cost stack is the explicit <strong>first use of seed proceeds</strong> (see bottom). We'd rather show an honest, defensible cost structure than a flattering invented one.
+  </div>
+
+  <h2>The honest headline</h2>
+  <p>Signal is a <strong>premium functional-chew</strong> brand. Chews built on branded actives are structurally more expensive to make than capsules. Earlier industry benchmarking suggested a cautious <strong>~35–45% gross margin</strong>. An <strong>updated bottom-up estimate points comfortably above that — on the order of ~50–60% gross margin</strong> — because real ingredient costs came in well below benchmark (the premium actives are milligram-dosed, so they cost little) and a formulation change (spermidine → NNB <strong>Puremidine™</strong>) removed the last gram-scale cost line. We treat this as an estimate to be confirmed by the validated formulation quote, not a number to lean on yet.</p>
+
+  <h2>Current formulation (what's being costed)</h2>
+  <p><strong>N°001 — the foundation (hero, launches first).</strong> A dual-chew daily packet. <em>Keystone chew:</em> Albion TRAACS® magnesium bisglycinate + AstaZine® astaxanthin + Kaneka QH® ubiquinol + MitoPrime® ergothioneine, plus sensory cofactors. <em>Substrate chew:</em> a phospholipid complex (membrane building blocks; delivery vehicle — in-chew vs companion softgel — set at formulation) + BioPQQ® + <strong>Puremidine™</strong> spermidine (NNB Nutrition; ≥98% purity, ~3 mg) + gingerol.</p>
+  <p><strong>N°002 — the daily fuel (launches 2027).</strong> Creatine + magnesium lead pair + branded ATP cofactors (betaine, ribose, methylated B-complex).</p>
+
+  <h2>Cost stack — per monthly box</h2>
+
+  <table>
+    <caption>N°001 — the foundation · two-chew serving · $89 retail · the hero, launches first</caption>
+    <thead><tr><th>Line</th><th>Amount</th></tr></thead>
+    <tbody>
+      <tr><td>Chew substrate (60 ct)</td><td>$4 – $8</td></tr>
+      <tr><td>Branded actives × 30 days (BioPQQ, Kaneka QH ubiquinol, MitoPrime, Puremidine™ spermidine, AstaZine, Suntheanine)</td><td>$11 – $18</td></tr>
+      <tr class="sub"><td>Product COGS</td><td>~$19 (bottom-up est., updated 2026-06-03)</td></tr>
+      <tr><td>Packaging + 3PL pick/pack</td><td>~$5.50</td></tr>
+      <tr><td>Outbound US parcel</td><td>$5 – $7</td></tr>
+      <tr><td>Payment processing</td><td>~$2.85</td></tr>
+      <tr class="sub"><td>Fully landed</td><td>~$32</td></tr>
+      <tr class="total"><td>Contribution @ $89</td><td>~$57 (~64% GM)</td></tr>
+    </tbody>
+  </table>
+
+  <table>
+    <caption>N°002 — the daily fuel · creatine + magnesium-led core · $49 retail · the stack-on, launches 2027</caption>
+    <thead><tr><th>Line</th><th>Amount</th></tr></thead>
+    <tbody>
+      <tr><td>Chew substrate (30 ct)</td><td>$2 – $4</td></tr>
+      <tr><td>Actives (branded creatine + Mg lead pair + ATP cofactors)</td><td>$1 – $3</td></tr>
+      <tr class="sub"><td>Product COGS</td><td>~$10 – $14 (preliminary Zone Halo estimate; plan $10–12)</td></tr>
+      <tr><td>Packaging + 3PL pick/pack</td><td>~$5.50</td></tr>
+      <tr><td>Outbound US parcel</td><td>$5 – $7</td></tr>
+      <tr><td>Payment processing</td><td>~$1.72</td></tr>
+      <tr class="sub"><td>Fully landed</td><td>~$22 – $28</td></tr>
+      <tr class="total"><td>Contribution @ $49</td><td>~$21 – $27 (43–55% GM)</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>The honest update (2026-06-03).</strong> An updated bottom-up estimate — named branded suppliers, two real cost anchors (MitoPrime $980/kg; creatine $11/kg) — puts the foundation's product COGS near <strong>$19</strong>, far below the earlier $42–90 benchmark. Why the benchmark was high: the premium actives are dosed in <em>milligrams</em> (so they cost little), the bulky lines are cheap commodities, and switching spermidine to NNB's Puremidine™ (≥98% purity, ~3 mg vs an 800 mg wheat-germ extract) removed the last gram-scale cost. At ~$19 the foundation clears ~64% GM at $89 — materially de-risking what was the model's single largest open question. The daily fuel (N°002) is independently estimated by Zone Halo at $10–14. Still an estimate, not a validated quote: locking the hard cost stack with the formulator remains the first use of funds, and the hero's full stack still needs a direct quote.</p>
+
+  <h2>Margin levers — how we protect and improve GM</h2>
+  <ol>
+    <li><strong>Cost came in low.</strong> The bottom-up estimate (~$19 hero / $10–14 fuel) already clears 50–64% — the milligram-dosed premium actives and the Puremidine swap are why. Validation is the lever that turns this from estimate to fact.</li>
+    <li><strong>Premium price tier</strong> — $89 is the foundation floor; positioning supports $99–120 (AG1 sits at ~$99). Pricing headroom is upside on top of the estimated margin.</li>
+    <li><strong>MOQ scale</strong> — moving from a 10K launch run toward 25K–50K pulls per-unit cost down an estimated 20–40% (Zone Halo: ~$12→$9.50 on the fuel SKU at 50K).</li>
+    <li><strong>Packaging</strong> — a fresh kraft outer + signal-red paperboard petal-fold tray each month (low-cost paperboard, no durable hardware). Per-box packaging cost is <em>TBD pending quote</em> and folds into the stack above.</li>
+  </ol>
+
+  <h2>Channels — how acquisition stays efficient</h2>
+  <ul>
+    <li><strong>Practitioner channel (Fullscript)</strong> — listing at launch puts Signal in front of clinicians who already test and recommend; a recommendation transfers trust that DTC otherwise pays ~$45+/purchase to manufacture. Lowers blended CAC and is the natural home for the test-led story.</li>
+    <li><strong>Send a Signal</strong> — gifting at checkout (~15% of acquisition); high-conversion, compounds the base, not the volume engine.</li>
+    <li><strong>Owned DTC + organic</strong> — the brand's home; paid capped (~$35).</li>
+  </ul>
+
+  <h2>Repeat economics</h2>
+  <ul>
+    <li><strong>Contribution / box</strong> — with the updated COGS: N°001 ~$57, N°002 ~$24; blended (assume 60% fuel / 40% foundation by units) <strong>~$35–40/box</strong> (was ~$14–23 on the old benchmark COGS).</li>
+    <li><strong>Retained cycles</strong> — base assumption ~6 (range bear ~4 / bull ~9), monthly auto-replenish.</li>
+    <li><strong>Lifetime value (base, ~6 cycles):</strong> <strong>~$180–220</strong> — up from the prior $85–140, driven by the lower COGS.</li>
+    <li><strong>Blended CAC target:</strong> ~$35–45 — Send-a-Signal gifting, practitioner referral, organic/founder reach, paid capped at $35.</li>
+    <li><strong>LTV / CAC:</strong> <strong>~3–5× at base</strong> on the estimated COGS (vs ~2–3× at benchmark) — and the conservative end already clears a healthy payback. Firms up as the cost estimate validates.</li>
+    <li><strong>Model:</strong> subscription — monthly auto-replenish, the structure that matches the daily-practice thesis; cancel anytime, one tap.</li>
+  </ul>
+
+  <h2>What we don't know yet — and how the raise resolves it</h2>
+  <table>
+    <thead><tr><th>Unknown</th><th>Status</th><th>How the raise closes it</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Hero (N°001) validated COGS</strong></td><td>Bottom-up estimate ~$19; two real anchors in hand; full stack not yet quoted</td><td><strong>First use of funds:</strong> Zone Halo converts the estimate into a hard, validated cost stack within 90 days of close</td></tr>
+      <tr><td><strong>Real churn / retained cycles</strong></td><td>Pre-launch — no live cohort</td><td>Paid pre-order + early cohort measures true tenure before we scale spend</td></tr>
+      <tr><td><strong>5-yr model refresh</strong></td><td>Parked on prior SKU numbering + benchmark COGS</td><td>Rebuilt against the validated cost stack once the hero quote lands</td></tr>
+    </tbody>
+  </table>
+
+  <h2>First use of funds</h2>
+  <p>A defined portion of the seed engages the contract formulator/manufacturer (Zone Halo, already in dialogue) and turns the estimate above into a <strong>hard cost stack and a launch-ready formula within 90 days of close.</strong> This is the single highest-leverage de-risking milestone in the plan: it confirms the largest number in the model, and every downstream figure — margin, LTV, the raise's own follow-on math — locks the moment it lands.</p>
+
+  <p class="foot">Built on the brand corpus and the financial model in this repository. Cost figures are a bottom-up estimate with two real ingredient anchors, pending the validated formulation quote. Confidential — INSDR Wellness Co.</p>
+
+</div>
+<script>
+(function(){
+  var PASS="54321",g=document.getElementById("gate"),i=document.getElementById("gpass"),e=document.getElementById("gerr");
+  if(sessionStorage.getItem("sig_ue_ok")==="1"){g.style.display="none";return;}
+  i.addEventListener("keydown",function(ev){
+    if(ev.key==="Enter"){
+      if(i.value===PASS){sessionStorage.setItem("sig_ue_ok","1");g.style.display="none";}
+      else{e.classList.add("show");i.value="";}
+    }
+  });
+})();
+</script>
+</body>
+</html>
