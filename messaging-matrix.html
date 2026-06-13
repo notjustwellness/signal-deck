@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>signal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#AD4236; --red-deep:#7A2E26; --espresso:#241B17; --ink:#2E2420;
+    --bone:#F6EFEA; --cream:#EFE5D1; --taupe:#D8CCC1; --gold:#A8845A;
+    --muted:#6D665C; --line:#C8BEAE; --paper:#FBF8F4;
+    --single:#B05A3C; --sink:#9A7B2E; --kin:#178D78; --adj:#7E57C2;
+    --display:'Bebas Neue',Impact,sans-serif;
+    --body:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.5;-webkit-font-smoothing:antialiased;padding:44px 20px;}
+  .sheet{max-width:1080px;margin:0 auto;}
+
+  .head{position:relative;border-bottom:3px solid var(--espresso);padding-bottom:16px;margin-bottom:22px;}
+  .head .wm-lock{position:absolute;top:0;right:0;display:inline-flex;align-items:center;}
+  .head .wm-art{height:50px;width:auto;display:block;}
+  .head .wm-sign,.head .wm-tail{fill:var(--espresso);}
+  .head .wm-accent{fill:var(--red);}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:9px;}
+  h1{font-family:var(--display);font-weight:400;font-size:50px;line-height:.95;letter-spacing:.01em;color:var(--espresso);}
+  h1 .sub{display:block;font-size:21px;color:var(--gold);margin-top:6px;letter-spacing:.03em;}
+  .meta{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:12px;display:flex;flex-wrap:wrap;gap:6px 22px;}
+
+  .honest{background:var(--espresso);color:var(--bone);border-radius:10px;padding:20px 24px;margin-bottom:24px;}
+  .honest .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:9px;}
+  .honest p{font-size:14.5px;}
+  .honest p + p{margin-top:10px;}
+  .honest strong{color:#E8B4AC;}
+  .honest .pull{font-family:var(--display);font-weight:400;font-size:25px;letter-spacing:.02em;color:#fff;line-height:1.05;margin:14px 0 4px;}
+
+  h2{font-family:var(--display);font-weight:400;font-size:29px;letter-spacing:.02em;color:var(--red-deep);margin:38px 0 6px;}
+  .lede{font-size:14px;color:var(--muted);margin-bottom:16px;max-width:760px;}
+  .lede b{color:var(--ink);}
+
+  /* personas */
+  .pcards{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;}
+  .pc{background:#fff;border:1px solid var(--line);border-top:4px solid var(--red);border-radius:9px;padding:15px 17px;display:flex;flex-direction:column;}
+  .pc.primary{border-top-color:var(--red);}
+  .pc.second{border-top-color:var(--gold);}
+  .pc.cold{border-top-color:var(--muted);}
+  .pc .tag{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--red);padding:2px 8px;border-radius:3px;align-self:flex-start;margin-bottom:9px;}
+  .pc.second .tag{background:var(--gold);} .pc.cold .tag{background:var(--muted);}
+  .pc h4{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:.02em;color:var(--espresso);line-height:1;margin-bottom:7px;}
+  .pc .row{border-top:1px solid #efe7da;padding:7px 0 6px;font-size:12.5px;}
+  .pc .row:first-of-type{border-top:none;}
+  .pc .row b{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--gold);margin-bottom:2px;font-weight:600;}
+
+  /* generic table */
+  table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  thead th{background:var(--cream);font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--red-deep);text-align:left;padding:9px 11px;border-bottom:2px solid var(--gold);vertical-align:bottom;}
+  tbody td{padding:10px 11px;border-bottom:1px solid var(--line);vertical-align:top;}
+  tbody tr:last-child td{border-bottom:none;}
+  .rowhdr{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--espresso);background:#f5ede2;font-weight:600;white-space:nowrap;}
+
+  /* messaging matrix tints per persona col */
+  .mx td.c1{background:#fdf6f4;} .mx td.c2{background:#fbf7ef;} .mx td.c3{background:#f7f5f1;}
+  .mx .lead{font-weight:600;color:var(--red-deep);}
+
+  /* differentiation */
+  .band td{background:var(--espresso);color:var(--bone);font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:7px 11px;font-weight:600;}
+  .band .ct{color:var(--gold);text-transform:none;letter-spacing:.02em;font-weight:500;}
+  .brand{font-weight:700;color:var(--espresso);white-space:nowrap;}
+  .brand .mech{display:block;font-weight:500;color:var(--muted);font-size:11px;}
+  .win{color:var(--red-deep);font-weight:600;}
+  .chip{font-family:var(--mono);font-size:8px;font-weight:600;letter-spacing:.05em;padding:2px 6px;border-radius:3px;color:#fff;white-space:nowrap;}
+  .chip.single{background:var(--single);} .chip.sink{background:var(--sink);}
+  .chip.kin{background:var(--kin);} .chip.adj{background:var(--adj);}
+
+  /* positioning framework */
+  .formula{background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:9px;padding:18px 22px;margin-top:6px;}
+  .formula .step{padding:10px 0;border-top:1px dashed var(--line);}
+  .formula .step:first-child{border-top:none;padding-top:2px;}
+  .formula .n{font-family:var(--display);font-size:20px;color:var(--red);margin-right:8px;}
+  .formula .what{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:600;}
+  .formula .ex{display:block;font-size:13px;color:var(--ink);margin-top:4px;}
+  .formula .ex i{color:var(--muted);}
+
+  .posgrid{display:grid;grid-template-columns:1fr;gap:13px;margin-top:14px;}
+  .posbox{border-radius:9px;padding:16px 20px;}
+  .posbox.int{position:relative;border:1px solid #4a3a30;}
+  .posbox .seal{position:absolute;top:14px;right:18px;font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#E8B4AC;border:1px solid #6e4d44;padding:3px 8px;border-radius:3px;}
+  .posbox .story p{font-size:14px;line-height:1.62;color:var(--bone);}
+  .posbox .story p + p{margin-top:11px;}
+  .posbox .story em{color:#E8B4AC;font-style:italic;}
+  .posbox .story .bk{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:.02em;color:#fff;display:block;margin-top:13px;line-height:1.15;}
+  .posbox .story .bk b{color:var(--red);}
+  .posbox .src{font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--taupe);margin-bottom:12px;display:block;}
+  .posbox.pub{background:#fff;border:1px solid var(--line);border-top:4px solid var(--kin);}
+  .posbox.int{background:var(--espresso);color:var(--bone);}
+  .posbox .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;font-weight:600;}
+  .posbox.pub .lbl{color:var(--kin);} .posbox.int .lbl{color:var(--gold);}
+  .posbox p{font-size:13.5px;line-height:1.55;}
+  .posbox.int strong{color:#E8B4AC;} .posbox.pub strong{color:var(--red-deep);}
+  .posbox .gate{display:block;font-family:var(--mono);font-size:9.5px;margin-top:10px;padding-top:8px;border-top:1px solid rgba(125,125,125,.25);letter-spacing:.02em;}
+  .posbox.pub .gate{color:var(--muted);} .posbox.int .gate{color:var(--taupe);}
+
+  .canon{background:var(--cream);border-radius:9px;padding:16px 22px;margin-top:14px;}
+  .canon .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--red-deep);margin-bottom:10px;font-weight:600;}
+  .canon dl{display:grid;grid-template-columns:78px 1fr;gap:10px 16px;}
+  .canon dt{font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.04em;padding-top:3px;}
+  .canon dd{font-size:13.5px;color:var(--ink);}
+  .canon dd b{color:var(--red-deep);}
+
+  .substance{background:#fffdf8;border:1px dashed var(--gold);border-radius:10px;padding:16px 20px;margin-top:14px;}
+  .substance .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8a6418;margin-bottom:9px;font-weight:600;}
+  .substance ul{list-style:none;}
+  .substance li{padding:5px 0 5px 20px;position:relative;font-size:13px;}
+  .substance li::before{content:"\2192";position:absolute;left:0;color:var(--gold);font-weight:700;}
+  .substance b{color:var(--red-deep);}
+
+  .flags{background:#f3e0dd;border-radius:10px;padding:16px 20px;margin-top:30px;}
+  .flags .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:9px;font-weight:600;}
+  .flags ul{list-style:none;}
+  .flags li{padding:5px 0 5px 20px;position:relative;font-size:13px;color:var(--red-deep);}
+  .flags li::before{content:"\26A0";position:absolute;left:0;}
+  .flags b{color:var(--red);}
+
+  footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media (max-width:820px){.pcards{grid-template-columns:1fr;}.posgrid{grid-template-columns:1fr;}.canon dl{grid-template-columns:1fr;gap:3px 0;}h1{font-size:38px;}table{font-size:11.5px;}}
+  @media print{body{padding:0;background:#fff;}.sheet{max-width:none;}table,.pc,.honest,.formula,.posbox,.canon,.substance{break-inside:avoid;}}
+
+  /* ─── PASSWORD GATE (mirrors root index.html — friction + noindex, not security) ─── */
+  #gate{position:fixed;inset:0;background:#241B17;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:#D8CCC1;padding:40px;text-align:center;}
+  #gate .gate-overline{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#AD4236;margin-bottom:16px;font-weight:600;}
+  #gate .gate-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:72px;color:#AD4236;line-height:.9;margin-bottom:32px;letter-spacing:-1.6px;text-transform:lowercase;}
+  #gate .gate-title .accent{color:#D8CCC1;}
+  #gate .gate-subtitle{font-size:14px;opacity:.6;margin-bottom:32px;letter-spacing:1px;}
+  #gate form{display:flex;flex-direction:column;align-items:center;gap:12px;}
+  #gate input{background:rgba(246,239,234,.08);border:1px solid rgba(246,239,234,.2);border-radius:6px;color:#D8CCC1;padding:14px 20px;font-size:15px;font-family:inherit;width:280px;text-align:center;letter-spacing:1px;outline:none;transition:border-color .2s;}
+  #gate input:focus{border-color:#AD4236;}
+  #gate button{background:#AD4236;color:#D8CCC1;border:none;border-radius:6px;padding:12px 32px;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background .2s;}
+  #gate button:hover{background:#c4574b;}
+  #gate .gate-error{color:#AD4236;font-size:12px;margin-top:8px;opacity:0;transition:opacity .2s;letter-spacing:1px;}
+  #gate .gate-error.show{opacity:1;}
+  #gate .gate-footer{position:absolute;bottom:40px;font-size:10px;opacity:.3;letter-spacing:3px;text-transform:uppercase;}
+  body.locked{overflow:hidden;height:100vh;}
+  body.locked > div:not(#gate){display:none !important;}
+</style>
+</head>
+<body class="locked">
+
+<!-- ═══════════════════ PASSWORD GATE ═══════════════════ -->
+<div id="gate">
+  <div class="gate-overline">INSDR Wellness — the cellcare company · Confidential</div>
+  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪgnɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="gate-subtitle">Enter password to continue.</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
+    <button type="submit">Enter</button>
+    <div class="gate-error" id="gate-error">Incorrect. Try again.</div>
+  </form>
+  <div class="gate-footer">Confidential — do not share.</div>
+</div>
+
+<div class="sheet">
+
+  <div class="head">
+    <span class="mark wm-lock" aria-label="signal"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3114.000000 696.000000" class="wm-art" role="img" aria-label="signal" shape-rendering="geometricPrecision"><g transform="translate(0.000000,696.000000) scale(0.100000,-0.100000)"><g class="wm-accent"><path d="M6051 5613 c-14 -13 -56 -124 -136 -363 -63 -190 -133 -397 -155
+-460 -23 -63 -49 -140 -59 -170 -11 -30 -39 -111 -63 -180 -60 -168 -108 -311
+-153 -455 -20 -66 -48 -149 -60 -185 -39 -109 -66 -192 -85 -260 -10 -36 -23
+-78 -30 -95 -7 -16 -20 -57 -30 -90 -10 -33 -32 -96 -49 -140 -16 -44 -46
+-123 -66 -175 -44 -117 -100 -275 -125 -355 -24 -78 -67 -200 -78 -223 -20
+-38 -22 -70 -6 -86 17 -17 148 -23 172 -8 18 12 86 202 212 592 43 135 97 295
+119 355 23 61 59 162 81 225 22 63 62 178 90 255 50 140 147 424 233 690 26
+77 62 185 82 240 68 191 96 271 171 500 42 127 86 251 100 276 26 51 31 98 12
+117 -20 20 -152 16 -177 -5z"/><path d="M24965 5620 c-54 -5 -61 -8 -82 -38 -12 -19 -33 -68 -47 -110 -14
+-43 -38 -113 -54 -157 -66 -179 -105 -293 -122 -350 -10 -33 -35 -105 -55
+-160 -20 -55 -49 -138 -65 -185 -16 -47 -42 -123 -60 -170 -17 -47 -44 -121
+-60 -165 -16 -44 -45 -123 -65 -175 -35 -94 -164 -472 -183 -540 -10 -32 -56
+-162 -119 -335 -110 -301 -216 -602 -238 -678 -12 -42 -27 -83 -33 -90 -18
+-23 -23 -72 -9 -91 11 -15 30 -20 84 -23 91 -4 102 6 141 122 17 50 58 169 92
+265 34 96 86 247 116 335 29 88 70 203 89 255 92 245 108 290 130 355 13 39
+28 84 34 100 14 37 136 407 150 455 6 19 29 87 51 150 22 63 51 147 65 185 28
+81 71 204 115 325 54 150 180 528 180 541 0 7 12 36 26 66 29 62 29 103 -1
+112 -11 3 -47 4 -80 1z"/></g><g class="wm-sign"><path d="M7852 4559 c-73 -11 -197 -58 -264 -100 -68 -44 -132 -118 -168 -195
+-98 -209 -40 -446 146 -593 109 -86 205 -131 539 -253 158 -58 284 -161 311
+-255 49 -168 -6 -288 -166 -365 -58 -29 -76 -32 -175 -36 -260 -9 -418 80
+-520 293 -25 53 -51 123 -58 157 -9 47 -18 66 -39 81 -23 17 -31 19 -53 9 -14
+-7 -29 -22 -33 -34 -4 -13 -5 -150 -2 -306 6 -344 3 -337 125 -256 84 55 92
+54 246 -4 126 -49 199 -62 334 -62 114 1 159 9 266 50 136 52 211 106 286 204
+88 117 121 239 98 369 -15 88 -32 128 -78 193 -82 114 -205 190 -487 299 -52
+21 -113 45 -135 55 -22 10 -51 21 -65 25 -14 4 -64 28 -113 52 -176 91 -231
+212 -172 384 18 53 79 117 145 151 41 21 58 23 180 23 133 0 136 -1 207 -34
+123 -57 231 -191 273 -334 27 -95 35 -107 75 -107 21 0 37 6 43 16 5 9 7 129
+4 267 -4 268 -10 297 -54 297 -11 0 -40 -18 -64 -40 -24 -22 -50 -40 -59 -40
+-8 0 -59 18 -112 39 -135 55 -301 72 -461 50z"/><path d="M9833 4515 c-31 -22 -30 -60 2 -81 14 -9 59 -20 101 -25 91 -10 141
+-33 170 -76 31 -47 38 -216 32 -871 l-5 -543 -29 -42 c-38 -54 -85 -76 -184
+-86 -44 -5 -87 -14 -95 -21 -23 -19 -18 -57 9 -75 21 -14 80 -16 482 -14 280
+1 464 6 472 12 15 12 16 59 0 75 -7 7 -28 12 -47 12 -19 0 -63 5 -99 11 -77
+14 -135 59 -152 117 -13 50 -13 1301 1 1361 21 92 72 128 198 142 59 7 80 13
+94 30 20 25 21 40 5 61 -12 14 -68 17 -473 23 -416 6 -462 5 -482 -10z"/><path d="M12519 4554 c-84 -15 -206 -59 -273 -98 -124 -73 -205 -165 -264
+-301 -31 -70 -36 -93 -40 -182 -7 -159 23 -269 104 -378 32 -44 121 -129 172
+-164 54 -37 37 -83 -45 -125 -56 -28 -159 -140 -177 -192 -21 -63 -20 -149 3
+-199 21 -47 90 -111 156 -145 39 -20 46 -28 43 -49 -2 -21 -17 -33 -68 -61
+-149 -79 -221 -142 -266 -231 -30 -60 -34 -78 -34 -144 0 -86 17 -130 76 -195
+81 -89 210 -147 419 -186 137 -27 169 -29 370 -28 213 0 224 1 345 32 220 55
+345 116 448 220 91 90 133 182 140 303 13 228 -69 376 -255 465 -127 60 -263
+77 -703 89 -129 4 -266 11 -303 15 -82 10 -136 42 -162 96 -26 56 -10 98 69
+172 87 81 111 88 211 62 172 -44 414 -17 577 66 180 91 286 211 329 376 45
+166 19 347 -66 461 -49 66 -53 78 -30 97 12 10 46 11 166 2 147 -11 177 -9
+191 12 4 6 8 50 8 99 0 74 -3 90 -20 107 -26 26 -40 25 -127 -5 -77 -26 -171
+-47 -299 -66 -75 -11 -86 -10 -155 11 -41 12 -87 29 -103 37 -75 39 -297 53
+-437 27z m308 -130 c112 -54 178 -145 218 -299 37 -142 36 -287 -4 -417 -62
+-207 -171 -294 -366 -290 -78 1 -97 5 -152 32 -108 53 -189 176 -224 337 -18
+86 -16 285 4 360 57 214 190 319 390 309 59 -3 92 -11 134 -32z m-84 -1744
+c253 -9 398 -22 467 -40 48 -13 111 -61 146 -111 26 -38 29 -50 28 -120 -1
+-97 -26 -152 -104 -230 -151 -152 -463 -216 -779 -159 -176 32 -284 95 -351
+206 -33 55 -35 63 -35 149 0 65 5 98 17 120 29 53 101 127 163 168 58 38 62
+39 125 33 36 -3 181 -10 323 -16z"/><path d="M15175 4558 c-16 -5 -52 -13 -80 -18 -27 -5 -93 -18 -145 -29 -52
+-11 -137 -24 -187 -29 -103 -10 -143 -29 -143 -66 0 -37 24 -49 108 -51 80 -2
+122 -16 155 -53 45 -50 46 -63 46 -717 0 -341 -4 -640 -8 -664 -17 -87 -76
+-130 -191 -140 -37 -4 -75 -13 -84 -20 -23 -19 -21 -68 4 -81 12 -7 159 -10
+417 -11 219 0 410 0 425 -1 34 -1 58 18 58 47 0 34 -31 55 -81 55 -91 0 -160
+37 -197 104 -16 28 -17 77 -14 574 l2 543 25 48 c30 60 168 191 250 236 82 46
+180 68 280 63 137 -7 219 -58 277 -173 28 -53 32 -73 37 -175 4 -63 4 -339 1
+-612 -5 -485 -5 -497 -26 -525 -32 -42 -73 -62 -159 -76 -62 -9 -81 -17 -93
+-35 -11 -18 -12 -28 -4 -47 l11 -23 437 -1 c312 -1 441 2 450 10 21 18 17 57
+-8 73 -13 8 -50 17 -84 21 -79 9 -134 39 -159 90 -19 39 -20 60 -20 635 l0
+595 -24 80 c-31 104 -71 173 -141 243 -113 113 -257 156 -446 135 -175 -20
+-327 -102 -480 -261 -127 -132 -129 -131 -129 73 -1 88 -4 165 -8 171 -10 17
+-38 22 -72 12z"/></g><g class="wm-tail"><path d="M18395 4555 c-78 -17 -218 -83 -293 -140 -76 -57 -181 -168 -228
+-242 -40 -62 -114 -221 -114 -245 0 -8 -10 -50 -22 -94 -20 -71 -23 -101 -22
+-284 0 -195 2 -211 32 -332 37 -149 74 -229 146 -313 151 -178 324 -265 527
+-265 59 0 156 16 174 30 6 4 29 14 53 24 101 39 226 142 315 259 47 62 73 45
+87 -55 26 -178 88 -242 235 -241 81 1 125 14 328 94 69 26 92 54 82 99 -13 59
+-56 76 -116 44 -37 -19 -139 -20 -168 -3 -49 31 -51 52 -51 599 0 614 15 834
+65 930 21 40 20 97 -2 108 -10 5 -71 8 -136 7 -144 -2 -152 -7 -166 -111 -14
+-94 -18 -104 -48 -104 -18 0 -48 21 -98 69 -158 150 -373 211 -580 166z m338
+-158 c76 -35 184 -141 225 -223 66 -130 67 -142 66 -541 l-1 -361 -36 -76
+c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
+368 -26 95 -27 111 -27 325 0 214 2 231 29 339 64 254 169 394 343 457 91 33
+200 30 286 -9z"/><path d="M20292 4364 c-20 -13 -23 -22 -18 -48 9 -43 140 -307 172 -345 52
+-62 76 -39 183 178 74 150 87 202 54 219 -10 5 -97 10 -193 11 -149 1 -179 -1
+-198 -15z"/><path d="M20468 3240 c-33 -20 -143 -214 -188 -332 -25 -66 -26 -104 -2 -116
+9 -5 111 -9 225 -8 218 2 226 4 227 47 0 50 -171 370 -218 407 -19 14 -22 14
+-44 2z"/><path d="M21950 5550 c-101 -30 -309 -75 -399 -85 -66 -8 -91 -20 -91 -45 0
+-30 39 -50 95 -50 81 0 145 -24 190 -70 l40 -41 3 -1162 c2 -804 0 -1173 -8
+-1199 -6 -20 -22 -46 -37 -58 -38 -30 -139 -57 -225 -59 -10 -1 -25 -12 -34
+-26 -14 -21 -15 -31 -6 -51 l12 -24 428 0 c236 1 440 -2 454 -5 40 -10 68 10
+68 48 0 42 -15 57 -57 57 -44 0 -132 19 -165 36 -15 8 -39 31 -53 51 l-25 38
+0 1325 c0 1018 -3 1329 -12 1338 -19 19 -75 13 -178 -18z"/></g></g></svg></span>
+    <div class="kicker">Brand Messaging Matrix · cellcare</div>
+    <h1>Send the right signal<span class="sub">Who we talk to · what we say · why nobody else can say it</span></h1>
+    <div class="meta">
+      <span>Signal · INSDR Wellness Co.</span>
+      <span>Foundation-first · two-SKU stack (N°001 + N°002)</span>
+      <span>v1 · 2026-06-13 · internal — not for public surfaces</span>
+    </div>
+  </div>
+
+  <!-- ───────────────────────── THE SPINE ───────────────────────── -->
+  <div class="honest">
+    <div class="lbl">The one axis — read this before the tables</div>
+    <p>Every brand in this market sells you an <strong>outcome</strong>: sleep, focus, longevity, glow, gut. They differ on <em>which</em> outcome and <em>which molecule</em> delivers it. None of them sell the layer underneath — the cellular energy every one of those outcomes is standing on.</p>
+    <p class="pull">We don't sell an outcome. We sell the floor it stands on.</p>
+    <p>That's the entire matrix below in one sentence. The personas are who feels the floor giving way. The benefits are how we describe the floor without overclaiming. The competitor table is a map of brands optimizing furniture in a room with no foundation. <strong>We name the dose, not the outcome</strong> — and that line is simultaneously our positioning, our compliance posture, and our proof of scientific substance.</p>
+  </div>
+
+  <!-- ───────────────────────── PERSONAS ───────────────────────── -->
+  <h2>1 · Who we talk to</h2>
+  <p class="lede">Three audiences, two funnel jobs. The <b>Foundation-Builder</b> buys. The <b>Stacker</b> validates and refers. <b>Cold traffic</b> only ever meets the tagline. The emotional story owns the top of the funnel for everyone; the segmentation is about <b>stage</b>, not a fork at the door.</p>
+  <div class="pcards">
+
+    <div class="pc primary">
+      <span class="tag">Primary · buyer</span>
+      <h4>The Foundation-Builder</h4>
+      <div class="row"><b>Who</b>Healthy, health-conscious, 30–55. Already invests in their body. Quietly afraid of where the family tree points — and chooses to maintain the floor now rather than chase it back later.</div>
+      <div class="row"><b>The pain</b>Does the work, takes the things, still can't tell what's actually holding the whole system up. Senses that "more outcomes" isn't the answer.</div>
+      <div class="row"><b>What lands</b>"Stop chasing outcomes. Build the foundation underneath them." The cabinet question. Foundation = the thing you maintain so you never have to chase it back.</div>
+      <div class="row"><b>Don't say</b>Anything that codes "for the frail / sick / elderly." This is maintenance for the strong, not rescue for the weak.</div>
+    </div>
+
+    <div class="pc second">
+      <span class="tag">Secondary · validator</span>
+      <h4>The Stacker / Optimizer</h4>
+      <div class="row"><b>Who</b>Skeptic who already takes everything. Read three papers to build their stack. Low brand loyalty, high scrutiny — will interrogate the COGS, the doses, the missing RCT.</div>
+      <div class="row"><b>The pain</b>Diminishing returns. Ten specialist bottles, none of them feeding the cellular layer they all depend on.</div>
+      <div class="row"><b>What lands</b>"Every specialist supplement asks your cells to do work; almost none give the cells what it takes." Named doses, real actives, no proprietary blend. Foundation is the <em>ceiling</em> their stack runs into — not a promise.</div>
+      <div class="row"><b>Funnel job</b>Conversion + credibility, <em>not</em> acquisition. Win the skeptic mid-funnel and they refer the buyers.</div>
+    </div>
+
+    <div class="pc cold">
+      <span class="tag">Cold · top-of-funnel</span>
+      <h4>Anyone (cold traffic)</h4>
+      <div class="row"><b>Who</b>Hasn't met the brand. Scrolling. No context, no patience.</div>
+      <div class="row"><b>The pain</b>Unarticulated. Doesn't know they have a foundation problem yet.</div>
+      <div class="row"><b>What lands</b>The tagline alone — <em>"send the right signal"</em> / "the first supplement you actually look forward to taking." Hook on feeling and format, never the founder story or the stacker argument.</div>
+      <div class="row"><b>Don't say</b>No origin story, no inflammation, no mechanism. Cold copy is owned-surface only — never paid health claims.</div>
+    </div>
+
+  </div>
+
+  <!-- ───────────────────────── THE MATRIX ───────────────────────── -->
+  <h2>2 · The messaging matrix</h2>
+  <p class="lede">Same truth, three altitudes. Read each column as a complete message system for one audience. Every <b>lead line</b> is DSHEA-safe: structure/function-adjacent, dose-named, outcome-free.</p>
+  <table class="mx">
+    <thead>
+      <tr>
+        <th style="width:120px;"></th>
+        <th>Foundation-Builder <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);">(buyer)</span></th>
+        <th>Stacker / Optimizer <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);">(validator)</span></th>
+        <th>Cold traffic <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);">(hook)</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="rowhdr">Trigger</td>
+        <td class="c1">"I do everything right and still can't tell what's holding it up."</td>
+        <td class="c2">"My stack has plateaued. Diminishing returns."</td>
+        <td class="c3">"What is that? It looks good and it's not another pill."</td>
+      </tr>
+      <tr>
+        <td class="rowhdr">Functional benefit</td>
+        <td class="c1">A maintained cellular-energy floor — the ATP layer every system draws on, in one 90-second daily ritual.</td>
+        <td class="c2">Mitochondrial / ATP architecture at named doses: Mg bisglycinate 200mg, Kaneka QH® ubiquinol, MitoPrime® ergothioneine, BioPQQ®, Puremidine® spermidine.</td>
+        <td class="c3">A chew you look forward to that actually carries real actives. 90 seconds. Every day.</td>
+      </tr>
+      <tr>
+        <td class="rowhdr">Emotional VP</td>
+        <td class="c1">Quiet control. You stopped chasing and started building. Maintenance as self-respect, not fear.</td>
+        <td class="c2">Vindication. Finally a brand that respects the homework — names the dose, skips the hype, shows the floor the stack runs into.</td>
+        <td class="c3">Desire + ease. Something you <em>want</em> to do, that signals you've got your body handled.</td>
+      </tr>
+      <tr>
+        <td class="rowhdr">Proof they demand</td>
+        <td class="c1">Honesty and a ritual that fits a real life. "Real doses, not fairy dust."</td>
+        <td class="c2">COGS-defensible doses, branded clinical actives, no proprietary blend, transparent posture on the missing company RCT.</td>
+        <td class="c3">It looks credible and the format is novel. Proof comes later.</td>
+      </tr>
+      <tr>
+        <td class="rowhdr">Lead line</td>
+        <td class="c1 lead">"Stop chasing outcomes. Build the foundation underneath them. One signal a day. It compounds."</td>
+        <td class="c2 lead">"Every specialist supplement asks your cells to do work. Signal is what lets them. Necessary, but not sufficient — that's the point."</td>
+        <td class="c3 lead">"Send the right signal. The first supplement you actually look forward to taking."</td>
+      </tr>
+      <tr>
+        <td class="rowhdr">Objection to defuse</td>
+        <td class="c1">"Is this just another thing on the pile?" → No — it's the base layer the pile is built on.</td>
+        <td class="c2">"Where's your trial? Why should I trust the dose?" → We name every dose; the RCT gets funded by revenue, not dilution.</td>
+        <td class="c3">"Another gummy?" → Not a gummy. A candy-like chew engineered to carry the actives.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ───────────────────────── PROBLEM / NEED ───────────────────────── -->
+  <h2>3 · The core problem we own</h2>
+  <p class="lede">Stated once, canonically, so every surface points back to the same need.</p>
+  <div class="canon">
+    <div class="lbl">The foundation thesis</div>
+    <dl>
+      <dt>The cabinet</dt><dd>"Careless or curated, the quiet question underneath both is the same — can you tell what's actually working, or only what you're taking?" <b>Everything in that cabinet was chasing an outcome. Nothing was feeding the foundation those outcomes are built on.</b></dd>
+      <dt>The gap</dt><dd>"Every specialist supplement on your shelf is asking your cells to do work; almost none of them give the cells what it takes to do it."</dd>
+      <dt>The fact</dt><dd>"About 9 out of 10 ATP molecules in your cells carry magnesium; the rest sit idle." <i>(The one concrete number that earns the poetry.)</i></dd>
+      <dt>The frame</dt><dd><b>Necessary, but not sufficient.</b> Your cells need this floor to run; they still need everything you do on top of it. Foundation first — everything stacks.</dd>
+    </dl>
+  </div>
+
+  <!-- ───────────────────────── DIFFERENTIATION ───────────────────────── -->
+  <h2>4 · Differentiation — the field, by archetype</h2>
+  <p class="lede">Sorted by how they compete, not alphabetically — because the <b>archetype</b> is the vulnerability. Three single-molecule plays make you assemble the stack. Two kitchen-sink plays under-dose everything. One proves foundation-first is a real category and leaves the brand wide open. Two are adjacent — concede the slot, coexist. <i>Timeline and Mitopure are one company; merged. Visual/science-storytelling cues verified web-current as of Jun 2026.</i></p>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:128px;">Brand / mechanism</th>
+        <th>How they signal "science"</th>
+        <th>Visual cues</th>
+        <th>Where they're exposed</th>
+        <th style="width:200px;">Signal's counter</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="band"><td colspan="5"><span class="chip single">SINGLE-MOLECULE</span> &nbsp; The "one lever" plays <span class="ct">— optimize a single mechanism, implicitly ask you to assemble the rest. This is the cabinet problem, branded.</span></td></tr>
+      <tr>
+        <td class="brand">MitoQ<span class="mech">Mitoquinol mesylate · mito-targeted CoQ10</span></td>
+        <td>Proof-by-numbers: "25+ trials, 900+ papers, 60+ patents," NZ university research heritage.</td>
+        <td>Clinical-pharma. Cool blues/whites, molecular motifs, capsule minimalism. "Credible biotech."</td>
+        <td>One antioxidant lever. Targeted-antioxidant thesis is scientifically contested (can blunt beneficial signaling).</td>
+        <td class="win">"MitoQ sharpens one lever. Signal builds the floor every lever runs on."</td>
+      </tr>
+      <tr>
+        <td class="brand">Timeline / Mitopure<span class="mech">Urolithin A · mitophagy</span></td>
+        <td>Deepest academic play: EPFL, 18 yrs, "25 trials / 2,000+ participants," <i>Nature Aging</i>, $50M+ R&amp;D.</td>
+        <td>Luxury-longevity. Warm neutrals, soft gold/amber, white space. Expensive <em>and</em> clinical.</td>
+        <td>Single mechanism (mitophagy) at the highest $/day in the set (~$2.50–4.00/day).</td>
+        <td class="win">"A specialist tool at a specialist price — and still needs a foundation under it."</td>
+      </tr>
+      <tr>
+        <td class="brand">Elysium (Basis)<span class="mech">NR + pterostilbene · NAD+</span></td>
+        <td>Nobel/academic prestige: MIT's Leonard Guarente, Nobel-laureate advisory board, NSF Certified.</td>
+        <td>Minimalist clinical-luxury. Muted grey/white, pharmaceutical austerity. Cold, low warmth.</td>
+        <td>NAD+ category under credibility pressure (2026 press: benefits not established in large human trials). Single bet, cold brand.</td>
+        <td class="win">"Borrowed Nobel credibility on a contested molecule. We earn it at the dose line."</td>
+      </tr>
+      <tr>
+        <td class="brand">Tru Niagen<span class="mech">Niagen NR · NAD+ <small>(Niagen Bioscience, fmr ChromaDex)</small></span></td>
+        <td>Ingredient-authority + institutional partners: "45+ studies, 300+ institutions (Mayo, Harvard, NIA)," USP.</td>
+        <td>Clean clinical-wellness. Green/white, accessible sans-serif. Pharmacy-shelf credible, not cold.</td>
+        <td>Same single-molecule NAD+ ceiling + same category headwind. A one-lever product positioned as a category.</td>
+        <td class="win">"Necessary, maybe. A foundation, no. We're the layer NAD+ itself runs on."</td>
+      </tr>
+
+      <tr class="band"><td colspan="5"><span class="chip sink">KITCHEN-SINK</span> &nbsp; The "everything" plays <span class="ct">— breadth over depth, outcome/anti-aging framing, dose-dilution risk. NOVOS is your closest structural rival.</span></td></tr>
+      <tr>
+        <td class="brand">NOVOS (Core)<span class="mech">12 ingredients · "12 hallmarks of aging"</span></td>
+        <td>Advisory-board + framework: 8 scientists (Harvard/MIT/Salk), 400+ studies, explicit anti-celebrity value framing.</td>
+        <td>Science-lifestyle. White + blue/teal, "12 hallmarks" infographics, education-heavy. "Smart longevity nerd."</td>
+        <td>Age-anxiety / outcome framing; 12-ingredient list reads unfocused. Competes on hallmarks, not a clean mechanism.</td>
+        <td class="win">"12 ingredients chasing 12 outcomes. We name the dose, not the hallmark."</td>
+      </tr>
+      <tr>
+        <td class="brand">IM8<span class="mech">90+ ingredient greens / all-in-one</span></td>
+        <td>Celebrity halo (David Beckham) + Mayo/NASA name-drops + NSF Certified for Sport.</td>
+        <td>Premium lifestyle. Dark, sleek, masculine-premium. Athlete-aspirational. Beckham <em>is</em> the brand.</td>
+        <td>90+ ingredients = everything under-dosed (fairy dust). Credibility from fame, not a defensible molecule story.</td>
+        <td class="win">"90 things at a trace, or the foundation done right. We don't fairy-dust."</td>
+      </tr>
+
+      <tr class="band"><td colspan="5"><span class="chip kin">FOUNDATION KIN</span> &nbsp; The closest philosophical relative <span class="ct">— proves "foundation-first" is a real category, then leaves the brand, the ritual and the story wide open.</span></td></tr>
+      <tr>
+        <td class="brand">BodyBio<span class="mech">Phosphatidylcholine (PC) · cell-membrane health</span></td>
+        <td>"Supplements made from science, for science." 25+ yrs, lipid/membrane mechanism, practitioner-trusted.</td>
+        <td>Clinical/educational, dated-credible. Reads lab-supply, not lifestyle. Low design discipline.</td>
+        <td>Practitioner-coded, dated brand, narrow (membrane only), almost no emotional pull or DTC craft.</td>
+        <td class="win">"BodyBio proves the foundation is real. We make it a brand you'd actually choose — ritual, dose, story."</td>
+      </tr>
+
+      <tr class="band"><td colspan="5"><span class="chip adj">ADJACENT</span> &nbsp; Not head-to-head <span class="ct">— concede the slot, coexist, and steal the playbook. Don't pick a fight you don't need.</span></td></tr>
+      <tr>
+        <td class="brand">Ritual<span class="mech">Multivitamin · nutrient gap-filler</span></td>
+        <td>Transparency as the credibility vector: "Made Traceable®," visible supply chain, USP Verified.</td>
+        <td>Lifestyle-DTC. Mint-yellow, friendly minimalism, the iconic transparent capsule with floating beads. IG-native.</td>
+        <td>Gap-filler, no mechanism depth, no "what powers the cell" story.</td>
+        <td class="win">"Ritual fills the gaps. Signal powers the cell those nutrients feed." <i>Steal their transparency craft.</i></td>
+      </tr>
+      <tr>
+        <td class="brand">Seed (DS-01)<span class="mech">24-strain synbiotic · gut</span></td>
+        <td>Gold-standard clinical comms: strain-level specificity, "largest probiotic bloating trial," science-education content.</td>
+        <td>Design-led premium. Green refillable glass jar, compostable refills, editorial type system. Best design in supplements.</td>
+        <td>Single-system (gut). Not a foundation rival — the brand to <em>emulate</em> on storytelling + design.</td>
+        <td class="win">"Seed handles your gut. We handle the energy beneath every system." <i>Match their science-comms bar.</i></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="lede" style="margin-top:14px;">
+    <b>The open lane:</b> no competitor owns <b>emotional founder origin + dose-naming honesty + foundation-first clarity</b> at once. The single-molecule brands borrow authority (Nobel boards, patent counts). The kitchen-sink brands borrow fame. Signal earns it by refusing the outcome claim and naming the dose to your face. <b>The honesty <em>is</em> the moat.</b>
+  </p>
+
+  <!-- ───────────────────────── POSITIONING FRAMEWORK ───────────────────────── -->
+  <h2>5 · Mission-led positioning statement</h2>
+  <p class="lede">A framework, not a tagline. It connects the founder's <b>why</b> to the customer's <b>outcome</b> through a mechanism specific enough to signal scientific substance — while respecting the firewall: the sealed personal origin powers the <b>room</b>, never the public surface.</p>
+
+  <div class="formula">
+    <div class="step"><span class="n">1</span><span class="what">Founder conviction — earned, not claimed</span><span class="ex">Why we, specifically, are allowed to say this. <i>Public surfaces carry the charge of the origin without the sealed clinical detail.</i></span></div>
+    <div class="step"><span class="n">2</span><span class="what">Mechanism truth — named &amp; dosed</span><span class="ex">The specific biological layer we build, with real actives at real doses. This is the scientific-substance signal — specificity, not adjectives.</span></div>
+    <div class="step"><span class="n">3</span><span class="what">Customer outcome — foundational, not promised</span><span class="ex">What changes for them, framed as a floor maintained — never an outcome guaranteed (DSHEA).</span></div>
+    <div class="step"><span class="n">4</span><span class="what">Proof posture — substance over borrowed authority</span><span class="ex">"We name the dose, not the outcome." The RCT is funded by revenue, not dilution. Honesty as the credibility move.</span></div>
+  </div>
+
+  <div class="posgrid">
+    <div class="posbox pub">
+      <div class="lbl">▸ Public mission statement (consumer / press-safe)</div>
+      <p>"Signal exists because the people who taught us what health really costs taught us something else first: by the time you're chasing an outcome, you're already behind. So we stopped chasing. We build the one layer every outcome stands on — <strong>cellular energy</strong> — at doses we'll name to your face, in a 90-second daily ritual. Not another promise on the pile. <strong>The foundation the rest of it is built on. Foundation first. Everything stacks.</strong>"</p>
+      <span class="gate">Sealed lines stripped. Carries the origin's charge ("what health really costs") without naming family, illness, or "the signal go dark." Cleared for owned surfaces; route mechanism wording past Zone Halo before any label.</span>
+    </div>
+    <div class="posbox int">
+      <span class="seal">🔒 Sealed — never leaves this room</span>
+      <div class="lbl">▸ Internal / investor narrative — the founder's why, verbatim</div>
+      <span class="src">Master long-form spine · founder_story.md · the conviction engine behind the dose-honesty posture</span>
+      <div class="story">
+        <p>My father had a stroke ten years ago. He's still here. But when his eyes open and I look in, no one looks back — just an abyss. I watch the signal go dark in him a little more every time.</p>
+        <p>Now I'm watching it work through my mother. Diabetes. A stroke. Then dementia. Her light's still on — it just shines a little differently now.</p>
+        <p>When it's the people who raised you, you do something. So I bought everything — first for them, grasping at every promise on every label. Then, afraid of what I might be carrying myself, I started buying it for me too. A whole cabinet of it. One morning I stood in front of all of it and realized I had no idea if any of it was working. I was running on hope and blind faith.</p>
+        <p>Maybe you know that cabinet. The bottles you can't remember starting. The quiet suspicion you're spending money to feel like you're doing something — not to actually do it.</p>
+        <p>I'm the kind of person who can't take a label at its word — I have to read the science underneath it. So I did. And the deeper I went, the more obvious the mistake became: everything in that cabinet was chasing an outcome. Nothing was feeding the foundation those outcomes are built on — the cellular layer underneath all of it. The energy the body makes before it can do anything else. And the low, constant inflammation that chokes that system in almost all of us now — and a little more every year.</p>
+        <p>Chasing outcomes is the trap. So I stopped chasing. I started underneath — priming the system everything else depends on, so whatever you do next actually lands.</p>
+        <p>That's Signal. Not another promise. A practice. One signal a day. It compounds.</p>
+        <span class="bk">You can't always stop the dark. You can keep sending the signal. <b>Send yours.</b></span>
+      </div>
+      <span class="gate">SEALED tier — personal + regulatory. This entire passage (parents · "an abyss" · "the signal go dark" · the inflammation sentence · "Send yours") lives in the founder story and the investor room ONLY. Never in ads, labels, cold web copy, or any public mirror. Inflammation line additionally requires Zone Halo reg review before any public use. One direction of flow: the mechanism travels out; the man never does.</span>
+    </div>
+  </div>
+
+  <div class="substance">
+    <div class="lbl">Why this reads as substance, not marketing</div>
+    <ul>
+      <li>Competitors signal science by <b>borrowing authority</b> — Nobel boards, patent counts, institution name-drops, celebrity advisors. Signal signals it by <b>surrendering the easy claim</b>: we name the dose and refuse the outcome.</li>
+      <li><b>Specificity is the proof.</b> "Kaneka QH® ubiquinol, MitoPrime® ergothioneine 10mg, Mg bisglycinate 200mg elemental" reads more scientific than any "clinically proven" badge — because it can be checked.</li>
+      <li><b>The mechanism is the architecture, made literal:</b> biogenesis (PQQ), autophagy (spermidine), antioxidant protection (astaxanthin, ergothioneine), methylation (B-complex), the ATP cycle (creatine + ribose + TMG + Mg). The chemistry <em>is</em> the foundation thesis.</li>
+      <li><b>The RCT posture flips the script:</b> "funded by revenue, not dilution" turns the missing trial from a weakness into a statement of integrity the skeptic respects.</li>
+    </ul>
+  </div>
+
+  <div class="canon">
+    <div class="lbl">Canonical positioning anchors (locked — propagate verbatim)</div>
+    <dl>
+      <dt>One-liner</dt><dd><b>"You've built a stack. Signal is the ground it stands on."</b></dd>
+      <dt>25-word</dt><dd>"Signal is cellcare: the foundation beneath every supplement you take. Clinically-dosed cellular energy, real doses shown openly. Not another outcome — the ground they all stand on."</dd>
+      <dt>50-word</dt><dd>"Every supplement sells you an outcome — sleep, focus, energy. Signal builds the layer underneath them all: cellcare, the foundation your stack is standing on. Clinically-dosed cellular energy in a daily chew, real doses shown openly. Not another thing to chase. Foundation first — everything stacks. We name the dose, not the outcome."</dd>
+      <dt>Tagline</dt><dd><b>"send the right signal"</b> — the biological signal your cells receive, and the social signal you send by showing up in your body.</dd>
+    </dl>
+  </div>
+
+  <!-- ───────────────────────── GUARDRAILS ───────────────────────── -->
+  <div class="flags">
+    <div class="lbl">Guardrails — before any of this touches a public surface</div>
+    <ul>
+      <li><b>DSHEA fence:</b> "cellular energy" stays metaphorical/foundational, never mechanistic-as-efficacy. No "reduces inflammation / improves cellular signaling / supports mitochondrial function" as claims on labels or ads.</li>
+      <li><b>Sealed origin:</b> father / mother / illness / "the signal go dark" / "send yours" — founder story and investor room only. Never marketing.</li>
+      <li><b>Inflammation</b> sentence: owned founder surfaces only, and routes through <b>Zone Halo</b> reg review before any public use.</li>
+      <li><b>Cold = owned only:</b> no founder story, no mechanism, no inflammation in paid ads or cold web copy. Tagline-level hook only.</li>
+      <li><b>Banned words:</b> wellness, self-care, boost, detox, biohacking, anti-aging, superfood, proprietary blend, holistic — and "supplement" in hero copy (use chew / ritual / signal).</li>
+    </ul>
+  </div>
+
+  <footer>
+    <span>Signal · cellcare · INSDR Wellness Co.</span>
+    <span>Built from locked canon — positioning statements, founder story, verbal brief, verification panel</span>
+    <span>v1 · 2026-06-13 · internal</span>
+  </footer>
+
+</div>
+
+<script>
+  (function(){
+    var PASS="54321";
+    var gate=document.getElementById("gate");
+    var body=document.body;
+    if(sessionStorage.getItem("signal_unlocked")==="true"){gate.style.display="none";body.classList.remove("locked");}
+    window.checkPass=function(e){
+      e.preventDefault();
+      var input=document.getElementById("gate-pass").value;
+      var err=document.getElementById("gate-error");
+      if(input===PASS){sessionStorage.setItem("signal_unlocked","true");gate.style.display="none";body.classList.remove("locked");}
+      else{err.classList.add("show");document.getElementById("gate-pass").value="";document.getElementById("gate-pass").focus();setTimeout(function(){err.classList.remove("show");},2400);}
+      return false;
+    };
+  })();
+</script>
+</body>
+</html>
