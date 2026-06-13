@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>signal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#AD4236; --red-deep:#7A2E26; --espresso:#241B17; --ink:#2E2420;
+    --bone:#F6EFEA; --cream:#EFE5D1; --taupe:#D8CCC1; --gold:#A8845A;
+    --muted:#6D665C; --line:#C8BEAE; --paper:#FBF8F4;
+    --display:'Bebas Neue',Impact,sans-serif;
+    --body:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased;padding:48px 20px;}
+  .sheet{max-width:940px;margin:0 auto;}
+
+  .head{border-bottom:3px solid var(--espresso);padding-bottom:18px;margin-bottom:30px;}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+  h1{font-family:var(--display);font-weight:400;font-size:54px;line-height:.95;letter-spacing:.01em;color:var(--espresso);}
+  h1 .sub{display:block;font-size:23px;color:var(--gold);margin-top:6px;letter-spacing:.03em;}
+  .meta{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:14px;display:flex;flex-wrap:wrap;gap:6px 22px;}
+
+  .tldr{background:var(--espresso);color:var(--bone);border-radius:10px;padding:22px 26px;margin-bottom:30px;}
+  .tldr .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+  .tldr p{font-size:15.5px;} .tldr p + p{margin-top:10px;} .tldr strong{color:#E8B4AC;}
+
+  h2{font-family:var(--display);font-weight:400;font-size:30px;letter-spacing:.02em;color:var(--red-deep);margin:34px 0 4px;}
+  .lead{color:var(--muted);font-size:13.5px;margin-bottom:18px;border-left:3px solid var(--gold);padding-left:12px;}
+
+  .c{font-family:var(--mono);font-size:10px;font-weight:500;padding:1px 6px;border-radius:3px;letter-spacing:.04em;white-space:nowrap;}
+  .c.cert{background:#dff0e3;color:#2f6b40;} .c.lik{background:#fcefd4;color:#8a6418;} .c.guess{background:#f3e0dd;color:#9a463b;}
+
+  /* node cards */
+  .nodes{display:flex;flex-direction:column;gap:0;position:relative;}
+  .node{background:#fff;border:1px solid var(--line);border-radius:10px;padding:0;margin-bottom:14px;overflow:hidden;}
+  .node.reserve{border-style:dashed;border-color:var(--gold);background:#fffdf8;}
+  .node .top{display:flex;align-items:stretch;}
+  .node .idx{background:var(--red);color:#fff;font-family:var(--display);font-size:40px;line-height:1;display:flex;align-items:center;justify-content:center;width:64px;flex:none;}
+  .node.reserve .idx{background:var(--gold);}
+  .node .top-body{padding:13px 18px;flex:1;}
+  .node .job{font-family:var(--display);font-size:27px;letter-spacing:.03em;color:var(--espresso);line-height:1;}
+  .node .active{font-family:var(--mono);font-size:11px;color:var(--red-deep);letter-spacing:.04em;margin-top:5px;}
+  .node .active .dose{color:var(--muted);}
+  .node .grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);}
+  .node .cell{padding:12px 18px;}
+  .node .cell + .cell{border-left:1px solid var(--line);}
+  .node .k{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:4px;}
+  .node .cell p{font-size:12.5px;}
+  .node .say{background:var(--cream);padding:10px 18px;font-size:12.5px;border-top:1px solid var(--line);}
+  .node.reserve .say{background:#f6eeda;}
+  .node .say b{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--red-deep);display:block;margin-bottom:2px;}
+  .node .say .line{font-size:13.5px;color:var(--espresso);font-weight:600;}
+
+  .rules{background:var(--bone);border:1px solid var(--line);border-radius:10px;padding:18px 22px;}
+  .rules ol{list-style:none;counter-reset:r;}
+  .rules li{counter-increment:r;position:relative;padding:8px 0 8px 34px;border-bottom:1px dashed var(--line);font-size:13.5px;}
+  .rules li:last-child{border-bottom:none;}
+  .rules li::before{content:counter(r);position:absolute;left:0;top:7px;font-family:var(--display);font-size:20px;color:var(--red);width:24px;text-align:center;}
+  .rules b{color:var(--espresso);}
+
+  .flag{background:#f3e0dd;border-radius:8px;padding:14px 18px;font-size:13.5px;color:var(--red-deep);margin-top:14px;}
+  .flag b{color:var(--red);}
+
+  .steal{background:linear-gradient(135deg,var(--red) 0%,var(--red-deep) 100%);color:#fff;border-radius:12px;padding:24px 30px;margin-top:30px;}
+  .steal .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#F1C9C2;margin-bottom:8px;}
+  .steal h3{font-family:var(--display);font-weight:400;font-size:28px;letter-spacing:.02em;margin-bottom:8px;}
+  .steal p{font-size:15px;}
+
+  footer{margin-top:38px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media (max-width:680px){h1{font-size:40px;}.node .grid{grid-template-columns:1fr;}.node .cell + .cell{border-left:none;border-top:1px solid var(--line);}}
+  @media print{body{padding:0;background:#fff;}.sheet{max-width:none;}.node,.tldr,.steal,.rules{break-inside:avoid;}}
+
+  /* ─── PASSWORD GATE (mirrors root index.html — friction + noindex, not security) ─── */
+  #gate{position:fixed;inset:0;background:#241B17;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:#D8CCC1;padding:40px;text-align:center;}
+  #gate .gate-overline{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#AD4236;margin-bottom:16px;font-weight:600;}
+  #gate .gate-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:72px;color:#AD4236;line-height:.9;margin-bottom:32px;letter-spacing:-1.6px;text-transform:lowercase;}
+  #gate .gate-title .accent{color:#D8CCC1;}
+  #gate .gate-subtitle{font-size:14px;opacity:.6;margin-bottom:32px;letter-spacing:1px;}
+  #gate form{display:flex;flex-direction:column;align-items:center;gap:12px;}
+  #gate input{background:rgba(246,239,234,.08);border:1px solid rgba(246,239,234,.2);border-radius:6px;color:#D8CCC1;padding:14px 20px;font-size:15px;font-family:inherit;width:280px;text-align:center;letter-spacing:1px;outline:none;transition:border-color .2s;}
+  #gate input:focus{border-color:#AD4236;}
+  #gate button{background:#AD4236;color:#D8CCC1;border:none;border-radius:6px;padding:12px 32px;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background .2s;}
+  #gate button:hover{background:#c4574b;}
+  #gate .gate-error{color:#AD4236;font-size:12px;margin-top:8px;opacity:0;transition:opacity .2s;letter-spacing:1px;}
+  #gate .gate-error.show{opacity:1;}
+  #gate .gate-footer{position:absolute;bottom:40px;font-size:10px;opacity:.3;letter-spacing:3px;text-transform:uppercase;}
+  body.locked{overflow:hidden;height:100vh;}
+  body.locked > div:not(#gate){display:none !important;}
+</style>
+</head>
+<body class="locked">
+
+<!-- ═══════════════════ PASSWORD GATE ═══════════════════ -->
+<div id="gate">
+  <div class="gate-overline">INSDR Wellness — the cellcare company · Confidential</div>
+  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪgnɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="gate-subtitle">Enter password to continue.</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
+    <button type="submit">Enter</button>
+    <div class="gate-error" id="gate-error">Incorrect. Try again.</div>
+  </form>
+  <div class="gate-footer">Confidential — do not share.</div>
+</div>
+
+<div class="sheet">
+
+  <div class="head">
+    <div class="kicker">Product Framework · Internal · pre-reg-review</div>
+    <h1>The Five Jobs of a Working Cell
+      <span class="sub">Making the foundation countable — and interrogable</span>
+    </h1>
+    <div class="meta">
+      <span>Signal · INSDR Wellness — the cellcare company</span>
+      <span>The named framework under "build the foundation"</span>
+      <span>2026-06-13 · draft</span>
+    </div>
+  </div>
+
+  <div class="tldr">
+    <div class="lbl">Why this exists</div>
+    <p>"The foundation / the cellular floor" is a <strong>metaphor</strong> — a skeptic can wave it away and a buyer can't picture it. Young Goose solved the same problem by bolting their thesis to a finite, named, science-anchored framework (their "12 hallmarks of skin aging"). This is Signal's version — <strong>but tighter on purpose.</strong> Five jobs beat twelve hallmarks: twelve is a credential, five is something a buyer can actually hold in their head and a skeptic can check off one link at a time.</p>
+    <p>Each job maps to <strong>one named active at one named dose</strong>, and the credibility of each job is the published evidence behind that ingredient — which is exactly the <strong>procurement spec for the supplier asks</strong> (see the partner-outreach brief). The framework is the skeleton; the ingredient houses' dossiers are the muscle.</p>
+  </div>
+
+  <h2>The chain</h2>
+  <div class="lead">Read top to bottom — it's a sequence, not a pile. Make energy → protect it → renew the machinery. Each node names a <em>cellular job</em> and what we supply for it, never a result the customer will feel. <span class="c lik">mechanism claims — likely defensible; all require reg review before consumer use</span></div>
+
+  <div class="nodes">
+
+    <div class="node">
+      <div class="top">
+        <div class="idx">1</div>
+        <div class="top-body">
+          <div class="job">Activate</div>
+          <div class="active">Magnesium bisglycinate <span class="dose">· 200&nbsp;mg</span></div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="cell"><div class="k">The cellular job</div><p>ATP is only biologically usable bound to magnesium. Magnesium is the required cofactor for ATP utilization (and hundreds of energy-dependent enzyme reactions).</p></div>
+        <div class="cell"><div class="k">What a skeptic checks → what backs it</div><p>Mg-ATP biochemistry is textbook-settled. <b>Ask the magnesium house</b> (e.g. Albion/Balchem TRAACS, if branded) for the chelate bioavailability data. <span class="c cert">mechanism certain</span></p></div>
+      </div>
+      <div class="say"><b>Consumer-safe line (pre-review)</b><span class="line">"The active form of cellular energy is magnesium-bound — about 9 of 10 ATP molecules carry magnesium; the rest sit idle."</span></div>
+    </div>
+
+    <div class="node">
+      <div class="top">
+        <div class="idx">2</div>
+        <div class="top-body">
+          <div class="job">Generate</div>
+          <div class="active">Kaneka QH® ubiquinol <span class="dose">· dose to lock on label</span></div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="cell"><div class="k">The cellular job</div><p>Ubiquinol (the reduced form of CoQ10) is an electron carrier in the mitochondrial electron-transport chain — the chain that actually produces ATP.</p></div>
+        <div class="cell"><div class="k">What a skeptic checks → what backs it</div><p>ETC role is settled; the live questions are <em>form</em> and <em>dose</em>. <b>Ask Kaneka</b> for the ubiquinol clinical dossier + bioavailability vs ubiquinone. <span class="c cert">strong branded evidence</span></p></div>
+      </div>
+      <div class="say"><b>Consumer-safe line (pre-review)</b><span class="line">"Ubiquinol ferries the electrons through the chain that produces ATP."</span></div>
+    </div>
+
+    <div class="node">
+      <div class="top">
+        <div class="idx">3</div>
+        <div class="top-body">
+          <div class="job">Multiply</div>
+          <div class="active">BioPQQ® <span class="dose">· dose to lock on label</span></div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="cell"><div class="k">The cellular job</div><p>PQQ is studied for a role in mitochondrial biogenesis — the cell making <em>new</em> mitochondria (PGC-1α signaling pathway).</p></div>
+        <div class="cell"><div class="k">What a skeptic checks → what backs it</div><p>Biogenesis evidence is the <em>least</em> settled node — keep the language measured ("studied for," not "increases"). <b>Ask the BioPQQ licensor</b> for human data, not just cell/animal. <span class="c lik">measured</span></p></div>
+      </div>
+      <div class="say"><b>Consumer-safe line (pre-review)</b><span class="line">"PQQ is studied for its role in mitochondrial biogenesis — the making of new mitochondria."</span></div>
+    </div>
+
+    <div class="node">
+      <div class="top">
+        <div class="idx">4</div>
+        <div class="top-body">
+          <div class="job">Protect</div>
+          <div class="active">MitoPrime® ergothioneine <span class="dose">· dose to lock on label</span></div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="cell"><div class="k">The cellular job</div><p>Ergothioneine is actively transported into the cell's most vulnerable compartments — including mitochondria — where it acts as an antioxidant.</p></div>
+        <div class="cell"><div class="k">What a skeptic checks → what backs it</div><p>The dedicated transporter (OCTN1) + mitochondrial accumulation is a strong, distinctive story. <b>Ask NNB</b> for the MitoPrime dossier. Avoid the "longevity vitamin" nickname in consumer copy (claim-adjacent). <span class="c lik">good</span></p></div>
+      </div>
+      <div class="say"><b>Consumer-safe line (pre-review)</b><span class="line">"Ergothioneine concentrates inside the cell's most vulnerable parts, including the mitochondria, where it acts as an antioxidant."</span></div>
+    </div>
+
+    <div class="node">
+      <div class="top">
+        <div class="idx">5</div>
+        <div class="top-body">
+          <div class="job">Renew</div>
+          <div class="active">Puremidine® spermidine <span class="dose">· dose to lock on label</span></div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="cell"><div class="k">The cellular job</div><p>Spermidine is studied for its role in autophagy — the cell's recycling of worn-out components, including damaged mitochondria (mitophagy).</p></div>
+        <div class="cell"><div class="k">What a skeptic checks → what backs it</div><p>Autophagy literature is robust (Madeo et al.); this is the node that closes the loop (clears what nodes 2–4 wear out). <b>Ask Oxford Healthspan / the Puremidine house</b> for the dossier + sourcing story. <span class="c lik">strong literature</span></p></div>
+      </div>
+      <div class="say"><b>Consumer-safe line (pre-review)</b><span class="line">"Spermidine is studied for its role in autophagy — how the cell recycles its own worn-out machinery."</span></div>
+    </div>
+
+    <div class="node reserve">
+      <div class="top">
+        <div class="idx">6</div>
+        <div class="top-body">
+          <div class="job">Reserve <span style="font-family:var(--body);font-size:12px;color:var(--gold);font-weight:600;letter-spacing:0;">— this is N°002, not the hero</span></div>
+          <div class="active">Creatine <span class="dose">· N°002 · the daily-fuel layer</span></div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="cell"><div class="k">The cellular job</div><p>The phosphocreatine system buffers ATP — rapidly recharging it for surge-demand moments (creatine kinase shuttle).</p></div>
+        <div class="cell"><div class="k">Why it sits outside the hero</div><p>It's the <b>reserve tank</b>, not one of the five base jobs. This is the cleanest argument yet for <em>why the stack is two SKUs</em>: N°001 = the five base jobs; N°002 = the reserve. Not an upsell — a sixth node. <span class="c cert">creatine = most-studied ingredient</span></p></div>
+      </div>
+      <div class="say"><b>Consumer-safe line (pre-review)</b><span class="line">"Creatine recharges the phosphocreatine system that buffers ATP for rapid-demand moments."</span></div>
+    </div>
+
+  </div>
+
+  <h2>The rules that keep it a moat, not a claim</h2>
+  <div class="rules">
+    <ol>
+      <li><b>Names jobs, never outcomes.</b> "Make energy, protect it, renew the machinery" is cell biology. "More energy / sharper focus / age slower" is the forbidden outcome claim. The framework lives exactly one level below the outcome — same fence as everything else.</li>
+      <li><b>One job, one named active, one named dose.</b> If a node can't name its dose, it's fairy dust. This is "real doses, not fairy dust" made structural.</li>
+      <li><b>Five, not twelve — on purpose.</b> Tighter is the edge. A buyer holds five; a skeptic checks five. Don't let it sprawl.</li>
+      <li><b>Each node's credibility = the supplier's dossier.</b> The framework tells you exactly which study library to request from which house. Build the framework, then go ask (see partner-outreach brief).</li>
+      <li><b>"Necessary, not sufficient" still governs.</b> The five jobs are what the cell needs to <em>run</em>; the framework supplies the inputs. It never promises the customer a felt result.</li>
+    </ol>
+    <div class="flag"><b>Before any consumer use:</b> every node line here is drafted for <b>internal + investor</b> reading and still needs <b>Zone Halo reg review</b> — the mechanism verbs (biogenesis, autophagy, antioxidant) sit near the DSHEA line. Doses on nodes 2–5 are placeholders until the formulation locks. This artifact is the <em>skeleton</em>; reg review decides which words survive to the label.</div>
+  </div>
+
+  <div class="steal">
+    <div class="lbl">The one move</div>
+    <h3>The framework is the procurement spec for credibility</h3>
+    <p>You're not inventing science — you're organizing borrowed evidence into a map a skeptic can walk. Lock these five (six) jobs, and each node becomes a precise request to an ingredient house: <em>"here is the job your ingredient does in our framework — send me the studies and the seal that prove it."</em> The framework turns five vendor relationships into five credibility partnerships.</p>
+  </div>
+
+  <footer>
+    <span>Signal · INSDR Wellness — the cellcare company</span>
+    <span>Internal product framework · uncommitted · pre-reg-review · not consumer copy</span>
+  </footer>
+
+</div>
+
+<script>
+  (function(){
+    var PASS="54321";
+    var gate=document.getElementById("gate");
+    var body=document.body;
+    if(sessionStorage.getItem("signal_unlocked")==="true"){gate.style.display="none";body.classList.remove("locked");}
+    window.checkPass=function(e){
+      e.preventDefault();
+      var input=document.getElementById("gate-pass").value;
+      var err=document.getElementById("gate-error");
+      if(input===PASS){sessionStorage.setItem("signal_unlocked","true");gate.style.display="none";body.classList.remove("locked");}
+      else{err.classList.add("show");document.getElementById("gate-pass").value="";document.getElementById("gate-pass").focus();setTimeout(function(){err.classList.remove("show");},2400);}
+      return false;
+    };
+  })();
+</script>
+</body>
+</html>
