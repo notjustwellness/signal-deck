@@ -27,6 +27,10 @@
   h1 .sub{display:block;font-size:22px;color:var(--gold);margin-top:6px;letter-spacing:.03em;}
   .meta{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:14px;display:flex;flex-wrap:wrap;gap:6px 22px;}
 
+  .tldr{background:var(--espresso);color:var(--bone);border-radius:10px;padding:22px 26px;margin-bottom:26px;}
+  .tldr .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+  .tldr p{font-size:15px;} .tldr p + p{margin-top:10px;} .tldr strong{color:#E8B4AC;}
+
   h2{font-family:var(--display);font-weight:400;font-size:30px;letter-spacing:.02em;color:var(--red-deep);margin:34px 0 4px;}
   h2 .num{color:var(--taupe);margin-right:10px;}
   .lead{color:var(--muted);font-size:13.5px;margin-bottom:18px;border-left:3px solid var(--gold);padding-left:12px;}
@@ -34,44 +38,48 @@
   .c{font-family:var(--mono);font-size:10px;font-weight:500;padding:1px 6px;border-radius:3px;letter-spacing:.04em;white-space:nowrap;}
   .c.cert{background:#dff0e3;color:#2f6b40;} .c.lik{background:#fcefd4;color:#8a6418;} .c.guess{background:#f3e0dd;color:#9a463b;}
 
-  /* the gate-zero box */
-  .gate0{background:#f3e0dd;border:1px solid var(--red);border-radius:10px;padding:18px 22px;margin-bottom:28px;}
-  .gate0 .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:700;}
-  .gate0 p{font-size:14px;color:var(--red-deep);} .gate0 b{color:var(--red);}
+  .trk{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:3px;color:#fff;white-space:nowrap;}
+  .trk.a{background:var(--gold);} .trk.b{background:var(--red);} .trk.na{background:var(--muted);}
 
-  /* ask menu */
+  /* alert / flag boxes */
+  .flagbox{border-radius:10px;padding:18px 22px;margin-bottom:24px;}
+  .flagbox.red{background:#f3e0dd;border:1px solid var(--red);}
+  .flagbox .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px;font-weight:700;color:var(--red);}
+  .flagbox.red p{font-size:14px;color:var(--red-deep);} .flagbox.red b{color:var(--red);}
+  .flagbox p + p{margin-top:9px;}
+
   ol.asks{list-style:none;counter-reset:a;}
-  ol.asks li{counter-increment:a;position:relative;padding:14px 0 14px 54px;border-bottom:1px solid var(--line);}
+  ol.asks li{counter-increment:a;position:relative;padding:13px 0 13px 50px;border-bottom:1px solid var(--line);}
   ol.asks li:last-child{border-bottom:none;}
-  ol.asks li::before{content:counter(a);position:absolute;left:0;top:12px;font-family:var(--display);font-size:30px;color:var(--red);width:40px;text-align:center;line-height:1;}
+  ol.asks li::before{content:counter(a);position:absolute;left:0;top:11px;font-family:var(--display);font-size:28px;color:var(--red);width:38px;text-align:center;line-height:1;}
   ol.asks .t{font-weight:700;color:var(--espresso);}
   ol.asks .why{display:block;font-size:12.5px;color:var(--muted);margin-top:3px;}
-  ol.asks .pri{font-family:var(--mono);font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;background:var(--gold);color:#fff;padding:1px 6px;border-radius:3px;margin-left:6px;vertical-align:middle;}
-  ol.asks .pri.top{background:var(--red);}
 
-  /* template block */
-  .tmpl{background:#fff;border:1px solid var(--line);border-radius:10px;padding:0;overflow:hidden;}
+  .tmpl{background:#fff;border:1px solid var(--line);border-radius:10px;padding:0;overflow:hidden;margin-top:6px;}
   .tmpl .bar{background:var(--espresso);color:var(--bone);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:9px 18px;display:flex;justify-content:space-between;}
   .tmpl .bar .copy{color:var(--gold);}
-  .tmpl .body{padding:20px 24px;font-size:13.5px;}
-  .tmpl .body p{margin-bottom:11px;}
+  .tmpl .body{padding:18px 22px;font-size:13.5px;}
+  .tmpl .body p{margin-bottom:10px;}
   .tmpl .slot{background:var(--cream);color:var(--red-deep);font-family:var(--mono);font-size:11.5px;padding:0 4px;border-radius:3px;}
-  .tmpl .body ul{margin:0 0 11px 0;list-style:none;}
-  .tmpl .body ul li{position:relative;padding:5px 0 5px 20px;font-size:13px;}
+  .tmpl .body ul{margin:0 0 10px 0;list-style:none;}
+  .tmpl .body ul li{position:relative;padding:4px 0 4px 20px;font-size:13px;}
   .tmpl .body ul li::before{content:"→";position:absolute;left:0;color:var(--gold);font-weight:700;}
 
   table{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px;}
   thead th{background:var(--cream);font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--red-deep);text-align:left;padding:9px 12px;border-bottom:2px solid var(--gold);}
   tbody td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+  tbody tr:last-child td{border-bottom:none;}
   tbody tr:nth-child(even){background:#fff;}
-  td.house{font-weight:700;color:var(--red-deep);width:24%;}
+  td.node{font-weight:700;color:var(--espresso);width:14%;}
+  td.act{color:var(--red-deep);font-family:var(--mono);font-size:11.5px;width:30%;}
+  td.tk{width:14%;white-space:nowrap;}
 
   .cards{display:grid;grid-template-columns:1fr;gap:12px;}
   .card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:8px;padding:14px 18px;}
   .card h4{font-size:14px;color:var(--espresso);margin-bottom:4px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;}
   .card p{font-size:13px;color:var(--ink);}
 
-  .syn{background:var(--bone);border:1px solid var(--line);border-radius:10px;padding:18px 22px;}
+  .syn{background:var(--bone);border:1px solid var(--line);border-radius:10px;padding:16px 22px;margin-top:6px;}
   .syn p{font-size:14px;} .syn b{color:var(--red-deep);}
 
   .steal{background:linear-gradient(135deg,var(--red) 0%,var(--red-deep) 100%);color:#fff;border-radius:12px;padding:24px 30px;margin-top:30px;}
@@ -81,8 +89,8 @@
 
   footer{margin-top:38px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
 
-  @media (max-width:680px){h1{font-size:38px;}td.house{width:auto;}}
-  @media print{body{padding:0;background:#fff;}.sheet{max-width:none;}section,.tmpl,.steal,.gate0{break-inside:avoid;}}
+  @media (max-width:680px){h1{font-size:38px;}td.node,td.act,td.tk{width:auto;}}
+  @media print{body{padding:0;background:#fff;}.sheet{max-width:none;}section,.tmpl,.steal,.flagbox,.tldr{break-inside:avoid;}}
 
   /* ─── PASSWORD GATE (mirrors root index.html — friction + noindex, not security) ─── */
   #gate{position:fixed;inset:0;background:#241B17;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:#D8CCC1;padding:40px;text-align:center;}
@@ -120,103 +128,102 @@
 <div class="sheet">
 
   <div class="head">
-    <div class="kicker">Outreach Brief + Template · Internal</div>
+    <div class="kicker">Outreach Brief + Template · Internal · v2 — two-track (ZH/NNB sourcing)</div>
     <h1>Turn suppliers into credibility partners
-      <span class="sub">The exact asks — and a letter you can send</span>
+      <span class="sub">Two tracks, because Zone Halo = NNB = Jake &amp; Sean</span>
     </h1>
     <div class="meta">
       <span>Signal · INSDR Wellness — the cellcare company</span>
       <span>Pairs with: The Five Jobs of a Working Cell</span>
-      <span>2026-06-13 · draft</span>
+      <span>2026-06-13 · v2</span>
     </div>
   </div>
 
-  <div class="gate0">
-    <div class="lbl">⚠ Gate zero — do this before any outreach</div>
-    <p><b>Confirm with Zone Halo who owns each supplier relationship.</b> If ZH sources Kaneka / NNB / BioPQQ / Puremidine through their China sourcing team, Signal may have <b>no direct line</b> to the ingredient house — and seal-licensing, dossier access, and co-marketing almost always require a <b>direct brand-to-supplier relationship.</b> A ZH intermediary can quietly block this entire play. So step one is a question to Jake/Sean: <i>"For each branded active, do we contract the house directly, or through you — and either way, can you introduce us to their brand/marketing team?"</i> <span class="c lik">likely the binding constraint — resolve first</span></p>
+  <div class="tldr">
+    <div class="lbl">Gate zero — answered, and it changes the whole play</div>
+    <p>Signal sources its actives <strong>through Zone Halo</strong>, and <strong>Zone Halo is a company under NNB — both owned by Jake &amp; Sean.</strong> So this is <em>not</em> five cold outreaches. It splits in two: <strong>Track A</strong> — NNB's own ingredients (MitoPrime®, PurestCreatine®) — where you don't write a letter, you write a <em>contract term</em>, because they already hold a $0.67/unit royalty and want you to sell. <strong>Track B</strong> — the third-party actives (Kaneka, BioPQQ, Puremidine) that ZH sources for you — where you have no direct line, so ZH must either <em>broker</em> the rights or <em>introduce</em> you.</p>
+    <p>And one thing to manage, not ignore: Jake &amp; Sean now capture value at <strong>three layers</strong> — ingredient margin, formulation, and the royalty. Aligned incentives, but it puts a <strong>cost-transparency blind spot and a related-party diligence flag</strong> on the table. See §04.</p>
   </div>
 
   <section>
-    <h2><span class="num">01</span>What you're actually asking for — the menu</h2>
-    <div class="lead">You currently ask one thing: price per kg. That's the COGS relationship. These five are the <em>credibility</em> relationship — the branded-ingredient "partner program" most houses run. <span class="c lik">programs likely; confirm per house</span></div>
-    <ol class="asks">
-      <li><span class="t">The clinical dossier + the right to cite it.</span> <span class="pri top">highest value</span><span class="why">Their published human studies on the ingredient are the trial you don't have to run. Ask for the full study library, the substantiation dossier, <b>and their pre-approved claim language</b> — so you stay inside DSHEA using <em>their</em> legal-vetted wording, per framework node.</span></li>
-      <li><span class="t">The seal + "contains X®" license.</span> <span class="pri">baseline</span><span class="why">The right to put Kaneka Ubiquinol™ / MitoPrime® / BioPQQ® / Puremidine® on pack and site. Baseline trust transfer. Ask: licensing terms, qualifying dose/format, and the claim-approval process.</span></li>
-      <li><span class="t">Co-marketing / market-development funds (MDF).</span> <span class="pri">often co-funded</span><span class="why">Many houses co-fund marketing for brands featuring their ingredient: co-branded one-pagers, webinars, social assets, sometimes shared spend or volume rebates. Ask flatly whether a program exists for a launch brand making their ingredient a hero at a clinical dose.</span></li>
-      <li><span class="t">Their scientist as a citable voice.</span> <span class="pri">authority</span><span class="why">A chief scientist or sponsored KOL who'll give a quote, run a webinar, or <b>be a guest on someone else's podcast</b> — the no-host version of borrowed authority. Connects straight to the guesting strategy.</span></li>
-      <li><span class="t">Featured-brand / case-study placement.</span> <span class="pri">inbound</span><span class="why">Being listed on their "brands that use us" page = inbound credibility + traffic. Offer to be a flagship launch case study; that's often the trade for the co-marketing in #3.</span></li>
-    </ol>
-  </section>
-
-  <section>
-    <h2><span class="num">02</span>The letter — fill the slots, send to each house</h2>
-    <div class="lead">One email, customized per ingredient. Keep it short; lead with what's in it for <em>them</em> (a premium showcase at a real dose), then ask.</div>
-    <div class="tmpl">
-      <div class="bar"><span>Outreach email · template</span><span class="copy">replace every <span style="color:#E8B4AC;">slot</span></span></div>
-      <div class="body">
-        <p><b>Subject:</b> <span class="slot">[Ingredient brand]</span> as a hero active in a new premium cellcare brand — partnership?</p>
-        <p>Hi <span class="slot">[name]</span>,</p>
-        <p>I'm <span class="slot">[Damon / title]</span>, co-founder of <b>Signal</b> by INSDR Wellness — a premium U.S. cellular-health brand launching <span class="slot">[Q4 2026]</span>. We're built on a simple discipline: <b>real actives at named, clinical doses — no proprietary blends, no fairy dust.</b></p>
-        <p>We've made <span class="slot">[Ingredient brand]</span> a <b>hero active</b> in our flagship, at <span class="slot">[dose]</span>, where it does a specific job in our product framework: <span class="slot">[e.g. "Generate — carrying electrons through the chain that produces ATP"]</span>. We chose the branded form precisely because the evidence and identity behind it are real.</p>
-        <p>Because we're featuring it prominently and honestly, I'd love to explore a partnership. Specifically:</p>
-        <ul>
-          <li>Access to your <b>clinical dossier + approved claim language</b> for the ingredient</li>
-          <li><b>Seal / "contains <span class="slot">[X]</span>®" licensing</b> for pack and web</li>
-          <li>Any <b>co-marketing or market-development support</b> you offer launch partners</li>
-          <li>Whether your <b>scientific team</b> would ever contribute a quote, webinar, or guest appearance</li>
-          <li>Being considered as a <b>flagship case study</b> as we scale</li>
-        </ul>
-        <p>Happy to share our formulation brief and positioning under NDA. Who's the right person on your brand/marketing side?</p>
-        <p>Best,<br><span class="slot">[Damon]</span></p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2><span class="num">03</span>Per-house notes — who likely has what</h2>
-    <div class="lead">Starting assumptions to confirm; tailor the letter accordingly. <span class="c guess">guessing on specifics — verify each program</span></div>
+    <h2><span class="num">01</span>The map — which node, which house, which track</h2>
+    <div class="lead">Read off the framework. The track tells you whether the credibility ask is a contract term or a brokered introduction.</div>
     <table>
-      <thead><tr><th>House / mark</th><th>What to expect &amp; emphasize</th></tr></thead>
+      <thead><tr><th>Node</th><th>Branded active · house</th><th>Track</th></tr></thead>
       <tbody>
-        <tr><td class="house">Kaneka — Ubiquinol QH®</td><td>Most mature branded-ingredient program of the set; established seal + deep ubiquinol dossier. Lead with the seal + bioavailability data. Likely the easiest "yes."</td></tr>
-        <tr><td class="house">NNB — MitoPrime® (ergothioneine), PurestCreatine®</td><td>Ingredient innovator with marketing support; MitoPrime has a distinctive transporter/mitochondrial story. Ask for the dossier and co-branded content. Covers two nodes (Protect + the N°002 Reserve).</td></tr>
-        <tr><td class="house">BioPQQ® licensor (Mitsubishi Gas Chemical lineage)</td><td>Push for <b>human</b> biogenesis data specifically; this is the framework's least-settled node, so the dossier matters most here. Keep claims measured.</td></tr>
-        <tr><td class="house">Oxford Healthspan / Puremidine® house</td><td>Spermidine + longevity narrative is their whole brand — strong co-marketing fit and a natural scientist-as-guest. Confirm sourcing/origin story (it travels with the autophagy claim).</td></tr>
-        <tr><td class="house">Magnesium (Albion/Balchem TRAACS, if branded)</td><td>Confirm whether your bisglycinate is a branded chelate at all — if yes, request the bioavailability data for node 1; if a commodity grade, this node leans on textbook biochemistry, not a partner.</td></tr>
+        <tr><td class="node">Activate</td><td class="act">Magnesium bisglycinate — commodity or Albion/Balchem (confirm)</td><td class="tk"><span class="trk na">confirm if branded</span></td></tr>
+        <tr><td class="node">Generate</td><td class="act">Kaneka QH® ubiquinol — Kaneka</td><td class="tk"><span class="trk b">B · via ZH</span></td></tr>
+        <tr><td class="node">Multiply</td><td class="act">BioPQQ® — Mitsubishi Gas Chemical lineage</td><td class="tk"><span class="trk b">B · via ZH</span></td></tr>
+        <tr><td class="node">Protect</td><td class="act">MitoPrime® ergothioneine — <b>NNB</b></td><td class="tk"><span class="trk a">A · in-house</span></td></tr>
+        <tr><td class="node">Renew</td><td class="act">Puremidine® spermidine — Oxford Healthspan</td><td class="tk"><span class="trk b">B · via ZH</span></td></tr>
+        <tr><td class="node">Reserve <span style="color:var(--gold);font-weight:400;">(N°002)</span></td><td class="act">PurestCreatine® — <b>NNB</b></td><td class="tk"><span class="trk a">A · in-house</span></td></tr>
       </tbody>
     </table>
   </section>
 
   <section>
-    <h2><span class="num">04</span>Your leverage — and the strings</h2>
-    <div class="syn" style="margin-bottom:14px;">
-      <p><b>Why they say yes:</b> you're making their ingredient the <em>hero at a clinical dose</em> in a premium brand — the exact showcase they want, and the opposite of the under-dosed brands that embarrass them. Premium positioning lifts <em>their</em> ingredient's brand too. <b>You are the case study they'd pay to have.</b> <span class="c lik">likely</span></p>
+    <h2><span class="num">02</span><span class="trk a" style="font-size:13px;vertical-align:middle;margin-right:8px;">Track A</span>NNB's own ingredients — negotiate it, don't ask for it</h2>
+    <div class="lead">MitoPrime + PurestCreatine are NNB's. You hold royalty leverage — they only earn the $0.67 if Signal sells, so making these nodes credible is in <em>their</em> interest. Don't send a polite letter; put it on the engagement term sheet. <span class="c lik">leverage is highest pre-signature</span></div>
+    <ol class="asks">
+      <li><span class="t">Dossiers + seal + co-marketing, bundled into the engagement.</span><span class="why">The MitoPrime / PurestCreatine study libraries, the seal/"contains" rights, and co-branded content — as deliverables of the relationship, not separate favors. They have every reason to say yes.</span></li>
+      <li><span class="t">Sean as the named, citable scientific voice.</span><span class="why">If Sean is the formulator, he's your built-in authority — already aligned by the royalty. The "scientist as a citable voice / podcast guest" play needs no cold recruiting; it's a person you're already paying to work on Signal. This is the no-host authority engine, handed to you.</span></li>
+      <li><span class="t">Pre-approved claim language for both ingredients.</span><span class="why">NNB's reg-vetted wording for ergothioneine + creatine keeps your framework nodes inside DSHEA. Get it in writing.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span><span class="trk b" style="font-size:13px;vertical-align:middle;margin-right:8px;">Track B</span>Third-party actives — ZH brokers or introduces</h2>
+    <div class="lead">Kaneka, BioPQQ, Puremidine are sourced through ZH, so you have no direct relationship. Two moves, both routed through Jake/Sean.</div>
+    <ol class="asks">
+      <li><span class="t">Ask ZH to broker the seal + dossier + co-marketing rights</span> — or to <b>introduce Signal directly</b> to each house's brand team.<span class="why">Seal-licensing (esp. Kaneka's) usually requires a registered, verified-source relationship. If ZH holds it, the rights pass through them — so secure ZH's cooperation as part of the engagement.</span></li>
+      <li><span class="t">Name the disincentive out loud.</span><span class="why">A direct Kaneka relationship mildly disintermediates ZH's sourcing margin, so they may prefer to broker rather than introduce. Fine — but get the seal rights confirmed either way, in writing, before signature.</span></li>
+    </ol>
+    <div class="tmpl">
+      <div class="bar"><span>The letter — for an <em>introduced</em> third-party house (Track B)</span><span class="copy">use only after ZH introduces you</span></div>
+      <div class="body">
+        <p><b>Subject:</b> <span class="slot">[Ingredient brand]</span> as a hero active in Signal — partnership?</p>
+        <p>Hi <span class="slot">[name]</span>, I'm <span class="slot">[Damon / title]</span>, co-founder of <b>Signal</b> by INSDR Wellness — a premium U.S. cellular-health brand launching <span class="slot">[Q4 2026]</span>, introduced by our formulation partner at Zone Halo / NNB. We've made <span class="slot">[Ingredient brand]</span> a <b>hero active</b> at <span class="slot">[dose]</span>, doing a specific job in our product framework: <span class="slot">[e.g. "Generate"]</span>.</p>
+        <p>Because we feature it prominently and at a clinical dose, I'd love to explore:</p>
+        <ul>
+          <li>Your <b>clinical dossier + approved claim language</b></li>
+          <li><b>Seal / "contains <span class="slot">[X]</span>®" licensing</b> for pack and web</li>
+          <li>Any <b>co-marketing / market-development support</b> for launch partners</li>
+          <li>Whether your <b>scientific team</b> would contribute a quote or guest appearance</li>
+          <li>Being considered a <b>flagship case study</b> as we scale</li>
+        </ul>
+        <p>Happy to share our brief under NDA. Best, <span class="slot">[Damon]</span></p>
+      </div>
     </div>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span>The related-party flag — manage it, don't paper over it</h2>
+    <div class="lead">Jake &amp; Sean take three bites — ingredient margin (NNB) + formulation (ZH) + the $0.67/unit royalty. Aligned, but it carries two real risks and a diligence flag. <span class="c cert">structure certain</span></div>
     <div class="cards">
       <div class="card">
-        <h4>String 1 — claim-approval control <span class="c cert">certain</span></h4>
-        <p>The seal and dossier come with the house policing how you use them. Good for DSHEA discipline; it means you can't improvise claims. Build that into the reg-review loop, don't fight it.</p>
+        <h4>Cost-transparency blind spot <span class="c lik">likely</span></h4>
+        <p>When ZH sources Kaneka/BioPQQ/Puremidine for you, you see <em>ZH's</em> price, not the house's. They could mark up the third-party actives and you couldn't easily tell — and your hero COGS model (~$19–27, with Kaneka ubiquinol alone ~$6–11 of it) rests on that number. <b>Ask for itemized third-party ingredient costs</b>, or accept a related-party blind spot in your margin.</p>
       </div>
       <div class="card">
-        <h4>String 2 — the seal is table stakes, not a moat <span class="c cert">certain</span></h4>
-        <p>Every competitor using Kaneka can show the same mark. Seals are <b>scaffolding on top of your moat</b> (the framework + the honesty), not the moat itself. Don't let Signal become "a Kaneka brand."</p>
+        <h4>The supplier-funded-study counter <span class="c lik">likely</span></h4>
+        <p>Two nodes (Protect, Reserve) cite <em>NNB's own</em> studies — and NNB is your formulator-with-a-royalty. A sharp Stacker will say "the company selling you the ingredient funded the research." <b>The counter is the per-lot third-party testing already in scope (~$2,500/lot)</b> — it proves identity + potency independent of NNB's efficacy claims. Lean on it.</p>
       </div>
       <div class="card">
-        <h4>String 3 — the ZH relationship question (again) <span class="c lik">likely</span></h4>
-        <p>If you don't hold the direct supplier relationship, none of the above is yours to ask for. Gate zero isn't optional — it decides whether this brief is actionable at all.</p>
+        <h4>Investor diligence will circle this <span class="c lik">likely</span></h4>
+        <p>One related party at three layers of the P&amp;L is a standard diligence question. Get ahead of it: document arm's-length pricing, the itemized costs, and why the embedded-R&amp;D-arm structure is a feature (aligned incentives) not a leak.</p>
       </div>
     </div>
   </section>
 
   <div class="steal">
-    <div class="lbl">The sequence</div>
-    <h3>Framework → dossier request → seal + co-marketing</h3>
-    <p>The Five Jobs framework already tells you the job each ingredient does — so each letter writes itself: name the node, ask for the evidence and seal that prove it, offer the showcase in return. Five vendor relationships become five credibility partnerships. But send nothing until gate zero is answered.</p>
+    <div class="lbl">The one move</div>
+    <h3>Negotiate credibility into the engagement, not after it</h3>
+    <p>Everything here — the NNB dossiers and seals, Sean as your citable scientist, ZH brokering the Kaneka/BioPQQ/Puremidine rights, and itemized third-party costs — should land on the <b>two-day engagement term sheet</b>, while your leverage is highest and before anything is signed. The framework already names what each ingredient must prove; this brief names who delivers it and on which track. Don't leave it for a "later" that arrives after the ink dries.</p>
   </div>
 
   <footer>
     <span>Signal · INSDR Wellness — the cellcare company</span>
-    <span>Internal outreach brief · uncommitted · confirm supplier relationships before sending</span>
+    <span>Internal outreach brief v2 · uncommitted · gated — share by direct URL only</span>
   </footer>
 
 </div>
