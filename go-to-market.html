@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>signal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#AD4236; --red-deep:#7A2E26; --espresso:#241B17; --ink:#2E2420;
+    --bone:#F6EFEA; --cream:#EFE5D1; --taupe:#D8CCC1; --gold:#A8845A;
+    --muted:#6D665C; --line:#C8BEAE; --paper:#FBF8F4;
+    --display:'Bebas Neue',Impact,sans-serif;
+    --body:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased;padding:48px 20px;}
+  .sheet{max-width:920px;margin:0 auto;}
+
+  .head{border-bottom:3px solid var(--espresso);padding-bottom:18px;margin-bottom:30px;}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+  h1{font-family:var(--display);font-weight:400;font-size:54px;line-height:.95;letter-spacing:.01em;color:var(--espresso);}
+  h1 .sub{display:block;font-size:24px;color:var(--gold);margin-top:6px;letter-spacing:.04em;}
+  .meta{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:14px;display:flex;flex-wrap:wrap;gap:6px 22px;}
+
+  .tldr{background:var(--espresso);color:var(--bone);border-radius:10px;padding:22px 26px;margin-bottom:34px;}
+  .tldr .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+  .tldr p{font-size:15.5px;}
+  .tldr strong{color:#E8B4AC;}
+  .tldr p + p{margin-top:10px;}
+
+  section{margin-bottom:38px;}
+  h2{font-family:var(--display);font-weight:400;font-size:30px;letter-spacing:.02em;color:var(--red-deep);margin-bottom:4px;}
+  h2 .num{color:var(--taupe);margin-right:10px;}
+  .lead{color:var(--muted);font-size:13.5px;margin-bottom:18px;border-left:3px solid var(--gold);padding-left:12px;}
+
+  .c{font-family:var(--mono);font-size:10px;font-weight:500;padding:1px 6px;border-radius:3px;letter-spacing:.04em;vertical-align:middle;white-space:nowrap;}
+  .c.cert{background:#dff0e3;color:#2f6b40;}
+  .c.lik{background:#fcefd4;color:#8a6418;}
+  .c.guess{background:#f3e0dd;color:#9a463b;}
+
+  /* Plain-language glossary text */
+  .gloss{color:var(--muted);font-style:italic;}
+
+  /* Sequence-at-a-glance strip */
+  .seq{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin-bottom:34px;}
+  .seq .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+  .seq ol{list-style:none;counter-reset:s;}
+  .seq li{counter-increment:s;position:relative;padding:8px 0 8px 40px;border-bottom:1px solid var(--line);font-size:13.5px;}
+  .seq li:last-child{border-bottom:none;}
+  .seq li::before{content:counter(s);position:absolute;left:0;top:7px;font-family:var(--display);font-size:22px;color:var(--red);width:28px;text-align:center;line-height:1;}
+  .seq b{color:var(--espresso);}
+  .seq .g{display:block;color:var(--muted);font-size:12.5px;margin-top:1px;}
+
+  /* Phase blocks */
+  .phase{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 22px;margin-bottom:14px;position:relative;overflow:hidden;}
+  .phase::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--red);}
+  .phase .ph{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:2px;}
+  .phase h3{font-family:var(--display);font-weight:400;font-size:24px;letter-spacing:.02em;color:var(--espresso);margin-bottom:8px;}
+  .phase h3 .c{font-family:var(--mono);font-size:10px;letter-spacing:.04em;vertical-align:middle;}
+  .phase .goal{font-size:13.5px;margin-bottom:8px;}
+  .phase .goal b{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--red-deep);}
+  .phase .steps-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--red-deep);margin-top:4px;}
+  .phase ul{list-style:none;margin:4px 0 10px;}
+  .phase li{padding:4px 0 4px 18px;position:relative;font-size:13.5px;}
+  .phase li::before{content:"–";position:absolute;left:0;color:var(--gold);}
+  .gate{background:var(--cream);border-radius:6px;padding:9px 13px;font-size:13px;}
+  .gate b{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--red-deep);}
+
+  /* Decision cards */
+  .cards{display:grid;grid-template-columns:1fr;gap:12px;}
+  .card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:8px;padding:14px 18px;}
+  .card.open{border-left-color:var(--gold);background:#fffdf8;}
+  .card.fence{border-left-color:var(--gold);}
+  .card h4{font-size:14px;color:var(--espresso);margin-bottom:4px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;}
+  .card p{font-size:13.5px;color:var(--ink);}
+  .card p + p{margin-top:7px;}
+  .pill{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:#fff;padding:2px 7px;border-radius:3px;}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px;}
+  thead th{background:var(--cream);font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--red-deep);text-align:left;padding:9px 12px;border-bottom:2px solid var(--gold);}
+  tbody td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+  tbody tr:nth-child(even){background:#fff;}
+  td.play{font-weight:600;color:var(--red-deep);width:28%;}
+  td.risk{width:14%;white-space:nowrap;text-align:center;font-size:15px;}
+
+  .nodes{counter-reset:n;list-style:none;}
+  .nodes > li{counter-increment:n;position:relative;padding:13px 0 13px 50px;border-bottom:1px solid var(--line);}
+  .nodes > li:last-child{border-bottom:none;}
+  .nodes > li::before{content:counter(n);position:absolute;left:0;top:11px;font-family:var(--display);font-size:28px;color:var(--red);width:36px;text-align:center;line-height:1;}
+  .nodes b{color:var(--espresso);}
+
+  .flag{background:#f3e0dd;border-radius:8px;padding:14px 18px;font-size:13.5px;color:var(--red-deep);}
+  .flag b{color:var(--red);}
+
+  .steal{background:linear-gradient(135deg,var(--red) 0%,var(--red-deep) 100%);color:#fff;border-radius:12px;padding:26px 30px;}
+  .steal .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#F1C9C2;margin-bottom:8px;}
+  .steal h3{font-family:var(--display);font-weight:400;font-size:28px;letter-spacing:.02em;margin-bottom:8px;}
+  .steal p{font-size:15px;}
+
+  footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media (max-width:680px){h1{font-size:40px;} td.play{width:auto;}}
+  @media print{body{padding:0;background:#fff;}.sheet{max-width:none;}section,.tldr,.seq,.steal,.phase{break-inside:avoid;}}
+
+  /* ─── PASSWORD GATE (mirrors root index.html — friction + noindex, not security) ─── */
+  #gate{position:fixed;inset:0;background:#241B17;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:#D8CCC1;padding:40px;text-align:center;}
+  #gate .gate-overline{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#AD4236;margin-bottom:16px;font-weight:600;}
+  #gate .gate-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:72px;color:#AD4236;line-height:.9;margin-bottom:32px;letter-spacing:-1.6px;text-transform:lowercase;}
+  #gate .gate-title .accent{color:#D8CCC1;}
+  #gate .gate-subtitle{font-size:14px;opacity:.6;margin-bottom:32px;letter-spacing:1px;}
+  #gate form{display:flex;flex-direction:column;align-items:center;gap:12px;}
+  #gate input{background:rgba(246,239,234,.08);border:1px solid rgba(246,239,234,.2);border-radius:6px;color:#D8CCC1;padding:14px 20px;font-size:15px;font-family:inherit;width:280px;text-align:center;letter-spacing:1px;outline:none;transition:border-color .2s;}
+  #gate input:focus{border-color:#AD4236;}
+  #gate button{background:#AD4236;color:#D8CCC1;border:none;border-radius:6px;padding:12px 32px;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background .2s;}
+  #gate button:hover{background:#c4574b;}
+  #gate .gate-error{color:#AD4236;font-size:12px;margin-top:8px;opacity:0;transition:opacity .2s;letter-spacing:1px;}
+  #gate .gate-error.show{opacity:1;}
+  #gate .gate-footer{position:absolute;bottom:40px;font-size:10px;opacity:.3;letter-spacing:3px;text-transform:uppercase;}
+  body.locked{overflow:hidden;height:100vh;}
+  body.locked > div:not(#gate){display:none !important;}
+</style>
+</head>
+<body class="locked">
+
+<!-- ═══════════════════ PASSWORD GATE ═══════════════════ -->
+<div id="gate">
+  <div class="gate-overline">INSDR Wellness — the cellcare company · Confidential</div>
+  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪgnɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="gate-subtitle">Enter password to continue.</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
+    <button type="submit">Enter</button>
+    <div class="gate-error" id="gate-error">Incorrect. Try again.</div>
+  </form>
+  <div class="gate-footer">Confidential — internal · do not share.</div>
+</div>
+
+<div class="sheet">
+
+  <div class="head">
+    <div class="kicker">Go-To-Market Plan · For the founding team · Internal</div>
+    <h1>Signal Go-To-Market
+      <span class="sub">How we launch — the steps and the checkpoints</span>
+    </h1>
+    <div class="meta">
+      <span>Written for the co-founders</span>
+      <span>U.S. launch only · one product (N°001) · U.S. supplement rules apply</span>
+      <span>2026-06-05</span>
+    </div>
+  </div>
+
+  <div class="tldr">
+    <div class="lbl">The plan in three sentences</div>
+    <p>We launch in steps, and each step has a <strong>checkpoint we must pass before we spend money on the next one</strong>. The thing that turns the launch on is early proof from real customers — but the thing that keeps the business alive is whether those customers <strong>buy again</strong>, so the key checkpoint is the re-order rate, not the number of reviews.</p>
+    <p>Build the one channel that no outside company can take away from us — our <strong>own audience (our email list, our members, our community)</strong> — first. Then make every rented channel (ads, Reddit, Amazon) feed that owned audience, so that if any one of them is switched off, we are still standing.</p>
+    <p style="margin-top:8px;"><strong>We launch one product only: N°001, the foundation hero ($89).</strong> One product means one price, one set of numbers, and one clear message — so the first customers prove <em>one</em> thing cleanly. The second product (N°002) is on the roadmap, <strong>not in this launch</strong>. We only build it after N°001 passes its re-order checkpoint.</p>
+  </div>
+
+  <div class="seq">
+    <div class="lbl">The whole path at a glance</div>
+    <ol>
+      <li><b>Phase −1 · Build the audience</b> — earn a place in a skeptical community and start our own community, so we have people to recruit later.<span class="g">Checkpoint: founder posting has been steady for 30 days, and a real foothold exists (standing on Reddit + our own community started).</span></li>
+      <li><b>Phase 0 · Build the proof a stranger can see</b> — lab results, cost transparency, the review system.<span class="g">Checkpoint: a first-time visitor sees real proof in 30 seconds.</span></li>
+      <li><b>Phase 1 · Recruit the first customers</b> — 100–500 founding members who use it honestly and leave reviews.<span class="g">Checkpoint: enough reviews/photos AND at least ~40% buy a second time.</span></li>
+      <li><b>Phase 2 · Win one market with word of mouth</b> — pick one place, fill it with customer content and press, before paying for reach.<span class="g">Checkpoint: real organic demand + a clean read on what a customer costs to win.</span></li>
+      <li><b>Phase 3 · Turn on paid ads</b> — scale up, aimed at the kind of customer we already converted.<span class="g">Checkpoint: ads pay for themselves inside our time limit.</span></li>
+    </ol>
+  </div>
+
+  <section>
+    <h2><span class="num">01</span>The steps — and the checkpoint at each one</h2>
+    <div class="lead">Every step has a checkpoint we must pass before spending the next dollar. Most direct-to-consumer supplement launches fail because they skip straight to paid ads (Phase 3) before earning the right to be there.</div>
+
+    <div class="phase">
+      <div class="ph">Phase −1 · Build the audience</div>
+      <h3>Earn the right to recruit — before the first customers exist</h3>
+      <p class="goal"><b>Goal</b> &nbsp;Signal starts with <b>no creator or community relationship in the U.S.</b> Phase 1 will recruit a founding group of customers — but we cannot recruit from nothing. So we build the audience first.</p>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:6px;">This phase runs at the same time as Phase 0, takes 3–6 months, and pushes the launch date back. Plan for that delay — it is not free.</p>
+      <p style="font-size:13px;color:var(--red-deep);background:#f3e0dd;border-radius:7px;padding:9px 13px;margin-bottom:10px;"><b>Start gate — Zone Halo:</b> the 30-day sprint and the r/Supplements earn-in <b>start only after the Zone Halo two-day (end-July / early-Aug 2026)</b>, once the formulation, partner, and go-forward are settled. We time the audience build to <i>converge with product availability</i> rather than run ahead of it and idle with nothing to sell. <b>Consequence:</b> with an ~Aug start, <b>Dec 2026 = founding-cohort live at the earliest; the re-order checkpoint lands Q1 2027.</b> The checkpoint governs the date, not the other way around.</p>
+      <div class="steps-lbl">Steps</div>
+      <ul>
+        <li><b>A two-person content engine</b> — <b>Damon</b> carries the message and posts every day (the first thing we ship is a 30-day "post every day" sprint to prove he can keep it up). <b>Vanness Wu</b> adds bigger, planned posts on top for extra reach. The science and the honesty stay the star; Vanness amplifies the message, he does not become the brand.</li>
+        <li><b>Earn trust first; do not advertise at people</b> — build a real reputation in a large, skeptical community (<b>r/Supplements</b>, ~105,000 members; the longevity community nearby). These communities reject brands that just show up to sell. We get in by being genuinely helpful — answering questions and giving honest opinions (see the "earn-in" steps in §02).</li>
+        <li><b>Start our own community</b> — open the <b>Skool or Discord</b> group that the most engaged people flow into. This is where we convert them, build the early proof, and hold onto them. It is also the audience no outside company can take from us — the whole "stay alive" plan in §05 rests on it.</li>
+      </ul>
+      <div class="gate"><b>Checkpoint</b> &nbsp;At day 30 of the sprint, two things must be true: <b>(1)</b> the daily founder posting has proven it can be kept up, <b>and (2)</b> a real foothold exists — earned standing in r/Supplements <b>and</b> our own community started with its first members. If we miss it, fix the content engine first (see the sprint's backup plan). Do not let Phase 1 lean on an audience that is not actually there.</div>
+    </div>
+
+    <div class="phase">
+      <div class="ph">Phase 0 · Build the proof</div>
+      <h3>Build the proof a stranger can see — before recruiting anyone</h3>
+      <p class="goal"><b>Goal</b> &nbsp;We cannot create customer proof with nowhere to show it and nothing to point at. Our promise is "show how it works, do not make a claim" — so we build the proof first.</p>
+      <div class="steps-lbl">Steps</div>
+      <ul>
+        <li>A <b>COA</b> <span class="gloss">(certificate of analysis — the lab report proving each batch contains what the label says)</span> for every production batch, shown publicly.</li>
+        <li>The <b>cost-transparency page</b> — our ingredient and <b>COGS</b> <span class="gloss">(cost of goods sold — what one box costs us to make)</span> breakdown. This is the proof a skeptic cannot fake.</li>
+        <li>The review and customer-content system wired into the store — with the U.S. claims rules built in from day one (see §03).</li>
+        <li>The streak / habit feature tied to the <b>bottle cycle</b> — the moment a customer needs to re-order is the moment we keep them, so the streak must carry someone across the 30-day refill or it is just decoration.</li>
+      </ul>
+      <div class="gate"><b>Checkpoint</b> &nbsp;A first-time visitor can see, in 30 seconds, proof that Signal is real. If they cannot, we are not allowed to start recruiting.</div>
+    </div>
+
+    <div class="phase">
+      <div class="ph">Phase 1 · Recruit the first customers</div>
+      <h3>Create the early proof — the founding group</h3>
+      <p class="goal"><b>Goal</b> &nbsp;Recruit 100–500 founding members → they use it honestly → they leave reviews → photos, videos, and streaks build up. This is the early proof that makes a stranger believe.</p>
+      <div class="steps-lbl">Steps</div>
+      <ul>
+        <li><b>Set a real number for "enough proof":</b> for example, 100+ written reviews, 30+ customer photos or videos, 20+ streak stories. Decide what "ready" means now, so later it is not just a feeling.</li>
+        <li><b>The cost is small</b> — about 500 boxes × ~$22 to make ≈ $11,000 plus shipping. Treat it as the cheapest way we will ever lower our cost to win a customer.</li>
+        <li><b>The real checkpoint is the re-order rate, not the review count.</b> If hand-picked, motivated founders do not buy a second time, strangers never will.</li>
+      </ul>
+      <div class="gate"><b>Checkpoint</b> &nbsp;Enough proof collected <b>AND</b> the re-order floor is cleared (for example, at least 40% buy again). If we miss the re-order floor, we have a <em>product</em> problem, not a marketing problem — and no later step can fix that.</div>
+    </div>
+
+    <div class="phase">
+      <div class="ph">Phase 2 · Win one market</div>
+      <h3>Grow with word of mouth and press — almost no paid ads yet</h3>
+      <p class="goal"><b>Goal</b> &nbsp;Pick <b>one</b> market and go deep. Fill it with the founding group's photos, videos, and reviews, plus press that explains who we are. Let word of mouth do the work before we pay for reach.</p>
+      <div class="gate"><b>Checkpoint</b> &nbsp;We can see real organic demand <b>and</b> a clean read, in a controlled setting, on what it costs to win a customer and how long it takes to earn that back.</div>
+    </div>
+
+    <div class="phase">
+      <div class="ph">Phase 3 · Turn on paid ads</div>
+      <h3>Scale up with paid acquisition</h3>
+      <p class="goal"><b>Goal</b> &nbsp;Now turn on paid ads, aimed at the kind of customer we have already converted (premium-stack buyers, found by building ad audiences that look like our founding group). The trust-building work keeps running underneath the whole time.</p>
+      <div class="gate"><b>Checkpoint</b> &nbsp;Ads pay for themselves inside our time limit. At ~$89 per order and ~60% margin ≈ ~$53 profit per box, we can afford a real cost to win a customer <em>if</em> the subscription value holds up — and Phase 1's re-order data now lets us estimate that instead of guess.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span>The decisions we have made</h2>
+    <div class="lead">The launch market and how we sell are locked: direct-to-consumer, through a healthy-optimizer community, U.S. only. The plan for who joins the first group is the working recommendation below.</div>
+    <div class="cards">
+      <div class="card">
+        <h4>What we launch <span class="pill" style="background:#2f6b40;">Locked</span></h4>
+        <p><b>One product at launch — N°001, the foundation hero ($89).</b> We built the whole launch around a single product on purpose: one price, one set of numbers, one message, and a founding group whose re-order behavior proves <em>one</em> thing with nothing else muddying the result.</p>
+        <p style="color:var(--muted);font-size:12.5px;"><b>The bigger product line stays the vision — but not the launch.</b> N°002 (the "daily fuel," working name) is our growth story and lives on the investor and concept materials. But it is <b>on the roadmap, locked behind N°001's re-order proof</b> — never a launch-day move. We do not develop the next product until the first one earns it.</p>
+      </div>
+      <div class="card">
+        <h4>Who joins the first customer group</h4>
+        <p>Our audience is <b>healthy people keeping a strong foundation</b> — optimizers, not the unwell, and not anyone buying on someone else's behalf. Inside that audience, the <b>skeptical optimizer</b> (the "stacker" — someone who already takes many supplements and questions everything) is the hardest to convince, which makes their endorsement the most believable. For <b>building proof</b>, we want the testimony that is hardest to fake. So we recruit the first group from there.</p>
+        <p>So: recruit the founding group from <b>skeptical optimizers</b> (the "even I am convinced" voice). Later, in Phase 3, paid ads target the <b>wider healthy-foundation audience</b> — less skeptical, more aspirational — using the skeptics' proof to lower their guard. <b>The first group and the paid-ad target are different slices of the same healthy-maintenance audience, on purpose.</b></p>
+      </div>
+      <div class="card">
+        <h4>How we sell <span class="pill" style="background:#2f6b40;">Locked</span></h4>
+        <p><b>Direct-to-consumer</b> <span class="gloss">(DTC — we sell straight to the customer online, with no shop or retail middleman)</span>, <b>U.S. only.</b> We launch through a single online channel where reviews, streaks, and customer content build on each other. This removes retail selling, which always fought against our "build early proof" approach — so there is no tension left to manage.</p>
+        <p><b>The exact channel is locked — a hybrid that gives both credibility and a place we can fill:</b> earn credibility in a large skeptic community (<b>r/Supplements</b>, ~105,000 members — exactly the dose-questioning people we want; the longevity community nearby), and funnel the most engaged into a <b>small community we own and control (Skool or Discord)</b>.</p>
+        <p style="color:var(--muted);font-size:12.5px;"><b>It is one funnel, not two separate efforts:</b> Reddit gives us <em>reach and credibility</em> (it is rented, and harsh on anything that looks like an ad — so we <em>earn our place</em> with honest, helpful posts, never advertise <em>at</em> people). The <b>community we own (Skool / Discord) is where we convert people and hold them</b>, and it is part of the audience no one can take from us. Reddit builds the credibility; our own community holds the people. <b>The daily founder-content sprint is the on-ramp to both.</b></p>
+        <p style="color:var(--muted);font-size:12.5px;"><b>Not in this launch:</b> retail is a different game (long sell-in cycle, no review/content loop). Frank's GNC-Taiwan deal is a <em>future Taiwan-market</em> channel — not part of this launch. The entire current plan is U.S.-only.</p>
+      </div>
+      <div class="card">
+        <h4>The earn-in steps — how the hybrid actually runs</h4>
+        <p><b>r/Supplements (the credibility front):</b></p>
+        <ul style="margin:4px 0 10px;">
+          <li><b>30–60 days of pure helping first</b> — answer dose questions, point out where popular products are under-dosed, share the "always show the lab report" view. <em>No store link, no product mention.</em> Reputation is the currency here; moderators ban anything promotional on sight.</li>
+          <li>Build one <b>recognizable, openly-disclosed</b> founder account. Never use fake accounts — one exposed fake account ends this channel for good.</li>
+          <li>Only after we have a reputation: a single honest post — <b>"I am building this; here is the lab report, tear it apart."</b> Invite people to question it, not to buy. <b>The skeptics' scrutiny is the credibility moment</b> — that is the value, not the traffic.</li>
+          <li>State that we are the founder/owner every single time (both U.S. advertising rules and the subreddit's own rules require it). Every post, no exceptions.</li>
+        </ul>
+        <p><b>Our own community (the place we can fill) — pick <em>one</em>, not both:</b></p>
+        <ul style="margin:4px 0 6px;">
+          <li><b>Recommendation: Skool</b> over Discord for the founding group — it is more structured, easier to fill, and its leaderboard maps neatly onto our streak/habit feature; a free tier helps seed it. (Discord is lower-friction but harder to structure and fill.)</li>
+          <li><b>Seed it</b> from the sprint's most engaged followers, plus the r/Supplements people who raise their hand (the Week-4 email sign-up is the bridge from rented reach to our owned audience).</li>
+          <li><b>Keep your own copy of the member list and emails</b> in <em>our</em> store and email tool, never only inside the platform. This is the "can't be taken away" layer from §05 — do not let the platform hold the only copy.</li>
+        </ul>
+        <p style="color:var(--muted);font-size:12.5px;"><b>One funnel:</b> Reddit earns the credibility → our own community holds the people → the founding group creates the proof. The daily founder-content sprint is the on-ramp to all three.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span>The rule that runs through the whole machine</h2>
+    <div class="lead">The U.S. supplement-claims line is not a footnote. Our proof machine is built on reviews and customer content that we asked for — and the U.S. advertising regulator (the FTC) treats those the same as paid endorsements. So the rule below runs through everything.</div>
+    <div class="cards">
+      <div class="card fence">
+        <h4>Reviews we ask for carry the same legal risk as paid endorsements</h4>
+        <p>• <b>Disclose the connection</b> (we gave them free product) on every founding-group review or post. No exceptions.<br>
+        • Do not <b>steer</b> reviewers toward disease or cure language — if customer content implies the product treats a disease, that gets blamed on us.<br>
+        • The founding-group instructions coach "your daily practice / what you felt," never "it cured my X."</p>
+        <p>This is the same wall as our other standing rule ("never mention inflammation in cold consumer copy"), now applied to the whole customer-content layer — which is the exact layer this launch is betting on. Build it into the Phase 0 review system (automatic disclosure, "practice-and-feel" prompts), or the machine becomes a legal problem the moment it starts working.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span>The six core ideas, mapped to the steps</h2>
+    <table>
+      <thead><tr><th>Idea</th><th>Where it lives</th></tr></thead>
+      <tbody>
+        <tr><td class="play">Early proof from real customers</td><td>The heart of Phase 1 — the ignition, judged on <b>re-orders</b></td></tr>
+        <tr><td class="play">Show how it works, not a claim</td><td>Phase 0 — built <em>first</em>; it is the precondition</td></tr>
+        <tr><td class="play">Aim at people already likely to convert</td><td>Phase 3 paid targeting (and the skeptic-led first group in Phase 1)</td></tr>
+        <tr><td class="play">Win one market, then let it spread</td><td>Phase 2 — one online channel, word of mouth before paid</td></tr>
+        <tr><td class="play">Press to build reputation, ads to win customers</td><td>Phase 2 = press; Phase 3 = ads — never the other way around</td></tr>
+        <tr><td class="play">Backups on anything that can shut us down</td><td>Runs across everything — see "Staying alive" below</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2><span class="num">05</span>Staying alive — no single outside company can shut us to zero</h2>
+    <div class="lead">A direct-to-consumer supplement brand does not own its path to the customer — it rents that path from a chain of outside companies (Meta, Google, the payment processor, Amazon, the manufacturer). Several of them dislike supplements and can cut us off with no warning and no appeal. The discipline: build a backup for each one, sized to how badly its failure would hurt us — so no single company can take us to zero.</div>
+
+    <p style="font-size:14px;margin-bottom:16px;">The core idea is <b>ownership</b>. The only channel no one can take from Signal is our <b>own audience</b> — our email list, our subscribers, our founding group, our community. Everything else (Meta, Google, Amazon, retail) is <em>rented reach</em> that can be switched off without warning. So we build the owned audience first, make every rented channel feed it, and make sure the business can run on the owned audience alone during any outage. The Phase 1 founding group is not only proof — it is the seed of this owned audience.</p>
+
+    <h3 style="font-family:var(--display);font-weight:400;font-size:20px;color:var(--espresso);letter-spacing:.02em;margin-bottom:6px;">The outside companies, ranked by how badly they can hurt us</h3>
+    <p class="lead" style="margin-bottom:10px;">A backup should be as strong as the damage if that company fails — not spread evenly across all of them.</p>
+    <table>
+      <thead><tr><th>Outside company</th><th>What happens if it cuts us off</th><th>Risk</th></tr></thead>
+      <tbody>
+        <tr><td class="play">Payment processor (Shopify / Stripe)</td><td><b>Revenue instantly to zero.</b> Supplements are flagged "high-risk"; accounts get frozen with no appeal.</td><td class="risk">🔴</td></tr>
+        <tr><td class="play">Main ad account (Meta)</td><td>New-customer ads stop dead; supplement claims trigger bans</td><td class="risk">🔴</td></tr>
+        <tr><td class="play">Manufacturer (if only one)</td><td>No supply — we cannot ship what we cannot make</td><td class="risk">🔴</td></tr>
+        <tr><td class="play">Amazon (if we rely on it heavily)</td><td>A suspension kills that channel; copycats and rule changes hit too</td><td class="risk">🟠</td></tr>
+        <tr><td class="play">Store host (Shopify)</td><td>Can be moved, but painful; high-risk-rules exposure</td><td class="risk">🟠</td></tr>
+        <tr><td class="play">Email / SMS delivery</td><td>Slows us down, does not zero us (but it weakens the owned audience)</td><td class="risk">🟡</td></tr>
+        <tr><td class="play">FDA / FTC (the U.S. regulators)</td><td>The power above all the others — can shut <em>any</em> channel</td><td class="risk">⚫</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-family:var(--display);font-weight:400;font-size:20px;color:var(--espresso);letter-spacing:.02em;margin:22px 0 8px;">The backup plan, one company at a time</h3>
+    <ol class="nodes">
+      <li><b>Payment — the one most likely to actually get us.</b> Do not run on a single processor. Have a <b>second, supplement-friendly payment account approved and connected before launch</b> (specialist high-risk processors exist for exactly this). A backup set up <em>after</em> a freeze is worthless.</li>
+      <li><b>Reach — never one rail, never 100% ads.</b> Our owned list is layer one (cannot be taken away). Then at least two live ad platforms (Meta + Google or TikTok) so one ban does not stop all new customers. Then press and creators as a rail that does not depend on an ad account. Ads should never be the <em>only</em> way a new customer can find us.</li>
+      <li><b>Manufacturing — have a second source for the key parts.</b> One manufacturer means one point of failure. With Zone Halo as our formulation partner, qualify a <b>second manufacturer</b> and find a <b>second supplier for the key ingredients</b> (the cost ledger flags the single-source risks — for example the Kaneka ubiquinol). This is slow to set up, so start early.</li>
+      <li><b>Sales channel — keep direct-to-consumer the base.</b> For the U.S. launch, our own store is the foundation; Amazon (if and when we use it) is <b>extra distribution, not the base.</b> Cap any single marketplace as a share of revenue, so a suspension is a dent, not death. Our own store owns the customer; a marketplace only rents us reach. <em>(Retail and Frank's GNC-Taiwan are a future Taiwan market, out of scope here.)</em></li>
+      <li><b>Infrastructure — own your domain, list, and data.</b> Export customer and list data on a regular schedule. The list is the asset. If Shopify or Klaviyo dropped us tomorrow, we should be able to rebuild reach in days, because we <em>hold</em> the relationships ourselves.</li>
+    </ol>
+
+    <div class="flag" style="margin-top:18px;">
+      <b>The honest part:</b> we cannot make Signal completely safe — the U.S. regulators (FDA/FTC) sit above everything, which is why the claims rule runs through every channel. What we <em>can</em> do is make sure no single failure zeroes us: a frozen payment account, a Meta ban, a manufacturer outage, an Amazon suspension — each one a bad week, not the end. That is the whole point: a backup at every point that could take us to zero, with the <b>owned audience as the floor under all of them.</b>
+    </div>
+  </section>
+
+  <section>
+    <div class="steal">
+      <div class="lbl">If we do one thing</div>
+      <h3>Build the audience no one can take away — first</h3>
+      <p>The founding group does three jobs at once: it creates day-one customer proof, it proves people buy again before we spend on ads (the real checkpoint), and it is the seed of the owned audience that survives every outside company. Set it up before launch — do not hope it appears after.</p>
+    </div>
+  </section>
+
+  <section>
+    <div style="border-left:4px solid var(--gold);background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 18px;">
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Roadmap · after the proof, not at launch</div>
+      <p style="margin:0;font-size:13px;">This plan covers <b>N°001 only</b>. <b>N°002</b> (the daily fuel — working name) comes <b>only after N°001 passes its re-order checkpoint</b> — the same "pass the checkpoint before you spend" discipline, applied to the product line as well as the channels. The full product-line vision is the company's, and lives on the investor and concept materials; it is deliberately <em>out of scope</em> for this launch plan.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Signal · INSDR Wellness — the cellcare company</span>
+    <span>Internal plan · for the founding team · numbers stay off public pages</span>
+  </footer>
+
+</div>
+<script>
+  (function(){
+    var PASS="54321";
+    var gate=document.getElementById("gate");
+    var body=document.body;
+    if(sessionStorage.getItem("signal_unlocked")==="true"){gate.style.display="none";body.classList.remove("locked");}
+    window.checkPass=function(e){
+      e.preventDefault();
+      var input=document.getElementById("gate-pass").value;
+      var err=document.getElementById("gate-error");
+      if(input===PASS){sessionStorage.setItem("signal_unlocked","true");gate.style.display="none";body.classList.remove("locked");}
+      else{err.classList.add("show");document.getElementById("gate-pass").value="";document.getElementById("gate-pass").focus();setTimeout(function(){err.classList.remove("show");},2400);}
+      return false;
+    };
+  })();
+</script>
+</body>
+</html>
