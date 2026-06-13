@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>signal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#AD4236; --red-deep:#7A2E26; --espresso:#241B17; --ink:#2E2420;
+    --bone:#F6EFEA; --cream:#EFE5D1; --taupe:#D8CCC1; --gold:#A8845A;
+    --muted:#6D665C; --line:#C8BEAE; --paper:#FBF8F4;
+    --display:'Bebas Neue',Impact,sans-serif;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --body:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--body);color:var(--ink);background:#e8e2d9;line-height:1.5;-webkit-font-smoothing:antialiased;padding:30px 16px;}
+
+  .page{width:100%;max-width:880px;margin:0 auto 30px;background:var(--paper);border-radius:4px;box-shadow:0 8px 40px rgba(36,27,23,.18);padding:46px 52px;position:relative;overflow:hidden;min-height:1120px;display:flex;flex-direction:column;}
+  .page.dark{background:var(--espresso);color:var(--bone);}
+
+  .rh{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:24px;}
+  .dark .rh{border-color:#4a3a30;}
+  .rh .mark{font-family:var(--display);font-size:24px;letter-spacing:.16em;color:var(--espresso);}
+  .dark .rh .mark{color:var(--bone);}
+  /* traced wordmark lockup in header (replaces Bebas SIGNAL text) */
+  .rh .mark.wm-lock{display:inline-flex;align-items:center;}
+  .rh .mark .wm-art{height:21px;width:auto;display:block;}
+  .rh .mark .wm-sign,.rh .mark .wm-tail{fill:var(--espresso);}
+  .rh .mark .wm-accent{fill:var(--red);}
+  .dark .rh .mark .wm-sign,.dark .rh .mark .wm-tail{fill:var(--bone);}
+  .dark .rh .mark .wm-accent{fill:var(--red);}
+  .rh .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);}
+  .dark .rh .tag{color:var(--gold);}
+
+  .ptitle{font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+
+  .hook{font-family:var(--serif);font-weight:500;font-size:44px;line-height:1.04;color:var(--espresso);letter-spacing:-.01em;margin-bottom:14px;}
+  .hook em{font-style:italic;color:var(--red);}
+  .hooksub{font-family:var(--serif);font-size:21px;font-style:italic;color:var(--red-deep);margin-bottom:22px;line-height:1.32;}
+
+  p{font-size:14px;margin-bottom:12px;}
+  .lede{font-size:15px;line-height:1.6;}
+  strong{color:var(--espresso);font-weight:700;}
+  .dark strong{color:#fff;}
+
+  .turn{border-left:4px solid var(--red);padding:4px 0 4px 18px;margin:18px 0;}
+  .turn .big{font-family:var(--serif);font-size:24px;font-style:italic;color:var(--red-deep);line-height:1.3;}
+
+  .reveal{background:var(--espresso);color:var(--bone);border-radius:10px;padding:22px 26px;margin:6px 0 0;}
+  .reveal .meet{font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+  .reveal h1{font-family:var(--serif);font-weight:500;font-size:30px;line-height:1.1;color:#fff;margin-bottom:8px;}
+  .reveal h1 em{font-style:italic;color:#E8B4AC;}
+  .reveal p{font-size:13px;color:#d8ccc1;margin-bottom:0;}
+  .reveal strong{color:#fff;}
+
+  .what2{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center;margin-top:18px;}
+
+  .skus{margin-top:14px;}
+  .sku{display:flex;gap:12px;align-items:baseline;font-size:12.5px;padding:5px 0;border-top:1px solid var(--line);}
+  .sku .n{font-family:var(--display);font-size:19px;color:var(--red);letter-spacing:.04em;min-width:60px;}
+  .sku .p{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap;}
+
+  .pyr{display:flex;flex-direction:column;align-items:center;gap:5px;}
+  .tier{color:#fff;text-align:center;padding:10px 8px;border-radius:3px;width:100%;}
+  .tier .lab{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;}
+  .tier .nm{font-size:12px;font-weight:600;margin-top:2px;line-height:1.2;}
+  .t3{width:52%;background:#C8BEAE;color:var(--espresso);}
+  .t2{width:74%;background:var(--gold);}
+  .t1{width:100%;background:linear-gradient(100deg,var(--red) 0%,var(--red-deep) 100%);box-shadow:0 4px 18px rgba(173,66,54,.4);padding:14px 8px;}
+  .t1 .nm{font-size:14px;}
+  .pyr-cap{font-family:var(--mono);font-size:9px;color:var(--muted);text-align:center;margin-top:9px;line-height:1.5;}
+
+  .flip{margin-top:auto;padding-top:16px;text-align:right;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);}
+
+  .foot{margin-top:auto;padding-top:16px;display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--muted);}
+  .dark .foot{color:#9a8c7e;}
+  .sig{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--red);}
+  .dark .sig{color:#E8B4AC;}
+
+  h2{font-family:var(--display);font-weight:400;font-size:23px;letter-spacing:.04em;margin:20px 0 10px;color:#fff;}
+  h2:first-of-type{margin-top:2px;}
+  h2 .k{color:var(--gold);font-size:13px;margin-right:8px;}
+
+  .disrupt{display:grid;grid-template-columns:1fr 1fr;gap:8px 22px;}
+  .d-item{padding:8px 0;border-bottom:1px solid #4a3a30;}
+  .d-item h4{font-size:13px;color:#fff;margin-bottom:3px;display:flex;gap:7px;align-items:baseline;}
+  .d-item h4 .dot{color:var(--red);font-size:11px;}
+  .d-item p{font-size:11.5px;color:#d8ccc1;margin-bottom:0;}
+
+  .markets{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:4px 0 10px;}
+  .mk{background:#2e2420;border:1px solid #4a3a30;border-radius:8px;padding:13px;text-align:center;}
+  .mk .v{font-family:var(--display);font-size:31px;color:var(--gold);line-height:1;}
+  .mk .k{font-family:var(--mono);font-size:8.5px;letter-spacing:.07em;text-transform:uppercase;color:#bbada0;margin-top:6px;line-height:1.4;}
+  .conv{text-align:center;font-style:italic;font-family:var(--serif);font-size:16px;color:#d8ccc1;margin-bottom:12px;}
+
+  .grow{display:grid;grid-template-columns:1fr 1fr;gap:8px 22px;}
+  .g-item{font-size:12px;color:#d8ccc1;padding:6px 0 6px 16px;position:relative;border-bottom:1px solid #4a3a30;}
+  .g-item::before{content:"→";position:absolute;left:0;color:var(--gold);}
+  .g-item b{color:#fff;}
+
+  .traj{background:#2e2420;border-radius:8px;padding:11px 16px;margin:11px 0;font-size:11.5px;color:#d8ccc1;display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+  .traj b{color:#fff;} .traj .arr{color:var(--gold);font-family:var(--mono);}
+
+  .team{font-size:11px;color:#bbada0;margin-top:2px;}
+  .team b{color:#e8d7bc;}
+
+  .close{background:linear-gradient(110deg,var(--red) 0%,var(--red-deep) 100%);border-radius:10px;padding:20px 26px;margin-top:14px;text-align:center;}
+  .close .big{font-family:var(--serif);font-size:24px;font-style:italic;color:#fff;line-height:1.3;margin-bottom:6px;}
+  .close p{font-size:12.5px;color:#f3d9d4;margin-bottom:0;}
+
+  .disclaim{font-family:var(--mono);font-size:8.5px;color:#8a7d70;letter-spacing:.04em;margin-top:10px;line-height:1.5;}
+
+  @media print{
+    @page{ size:9.25in 13in; margin:0; }
+    html,body{background:#fff;padding:0;margin:0;}
+    .page{box-shadow:none;margin:0;border-radius:0;max-width:none;width:9.25in;height:13in;min-height:0;overflow:hidden;page-break-after:always;break-after:page;}
+    .page:last-child{page-break-after:auto;break-after:auto;}
+  }
+  @media (max-width:680px){.page{padding:30px 24px;}.hook{font-size:33px;}.what2,.disrupt,.grow,.markets{grid-template-columns:1fr;}}
+  /* ─── PASSWORD GATE (mirrors root index.html — friction + noindex, not security) ─── */
+  #gate{position:fixed;inset:0;background:#241B17;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:#D8CCC1;padding:40px;text-align:center;}
+  #gate .gate-overline{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#AD4236;margin-bottom:16px;font-weight:600;}
+  #gate .gate-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:72px;color:#AD4236;line-height:.9;margin-bottom:32px;letter-spacing:-1.6px;text-transform:lowercase;}
+  #gate .gate-title .accent{color:#D8CCC1;}
+  #gate .gate-subtitle{font-size:14px;opacity:.6;margin-bottom:32px;letter-spacing:1px;}
+  #gate form{display:flex;flex-direction:column;align-items:center;gap:12px;}
+  #gate input{background:rgba(246,239,234,.08);border:1px solid rgba(246,239,234,.2);border-radius:6px;color:#D8CCC1;padding:14px 20px;font-size:15px;font-family:inherit;width:280px;text-align:center;letter-spacing:1px;outline:none;transition:border-color .2s;}
+  #gate input:focus{border-color:#AD4236;}
+  #gate button{background:#AD4236;color:#D8CCC1;border:none;border-radius:6px;padding:12px 32px;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background .2s;}
+  #gate button:hover{background:#c4574b;}
+  #gate .gate-error{color:#AD4236;font-size:12px;margin-top:8px;opacity:0;transition:opacity .2s;letter-spacing:1px;}
+  #gate .gate-error.show{opacity:1;}
+  #gate .gate-footer{position:absolute;bottom:40px;font-size:10px;opacity:.3;letter-spacing:3px;text-transform:uppercase;}
+  body.locked{overflow:hidden;height:100vh;}
+  body.locked > div:not(#gate){display:none !important;}
+</style>
+</head>
+<body class="locked">
+
+<!-- ═══════════════════ PASSWORD GATE ═══════════════════ -->
+<div id="gate">
+  <div class="gate-overline">INSDR Wellness — the cellcare company · Confidential</div>
+  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪgnɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="gate-subtitle">Enter password to continue.</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
+    <button type="submit">Enter</button>
+    <div class="gate-error" id="gate-error">Incorrect. Try again.</div>
+  </form>
+  <div class="gate-footer">Confidential — do not share.</div>
+</div>
+
+<!-- ============ PAGE 1 · THE PITCH ============ -->
+<div class="page">
+  <div class="rh">
+    <span class="mark wm-lock" aria-label="signal"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3114.000000 696.000000" class="wm-art" role="img" aria-label="signal" shape-rendering="geometricPrecision"><g transform="translate(0.000000,696.000000) scale(0.100000,-0.100000)"><g class="wm-accent"><path d="M6051 5613 c-14 -13 -56 -124 -136 -363 -63 -190 -133 -397 -155
+-460 -23 -63 -49 -140 -59 -170 -11 -30 -39 -111 -63 -180 -60 -168 -108 -311
+-153 -455 -20 -66 -48 -149 -60 -185 -39 -109 -66 -192 -85 -260 -10 -36 -23
+-78 -30 -95 -7 -16 -20 -57 -30 -90 -10 -33 -32 -96 -49 -140 -16 -44 -46
+-123 -66 -175 -44 -117 -100 -275 -125 -355 -24 -78 -67 -200 -78 -223 -20
+-38 -22 -70 -6 -86 17 -17 148 -23 172 -8 18 12 86 202 212 592 43 135 97 295
+119 355 23 61 59 162 81 225 22 63 62 178 90 255 50 140 147 424 233 690 26
+77 62 185 82 240 68 191 96 271 171 500 42 127 86 251 100 276 26 51 31 98 12
+117 -20 20 -152 16 -177 -5z"/><path d="M24965 5620 c-54 -5 -61 -8 -82 -38 -12 -19 -33 -68 -47 -110 -14
+-43 -38 -113 -54 -157 -66 -179 -105 -293 -122 -350 -10 -33 -35 -105 -55
+-160 -20 -55 -49 -138 -65 -185 -16 -47 -42 -123 -60 -170 -17 -47 -44 -121
+-60 -165 -16 -44 -45 -123 -65 -175 -35 -94 -164 -472 -183 -540 -10 -32 -56
+-162 -119 -335 -110 -301 -216 -602 -238 -678 -12 -42 -27 -83 -33 -90 -18
+-23 -23 -72 -9 -91 11 -15 30 -20 84 -23 91 -4 102 6 141 122 17 50 58 169 92
+265 34 96 86 247 116 335 29 88 70 203 89 255 92 245 108 290 130 355 13 39
+28 84 34 100 14 37 136 407 150 455 6 19 29 87 51 150 22 63 51 147 65 185 28
+81 71 204 115 325 54 150 180 528 180 541 0 7 12 36 26 66 29 62 29 103 -1
+112 -11 3 -47 4 -80 1z"/></g><g class="wm-sign"><path d="M7852 4559 c-73 -11 -197 -58 -264 -100 -68 -44 -132 -118 -168 -195
+-98 -209 -40 -446 146 -593 109 -86 205 -131 539 -253 158 -58 284 -161 311
+-255 49 -168 -6 -288 -166 -365 -58 -29 -76 -32 -175 -36 -260 -9 -418 80
+-520 293 -25 53 -51 123 -58 157 -9 47 -18 66 -39 81 -23 17 -31 19 -53 9 -14
+-7 -29 -22 -33 -34 -4 -13 -5 -150 -2 -306 6 -344 3 -337 125 -256 84 55 92
+54 246 -4 126 -49 199 -62 334 -62 114 1 159 9 266 50 136 52 211 106 286 204
+88 117 121 239 98 369 -15 88 -32 128 -78 193 -82 114 -205 190 -487 299 -52
+21 -113 45 -135 55 -22 10 -51 21 -65 25 -14 4 -64 28 -113 52 -176 91 -231
+212 -172 384 18 53 79 117 145 151 41 21 58 23 180 23 133 0 136 -1 207 -34
+123 -57 231 -191 273 -334 27 -95 35 -107 75 -107 21 0 37 6 43 16 5 9 7 129
+4 267 -4 268 -10 297 -54 297 -11 0 -40 -18 -64 -40 -24 -22 -50 -40 -59 -40
+-8 0 -59 18 -112 39 -135 55 -301 72 -461 50z"/><path d="M9833 4515 c-31 -22 -30 -60 2 -81 14 -9 59 -20 101 -25 91 -10 141
+-33 170 -76 31 -47 38 -216 32 -871 l-5 -543 -29 -42 c-38 -54 -85 -76 -184
+-86 -44 -5 -87 -14 -95 -21 -23 -19 -18 -57 9 -75 21 -14 80 -16 482 -14 280
+1 464 6 472 12 15 12 16 59 0 75 -7 7 -28 12 -47 12 -19 0 -63 5 -99 11 -77
+14 -135 59 -152 117 -13 50 -13 1301 1 1361 21 92 72 128 198 142 59 7 80 13
+94 30 20 25 21 40 5 61 -12 14 -68 17 -473 23 -416 6 -462 5 -482 -10z"/><path d="M12519 4554 c-84 -15 -206 -59 -273 -98 -124 -73 -205 -165 -264
+-301 -31 -70 -36 -93 -40 -182 -7 -159 23 -269 104 -378 32 -44 121 -129 172
+-164 54 -37 37 -83 -45 -125 -56 -28 -159 -140 -177 -192 -21 -63 -20 -149 3
+-199 21 -47 90 -111 156 -145 39 -20 46 -28 43 -49 -2 -21 -17 -33 -68 -61
+-149 -79 -221 -142 -266 -231 -30 -60 -34 -78 -34 -144 0 -86 17 -130 76 -195
+81 -89 210 -147 419 -186 137 -27 169 -29 370 -28 213 0 224 1 345 32 220 55
+345 116 448 220 91 90 133 182 140 303 13 228 -69 376 -255 465 -127 60 -263
+77 -703 89 -129 4 -266 11 -303 15 -82 10 -136 42 -162 96 -26 56 -10 98 69
+172 87 81 111 88 211 62 172 -44 414 -17 577 66 180 91 286 211 329 376 45
+166 19 347 -66 461 -49 66 -53 78 -30 97 12 10 46 11 166 2 147 -11 177 -9
+191 12 4 6 8 50 8 99 0 74 -3 90 -20 107 -26 26 -40 25 -127 -5 -77 -26 -171
+-47 -299 -66 -75 -11 -86 -10 -155 11 -41 12 -87 29 -103 37 -75 39 -297 53
+-437 27z m308 -130 c112 -54 178 -145 218 -299 37 -142 36 -287 -4 -417 -62
+-207 -171 -294 -366 -290 -78 1 -97 5 -152 32 -108 53 -189 176 -224 337 -18
+86 -16 285 4 360 57 214 190 319 390 309 59 -3 92 -11 134 -32z m-84 -1744
+c253 -9 398 -22 467 -40 48 -13 111 -61 146 -111 26 -38 29 -50 28 -120 -1
+-97 -26 -152 -104 -230 -151 -152 -463 -216 -779 -159 -176 32 -284 95 -351
+206 -33 55 -35 63 -35 149 0 65 5 98 17 120 29 53 101 127 163 168 58 38 62
+39 125 33 36 -3 181 -10 323 -16z"/><path d="M15175 4558 c-16 -5 -52 -13 -80 -18 -27 -5 -93 -18 -145 -29 -52
+-11 -137 -24 -187 -29 -103 -10 -143 -29 -143 -66 0 -37 24 -49 108 -51 80 -2
+122 -16 155 -53 45 -50 46 -63 46 -717 0 -341 -4 -640 -8 -664 -17 -87 -76
+-130 -191 -140 -37 -4 -75 -13 -84 -20 -23 -19 -21 -68 4 -81 12 -7 159 -10
+417 -11 219 0 410 0 425 -1 34 -1 58 18 58 47 0 34 -31 55 -81 55 -91 0 -160
+37 -197 104 -16 28 -17 77 -14 574 l2 543 25 48 c30 60 168 191 250 236 82 46
+180 68 280 63 137 -7 219 -58 277 -173 28 -53 32 -73 37 -175 4 -63 4 -339 1
+-612 -5 -485 -5 -497 -26 -525 -32 -42 -73 -62 -159 -76 -62 -9 -81 -17 -93
+-35 -11 -18 -12 -28 -4 -47 l11 -23 437 -1 c312 -1 441 2 450 10 21 18 17 57
+-8 73 -13 8 -50 17 -84 21 -79 9 -134 39 -159 90 -19 39 -20 60 -20 635 l0
+595 -24 80 c-31 104 -71 173 -141 243 -113 113 -257 156 -446 135 -175 -20
+-327 -102 -480 -261 -127 -132 -129 -131 -129 73 -1 88 -4 165 -8 171 -10 17
+-38 22 -72 12z"/></g><g class="wm-tail"><path d="M18395 4555 c-78 -17 -218 -83 -293 -140 -76 -57 -181 -168 -228
+-242 -40 -62 -114 -221 -114 -245 0 -8 -10 -50 -22 -94 -20 -71 -23 -101 -22
+-284 0 -195 2 -211 32 -332 37 -149 74 -229 146 -313 151 -178 324 -265 527
+-265 59 0 156 16 174 30 6 4 29 14 53 24 101 39 226 142 315 259 47 62 73 45
+87 -55 26 -178 88 -242 235 -241 81 1 125 14 328 94 69 26 92 54 82 99 -13 59
+-56 76 -116 44 -37 -19 -139 -20 -168 -3 -49 31 -51 52 -51 599 0 614 15 834
+65 930 21 40 20 97 -2 108 -10 5 -71 8 -136 7 -144 -2 -152 -7 -166 -111 -14
+-94 -18 -104 -48 -104 -18 0 -48 21 -98 69 -158 150 -373 211 -580 166z m338
+-158 c76 -35 184 -141 225 -223 66 -130 67 -142 66 -541 l-1 -361 -36 -76
+c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
+368 -26 95 -27 111 -27 325 0 214 2 231 29 339 64 254 169 394 343 457 91 33
+200 30 286 -9z"/><path d="M20292 4364 c-20 -13 -23 -22 -18 -48 9 -43 140 -307 172 -345 52
+-62 76 -39 183 178 74 150 87 202 54 219 -10 5 -97 10 -193 11 -149 1 -179 -1
+-198 -15z"/><path d="M20468 3240 c-33 -20 -143 -214 -188 -332 -25 -66 -26 -104 -2 -116
+9 -5 111 -9 225 -8 218 2 226 4 227 47 0 50 -171 370 -218 407 -19 14 -22 14
+-44 2z"/><path d="M21950 5550 c-101 -30 -309 -75 -399 -85 -66 -8 -91 -20 -91 -45 0
+-30 39 -50 95 -50 81 0 145 -24 190 -70 l40 -41 3 -1162 c2 -804 0 -1173 -8
+-1199 -6 -20 -22 -46 -37 -58 -38 -30 -139 -57 -225 -59 -10 -1 -25 -12 -34
+-26 -14 -21 -15 -31 -6 -51 l12 -24 428 0 c236 1 440 -2 454 -5 40 -10 68 10
+68 48 0 42 -15 57 -57 57 -44 0 -132 19 -165 36 -15 8 -39 31 -53 51 l-25 38
+0 1325 c0 1018 -3 1329 -12 1338 -19 19 -75 13 -178 -18z"/></g></g></svg></span>
+    <span class="tag">INSDR Wellness — the cellcare company</span>
+  </div>
+
+  <div class="ptitle">The Pitch · 01 — The opening every reader feels</div>
+  <div class="hook">You've stacked supplements for years.<br>You're <em>still</em> chasing.</div>
+  <div class="hooksub">Every bottle in the cabinet sells you an outcome. Not one of them sells the foundation underneath.</div>
+
+  <p class="lede">The whole industry is built on chasing symptoms — sleep, focus, skin, energy — one more bottle for one more outcome. So the cabinet fills up, the spend climbs, and the nagging question never goes away: <strong>is any of this actually working?</strong></p>
+
+  <div class="turn">
+    <div class="big">There's a layer underneath all of it that nobody is selling — the cell. The foundation. We built the brand that owns it.</div>
+  </div>
+
+  <div class="reveal">
+    <div class="meet">Here's the product</div>
+    <h1>Signal — the flagship of a new category: <em>cellcare</em>.</h1>
+    <p>A daily two-chew packet built on branded, clinically-dosed actives — <strong>a daily pleasure that happens to carry real doses.</strong> It's not another outcome to chase. It's the <strong>foundation your whole stack is standing on</strong> — additive to everything else you take, in competition with none of it.</p>
+    <p style="font-family:var(--serif);font-style:italic;font-size:19px;color:#E8B4AC;margin-top:10px;margin-bottom:0;">You've built a stack. Signal is the ground it stands on.</p>
+  </div>
+
+  <div class="what2">
+    <div>
+      <p style="font-size:13px;margin-top:2px;">Where foundation products always failed — pills endured, powders choked, gummies regress to candy — Signal wins on the one thing that decides this category: <strong>it's the part of the day people actually keep.</strong> Real doses. No fairy dust. Nothing to chase.</p>
+      <div class="skus">
+        <div class="sku"><span class="n">N°001</span><span>The Foundation — dual-chew daily packet. <b>The hero.</b> Q4 2026.</span><span class="p">$89 / mo</span></div>
+        <div class="sku"><span class="n">N°002</span><span>The stack-on — the second SKU in the practice. <em style="color:var(--muted);">Working name &ldquo;Daily Fuel&rdquo;; final name &amp; focus in development.</em> 2027.</span><span class="p">$49 / mo</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="pyr">
+        <div class="tier t3"><div class="lab">Tier 3</div><div class="nm">Visible outcomes</div></div>
+        <div class="tier t2"><div class="lab">Tier 2</div><div class="nm">Cellular maintenance</div></div>
+        <div class="tier t1"><div class="lab">Tier 1 · the substrate</div><div class="nm">SIGNAL</div></div>
+      </div>
+      <div class="pyr-cap">Everyone fights for the top two tiers.<br>We own the base that makes them work.</div>
+    </div>
+  </div>
+
+  <div style="background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:8px;padding:13px 18px;margin-top:16px;">
+    <div style="font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--red-deep);margin-bottom:6px;">If you already stack — read this</div>
+    <p style="font-size:12.5px;margin-bottom:0;">You take supplements to move a number, and you'll probably move it — but <strong>how far it moves is capped by the foundation underneath.</strong> Under-resourced cells can only convert so much of whatever you stack on top. Signal primes that foundation, so across the same 90 days <strong>the same stack has more room to work</strong> — not a different promise, a higher ceiling on the one you already bought.</p>
+  </div>
+
+  <div class="flip">Turn the page — here's why it wins ▸</div>
+  <div class="foot"><span>SIGNAL · CONCEPT PITCH · 2026</span><span class="sig">Send a signal.</span></div>
+</div>
+
+<!-- ============ PAGE 2 · WHY IT WINS + THE PRIZE + CLOSE ============ -->
+<div class="page dark">
+  <div class="rh">
+    <span class="mark wm-lock" aria-label="signal"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3114.000000 696.000000" class="wm-art" role="img" aria-label="signal" shape-rendering="geometricPrecision"><g transform="translate(0.000000,696.000000) scale(0.100000,-0.100000)"><g class="wm-accent"><path d="M6051 5613 c-14 -13 -56 -124 -136 -363 -63 -190 -133 -397 -155
+-460 -23 -63 -49 -140 -59 -170 -11 -30 -39 -111 -63 -180 -60 -168 -108 -311
+-153 -455 -20 -66 -48 -149 -60 -185 -39 -109 -66 -192 -85 -260 -10 -36 -23
+-78 -30 -95 -7 -16 -20 -57 -30 -90 -10 -33 -32 -96 -49 -140 -16 -44 -46
+-123 -66 -175 -44 -117 -100 -275 -125 -355 -24 -78 -67 -200 -78 -223 -20
+-38 -22 -70 -6 -86 17 -17 148 -23 172 -8 18 12 86 202 212 592 43 135 97 295
+119 355 23 61 59 162 81 225 22 63 62 178 90 255 50 140 147 424 233 690 26
+77 62 185 82 240 68 191 96 271 171 500 42 127 86 251 100 276 26 51 31 98 12
+117 -20 20 -152 16 -177 -5z"/><path d="M24965 5620 c-54 -5 -61 -8 -82 -38 -12 -19 -33 -68 -47 -110 -14
+-43 -38 -113 -54 -157 -66 -179 -105 -293 -122 -350 -10 -33 -35 -105 -55
+-160 -20 -55 -49 -138 -65 -185 -16 -47 -42 -123 -60 -170 -17 -47 -44 -121
+-60 -165 -16 -44 -45 -123 -65 -175 -35 -94 -164 -472 -183 -540 -10 -32 -56
+-162 -119 -335 -110 -301 -216 -602 -238 -678 -12 -42 -27 -83 -33 -90 -18
+-23 -23 -72 -9 -91 11 -15 30 -20 84 -23 91 -4 102 6 141 122 17 50 58 169 92
+265 34 96 86 247 116 335 29 88 70 203 89 255 92 245 108 290 130 355 13 39
+28 84 34 100 14 37 136 407 150 455 6 19 29 87 51 150 22 63 51 147 65 185 28
+81 71 204 115 325 54 150 180 528 180 541 0 7 12 36 26 66 29 62 29 103 -1
+112 -11 3 -47 4 -80 1z"/></g><g class="wm-sign"><path d="M7852 4559 c-73 -11 -197 -58 -264 -100 -68 -44 -132 -118 -168 -195
+-98 -209 -40 -446 146 -593 109 -86 205 -131 539 -253 158 -58 284 -161 311
+-255 49 -168 -6 -288 -166 -365 -58 -29 -76 -32 -175 -36 -260 -9 -418 80
+-520 293 -25 53 -51 123 -58 157 -9 47 -18 66 -39 81 -23 17 -31 19 -53 9 -14
+-7 -29 -22 -33 -34 -4 -13 -5 -150 -2 -306 6 -344 3 -337 125 -256 84 55 92
+54 246 -4 126 -49 199 -62 334 -62 114 1 159 9 266 50 136 52 211 106 286 204
+88 117 121 239 98 369 -15 88 -32 128 -78 193 -82 114 -205 190 -487 299 -52
+21 -113 45 -135 55 -22 10 -51 21 -65 25 -14 4 -64 28 -113 52 -176 91 -231
+212 -172 384 18 53 79 117 145 151 41 21 58 23 180 23 133 0 136 -1 207 -34
+123 -57 231 -191 273 -334 27 -95 35 -107 75 -107 21 0 37 6 43 16 5 9 7 129
+4 267 -4 268 -10 297 -54 297 -11 0 -40 -18 -64 -40 -24 -22 -50 -40 -59 -40
+-8 0 -59 18 -112 39 -135 55 -301 72 -461 50z"/><path d="M9833 4515 c-31 -22 -30 -60 2 -81 14 -9 59 -20 101 -25 91 -10 141
+-33 170 -76 31 -47 38 -216 32 -871 l-5 -543 -29 -42 c-38 -54 -85 -76 -184
+-86 -44 -5 -87 -14 -95 -21 -23 -19 -18 -57 9 -75 21 -14 80 -16 482 -14 280
+1 464 6 472 12 15 12 16 59 0 75 -7 7 -28 12 -47 12 -19 0 -63 5 -99 11 -77
+14 -135 59 -152 117 -13 50 -13 1301 1 1361 21 92 72 128 198 142 59 7 80 13
+94 30 20 25 21 40 5 61 -12 14 -68 17 -473 23 -416 6 -462 5 -482 -10z"/><path d="M12519 4554 c-84 -15 -206 -59 -273 -98 -124 -73 -205 -165 -264
+-301 -31 -70 -36 -93 -40 -182 -7 -159 23 -269 104 -378 32 -44 121 -129 172
+-164 54 -37 37 -83 -45 -125 -56 -28 -159 -140 -177 -192 -21 -63 -20 -149 3
+-199 21 -47 90 -111 156 -145 39 -20 46 -28 43 -49 -2 -21 -17 -33 -68 -61
+-149 -79 -221 -142 -266 -231 -30 -60 -34 -78 -34 -144 0 -86 17 -130 76 -195
+81 -89 210 -147 419 -186 137 -27 169 -29 370 -28 213 0 224 1 345 32 220 55
+345 116 448 220 91 90 133 182 140 303 13 228 -69 376 -255 465 -127 60 -263
+77 -703 89 -129 4 -266 11 -303 15 -82 10 -136 42 -162 96 -26 56 -10 98 69
+172 87 81 111 88 211 62 172 -44 414 -17 577 66 180 91 286 211 329 376 45
+166 19 347 -66 461 -49 66 -53 78 -30 97 12 10 46 11 166 2 147 -11 177 -9
+191 12 4 6 8 50 8 99 0 74 -3 90 -20 107 -26 26 -40 25 -127 -5 -77 -26 -171
+-47 -299 -66 -75 -11 -86 -10 -155 11 -41 12 -87 29 -103 37 -75 39 -297 53
+-437 27z m308 -130 c112 -54 178 -145 218 -299 37 -142 36 -287 -4 -417 -62
+-207 -171 -294 -366 -290 -78 1 -97 5 -152 32 -108 53 -189 176 -224 337 -18
+86 -16 285 4 360 57 214 190 319 390 309 59 -3 92 -11 134 -32z m-84 -1744
+c253 -9 398 -22 467 -40 48 -13 111 -61 146 -111 26 -38 29 -50 28 -120 -1
+-97 -26 -152 -104 -230 -151 -152 -463 -216 -779 -159 -176 32 -284 95 -351
+206 -33 55 -35 63 -35 149 0 65 5 98 17 120 29 53 101 127 163 168 58 38 62
+39 125 33 36 -3 181 -10 323 -16z"/><path d="M15175 4558 c-16 -5 -52 -13 -80 -18 -27 -5 -93 -18 -145 -29 -52
+-11 -137 -24 -187 -29 -103 -10 -143 -29 -143 -66 0 -37 24 -49 108 -51 80 -2
+122 -16 155 -53 45 -50 46 -63 46 -717 0 -341 -4 -640 -8 -664 -17 -87 -76
+-130 -191 -140 -37 -4 -75 -13 -84 -20 -23 -19 -21 -68 4 -81 12 -7 159 -10
+417 -11 219 0 410 0 425 -1 34 -1 58 18 58 47 0 34 -31 55 -81 55 -91 0 -160
+37 -197 104 -16 28 -17 77 -14 574 l2 543 25 48 c30 60 168 191 250 236 82 46
+180 68 280 63 137 -7 219 -58 277 -173 28 -53 32 -73 37 -175 4 -63 4 -339 1
+-612 -5 -485 -5 -497 -26 -525 -32 -42 -73 -62 -159 -76 -62 -9 -81 -17 -93
+-35 -11 -18 -12 -28 -4 -47 l11 -23 437 -1 c312 -1 441 2 450 10 21 18 17 57
+-8 73 -13 8 -50 17 -84 21 -79 9 -134 39 -159 90 -19 39 -20 60 -20 635 l0
+595 -24 80 c-31 104 -71 173 -141 243 -113 113 -257 156 -446 135 -175 -20
+-327 -102 -480 -261 -127 -132 -129 -131 -129 73 -1 88 -4 165 -8 171 -10 17
+-38 22 -72 12z"/></g><g class="wm-tail"><path d="M18395 4555 c-78 -17 -218 -83 -293 -140 -76 -57 -181 -168 -228
+-242 -40 -62 -114 -221 -114 -245 0 -8 -10 -50 -22 -94 -20 -71 -23 -101 -22
+-284 0 -195 2 -211 32 -332 37 -149 74 -229 146 -313 151 -178 324 -265 527
+-265 59 0 156 16 174 30 6 4 29 14 53 24 101 39 226 142 315 259 47 62 73 45
+87 -55 26 -178 88 -242 235 -241 81 1 125 14 328 94 69 26 92 54 82 99 -13 59
+-56 76 -116 44 -37 -19 -139 -20 -168 -3 -49 31 -51 52 -51 599 0 614 15 834
+65 930 21 40 20 97 -2 108 -10 5 -71 8 -136 7 -144 -2 -152 -7 -166 -111 -14
+-94 -18 -104 -48 -104 -18 0 -48 21 -98 69 -158 150 -373 211 -580 166z m338
+-158 c76 -35 184 -141 225 -223 66 -130 67 -142 66 -541 l-1 -361 -36 -76
+c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
+368 -26 95 -27 111 -27 325 0 214 2 231 29 339 64 254 169 394 343 457 91 33
+200 30 286 -9z"/><path d="M20292 4364 c-20 -13 -23 -22 -18 -48 9 -43 140 -307 172 -345 52
+-62 76 -39 183 178 74 150 87 202 54 219 -10 5 -97 10 -193 11 -149 1 -179 -1
+-198 -15z"/><path d="M20468 3240 c-33 -20 -143 -214 -188 -332 -25 -66 -26 -104 -2 -116
+9 -5 111 -9 225 -8 218 2 226 4 227 47 0 50 -171 370 -218 407 -19 14 -22 14
+-44 2z"/><path d="M21950 5550 c-101 -30 -309 -75 -399 -85 -66 -8 -91 -20 -91 -45 0
+-30 39 -50 95 -50 81 0 145 -24 190 -70 l40 -41 3 -1162 c2 -804 0 -1173 -8
+-1199 -6 -20 -22 -46 -37 -58 -38 -30 -139 -57 -225 -59 -10 -1 -25 -12 -34
+-26 -14 -21 -15 -31 -6 -51 l12 -24 428 0 c236 1 440 -2 454 -5 40 -10 68 10
+68 48 0 42 -15 57 -57 57 -44 0 -132 19 -165 36 -15 8 -39 31 -53 51 l-25 38
+0 1325 c0 1018 -3 1329 -12 1338 -19 19 -75 13 -178 -18z"/></g></g></svg></span>
+    <span class="tag">Why it wins · the prize · the close</span>
+  </div>
+
+  <div class="ptitle" style="color:var(--gold)">The Pitch · 02 — Why you can't pass on this</div>
+
+  <h2><span class="k">A</span>Why it's a disruptor</h2>
+  <div class="disrupt">
+    <div class="d-item"><h4><span class="dot">◆</span>It owns a category that doesn't exist yet</h4><p>The upstream substrate layer of the supplement stack — additive to every customer's stack, competitive with none of it.</p></div>
+    <div class="d-item"><h4><span class="dot">◆</span>The format cracks retention</h4><p>Clinical doses in something people genuinely want to take daily. No analog at the foundation layer.</p></div>
+    <div class="d-item"><h4><span class="dot">◆</span>Proof, not spin</h4><p>Branded actives with published evidence, dosed to clinical levels — minimum effective dose, maximum effect.</p></div>
+    <div class="d-item"><h4><span class="dot">◆</span>Discipline as a moat</h4><p>Mechanism-only, never an outcome claim. The honesty that builds trust also makes the brand structurally durable.</p></div>
+  </div>
+  <p style="font-size:11.5px;color:#bbada0;margin-top:8px;">This isn't defended by a secret blend — the category has never rewarded that. It's defended by a <b style="color:#e8d7bc">stack of seven compounding layers</b>: category position · brand equity · format IP · supplier relationships · habit metrics · the APAC arc · platform discipline. None can be claimed retroactively.</p>
+
+  <h2><span class="k">B</span>The size of the prize</h2>
+  <div class="conv">Two large, sourced markets converging — and a daily-packet format already proven at scale.</div>
+  <div class="markets" style="grid-template-columns:1fr 1fr;">
+    <div class="mk"><div class="v">$180B+</div><div class="k">Global dietary-supplement market<br>(positioned upstream of)</div></div>
+    <div class="mk"><div class="v">$27 → 64B</div><div class="k">Longevity &amp; healthy-aging market<br>(2024 → 2034)</div></div>
+  </div>
+  <p style="font-size:12px;color:#e8d7bc;margin:10px 0 0;"><b style="color:#fff;">We sell to the already-converted.</b> Signal targets people who <em>already</em> take supplements — not non-users. The $180B is an existing monthly habit; we capture share of a stack people already build, so acquisition needs no category education.</p>
+  <div class="grow">
+    <div class="g-item"><b>Why now.</b> Cellular energy is the trade-press wave of 2026. The cultural moment is arriving — and the category window won't stay open.</div>
+    <div class="g-item"><b>The format is proven — and acquirers are paying.</b> Grüns, a daily-packet supplement brand, was acquired by Unilever for <b>$1.2B</b> (2026); AG1 runs at <b>~$600M</b> annual revenue. Vital Proteins (Nestlé) &amp; Liquid I.V. (Unilever) set the precedent.</div>
+    <div class="g-item"><b>A platform, not a SKU.</b> A brand sitting above every outcome category is structurally a platform buy — multiple expansion, not just differentiation.</div>
+    <div class="g-item"><b>Premium economics.</b> $89 foundation; the stack-on brings the full <b>two-part</b> daily practice to ~$130/mo. Subscription, monthly auto-replenish.</div>
+  </div>
+  <div style="font-family:var(--mono);font-size:8px;color:#8a7d70;letter-spacing:.03em;margin-top:10px;line-height:1.5;">Sources: dietary-supplement market — SkyQuest / Precedence / Grand View (2024–25). Longevity &amp; healthy-aging market — Emergen Research ($27.1B 2024 → $64.3B 2034). Grüns/Unilever $1.2B — Inc. (2026). AG1 revenue — public reports. Figures vary by source &amp; market definition.</div>
+
+  <div class="traj"><span class="arr">▸</span><b>N°001 launch</b> (DTC-first, Q4 2026) <span class="arr">→</span> retention proof <span class="arr">→</span> <b>N°002 stack-on</b> (2027) <span class="arr">→</span> APAC expansion <span class="arr">→</span> phased platform</div>
+
+  <p class="team"><b>Who's building it:</b> Damon (founder / architect — built the brand, runs the company) · <b>Vanness Wu</b> (brand equity / APAC) · Frank (distribution / category) · Gabby (operations) · Zone Halo (embedded R&amp;D).</p>
+
+  <div class="close">
+    <div class="big">There is exactly one brand positioned above the entire $180B stack —<br>and we're building it to last. The category gets created only once.</div>
+    <p>To the team: this is the mission we're already executing. To a partner joining now: this is the window — before it closes. &nbsp;·&nbsp; <b style="color:#fff">Send a signal.</b></p>
+  </div>
+
+  <div class="disclaim">Foundational framework, not a clinical claim. Signal is a dietary supplement; it is not intended to diagnose, treat, cure, or prevent any disease. Market figures and acquisition valuations are drawn from public reports and may vary by source.</div>
+
+  <div class="foot"><span>SIGNAL · INSDR WELLNESS CO.</span><span class="sig">Send a signal.</span></div>
+</div>
+
+<!-- ============ PAGE 3 · THE ECONOMICS (CONFIDENTIAL) ============ -->
+<div class="page">
+  <div style="background:var(--red);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;text-align:center;padding:6px;border-radius:3px;margin-bottom:18px;">Confidential · co-founders + prospective investor · not for distribution</div>
+
+  <div class="rh">
+    <span class="mark wm-lock" aria-label="signal"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3114.000000 696.000000" class="wm-art" role="img" aria-label="signal" shape-rendering="geometricPrecision"><g transform="translate(0.000000,696.000000) scale(0.100000,-0.100000)"><g class="wm-accent"><path d="M6051 5613 c-14 -13 -56 -124 -136 -363 -63 -190 -133 -397 -155
+-460 -23 -63 -49 -140 -59 -170 -11 -30 -39 -111 -63 -180 -60 -168 -108 -311
+-153 -455 -20 -66 -48 -149 -60 -185 -39 -109 -66 -192 -85 -260 -10 -36 -23
+-78 -30 -95 -7 -16 -20 -57 -30 -90 -10 -33 -32 -96 -49 -140 -16 -44 -46
+-123 -66 -175 -44 -117 -100 -275 -125 -355 -24 -78 -67 -200 -78 -223 -20
+-38 -22 -70 -6 -86 17 -17 148 -23 172 -8 18 12 86 202 212 592 43 135 97 295
+119 355 23 61 59 162 81 225 22 63 62 178 90 255 50 140 147 424 233 690 26
+77 62 185 82 240 68 191 96 271 171 500 42 127 86 251 100 276 26 51 31 98 12
+117 -20 20 -152 16 -177 -5z"/><path d="M24965 5620 c-54 -5 -61 -8 -82 -38 -12 -19 -33 -68 -47 -110 -14
+-43 -38 -113 -54 -157 -66 -179 -105 -293 -122 -350 -10 -33 -35 -105 -55
+-160 -20 -55 -49 -138 -65 -185 -16 -47 -42 -123 -60 -170 -17 -47 -44 -121
+-60 -165 -16 -44 -45 -123 -65 -175 -35 -94 -164 -472 -183 -540 -10 -32 -56
+-162 -119 -335 -110 -301 -216 -602 -238 -678 -12 -42 -27 -83 -33 -90 -18
+-23 -23 -72 -9 -91 11 -15 30 -20 84 -23 91 -4 102 6 141 122 17 50 58 169 92
+265 34 96 86 247 116 335 29 88 70 203 89 255 92 245 108 290 130 355 13 39
+28 84 34 100 14 37 136 407 150 455 6 19 29 87 51 150 22 63 51 147 65 185 28
+81 71 204 115 325 54 150 180 528 180 541 0 7 12 36 26 66 29 62 29 103 -1
+112 -11 3 -47 4 -80 1z"/></g><g class="wm-sign"><path d="M7852 4559 c-73 -11 -197 -58 -264 -100 -68 -44 -132 -118 -168 -195
+-98 -209 -40 -446 146 -593 109 -86 205 -131 539 -253 158 -58 284 -161 311
+-255 49 -168 -6 -288 -166 -365 -58 -29 -76 -32 -175 -36 -260 -9 -418 80
+-520 293 -25 53 -51 123 -58 157 -9 47 -18 66 -39 81 -23 17 -31 19 -53 9 -14
+-7 -29 -22 -33 -34 -4 -13 -5 -150 -2 -306 6 -344 3 -337 125 -256 84 55 92
+54 246 -4 126 -49 199 -62 334 -62 114 1 159 9 266 50 136 52 211 106 286 204
+88 117 121 239 98 369 -15 88 -32 128 -78 193 -82 114 -205 190 -487 299 -52
+21 -113 45 -135 55 -22 10 -51 21 -65 25 -14 4 -64 28 -113 52 -176 91 -231
+212 -172 384 18 53 79 117 145 151 41 21 58 23 180 23 133 0 136 -1 207 -34
+123 -57 231 -191 273 -334 27 -95 35 -107 75 -107 21 0 37 6 43 16 5 9 7 129
+4 267 -4 268 -10 297 -54 297 -11 0 -40 -18 -64 -40 -24 -22 -50 -40 -59 -40
+-8 0 -59 18 -112 39 -135 55 -301 72 -461 50z"/><path d="M9833 4515 c-31 -22 -30 -60 2 -81 14 -9 59 -20 101 -25 91 -10 141
+-33 170 -76 31 -47 38 -216 32 -871 l-5 -543 -29 -42 c-38 -54 -85 -76 -184
+-86 -44 -5 -87 -14 -95 -21 -23 -19 -18 -57 9 -75 21 -14 80 -16 482 -14 280
+1 464 6 472 12 15 12 16 59 0 75 -7 7 -28 12 -47 12 -19 0 -63 5 -99 11 -77
+14 -135 59 -152 117 -13 50 -13 1301 1 1361 21 92 72 128 198 142 59 7 80 13
+94 30 20 25 21 40 5 61 -12 14 -68 17 -473 23 -416 6 -462 5 -482 -10z"/><path d="M12519 4554 c-84 -15 -206 -59 -273 -98 -124 -73 -205 -165 -264
+-301 -31 -70 -36 -93 -40 -182 -7 -159 23 -269 104 -378 32 -44 121 -129 172
+-164 54 -37 37 -83 -45 -125 -56 -28 -159 -140 -177 -192 -21 -63 -20 -149 3
+-199 21 -47 90 -111 156 -145 39 -20 46 -28 43 -49 -2 -21 -17 -33 -68 -61
+-149 -79 -221 -142 -266 -231 -30 -60 -34 -78 -34 -144 0 -86 17 -130 76 -195
+81 -89 210 -147 419 -186 137 -27 169 -29 370 -28 213 0 224 1 345 32 220 55
+345 116 448 220 91 90 133 182 140 303 13 228 -69 376 -255 465 -127 60 -263
+77 -703 89 -129 4 -266 11 -303 15 -82 10 -136 42 -162 96 -26 56 -10 98 69
+172 87 81 111 88 211 62 172 -44 414 -17 577 66 180 91 286 211 329 376 45
+166 19 347 -66 461 -49 66 -53 78 -30 97 12 10 46 11 166 2 147 -11 177 -9
+191 12 4 6 8 50 8 99 0 74 -3 90 -20 107 -26 26 -40 25 -127 -5 -77 -26 -171
+-47 -299 -66 -75 -11 -86 -10 -155 11 -41 12 -87 29 -103 37 -75 39 -297 53
+-437 27z m308 -130 c112 -54 178 -145 218 -299 37 -142 36 -287 -4 -417 -62
+-207 -171 -294 -366 -290 -78 1 -97 5 -152 32 -108 53 -189 176 -224 337 -18
+86 -16 285 4 360 57 214 190 319 390 309 59 -3 92 -11 134 -32z m-84 -1744
+c253 -9 398 -22 467 -40 48 -13 111 -61 146 -111 26 -38 29 -50 28 -120 -1
+-97 -26 -152 -104 -230 -151 -152 -463 -216 -779 -159 -176 32 -284 95 -351
+206 -33 55 -35 63 -35 149 0 65 5 98 17 120 29 53 101 127 163 168 58 38 62
+39 125 33 36 -3 181 -10 323 -16z"/><path d="M15175 4558 c-16 -5 -52 -13 -80 -18 -27 -5 -93 -18 -145 -29 -52
+-11 -137 -24 -187 -29 -103 -10 -143 -29 -143 -66 0 -37 24 -49 108 -51 80 -2
+122 -16 155 -53 45 -50 46 -63 46 -717 0 -341 -4 -640 -8 -664 -17 -87 -76
+-130 -191 -140 -37 -4 -75 -13 -84 -20 -23 -19 -21 -68 4 -81 12 -7 159 -10
+417 -11 219 0 410 0 425 -1 34 -1 58 18 58 47 0 34 -31 55 -81 55 -91 0 -160
+37 -197 104 -16 28 -17 77 -14 574 l2 543 25 48 c30 60 168 191 250 236 82 46
+180 68 280 63 137 -7 219 -58 277 -173 28 -53 32 -73 37 -175 4 -63 4 -339 1
+-612 -5 -485 -5 -497 -26 -525 -32 -42 -73 -62 -159 -76 -62 -9 -81 -17 -93
+-35 -11 -18 -12 -28 -4 -47 l11 -23 437 -1 c312 -1 441 2 450 10 21 18 17 57
+-8 73 -13 8 -50 17 -84 21 -79 9 -134 39 -159 90 -19 39 -20 60 -20 635 l0
+595 -24 80 c-31 104 -71 173 -141 243 -113 113 -257 156 -446 135 -175 -20
+-327 -102 -480 -261 -127 -132 -129 -131 -129 73 -1 88 -4 165 -8 171 -10 17
+-38 22 -72 12z"/></g><g class="wm-tail"><path d="M18395 4555 c-78 -17 -218 -83 -293 -140 -76 -57 -181 -168 -228
+-242 -40 -62 -114 -221 -114 -245 0 -8 -10 -50 -22 -94 -20 -71 -23 -101 -22
+-284 0 -195 2 -211 32 -332 37 -149 74 -229 146 -313 151 -178 324 -265 527
+-265 59 0 156 16 174 30 6 4 29 14 53 24 101 39 226 142 315 259 47 62 73 45
+87 -55 26 -178 88 -242 235 -241 81 1 125 14 328 94 69 26 92 54 82 99 -13 59
+-56 76 -116 44 -37 -19 -139 -20 -168 -3 -49 31 -51 52 -51 599 0 614 15 834
+65 930 21 40 20 97 -2 108 -10 5 -71 8 -136 7 -144 -2 -152 -7 -166 -111 -14
+-94 -18 -104 -48 -104 -18 0 -48 21 -98 69 -158 150 -373 211 -580 166z m338
+-158 c76 -35 184 -141 225 -223 66 -130 67 -142 66 -541 l-1 -361 -36 -76
+c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
+368 -26 95 -27 111 -27 325 0 214 2 231 29 339 64 254 169 394 343 457 91 33
+200 30 286 -9z"/><path d="M20292 4364 c-20 -13 -23 -22 -18 -48 9 -43 140 -307 172 -345 52
+-62 76 -39 183 178 74 150 87 202 54 219 -10 5 -97 10 -193 11 -149 1 -179 -1
+-198 -15z"/><path d="M20468 3240 c-33 -20 -143 -214 -188 -332 -25 -66 -26 -104 -2 -116
+9 -5 111 -9 225 -8 218 2 226 4 227 47 0 50 -171 370 -218 407 -19 14 -22 14
+-44 2z"/><path d="M21950 5550 c-101 -30 -309 -75 -399 -85 -66 -8 -91 -20 -91 -45 0
+-30 39 -50 95 -50 81 0 145 -24 190 -70 l40 -41 3 -1162 c2 -804 0 -1173 -8
+-1199 -6 -20 -22 -46 -37 -58 -38 -30 -139 -57 -225 -59 -10 -1 -25 -12 -34
+-26 -14 -21 -15 -31 -6 -51 l12 -24 428 0 c236 1 440 -2 454 -5 40 -10 68 10
+68 48 0 42 -15 57 -57 57 -44 0 -132 19 -165 36 -15 8 -39 31 -53 51 l-25 38
+0 1325 c0 1018 -3 1329 -12 1338 -19 19 -75 13 -178 -18z"/></g></g></svg></span>
+    <span class="tag">The economics · why the model works</span>
+  </div>
+
+  <div class="ptitle">Confidential · 03 — The economics</div>
+  <div class="hook" style="font-size:36px;margin-bottom:10px;">Why the model works.</div>
+  <p style="font-size:12px;color:var(--muted);margin-bottom:20px;">Pre-launch. A <strong>bottom-up estimate anchored by three real ingredient costs</strong> (Kaneka QH® ubiquinol, MitoPrime® ergothioneine, creatine) — not yet a fully validated quote, which is why the hero is shown as a range. <strong>Locking the validated cost stack is the first use of proceeds.</strong> Two margins per SKU: <strong>gross</strong> (vs COGS) and <strong>contribution</strong> (after fulfillment/parcel/payment — the figure that funds CAC).</p>
+
+  <!-- SKU econ cards -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:10px;">
+    <div style="background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:8px;padding:15px 18px;">
+      <div style="font-family:var(--display);font-size:21px;color:var(--red);letter-spacing:.04em;">N°001 · The Foundation</div>
+      <div style="font-family:var(--mono);font-size:9.5px;color:var(--muted);margin-bottom:10px;letter-spacing:.06em;">THE HERO · $89 / MO · LAUNCHES Q4 2026</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+        <tr><td style="padding:3px 0;color:var(--ink);border-bottom:1px solid var(--line);">Retail</td><td style="text-align:right;border-bottom:1px solid var(--line);font-family:var(--mono);">$89</td></tr>
+        <tr><td style="padding:3px 0;color:var(--ink);border-bottom:1px solid var(--line);">Product COGS</td><td style="text-align:right;border-bottom:1px solid var(--line);font-family:var(--mono);">$19–27 <span style="color:var(--muted);">(~$22)</span></td></tr>
+        <tr><td style="padding:3px 0;color:var(--espresso);font-weight:700;border-bottom:1px solid var(--line);">Gross margin</td><td style="text-align:right;border-bottom:1px solid var(--line);font-family:var(--mono);font-weight:700;color:var(--espresso);">~70–79% <span style="color:var(--muted);font-weight:400;">(~75%)</span></td></tr>
+        <tr><td style="padding:3px 0;color:var(--ink);border-bottom:1px solid var(--line);">Total variable</td><td style="text-align:right;border-bottom:1px solid var(--line);font-family:var(--mono);">~$28–42 <span style="color:var(--muted);">(~$35)</span></td></tr>
+        <tr><td style="padding:3px 0;color:var(--espresso);font-weight:700;">Contribution</td><td style="text-align:right;font-family:var(--mono);font-weight:700;color:var(--red-deep);">~$47–61 <span style="color:var(--muted);font-weight:400;">(~$54)</span></td></tr>
+        <tr><td style="padding:3px 0;color:var(--espresso);font-weight:700;">Contribution margin</td><td style="text-align:right;font-family:var(--mono);font-weight:700;color:var(--red-deep);">~53–67% <span style="color:var(--muted);font-weight:400;">(~60%)</span></td></tr>
+      </table>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:8px;padding:15px 18px;">
+      <div style="font-family:var(--display);font-size:21px;color:var(--gold);letter-spacing:.04em;">N°002 · The Daily Fuel <span style="font-size:11px;color:var(--muted);">(working name)</span></div>
+      <div style="font-family:var(--mono);font-size:9.5px;color:var(--muted);margin-bottom:10px;letter-spacing:.06em;">STACK-ON · $49 / MO · LAUNCHES 2027</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+        <tr><td style="padding:3px 0;color:var(--ink);border-bottom:1px solid var(--line);">Retail</td><td style="text-align:right;border-bottom:1px solid var(--line);font-family:var(--mono);">$49</td></tr>
+        <tr><td style="padding:3px 0;color:var(--ink);border-bottom:1px solid var(--line);">Product COGS</td><td style="text-align:right;border-bottom:1px solid var(--line);font-family:var(--mono);">~$10–14</td></tr>
+        <tr><td style="padding:3px 0;color:var(--espresso);font-weight:700;border-bottom:1px solid var(--line);">Gross margin</td><td style="text-align:right;border-bottom:1px solid var(--line);font-family:var(--mono);font-weight:700;color:var(--espresso);">~71–80% <span style="color:var(--muted);font-weight:400;">(~76%)</span></td></tr>
+        <tr><td style="padding:3px 0;color:var(--ink);border-bottom:1px solid var(--line);">Total variable</td><td style="text-align:right;border-bottom:1px solid var(--line);font-family:var(--mono);">~$22–28</td></tr>
+        <tr><td style="padding:3px 0;color:var(--espresso);font-weight:700;">Contribution</td><td style="text-align:right;font-family:var(--mono);font-weight:700;color:var(--red-deep);">~$21–27 <span style="color:var(--muted);font-weight:400;">(~$24)</span></td></tr>
+        <tr><td style="padding:3px 0;color:var(--espresso);font-weight:700;">Contribution margin</td><td style="text-align:right;font-family:var(--mono);font-weight:700;color:var(--red-deep);">~43–55% <span style="color:var(--muted);font-weight:400;">(~49%)</span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- repeat economics strip -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:10px;">
+    <div style="background:var(--cream);border-radius:8px;padding:13px;text-align:center;"><div style="font-family:var(--display);font-size:28px;color:var(--red);line-height:1;">~$180–220</div><div style="font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px;">LTV · base ~6 cycles</div></div>
+    <div style="background:var(--cream);border-radius:8px;padding:13px;text-align:center;"><div style="font-family:var(--display);font-size:28px;color:var(--red);line-height:1;">~$35–45</div><div style="font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px;">Blended CAC target</div></div>
+    <div style="background:var(--cream);border-radius:8px;padding:13px;text-align:center;"><div style="font-family:var(--display);font-size:28px;color:var(--red);line-height:1;">~3–5×</div><div style="font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px;">LTV : CAC at base</div></div>
+    <div style="background:var(--cream);border-radius:8px;padding:13px;text-align:center;"><div style="font-family:var(--display);font-size:28px;color:var(--red);line-height:1;">~6</div><div style="font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px;">Retained cycles<br>(bear ~4 / bull ~9)</div></div>
+  </div>
+
+  <!-- levers + channels -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:10px;">
+    <div>
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--red-deep);margin-bottom:8px;">Margin levers</div>
+      <p style="font-size:12px;margin-bottom:7px;"><strong>Cost came in low.</strong> Premium actives are milligram-dosed (so they cost little); a formulation swap removed the last gram-scale cost line.</p>
+      <p style="font-size:12px;margin-bottom:7px;"><strong>Pricing headroom.</strong> $89 is the floor; positioning supports $99–120 (AG1 ~$99) — upside on top.</p>
+      <p style="font-size:12px;margin-bottom:0;"><strong>Scale.</strong> 10K → 25–50K MOQ pulls per-unit cost down ~20–40%.</p>
+    </div>
+    <div>
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--red-deep);margin-bottom:8px;">How CAC stays efficient</div>
+      <p style="font-size:12px;margin-bottom:7px;"><strong>Practitioner (Fullscript).</strong> Clinician recommendation transfers trust DTC otherwise pays ~$45+ to manufacture — lowers blended CAC.</p>
+      <p style="font-size:12px;margin-bottom:7px;"><strong>Send a Signal.</strong> Gifting at checkout (~15% of acquisition) — high-conversion, compounds the base.</p>
+      <p style="font-size:12px;margin-bottom:0;"><strong>Owned DTC + organic.</strong> The brand's home; paid spend capped (~$35).</p>
+    </div>
+  </div>
+
+  <div style="background:var(--espresso);color:var(--bone);border-radius:8px;padding:16px 20px;">
+    <span style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);">The raise · $800K – $1M · terms &amp; use of proceeds</span>
+    <div style="display:flex;flex-wrap:wrap;gap:6px 16px;margin:9px 0 4px;font-size:11.5px;color:#e8d7bc;">
+      <span><b style="color:#fff;">Instrument</b> · post-money SAFE</span>
+      <span><b style="color:#fff;">Total to launch</b> · $1M <span style="color:#bbada0;">(min $800K)</span></span>
+      <span><b style="color:#fff;">Terms</b> · cap-only, no discount · MFN for first checks</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:4px 14px;margin:0 0 5px;font-size:11px;color:#bbada0;">
+      <span><b style="color:#e8d7bc;">Founders self-fund ~$270K</b> → finalize the formulation <span style="color:#bbada0;">(pre-proof, skin in the game)</span></span>
+      <span><b style="color:#e8d7bc;">SAFE raises ~$530–730K</b> → funds the launch @ <b style="color:#fff;">step-up cap (~$8M)</b>, opened post-formulation</span>
+    </div>
+    <p style="font-size:11px;color:#bbada0;margin:0 0 8px;">≈ <b style="color:#fff;">7–9% dilution</b> — the founders self-fund the riskiest pre-proof phase, so outside capital enters only on a <span style="color:#e8d7bc;">validated product, at the higher post-formulation cap</span> (not a pre-launch guess). A SAFE keeps it fast and cheap and defers the priced valuation to the Series A. <span style="color:#e8d7bc;">Milestones: <b style="color:#fff;">$270K</b> founder-funded formulation · <b style="color:#fff;">$800K</b> full public launch · <b style="color:#fff;">$1M</b> target.</span></p>
+    <p style="font-size:12.5px;color:#fff;margin:7px 0 8px;font-weight:600;">If we do one thing: build the un-revocable core first.</p>
+    <p style="font-size:12px;color:#d8ccc1;margin:0 0 8px;">The <b style="color:#fff">founding cohort</b> is the priority — it does triple duty: ① manufactures day-one social proof (MCM — minimum critical mass); ② proves retention before a dollar of paid spend; ③ becomes the seed of the owned audience no gatekeeper can revoke.</p>
+    <p style="font-size:11.5px;color:#bbada0;margin:0;">Then, in order: <b style="color:#e8d7bc">lock the formulation cost stack</b> (the cohort needs finished product) · <b style="color:#e8d7bc">target the already-converted</b> · <b style="color:#e8d7bc">saturate one beachhead</b> with the cohort's UGC · <b style="color:#e8d7bc">PR</b> for organic &amp; earned authenticity · <b style="color:#e8d7bc">paid</b>, aimed narrowly at the already-converted. <span style="color:#fff;">Prime the engine before launch — don't hope it ignites after.</span></p>
+  </div>
+
+  <div style="border:1px solid var(--line);border-left:4px solid var(--red);border-radius:8px;padding:13px 20px;margin-top:10px;">
+    <div style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--red-deep);margin-bottom:6px;">How we launch — no ghost town</div>
+    <p style="font-size:12.5px;margin-bottom:0;">Acquisition spend on an empty storefront is wasted. So before we open to the public, we <strong>manufacture day-one density</strong>: a founding cohort who actually use N°001 and generate the first reviews and real-world content — so the first visitor meets a living practice, not an empty shelf. We don't scale paid spend until that cohort proves it <strong>retains</strong> (they reorder). <strong>We prime the engine before launch — we don't hope it ignites after.</strong></p>
+  </div>
+
+  <div class="disclaim">Confidential and proprietary — INSDR Wellness Co. Figures are pre-launch, bottom-up estimates anchored by three real ingredient costs; not yet a fully validated quote. Not an offer to sell or a solicitation of any security.</div>
+
+  <div class="foot"><span>SIGNAL · CONFIDENTIAL · 2026</span><span class="sig">Send a signal.</span></div>
+</div>
+
+<script>
+  (function(){
+    var PASS="54321";
+    var gate=document.getElementById("gate");
+    var body=document.body;
+    if(sessionStorage.getItem("signal_unlocked")==="true"){gate.style.display="none";body.classList.remove("locked");}
+    window.checkPass=function(e){
+      e.preventDefault();
+      var input=document.getElementById("gate-pass").value;
+      var err=document.getElementById("gate-error");
+      if(input===PASS){sessionStorage.setItem("signal_unlocked","true");gate.style.display="none";body.classList.remove("locked");}
+      else{err.classList.add("show");document.getElementById("gate-pass").value="";document.getElementById("gate-pass").focus();setTimeout(function(){err.classList.remove("show");},2400);}
+      return false;
+    };
+  })();
+</script>
+</body>
+</html>
