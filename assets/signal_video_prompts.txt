@@ -1,0 +1,150 @@
+================================================================
+SIGNAL — "THE SIGNAL IN THE DARK"  ·  AI VIDEO PROMPT PACK  ·  v5
+60-second film · bioluminescence: the signal & its cost · no narration
+================================================================
+
+THE IDEA (so every choice makes sense)
+--------------------------------------
+Some creatures send a flash of living light into the dark — a SIGNAL. We
+see the flash; we never see what it cost: cellular energy, poured out in
+an instant. This film lives in the DARK (where the energy gathers), lets
+brief flashes reveal the world for a heartbeat, and ONCE goes inside a
+flash to show the cellular machinery behind it. The brand is the one
+signal that doesn't go dark. Tagline lands literally: "send the right
+signal." Weight everything to the dark and the cost — NOT the pretty
+flash (that's the trap).
+
+HOW TO USE THIS FILE
+--------------------
+AI generates two kinds of clips: (a) bioluminescent FLASHES in darkness,
+and (b) the INTERIOR cellular machinery (the cost). The film lives in the
+editor: the black, the flash timing, the charge-up builds, the sound. In
+post: assemble against long black, build a glow before each flash, go
+inside once, lay the slow-entrainment bed, end on the brand flash that
+holds. Wordmark + sound are SUPPLIED FILES — never AI-generated.
+
+THE RULES (do not break)
+------------------------
+- The light is the CREATURE'S SIGNAL, never a human benefit. No human
+  glowing. "glow = your vitality" is a claim — don't.
+- The product never causes a flash. No outcome shown.
+- Don't worship the flash. The dark and the cost are the subject.
+
+
+================================================================
+GLOBAL STYLE BIBLE  —  prepend on EVERY shot
+================================================================
+Two looks, one palette. Photoreal. EXTERIOR flashes: bioluminescence in
+near-total darkness — light brief and soft, revealing surroundings for a
+heartbeat, deep black all around. INTERIOR (the cost): extreme cellular
+close-up, machinery pouring a warm OXBLOOD-RED glow (#AD4236) into the
+reaction. Across both: deep espresso-black, bone highlights, the single
+oxblood-amber glow as the through-line. Low-key, volumetric, lots of
+negative space, slow and reverent. The darkness is the subject; the light
+is rare.
+
+GLOBAL NEGATIVE PROMPT  —  append on every shot
+-----------------------------------------------
+text, captions, watermark, logo, brand name, bright or daytime scenes,
+full/even lighting, human glowing, the creature's whole body in clear
+view, fast cutting, distorted anatomy, cartoon, plastic CGI look,
+oversaturated, garish neon, shaky cam
+
+
+================================================================
+THE SHOTS  (each is one generation; assemble against BLACK)
+================================================================
+
+--- SHOT 1 · FIREFLY FLASH (the first signal) · ~4s ---
+Total darkness. A single firefly ignites — a soft warm flash that, for one
+heartbeat, reveals a dense dark forest around it (leaves, branches, mist)
+— then the light fades and everything returns to black. Photoreal, deep
+shadow, the light gentle not harsh. Slow.
+
+--- SHOT 2 · THE CHARGE (the cost, before the light) · ~6s ---
+Near-total black. A faint warm amber-red glow slowly gathers and builds in
+one spot — energy pooling, intensifying, straining, as if charging — but
+it does NOT fully flash; hold it on the verge. Macro, abstract, the glow
+breathing inside darkness. Very slow build.
+
+--- SHOT 3 · PLANKTON WAVE (the release) · ~4s ---
+A dark night beach. A wave breaks and the disturbed water blooms with blue
+bioluminescent plankton light along the surf for a moment, then fades to
+black. Photoreal, deep night, the blue glow soft and electric. Slow motion.
+
+--- SHOT 4 · INSIDE THE FLASH (the cost, revealed) · ~6s ---
+Extreme microscopic close-up: we are INSIDE a light organ at the cellular
+scale — machinery and mitochondria pouring a warm oxblood-red/amber glow
+into a luminescent chemical reaction, furious activity, energy streaming
+along channels. The hidden cost behind a single flash. Slow, dense, alive.
+
+--- SHOT 5 · DEEP-SEA GLOW (alone in the black) · ~4s ---
+The pitch-black deep ocean. A lone deep-sea creature emits a soft glow
+that reveals only itself, drifting in infinite darkness, then dims. No
+surroundings, no surface. Photoreal, cold, lonely, beautiful. Very slow.
+
+--- SHOT 6 · THE TURN (human interior) · ~5s ---
+Extreme cellular close-up of HUMAN interior tissue — capillaries, the same
+warm oxblood-red glow and machinery, IDENTICAL in look to Shot 4. A subtle
+human pulse. (It must be indistinguishable from the firefly interior.) No
+face, no body, no glowing skin — only the cellular interior. Slow.
+
+
+================================================================
+NOT GENERATED — built in the editor
+================================================================
+
+--- THE AFTERCOST ---
+After a flash, hold on BLACK (the creature spent, recharging). Long dark
+beats between flashes are part of the film, not dead air.
+
+--- THE LINE (0:52) ---
+On black, no voice: "You see the signal. Not what it costs to send it."
+Then smaller: "You don't start it. You feed it."
+
+--- THE BRAND FLASH (0:57) ---
+On black, the wordmark (signal_wordmark_on_dark.png) rises like a flash —
+but unlike every creature's, it does NOT go dark. Two offset copies drift
+into one as signal_meditation.wav reaches unison; the glow holds steady.
+Line beneath: send the right signal. Slow fade.
+
+
+================================================================
+ASSEMBLY (in your editor)
+================================================================
+TIMING (60s): 0:00 firefly flash · 0:08 the charge (dark) · 0:18 plankton
+flash · 0:24 inside-the-cost · 0:36 aftercost + deep-sea · 0:44 the turn
+(human interior) · 0:52 the line · 0:57 brand flash that holds.
+
+THE DARK IS THE FILM: most of the runtime is near-black. Flashes are
+seconds. Let the black breathe — the disproportion of dark-to-light is the
+argument. Don't fill the silence with light.
+
+THE CHARGE: ramp a building glow before flashes so the energy is felt, not
+just popped. THE COST: dissolve through one flash into the cellular machine
+(Shot 4), graded to match the human interior (Shot 6) so the turn lands
+with no announced cut.
+
+AUDIO: signal_meditation.wav (~60s) under the whole film — two tones drift
+to unison, steady ~60 bpm heartbeat; soft accents on each flash; the tones
+settle to unison only at the brand flash. Final mix to -14 LUFS.
+
+CUTDOWNS: :15 / :06 reuse the spine — :06 = one flash + inside-the-cost +
+the brand flash. 9:16 vertical for paid/organic.
+
+
+================================================================
+ASSET MANIFEST  (companion files in this /assets folder)
+================================================================
+signal_wordmark_on_dark.png  — transparent PNG, 1557x348, drop-in overlay
+signal_wordmark_on_dark.svg  — vector master
+signal_meditation.wav        — ~60s slow drift to unison A4 + steady
+                               heartbeat (the charge in the dark). -14 LUFS.
+gen_signal_sound.py          — regenerates the sound (BINAURAL=True for
+                               headphones; tune START_SPREAD/BPM/DUR)
+preview_close.html           — hear the sound + see the wordmark resolve
+
+THE ENDING FORK — decide before spending on production:
+If a public consumer surface exists, end on wordmark + a URL (the brand
+flash points somewhere). If not, it ends on the wordmark alone.
+================================================================
