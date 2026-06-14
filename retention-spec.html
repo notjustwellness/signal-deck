@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>signal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#AD4236; --red-deep:#7A2E26; --espresso:#241B17; --ink:#2E2420;
+    --bone:#F6EFEA; --cream:#EFE5D1; --taupe:#D8CCC1; --gold:#A8845A;
+    --muted:#6D665C; --line:#C8BEAE; --paper:#FBF8F4; --real:#178D78;
+    --display:'Bebas Neue',Impact,sans-serif;
+    --body:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.5;-webkit-font-smoothing:antialiased;padding:44px 20px;}
+  .sheet{max-width:1000px;margin:0 auto;}
+
+  .head{position:relative;border-bottom:3px solid var(--espresso);padding-bottom:16px;margin-bottom:22px;}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:9px;}
+  h1{font-family:var(--display);font-weight:400;font-size:50px;line-height:.95;letter-spacing:.01em;color:var(--espresso);}
+  h1 .sub{display:block;font-size:21px;color:var(--gold);margin-top:6px;letter-spacing:.03em;}
+  .meta{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:12px;display:flex;flex-wrap:wrap;gap:6px 22px;}
+
+  .honest{background:var(--espresso);color:var(--bone);border-radius:10px;padding:20px 24px;margin-bottom:24px;}
+  .honest .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:9px;}
+  .honest p{font-size:14.5px;}
+  .honest p + p{margin-top:10px;}
+  .honest strong{color:#E8B4AC;}
+  .honest .pull{font-family:var(--display);font-weight:400;font-size:25px;letter-spacing:.02em;color:#fff;line-height:1.05;margin:14px 0 4px;}
+
+  h2{font-family:var(--display);font-weight:400;font-size:29px;letter-spacing:.02em;color:var(--red-deep);margin:36px 0 4px;}
+  h2 .n{color:var(--taupe);margin-right:10px;}
+  .lede{font-size:14px;color:var(--muted);margin-bottom:14px;max-width:880px;}
+  .lede b{color:var(--ink);}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px;}
+  .job{background:#fff;border:1px solid var(--line);border-top:5px solid var(--gold);border-radius:10px;padding:16px 18px;}
+  .job .tag{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--red-deep);font-weight:700;}
+  .job h4{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:.02em;color:var(--espresso);margin:3px 0 6px;line-height:1.05;}
+  .job p{font-size:13px;color:var(--ink);}
+  .job.solv{border-top-color:var(--real);}
+  .job .verdict{font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;margin-top:9px;display:inline-block;padding:2px 8px;border-radius:3px;}
+  .job.solv .verdict{background:var(--real);color:#fff;} .job .verdict{background:var(--gold);color:#fff;}
+
+  .card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:9px;padding:15px 18px;margin-bottom:11px;}
+  .card h4{font-size:15px;color:var(--espresso);margin-bottom:4px;display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap;}
+  .card h4 .cyc{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;}
+  .card p{font-size:13.5px;color:var(--ink);} .card p + p{margin-top:6px;}
+  .card.real{border-left-color:var(--real);}
+  .card.gold{border-left-color:var(--gold);background:#fffdf8;}
+
+  .bridge{background:var(--cream);border-radius:10px;padding:18px 22px;margin-top:8px;}
+  .bridge .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--red-deep);margin-bottom:10px;font-weight:600;}
+  .bridge .lane{display:flex;align-items:center;gap:10px;font-size:13px;padding:7px 0;border-bottom:1px dashed var(--line);}
+  .bridge .lane:last-child{border-bottom:none;}
+  .bridge .when{font-family:var(--mono);font-size:10px;color:var(--gold);min-width:118px;letter-spacing:.03em;}
+  .bridge .lane b{color:var(--espresso);}
+
+  .flags{background:#f3e0dd;border-radius:10px;padding:16px 20px;margin-top:30px;}
+  .flags .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:9px;font-weight:600;}
+  .flags ul{list-style:none;}
+  .flags li{padding:5px 0 5px 22px;position:relative;font-size:13px;color:var(--red-deep);}
+  .flags li::before{content:"\26A0";position:absolute;left:0;}
+  .flags b{color:var(--red);}
+
+  .line{background:linear-gradient(135deg,var(--red) 0%,var(--red-deep) 100%);color:#fff;border-radius:12px;padding:22px 26px;margin-top:8px;}
+  .line .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#F1C9C2;margin-bottom:8px;}
+  .line p{font-size:15px;} .line .big{font-family:var(--display);font-weight:400;font-size:27px;letter-spacing:.02em;line-height:1.06;margin-bottom:8px;}
+
+  footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media (max-width:820px){h1{font-size:38px;}.split{grid-template-columns:1fr;}}
+  @media print{body{padding:0;background:#fff;}.sheet{max-width:none;}.card,.honest,.bridge,.job,.line,.flags{break-inside:avoid;}}
+
+  /* ─── PASSWORD GATE (friction + noindex, not security) ─── */
+  #gate{position:fixed;inset:0;background:#241B17;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:#D8CCC1;padding:40px;text-align:center;}
+  #gate .gate-overline{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#AD4236;margin-bottom:16px;font-weight:600;}
+  #gate .gate-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:72px;color:#AD4236;line-height:.9;margin-bottom:32px;letter-spacing:-1.6px;text-transform:lowercase;}
+  #gate .gate-title .accent{color:#D8CCC1;}
+  #gate .gate-subtitle{font-size:14px;opacity:.6;margin-bottom:32px;letter-spacing:1px;}
+  #gate form{display:flex;flex-direction:column;align-items:center;gap:12px;}
+  #gate input{background:rgba(246,239,234,.08);border:1px solid rgba(246,239,234,.2);border-radius:6px;color:#D8CCC1;padding:14px 20px;font-size:15px;font-family:inherit;width:280px;text-align:center;letter-spacing:1px;outline:none;transition:border-color .2s;}
+  #gate input:focus{border-color:#AD4236;}
+  #gate button{background:#AD4236;color:#D8CCC1;border:none;border-radius:6px;padding:12px 32px;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background .2s;}
+  #gate button:hover{background:#c4574b;}
+  #gate .gate-error{color:#AD4236;font-size:12px;margin-top:8px;opacity:0;transition:opacity .2s;letter-spacing:1px;}
+  #gate .gate-error.show{opacity:1;}
+  #gate .gate-footer{position:absolute;bottom:40px;font-size:10px;opacity:.3;letter-spacing:3px;text-transform:uppercase;}
+  body.locked{overflow:hidden;height:100vh;}
+  body.locked > div:not(#gate){display:none !important;}
+</style>
+</head>
+<body class="locked">
+
+<!-- ═══════════════════ PASSWORD GATE ═══════════════════ -->
+<div id="gate">
+  <div class="gate-overline">INSDR Wellness — the cellcare company · Confidential</div>
+  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪgnɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="gate-subtitle">Enter password to continue.</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
+    <button type="submit">Enter</button>
+    <div class="gate-error" id="gate-error">Incorrect. Try again.</div>
+  </form>
+  <div class="gate-footer">Confidential — internal · do not share.</div>
+</div>
+
+<div class="sheet">
+
+  <div class="head">
+    <div class="kicker">Retention design · the mirror substitute · cellcare</div>
+    <h1>Earning the re-order<span class="sub">How an imperceptible foundation keeps the customer — honestly</span></h1>
+    <div class="meta">
+      <span>Signal · INSDR Wellness Co.</span>
+      <span>The mechanic behind the re-order ≥40% gate</span>
+      <span>v1 · 2026-06-14 · internal — design spec</span>
+    </div>
+  </div>
+
+  <!-- ───────────────────────── FRAME ───────────────────────── -->
+  <div class="honest">
+    <div class="lbl">Why this document exists</div>
+    <p>The whole business turns on one number — <strong>do at least ~40% of customers re-order</strong> — and Signal is built to win it with a product the customer <strong>cannot feel.</strong> A topical brand gets a mirror: visible proof, daily, for free. We get nothing the senses can confirm. That asymmetry is the single biggest risk in the plan, and the mechanic that answers it has been a sentence, not a design. This is the design.</p>
+    <p class="pull">For Signal, retention is conviction made into a habit.</p>
+    <p>The rule that governs everything below: <strong>we substitute for the mirror, we never fake it.</strong> No fabricated biomarker, no manufactured sensation, no "your cellular score went up 18%." The honest substitute reflects the customer's <em>practice</em> and the customer's <em>own real data</em> — never a result we invented.</p>
+  </div>
+
+  <!-- ───────────────────────── 1 · THE MIRROR PROBLEM ───────────────────────── -->
+  <h2><span class="n">1</span>The mirror problem</h2>
+  <p class="lede">A topical works because the customer looks in the mirror and sees it — daily, first-person, no claim required. That visible cue does the entire job of keeping them buying. Signal is a <b>cellular foundation</b>: by design it produces <b>no acute, visible, or felt output</b> — and claiming one would break both the law (DSHEA) and the brand ("we name the dose, not the outcome"). So the feedback loop every other supplement leans on is, for us, deliberately empty. We can't borrow the mirror. We have to build a substitute that does its <em>jobs</em> without faking its <em>proof</em>.</p>
+
+  <!-- ───────────────────────── 2 · SPLIT THE JOB ───────────────────────── -->
+  <h2><span class="n">2</span>The reframe — the mirror does two jobs, not one</h2>
+  <p class="lede">Trying to find one substitute is the trap that leads to fabricated dashboards. The mirror actually does two separate jobs, and they need different — and honestly different — answers.</p>
+  <div class="split">
+    <div class="job solv">
+      <span class="tag">Job 1 · the reward loop</span>
+      <h4>A small, daily, self-observed payoff that keeps the habit alive</h4>
+      <p>Short-cycle (every day). This is what makes you reach for it tomorrow. <b>Fully solvable, honestly, now</b> — by reflecting the customer's <em>practice</em>, not a result.</p>
+      <span class="verdict">Solvable pre-launch</span>
+    </div>
+    <div class="job">
+      <span class="tag">Job 2 · belief confirmation</span>
+      <h4>Proof over time that the money wasn't wasted — "it's working"</h4>
+      <p>Long-cycle (weeks to months). This is the hard one: it <b>cannot be honestly manufactured</b> short-term for a foundation. We answer it with real, customer-owned signals + conviction — never a fake.</p>
+      <span class="verdict">No fake — real data + conviction only</span>
+    </div>
+  </div>
+
+  <!-- ───────────────────────── 3 · JOB 1 ───────────────────────── -->
+  <h2><span class="n">3</span>Job 1 — the reward loop (build this now)</h2>
+  <p class="lede">The substitute mirror reflects the customer's <b>consistency</b>, not a benefit. It's honest because it shows what <em>they</em> did, never what the product did — and it borrows the topical's "results compound" emotional arc, rebuilt on the axis of practice.</p>
+
+  <div class="card real">
+    <h4>The consistency mirror <span class="cyc">daily · short-cycle</span></h4>
+    <p>A visible <b>streak / "signals sent"</b> surface: <em>"You've sent 90 signals. Foundation compounds."</em> Loss-aversion protects the chain; the number climbs whether or not anything is felt, because it measures adherence. This is the closest honest analog to the daily glance in the mirror — and it's the topical's compounding story told truthfully.</p>
+  </div>
+  <div class="card real">
+    <h4>The chew as the reward itself <span class="cyc">daily · short-cycle</span></h4>
+    <p>The 90-second ritual must be genuinely <b>pleasant in itself</b> (the Hi-Chew-grade bite). The immediate sensory payoff substitutes for "seeing the improvement." This is why format quality is load-bearing for retention, not a nicety — the enjoyment <em>is</em> the daily reward.</p>
+  </div>
+  <div class="card real">
+    <h4>The community as a collective mirror <span class="cyc">ongoing</span></h4>
+    <p>In the owned cohort you see <b>others' consistency</b>, which reflects back on your own and adds a social cost to quitting. Streak leaderboards make the consistency mirror shared. (This is also why MCM matters for <em>retention</em>, not just acquisition — below critical mass the room can't do this job.)</p>
+  </div>
+
+  <!-- ───────────────────────── 4 · JOB 2 ───────────────────────── -->
+  <h2><span class="n">4</span>Job 2 — belief confirmation (the hard one, answered honestly)</h2>
+  <p class="lede">You cannot give a foundation customer short-term proof it's working — so don't. Instead: one <b>real</b> felt anchor, the customer's <b>own</b> long-cycle data framed as observation, and conviction strong enough they don't demand short-term proof.</p>
+
+  <div class="card">
+    <h4>Creatine — the one genuinely-felt mirror we have <span class="cyc">weeks</span></h4>
+    <p>Creatine is the single active with a <b>real, perceptible, measurable</b> effect (reps, grip, training). For anyone who trains, that's a legitimate "I can tell" that breaks no rule <em>because it's true.</em> It is the felt foothold under an otherwise imperceptible foundation — and a real argument for keeping it in the product, not splitting it out.</p>
+  </div>
+  <div class="card">
+    <h4>The customer's own data — which our ICP already tracks <span class="cyc">months</span></h4>
+    <p>Optimizers already wear Oura/Whoop and run bloodwork. We don't generate that data and <b>must never claim to move it.</b> We give the <em>frame</em>: a foundation shows up slowly, in the system, in the markers you already watch — so watch your baseline. That's observation and identity, not causation. <b>⚠ Exact wording routes through Zone Halo regulatory review before any customer surface</b> — "track your HRV" must never become "Signal raises your HRV."</p>
+  </div>
+  <div class="card">
+    <h4>Conviction + transparency as the substitute for personal proof <span class="cyc">ongoing</span></h4>
+    <p>The COA, the named doses, the science, the founder's why — external credibility stands in for the felt confirmation the mirror would give. The <b>insurance / maintenance model</b>: you don't need to feel it if you're convinced it's structurally necessary. Because the product never re-sells itself, <b>we run a permanent belief-maintenance loop aimed at existing subscribers</b> — monthly founder-voice "why the foundation still matters" content. The day we stop re-teaching the why is the day an imperceptible product loses the argument against $89.</p>
+  </div>
+
+  <!-- ───────────────────────── 5 · THE BRIDGE ───────────────────────── -->
+  <h2><span class="n">5</span>The temporal bridge — short-cycle carries them to long-cycle</h2>
+  <p class="lede">The topical's mirror is short-cycle (days). Our only honest belief-confirmation (training gains, bloodwork, trend data) is long-cycle (weeks to months). So the architecture is simple: <b>the reward loop carries the customer across the gap until a real signal can appear.</b></p>
+  <div class="bridge">
+    <div class="lbl">The retention timeline</div>
+    <div class="lane"><span class="when">Day 1 → 30</span><span><b>Reward loop only.</b> Streak + chew enjoyment + community + onboarding conviction. Nothing is "proven" yet — and we don't pretend it is. This stretch is carried entirely by practice and belief.</span></div>
+    <div class="lane"><span class="when">The 30-day cliff</span><span><b>The churn moment.</b> Refill auto-arrives ~3–4 days before run-out; the streak-at-stake nudge fires here. Re-order is the frictionless default; cancel stays one honest tap.</span></div>
+    <div class="lane"><span class="when">Weeks → months</span><span><b>Real signals can surface.</b> Creatine's training effect (weeks); the customer's own wearable / bloodwork trends (months), observed on their terms. Conviction content runs the whole time.</span></div>
+  </div>
+
+  <!-- ───────────────────────── 6 · THE BRAND LINE ───────────────────────── -->
+  <h2><span class="n">6</span>The position — turn the asymmetry into the point</h2>
+  <div class="line">
+    <div class="lbl">The reframe that makes the weakness a moat</div>
+    <p class="big">"We don't hand you a mirror. We make you the kind of person who reads their own."</p>
+    <p>A foundation shows in the <em>system</em>, not the <em>surface</em> — so the proof isn't a reflection we manufacture, it's the data the customer was already serious enough to track. This flatters the optimizer's self-image <em>and</em> sidesteps every claim landmine. Pair it with the honest insurance truth: <b>"the supplements you feel are the ones you quit when life gets busy. The foundation is the one you never stop — that's what makes it the foundation."</b> Both lines only work if the conviction engine (§4) is real; said without it, they tell someone they're paying $89 to feel nothing.</p>
+  </div>
+
+  <!-- ───────────────────────── 7 · THE HARD RULES ───────────────────────── -->
+  <div class="flags">
+    <div class="lbl">The hard rules — non-negotiable, because the brand dies if they break</div>
+    <ul>
+      <li><b>No fabricated proof-of-efficacy surface.</b> Under launch pressure someone <em>will</em> propose a slick "your cellular score went up 18%" dashboard. That single feature detonates the brand. The substitute mirror reflects <b>consistency</b> and the customer's <b>own real data</b> — never a Signal-generated result.</li>
+      <li><b>No manufactured sensation.</b> We do not engineer a tingle, a buzz, or a "you should feel something" cue. (This is the recurring filter that has killed off-brand tactics before.)</li>
+      <li><b>No placebo-fishing self-reports.</b> Check-ins may not ask leading "do you feel more energy?" questions designed to manufacture attribution.</li>
+      <li><b>No health-fear loss-framing.</b> Retention is framed as <em>maintenance and identity</em> ("you keep the foundation"), never "stop and you'll deteriorate" — that's both off-brand and a DSHEA disease claim.</li>
+      <li><b>Wearable / biomarker framing is reg-gated.</b> Any "watch your own markers" language goes through Zone Halo regulatory review before a customer sees it; observation only, never implied causation.</li>
+    </ul>
+  </div>
+
+  <!-- ───────────────────────── 8 · THE TEST ───────────────────────── -->
+  <h2><span class="n">8</span>How we'll know — and how not to misread it</h2>
+  <p class="lede">The Phase-1 founding cohort isn't only the product test — it's the <b>live experiment for this mechanic.</b> The GTM currently reads a sub-40% re-order as "a product problem." For an imperceptible product, a miss is at least as likely to be a <b>conviction / mechanic problem</b> — the belief loop or the reward loop wasn't strong enough, not the formula. <b>Instrument the cohort to tell the two apart</b> (do the lapsed re-orderers cite the product, the price, or "I forgot / didn't see the point"?), or we'll fix the wrong thing.</p>
+
+  <footer>
+    <span>Signal · cellcare · INSDR Wellness Co.</span>
+    <span>Fills the retention-mechanic gap flagged in the customer-journey map</span>
+    <span>v1 · 2026-06-14 · internal — design spec</span>
+  </footer>
+
+</div>
+<script>
+  (function(){
+    var PASS="54321";
+    var gate=document.getElementById("gate");
+    var body=document.body;
+    if(sessionStorage.getItem("signal_unlocked")==="true"){gate.style.display="none";body.classList.remove("locked");}
+    window.checkPass=function(e){
+      e.preventDefault();
+      var input=document.getElementById("gate-pass").value;
+      var err=document.getElementById("gate-error");
+      if(input===PASS){sessionStorage.setItem("signal_unlocked","true");gate.style.display="none";body.classList.remove("locked");}
+      else{err.classList.add("show");document.getElementById("gate-pass").value="";document.getElementById("gate-pass").focus();setTimeout(function(){err.classList.remove("show");},2400);}
+      return false;
+    };
+  })();
+</script>
+</body>
+</html>
