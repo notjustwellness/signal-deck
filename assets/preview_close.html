@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>signal — close preview</title>
+<style>
+  html,body{margin:0;height:100%;background:#0a0706;color:#D8CCC1;font-family:-apple-system,sans-serif;}
+  .stage{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;}
+  .markwrap{position:relative;width:520px;height:116px;}
+  .markwrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;}
+  /* two offset ghosts that converge — the entrainment wordmark */
+  .ghostA{transform:translateX(-26px);opacity:.55;animation:convA 1.6s ease-out forwards;}
+  .ghostB{transform:translateX(26px);opacity:.55;animation:convB 1.6s ease-out forwards;}
+  @keyframes convA{to{transform:translateX(0);opacity:1;}}
+  @keyframes convB{to{transform:translateX(0);opacity:1;}}
+  .tag{font-size:13px;letter-spacing:2px;opacity:0;animation:fadein .8s ease 1.4s forwards;}
+  @keyframes fadein{to{opacity:.8;}}
+  .controls{position:fixed;bottom:26px;left:0;right:0;text-align:center;}
+  button{background:#AD4236;color:#F6EFEA;border:none;border-radius:6px;padding:11px 26px;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;}
+  button:hover{background:#c4574b;}
+  .hint{display:block;margin-top:12px;font-size:11px;opacity:.4;letter-spacing:1px;}
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="markwrap" id="mark">
+      <img class="ghostA" src="signal_wordmark_on_dark.png" alt="">
+      <img class="ghostB" src="signal_wordmark_on_dark.png" alt="">
+    </div>
+    <div class="tag" id="tag">send the right signal</div>
+  </div>
+  <div class="controls">
+    <button onclick="playClose()">▶ Play the close (sound + converge)</button>
+    <span class="hint">the two wordmark ghosts converge as the two tones lock to one pitch · loop to replay</span>
+  </div>
+  <audio id="snd" src="signal_sound.wav" preload="auto"></audio>
+<script>
+  function playClose(){
+    var a=document.getElementById('snd');
+    a.currentTime=0; a.play();
+    // restart the converge animation in sync with the sound
+    ['ghostA','ghostB'].forEach(function(c){
+      var el=document.querySelector('.'+c);
+      el.style.animation='none'; void el.offsetWidth; // reflow
+      el.style.animation='';
+    });
+    var tag=document.getElementById('tag');
+    tag.style.animation='none'; void tag.offsetWidth; tag.style.animation='';
+  }
+</script>
+</body>
+</html>

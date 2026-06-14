@@ -1,0 +1,162 @@
+================================================================
+SIGNAL — "THE FORCE OF NATURE" BRAND FILM
+AI VIDEO GENERATION PROMPT PACK  ·  v1 · 2026-06-14
+60-second category-mood film · one fire, many lifeforms
+================================================================
+
+HOW TO USE THIS FILE
+--------------------
+AI video tools (Runway Gen-4, Kling, Veo, Sora, Pika) generate the
+ORGANIC CLIPS below — one prompt per generation, ~5–8s each. They will
+NOT do three things, so you do these in an editor afterward:
+  1. The MATCH-CUTS between shots (assembled, not generated).
+  2. The exact WORDMARK   -> overlay  assets/signal_wordmark_on_dark.png
+  3. The exact SIGNAL SOUND -> lay in assets/signal_sound.wav
+Workflow: generate clips -> pick best takes -> assemble + color-grade
+-> overlay wordmark -> lay in sound -> export. (See ASSEMBLY at bottom.)
+
+THE ONE RULE (do not break)
+---------------------------
+The product NEVER appears as the cause of a natural event. No sachet by
+an egg, no chew dissolving into a bloom. Nature carries the awe; the
+product, if shown at all, comes only AFTER the wordmark, separately.
+
+
+================================================================
+GLOBAL STYLE BIBLE  —  prepend (or set as style ref) on EVERY shot
+================================================================
+Cinematic macro nature-documentary look. Extreme close-up, shallow
+depth of field, anamorphic, photoreal, fine 35mm film grain. Palette:
+deep espresso-brown shadows, soft bone-cream highlights, and a single
+warm OXBLOOD-RED internal glow (#AD4236) that pulses from inside living
+tissue like bioluminescent energy. Low-key dramatic lighting,
+volumetric light, deep negative space. Slow, deliberate motion. The
+red-amber internal pulse is the through-line of the whole film — it
+must appear, subtly, in every shot.
+
+GLOBAL NEGATIVE PROMPT  —  append on every shot
+-----------------------------------------------
+text, captions, subtitles, watermark, logo, brand name, UI, distorted
+anatomy, extra fingers, extra limbs, mutated hands, cartoon, anime,
+plastic CGI look, oversaturated, neon, busy background, fast cutting,
+shaky cam
+
+
+================================================================
+THE SHOTS  (in order — each row is one generation)
+================================================================
+
+--- SHOT 1 · THE DARK (the floor) · ~8s ---
+Extreme macro, underground cross-section of dark wet soil. A single
+seed casing slowly splits open; the first pale root tip pushes against
+grit. A faint warm amber-red glow pulses from deep inside the seed.
+Camera: very slow push-in toward the seed's interior. Near-black frame,
+single low key light, drifting dust motes. Slow motion.
+
+--- SHOT 2 · THE UNBORN HEART (effort before the crack) · ~7s ---
+Extreme macro, a translucent egg backlit in darkness. A glowing network
+of fine blood vessels is visible through the shell; a tiny embryonic
+heart beats rhythmically inside the INTACT shell. The amber-red glow
+pulses in time with the heartbeat. Camera: slow drift across the
+vascular network. Egg lit from within, dark surround. Slow motion.
+(Do NOT show hatching or a cracked shell.)
+
+--- SHOT 3 · THE NIGHT SHIFT (labor, not glory) · ~7s ---
+Extreme macro, a spider spinning silk in pre-dawn darkness — precise,
+repetitive labor on a half-built web. A single glistening silk strand
+under tension catches a faint amber rim light; a subtle red glow inside
+the spider's body. Camera: locked-off, then a slow track along the
+strand. Low-key, single rim light, deep shadow. Slow motion.
+(No dew, no sunrise, no finished web.)
+
+--- SHOT 4A · ROOT THROUGH GRIT (widening) · ~5s ---
+Extreme macro timelapse, a plant root forcing its way through dense
+gritty soil, shouldering aside small stones, relentless growth. A faint
+amber-red energy glow runs and pulses along the root. Camera: slow
+follow of the advancing tip. Dramatic dark side-light.
+
+--- SHOT 4B · AGAINST THE CURRENT (widening) · ~5s ---
+Underwater, a powerful salmon swimming hard against a fast river
+current, flank muscles flexing, water turbulence streaming past. A
+faint internal amber-red glow under the skin suggests muscular energy.
+Cold blue water against the warm internal glow. Camera: tracking
+alongside the fish. Slow motion. (No people.)
+
+--- SHOT 5 · THE TURN (the whole point) · ~8s ---
+Cinematic close-up: a weathered older human hand grips a wooden stair
+railing, knuckles tightening with effort. Then a wider, tender shot of
+an adult carrying a small child up a staircase — an ordinary domestic
+moment. A faint warm amber-red glow pulses beneath the skin of the
+straining muscles. Warm low light, shallow depth of field, faces soft
+and not the focus. Slow motion.
+(NOTE: AI struggles with hands — generate several takes, pick clean
+fingers, or frame tighter to avoid full-hand detail.)
+
+--- SHOT 6 · THE PAYOFFS, UNDERSOLD (deliberately not the climax) · ~6s ---
+Fast, understated montage of brief flashes, warm natural light: a
+flower opening in timelapse; an eggshell cracking; a spider web
+catching the first gold light; a person reaching the top of a
+staircase. Each flash is brief and quiet, not triumphant. Photoreal.
+
+--- SHOT 7 · THE RESET (never arrives, never stops) · ~6s ---
+Extreme macro, return to dark soil. A NEW single seed rests in black
+earth; a faint amber-red glow begins to pulse inside it — the cycle
+starting again. Very slow push-in. Near-black, volumetric dust. Slow
+motion. (A variant of Shot 1; can reuse/regrade Shot 1's best take.)
+
+--- SHOT 8 · THE CLOSE · NOT AI-GENERATED — built in the editor ---
+Black screen. Overlay the wordmark (assets/signal_wordmark_on_dark.png)
+as TWO copies, offset horizontally so it reads doubled and slightly out
+of alignment. Over ~1.5s, animate the two copies converging into one
+perfectly aligned mark. Lay in assets/signal_sound.wav so the two tones
+resolve to one pitch EXACTLY as the marks lock — the logo becomes clear
+as the sound fades. Then add the line, small, beneath: send the right
+signal.
+
+
+================================================================
+ASSEMBLY (in your editor — CapCut / Premiere / DaVinci / Runway)
+================================================================
+TIMING (60s master):
+  0:00 Shot1  0:08 Shot2  0:16 Shot3  0:24 Shot4A+4B  0:32 Shot5 (hold,
+  the peak — let it breathe)  0:42 Shot6  0:50 Shot7  0:56 Shot8 close.
+
+MATCH-CUTS: cut on the PULSE, not the subject. At each transition,
+align the amber-red glow of the outgoing shot with the glow of the
+incoming shot; use a quick dissolve or whip on the glow so it reads as
+ONE continuous fire moving through different life-forms.
+
+COLOR: AI clips won't match out of the box. Grade them all to one look
+— espresso shadows, bone highlights, the single oxblood-red glow. If a
+clip lost the internal glow, add it back as a subtle masked glow comp.
+
+AUDIO:
+  - Bed: a low heartbeat/pulse ambient track runs throughout (temp or
+    licensed). It rises to Shot 5, then strips back to a single pulse
+    by 0:56.
+  - Sting: at ~0:56 lay assets/signal_sound.wav over black for the
+    wordmark converge. ONE sonic event, at the close only — never
+    mid-roll. Loudness-normalize the final mix to -14 LUFS.
+
+CUTDOWNS: :30 / :15 / :06 reuse the same spine. The :06 is just Shot 5
+(the turn) + Shot 8 (the sonic close). Also export 9:16 vertical
+reframes for paid/organic.
+
+
+================================================================
+ASSET MANIFEST  (companion files in this /assets folder)
+================================================================
+signal_wordmark_on_dark.png  — transparent PNG, 1557x348, drop-in overlay
+signal_wordmark_on_dark.svg  — vector master (scale to any size)
+signal_sound.wav             — the 2.0s entrainment sting (two tones
+                               10Hz apart -> unison A4). Normalize to
+                               -14 LUFS for delivery; export MP3/AAC.
+gen_signal_sound.py          — regenerates/tweaks the sound (edit DUR,
+                               GLIDE, SPREAD; BINAURAL=True for the
+                               headphone-only version)
+
+THE ENDING FORK — decide before spending on production:
+If a public consumer surface exists, end on wordmark + sound + a URL
+(top-of-funnel conversion). If not, the film can only end on the
+wordmark — beautiful, but with nowhere to send anyone.
+================================================================

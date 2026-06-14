@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>signal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#AD4236; --red-deep:#7A2E26; --espresso:#241B17; --ink:#2E2420;
+    --bone:#F6EFEA; --cream:#EFE5D1; --taupe:#D8CCC1; --gold:#A8845A;
+    --muted:#6D665C; --line:#C8BEAE; --paper:#FBF8F4;
+    --display:'Bebas Neue',Impact,sans-serif;
+    --body:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.5;-webkit-font-smoothing:antialiased;padding:44px 20px;}
+  .sheet{max-width:1080px;margin:0 auto;}
+
+  .head{position:relative;border-bottom:3px solid var(--espresso);padding-bottom:16px;margin-bottom:22px;}
+  .head .wm-lock{position:absolute;top:0;right:0;display:inline-flex;align-items:center;}
+  .head .wm-art{height:50px;width:auto;display:block;}
+  .head .wm-sign,.head .wm-tail{fill:var(--espresso);}
+  .head .wm-accent{fill:var(--red);}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:9px;}
+  h1{font-family:var(--display);font-weight:400;font-size:50px;line-height:.95;letter-spacing:.01em;color:var(--espresso);}
+  h1 .sub{display:block;font-size:21px;color:var(--gold);margin-top:6px;letter-spacing:.03em;}
+  .meta{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:12px;display:flex;flex-wrap:wrap;gap:6px 22px;}
+
+  .honest{background:var(--espresso);color:var(--bone);border-radius:10px;padding:20px 24px;margin-bottom:24px;}
+  .honest .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:9px;}
+  .honest p{font-size:14.5px;}
+  .honest p + p{margin-top:10px;}
+  .honest strong{color:#E8B4AC;}
+  .honest .pull{font-family:var(--display);font-weight:400;font-size:25px;letter-spacing:.02em;color:#fff;line-height:1.05;margin:14px 0 4px;}
+
+  h2{font-family:var(--display);font-weight:400;font-size:29px;letter-spacing:.02em;color:var(--red-deep);margin:38px 0 6px;}
+  .lede{font-size:14px;color:var(--muted);margin-bottom:16px;max-width:820px;}
+  .lede b{color:var(--ink);}
+
+  /* timeline table */
+  table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  thead th{background:var(--cream);font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--red-deep);text-align:left;padding:9px 11px;border-bottom:2px solid var(--gold);vertical-align:bottom;}
+  tbody td{padding:10px 11px;border-bottom:1px solid var(--line);vertical-align:top;}
+  tbody tr:last-child td{border-bottom:none;}
+  .tc{font-family:var(--mono);font-size:11px;color:var(--red-deep);font-weight:600;white-space:nowrap;}
+  .beat{font-weight:700;color:var(--espresso);}
+  .beat small{display:block;font-weight:500;color:var(--muted);font-size:10.5px;font-family:var(--mono);letter-spacing:.04em;margin-top:2px;}
+  .cut{color:var(--red-deep);font-weight:600;}
+  td.audio{font-size:11.5px;color:var(--muted);}
+
+  .spine{background:var(--espresso);color:var(--bone);border-radius:10px;padding:18px 22px;margin-top:14px;}
+  .spine .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+  .spine .flow{font-family:var(--mono);font-size:12.5px;line-height:2;color:var(--taupe);}
+  .spine .flow b{color:#E8B4AC;font-weight:600;}
+  .spine .flow .arr{color:var(--red);padding:0 6px;}
+  .spine p{font-size:13px;margin-top:12px;color:var(--bone);}
+
+  .canon{background:var(--cream);border-radius:9px;padding:16px 22px;margin-top:14px;}
+  .canon .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--red-deep);margin-bottom:10px;font-weight:600;}
+  .canon dl{display:grid;grid-template-columns:120px 1fr;gap:10px 16px;}
+  .canon dt{font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.04em;padding-top:3px;}
+  .canon dd{font-size:13.5px;color:var(--ink);}
+  .canon dd b{color:var(--red-deep);}
+
+  .rule{background:#fffdf8;border:1px dashed var(--gold);border-radius:10px;padding:16px 20px;margin-top:14px;}
+  .rule .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8a6418;margin-bottom:9px;font-weight:600;}
+  .rule ul{list-style:none;}
+  .rule li{padding:5px 0 5px 20px;position:relative;font-size:13px;}
+  .rule li::before{content:"\2192";position:absolute;left:0;color:var(--gold);font-weight:700;}
+  .rule b{color:var(--red-deep);}
+
+  .fork{background:#f3e0dd;border-radius:10px;padding:16px 20px;margin-top:14px;}
+  .fork .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:9px;font-weight:600;}
+  .fork p{font-size:13px;color:var(--red-deep);}
+  .fork p + p{margin-top:8px;}
+  .fork b{color:var(--red);}
+
+  .phase{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:6px;}
+  .ph{background:#fff;border:1px solid var(--line);border-top:4px solid var(--red);border-radius:9px;padding:15px 17px;}
+  .ph:nth-child(2){border-top-color:var(--gold);}
+  .ph:nth-child(3){border-top-color:var(--muted);}
+  .ph h4{font-family:var(--display);font-weight:400;font-size:20px;letter-spacing:.02em;color:var(--espresso);line-height:1;margin-bottom:4px;}
+  .ph .cost{font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.04em;margin-bottom:9px;}
+  .ph p{font-size:12.5px;color:var(--ink);}
+  .ph .gate-when{display:block;font-family:var(--mono);font-size:9.5px;color:var(--muted);margin-top:9px;padding-top:8px;border-top:1px solid #efe7da;}
+
+  .src .q{font-family:var(--mono);font-size:11px;color:var(--red-deep);}
+  .src .lib{font-family:var(--mono);font-size:10px;color:var(--muted);}
+  .src .cgi{display:inline-block;font-family:var(--mono);font-size:8px;font-weight:600;letter-spacing:.05em;background:var(--red);color:#fff;padding:1px 5px;border-radius:3px;margin-left:4px;vertical-align:middle;}
+
+  footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media (max-width:820px){.phase{grid-template-columns:1fr;}.canon dl{grid-template-columns:1fr;gap:3px 0;}h1{font-size:38px;}table{font-size:11.5px;}}
+  @media print{body{padding:0;background:#fff;}.sheet{max-width:none;}table,.spine,.canon,.rule,.fork,.ph{break-inside:avoid;}}
+
+  /* ─── PASSWORD GATE (mirrors root index.html — friction + noindex, not security) ─── */
+  #gate{position:fixed;inset:0;background:#241B17;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:#D8CCC1;padding:40px;text-align:center;}
+  #gate .gate-overline{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#AD4236;margin-bottom:16px;font-weight:600;}
+  #gate .gate-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:72px;color:#AD4236;line-height:.9;margin-bottom:32px;letter-spacing:-1.6px;text-transform:lowercase;}
+  #gate .gate-title .accent{color:#D8CCC1;}
+  #gate .gate-subtitle{font-size:14px;opacity:.6;margin-bottom:32px;letter-spacing:1px;}
+  #gate form{display:flex;flex-direction:column;align-items:center;gap:12px;}
+  #gate input{background:rgba(246,239,234,.08);border:1px solid rgba(246,239,234,.2);border-radius:6px;color:#D8CCC1;padding:14px 20px;font-size:15px;font-family:inherit;width:280px;text-align:center;letter-spacing:1px;outline:none;transition:border-color .2s;}
+  #gate input:focus{border-color:#AD4236;}
+  #gate button{background:#AD4236;color:#D8CCC1;border:none;border-radius:6px;padding:12px 32px;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background .2s;}
+  #gate button:hover{background:#c4574b;}
+  #gate .gate-error{color:#AD4236;font-size:12px;margin-top:8px;opacity:0;transition:opacity .2s;letter-spacing:1px;}
+  #gate .gate-error.show{opacity:1;}
+  #gate .gate-footer{position:absolute;bottom:40px;font-size:10px;opacity:.3;letter-spacing:3px;text-transform:uppercase;}
+  body.locked{overflow:hidden;height:100vh;}
+  body.locked > div:not(#gate){display:none !important;}
+</style>
+</head>
+<body class="locked">
+
+<!-- ═══════════════════ PASSWORD GATE ═══════════════════ -->
+<div id="gate">
+  <div class="gate-overline">INSDR Wellness — the cellcare company · Confidential</div>
+  <div class="gate-title" aria-label="signal"><span class="accent">/</span>sɪgnɑ<span class="accent">ː</span>l<span class="accent">/</span></div>
+  <div class="gate-subtitle">Enter password to continue.</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gate-pass" autocomplete="off" autofocus placeholder="password">
+    <button type="submit">Enter</button>
+    <div class="gate-error" id="gate-error">Incorrect. Try again.</div>
+  </form>
+  <div class="gate-footer">Confidential — do not share.</div>
+</div>
+
+<div class="sheet">
+
+  <div class="head">
+    <span class="mark wm-lock" aria-label="signal"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3114.000000 696.000000" class="wm-art" role="img" aria-label="signal" shape-rendering="geometricPrecision"><g transform="translate(0.000000,696.000000) scale(0.100000,-0.100000)"><g class="wm-accent"><path d="M6051 5613 c-14 -13 -56 -124 -136 -363 -63 -190 -133 -397 -155
+-460 -23 -63 -49 -140 -59 -170 -11 -30 -39 -111 -63 -180 -60 -168 -108 -311
+-153 -455 -20 -66 -48 -149 -60 -185 -39 -109 -66 -192 -85 -260 -10 -36 -23
+-78 -30 -95 -7 -16 -20 -57 -30 -90 -10 -33 -32 -96 -49 -140 -16 -44 -46
+-123 -66 -175 -44 -117 -100 -275 -125 -355 -24 -78 -67 -200 -78 -223 -20
+-38 -22 -70 -6 -86 17 -17 148 -23 172 -8 18 12 86 202 212 592 43 135 97 295
+119 355 23 61 59 162 81 225 22 63 62 178 90 255 50 140 147 424 233 690 26
+77 62 185 82 240 68 191 96 271 171 500 42 127 86 251 100 276 26 51 31 98 12
+117 -20 20 -152 16 -177 -5z"/><path d="M24965 5620 c-54 -5 -61 -8 -82 -38 -12 -19 -33 -68 -47 -110 -14
+-43 -38 -113 -54 -157 -66 -179 -105 -293 -122 -350 -10 -33 -35 -105 -55
+-160 -20 -55 -49 -138 -65 -185 -16 -47 -42 -123 -60 -170 -17 -47 -44 -121
+-60 -165 -16 -44 -45 -123 -65 -175 -35 -94 -164 -472 -183 -540 -10 -32 -56
+-162 -119 -335 -110 -301 -216 -602 -238 -678 -12 -42 -27 -83 -33 -90 -18
+-23 -23 -72 -9 -91 11 -15 30 -20 84 -23 91 -4 102 6 141 122 17 50 58 169 92
+265 34 96 86 247 116 335 29 88 70 203 89 255 92 245 108 290 130 355 13 39
+28 84 34 100 14 37 136 407 150 455 6 19 29 87 51 150 22 63 51 147 65 185 28
+81 71 204 115 325 54 150 180 528 180 541 0 7 12 36 26 66 29 62 29 103 -1
+112 -11 3 -47 4 -80 1z"/></g><g class="wm-sign"><path d="M7852 4559 c-73 -11 -197 -58 -264 -100 -68 -44 -132 -118 -168 -195
+-98 -209 -40 -446 146 -593 109 -86 205 -131 539 -253 158 -58 284 -161 311
+-255 49 -168 -6 -288 -166 -365 -58 -29 -76 -32 -175 -36 -260 -9 -418 80
+-520 293 -25 53 -51 123 -58 157 -9 47 -18 66 -39 81 -23 17 -31 19 -53 9 -14
+-7 -29 -22 -33 -34 -4 -13 -5 -150 -2 -306 6 -344 3 -337 125 -256 84 55 92
+54 246 -4 126 -49 199 -62 334 -62 114 1 159 9 266 50 136 52 211 106 286 204
+88 117 121 239 98 369 -15 88 -32 128 -78 193 -82 114 -205 190 -487 299 -52
+21 -113 45 -135 55 -22 10 -51 21 -65 25 -14 4 -64 28 -113 52 -176 91 -231
+212 -172 384 18 53 79 117 145 151 41 21 58 23 180 23 133 0 136 -1 207 -34
+123 -57 231 -191 273 -334 27 -95 35 -107 75 -107 21 0 37 6 43 16 5 9 7 129
+4 267 -4 268 -10 297 -54 297 -11 0 -40 -18 -64 -40 -24 -22 -50 -40 -59 -40
+-8 0 -59 18 -112 39 -135 55 -301 72 -461 50z"/><path d="M9833 4515 c-31 -22 -30 -60 2 -81 14 -9 59 -20 101 -25 91 -10 141
+-33 170 -76 31 -47 38 -216 32 -871 l-5 -543 -29 -42 c-38 -54 -85 -76 -184
+-86 -44 -5 -87 -14 -95 -21 -23 -19 -18 -57 9 -75 21 -14 80 -16 482 -14 280
+1 464 6 472 12 15 12 16 59 0 75 -7 7 -28 12 -47 12 -19 0 -63 5 -99 11 -77
+14 -135 59 -152 117 -13 50 -13 1301 1 1361 21 92 72 128 198 142 59 7 80 13
+94 30 20 25 21 40 5 61 -12 14 -68 17 -473 23 -416 6 -462 5 -482 -10z"/><path d="M12519 4554 c-84 -15 -206 -59 -273 -98 -124 -73 -205 -165 -264
+-301 -31 -70 -36 -93 -40 -182 -7 -159 23 -269 104 -378 32 -44 121 -129 172
+-164 54 -37 37 -83 -45 -125 -56 -28 -159 -140 -177 -192 -21 -63 -20 -149 3
+-199 21 -47 90 -111 156 -145 39 -20 46 -28 43 -49 -2 -21 -17 -33 -68 -61
+-149 -79 -221 -142 -266 -231 -30 -60 -34 -78 -34 -144 0 -86 17 -130 76 -195
+81 -89 210 -147 419 -186 137 -27 169 -29 370 -28 213 0 224 1 345 32 220 55
+345 116 448 220 91 90 133 182 140 303 13 228 -69 376 -255 465 -127 60 -263
+77 -703 89 -129 4 -266 11 -303 15 -82 10 -136 42 -162 96 -26 56 -10 98 69
+172 87 81 111 88 211 62 172 -44 414 -17 577 66 180 91 286 211 329 376 45
+166 19 347 -66 461 -49 66 -53 78 -30 97 12 10 46 11 166 2 147 -11 177 -9
+191 12 4 6 8 50 8 99 0 74 -3 90 -20 107 -26 26 -40 25 -127 -5 -77 -26 -171
+-47 -299 -66 -75 -11 -86 -10 -155 11 -41 12 -87 29 -103 37 -75 39 -297 53
+-437 27z m308 -130 c112 -54 178 -145 218 -299 37 -142 36 -287 -4 -417 -62
+-207 -171 -294 -366 -290 -78 1 -97 5 -152 32 -108 53 -189 176 -224 337 -18
+86 -16 285 4 360 57 214 190 319 390 309 59 -3 92 -11 134 -32z m-84 -1744
+c253 -9 398 -22 467 -40 48 -13 111 -61 146 -111 26 -38 29 -50 28 -120 -1
+-97 -26 -152 -104 -230 -151 -152 -463 -216 -779 -159 -176 32 -284 95 -351
+206 -33 55 -35 63 -35 149 0 65 5 98 17 120 29 53 101 127 163 168 58 38 62
+39 125 33 36 -3 181 -10 323 -16z"/><path d="M15175 4558 c-16 -5 -52 -13 -80 -18 -27 -5 -93 -18 -145 -29 -52
+-11 -137 -24 -187 -29 -103 -10 -143 -29 -143 -66 0 -37 24 -49 108 -51 80 -2
+122 -16 155 -53 45 -50 46 -63 46 -717 0 -341 -4 -640 -8 -664 -17 -87 -76
+-130 -191 -140 -37 -4 -75 -13 -84 -20 -23 -19 -21 -68 4 -81 12 -7 159 -10
+417 -11 219 0 410 0 425 -1 34 -1 58 18 58 47 0 34 -31 55 -81 55 -91 0 -160
+37 -197 104 -16 28 -17 77 -14 574 l2 543 25 48 c30 60 168 191 250 236 82 46
+180 68 280 63 137 -7 219 -58 277 -173 28 -53 32 -73 37 -175 4 -63 4 -339 1
+-612 -5 -485 -5 -497 -26 -525 -32 -42 -73 -62 -159 -76 -62 -9 -81 -17 -93
+-35 -11 -18 -12 -28 -4 -47 l11 -23 437 -1 c312 -1 441 2 450 10 21 18 17 57
+-8 73 -13 8 -50 17 -84 21 -79 9 -134 39 -159 90 -19 39 -20 60 -20 635 l0
+595 -24 80 c-31 104 -71 173 -141 243 -113 113 -257 156 -446 135 -175 -20
+-327 -102 -480 -261 -127 -132 -129 -131 -129 73 -1 88 -4 165 -8 171 -10 17
+-38 22 -72 12z"/></g><g class="wm-tail"><path d="M18395 4555 c-78 -17 -218 -83 -293 -140 -76 -57 -181 -168 -228
+-242 -40 -62 -114 -221 -114 -245 0 -8 -10 -50 -22 -94 -20 -71 -23 -101 -22
+-284 0 -195 2 -211 32 -332 37 -149 74 -229 146 -313 151 -178 324 -265 527
+-265 59 0 156 16 174 30 6 4 29 14 53 24 101 39 226 142 315 259 47 62 73 45
+87 -55 26 -178 88 -242 235 -241 81 1 125 14 328 94 69 26 92 54 82 99 -13 59
+-56 76 -116 44 -37 -19 -139 -20 -168 -3 -49 31 -51 52 -51 599 0 614 15 834
+65 930 21 40 20 97 -2 108 -10 5 -71 8 -136 7 -144 -2 -152 -7 -166 -111 -14
+-94 -18 -104 -48 -104 -18 0 -48 21 -98 69 -158 150 -373 211 -580 166z m338
+-158 c76 -35 184 -141 225 -223 66 -130 67 -142 66 -541 l-1 -361 -36 -76
+c-115 -243 -245 -337 -466 -336 -93 1 -148 15 -208 57 -92 62 -161 181 -211
+368 -26 95 -27 111 -27 325 0 214 2 231 29 339 64 254 169 394 343 457 91 33
+200 30 286 -9z"/><path d="M20292 4364 c-20 -13 -23 -22 -18 -48 9 -43 140 -307 172 -345 52
+-62 76 -39 183 178 74 150 87 202 54 219 -10 5 -97 10 -193 11 -149 1 -179 -1
+-198 -15z"/><path d="M20468 3240 c-33 -20 -143 -214 -188 -332 -25 -66 -26 -104 -2 -116
+9 -5 111 -9 225 -8 218 2 226 4 227 47 0 50 -171 370 -218 407 -19 14 -22 14
+-44 2z"/><path d="M21950 5550 c-101 -30 -309 -75 -399 -85 -66 -8 -91 -20 -91 -45 0
+-30 39 -50 95 -50 81 0 145 -24 190 -70 l40 -41 3 -1162 c2 -804 0 -1173 -8
+-1199 -6 -20 -22 -46 -37 -58 -38 -30 -139 -57 -225 -59 -10 -1 -25 -12 -34
+-26 -14 -21 -15 -31 -6 -51 l12 -24 428 0 c236 1 440 -2 454 -5 40 -10 68 10
+68 48 0 42 -15 57 -57 57 -44 0 -132 19 -165 36 -15 8 -39 31 -53 51 l-25 38
+0 1325 c0 1018 -3 1329 -12 1338 -19 19 -75 13 -178 -18z"/></g></g></svg></span>
+    <div class="kicker">Brand Film · AI-Generation Instruction Pack · cellcare</div>
+    <h1>The force of nature<span class="sub">One fire, many lifeforms — the cellular-energy brand film</span></h1>
+    <div class="meta">
+      <span>Signal · INSDR Wellness Co.</span>
+      <span>60-second category-mood film · no product claim</span>
+      <span>v2 · 2026-06-14 · AI-generation pack + wordmark &amp; sound assets</span>
+    </div>
+  </div>
+
+  <!-- ───────────────────────── THE LOGLINE ───────────────────────── -->
+  <div class="honest">
+    <div class="lbl">The logline — read before the shot sheet</div>
+    <p>Cellular energy is not a human story. It is the price every living thing pays before it can do anything at all. A seed splitting in the dark, a heart beating inside an unbroken shell, a spider laying silk before dawn — each is the same fire, paid in the same currency, doing the unglamorous work that buys the visible miracle.</p>
+    <p class="pull">We don't worship the bloom. We worship the work that bought it.</p>
+    <p>The film makes one argument and makes it with the <strong>edit, not the narration</strong>: it is the <em>same force</em> across every form of life — and the viewer is running on it too. The grammar is a single rule — <strong>cut on the energy, never on the subject.</strong> The glowing network never changes between shots; only the organism around it does. By the time a human appears, the body already believes it's the same fire.</p>
+  </div>
+
+  <!-- ───────────────────────── HOW TO USE ───────────────────────── -->
+  <div class="rule" style="border-color:var(--red);background:#fff7f5;">
+    <div class="lbl" style="color:var(--red);">How to use this — the division of labor</div>
+    <ul>
+      <li><b>The droppable file is <code>assets/signal_video_prompts.txt</code></b> — paste one shot prompt per generation into your AI video tool (Runway Gen-4, Kling, Veo, Sora, Pika). This HTML is the human-readable brief behind it.</li>
+      <li><b>AI generates the 8 organic clips. You finish in an editor.</b> AI tools can't reliably do three things, so these are post: (1) the <b>match-cuts</b>, (2) the exact <b>wordmark</b> overlay, (3) the exact <b>signal sound</b>. The clips are raw material; the film is assembled.</li>
+      <li><b>The wordmark and sound are real files, supplied — not prompts.</b> Don't ask the AI to draw the logo or guess the sound. See the asset manifest (§7).</li>
+      <li><b>Workflow:</b> generate clips → pick best takes → assemble + color-grade to one look → overlay wordmark → lay in the sound → export :60 + cutdowns.</li>
+    </ul>
+  </div>
+
+  <!-- ───────────────────────── THE SHOT SHEET ───────────────────────── -->
+  <h2>1 · The 60-second shot sheet</h2>
+  <p class="lede">Timed for a :60 master (cut down to :30 / :15 / :06 later). Each row is one beat. The <b>cut</b> column is the match-on-energy transition <em>out</em> of that beat — the device that carries the film. The product never appears inside the chain (see §4).</p>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:62px;">Time</th>
+        <th style="width:150px;">Beat</th>
+        <th>On screen</th>
+        <th style="width:180px;">The cut (match-on-energy)</th>
+        <th style="width:150px;">Audio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tc">0:00–0:08</td>
+        <td class="beat">The dark<small>the floor</small></td>
+        <td>Underground. Soil cross-section, near-black. A seed casing splits — slow, effortful, microscopic. We open <em>beneath</em> everything, before any result exists.</td>
+        <td class="cut">Push into the seed's interior → the glowing vascular web inside.</td>
+        <td class="audio">Silence, then a single low sub-bass <b>pulse</b> (the bed begins). No music yet.</td>
+      </tr>
+      <tr>
+        <td class="tc">0:08–0:16</td>
+        <td class="beat">The unborn heart<small>effort before the crack</small></td>
+        <td>That pulsing network dissolves into the veins of a translucent egg. Inside: a chick's heart beating against an <em>intact</em> shell. Hold on the effort — never the hatch.</td>
+        <td class="cut">The heartbeat pulse becomes the through-line → carries into the next network.</td>
+        <td class="audio">Pulse steadies into a rhythm. A faint organic hum enters underneath.</td>
+      </tr>
+      <tr>
+        <td class="tc">0:16–0:24</td>
+        <td class="beat">The night shift<small>labor, not glory</small></td>
+        <td>A spider's silk gland producing thread in pre-dawn dark. Repetitive overnight work. The web is half-built — no dew, no first light, no payoff yet.</td>
+        <td class="cut">Tight on the silk strand under tension → matches a root fiber under tension.</td>
+        <td class="audio">Rhythm builds. Texture layers: subtle clicks, fibrous detail, breath.</td>
+      </tr>
+      <tr>
+        <td class="tc">0:24–0:32</td>
+        <td class="beat">Against the current<small>widening the aperture</small></td>
+        <td>Same energetic register, faster now: a root forcing through grit; salmon muscle firing against a river's current. Effort everywhere, all of it costing the same fuel.</td>
+        <td class="cut">Push into the salmon's firing muscle fiber → straight into a <em>human</em> muscle fiber.</td>
+        <td class="audio">Tempo and pulse rise together. The hum resolves toward a pitch.</td>
+      </tr>
+      <tr>
+        <td class="tc">0:32–0:42</td>
+        <td class="beat">The turn<small>the whole point</small></td>
+        <td>Human muscle fiber → a person doing something ordinary: an older hand gripping a stair rail; someone carrying a child upward. The same light pulses under human skin. <b>The realization: the fire in the seed and the fire in your chest are one fire.</b></td>
+        <td class="cut">Hold — this is the emotional peak, not a cut. Let it breathe.</td>
+        <td class="audio">Fullest moment of the bed. Then a deliberate <b>pull-back</b> begins.</td>
+      </tr>
+      <tr>
+        <td class="tc">0:42–0:50</td>
+        <td class="beat">The payoffs, undersold<small>deliberately not the climax</small></td>
+        <td>Fast, almost incidental: flower opens, shell cracks, web catches first light, the person reaches the top of the stairs. A montage of "results" we <em>refuse</em> to make the climax — the film already told you they were bought, not given.</td>
+        <td class="cut">Each payoff flashes and is gone → hard cut back to black.</td>
+        <td class="audio">Music thins. We're being walked back down to the single pulse.</td>
+      </tr>
+      <tr>
+        <td class="tc">0:50–0:56</td>
+        <td class="beat">The reset<small>never arrives, never stops</small></td>
+        <td>Back to black soil. A <b>new</b> seed. The pulse starts over. The work restarting — the foundation is not an event, it's a practice.</td>
+        <td class="cut">The pulse alone carries into black → the entrainment close (§3).</td>
+        <td class="audio">Down to one bare pulse. Space opens for the sonic mark.</td>
+      </tr>
+      <tr>
+        <td class="tc">0:56–1:00</td>
+        <td class="beat">The signal<small>wordmark + sound</small></td>
+        <td>On black: two wordmark ghosts sit slightly out of alignment, doubled. Over ~1.5s they drift into perfect overlap — <em>signal</em> resolves to one clear mark. One line beneath: <b>"send the right signal."</b></td>
+        <td class="cut">The mark holds clear, then fades. End on black.</td>
+        <td class="audio"><b>The signal sound</b> — two tones ~10&nbsp;Hz apart lock to unison at A4 as the mark aligns. The logo is clear exactly as the sound fades (§3).</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ───────────────────────── THE MATCH-CUT SPINE ───────────────────────── -->
+  <h2>2 · The match-cut spine</h2>
+  <p class="lede">The one device the whole film rests on: the glowing energy network is the <b>only constant</b>. Cut on it every time, and the film argues — without a word — that it's all one force.</p>
+  <div class="spine">
+    <div class="lbl">Cut on the pulse — the connective tissue</div>
+    <div class="flow">
+      <b>seed vascular web</b><span class="arr">→</span><b>egg vasculature</b><span class="arr">→</span><b>silk gland fiber</b><span class="arr">→</span><b>salmon muscle</b><span class="arr">→</span><b>human muscle fiber</b><span class="arr">→</span><b>human, ordinary effort</b><span class="arr">→</span><b>reset: new seed</b>
+    </div>
+    <p>The transition asset that connects them — a pulsing, vein-like glow — is the single most important thing to get right and the one thing stock can't fully supply. Treat it as a designed motion element (abstract bioluminescent network) composited at each cut, so the "same fire" reads as literally the same fire. If the converge of the wordmark close (§3) uses the same visual language as this pulse, the brand mark becomes the final organism in the chain.</p>
+  </div>
+
+  <!-- ───────────────────────── WORDMARK + SIGNAL SOUND ───────────────────────── -->
+  <h2>3 · The close — wordmark + the signal sound (entrainment)</h2>
+  <p class="lede">Pulled from locked canon (<b>codex Ch.03 §4 · brand-kit §09</b>), not invented here. The sonic mark and wordmark are a <b>paired entrainment event</b> — and that mechanic happens to <em>be</em> this film's thesis: separate things converging on one. Place it at the close only.</p>
+  <div class="canon">
+    <div class="lbl">The signal sound — canonical spec</div>
+    <dl>
+      <dt>The sound</dt><dd>Two tones start <b>~10&nbsp;Hz apart</b> (a binaural beat) and <b>drift to unison at A4</b> over ~1.5–2s. Short, specific, ownable. <i>"Audio meant to be heard once at the first ritual and recalled across every subsequent one."</i></dd>
+      <dt>The mechanic</dt><dd>The brand calls it <b>entrainment</b> — the body's pull toward sync, made audible and visible at once. The detuned beat resolves to one clear pitch.</dd>
+      <dt>The wordmark</dt><dd>Two wordmark ghosts at a slight horizontal offset (doubled, out of alignment) drift to perfect overlap. <b>The logo becomes clear exactly as the sound fades.</b> Visual convergence spans the full audio event.</dd>
+      <dt>Delivery files</dt><dd>WAV master + MP3/AAC at <b>&minus;14&nbsp;LUFS</b> · full sting (~1.5s) · short tag (~0.6s) · ambient bed · mono + stereo. <b>A working reference WAV is now generated: <code>assets/signal_sound.wav</code></b> (2.0s, two tones 10&nbsp;Hz apart → unison A4). Loudness-normalize to &minus;14&nbsp;LUFS and export MP3 at delivery. Regenerate/tweak via <code>assets/gen_signal_sound.py</code>.</dd>
+      <dt>Wordmark asset</dt><dd>On-dark variant supplied for the close: <code>assets/signal_wordmark_on_dark.png</code> (transparent, 1557×348, drop-in overlay) + <code>.svg</code> master. Place as two offset copies, converge to one over ~1.5s, timed to the sound.</dd>
+      <dt>⚠ Engineering flag</dt><dd>Canon says "binaural." The supplied WAV renders a <b>monaural beat</b> (both tones in both channels) so the ~10&nbsp;Hz beating is audible on <em>speakers</em>, not just headphones — the right call for a film sting. Set <code>BINAURAL=True</code> in the generator if you want the literal headphone-only version. <b>Brand-owner decision.</b></dd>
+      <dt>The discipline</dt><dd><b>One per piece.</b> At the open OR the close — for this film, the <b>close</b>. Never mid-roll, never a notification chime. The motion mark and sonic mark are paired, never used apart.</dd>
+    </dl>
+  </div>
+  <div class="rule" style="border-color:var(--red);background:#fff7f5;">
+    <div class="lbl" style="color:var(--red);">Why it fits this film exactly</div>
+    <ul>
+      <li>The film's argument is <b>convergence</b> — seed, egg, spider, salmon, human, all resolving to one shared fire. The sonic mark's argument is <b>convergence</b> — two tones resolving to one pitch. The brand's entrainment mechanic and the film's thesis are the same shape.</li>
+      <li><b>The bed vs. the sting are different assets.</b> The heartbeat <em>pulse</em> that runs throughout is the ambient bed (sanctioned). The <em>entrainment sting</em> (the two-tone converge) is the once-only event at the close. This keeps the "one sonic per piece" rule intact — the bed is texture, the sting is the signature.</li>
+      <li><b>Option to seed it (flag for brand owner):</b> faintly detuning the bed's pulse earlier so the final lock-to-unison feels <em>earned</em> is powerful — but it risks reading as a mid-roll sonic. Default: keep the converge clean and only at the close. Decide deliberately, don't drift into it.</li>
+      <li>Make the wordmark the <b>last organism in the match-cut spine</b> — its converge uses the same glow language as the pulse, so the brand mark resolves out of the same fire the film has been following.</li>
+    </ul>
+  </div>
+
+  <!-- ───────────────────────── THE BRAND RULE ───────────────────────── -->
+  <h2>4 · The rule that protects the brand</h2>
+  <div class="rule">
+    <div class="lbl">Non-negotiable — this is what keeps the film on-brand and legal</div>
+    <ul>
+      <li><b>The product never enters the cause-and-effect chain.</b> No sachet beside a hatching egg, no chew dissolving into a blooming flower. The instant Signal appears as the cause of a natural miracle, the film makes the exact outcome claim the brand is built to never make.</li>
+      <li><b>Nature carries the awe; the product stays honest.</b> If the product appears at all, it appears <em>after</em> the wordmark close, separately — as the named-dose floor, not the magic behind the bloom.</li>
+      <li><b>No voiceover claim.</b> The film argues with edit and sound. Any words are the tagline and (optionally) the foundation line — never "supports," "boosts," "improves," or a benefit.</li>
+      <li><b>This is a category-mood film, not a product ad.</b> It earns attention and plants the "cellular energy = force of nature" frame. The selling happens downstream, on a surface the film points to (§5).</li>
+    </ul>
+  </div>
+
+  <!-- ───────────────────────── THE ENDING FORK ───────────────────────── -->
+  <h2>5 · The ending fork — what the last frame asks for</h2>
+  <div class="fork">
+    <div class="lbl">The film's CTA depends on a decision that isn't a film decision</div>
+    <p><b>If a public consumer surface exists:</b> final frame is wordmark + sound + a URL. The film becomes a top-of-funnel conversion asset — awe → door → product.</p>
+    <p><b>If it doesn't:</b> the film can only end on the wordmark. It is pure brand atmosphere with nowhere to send anyone — beautiful, and strategically stranded.</p>
+    <p>That fork <b>is</b> the company-to-pitch vs. product-to-sell question. Resolve that before committing real production budget — otherwise you've shot a gorgeous top-of-funnel asset for a funnel with no bottom.</p>
+  </div>
+
+  <!-- ───────────────────────── PRODUCTION PATH ───────────────────────── -->
+  <h2>6 · Production path — cheapest proof first</h2>
+  <p class="lede">Don't greenlight an original shoot to test a <b>feeling</b>. Validate the edit grammar with footage that already exists; spend on originals only for the beats stock can't cover.</p>
+  <div class="phase">
+    <div class="ph">
+      <h4>Phase 1 · The AI supercut test</h4>
+      <div class="cost">~$0–50 · a weekend</div>
+      <p>Generate the 8 clips from the prompt pack (§7), assemble the :60 with the supplied wordmark + sound, temp heartbeat bed. Goal: does the <b>match-on-pulse</b> land the "same fire" realization at 0:32? If it works with AI footage, the concept is real.</p>
+      <span class="gate-when">Decision gate: does the turn give people chills? If no, the idea is wrong — and you've spent almost nothing learning it.</span>
+    </div>
+    <div class="ph">
+      <h4>Phase 2 · The sonic + originals</h4>
+      <div class="cost">composer + selective shoot</div>
+      <p>Finalize the <b>signal sound</b> (normalize the supplied WAV to &minus;14 LUFS + ambient bed). Upgrade the beats AI can't carry to brand-look: the designed pulse/glow transition asset and the human-turn moments (real shoot or higher-fidelity gen).</p>
+      <span class="gate-when">Gate: only after Phase 1 proves the cut, AND §5's funnel question is answered.</span>
+    </div>
+    <div class="ph">
+      <h4>Phase 3 · Master + cutdowns</h4>
+      <div class="cost">finishing</div>
+      <p>Color, sound mix, the wordmark entrainment converge in finishing. Deliver :60 master + :30 / :15 / :06 cutdowns and vertical 9:16 reframes for paid + organic.</p>
+      <span class="gate-when">Cutdowns reuse the same spine — the :06 is just the turn + the sonic close.</span>
+    </div>
+  </div>
+
+  <!-- ───────────────────────── AI PROMPT PACK + ASSETS ───────────────────────── -->
+  <h2>7 · AI prompt pack &amp; asset manifest</h2>
+  <p class="lede">The full, copy-paste prompts live in <code>assets/signal_video_prompts.txt</code> — that's the file you drop into the AI platform. Below: the global style fragment to prepend to every shot, and the companion asset files.</p>
+
+  <div class="spine">
+    <div class="lbl">Global style bible — prepend to EVERY shot (consistency is the hard part)</div>
+    <p style="color:var(--taupe);font-size:12.5px;">Cinematic macro nature-documentary look. Extreme close-up, shallow depth of field, anamorphic, photoreal, fine 35mm film grain. Palette: deep <b style="color:#E8B4AC;">espresso-brown shadows</b>, soft <b style="color:#fff;">bone-cream highlights</b>, and a single warm <b style="color:#E8B4AC;">oxblood-red internal glow (#AD4236)</b> that pulses from inside living tissue like bioluminescent energy. Low-key dramatic lighting, volumetric light, deep negative space. Slow deliberate motion. <b style="color:#E8B4AC;">The red-amber internal pulse is the through-line — it must appear, subtly, in every shot.</b></p>
+    <p style="font-size:12px;"><b>Global negative prompt:</b> text, captions, watermark, logo, brand name, distorted anatomy, extra fingers, mutated hands, cartoon, plastic CGI look, oversaturated, neon, fast cutting, shaky cam.</p>
+  </div>
+
+  <div class="canon" style="margin-top:14px;">
+    <div class="lbl">⬇ Asset manifest — click to download (the files you hand the AI tool + editor)</div>
+    <dl>
+      <dt>prompts</dt><dd><a href="assets/signal_video_prompts.txt" download><b>signal_video_prompts.txt</b></a> — the droppable prompt pack: 8 shot prompts + style bible + assembly + timing.</dd>
+      <dt>wordmark</dt><dd><a href="assets/signal_wordmark_on_dark.png" download><b>signal_wordmark_on_dark.png</b></a> (transparent, 1557×348, drop-in overlay) · <a href="assets/signal_wordmark_on_dark.svg" download><b>.svg</b></a> (vector master).</dd>
+      <dt>sound</dt><dd><a href="assets/signal_sound.wav" download><b>signal_sound.wav</b></a> — the 2.0s entrainment sting (two tones 10&nbsp;Hz apart → unison A4). Normalize to &minus;14&nbsp;LUFS for delivery.</dd>
+      <dt>preview</dt><dd><a href="assets/preview_close.html" target="_blank"><b>preview_close.html</b></a> — see/hear the wordmark+sound close (open in browser, hit Play).</dd>
+      <dt>generator</dt><dd><a href="assets/gen_signal_sound.py" download><b>gen_signal_sound.py</b></a> — regenerates/tweaks the sound (DUR, GLIDE, SPREAD; <code>BINAURAL=True</code> for the headphone-only version).</dd>
+    </dl>
+  </div>
+
+  <div class="rule">
+    <div class="lbl">Assembly notes — what the AI can't do for you</div>
+    <ul>
+      <li><b>Match-cuts:</b> cut on the <b>pulse</b>, not the subject. Align the amber-red glow of the outgoing and incoming shots; quick dissolve/whip on the glow so one fire moves through every life-form.</li>
+      <li><b>Color:</b> AI clips won't match out of the box — grade them all to one look (espresso shadows, bone highlights, the single oxblood glow). Re-add the internal glow as a masked comp where a clip lost it.</li>
+      <li><b>Audio:</b> heartbeat/pulse bed throughout, rising to Shot&nbsp;5, stripped to one pulse by 0:56; lay <code>signal_sound.wav</code> over black at the close. One sonic event, close only. Final mix to &minus;14&nbsp;LUFS.</li>
+      <li><b>Wordmark close:</b> place the PNG as two horizontally-offset copies; converge to perfect overlap over ~1.5s, locked so the marks align exactly as the sound resolves to unison and fades. Tagline beneath.</li>
+    </ul>
+  </div>
+
+  <footer>
+    <span>Signal · cellcare · INSDR Wellness Co.</span>
+    <span>Sonic + wordmark spec sourced from locked canon (codex Ch.03 §4 · brand-kit §09)</span>
+    <span>v2 · 2026-06-14 · AI-generation pack + assets</span>
+  </footer>
+
+</div>
+
+<script>
+  (function(){
+    var PASS="54321";
+    var gate=document.getElementById("gate");
+    var body=document.body;
+    if(sessionStorage.getItem("signal_unlocked")==="true"){gate.style.display="none";body.classList.remove("locked");}
+    window.checkPass=function(e){
+      e.preventDefault();
+      var input=document.getElementById("gate-pass").value;
+      var err=document.getElementById("gate-error");
+      if(input===PASS){sessionStorage.setItem("signal_unlocked","true");gate.style.display="none";body.classList.remove("locked");}
+      else{err.classList.add("show");document.getElementById("gate-pass").value="";document.getElementById("gate-pass").focus();setTimeout(function(){err.classList.remove("show");},2400);}
+      return false;
+    };
+  })();
+</script>
+</body>
+</html>
