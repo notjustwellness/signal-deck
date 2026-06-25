@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>signal — moat &amp; proof</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#AD4236; --red-deep:#7A2E26; --espresso:#241B17; --ink:#2E2420;
+    --bone:#F6EFEA; --cream:#EFE5D1; --taupe:#D8CCC1; --gold:#A8845A;
+    --muted:#6D665C; --line:#C8BEAE; --paper:#FBF8F4; --brand:#178D78;
+    --display:'Bebas Neue',Impact,sans-serif;
+    --body:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  img{max-width:100%;display:block;}
+
+  /* ── app shell ── */
+  .app{display:flex;min-height:100vh;}
+  .sidebar{width:280px;flex-shrink:0;background:var(--espresso);color:var(--bone);position:sticky;top:0;height:100vh;overflow-y:auto;padding:26px 22px;display:flex;flex-direction:column;}
+  .sb-wm{margin-bottom:6px;} .sb-wm img{height:30px;width:auto;}
+  .sb-kicker{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:14px 0 4px;}
+  .sb-title{font-family:var(--display);font-weight:400;font-size:30px;line-height:.98;letter-spacing:.01em;color:#fff;margin-bottom:20px;}
+  .nav{list-style:none;flex:1;}
+  .nav li{margin:0;}
+  .nav button{width:100%;text-align:left;background:none;border:none;color:var(--taupe);font-family:var(--body);font-size:13.5px;padding:9px 12px;border-radius:7px;cursor:pointer;display:flex;gap:10px;align-items:baseline;transition:background .12s,color .12s;line-height:1.25;}
+  .nav button:hover{background:rgba(246,239,234,.06);color:var(--bone);}
+  .nav button.active{background:var(--red);color:#fff;}
+  .nav .ix{font-family:var(--mono);font-size:10px;opacity:.7;min-width:16px;}
+  .nav button.active .ix{opacity:.9;}
+  .sb-foot{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(216,204,193,.4);margin-top:18px;padding-top:14px;border-top:1px solid rgba(216,204,193,.14);}
+
+  /* ── main ── */
+  .main{flex:1;min-width:0;}
+  .wrap{max-width:780px;margin:0 auto;padding:0 30px 60px;}
+  .chapter{display:none;animation:fade .25s ease;}
+  .chapter.active{display:block;}
+  /* ── one-page / print view ── */
+  body.showall .chapter{display:block!important;animation:none;}
+  body.showall .pager{display:none;}
+  body.showall #nav button.active{background:transparent;color:var(--bone);}
+  .sb-toggle{margin-top:14px;width:100%;background:rgba(246,239,234,.06);border:1px solid rgba(216,204,193,.18);color:var(--bone);border-radius:7px;padding:10px 12px;cursor:pointer;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-align:left;transition:background .12s,border-color .12s;}
+  .sb-toggle:hover{background:rgba(173,66,54,.22);border-color:var(--red);}
+  @media print{.sidebar{display:none!important;}.chapter{display:block!important;}.pager{display:none!important;}#gate{display:none!important;}.app{display:block!important;}body.locked .app{display:block!important;}body.locked{overflow:visible!important;height:auto!important;}}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+  /* chapter header / hero */
+  .chhero{position:relative;height:300px;margin:0 0 26px;overflow:hidden;display:flex;align-items:flex-end;background:var(--espresso);}
+  .chhero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.82;}
+  .chhero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,27,23,.1) 0%,rgba(36,27,23,.82) 100%);}
+  .chhero .cap{position:relative;padding:30px;color:var(--bone);}
+  .chhero .n{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#E8B4AC;margin-bottom:8px;}
+  .chhero h2{font-family:var(--display);font-weight:400;font-size:46px;line-height:.95;letter-spacing:.01em;color:#fff;}
+  .chhero .sub{font-size:14px;color:var(--taupe);margin-top:8px;max-width:90%;}
+
+  .chhead{padding:34px 0 14px;border-bottom:2px solid var(--espresso);margin-bottom:22px;}
+  .chhead .n{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:7px;}
+  .chhead h2{font-family:var(--display);font-weight:400;font-size:40px;line-height:.96;letter-spacing:.01em;color:var(--espresso);}
+  .chhead .sub{font-size:14px;color:var(--muted);margin-top:8px;}
+
+  p{font-size:14.5px;margin-bottom:13px;}
+  p.lead{font-size:15px;color:var(--muted);margin-bottom:18px;}
+  .sub-h{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin:26px 0 10px;font-weight:600;}
+  b{color:var(--ink);}
+
+  ul.clean{list-style:none;margin:6px 0 16px;}
+  ul.clean li{padding:8px 0 8px 22px;position:relative;font-size:14px;border-bottom:1px dotted var(--line);}
+  ul.clean li:last-child{border-bottom:none;}
+  ul.clean li::before{content:"›";position:absolute;left:2px;color:var(--red);font-weight:700;}
+
+  .pill{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:3px;margin-left:8px;vertical-align:middle;}
+  .pill.lock{background:var(--brand);color:#fff;} .pill.pend{background:var(--gold);color:#fff;}
+
+  .card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:17px 21px;margin:14px 0;}
+  .card h4{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:.02em;color:var(--espresso);margin-bottom:7px;}
+  .card p{font-size:13.5px;margin-bottom:6px;}.card p:last-child{margin-bottom:0;}
+
+  /* photos */
+  figure.photo{margin:18px 0 22px;}
+  figure.photo img{border-radius:12px;border:1px solid var(--line);width:100%;}
+  figure.photo figcaption{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:9px;letter-spacing:.02em;}
+  .photo-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0 22px;}
+  .photo-2 figure{margin:0;} .photo-2 img{border-radius:12px;border:1px solid var(--line);width:100%;height:100%;object-fit:cover;}
+  .photo-2 figcaption{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:8px;}
+
+  table.ftable{width:100%;border-collapse:collapse;margin:10px 0 6px;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden;}
+  .ftable th{background:var(--espresso);color:var(--bone);font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;text-align:left;padding:9px 12px;font-weight:500;}
+  .ftable td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top;}
+  .ftable tr:nth-child(even) td{background:#faf6f1;}
+  .ftable .job{font-weight:600;color:var(--ink);} .ftable .sup{font-family:var(--mono);font-size:11px;color:var(--muted);}
+  .ftable .form b{color:var(--espresso);}
+  .ftable .dose{font-family:var(--mono);font-size:11px;color:var(--red-deep);} .ftable .felt td{background:#f3ece2;}
+  .ftable .rival td{background:#fbeee8;box-shadow:inset 3px 0 0 var(--red-deep);}
+
+  .flags{background:#f3e0dd;border-radius:11px;padding:19px 23px;margin:22px 0;}
+  .flags .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:10px;font-weight:600;}
+  .flags ul{list-style:none;}
+  .flags li{padding:7px 0 7px 22px;position:relative;font-size:13.5px;color:var(--red-deep);}
+  .flags li::before{content:"\26A0";position:absolute;left:0;}
+  .flags b{color:var(--red);}
+  .xref{font-family:var(--mono);font-size:11px;color:var(--muted);margin:18px 0 4px;}
+  .xref a,.xref b{color:var(--red);text-decoration:none;}
+
+  /* pager */
+  .pager{display:flex;justify-content:space-between;gap:12px;margin-top:38px;padding-top:20px;border-top:1px solid var(--line);}
+  .pager button{flex:1;background:#fff;border:1px solid var(--line);border-radius:9px;padding:13px 16px;cursor:pointer;font-family:var(--body);text-align:left;transition:border-color .12s,box-shadow .12s;}
+  .pager button:hover:not(:disabled){border-color:var(--red);box-shadow:0 3px 14px rgba(36,27,23,.07);}
+  .pager button:disabled{opacity:.35;cursor:default;}
+  .pager .dir{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+  .pager .ttl{font-size:13.5px;color:var(--espresso);font-weight:600;margin-top:3px;}
+  .pager .next{text-align:right;}
+
+  @media (max-width:880px){
+    .app{flex-direction:column;}
+    .sidebar{width:100%;height:auto;position:relative;top:0;}
+    .nav{display:flex;flex-wrap:wrap;gap:4px;}
+    .nav button{width:auto;}
+    .photo-2{grid-template-columns:1fr;}
+    .chhero h2{font-size:34px;}
+  }
+
+  /* ── gate ── */
+  #gate{position:fixed;inset:0;background:#241B17;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#D8CCC1;padding:40px;text-align:center;}
+  #gate img{height:80px;margin-bottom:30px;}
+  #gate .ov{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#AD4236;margin-bottom:14px;}
+  #gate input{background:rgba(246,239,234,.08);border:1px solid rgba(246,239,234,.2);border-radius:6px;color:#D8CCC1;padding:13px 20px;font-size:15px;font-family:var(--body);width:260px;text-align:center;letter-spacing:1px;outline:none;}
+  #gate button{margin-top:12px;background:#AD4236;color:#fff;border:none;border-radius:6px;padding:11px 30px;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:var(--body);}
+  body.locked{overflow:hidden;height:100vh;} body.locked .app{display:none;}
+  .wellness{font-family:var(--display);font-weight:400;letter-spacing:.04em;}
+  .insdr-logo{height:9px;width:auto;vertical-align:baseline;margin-right:5px;}
+
+  /* ── infographic ── */
+  .ig-cap{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:24px 0 0;}
+  .ig-band{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:16px 0 6px;}
+  .ig-ladder{display:flex;flex-direction:column;gap:7px;}
+  .ig-rung{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--dot,#AD4236);border-radius:9px;padding:11px 16px;}
+  .ig-rung .num{font-family:var(--display);font-size:26px;line-height:1;color:var(--espresso);width:24px;text-align:center;flex-shrink:0;}
+  .ig-rung .lab{flex:1;font-size:13.5px;color:var(--ink);} .ig-rung .lab b{color:var(--espresso);}
+  .ig-rung .tag{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--dot,#AD4236);padding:4px 10px;border-radius:20px;flex-shrink:0;}
+  .ig-rung.ext{--dot:#7A2E26;} .ig-rung.self{--dot:#8a7d6a;} .ig-rung.earn{--dot:#A8845A;}
+  .ig-rung.key{box-shadow:0 0 0 2px var(--gold);}
+</style>
+</head>
+<body class="locked">
+
+<div id="gate">
+  <img src="../assets/signal_wordmark_on_dark.svg" alt="signal">
+  <div class="ov">Internal · Operating Bible · Confidential</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gp" autocomplete="off" autofocus placeholder="password"><br>
+    <button type="submit">Enter</button>
+  </form>
+</div>
+
+<div class="app">
+  <!-- ───────── SIDEBAR ───────── -->
+  <aside class="sidebar">
+    <div class="sb-wm"><img src="../assets/signal_wordmark_on_dark.svg" alt="signal"></div>
+    <div class="sb-kicker">Operating Bible · 05</div>
+    <div class="sb-title">Moat &amp;<br>Proof Plan</div>
+    <ul class="nav" id="nav">
+      <li><button data-ch="0" class="active"><span class="ix">00</span> Overview</button></li>
+      <li><button data-ch="1"><span class="ix">01</span> The moat — what it is</button></li>
+      <li><button data-ch="2"><span class="ix">02</span> Two kinds of proof</button></li>
+      <li><button data-ch="3"><span class="ix">03</span> The proof stack</button></li>
+      <li><button data-ch="4"><span class="ix">04</span> The pre-public window</button></li>
+      <li><button data-ch="5"><span class="ix">05</span> Channel partners &amp; rubrics</button></li>
+      <li><button data-ch="6"><span class="ix">06</span> The three proof pillars</button></li>
+      <li><button data-ch="7"><span class="ix">07</span> Competitive landscape</button></li>
+      <li><button data-ch="8"><span class="ix">08</span> What we refuse</button></li>
+    </ul>
+    <button class="sb-toggle" id="viewToggle" type="button">▤ Read as one page</button>
+    <div class="sb-foot"><img class="insdr-logo" src="../assets/insdr_logo_light.png" alt="INSDR"> <span class="wellness">Wellness</span> · the cellcare company<br>Confidential — do not share</div>
+  </aside>
+
+  <!-- ───────── MAIN ───────── -->
+  <main class="main">
+
+    <!-- CH 0 — OVERVIEW (cover) -->
+    <section class="chapter active" data-ch="0">
+      <div class="chhero">
+        <div class="veil"></div>
+        <div class="cap">
+          <div class="n">Internal · Moat &amp; Proof</div>
+          <h2>The moat, in chapters</h2>
+          <div class="sub">Why this is defensible — and the proof record that builds the moat.</div>
+        </div>
+      </div>
+      <div class="wrap">
+        <p class="lead">Signal has <b>no thesis moat</b> — "foundation-first cellular energy" is claimed ground and no biology is unowned. What's defensible is an <b>execution moat: trust, externalized as a compounding proof record.</b></p>
+        <div class="card">
+          <h4>The one thing to take away</h4>
+          <p>It builds slowly and is lost instantly — which is exactly what makes it hard to copy. A rival would have to run the same honest discipline, on every lot, for the same number of years, and <b>their business model usually won't let them.</b></p>
+          <p>This doc is the operating plan for building that record. It <b>ladders to the Foundation Brief §07</b> — if anything here contradicts the brief, the brief wins.</p>
+        </div>
+        <p class="lead" style="margin-top:18px;">Use the chapters on the left, or step through with Next →</p>
+        <div class="pager"><button disabled><span class="dir">—</span><div class="ttl">Start</div></button><button class="go-next next" data-go="1"><span class="dir">Next →</span><div class="ttl">The moat — what it is</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 1 — THE MOAT -->
+    <section class="chapter" data-ch="1">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 01</div><h2>The moat — what it is, and what it isn't</h2><div class="sub">Be honest about where there's no defensibility, so we spend the effort where there is.</div></div>
+        <ul class="clean">
+          <li><b>Not the molecule.</b> No active is unowned, no biology is unclaimed. "Foundation-first cellular energy" is occupied ground. Anyone can buy the same branded ingredients.</li>
+          <li><b>Not the format.</b> A chew, a sachet, a counter vessel — all copyable. Format is execution, not a moat (a fast follower can match it in a season).</li>
+          <li><b>The moat is trust, externalized as a compounding proof record.</b> Not "we are honest" (a claim) — a <b>verifiable record that accrues</b>: every clean lot, every third-party result, every rubric we pass, stacked and public over time.</li>
+          <li><b>Why it's defensible:</b> it can't be bought, only accrued — and it's <b>moated by competitors' own business models.</b> A brand addicted to hype, proprietary blends, or convenience-markups can't suddenly run our discipline without indicting its back catalogue. Slow to build, instant to lose: that asymmetry is the wall.</li>
+          <li><b>But it's a defense, not a sales pitch.</b> Research refuted the claim that premium brands "compete primarily on trust" — people <b>buy</b> on product attributes (dose, price, format, aesthetic); trust is the <b>qualifier</b>. So the proof record is a <b>retention/defense moat plus permission-to-be-considered</b>: it keeps customers and clears the skeptic's gate. It does <b>not</b> acquire them, and honesty won't drive the sale on its own. Acquisition is the relay + the product (doc 04); proof is what makes them stay and what makes a voucher safe to give.</li>
+        </ul>
+        <div class="card">
+          <h4>The forcing question</h4>
+          <p>Are we a supplement company that happens to be honest, or a <b>trust/proof company that ships a supplement</b>? This doc commits to the second. The product is the artifact; the proof record is the asset.</p>
+        </div>
+        <div class="card">
+          <h4>Proof's second job — answering "why not the cheaper tub?"</h4>
+          <p>The moat is the long game. But proof earns its keep daily on a blunter front: <b>price</b>. The <b>#2 reason</b> people quit a premium supplement is comparing it to a cheaper one on Amazon (doc 09's churn map). Proof <b>is</b> the answer — and the answer has teeth: in independent ISO-17025 testing, <b>4 of 6 retail creatine gummies failed</b> identity/potency, two with <i>zero detectable creatine</i> — yet those SKUs kept selling ~50k units/month at 4.4–4.7 stars. The cheaper tub isn't the same product at a lower price; it may not be the product at all. Our published COA is how a customer knows the difference — that's proof doing <b>retention</b> work, not just moat work.</p>
+          <p style="font-size:12.5px;color:var(--muted);margin-bottom:0;">Cited as a <b>category</b> truth — the failures were cheap Amazon no-names, not premium rivals, and the source is a testing company. The point isn't that rivals are mislabeled; it's that a customer <i>can't tell</i> without a COA, which is exactly the gap proof closes.</p>
+        </div>
+        <div class="pager"><button class="go-prev" data-go="0"><span class="dir">← Back</span><div class="ttl">Overview</div></button><button class="go-next next" data-go="2"><span class="dir">Next →</span><div class="ttl">Two kinds of proof</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 2 — TWO KINDS OF PROOF -->
+    <section class="chapter" data-ch="2">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 02</div><h2>Two kinds of proof — don't confuse them</h2><div class="sub">Honesty ≠ proof. Honesty is a claim about us; proof is verifiable <i>without</i> trusting us. The highest-impact proof is the kind we don't control.</div></div>
+        <ul class="clean">
+          <li><b>Formula-truth proof — winnable now.</b> "The product is exactly what the label says": identity, potency, purity, contaminants. Provable today with third-party testing. This is where we play to win, hard and early.</li>
+          <li><b>Effect proof — a structural weakness; never fake it.</b> "The product does what we imply." Signal has <b>no felt mirror</b> and no Signal-specific RCT yet. We do <b>not</b> manufacture an effect, a buzz, or a fabricated read-out to cover the gap. We borrow ingredient-level evidence honestly and let real effect proof (re-order behaviour, eventually a funded trial) accrue slowly.</li>
+        </ul>
+        <p style="font-size:13px;color:var(--muted);">The line that governs everything below: <b>we win the formula-truth game decisively, and we refuse to fake the effect game.</b> Pretending we've won effect proof is the one move that would collapse the whole moat.</p>
+        <div class="pager"><button class="go-prev" data-go="1"><span class="dir">← Back</span><div class="ttl">The moat — what it is</div></button><button class="go-next next" data-go="3"><span class="dir">Next →</span><div class="ttl">The proof stack</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 3 — THE PROOF STACK -->
+    <section class="chapter" data-ch="3">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 03</div><h2>The proof stack — ranked by impact</h2><div class="sub">Seven signals, ordered by how hard they are to fake. The ones we <b>don't</b> control lead; the ones we self-publish are receipts, not proof.</div></div>
+        <table class="ftable">
+          <thead><tr><th>#</th><th>Proof signal</th><th>Type</th><th>Who controls it</th></tr></thead>
+          <tbody>
+            <tr><td class="dose">1</td><td class="form"><b>Independent rubric score</b> — SuppCo / Labdoor-type scoring of our actual product</td><td>External</td><td class="sup">Not us — highest impact</td></tr>
+            <tr><td class="dose">2</td><td class="form"><b>Sport certification</b> — NSF Certified for Sport <i>or</i> Informed Sport (banned-substance + label-accuracy)</td><td>External</td><td class="sup">Independent certifier</td></tr>
+            <tr><td class="dose">3</td><td class="form"><b>Clinician recommendation</b> — FrontrowMD / Fullscript practitioner channels carrying us</td><td>External</td><td class="sup">Third-party experts</td></tr>
+            <tr><td class="dose">4</td><td class="form"><b>Per-lot ISO-17025 COA</b>, published — full panel on every production lot</td><td>Self-published</td><td class="sup">Us (lab is independent)</td></tr>
+            <tr><td class="dose">5</td><td class="form"><b>Open formula + named doses</b> — every active, branded form, exact mg, no blends</td><td>Self-published</td><td class="sup">Us</td></tr>
+            <tr><td class="dose">6</td><td class="form"><b>Provenance trail</b> — supplier, branded-form pedigree, country of origin per active</td><td>Self-published</td><td class="sup">Us</td></tr>
+            <tr class="felt"><td class="dose">7</td><td class="form"><b>Customer re-order / retention data</b> — the only real-world effect signal</td><td>Earned over time</td><td class="sup">Customers — slow loop</td></tr>
+          </tbody>
+        </table>
+        <div class="ig-cap">Seven signals &mdash; hardest-to-fake first</div>
+        <div class="ig-band">External &mdash; they lead (we don't control them)</div>
+        <div class="ig-ladder">
+          <div class="ig-rung ext"><div class="num">1</div><div class="lab"><b>Independent rubric score</b> &mdash; SuppCo / Labdoor-type scoring of our product</div><div class="tag">External</div></div>
+          <div class="ig-rung ext"><div class="num">2</div><div class="lab"><b>Sport certification</b> &mdash; NSF Certified for Sport <i>or</i> Informed Sport</div><div class="tag">External</div></div>
+          <div class="ig-rung ext"><div class="num">3</div><div class="lab"><b>Clinician recommendation</b> &mdash; FrontrowMD / Fullscript channels</div><div class="tag">External</div></div>
+        </div>
+        <div class="ig-band">Self-published &mdash; receipts</div>
+        <div class="ig-ladder">
+          <div class="ig-rung self key"><div class="num">4</div><div class="lab"><b>Per-lot ISO-17025 COA</b> &mdash; the keystone that unlocks 1&ndash;4</div><div class="tag">Self-pub</div></div>
+          <div class="ig-rung self"><div class="num">5</div><div class="lab"><b>Open formula + named doses</b> &mdash; every active, exact mg, no blends</div><div class="tag">Self-pub</div></div>
+          <div class="ig-rung self"><div class="num">6</div><div class="lab"><b>Provenance trail</b> &mdash; supplier, branded-form pedigree, origin</div><div class="tag">Self-pub</div></div>
+        </div>
+        <div class="ig-band">Earned over time &mdash; the only real-world effect signal</div>
+        <div class="ig-ladder">
+          <div class="ig-rung earn"><div class="num">7</div><div class="lab"><b>Customer re-order / retention data</b> &mdash; the slowest, most valuable proof</div><div class="tag">Earned</div></div>
+        </div>
+        <p style="font-size:13px;color:var(--muted);"><b>Read this top-down.</b> 1–3 are external and lead our story because we don't control them. 4–6 are receipts — necessary, but they only prove what's <i>in</i> the product, and a customer still has to trust we publish honestly. 7 is the slowest and the most valuable: the only proof that customers actually keep the product. The keystone that unlocks 1–4 is one thing → <b>a lot-specific ISO-17025 COA on a real production lot.</b></p>
+        <div class="pager"><button class="go-prev" data-go="2"><span class="dir">← Back</span><div class="ttl">Two kinds of proof</div></button><button class="go-next next" data-go="4"><span class="dir">Next →</span><div class="ttl">The pre-public window</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 4 — THE PRE-PUBLIC WINDOW -->
+    <section class="chapter" data-ch="4">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 04</div><h2>The pre-public window — manufacture proof, not revenue</h2><div class="sub">"Before launch" hides a window most brands waste: the product can exist before the storefront does.</div></div>
+        <p>A real first lot can be made, tested, scored, and certified <b>before we ever open checkout.</b> That window is where the proof record is born. The discipline: in this phase we are <b>manufacturing proof, not revenue</b> — the first lot's job is to generate the keystone evidence, not sales.</p>
+        <ul class="clean">
+          <li><b>The keystone:</b> a <b>lot-specific ISO-17025 COA</b> on the first real production lot. Everything else — rubric score, sport cert, clinician interest — is gated on having a tested lot in hand.</li>
+          <li><b>Sequence:</b> first lot → independent full-panel COA → submit to rubric / sport-cert / clinician partners → publish the record → <i>then</i> open the storefront with proof already on the page.</li>
+          <li><b>Launch with receipts, not promises.</b> Day one, the proof page is already populated. We never ask the first customer to take honesty on faith.</li>
+        </ul>
+        <div class="pager"><button class="go-prev" data-go="3"><span class="dir">← Back</span><div class="ttl">The proof stack</div></button><button class="go-next next" data-go="5"><span class="dir">Next →</span><div class="ttl">Channel partners &amp; rubrics</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 5 — CHANNEL PARTNERS -->
+    <section class="chapter" data-ch="5">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 05</div><h2>Channel partners &amp; rubrics — the badge becomes the channel</h2><div class="sub">We don't build the measurement business; we get <b>recommended</b> by the people who do.</div></div>
+        <p>The strategic shift behind this: <b>Function Health acquired SuppCo</b> — the rubric we formulate to is now wired into a 50M+ test platform. A good score isn't just a badge on our page; it's a <b>distribution channel</b> into an audience that already trusts the rubric. Same logic for clinician platforms: a recommendation is borrowed, third-party trust we could never assert ourselves. SuppCo's separate <b>TESTED</b> certification goes further still — it buys our retail unit off-shelf, assays it to <b>≥95% of label</b>, and publishes the analyte-level data: the strongest form of the external proof above (the kind we don't control). The formulation cost of clearing that bar — overage — is set at the Zone Halo two-day (doc 06 §6).</p>
+        <table class="ftable">
+          <thead><tr><th>Partner</th><th>What it gives us</th><th>Decision layer</th></tr></thead>
+          <tbody>
+            <tr><td class="job">SuppCo (Function)</td><td class="form">Independent rubric score → badge that doubles as a channel into Function's audience</td><td class="sup">Formulate to the rubric pre-launch</td></tr>
+            <tr><td class="job">NSF Certified for Sport <i>/</i> Informed Sport</td><td class="form">Banned-substance + label-accuracy certification — the gold trust badge</td><td class="sup">UPSTREAM — a factory / first-lot decision</td></tr>
+            <tr><td class="job">FrontrowMD</td><td class="form">Clinician-recommendation engine — borrowed expert authority</td><td class="sup">Warm later, post label-lock + COA</td></tr>
+            <tr><td class="job">Fullscript</td><td class="form">Practitioner dispensary channel — recommendation + distribution</td><td class="sup">Application channel, post-COA</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:13px;color:var(--muted);"><b>The cert is an upstream base decision, not a late add-on.</b> NSF/Informed certification is decided at the factory and first-lot stage — choosing a certified facility is one of the first manufacturing commitments (see doc 06), because retrofitting certification is far costlier than building to it.</p>
+        <p style="font-size:13px;color:var(--muted);"><b>Contact-now, activate-later.</b> The gate is <i>what</i> we ask, not <i>which</i> partner. Information requests can go out early (they reduce surprises and arm the formulation). Activation — submitting data, applying, sending samples, requesting a score — waits until the label is locked and the COA exists. We never submit before we can submit honestly.</p>
+        <div class="pager"><button class="go-prev" data-go="4"><span class="dir">← Back</span><div class="ttl">The pre-public window</div></button><button class="go-next next" data-go="6"><span class="dir">Next →</span><div class="ttl">The three proof pillars</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 6 — THREE PROOF PILLARS -->
+    <section class="chapter" data-ch="6">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 06</div><h2>The three proof pillars</h2><div class="sub">What we actually prove, mapped to the brand's pillars. These are the claims the proof record substantiates.</div></div>
+        <div class="card">
+          <h4>Adherence — the spine</h4>
+          <p>The hardest thing to prove and the most valuable: that customers <b>keep taking it</b>. Proven only by signal #7 (re-order / retention data) — a slow loop, but the one effect signal we can earn honestly. "The supplement you'll actually keep taking" is a promise the data either backs or it doesn't.</p>
+        </div>
+        <div class="card">
+          <h4>Bioavailability — prove the pathway</h4>
+          <p>A <b>locked edge of the moat.</b> Most brands lean on a COA, but <b>a COA only proves what is <i>in</i> the product — not what the body takes up.</b> Proving <b>absorption</b> — beyond a content-only COA — is the differentiated proof, and the <i>commitment</i> is settled. <span style="color:var(--red);">What's open is the <i>method</i>: which credible, affordable absorption test demonstrates it (see flags).</span></p>
+        </div>
+        <div class="card">
+          <h4>Provenance — inputs, not diagnostics</h4>
+          <p>Named branded forms, supplier pedigree, country of origin, per-lot testing. The honesty position <b>and</b> exactly what third-party rubrics score. This is the most winnable pillar and the base of the whole stack.</p>
+        </div>
+        <div class="pager"><button class="go-prev" data-go="5"><span class="dir">← Back</span><div class="ttl">Channel partners &amp; rubrics</div></button><button class="go-next next" data-go="7"><span class="dir">Next →</span><div class="ttl">Competitive landscape</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 7 — COMPETITIVE LANDSCAPE -->
+    <section class="chapter" data-ch="7">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 07</div><h2>The competitive proof landscape</h2><div class="sub">"Proof" is crowded, not white space. Know who owns which proof-thesis before we pick a lane.</div></div>
+        <table class="ftable">
+          <thead><tr><th>Proof-thesis</th><th>Who owns it</th><th>Our read</th></tr></thead>
+          <tbody>
+            <tr><td class="job">Open-label / full transparency</td><td class="form">Transparent Labs, Legion</td><td class="sup">Owned — "transparency" as a word is taken</td></tr>
+            <tr class="rival"><td class="job"><b>Traceability as founding identity</b><br><span class="sup">"Made Traceable" — supplier, source &amp; dose visible</span></td><td class="form"><b>Ritual</b></td><td class="sup"><b>Our closest competitor.</b> Proves the contents &amp; provenance — but not the promise</td></tr>
+            <tr><td class="job">Most third-party tested</td><td class="form">NF Sports, Nordic Naturals, Legion</td><td class="sup">An arms race — don't compete on volume of badges</td></tr>
+            <tr><td class="job">Cert-badge stacking</td><td class="form">Klean, Momentous, Thorne</td><td class="sup">Outsourced trust — table stakes, not a moat</td></tr>
+            <tr><td class="job">Clinical trials on own SKU</td><td class="form">Thorne</td><td class="sup">Don't try to out-Thorne Thorne</td></tr>
+            <tr><td class="job">Independent arbiter</td><td class="form">Examine, Labdoor</td><td class="sup">We get scored <i>by</i> them — not a lane we occupy</td></tr>
+            <tr class="rival"><td class="job"><b>"Clinically dosed, no hidden dosages"</b><br><span class="sup">the claim, made atop a 90+ ingredient all-in-one</span></td><td class="form"><b>IM8</b> (Beckham), AG1-class</td><td class="sup"><b>Claims our lane — can't hold it.</b> NSF-real and label-accurate, but clinical doses can't coexist at 90 ingredients, and the actives sit in undisclosed blends</td></tr>
+            <tr class="felt"><td class="job"><b>Proof of HONESTY</b> (constraint on marketing)</td><td class="form"><b>White space</b></td><td class="sup"><b>Signal's lane</b></td></tr>
+          </tbody>
+        </table>
+        <p>Everyone proves <b>what's in the bottle.</b> Almost no one proves <b>what they say about it.</b> Testing proves the <b>product</b>; honesty proves the <b>promise</b>. Our lane is the promise — proof that we're not overstating what this does, and a record of telling you what <i>not</i> to expect, even what not to buy. Put plainly: testing is a weapon pointed at the product; honesty is a constraint pointed at ourselves.</p>
+        <p><b>Why Ritual is the one to watch.</b> Most rivals treat transparency as a category habit; <b>Ritual built its identity on it</b> — "Made Traceable" puts every supplier, source, and dose on the page. That makes Ritual the brand standing closest to our door. The line that separates us is exact: <b>Ritual proves what's in the bottle and where it came from; Signal proves the promise — that what we say it does is not overstated.</b> Provenance is necessary and we'll meet it, but it's table stakes for the honest lane, not the lane itself. The moment a traceability-first brand starts overclaiming the <i>effect</i> to drive growth, the gap we're defending opens — and our discipline is the thing that can't follow them across it.</p>
+        <p><b>The IM8 wedge — a claim we expose, not an idea we must teach.</b> IM8 (David Beckham's brand, roughly $120M ARR in its first year) leads on <i>consolidation</i> — "replace 16 supplements for $6 a day." But at the product level it markets the exact words we intend to own: <i>clinically dosed, no hidden dosages.</i> Its own label can't back that. The vitamins and minerals are honestly dosed, but the functional actives people actually buy it for sit in grouped blends with no per-ingredient amounts — and at 90+ ingredients in a ~12 g serving, clinically effective doses physically cannot coexist. <b>Your enemy is a brand that claims your exact position and can't structurally deliver it. That's a far more powerful wedge — you're not introducing a new idea to the market, you're exposing a gap in a claim the market already finds attractive.</b></p>
+        <p><b>The framing shift.</b> Not "we're the honest, minimal alternative to hype" — a new idea we'd have to teach. Instead: <i>everyone already wants clinically-dosed and transparent; here's the one formula where every dose on the label is at the level the study used, because we kept it small enough that it can be.</i> The axis is <b>auditability, not quantity.</b> We don't win on "fewer ingredients" — a buyer can read that as less value — we win on "every dose is checkable," the one place a 90-ingredient consolidation model can never follow without detonating its own pitch.</p>
+        <div class="flags">
+          <div class="lbl">Guardrail — attack the claim, not a falsehood</div>
+          <ul>
+            <li><b>Aim at the clinical-dose claim, never the whole brand.</b> IM8's headline is consolidation, not honesty — saying "they pretend to be transparent" overstates it and invites a swat-down. The defensible target is narrow: a clinical-dosing claim their hidden blends can't support.</li>
+            <li><b>Never deny what's real.</b> Their NSF Certified for Sport and per-batch COAs are genuine — they prove the product matches the label, just not that the doses work. Don't imply they're untested.</li>
+            <li><b>The sub-clinical math is our analysis, not their admission.</b> We infer it from serving size and grouped-blend totals; we never fabricate a specific mg figure or quote them under-dosing. Same discipline as the personalization guardrail — name the gap in the claim, not a falsehood about the company.</li>
+          </ul>
+        </div>
+        <div class="flags">
+          <div class="lbl">The trap to design against</div>
+          <ul>
+            <li><b>True-but-illegible loses to the sledgehammer.</b> "World's most third-party tested" is a blunt, legible claim. "We constrain our own marketing" is subtler and easy to miss. The proof record must be made <b>legible</b> — ranked, visual, skimmable — or the honest position quietly loses to the loud one.</li>
+          </ul>
+        </div>
+        <div class="pager"><button class="go-prev" data-go="6"><span class="dir">← Back</span><div class="ttl">The three proof pillars</div></button><button class="go-next next" data-go="8"><span class="dir">Next →</span><div class="ttl">What we refuse</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 8 — WHAT WE REFUSE -->
+    <section class="chapter" data-ch="8">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 08</div><h2>What we refuse — the discipline that builds the moat</h2><div class="sub">The bright lines that keep the proof record honest.</div></div>
+        <ul class="clean">
+          <li><b>The anti-gimmick test.</b> For any tactic: <i>"would a dishonest competitor do this too?"</i> If yes, it's marketing, not trust — it doesn't go in the proof record. Ingredient spend is real; COGS-theatre and margin-bragging are gimmicks.</li>
+          <li><b>The relay rule.</b> Trust flows through people. Our job is to equip the person who vouches for us, and to <b>never embarrass the one who recommended us.</b> Proof is the ammunition we hand the voucher.</li>
+          <li><b>Never fake the effect.</b> No stimulant, drug, or fabricated read-out to manufacture a felt mirror (paraxanthine and NMN-as-mirror were both rejected). The felt layer is honest (Rhodiola, named) or it isn't there.</li>
+          <li><b>TOTOX / oxidation honesty.</b> Where freshness matters, prove the <b>input</b>, not a finished-unit number a flavor system can distort — a flavored, chewable format can break some finished-product assays, so we test the source material and say so. Don't publish a number the format makes meaningless.</li>
+          <li><b>No patent theatre.</b> We don't claim to own intellectual property we don't actually hold — bluffing a patent moat is exactly the kind of dishonesty this whole doc refuses (see the explainer below).</li>
+        </ul>
+
+        <div class="card">
+          <h4>How we actually protect the product (plain English)</h4>
+          <p>Patents won't be Signal's protection, and we won't pretend otherwise. A <b>patent</b> only covers a genuinely <i>new</i> invention. The single-serve <b>sachet</b> was already patented years ago by someone else — that's "<b>prior&nbsp;art</b>," and it means the format is now public; anyone can use it and no one can re-patent it. Filing patents on stuff like that just for the optics is "<b>patent theatre</b>" — and for a trust brand, getting caught bluffing IP would do real damage.</p>
+          <p>The <i>one</i> thing that might be genuinely patentable is a <b>new way to keep creatine stable alongside other ingredients</b> — if our formulation work turns up something truly novel. That's an open question for the Zone Halo two-day, not a promise.</p>
+          <p>So our real protection is two tools that don't need a patent:</p>
+          <ul class="clean">
+            <li><b>Trade secret</b> — we keep the <b>manufacturing process and formulation know-how</b> confidential: <i>how</i> we make a 5&nbsp;g creatine load taste good and stay stable, the chew matrix, the flavor system, the order of operations. It's protected for as long as no one else can reverse-engineer it.</li>
+            <li><b>Trade dress</b> — legal protection for the <b>distinctive look</b> of the product and packaging (the terracotta sachets, the counter vessel, the wordmark) so a competitor can't copy our appearance to borrow our recognition.</li>
+          </ul>
+          <div class="flags" style="margin-top:14px;">
+            <div class="lbl">Doesn't this contradict open formulas + published COAs?</div>
+            <ul>
+              <li>No — it's a <b>what-vs-how</b> split. We <b>publish what's in the product</b> (every active, branded form, exact mg) and <b>publish the COA</b> that proves it. We keep secret only <b>how it's made</b> (the process). A COA confirms the contents <i>without</i> revealing the technique, so openness and the trade secret don't collide. The hard boundary: a secret may cover the process, <b>never a dose or an ingredient</b> — the moment secrecy hides <i>what's in it</i>, it becomes the "proprietary blend" dishonesty we ban.</li>
+            </ul>
+          </div>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:0;">Bottom line: the real moat isn't a patent — it's the proof record this whole document describes. IP protection is a fence around the product; <b>trust is the thing that's actually hard to copy.</b></p>
+        </div>
+
+        <div class="flags">
+          <div class="lbl">Open — decisions &amp; research items</div>
+          <ul>
+            <li><b>Proving the pathway — the method.</b> The commitment is locked (a moat edge); what's open is <i>which</i> credible, affordable absorption test demonstrates uptake beyond a content-only COA.</li>
+            <li><b>The RCT gap</b> — we have branded-ingredient pedigree but no Signal-specific clinical trial. Honest line: it gets funded by <b>revenue, not dilution</b>. Until then, effect proof is borrowed + re-order data.</li>
+            <li><b>Certification stack</b> — final pick of cGMP/NSF facility + per-lot ISO-17025 lab + one sport cert (NSF Certified for Sport vs Informed Sport). An upstream factory decision (see doc 06).</li>
+            <li><b>Creatine-stability co-formulation IP</b> — decide at the Zone Halo two-day what, if anything, is ownable and how to protect it.</li>
+            <li><b>Legibility build</b> — how the proof record is presented (the public proof page / ranked stack) so honest-but-subtle doesn't lose to loud-but-blunt. Feeds doc 03 (brand) and 04 (GTM).</li>
+          </ul>
+        </div>
+
+        <p class="xref">Source of truth → <b>01 Foundation Brief §07</b>. Feeds → <b>03 Brand &amp; Claims</b> (making proof legible) · <b>04 GTM</b> (badge→channel, relay) · <b>06 Operations</b> (facility, certs, COA, the upstream cert decision) · <b>09 Retention</b> (proof as the answer to the price/​"why-not-Amazon" churn driver). Pulls from → <b>02 Product &amp; Formula Spec</b> (formulate-to-rubric).</p>
+
+        <div class="pager"><button class="go-prev" data-go="7"><span class="dir">← Back</span><div class="ttl">Competitive landscape</div></button><button disabled class="next"><span class="dir">End</span><div class="ttl">Chapter 08 of 08</div></button></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  function checkPass(e){e.preventDefault();if(document.getElementById('gp').value==='54321'){document.body.classList.remove('locked');document.getElementById('gate').style.display='none';}return false;}
+  var navBtns=document.querySelectorAll('#nav button');
+  var chapters=document.querySelectorAll('.chapter');
+  function show(ch){
+    chapters.forEach(function(s){s.classList.toggle('active',s.dataset.ch===String(ch));});
+    navBtns.forEach(function(b){b.classList.toggle('active',b.dataset.ch===String(ch));});
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  navBtns.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.ch);});});
+  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.go);});});
+  var vt=document.getElementById('viewToggle');
+  if(vt){vt.addEventListener('click',function(){var on=document.body.classList.toggle('showall');vt.textContent=on?'❐ Back to chapters':'▤ Read as one page';if(on)window.scrollTo({top:0});});}
+  navBtns.forEach(function(b){b.addEventListener('click',function(){if(document.body.classList.contains('showall')){var t=document.querySelector('.chapter[data-ch="'+b.dataset.ch+'"]');if(t)t.scrollIntoView({behavior:'smooth'});}});});
+</script>
+</body>
+</html>

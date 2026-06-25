@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>signal — gtm & audience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#AD4236; --red-deep:#7A2E26; --espresso:#241B17; --ink:#2E2420;
+    --bone:#F6EFEA; --cream:#EFE5D1; --taupe:#D8CCC1; --gold:#A8845A;
+    --muted:#6D665C; --line:#C8BEAE; --paper:#FBF8F4; --brand:#178D78;
+    --display:'Bebas Neue',Impact,sans-serif;
+    --body:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  img{max-width:100%;display:block;}
+
+  /* ── app shell ── */
+  .app{display:flex;min-height:100vh;}
+  .sidebar{width:280px;flex-shrink:0;background:var(--espresso);color:var(--bone);position:sticky;top:0;height:100vh;overflow-y:auto;padding:26px 22px;display:flex;flex-direction:column;}
+  .sb-wm{margin-bottom:6px;} .sb-wm img{height:30px;width:auto;}
+  .sb-kicker{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:14px 0 4px;}
+  .sb-title{font-family:var(--display);font-weight:400;font-size:30px;line-height:.98;letter-spacing:.01em;color:#fff;margin-bottom:20px;}
+  .nav{list-style:none;flex:1;}
+  .nav li{margin:0;}
+  .nav button{width:100%;text-align:left;background:none;border:none;color:var(--taupe);font-family:var(--body);font-size:13.5px;padding:9px 12px;border-radius:7px;cursor:pointer;display:flex;gap:10px;align-items:baseline;transition:background .12s,color .12s;line-height:1.25;}
+  .nav button:hover{background:rgba(246,239,234,.06);color:var(--bone);}
+  .nav button.active{background:var(--red);color:#fff;}
+  .nav .ix{font-family:var(--mono);font-size:10px;opacity:.7;min-width:16px;}
+  .nav button.active .ix{opacity:.9;}
+  .sb-foot{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(216,204,193,.4);margin-top:18px;padding-top:14px;border-top:1px solid rgba(216,204,193,.14);}
+  .insdr-logo{height:9px;width:auto;display:inline-block;vertical-align:baseline;margin-right:5px;}
+
+  /* ── main ── */
+  .main{flex:1;min-width:0;}
+  .wrap{max-width:780px;margin:0 auto;padding:0 30px 60px;}
+  .chapter{display:none;animation:fade .25s ease;}
+  .chapter.active{display:block;}
+  /* ── one-page / print view ── */
+  body.showall .chapter{display:block!important;animation:none;}
+  body.showall .pager{display:none;}
+  body.showall #nav button.active{background:transparent;color:var(--bone);}
+  .sb-toggle{margin-top:14px;width:100%;background:rgba(246,239,234,.06);border:1px solid rgba(216,204,193,.18);color:var(--bone);border-radius:7px;padding:10px 12px;cursor:pointer;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-align:left;transition:background .12s,border-color .12s;}
+  .sb-toggle:hover{background:rgba(173,66,54,.22);border-color:var(--red);}
+  @media print{.sidebar{display:none!important;}.chapter{display:block!important;}.pager{display:none!important;}#gate{display:none!important;}.app{display:block!important;}body.locked .app{display:block!important;}body.locked{overflow:visible!important;height:auto!important;}}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+  /* chapter header / hero */
+  .chhero{position:relative;height:300px;margin:0 0 26px;overflow:hidden;display:flex;align-items:flex-end;background:var(--espresso);}
+  .chhero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.82;}
+  .chhero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,27,23,.1) 0%,rgba(36,27,23,.82) 100%);}
+  .chhero .cap{position:relative;padding:30px;color:var(--bone);}
+  .chhero .n{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#E8B4AC;margin-bottom:8px;}
+  .chhero h2{font-family:var(--display);font-weight:400;font-size:46px;line-height:.95;letter-spacing:.01em;color:#fff;}
+  .chhero .sub{font-size:14px;color:var(--taupe);margin-top:8px;max-width:90%;}
+
+  .chhead{padding:34px 0 14px;border-bottom:2px solid var(--espresso);margin-bottom:22px;}
+  .chhead .n{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:7px;}
+  .chhead h2{font-family:var(--display);font-weight:400;font-size:40px;line-height:.96;letter-spacing:.01em;color:var(--espresso);}
+  .chhead .sub{font-size:14px;color:var(--muted);margin-top:8px;}
+
+  p{font-size:14.5px;margin-bottom:13px;}
+  p.lead{font-size:15px;color:var(--muted);margin-bottom:18px;}
+  .sub-h{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin:26px 0 10px;font-weight:600;}
+  b{color:var(--ink);}
+
+  ul.clean{list-style:none;margin:6px 0 16px;}
+  ul.clean li{padding:8px 0 8px 22px;position:relative;font-size:14px;border-bottom:1px dotted var(--line);}
+  ul.clean li:last-child{border-bottom:none;}
+  ul.clean li::before{content:"›";position:absolute;left:2px;color:var(--red);font-weight:700;}
+
+  .pill{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:3px;margin-left:8px;vertical-align:middle;}
+  .pill.lock{background:var(--brand);color:#fff;} .pill.pend{background:var(--gold);color:#fff;}
+
+  .card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:17px 21px;margin:14px 0;}
+  .card h4{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:.02em;color:var(--espresso);margin-bottom:7px;}
+  .card p{font-size:13.5px;margin-bottom:6px;}.card p:last-child{margin-bottom:0;}
+
+  /* photos */
+  figure.photo{margin:18px 0 22px;}
+  figure.photo img{border-radius:12px;border:1px solid var(--line);width:100%;}
+  figure.photo figcaption{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:9px;letter-spacing:.02em;}
+  .photo-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0 22px;}
+  .photo-2 figure{margin:0;} .photo-2 img{border-radius:12px;border:1px solid var(--line);width:100%;height:100%;object-fit:cover;}
+  .photo-2 figcaption{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:8px;}
+
+  table.ftable{width:100%;border-collapse:collapse;margin:10px 0 6px;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden;}
+  .ftable th{background:var(--espresso);color:var(--bone);font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;text-align:left;padding:9px 12px;font-weight:500;}
+  .ftable td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top;}
+  .ftable tr:nth-child(even) td{background:#faf6f1;}
+  .ftable .job{font-weight:600;color:var(--ink);} .ftable .sup{font-family:var(--mono);font-size:11px;color:var(--muted);}
+  .ftable .form b{color:var(--espresso);}
+  .ftable .dose{font-family:var(--mono);font-size:11px;color:var(--red-deep);} .ftable .felt td{background:#f3ece2;}
+
+  .flags{background:#f3e0dd;border-radius:11px;padding:19px 23px;margin:22px 0;}
+  .flags .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:10px;font-weight:600;}
+  .flags ul{list-style:none;}
+  .flags li{padding:7px 0 7px 22px;position:relative;font-size:13.5px;color:var(--red-deep);}
+  .flags li::before{content:"\26A0";position:absolute;left:0;}
+  .flags b{color:var(--red);}
+  .xref{font-family:var(--mono);font-size:11px;color:var(--muted);margin:18px 0 4px;}
+  .xref b{color:var(--red);}
+
+  /* pager */
+  .pager{display:flex;justify-content:space-between;gap:12px;margin-top:38px;padding-top:20px;border-top:1px solid var(--line);}
+  .pager button{flex:1;background:#fff;border:1px solid var(--line);border-radius:9px;padding:13px 16px;cursor:pointer;font-family:var(--body);text-align:left;transition:border-color .12s,box-shadow .12s;}
+  .pager button:hover:not(:disabled){border-color:var(--red);box-shadow:0 3px 14px rgba(36,27,23,.07);}
+  .pager button:disabled{opacity:.35;cursor:default;}
+  .pager .dir{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+  .pager .ttl{font-size:13.5px;color:var(--espresso);font-weight:600;margin-top:3px;}
+  .pager .next{text-align:right;}
+
+  @media (max-width:880px){
+    .app{flex-direction:column;}
+    .sidebar{width:100%;height:auto;position:relative;top:0;}
+    .nav{display:flex;flex-wrap:wrap;gap:4px;}
+    .nav button{width:auto;}
+    .photo-2{grid-template-columns:1fr;}
+    .chhero h2{font-size:34px;}
+  }
+
+  /* ── gate ── */
+  #gate{position:fixed;inset:0;background:#241B17;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#D8CCC1;padding:40px;text-align:center;}
+  #gate img{height:80px;margin-bottom:30px;}
+  #gate .ov{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#AD4236;margin-bottom:14px;}
+  #gate input{background:rgba(246,239,234,.08);border:1px solid rgba(246,239,234,.2);border-radius:6px;color:#D8CCC1;padding:13px 20px;font-size:15px;font-family:var(--body);width:260px;text-align:center;letter-spacing:1px;outline:none;}
+  #gate button{margin-top:12px;background:#AD4236;color:#fff;border:none;border-radius:6px;padding:11px 30px;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:var(--body);}
+  body.locked{overflow:hidden;height:100vh;} body.locked .app{display:none;}
+  .wellness{font-family:var(--display);font-weight:400;letter-spacing:.04em;}
+
+  /* ── infographic ── */
+  .ig-cap{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:24px 0 0;}
+  .ig-funnel{display:flex;flex-direction:column;align-items:center;margin:18px 0 8px;}
+  .ig-stage{width:100%;display:flex;gap:10px;justify-content:center;}
+  .ig-stage.n1{max-width:64%;} .ig-stage.n2{max-width:48%;}
+  .ig-node{background:#fff;border:1px solid var(--line);border-top:3px solid var(--dot,#AD4236);border-radius:10px;padding:12px 16px;text-align:center;flex:1;}
+  .ig-node .role{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+  .ig-node .who{font-family:var(--display);font-size:21px;color:var(--espresso);line-height:1;margin-top:5px;}
+  .ig-node .note{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.3;}
+  .ig-node.seed{--dot:#7A2E26;} .ig-node.mcm{--dot:#AD4236;background:#fbf2ee;} .ig-node.conv{--dot:#6D665C;} .ig-node.scale{--dot:#A8845A;background:#fbf4ea;}
+  .ig-arrow{font-family:var(--display);font-size:22px;color:var(--red);line-height:1;margin:8px 0;}
+  @media(max-width:880px){.ig-stage,.ig-stage.n1,.ig-stage.n2{max-width:100%;flex-direction:column;}}
+</style>
+</head>
+<body class="locked">
+
+<div id="gate">
+  <img src="../assets/signal_wordmark_on_dark.svg" alt="signal">
+  <div class="ov">Internal · Operating Bible · Confidential</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gp" autocomplete="off" autofocus placeholder="password"><br>
+    <button type="submit">Enter</button>
+  </form>
+</div>
+
+<div class="app">
+  <!-- ───────── SIDEBAR ───────── -->
+  <aside class="sidebar">
+    <div class="sb-wm"><img src="../assets/signal_wordmark_on_dark.svg" alt="signal"></div>
+    <div class="sb-kicker">Operating Bible · 04</div>
+    <div class="sb-title">GTM &amp;<br>Audience</div>
+    <ul class="nav" id="nav">
+      <li><button data-ch="0" class="active"><span class="ix">00</span> Overview</button></li>
+      <li><button data-ch="1"><span class="ix">01</span> The GTM thesis — relay, not reach</button></li>
+      <li><button data-ch="2"><span class="ix">02</span> The audience architecture</button></li>
+      <li><button data-ch="3"><span class="ix">03</span> Why these — not the obvious ones</button></li>
+      <li><button data-ch="4"><span class="ix">04</span> The relay engine</button></li>
+      <li><button data-ch="5"><span class="ix">05</span> Institutional relay</button></li>
+      <li><button data-ch="6"><span class="ix">06</span> The launch sequence</button></li>
+      <li><button data-ch="7"><span class="ix">07</span> The GLP-1 tailwind</button></li>
+      <li><button data-ch="8"><span class="ix">08</span> The personalization wave</button></li>
+      <li><button data-ch="9"><span class="ix">09</span> What we refuse in growth</button></li>
+    </ul>
+    <button class="sb-toggle" id="viewToggle" type="button">▤ Read as one page</button>
+    <div class="sb-foot"><img class="insdr-logo" src="../assets/insdr_logo_light.png" alt="INSDR"> <span class="wellness">Wellness</span> · the cellcare company<br>Confidential — do not share</div>
+  </aside>
+
+  <!-- ───────── MAIN ───────── -->
+  <main class="main">
+
+    <!-- CH 0 — OVERVIEW (cover) -->
+    <section class="chapter active" data-ch="0">
+      <div class="chhero">
+        <div class="veil"></div>
+        <div class="cap">
+          <div class="n">Internal · GTM &amp; Audience</div>
+          <h2>The channel is people</h2>
+          <div class="sub">Who we sell to, in what order — and why trust travels by relay, not by ads.</div>
+        </div>
+      </div>
+      <div class="wrap">
+        <p class="lead">We do not buy our way in. A trust brand can't out-spend the category on ads without becoming the thing it refuses to be. The channel is <b>relay: trust flows through people.</b> Our job is to <b>equip the person who vouches for us</b> — not to persuade a cold buyer.</p>
+        <p class="lead">So the audience is sequenced, not blended: <b>credibility seeds make us believable, one dense audience pays the bills, and scale comes last — only after re-order proof.</b> This doc ladders to <b>Foundation Brief §06</b> (who it's for) and §05 (the relay rule); if anything here contradicts the brief, the brief wins. Channel-partner mechanics live in <b>doc 05</b> — here we cover audience, sequence, and the relay engine.</p>
+        <p class="lead" style="margin-top:18px;">Use the chapters on the left, or step through with Next →</p>
+        <div class="pager"><button disabled><span class="dir">—</span><div class="ttl">Start</div></button><button class="go-next next" data-go="1"><span class="dir">Next →</span><div class="ttl">The GTM thesis — relay, not reach</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 1 — THE GTM THESIS -->
+    <section class="chapter" data-ch="1">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 01</div><h2>The GTM thesis — relay, not reach</h2><div class="sub">A trust brand can't win by out-shouting the category. The mechanism has to match the message.</div></div>
+
+        <ul class="clean">
+          <li><b>The channel is people.</b> Trust flows through a person who already has it — a colleague, a coach, a clinician, a respected skeptic. We don't try to convert a cold stranger; we <b>arm the voucher</b> and let them carry us the last foot.</li>
+          <li><b>Why not paid acquisition first.</b> Performance ads reward the loudest claim and the biggest budget — the exact game an honesty brand loses by playing. Paid has a role later (retargeting warm traffic, not cold prospecting), but it is never the engine.</li>
+          <li><b>The relay rule.</b> Our north star is to <b>never embarrass the person who recommended us.</b> Every GTM tactic is judged against it: if a move could make a voucher look foolish, it's off the table.</li>
+          <li><b>Trust starts borrowed.</b> Before we've earned our own, we borrow it — from the people who vouch, the rubrics that score us, and the discipline of inviting a teardown ("tear it apart") rather than asking for faith.</li>
+        </ul>
+        <div class="card">
+          <h4>The anti-gimmick test, applied to GTM</h4>
+          <p>For any growth tactic: <i>"would a dishonest competitor do this too?"</i> Buying influencer vouches, gating reviews, juicing scarcity — all things a hype brand does. If the tactic survives only because it's loud, it's marketing, not relay. We grow on equipped advocates and earned proof, or we grow slower.</p>
+        </div>
+        <div class="card">
+          <h4>Honesty doesn't sell — it qualifies and keeps</h4>
+          <p>The correction that disciplines this whole doc: research refuted the idea that premium brands "compete primarily on trust." People <b>buy</b> on product attributes — dose, price, format, aesthetic — and on the <b>voucher's</b> credibility. Trust's job in growth is narrower and real: it <b>grants permission to be considered</b> (it clears the skeptic's gate) and it <b>retains</b>. It is <b>not</b> the thing that closes the sale. So acquisition leans on the relay + the concrete product; <b>honesty is what makes the voucher safe to give and the customer slow to leave</b> — never the pitch that converts a cold stranger. Pointing the proof record at acquisition and expecting it to sell is the trap; aim it at permission and retention.</p>
+        </div>
+
+        <div class="pager"><button class="go-prev" data-go="0"><span class="dir">← Back</span><div class="ttl">Overview</div></button><button class="go-next next" data-go="2"><span class="dir">Next →</span><div class="ttl">The audience architecture</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 2 — THE AUDIENCE ARCHITECTURE -->
+    <section class="chapter" data-ch="2">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 02</div><h2>The audience architecture — sequenced, not blended</h2><div class="sub">Seeds earn credibility; one audience earns revenue; scale comes last. These are different jobs — never run them as one funnel.</div></div>
+
+        <table class="ftable">
+          <thead><tr><th>Role</th><th>Who</th><th>What they give us</th><th>What they are not</th></tr></thead>
+          <tbody>
+            <tr><td class="job">Credibility seed — trust</td><td class="form"><b>First responders</b> — the people who run toward danger and trust the floor under them</td><td class="sup">Borrowed authority; hard-won belief from natural skeptics</td><td class="sup">Not the paying engine ($89/mo on public-servant pay)</td></tr>
+            <tr><td class="job">Credibility seed — data</td><td class="form"><b>Skeptic-stacker / biohacker</b> — the label-readers who reward "name the dose"</td><td class="sup">Proof and scrutiny; "even the data crowd approves"</td><td class="sup">Not revenue — demand proof, low loyalty, halo doesn't transfer</td></tr>
+            <tr><td class="job"><b>Revenue MCM</b></td><td class="form"><b>Veteran / tactical-fitness</b> — belief-buyer with a halo</td><td class="sup">Pays without a trial, dense identity, word-of-mouth ignites</td><td class="sup">Not a niche to outgrow — the engine that funds everything</td></tr>
+            <tr><td class="job">Conversion segment</td><td class="form"><b>The cabinet-skeptic</b> — overwhelmed by bottles, wants to simplify</td><td class="sup">Converts <i>after</i> the hook; the origin speaks straight to them</td><td class="sup">Not a cold-acquisition funnel — a de-risking close</td></tr>
+            <tr class="felt"><td class="job">Scale — last</td><td class="form"><b>Longevity / affluent-wellness</b></td><td class="sup">Pays, fits the thesis, the large market</td><td class="sup">Not a Phase-1 seed — diffuse, no density; unlock only on re-order proof</td></tr>
+          </tbody>
+        </table>
+        <div class="ig-cap">Sequenced, never blended</div>
+        <div class="ig-funnel">
+          <div class="ig-stage">
+            <div class="ig-node seed"><div class="role">Credibility seed &middot; trust</div><div class="who">First responders</div><div class="note">Borrowed authority &mdash; not the paying engine</div></div>
+            <div class="ig-node seed"><div class="role">Credibility seed &middot; data</div><div class="who">Skeptic-stacker</div><div class="note">"Even the data crowd approves"</div></div>
+          </div>
+          <div class="ig-arrow">&darr;</div>
+          <div class="ig-stage n1"><div class="ig-node mcm"><div class="role">Revenue MCM</div><div class="who">Veteran / tactical-fitness</div><div class="note">Buys on belief &middot; the engine that funds everything</div></div></div>
+          <div class="ig-arrow">&darr;</div>
+          <div class="ig-stage n1"><div class="ig-node conv"><div class="role">Conversion</div><div class="who">The cabinet-skeptic</div><div class="note">Converts behind the hook &mdash; a de-risking close</div></div></div>
+          <div class="ig-arrow">&darr;</div>
+          <div class="ig-stage n2"><div class="ig-node scale"><div class="role">Scale &middot; last</div><div class="who">Longevity / affluent</div><div class="note">Unlock only on re-order proof</div></div></div>
+        </div>
+        <p class="body" style="font-size:13px;color:var(--muted);"><b>The shape:</b> two credibility seeds (responders = trust, biohacker = data) make us believable → one dense revenue audience (veteran/tactical) pays the bills and lights word-of-mouth → the cabinet-skeptic converts behind the hook → longevity/affluent is the scale tier, last. One door — <b>the cabinet</b> — both the emotional buyer and the skeptic walk through; after it the stories fork and never blend.</p>
+
+        <div class="card">
+          <h4>Who "veteran / tactical-fitness" actually means</h4>
+          <p>It is <b>not only military veterans.</b> It's the broader <b>tactical-athlete</b> world: current and former military, plus the civilian culture that trains the way soldiers, police, and firefighters train — <b>functional strength and work-capacity for the job, not the mirror.</b> Rucking, strength-endurance, conditioning built for real-world readiness rather than aesthetics.</p>
+          <p><b>Where they live:</b> tactical-fitness programs and gyms, veteran-owned training brands and apparel, rucking and work-capacity communities (load-carriage events, minimalist strength-endurance programming, mountain-athlete training), and the unit gyms, ranges, and online forums where these people coach each other. Tight networks where a recommendation travels fast and sticks.</p>
+          <p><b>What defines them culturally:</b> discipline over hype, hard-earned skepticism of "snake oil," and fierce loyalty to gear that proves itself. They spend on <b>readiness</b> — supplements are a normal part of training budget, not an indulgence — and they want the floor under them to be solid, which is exactly Signal's "foundation, not a burst."</p>
+          <p><b>The line vs. the first-responder seed</b> (§2 above): overlapping tribe, <i>different job</i>. First responders are the <b>credibility seed</b> — we earn their trust to be <i>believable</i>, not to bill them. Veteran/tactical-fitness is the <b>revenue engine</b> — the same values, but a population that buys performance-foundation products as routine training spend. Many people sit in both; we treat them by the <i>role</i> we're asking them to play, never blend the two.</p>
+          <p style="margin-bottom:0;"><b>One concrete consequence:</b> a meaningful share are <b>drug-tested or train alongside people who are</b> — so <b>NSF Certified for Sport</b> is a real purchase driver for them, not a nicety. That's a direct reason the cert decision in doc 05/06 isn't optional polish; it's table stakes for the audience that pays.</p>
+        </div>
+
+        <div class="pager"><button class="go-prev" data-go="1"><span class="dir">← Back</span><div class="ttl">The GTM thesis</div></button><button class="go-next next" data-go="3"><span class="dir">Next →</span><div class="ttl">Why these — not the obvious ones</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 3 — WHY THESE -->
+    <section class="chapter" data-ch="3">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 03</div><h2>Why these — and why not the obvious ones</h2><div class="sub">With no Signal-specific trial yet, the deciding question isn't "who loves the science." It's who buys on belief vs who demands proof — and whether the credibility halo transfers.</div></div>
+
+        <ul class="clean">
+          <li><b>Veteran / tactical-fitness wins revenue</b> because they're <b>belief-buyers</b> (they'll commit before a trial exists), their identity is dense (recommendations travel inside a tight tribe), and the first-responder halo transfers <b>perfectly</b> — it's the same world. Lowest capture risk of the belief-buying audiences.</li>
+          <li><b>Biohackers are a trap as revenue</b> — counterintuitive, because the brand fits them. They <b>demand proof</b> and will stall on "no trial yet"; loyalty is near zero (they rotate to the next protocol, torching the re-order gate); and the halo doesn't transfer — they trust <b>data, not heroes</b>. So they're a second credibility seed, not the engine.</li>
+          <li><b>CrossFit / functional-fitness was the tempting #2</b> — highest density, fastest ignition — but it carries the strongest pull back toward "<b>performance / energy-drink</b>," the exact box we killed. We chose veteran/tactical to protect "foundation, not a burst." <span style="color:var(--red);">The velocity-vs-integrity tension is real and worth revisiting if growth stalls (see flags).</span></li>
+          <li><b>Longevity-affluent is the buyer persona, not a seed</b> — they pay and fit, but they're diffuse and low-density, so they can't ignite word-of-mouth cold. They're the scale tier, earned after re-order proof.</li>
+        </ul>
+
+        <div class="pager"><button class="go-prev" data-go="2"><span class="dir">← Back</span><div class="ttl">The audience architecture</div></button><button class="go-next next" data-go="4"><span class="dir">Next →</span><div class="ttl">The relay engine</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 4 — THE RELAY ENGINE -->
+    <section class="chapter" data-ch="4">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 04</div><h2>The relay engine — how trust actually moves</h2><div class="sub">Relay is a system, not a vibe. It has roles, rules, and ammunition — and one mechanic, built into the product, that turns a customer into a voucher.</div></div>
+
+        <div class="card">
+          <h4>Send a Signal — the relay, built into every purchase <span class="pill lock">Locked</span></h4>
+          <p><b>Every purchase carries the gift.</b> Baked into checkout, the buyer can <b>send a Signal</b> — a <b>one-time sample</b> — to a friend or loved one. It's not a coupon or a refer-a-friend bolt-on; it's the relay made physical: the moment a customer becomes a voucher, in one tap.</p>
+          <p><b>Why it's the engine, not a feature.</b> The sample arrives <b>from a person, not from us</b> — peer-initiated trust, the only kind that converts in a low-trust category. It's a trial that doesn't betray the no-hype stance, because a friend chose to send it; we never bought the introduction. The name itself carries the brand line ("send the right signal").</p>
+          <p><b>Why a one-time sample, not a discount.</b> A sample lets the product earn its own verdict — taste, ritual, the honest "what to expect" — at <b>low gift COGS and near-zero CAC</b> (doc 07). A discount buys a transaction; a sample earns a believer.</p>
+        </div>
+        <div class="card">
+          <h4>The voucher — the person who carries us</h4>
+          <p>The respected individual inside a tribe (a department's fittest medic, a veteran coach, a label-reading skeptic others defer to). We don't pay them. We <b>equip</b> them — with the open formula, the COA, the "what not to expect" honesty — so vouching for us is safe and makes <i>them</i> look smart. <span style="color:var(--red);">Naming the keystone voucher per seed is an open item (see flags).</span></p>
+        </div>
+        <div class="card">
+          <h4>The founder — known, not the face</h4>
+          <p>Damon stays the <b>known founder</b> (anonymous + authentic is a contradiction) but is <b>not the public spokesperson</b>. His lack of a formulation background is an <b>authenticity asset</b>, not a liability — he's the man at the cabinet, not the chemist on a pedestal. The story uses the <b>mechanism, never the man</b>.</p>
+        </div>
+        <div class="card">
+          <h4>The credential vs the vouch</h4>
+          <p>A formulator (e.g. Sean Wells) is a <b>"formulated by" credential</b> — not an endorsement. If a name can't be used, we drop it; we never paper over it with a vague "world's best." Credentials sit on the product; vouches come from people who chose us freely.</p>
+        </div>
+        <div class="card">
+          <h4>The daily voice — arms the relay, doesn't replace it</h4>
+          <p>Our owned content is a <b>product-led backbone that informs</b> — it hands the voucher better language and the buyer better understanding. It <b>does not vouch for itself</b> (a brand can't be its own third party). Content is ammunition for the relay layer, not a substitute for it.</p>
+        </div>
+
+        <div class="pager"><button class="go-prev" data-go="3"><span class="dir">← Back</span><div class="ttl">Why these — not the obvious ones</div></button><button class="go-next next" data-go="5"><span class="dir">Next →</span><div class="ttl">Institutional relay</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 5 — INSTITUTIONAL RELAY -->
+    <section class="chapter" data-ch="5">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 05</div><h2>Institutional relay — rubrics &amp; clinician channels</h2><div class="sub">The same relay logic, scaled through institutions that lend us trust we can't assert ourselves. Full mechanics live in doc 05; here's the GTM read.</div></div>
+
+        <ul class="clean">
+          <li><b>SuppCo (now Function) — the badge that becomes a channel.</b> An independent rubric score isn't just a badge on our page; because Function acquired SuppCo, a good score is <b>distribution</b> into a 50M+ test audience that already trusts the rubric. We <b>formulate to the rubric</b> pre-launch so the score is earned, not scraped.</li>
+          <li><b>FrontrowMD / Fullscript — borrowed clinician authority.</b> A clinician recommendation is third-party trust we could never claim ourselves. Warm these <b>after</b> label-lock + COA.</li>
+          <li><b>The sequencing trap (honesty-brand-specific).</b> A failed cert or a mediocre score is <b>permanent reputational damage</b> for us — far worse than for a normal brand, because transparency <i>is</i> the pitch. Rule: earn the rating only when the label is certainly dead-accurate (post-COA, supply stable). <b>Never submit for hype.</b></li>
+        </ul>
+        <div class="flags">
+          <div class="lbl">A fork to hold open — not close early</div>
+          <ul>
+            <li><b>Fullscript = DTC-vs-practitioner, not a checkbox.</b> Listing in a practitioner dispensary changes margin (wholesale eats the $89 gross), positioning (clinical dispensary pulls against the consumer brand), and qualification (does the formula pass their QA?). Open the <i>conversation</i> pre-launch (cheap, de-risks formulation); treat <i>listing</i> as a Phase-2+ decision after DTC re-order proof. Don't let "add a channel" quietly become "become a practitioner brand."</li>
+          </ul>
+        </div>
+
+        <div class="pager"><button class="go-prev" data-go="4"><span class="dir">← Back</span><div class="ttl">The relay engine</div></button><button class="go-next next" data-go="6"><span class="dir">Next →</span><div class="ttl">The launch sequence</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 6 — THE LAUNCH SEQUENCE -->
+    <section class="chapter" data-ch="6">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 06</div><h2>The launch sequence — proof before storefront</h2><div class="sub">Order matters as much as audience. We open the door with proof already on the page, then layer audiences in the sequence above.</div></div>
+
+        <table class="ftable">
+          <thead><tr><th>Phase</th><th>Move</th><th>Gate to advance</th></tr></thead>
+          <tbody>
+            <tr><td class="dose">−1</td><td class="form"><b>Pre-public window.</b> First lot made, tested, scored, certified. Invite a hostile teardown. Build the waitlist tribe around the origin + the bioluminescent brand world.</td><td class="sup">Keystone COA in hand → proof page populated</td></tr>
+            <tr><td class="dose">0</td><td class="form"><b>Seed.</b> Put the equipped product in front of the credibility seeds (first responders for trust, biohackers for data). Earn vouches and scrutiny — not revenue.</td><td class="sup">Authentic adoption + at least one named voucher</td></tr>
+            <tr><td class="dose">1</td><td class="form"><b>Revenue MCM.</b> Concentrate on veteran/tactical-fitness in one dense market. Let word-of-mouth ignite; the cabinet-skeptic converts behind the hook.</td><td class="sup">Re-order ≥ target → the only real effect signal</td></tr>
+            <tr class="felt"><td class="dose">2+</td><td class="form"><b>Scale.</b> Open to longevity/affluent-wellness; settle the Fullscript fork; paid retargeting of warm traffic only.</td><td class="sup">Self-sustaining gravity → broaden, never blend</td></tr>
+          </tbody>
+        </table>
+        <p class="body" style="font-size:13px;color:var(--muted);"><b>MCM = Minimum Critical Mass:</b> the smallest number of active, repeat, <i>visible</i> paying customers whose word-of-mouth becomes self-sustaining. We don't chase a big number first; we chase a <b>dense</b> one. Density — not reach — is what makes a relay ignite.</p>
+
+        <div class="card">
+          <h4>The beachhead — where we earn in, and where we hold</h4>
+          <p><b>A hybrid of credibility and saturability, run as one funnel.</b> The seed and the cohort are manufactured across two linked venues — one rented for reach, one owned for retention.</p>
+          <p><b>Rented top-of-funnel — earn-in credibility.</b> A community like <b>r/Supplements</b> (~100k label-readers): we earn standing with founder-led teardown / POV content and <b>never market at them</b>. The reach is rented; the trust has to be earned, which is exactly the relay discipline.</p>
+          <p><b>Owned core — the saturable cohort engine.</b> An owned <b>Discord / Skool</b> community where the founding cohort converts, sticks, and generates proof — part of the <b>un-revocable owned core</b>, the place the relay compounds and the MCM is held.</p>
+          <p style="margin-bottom:0;">The founder content sprint is the on-ramp to both — it informs the rented audience and seeds the owned one. (Content arms the relay; it doesn't vouch — consistent with §4.)</p>
+        </div>
+
+        <div class="pager"><button class="go-prev" data-go="5"><span class="dir">← Back</span><div class="ttl">Institutional relay</div></button><button class="go-next next" data-go="7"><span class="dir">Next →</span><div class="ttl">The GLP-1 tailwind</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 7 — THE GLP-1 TAILWIND -->
+    <section class="chapter" data-ch="7">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 07</div><h2>The GLP-1 tailwind — ride it, never become it</h2><div class="sub">The biggest demand wave in the category is adjacent to us. We position beside it without letting it capture the brand.</div></div>
+
+        <ul class="clean">
+          <li><b>The opening.</b> People eating far less on GLP-1 medications still need cellular foundation — "<b>feed the machinery when you're eating less</b>" is a credible, on-thesis adjacency, and the under-fed-cell angle is relatively open ground.</li>
+          <li><b>The discipline.</b> Our creatine is an <b>anchor, not the differentiator</b> — the GLP-1 + muscle-loss story is already crowded (big retail and brands are there). We reference the tailwind; we don't rebuild the brand around it.</li>
+          <li><b>The trap.</b> Chasing outcome-capture ("the GLP-1 companion") would re-import the felt-effect / weight-loss promise we deliberately refuse. <b>Ride it, never become it.</b></li>
+        </ul>
+
+        <div class="pager"><button class="go-prev" data-go="6"><span class="dir">← Back</span><div class="ttl">The launch sequence</div></button><button class="go-next next" data-go="8"><span class="dir">Next →</span><div class="ttl">The personalization wave</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 8 — THE PERSONALIZATION WAVE -->
+    <section class="chapter" data-ch="8">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 08</div><h2>The personalization wave — ride the desire, refuse the mechanism</h2><div class="sub">A ~$15B tailwind is pulling the category toward quizzes, swabs and sensors. We take what people actually want from it and refuse the apparatus.</div></div>
+
+        <ul class="clean">
+          <li><b>The opening.</b> People don't want a swab — they want relevance, progress, and proof it's working. We deliver that payload with <b>knowledge and ritual</b> (the dose-response timeline, the daily voice), not hardware. "Made for you," without a lab.</li>
+          <li><b>The discipline.</b> Personalization is <b>selection, not formulation</b> — the quiz picks which generic SKUs land in your box; almost no one changes the per-person dose. And the most data-driven version (ZOE-grade biology) collapses to the same fundamentals anyway. We skipped to the fundamentals and dosed them properly.</li>
+          <li><b>The trap.</b> Bolting on a quiz, DNA kit or CGM would build the exact <b>retention maze our churn data names as the #1 driver of quitting</b> (doc 09) — and import a diagnostic claim surface we can't substantiate. <b>Ride the desire, never become the apparatus.</b></li>
+        </ul>
+
+        <div class="flags">
+          <div class="lbl">What we can / can't say about personalization</div>
+          <ul>
+            <li><b>Defensible</b> — "most personalization changes which products you're sold, not the dose"; "even the most data-driven methods point back to the fundamentals." Backed by a graded systematic review of DNA-diet RCTs (13 of 15 conclusions: no effect) and the ZOE trial critique (its own output collapses to common-sense advice).</li>
+            <li><b>Off-limits — refuted by the research, never say</b> — "personalization is proven worthless," "DNA diets don't work," "personalization has no clinical support." Each overreaches the evidence and is factually unsafe.</li>
+            <li><b>The rule</b> — attack the <b>practice</b>, never the <b>customer</b> who bought one.</li>
+          </ul>
+        </div>
+
+        <p class="xref">Source of truth → <b>01 Foundation Brief §02</b> (the enemy is distraction from the dose). Words → <b>03 Brand &amp; Claims §06</b> (the personalization campaign line). Feeds → <b>09 Retention</b> (why no retention maze).</p>
+
+        <div class="pager"><button class="go-prev" data-go="7"><span class="dir">← Back</span><div class="ttl">The GLP-1 tailwind</div></button><button class="go-next next" data-go="9"><span class="dir">Next →</span><div class="ttl">What we refuse in growth</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 9 — WHAT WE REFUSE IN GROWTH -->
+    <section class="chapter" data-ch="9">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 09</div><h2>What we refuse in growth</h2><div class="sub">The bright lines the funnel is built inside.</div></div>
+
+        <ul class="clean">
+          <li><b>No bought vouches.</b> Paid endorsements read as exactly what they are; a tribe smells them and the rejection backfires. Vouches are earned through authentic adoption or they don't count.</li>
+          <li><b>No capture for velocity.</b> We won't adopt energy-drink / performance-burst language to ignite a faster audience. Speed bought by betraying "foundation, not a burst" is a loss disguised as a win.</li>
+          <li><b>No personalization theater.</b> We won't ship a quiz, DNA kit, microbiome test or CGM integration to <i>simulate</i> customization. The honest version of "made for you" is one rigorous formula, dosed to the research, that you fit to your day (the argument lives in §08).</li>
+          <li><b>No claims-creep at the funnel's edge.</b> GTM copy lives under the same claims law as everything else (doc 03): "they trust the floor" is safe; "Signal keeps them safe on shift" is an illegal structure/function claim near a lives-on-the-line job. The funnel never says what the label can't.</li>
+          <li><b>No fake scarcity or gated proof.</b> The waitlist is a real tribe, not a manufactured line; reviews and COAs are open, never curated to flatter. If a tactic only works because it's loud, it fails the relay rule.</li>
+          <li><b>The "thanks" trap.</b> Give-back to a seed tribe (e.g. first responders) must be <b>real</b>, never a credibility prop. The founder blind spot is doing it <i>for</i> the thanks — the tribe resents a performance.</li>
+        </ul>
+
+        <div class="flags">
+          <div class="lbl">Open — decisions &amp; build items</div>
+          <ul>
+            <li><b>Name the keystone voucher</b> — per seed (one respected first responder; one trusted skeptic-stacker). The relay can't start until a real person agrees to carry us.</li>
+            <li><b>The velocity-vs-integrity fork</b> — veteran/tactical is chosen, but if growth stalls, revisit CrossFit/functional-fitness. Settling question: <i>can Signal win that velocity without adopting that language?</i></li>
+            <li><b>First-responder access model</b> — they're a trust seed, not revenue; the give-back / pricing model for $89-on-public-pay is undefined and must be real, not optics.</li>
+            <li><b>The trial gap shapes sequencing</b> — until a Signal-specific study exists, proof-demanding audiences (biohackers) stay seeds, not revenue. Effect proof is borrowed + re-order data.</li>
+            <li><b>Fullscript DTC-vs-practitioner fork</b> — Phase-2+ decision after DTC re-order proof (see §5).</li>
+          </ul>
+        </div>
+
+        <p class="xref">Source of truth → <b>01 Foundation Brief §06</b> (who it's for) + <b>§05</b> (relay rule). Pulls from → <b>05 Moat &amp; Proof Plan</b> (badge→channel, partner mechanics) · <b>03 Brand &amp; Claims</b> (claims law on funnel copy). Feeds → <b>07 Unit Economics</b> (CAC by channel, re-order target) · <b>08 Roadmap</b> (phase gates).</p>
+
+        <div class="pager"><button class="go-prev" data-go="8"><span class="dir">← Back</span><div class="ttl">The personalization wave</div></button><button disabled class="next"><span class="dir">End</span><div class="ttl">Chapter 09 of 09</div></button></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  function checkPass(e){e.preventDefault();if(document.getElementById('gp').value==='54321'){document.body.classList.remove('locked');document.getElementById('gate').style.display='none';}return false;}
+  var navBtns=document.querySelectorAll('#nav button');
+  var chapters=document.querySelectorAll('.chapter');
+  function show(ch){
+    chapters.forEach(function(s){s.classList.toggle('active',s.dataset.ch===String(ch));});
+    navBtns.forEach(function(b){b.classList.toggle('active',b.dataset.ch===String(ch));});
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  navBtns.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.ch);});});
+  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.go);});});
+  var vt=document.getElementById('viewToggle');
+  if(vt){vt.addEventListener('click',function(){var on=document.body.classList.toggle('showall');vt.textContent=on?'❐ Back to chapters':'▤ Read as one page';if(on)window.scrollTo({top:0});});}
+  navBtns.forEach(function(b){b.addEventListener('click',function(){if(document.body.classList.contains('showall')){var t=document.querySelector('.chapter[data-ch="'+b.dataset.ch+'"]');if(t)t.scrollIntoView({behavior:'smooth'});}});});
+</script>
+</body>
+</html>

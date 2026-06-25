@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>signal — retention & adherence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#AD4236; --red-deep:#7A2E26; --espresso:#241B17; --ink:#2E2420;
+    --bone:#F6EFEA; --cream:#EFE5D1; --taupe:#D8CCC1; --gold:#A8845A;
+    --muted:#6D665C; --line:#C8BEAE; --paper:#FBF8F4; --brand:#178D78;
+    --display:'Bebas Neue',Impact,sans-serif;
+    --body:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  img{max-width:100%;display:block;}
+
+  /* ── app shell ── */
+  .app{display:flex;min-height:100vh;}
+  .sidebar{width:280px;flex-shrink:0;background:var(--espresso);color:var(--bone);position:sticky;top:0;height:100vh;overflow-y:auto;padding:26px 22px;display:flex;flex-direction:column;}
+  .sb-wm{margin-bottom:6px;} .sb-wm img{height:30px;width:auto;}
+  .sb-kicker{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:14px 0 4px;}
+  .sb-title{font-family:var(--display);font-weight:400;font-size:30px;line-height:.98;letter-spacing:.01em;color:#fff;margin-bottom:20px;}
+  .nav{list-style:none;flex:1;}
+  .nav li{margin:0;}
+  .nav button{width:100%;text-align:left;background:none;border:none;color:var(--taupe);font-family:var(--body);font-size:13.5px;padding:9px 12px;border-radius:7px;cursor:pointer;display:flex;gap:10px;align-items:baseline;transition:background .12s,color .12s;line-height:1.25;}
+  .nav button:hover{background:rgba(246,239,234,.06);color:var(--bone);}
+  .nav button.active{background:var(--red);color:#fff;}
+  .nav .ix{font-family:var(--mono);font-size:10px;opacity:.7;min-width:16px;}
+  .nav button.active .ix{opacity:.9;}
+  .sb-foot{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(216,204,193,.4);margin-top:18px;padding-top:14px;border-top:1px solid rgba(216,204,193,.14);}
+  .insdr-logo{height:9px;width:auto;display:inline-block;vertical-align:baseline;margin-right:5px;}
+
+  /* ── main ── */
+  .main{flex:1;min-width:0;}
+  .wrap{max-width:780px;margin:0 auto;padding:0 30px 60px;}
+  .chapter{display:none;animation:fade .25s ease;}
+  .chapter.active{display:block;}
+  /* ── one-page / print view ── */
+  body.showall .chapter{display:block!important;animation:none;}
+  body.showall .pager{display:none;}
+  body.showall #nav button.active{background:transparent;color:var(--bone);}
+  .sb-toggle{margin-top:14px;width:100%;background:rgba(246,239,234,.06);border:1px solid rgba(216,204,193,.18);color:var(--bone);border-radius:7px;padding:10px 12px;cursor:pointer;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-align:left;transition:background .12s,border-color .12s;}
+  .sb-toggle:hover{background:rgba(173,66,54,.22);border-color:var(--red);}
+  @media print{.sidebar{display:none!important;}.chapter{display:block!important;}.pager{display:none!important;}#gate{display:none!important;}.app{display:block!important;}body.locked .app{display:block!important;}body.locked{overflow:visible!important;height:auto!important;}}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+  /* chapter header / hero */
+  .chhero{position:relative;height:300px;margin:0 0 26px;overflow:hidden;display:flex;align-items:flex-end;background:var(--espresso);}
+  .chhero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.82;}
+  .chhero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,27,23,.1) 0%,rgba(36,27,23,.82) 100%);}
+  .chhero .cap{position:relative;padding:30px;color:var(--bone);}
+  .chhero .n{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#E8B4AC;margin-bottom:8px;}
+  .chhero h2{font-family:var(--display);font-weight:400;font-size:46px;line-height:.95;letter-spacing:.01em;color:#fff;}
+  .chhero .sub{font-size:14px;color:var(--taupe);margin-top:8px;max-width:90%;}
+
+  .chhead{padding:34px 0 14px;border-bottom:2px solid var(--espresso);margin-bottom:22px;}
+  .chhead .n{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:7px;}
+  .chhead h2{font-family:var(--display);font-weight:400;font-size:40px;line-height:.96;letter-spacing:.01em;color:var(--espresso);}
+  .chhead .sub{font-size:14px;color:var(--muted);margin-top:8px;}
+
+  p{font-size:14.5px;margin-bottom:13px;}
+  p.lead{font-size:15px;color:var(--muted);margin-bottom:18px;}
+  .sub-h{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin:26px 0 10px;font-weight:600;}
+  b{color:var(--ink);}
+
+  ul.clean{list-style:none;margin:6px 0 16px;}
+  ul.clean li{padding:8px 0 8px 22px;position:relative;font-size:14px;border-bottom:1px dotted var(--line);}
+  ul.clean li:last-child{border-bottom:none;}
+  ul.clean li::before{content:"›";position:absolute;left:2px;color:var(--red);font-weight:700;}
+
+  .pill{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:3px;margin-left:8px;vertical-align:middle;}
+  .pill.lock{background:var(--brand);color:#fff;} .pill.pend{background:var(--gold);color:#fff;}
+
+  .card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:17px 21px;margin:14px 0;}
+  .card h4{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:.02em;color:var(--espresso);margin-bottom:7px;}
+  .card p{font-size:13.5px;margin-bottom:6px;}.card p:last-child{margin-bottom:0;}
+
+  /* photos */
+  figure.photo{margin:18px 0 22px;}
+  figure.photo img{border-radius:12px;border:1px solid var(--line);width:100%;}
+  figure.photo figcaption{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:9px;letter-spacing:.02em;}
+  .photo-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0 22px;}
+  .photo-2 figure{margin:0;} .photo-2 img{border-radius:12px;border:1px solid var(--line);width:100%;height:100%;object-fit:cover;}
+  .photo-2 figcaption{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:8px;}
+
+  table.ftable{width:100%;border-collapse:collapse;margin:10px 0 6px;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden;}
+  .ftable th{background:var(--espresso);color:var(--bone);font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;text-align:left;padding:9px 12px;font-weight:500;}
+  .ftable td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top;}
+  .ftable tr:nth-child(even) td{background:#faf6f1;}
+  .ftable .job{font-weight:600;color:var(--ink);} .ftable .sup{font-family:var(--mono);font-size:11px;color:var(--muted);}
+  .ftable .dose{font-family:var(--mono);font-size:11px;color:var(--red-deep);} .ftable .felt td{background:#f3ece2;}
+  .ftable .form b{color:var(--espresso);}
+
+  .flags{background:#f3e0dd;border-radius:11px;padding:19px 23px;margin:22px 0;}
+  .flags .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:10px;font-weight:600;}
+  .flags ul{list-style:none;}
+  .flags li{padding:7px 0 7px 22px;position:relative;font-size:13.5px;color:var(--red-deep);}
+  .flags li::before{content:"\26A0";position:absolute;left:0;}
+  .flags b{color:var(--red);}
+  .xref{font-family:var(--mono);font-size:11px;color:var(--muted);margin:18px 0 4px;}
+  .xref b{color:var(--red);}
+
+  /* ── INFOGRAPHIC: 2-SKU architecture ── */
+  .skumap{display:grid;grid-template-columns:1.4fr auto 1fr;align-items:stretch;gap:0;margin:20px 0 24px;}
+  .skubox{border-radius:12px;padding:20px;color:var(--bone);display:flex;flex-direction:column;justify-content:center;}
+  .skubox.hero{background:var(--espresso);} .skubox.comp{background:#3a2c24;}
+  .skubox .tag{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+  .skubox h5{font-family:var(--display);font-weight:400;font-size:26px;line-height:1;letter-spacing:.01em;color:#fff;margin-bottom:8px;}
+  .skubox p{font-size:12.5px;color:var(--taupe);margin:0;line-height:1.45;}
+  .skujoin{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 14px;}
+  .skujoin .lk{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;transform:rotate(180deg);}
+  .skujoin .plus{font-family:var(--display);font-size:30px;color:var(--red);line-height:1;}
+
+  /* ── INFOGRAPHIC: month grid ── */
+  .monthwrap{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:18px 0 22px;}
+  .monthgrid{display:grid;grid-template-columns:repeat(10,1fr);gap:7px;margin-bottom:12px;}
+  .monthgrid span{aspect-ratio:1;border-radius:5px;background:linear-gradient(160deg,#C44A38,#9a3a2c);box-shadow:inset 0 -2px 3px rgba(0,0,0,.15);}
+  .monthcap{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.03em;}
+  .monthcap b{color:var(--espresso);}
+
+  /* ── INFOGRAPHIC: actives job-map ── */
+  .actmap{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 16px;}
+  .actcard{background:#fff;border:1px solid var(--line);border-radius:11px;padding:15px 16px;position:relative;border-top:3px solid var(--dot,#A8845A);}
+  .actcard .job{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+  .actcard .form{font-family:var(--display);font-weight:400;font-size:23px;letter-spacing:.01em;color:var(--espresso);line-height:1;}
+  .actcard .meta{display:flex;justify-content:space-between;align-items:baseline;margin-top:9px;}
+  .actcard .sup{font-size:11.5px;color:var(--muted);} .actcard .dose{font-family:var(--mono);font-size:10px;color:var(--red-deep);background:#f3e0dd;padding:2px 7px;border-radius:3px;}
+  .actcard.felt{border-top-color:var(--gold);background:#fbf4ea;}
+  .actcard.felt .form{color:var(--gold);}
+
+  /* pager */
+  .pager{display:flex;justify-content:space-between;gap:12px;margin-top:38px;padding-top:20px;border-top:1px solid var(--line);}
+  .pager button{flex:1;background:#fff;border:1px solid var(--line);border-radius:9px;padding:13px 16px;cursor:pointer;font-family:var(--body);text-align:left;transition:border-color .12s,box-shadow .12s;}
+  .pager button:hover:not(:disabled){border-color:var(--red);box-shadow:0 3px 14px rgba(36,27,23,.07);}
+  .pager button:disabled{opacity:.35;cursor:default;}
+  .pager .dir{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+  .pager .ttl{font-size:13.5px;color:var(--espresso);font-weight:600;margin-top:3px;}
+  .pager .next{text-align:right;}
+
+  @media (max-width:880px){
+    .app{flex-direction:column;}
+    .sidebar{width:100%;height:auto;position:relative;top:0;}
+    .nav{display:flex;flex-wrap:wrap;gap:4px;}
+    .nav button{width:auto;}
+    .actmap,.photo-2{grid-template-columns:1fr;}
+    .skumap{grid-template-columns:1fr;} .skujoin{flex-direction:row;padding:8px 0;} .skujoin .lk{writing-mode:horizontal-tb;transform:none;}
+    .chhero h2{font-size:34px;}
+  }
+
+  /* ── gate ── */
+  #gate{position:fixed;inset:0;background:#241B17;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#D8CCC1;padding:40px;text-align:center;}
+  #gate img{height:80px;margin-bottom:30px;}
+  #gate .ov{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#AD4236;margin-bottom:14px;}
+  #gate input{background:rgba(246,239,234,.08);border:1px solid rgba(246,239,234,.2);border-radius:6px;color:#D8CCC1;padding:13px 20px;font-size:15px;font-family:var(--body);width:260px;text-align:center;letter-spacing:1px;outline:none;}
+  #gate button{margin-top:12px;background:#AD4236;color:#fff;border:none;border-radius:6px;padding:11px 30px;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:var(--body);}
+  body.locked{overflow:hidden;height:100vh;} body.locked .app{display:none;}
+  .wellness{font-family:var(--display);font-weight:400;letter-spacing:.04em;}
+
+  /* ── infographic ── */
+  .ig-cap{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:24px 0 0;}
+  .ig-tl{display:flex;margin:18px 0 6px;}
+  .ig-tl .node{flex:1;text-align:center;position:relative;padding-top:28px;}
+  .ig-tl .node::before{content:"";position:absolute;top:9px;left:0;right:0;height:2px;background:var(--line);}
+  .ig-tl .node:first-child::before{left:50%;} .ig-tl .node:last-child::before{right:50%;}
+  .ig-tl .node .dot{position:absolute;top:3px;left:50%;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;background:var(--red);border:2px solid var(--paper);box-shadow:0 0 0 1px var(--line);}
+  .ig-tl .node.gold .dot{background:var(--gold);width:18px;height:18px;top:1px;}
+  .ig-tl .node .day{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--red-deep);}
+  .ig-tl .node.gold .day{color:var(--gold);}
+  .ig-tl .node .th{font-size:10.5px;color:var(--ink);margin-top:4px;padding:0 5px;line-height:1.25;}
+  @media(max-width:880px){.ig-tl{flex-wrap:wrap;gap:14px 0;}.ig-tl .node{flex:0 0 33.33%;}.ig-tl .node::before{display:none;}}
+</style>
+</head>
+<body class="locked">
+
+<div id="gate">
+  <img src="../assets/signal_wordmark_on_dark.svg" alt="signal">
+  <div class="ov">Internal · Operating Bible · Confidential</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gp" autocomplete="off" autofocus placeholder="password"><br>
+    <button type="submit">Enter</button>
+  </form>
+</div>
+
+<div class="app">
+  <!-- ───────── SIDEBAR ───────── -->
+  <aside class="sidebar">
+    <div class="sb-wm"><img src="../assets/signal_wordmark_on_dark.svg" alt="signal"></div>
+    <div class="sb-kicker">Operating Bible · 09</div>
+    <div class="sb-title">Retention &amp;<br>Adherence</div>
+    <ul class="nav" id="nav">
+      <li><button data-ch="0" class="active"><span class="ix">00</span> Overview</button></li>
+      <li><button data-ch="1"><span class="ix">01</span> The thesis — the spine</button></li>
+      <li><button data-ch="2"><span class="ix">02</span> What actually drives churn</button></li>
+      <li><button data-ch="3"><span class="ix">03</span> Three honest levers</button></li>
+      <li><button data-ch="4"><span class="ix">04</span> The dose-mirror</button></li>
+      <li><button data-ch="5"><span class="ix">05</span> The ritual &amp; the vessel</button></li>
+      <li><button data-ch="6"><span class="ix">06</span> What we refuse</button></li>
+      <li><button data-ch="7"><span class="ix">07</span> Measuring it</button></li>
+      <li><button data-ch="8"><span class="ix">08</span> The honest mirror — skin</button></li>
+    </ul>
+    <button class="sb-toggle" id="viewToggle" type="button">▤ Read as one page</button>
+    <div class="sb-foot"><img class="insdr-logo" src="../assets/insdr_logo_light.png" alt="INSDR"> <span class="wellness">Wellness</span> · the cellcare company<br>Confidential — do not share</div>
+  </aside>
+
+  <!-- ───────── MAIN ───────── -->
+  <main class="main">
+
+    <!-- CH 0 — OVERVIEW (cover) -->
+    <section class="chapter active" data-ch="0">
+      <div class="chhero">
+        <div class="veil"></div>
+        <div class="cap">
+          <div class="n">Internal · Retention &amp; Adherence</div>
+          <h2>The one you keep taking</h2>
+          <div class="sub">How we make it the one you keep taking — without faking a feeling.</div>
+        </div>
+      </div>
+      <div class="wrap">
+        <p class="lead">Adherence is the <b>spine</b> of the whole thesis: "the supplement you'll actually keep taking." But the product <b>can't be felt</b> — so we can't lean on a buzz to bring people back. That instinct shaped this doc — yet the external churn data (Ch 02) says the felt gap is only the <b>fourth</b>-largest reason people quit. The bigger ones are the <b>subscription</b> and the <b>price</b>, and we defend those first. Throughout, we refuse the easy fixes (a fake sensation, a fabricated dashboard, a guilt-trip).</p>
+        <div class="card">
+          <h4>The one thing to take away</h4>
+          <p>Churn has four drivers, and we'd been building around the smallest. In order: feeling <b>trapped</b> by the subscription (~30%), the <b>price</b> question against a cheaper tub (~25%), <b>forgetting</b> until bottles pile up (~15–20%), and <b>"I didn't feel anything"</b> (~15%). Our answers, in that order: an <b>honest on/off switch</b>, <b>proof that justifies the premium</b>, the <b>ritual + dose-mirror</b>, and the <b>three honest felt levers</b>. The felt work is real — it's just one front, not the whole game.</p>
+          <p>We compete on adherence through <b>effortlessness</b>, not accountability. This ladders to the <b>Foundation Brief</b>; if anything here contradicts it, the brief wins.</p>
+        </div>
+        <p class="lead" style="margin-top:18px;">Use the chapters on the left, or step through with Next →</p>
+        <div class="pager"><button disabled><span class="dir">—</span><div class="ttl">Start</div></button><button class="go-next next" data-go="1"><span class="dir">Next →</span><div class="ttl">The thesis — the spine</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 1 — THE THESIS -->
+    <section class="chapter" data-ch="1">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 01</div><h2>The thesis — adherence is the spine</h2><div class="sub">Cellular energy is the headline; adherence is the spine underneath it.</div></div>
+        <p class="lead">A foundation product only works if you keep taking it.</p>
+        <ul class="clean">
+          <li><b>"The supplement you'll actually keep taking."</b> The meta-benefit. Most supplements fail not because the formula is wrong but because the bottle ends up in the cabinet. We compete on whether the vessel ends up empty.</li>
+          <li><b>Effortlessness, not accountability.</b> The one competitor in this lane (CORE7) drives adherence through <b>accountability</b> — coaching, nagging, streaks. We drive it through <b>effortlessness</b>: the easiest daily thing you'll do. Minimalism is the strategy, not a constraint.</li>
+          <li><b>Re-order is the metric.</b> Because there's no felt mirror, re-order / retention is the truest signal we have that the product earns its place. It's the LTV metric (doc 07) and the real-world effect proof (doc 05, signal #7).</li>
+        </ul>
+        <div class="pager"><button class="go-prev" data-go="0"><span class="dir">← Back</span><div class="ttl">Overview</div></button><button class="go-next next" data-go="2"><span class="dir">Next →</span><div class="ttl">What actually drives churn</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 2 — THE PROBLEM -->
+    <section class="chapter" data-ch="2">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 02</div><h2>What actually drives churn</h2><div class="sub">Name the real drivers plainly — including the uncomfortable one: we'd been building around the smallest.</div></div>
+        <p class="body">A stimulant brand brings you back with a buzz. A weight-loss brand brings you back with the scale. <b>We have neither</b> — a cellular-foundation product works below the threshold of sensation. That's the weakness we feel most acutely, so we instinctively built this whole doc around it. <b>The external data says we over-indexed.</b></p>
+        <table class="ftable">
+          <thead><tr><th>What makes people quit</th><th>Share*</th><th>Our answer</th></tr></thead>
+          <tbody>
+            <tr><td class="job">Feeling trapped by the subscription</td><td class="dose">~30%</td><td class="sup">The <b>honest on/off switch</b> — one-tap pause, no maze (Ch 05; doc 07)</td></tr>
+            <tr><td class="job">"Why not the cheaper tub?" — price vs Amazon</td><td class="dose">~25%</td><td class="sup"><b>Proof</b> as the receipt that justifies the premium (doc 05) — the cheap tub may have <i>none</i> of what the label claims</td></tr>
+            <tr><td class="job">Bottles pile up — forgetting</td><td class="dose">~15–20%</td><td class="sup">The <b>ritual</b> (Ch 05) + the <b>dose-mirror</b> as re-engagement (Ch 04)</td></tr>
+            <tr class="felt"><td class="job">"I didn't feel anything"</td><td class="dose">~15%</td><td class="sup">The <b>three honest felt levers</b> (Ch 03) — sized as one front, not the whole game</td></tr>
+          </tbody>
+        </table>
+        <p class="body" style="font-size:12px;color:var(--muted);">*Directional — a single external source (an agency synthesis of supplement cancellation flows), not audited, and public data under-counts <i>silent</i> forgetting. We treat it as a <b>hypothesis to confirm</b>, not fact. The headline it earns regardless of the exact percentages: stop spending the whole retention budget on the fourth-largest problem.</p>
+        <div class="card">
+          <h4>The founding cohort is the live experiment</h4>
+          <p>For an imperceptible product, a re-order miss is <b>as likely a conviction/mechanic problem as a product one</b>. So the founding cohort is instrumented to tell those apart: when someone lapses, we learn <i>why</i> — subscription friction? price? "forgot / didn't see the point"? product? — before we scale spend. The four-front table above is our <b>borrowed prior</b>; the cohort is how we replace it with our own numbers. Fixing the wrong thing is the trap; the cohort exists to stop us doing it.</p>
+        </div>
+        <div class="pager"><button class="go-prev" data-go="1"><span class="dir">← Back</span><div class="ttl">The thesis — the spine</div></button><button class="go-next next" data-go="3"><span class="dir">Next →</span><div class="ttl">Three honest levers</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 3 — THREE HONEST LEVERS -->
+    <section class="chapter" data-ch="3">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 03</div><h2>The three honest levers of "felt"</h2><div class="sub">We replace a fake sensation with three real ones — stacked, none of them a trick.</div></div>
+        <table class="ftable">
+          <thead><tr><th>Layer</th><th>What it is</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td class="job">L1 — honest felt</td><td class="form">A real, disclosed felt active (Rhodiola, the named felt layer — doc 02). "No instant hit; it builds quietly."</td><td class="sup">The <b>upside</b>, not the floor</td></tr>
+            <tr class="felt"><td class="job">L2 — the dose-mirror</td><td class="form">A narrated email sequence: the dose you've delivered + what the science says it supports. Never your internal state.</td><td class="sup">The <b>keystone</b> (Ch 04)</td></tr>
+            <tr><td class="job">L3 — the ritual</td><td class="form">The counter vessel, the daily moment, the honest on/off switch (Ch 05).</td><td class="sup">The <b>guaranteed floor</b></td></tr>
+          </tbody>
+        </table>
+        <p class="body" style="font-size:13px;color:var(--muted);"><b>Why this order matters:</b> L1 is upside — if the formula delivers a perceptible lift, great, but we never promise it. L2 and L3 are the <b>guaranteed floor</b>: they work whether or not anything is felt, because they're built on what we <i>can</i> verify (the dose) and what we <i>do</i> control (the ritual), not on a sensation we can't.</p>
+        <div class="pager"><button class="go-prev" data-go="2"><span class="dir">← Back</span><div class="ttl">What actually drives churn</div></button><button class="go-next next" data-go="4"><span class="dir">Next →</span><div class="ttl">The dose-mirror</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 4 — THE DOSE-MIRROR -->
+    <section class="chapter" data-ch="4">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 04</div><h2>The dose-mirror — the keystone mechanic</h2><div class="sub">Its first job is to fight <b>forgetting</b> (the #3 churn driver) — a reason to re-open, re-engage, stay in the habit. Its second is to be something real to feel <i>about</i> the product without faking what they feel <i>from</i> it.</div></div>
+        <div class="card">
+          <h4>The grammar — two things only, never a third</h4>
+          <p>Every touch narrates exactly two things: <b>(1)</b> the dose the customer has actually delivered to their body, and <b>(2)</b> what the published science says that dose supports. It <b>never</b> asserts what is happening <i>inside</i> them — we can't verify that, and a name-the-dose brand won't pretend to. The forbidden third thing is the fabricated read-out ("your energy is up 18%").</p>
+        </div>
+        <p class="body"><b>Email, not an app.</b> The dose-mirror lives in email. An app with streaks and check-ins is the <b>accountability</b> lane (CORE7's game) — it pulls against effortlessness and invites the guilt-trip we refuse. Email narrates; it doesn't nag.</p>
+        <table class="ftable">
+          <thead><tr><th>Touch</th><th>The job</th><th>What's narrated (cumulative dose delivered)</th></tr></thead>
+          <tbody>
+            <tr><td class="dose">Day 0</td><td class="form">Kill the wrong expectation</td><td class="sup">"No instant hit — it builds quietly." Set-up, no tally.</td></tr>
+            <tr><td class="dose">Day 3</td><td class="form">Reassure "nothing" is correct</td><td class="sup">The first days of the full stack delivered — by design you feel nothing yet.</td></tr>
+            <tr><td class="dose">Day 7</td><td class="form">The science of the build</td><td class="sup">A week in: each active named, at its label dose, and what it supports.</td></tr>
+            <tr><td class="dose">Day 14</td><td class="form">The honesty line itself</td><td class="sup">Two weeks, every active at label — the brand in one email.</td></tr>
+            <tr><td class="dose">Day 30</td><td class="form">Experiment → foundation</td><td class="sup">A month delivered: the cumulative grams of each active, spelled out.</td></tr>
+            <tr><td class="dose">Day 60</td><td class="form">Habit + relay-trust forward</td><td class="sup">Two months in; the ritual is the point — and a nudge to send a Signal.</td></tr>
+            <tr class="felt"><td class="dose">Day 90</td><td class="form">Close the gap — the thesis</td><td class="sup">A full quarter of every active delivered — what a foundation actually is.</td></tr>
+          </tbody>
+        </table>
+        <div class="ig-cap">One onboarding touch + six dose-mirror milestones &mdash; Day 0 to 90</div>
+        <div class="ig-tl">
+          <div class="node"><span class="dot"></span><div class="day">Day 0</div><div class="th">Kill the wrong expectation</div></div>
+          <div class="node"><span class="dot"></span><div class="day">Day 3</div><div class="th">Reassure "nothing" is correct</div></div>
+          <div class="node"><span class="dot"></span><div class="day">Day 7</div><div class="th">The science of the build</div></div>
+          <div class="node"><span class="dot"></span><div class="day">Day 14</div><div class="th">The honesty line itself</div></div>
+          <div class="node"><span class="dot"></span><div class="day">Day 30</div><div class="th">Experiment &rarr; foundation</div></div>
+          <div class="node"><span class="dot"></span><div class="day">Day 60</div><div class="th">Habit + relay forward</div></div>
+          <div class="node gold"><span class="dot"></span><div class="day">Day 90</div><div class="th">Close the gap &mdash; the thesis</div></div>
+        </div>
+        <p class="body" style="font-size:11px;color:var(--muted);margin:2px 0 10px;font-family:var(--mono);letter-spacing:.04em;">Cumulative creatine delivered: <b style="color:var(--red-deep);">150&nbsp;g by Day&nbsp;30 &middot; 450&nbsp;g by Day&nbsp;90</b> &mdash; real numbers, not a feeling.</p>
+        <p class="body" style="font-size:13px;color:var(--muted);">One onboarding touch + six dose-mirror milestones. The cumulative math is concrete (e.g. the bundled creatine alone is 5&nbsp;g/day → 150&nbsp;g by Day 30, 450&nbsp;g by Day 90) — real numbers, not a feeling. <span style="color:var(--red);">All copy clears Zone Halo reg review before it ships (the same two-gate claims law as doc 03).</span></p>
+        <div class="pager"><button class="go-prev" data-go="3"><span class="dir">← Back</span><div class="ttl">Three honest levers</div></button><button class="go-next next" data-go="5"><span class="dir">Next →</span><div class="ttl">The ritual &amp; the vessel</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 5 — THE RITUAL & THE VESSEL -->
+    <section class="chapter" data-ch="5">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 05</div><h2>The ritual &amp; the vessel</h2><div class="sub">The part of retention we fully control. Make the daily act easy, visible, and honest to leave.</div></div>
+        <ul class="clean">
+          <li><b>Visibility = adherence.</b> The counter-kept vessel is designed to look good and stay in sight — an empty vessel means a finished month (doc 02). The product that's seen is the product that's taken.</li>
+          <li><b>The daily moment.</b> Same time, every day — the bundled creatine fuses into the flagship's moment so the ritual is one act, not two. "One signal a day. It adds up."</li>
+          <li><b>The honest on/off switch — our answer to the #1 churn driver.</b> Feeling <i>trapped</i> by the subscription is the single biggest reason people quit the category (Ch 02). So pausing or stopping is one tap — no retention maze (doc 07). Honest retention compounds; trapped retention rots. We'd rather see a real switch-off and fix the product than bury it under friction — and the brands that bury it are the ones bleeding ~30% of cancels to resentment.</li>
+        </ul>
+        <div class="pager"><button class="go-prev" data-go="4"><span class="dir">← Back</span><div class="ttl">The dose-mirror</div></button><button class="go-next next" data-go="6"><span class="dir">Next →</span><div class="ttl">What we refuse</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 6 — WHAT WE REFUSE -->
+    <section class="chapter" data-ch="6">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 06</div><h2>What we refuse</h2><div class="sub">The retention surface is the single highest claim-risk part of the brand. These are bright lines, not preferences.</div></div>
+        <ul class="clean">
+          <li><b>No fabricated efficacy dashboard.</b> Under launch pressure someone will propose "your cellular score went up 18%." That one feature detonates the brand. Any read-out reflects <b>consistency</b> + the customer's <b>own real data</b> — never a Signal-generated result.</li>
+          <li><b>No manufactured sensation.</b> We never bolt on a stimulant to make the product "feel" like it works (paraxanthine / NMN-as-mirror rejected, doc 02).</li>
+          <li><b>No placebo-fishing self-reports.</b> We don't ask leading questions ("feeling more energy?") designed to manufacture a yes.</li>
+          <li><b>No health-fear loss-framing.</b> Retention copy is maintenance and identity ("this is who you are now"), never "stop and you'll deteriorate" — that's off-brand and a disease-adjacent claim.</li>
+          <li><b>Biomarker / wearable framing is the highest-risk idea we hold.</b> If we ever surface a real read-out, it routes through Zone Halo reg review and stays <b>observation-only, never implied causation</b> — we show what was observed, we never claim Signal caused it.</li>
+        </ul>
+        <div class="pager"><button class="go-prev" data-go="5"><span class="dir">← Back</span><div class="ttl">The ritual &amp; the vessel</div></button><button class="go-next next" data-go="7"><span class="dir">Next →</span><div class="ttl">Measuring it</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 7 — MEASURING IT -->
+    <section class="chapter" data-ch="7">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 07</div><h2>Measuring it</h2><div class="sub">One metric leads; the cohort tells us what's behind it.</div></div>
+        <ul class="clean">
+          <li><b>Re-order rate is the headline metric</b> — the truest read on whether the product earns its place, and the input to LTV (doc 07).</li>
+          <li><b>Instrument the cohort, not just the number.</b> A sub-target re-order rate is a question, not an answer: lapsed re-orderers are asked <i>why</i> (product / price / "forgot / didn't see the point") so we fix the real cause.</li>
+          <li><b>The watch line.</b> A re-order rate well below target is a question, not a verdict: the cohort tells us <i>which</i> driver is biting — subscription, price, forgetting, or the felt gap — before we act. We don't pre-blame the felt gap (the data says it's the smallest of the four), and we never discount or add a gimmick.</li>
+        </ul>
+        <div class="pager"><button class="go-prev" data-go="6"><span class="dir">← Back</span><div class="ttl">What we refuse</div></button><button class="go-next next" data-go="8"><span class="dir">Next →</span><div class="ttl">The honest mirror — skin</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 8 — THE HONEST MIRROR (SKIN) + FLAGS + XREF -->
+    <section class="chapter" data-ch="8">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 08</div><h2>The honest mirror — skin (a sentence, not a SKU)</h2><div class="sub">The one place a real, visible read-out might honestly exist — handled with the same discipline as everything above.</div></div>
+        <p class="body">Skin is the body's most visible surface, and over time it can act as an <b>honest read-out</b> of the cellular thesis — not a claim we make, an observation the customer can make. The regulatory firewall is a friend here: an oral skin-<i>outcome</i> claim is an illegal drug claim, so the <b>only</b> legal posture — "an observed read-out, never a promise" — is exactly our honesty discipline. It's a <b>sentence, not a product</b>: a way to talk about what people may notice, never a skin SKU and never implied causation. <span style="color:var(--red);">Any use of this routes through Zone Halo reg review first.</span></p>
+
+        <div class="flags">
+          <div class="lbl">Open — decisions &amp; research items</div>
+          <ul>
+            <li><b>Dose-mirror copy + reg sign-off</b> — the seven touches need final copy, then Zone Halo reg review before they ship. The gram math locks to the final formula (doc 02).</li>
+            <li><b>Felt-layer viability</b> — whether Rhodiola delivers a perceptible lift is upside, not floor. If it doesn't, L2 + L3 carry retention. Confirm form/dose at the Zone Halo two-day.</li>
+            <li><b>Churn-driver weights</b> — the ~30 / 25 / 20 / 15 split is one external source. Confirm with a paid lapsed-user report (Mintel / FMCG Gurus) and the founding cohort before re-weighting spend further. Do <b>not</b> demote the felt layer on the strength of one agency blog.</li>
+            <li><b>The skin read-out language</b> — if used, draft the reg-safe "observed, never promised" wording and clear it before any surface.</li>
+            <li><b>Re-order target</b> — set the actual re-order threshold the cohort is measured against (feeds doc 07's retained-cycles assumption).</li>
+          </ul>
+        </div>
+
+        <p class="xref">Source of truth → <b>01 Foundation Brief</b>. Pulls from → <b>02 Product</b> (the felt layer, the vessel, the ritual) · <b>03 Brand</b> (the claims law on dose-mirror copy) · <b>07 Unit Economics</b> (re-order = LTV, the on/off switch). Feeds → <b>05 Moat &amp; Proof</b> (re-order = effect signal #7) · <b>08 Roadmap</b> (the open reg-review items). Locked at → the <b>Zone Halo two-day</b> (gram math + reg review).</p>
+
+        <div class="pager"><button class="go-prev" data-go="7"><span class="dir">← Back</span><div class="ttl">Measuring it</div></button><button disabled class="next"><span class="dir">End</span><div class="ttl">Chapter 08 of 08</div></button></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  function checkPass(e){e.preventDefault();if(document.getElementById('gp').value==='54321'){document.body.classList.remove('locked');document.getElementById('gate').style.display='none';}return false;}
+  var navBtns=document.querySelectorAll('#nav button');
+  var chapters=document.querySelectorAll('.chapter');
+  function show(ch){
+    chapters.forEach(function(s){s.classList.toggle('active',s.dataset.ch===String(ch));});
+    navBtns.forEach(function(b){b.classList.toggle('active',b.dataset.ch===String(ch));});
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  navBtns.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.ch);});});
+  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.go);});});
+  var vt=document.getElementById('viewToggle');
+  if(vt){vt.addEventListener('click',function(){var on=document.body.classList.toggle('showall');vt.textContent=on?'❐ Back to chapters':'▤ Read as one page';if(on)window.scrollTo({top:0});});}
+  navBtns.forEach(function(b){b.addEventListener('click',function(){if(document.body.classList.contains('showall')){var t=document.querySelector('.chapter[data-ch="'+b.dataset.ch+'"]');if(t)t.scrollIntoView({behavior:'smooth'});}});});
+</script>
+</body>
+</html>

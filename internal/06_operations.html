@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>signal — operations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#AD4236; --red-deep:#7A2E26; --espresso:#241B17; --ink:#2E2420;
+    --bone:#F6EFEA; --cream:#EFE5D1; --taupe:#D8CCC1; --gold:#A8845A;
+    --muted:#6D665C; --line:#C8BEAE; --paper:#FBF8F4; --brand:#178D78;
+    --display:'Bebas Neue',Impact,sans-serif;
+    --body:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  img{max-width:100%;display:block;}
+
+  /* ── app shell ── */
+  .app{display:flex;min-height:100vh;}
+  .sidebar{width:280px;flex-shrink:0;background:var(--espresso);color:var(--bone);position:sticky;top:0;height:100vh;overflow-y:auto;padding:26px 22px;display:flex;flex-direction:column;}
+  .sb-wm{margin-bottom:6px;} .sb-wm img{height:30px;width:auto;}
+  .sb-kicker{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:14px 0 4px;}
+  .sb-title{font-family:var(--display);font-weight:400;font-size:30px;line-height:.98;letter-spacing:.01em;color:#fff;margin-bottom:20px;}
+  .nav{list-style:none;flex:1;}
+  .nav li{margin:0;}
+  .nav button{width:100%;text-align:left;background:none;border:none;color:var(--taupe);font-family:var(--body);font-size:13.5px;padding:9px 12px;border-radius:7px;cursor:pointer;display:flex;gap:10px;align-items:baseline;transition:background .12s,color .12s;line-height:1.25;}
+  .nav button:hover{background:rgba(246,239,234,.06);color:var(--bone);}
+  .nav button.active{background:var(--red);color:#fff;}
+  .nav .ix{font-family:var(--mono);font-size:10px;opacity:.7;min-width:16px;}
+  .nav button.active .ix{opacity:.9;}
+  .sb-foot{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(216,204,193,.4);margin-top:18px;padding-top:14px;border-top:1px solid rgba(216,204,193,.14);}
+  .insdr-logo{height:9px;width:auto;display:inline-block;vertical-align:baseline;margin-right:5px;}
+
+  /* ── main ── */
+  .main{flex:1;min-width:0;}
+  .wrap{max-width:780px;margin:0 auto;padding:0 30px 60px;}
+  .chapter{display:none;animation:fade .25s ease;}
+  .chapter.active{display:block;}
+  /* ── one-page / print view ── */
+  body.showall .chapter{display:block!important;animation:none;}
+  body.showall .pager{display:none;}
+  body.showall #nav button.active{background:transparent;color:var(--bone);}
+  .sb-toggle{margin-top:14px;width:100%;background:rgba(246,239,234,.06);border:1px solid rgba(216,204,193,.18);color:var(--bone);border-radius:7px;padding:10px 12px;cursor:pointer;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-align:left;transition:background .12s,border-color .12s;}
+  .sb-toggle:hover{background:rgba(173,66,54,.22);border-color:var(--red);}
+  @media print{.sidebar{display:none!important;}.chapter{display:block!important;}.pager{display:none!important;}#gate{display:none!important;}.app{display:block!important;}body.locked .app{display:block!important;}body.locked{overflow:visible!important;height:auto!important;}}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+  /* chapter header / hero */
+  .chhero{position:relative;height:300px;margin:0 0 26px;overflow:hidden;display:flex;align-items:flex-end;background:var(--espresso);}
+  .chhero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.82;}
+  .chhero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,27,23,.1) 0%,rgba(36,27,23,.82) 100%);}
+  .chhero .cap{position:relative;padding:30px;color:var(--bone);}
+  .chhero .n{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#E8B4AC;margin-bottom:8px;}
+  .chhero h2{font-family:var(--display);font-weight:400;font-size:46px;line-height:.95;letter-spacing:.01em;color:#fff;}
+  .chhero .sub{font-size:14px;color:var(--taupe);margin-top:8px;max-width:90%;}
+
+  .chhead{padding:34px 0 14px;border-bottom:2px solid var(--espresso);margin-bottom:22px;}
+  .chhead .n{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:7px;}
+  .chhead h2{font-family:var(--display);font-weight:400;font-size:40px;line-height:.96;letter-spacing:.01em;color:var(--espresso);}
+  .chhead .sub{font-size:14px;color:var(--muted);margin-top:8px;}
+
+  p{font-size:14.5px;margin-bottom:13px;}
+  p.lead{font-size:15px;color:var(--muted);margin-bottom:18px;}
+  .sub-h{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin:26px 0 10px;font-weight:600;}
+  b{color:var(--ink);}
+
+  ul.clean{list-style:none;margin:6px 0 16px;}
+  ul.clean li{padding:8px 0 8px 22px;position:relative;font-size:14px;border-bottom:1px dotted var(--line);}
+  ul.clean li:last-child{border-bottom:none;}
+  ul.clean li::before{content:"›";position:absolute;left:2px;color:var(--red);font-weight:700;}
+
+  .pill{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:3px;margin-left:8px;vertical-align:middle;}
+  .pill.lock{background:var(--brand);color:#fff;} .pill.pend{background:var(--gold);color:#fff;}
+
+  .card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:17px 21px;margin:14px 0;}
+  .card h4{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:.02em;color:var(--espresso);margin-bottom:7px;}
+  .card p{font-size:13.5px;margin-bottom:6px;}.card p:last-child{margin-bottom:0;}
+
+  /* photos */
+  figure.photo{margin:18px 0 22px;}
+  figure.photo img{border-radius:12px;border:1px solid var(--line);width:100%;}
+  figure.photo figcaption{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:9px;letter-spacing:.02em;}
+  .photo-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0 22px;}
+  .photo-2 figure{margin:0;} .photo-2 img{border-radius:12px;border:1px solid var(--line);width:100%;height:100%;object-fit:cover;}
+  .photo-2 figcaption{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:8px;}
+
+  table.ftable{width:100%;border-collapse:collapse;margin:10px 0 6px;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden;}
+  .ftable th{background:var(--espresso);color:var(--bone);font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;text-align:left;padding:9px 12px;font-weight:500;}
+  .ftable td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top;}
+  .ftable tr:nth-child(even) td{background:#faf6f1;}
+  .ftable .job{font-weight:600;color:var(--ink);} .ftable .sup{font-family:var(--mono);font-size:11px;color:var(--muted);}
+  .ftable .form b{color:var(--espresso);}
+  .ftable .dose{font-family:var(--mono);font-size:11px;color:var(--red-deep);} .ftable .felt td{background:#f3ece2;}
+
+  .flags{background:#f3e0dd;border-radius:11px;padding:19px 23px;margin:22px 0;}
+  .flags .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:10px;font-weight:600;}
+  .flags ul{list-style:none;}
+  .flags li{padding:7px 0 7px 22px;position:relative;font-size:13.5px;color:var(--red-deep);}
+  .flags li::before{content:"\26A0";position:absolute;left:0;}
+  .flags b{color:var(--red);}
+  .xref{font-family:var(--mono);font-size:11px;color:var(--muted);margin:18px 0 4px;}
+  .xref b{color:var(--red);}
+
+  /* pager */
+  .pager{display:flex;justify-content:space-between;gap:12px;margin-top:38px;padding-top:20px;border-top:1px solid var(--line);}
+  .pager button{flex:1;background:#fff;border:1px solid var(--line);border-radius:9px;padding:13px 16px;cursor:pointer;font-family:var(--body);text-align:left;transition:border-color .12s,box-shadow .12s;}
+  .pager button:hover:not(:disabled){border-color:var(--red);box-shadow:0 3px 14px rgba(36,27,23,.07);}
+  .pager button:disabled{opacity:.35;cursor:default;}
+  .pager .dir{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+  .pager .ttl{font-size:13.5px;color:var(--espresso);font-weight:600;margin-top:3px;}
+  .pager .next{text-align:right;}
+
+  @media (max-width:880px){
+    .app{flex-direction:column;}
+    .sidebar{width:100%;height:auto;position:relative;top:0;}
+    .nav{display:flex;flex-wrap:wrap;gap:4px;}
+    .nav button{width:auto;}
+    .photo-2{grid-template-columns:1fr;}
+    .chhero h2{font-size:34px;}
+  }
+
+  /* ── gate ── */
+  #gate{position:fixed;inset:0;background:#241B17;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#D8CCC1;padding:40px;text-align:center;}
+  #gate img{height:80px;margin-bottom:30px;}
+  #gate .ov{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#AD4236;margin-bottom:14px;}
+  #gate input{background:rgba(246,239,234,.08);border:1px solid rgba(246,239,234,.2);border-radius:6px;color:#D8CCC1;padding:13px 20px;font-size:15px;font-family:var(--body);width:260px;text-align:center;letter-spacing:1px;outline:none;}
+  #gate button{margin-top:12px;background:#AD4236;color:#fff;border:none;border-radius:6px;padding:11px 30px;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:var(--body);}
+  body.locked{overflow:hidden;height:100vh;} body.locked .app{display:none;}
+  .wellness{font-family:var(--display);font-weight:400;letter-spacing:.04em;}
+</style>
+</head>
+<body class="locked">
+
+<div id="gate">
+  <img src="../assets/signal_wordmark_on_dark.svg" alt="signal">
+  <div class="ov">Internal · Operating Bible · Confidential</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gp" autocomplete="off" autofocus placeholder="password"><br>
+    <button type="submit">Enter</button>
+  </form>
+</div>
+
+<div class="app">
+  <!-- ───────── SIDEBAR ───────── -->
+  <aside class="sidebar">
+    <div class="sb-wm"><img src="../assets/signal_wordmark_on_dark.svg" alt="signal"></div>
+    <div class="sb-kicker">Operating Bible · 06</div>
+    <div class="sb-title">Operations &amp;<br>Supply Chain</div>
+    <ul class="nav" id="nav">
+      <li><button data-ch="0" class="active"><span class="ix">00</span> Overview</button></li>
+      <li><button data-ch="1"><span class="ix">01</span> The operating principle</button></li>
+      <li><button data-ch="2"><span class="ix">02</span> The ingredient house — NNB</button></li>
+      <li><button data-ch="3"><span class="ix">03</span> The manufacturing chain</button></li>
+      <li><button data-ch="4"><span class="ix">04</span> Facility &amp; certification</button></li>
+      <li><button data-ch="5"><span class="ix">05</span> Testing &amp; the COA</button></li>
+      <li><button data-ch="6"><span class="ix">06</span> SuppCo readiness checklist</button></li>
+      <li><button data-ch="7"><span class="ix">07</span> Packaging &amp; materials</button></li>
+      <li><button data-ch="8"><span class="ix">08</span> Operating disciplines</button></li>
+    </ul>
+    <button class="sb-toggle" id="viewToggle" type="button">▤ Read as one page</button>
+    <div class="sb-foot"><img class="insdr-logo" src="../assets/insdr_logo_light.png" alt="INSDR"> <span class="wellness">Wellness</span> · the cellcare company<br>Confidential — do not share</div>
+  </aside>
+
+  <!-- ───────── MAIN ───────── -->
+  <main class="main">
+
+    <!-- CH 0 — OVERVIEW (cover) -->
+    <section class="chapter active" data-ch="0">
+      <div class="chhero">
+        <img src="../assets/photo_chews.png" alt="Signal chews">
+        <div class="veil"></div>
+        <div class="cap">
+          <div class="n">Internal · Operations &amp; Supply Chain</div>
+          <h2>The chain, made physical</h2>
+          <div class="sub">How it actually gets made — and why knowing our own supply chain is the moat made physical.</div>
+        </div>
+      </div>
+      <div class="wrap">
+        <p class="lead">Most supplement brands <b>white-label and don't actually know their own supply chain.</b> Signal's edge is the opposite: because <b>NNB manufactures several of our actives in-house</b>, we can credibly claim <b>single-origin, traceable-to-the-lot</b> inputs. Provenance isn't a slogan here — it's the supply chain made physical.</p>
+        <div class="card">
+          <h4>The one thing to take away</h4>
+          <p>This doc is the operating plan for that: who makes what, the <b>facility and certification decisions made upstream</b> (before the first lot), the per-lot testing that produces the keystone COA, and the <b>SuppCo readiness checklist we build to.</b></p>
+          <p>Much of the finished-goods chain is a <b>Zone Halo two-day</b> decision and is marked <span class="pill pend">Pending</span> — a working value is a placeholder, never a commitment. It ladders to <b>Foundation Brief §07</b>; if anything here contradicts the brief, the brief wins.</p>
+        </div>
+        <p class="lead" style="margin-top:18px;">Use the chapters on the left, or step through with Next →</p>
+        <div class="pager"><button disabled><span class="dir">—</span><div class="ttl">Start</div></button><button class="go-next next" data-go="1"><span class="dir">Next →</span><div class="ttl">The operating principle</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 1 — THE OPERATING PRINCIPLE -->
+    <section class="chapter" data-ch="1">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 01</div><h2>The operating principle — own the chain</h2><div class="sub">Operations is where the provenance pillar is either real or it isn't.</div></div>
+        <p class="lead">Everything here serves one rule: we can trace what we sell back to its source.</p>
+        <ul class="clean">
+          <li><b>Know our own supply chain.</b> The industry norm is to white-label a finished product and trust a contract manufacturer's word. We refuse that. If we can't trace an input to its lot and its maker, it doesn't go in.</li>
+          <li><b>Single-origin where it counts.</b> Because NNB makes several of our actives in-house, the provenance claim is structural, not marketing — same maker, traceable lot, no broker in the middle (see §2).</li>
+          <li><b>Build to the bar, don't retrofit to it.</b> Certifications, testing, and traceability are decided <b>at the factory and first-lot stage</b> (§4–§6). Retrofitting a cert or a tested lot later is far costlier — and for a trust brand, a gap found after launch is reputational, not just operational.</li>
+          <li><b>Honest about what's not yet decided.</b> The finished-goods chain — who manufactures the chew, who fills and seals, who fills the tins — is largely a <b>Zone Halo two-day</b> decision. We mark it <span class="pill pend">Pending</span> rather than invent a supplier, a cost, or a lead time.</li>
+        </ul>
+        <div class="pager"><button class="go-prev" data-go="0"><span class="dir">← Back</span><div class="ttl">Overview</div></button><button class="go-next next" data-go="2"><span class="dir">Next →</span><div class="ttl">The ingredient house — NNB</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 2 — THE INGREDIENT HOUSE -->
+    <section class="chapter" data-ch="2">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 02</div><h2>The ingredient house — NNB &amp; the actives</h2><div class="sub">Branded, clinically-studied forms only.</div></div>
+        <p class="lead">Where the maker is NNB, the input is single-origin and traceable to the lot; where it isn't, the branded form is the provenance anchor.</p>
+        <table class="ftable">
+          <thead><tr><th>Cellular job</th><th>Active — branded form</th><th>Maker</th><th>Provenance</th></tr></thead>
+          <tbody>
+            <tr><td class="job">Energy carrier</td><td class="form"><b>Ubiquinol</b> — Kaneka QH&trade;</td><td class="sup">Kaneka</td><td class="sup">Branded-form anchor</td></tr>
+            <tr><td class="job">Mitochondrial cofactor</td><td class="form"><b>PQQ</b> — BioPQQ&trade;</td><td class="sup">Mitsubishi</td><td class="sup">Branded-form anchor</td></tr>
+            <tr><td class="job">Cellular protection</td><td class="form"><b>Ergothioneine</b> — MitoPrime&reg;</td><td class="sup">NNB</td><td class="sup">Single-origin, in-house</td></tr>
+            <tr><td class="job">Cellular renewal</td><td class="form"><b>Spermidine</b> — Puremidine&reg;</td><td class="sup">NNB</td><td class="sup">Single-origin, in-house</td></tr>
+            <tr><td class="job">Foundational mineral</td><td class="form"><b>Magnesium</b> — Albion&reg; bisglycinate</td><td class="sup">Balchem (Albion)</td><td class="sup">Branded-form anchor</td></tr>
+            <tr class="felt"><td class="job">Felt layer (protected)</td><td class="form"><b>Rhodiola</b> — RhodioPrime&reg; 6X <i>or</i> SalidroPure&reg;</td><td class="sup">NNB</td><td class="sup">Single-origin · form <span class="pill pend">Pending</span></td></tr>
+            <tr><td class="job">Creatine SKU (separate)</td><td class="form"><b>Creatine</b> — NNB PurestCreatine&trade;</td><td class="sup">NNB</td><td class="sup">Single-origin · purity vs Creapure <span class="pill pend">Pending</span></td></tr>
+          </tbody>
+        </table>
+        <p class="body" style="font-size:13px;color:var(--muted);"><b>The working set, not the final set.</b> Forms here are the working choices; <b>final doses and the final active count are locked at the Zone Halo two-day</b>, and the count will likely be <i>trimmed</i> (minimum dosage, maximum provable effect — see doc 02). This table is supply-chain provenance, not the formula spec. The single-origin NNB share is the part of the provenance claim we can defend hardest.</p>
+        <div class="pager"><button class="go-prev" data-go="1"><span class="dir">← Back</span><div class="ttl">The operating principle</div></button><button class="go-next next" data-go="3"><span class="dir">Next →</span><div class="ttl">The manufacturing chain</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 3 — THE MANUFACTURING CHAIN -->
+    <section class="chapter" data-ch="3">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 03</div><h2>The manufacturing chain — input to finished unit</h2><div class="sub">From active to the thing on the counter. Two product lines, two chains.</div></div>
+        <p class="lead">Several links are still a Zone Halo decision.</p>
+        <div class="card">
+          <h4>Flagship chew</h4>
+          <p><b>Formulate</b> (Zone Halo two-day: doses, count, chew-stability, the felt-active form) → <b>chew manufacture</b> at a cGMP facility <span class="pill pend">Pending — facility</span> → <b>single-serve sachet fill &amp; seal</b> (barrier film that protects the chew; not a tub) → <b>vessel + kraft mailer</b> assembly into the 30-unit counter vessel.</p>
+        </div>
+        <div class="card">
+          <h4>Pure-creatine trust SKU</h4>
+          <p><b>NNB PurestCreatine</b> → <b>tin fill &amp; seal</b> into the dose-sized single-use aluminum tin, twist-off cap + dry-seal liner (<b>no PVC</b>) <span class="pill pend">Pending — tin filler</span> → assembled into the 30-tin "cellular unit." The <b>stability gate governs this whole line</b>: creatine hydrolyzes to creatinine in moisture, so the seal must hold label claim to end of shelf life. That gate is the entire reason the tin exists (doc 02 §4).</p>
+        </div>
+        <figure class="photo"><img src="../assets/photo_creatine_tins.png" alt="Creatine tins"><figcaption>The single-use creatine tin — twist-off cap + dry-seal liner.</figcaption></figure>
+        <p class="body" style="font-size:13px;color:var(--muted);"><b>Make-vs-buy, stated honestly:</b> NNB is the <b>ingredient</b> house. The <b>finished-goods</b> manufacturer(s) — who makes the chew, who fills the sachets, who fills the tins — are <b>not yet selected</b>; that selection is gated on the Zone Halo formulation work (a chew's manufacturability depends on the final formula). We don't name a co-manufacturer we haven't chosen.</p>
+        <div class="pager"><button class="go-prev" data-go="2"><span class="dir">← Back</span><div class="ttl">The ingredient house — NNB</div></button><button class="go-next next" data-go="4"><span class="dir">Next →</span><div class="ttl">Facility &amp; certification</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 4 — FACILITY & CERTIFICATION -->
+    <section class="chapter" data-ch="4">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 04</div><h2>Facility &amp; certification — the upstream decision</h2><div class="sub">It's made first, because the facility you pick determines which certs are even reachable.</div></div>
+        <p class="lead">This is the decision docs 04 and 05 both point to as "upstream."</p>
+        <ul class="clean">
+          <li><b>cGMP facility, non-negotiable.</b> The manufacturing site must be cGMP-certified (NSF / UL / Eurofins-type). This is the base of the SuppCo "Manufacturing Standards" category and the floor for every downstream partner (Fullscript requires annually-renewed third-party cGMP).</li>
+          <li><b>One sport certification — NSF Certified for Sport is the priority.</b> Over Informed Sport, because a meaningful share of the veteran/tactical revenue audience is drug-tested or trains alongside people who are (doc 04 §2). For them the sport cert is a <b>purchase driver, not polish</b>.</li>
+          <li><b>Decide the cert before the first lot.</b> Certified production has facility and process requirements; choosing a certified facility up front is one of the first manufacturing commitments. Retrofitting certification onto an already-running line is the expensive path.</li>
+        </ul>
+        <div class="flags">
+          <div class="lbl">The honesty-brand sequencing trap</div>
+          <ul>
+            <li><b>A failed cert or a mediocre score is permanent damage for us</b> — worse than for a normal brand, because transparency <i>is</i> the pitch. So we earn the rating only when the label is <b>certainly dead-accurate</b> (post-COA, supply stable). We build to the cert here in operations; we <i>activate</i> it (submit, apply, publish) only when we can do so honestly — never at launch for hype.</li>
+          </ul>
+        </div>
+        <div class="pager"><button class="go-prev" data-go="3"><span class="dir">← Back</span><div class="ttl">The manufacturing chain</div></button><button class="go-next next" data-go="5"><span class="dir">Next →</span><div class="ttl">Testing &amp; the COA</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 5 — TESTING & THE COA -->
+    <section class="chapter" data-ch="5">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 05</div><h2>Testing &amp; the COA operation</h2><div class="sub">The proof record (doc 05) is only as good as the testing that feeds it.</div></div>
+        <p class="lead">This is the operational machine behind the keystone.</p>
+        <ul class="clean">
+          <li><b>Per-lot, full panel, ISO-17025.</b> Every production lot gets an independent <b>ISO-17025-accredited</b> lab panel: identity, potency, purity, heavy metals. The <b>lot-specific COA is the keystone</b> that unlocks the rubric score, the sport cert, and the public proof page.</li>
+          <li><b>Cadence is per-lot, not periodic.</b> We test every lot, not a sample once a year. The cost of that cadence is a unit-economics line (doc 07); the payoff is a proof record that can't be faked.</li>
+          <li><b>Input-not-finished where the format would distort the assay.</b> For oxidation-sensitive inputs, a flavored/chewable finished unit can break some assays — so we test the <b>source material</b> and say so, rather than publish a finished-unit number the format makes meaningless (the TOTOX discipline, doc 05 §8).</li>
+          <li><b>Proving the pathway — the method is open.</b> The commitment is a locked edge of the moat: we prove <b>absorption</b> — what the body takes up — beyond a content-only COA. What's unsolved is the <i>method</i> — a credible, affordable absorption test (see flags).</li>
+        </ul>
+        <div class="pager"><button class="go-prev" data-go="4"><span class="dir">← Back</span><div class="ttl">Facility &amp; certification</div></button><button class="go-next next" data-go="6"><span class="dir">Next →</span><div class="ttl">SuppCo readiness checklist</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 6 — SUPPCO READINESS CHECKLIST -->
+    <section class="chapter" data-ch="6">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 06</div><h2>The SuppCo readiness checklist — build to the bar</h2><div class="sub">SuppCo's TrustScore intake form is, in effect, a pre-built procurement checklist.</div></div>
+        <p class="lead">Every upload it asks for is something we must already have. So we build to it — so that filling it out later is just attaching documents we already hold.</p>
+        <table class="ftable">
+          <thead><tr><th>What SuppCo asks for</th><th>Our standing</th><th>Closed by</th></tr></thead>
+          <tbody>
+            <tr><td class="job">cGMP certification (NSF/UL/Eurofins) + upload</td><td class="form">Not yet ours — a facility decision</td><td class="sup">§4 facility pick</td></tr>
+            <tr><td class="job">Product certs — NSF Certified for Sport / Informed</td><td class="form">Not yet — the sport-cert decision</td><td class="sup">§4 cert pick</td></tr>
+            <tr><td class="job">ISO 17025:2017 lab + COA upload (purity, heavy metals, identity, potency)</td><td class="form">Planned per-lot — the keystone</td><td class="sup">§5 lab pick + first lot</td></tr>
+            <tr><td class="job">Product testing frequency</td><td class="form">Per-lot (every lot)</td><td class="sup">§5 cadence — already decided</td></tr>
+            <tr><td class="job">TESTED cert — off-shelf retail unit assays ≥95% of every label claim (active identity + potency)</td><td class="form"><b>The formula must carry overage to clear 95% through shelf life</b></td><td class="sup">Zone Halo two-day — overage spec per active</td></tr>
+            <tr class="felt"><td class="job">Clinically studied (RCT) link</td><td class="form"><b>None yet — the known soft spot</b></td><td class="sup">Funded by revenue, not dilution (later)</td></tr>
+          </tbody>
+        </table>
+        <p class="body" style="font-size:13px;color:var(--muted);"><b>The strategic read:</b> only about one-fifth of the TrustScore is honesty (no proprietary blends, named forms, accurate doses) — that fifth we win by construction, though TESTED's 95%-off-shelf bar turns part of it into a hard <i>stability</i> requirement (overage), not just truthful labeling. <b>The other four-fifths are procurement discipline</b> decided in this doc. That makes "formulate to the rubric" a two-day-with-Zone-Halo <i>decision</i>, not a copywriting task. <span style="color:var(--red);">(Full intake-form contents held in reference; submission timing &amp; mechanics live in doc 05 / the outreach pack — not here.)</span></p>
+        <div class="flags">
+          <div class="lbl">Two SuppCo mechanisms — don't conflate them</div>
+          <ul>
+            <li><b>TrustScore</b> — the algorithmic 10-point / 5-pillar rating (Manufacturing · Certifications · Quality Indicators · Testing · Innovation), built largely from public data plus the intake-form uploads. We <b>formulate to it and upload to improve it.</b></li>
+            <li><b>TESTED</b> — a separate <i>certification</i>: SuppCo anonymously buys the retail unit off our own site and assays it at an ISO-17025 lab; it must hit <b>≥95% of every label claim</b>, with <b>annual retesting</b> and <b>analyte-level results published publicly</b>. The shipped unit must pass — no special sample — so the formula carries <b>overage</b>, and the public read-out becomes a top-of-stack external proof (doc 05).</li>
+            <li><b>Scoring levers we already hold or can cheaply add</b> — <b>patented/branded forms score positively</b> (not just an honesty cost); <b>artificial additives are penalized</b> (our allulose / natural-sweetener choice is on-rubric); <b>credentialed leadership (PhD/MD/ND/PharmD)</b> scores under Innovation (the formulator's credential is a lever); USA manufacturing and broader certs (USP Verified, Non-GMO, Clean Label Project) are extra points at the §4 pick.</li>
+          </ul>
+        </div>
+        <div class="pager"><button class="go-prev" data-go="5"><span class="dir">← Back</span><div class="ttl">Testing &amp; the COA</div></button><button class="go-next next" data-go="7"><span class="dir">Next →</span><div class="ttl">Packaging &amp; materials</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 7 — PACKAGING & MATERIALS -->
+    <section class="chapter" data-ch="7">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 07</div><h2>Packaging &amp; materials</h2><div class="sub">Material specs are locked; sourcing is open.</div></div>
+        <p class="lead">Packaging carries two jobs at once: protect the product (barrier, stability) and serve adherence (the counter vessel that stays in sight).</p>
+
+        <div class="photo-2">
+          <figure><img src="../assets/photo_sachet_front.png" alt="Sachet front"><figcaption>The flagship sachet — front.</figcaption></figure>
+          <figure><img src="../assets/photo_sachet_back.png" alt="Sachet back"><figcaption>The sachet back — one daily serving.</figcaption></figure>
+        </div>
+
+        <table class="ftable">
+          <thead><tr><th>Component</th><th>Spec</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="job">Flagship unit</td><td class="form">Single-serve, individually sealed sachet — barrier film that protects the chew (not a tub/bottle)</td><td class="sup"><span class="pill lock">Locked</span> form · film &amp; supplier <span class="pill pend">Pending</span></td></tr>
+            <tr><td class="job">Counter vessel</td><td class="form">Holds 30 daily packages; built to live on the counter and look good there (visibility = adherence)</td><td class="sup"><span class="pill lock">Locked</span> intent · material <span class="pill pend">Pending</span></td></tr>
+            <tr><td class="job">Creatine tin</td><td class="form">Dose-sized single-use aluminum (~10&nbsp;ml/5&nbsp;g), twist-off aluminum cap + dry-seal liner, <b>no PVC</b></td><td class="sup"><span class="pill lock">Locked</span> · filler <span class="pill pend">Pending</span></td></tr>
+            <tr><td class="job">Outer</td><td class="form">Kraft outer mailer</td><td class="sup"><span class="pill lock">Locked</span> intent</td></tr>
+          </tbody>
+        </table>
+        <div class="flags">
+          <div class="lbl">Recyclability honesty (locked — doc 02 §4)</div>
+          <ul>
+            <li><b>No "100% recyclable" / "reusable" / "sustainable" claims.</b> Recyclable ≠ recycled, and small aluminum falls through most recycling streams. We <b>name the liner material</b>, make <b>no mono-material claim</b>, and make <b>no take-back promise</b> we can't keep. Honest packaging language is part of the same discipline as honest dosing.</li>
+          </ul>
+        </div>
+        <div class="pager"><button class="go-prev" data-go="6"><span class="dir">← Back</span><div class="ttl">SuppCo readiness checklist</div></button><button class="go-next next" data-go="8"><span class="dir">Next →</span><div class="ttl">Operating disciplines</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 8 — OPERATING DISCIPLINES -->
+    <section class="chapter" data-ch="8">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 08</div><h2>Operating disciplines — what we refuse</h2><div class="sub">The bright lines the operation is run inside.</div></div>
+        <ul class="clean">
+          <li><b>No white-label-and-pretend.</b> We don't sell a finished product we can't trace. If we don't know the maker and the lot, it doesn't ship.</li>
+          <li><b>No proprietary blend, ever.</b> Every active and its dose is disclosed (doc 03 claims law). A trade secret may cover a <b>process</b>, never a dose or an ingredient (doc 05 §8).</li>
+          <li><b>Build to cert, don't retrofit.</b> Facility and certification are first-lot decisions, not post-launch patches.</li>
+          <li><b>Never quietly under-dose.</b> When taste and dose-honesty collide, we move mass out of the chew or trim <b>transparently</b> — we never silently cut a dose to fix the format (doc 02).</li>
+          <li><b>The stability gate is absolute.</b> Creatine ships only in a seal that holds label claim to end of shelf life. Stability over convenience, every time — it's a health product.</li>
+          <li><b>Test honestly.</b> Per-lot, independent, and input-not-finished where the format would distort the number. We never publish a test result we know is meaningless.</li>
+        </ul>
+
+        <div class="flags">
+          <div class="lbl">Open — decisions &amp; sourcing items</div>
+          <ul>
+            <li><b>Finished-goods manufacturer(s)</b> — the chew co-manufacturer, the sachet fill/seal partner, and the tin filler are unselected; gated on Zone Halo formulation (manufacturability depends on the final formula).</li>
+            <li><b>Facility + cert stack</b> — pick the cGMP/NSF facility, the per-lot ISO-17025 lab, and one sport cert (NSF Certified for Sport priority). The single upstream decision that clears SuppCo + Fullscript at once.</li>
+            <li><b>Creatine purity</b> — NNB PurestCreatine vs Creapure, independently verified head-to-head.</li>
+            <li><b>Rhodiola branded form</b> — RhodioPrime 6X vs SalidroPure, plus dose and chew-stability (the felt layer).</li>
+            <li><b>Proving the pathway — the method.</b> The commitment is locked (a moat edge); what's open is <i>which</i> credible, affordable absorption test demonstrates uptake beyond a content-only COA.</li>
+            <li><b>Packaging sourcing</b> — barrier film, vessel material, tin filler, MOQs and lead times — all to be quoted (not invented here).</li>
+          </ul>
+        </div>
+
+        <p class="xref">Source of truth → <b>01 Foundation Brief §07</b>. Pulls from → <b>02 Product &amp; Formula Spec</b> (format, materials, the active set). Feeds → <b>05 Moat &amp; Proof Plan</b> (the COA + cert decisions made here become the proof) · <b>07 Unit Economics</b> (per-lot testing cost, COGS, facility/cert spend). Builds to → the <b>SuppCo TrustScore intake</b> (reference). Locked at → the <b>Zone Halo two-day</b>.</p>
+
+        <div class="pager"><button class="go-prev" data-go="7"><span class="dir">← Back</span><div class="ttl">Packaging &amp; materials</div></button><button disabled class="next"><span class="dir">End</span><div class="ttl">Chapter 08 of 08</div></button></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  function checkPass(e){e.preventDefault();if(document.getElementById('gp').value==='54321'){document.body.classList.remove('locked');document.getElementById('gate').style.display='none';}return false;}
+  var navBtns=document.querySelectorAll('#nav button');
+  var chapters=document.querySelectorAll('.chapter');
+  function show(ch){
+    chapters.forEach(function(s){s.classList.toggle('active',s.dataset.ch===String(ch));});
+    navBtns.forEach(function(b){b.classList.toggle('active',b.dataset.ch===String(ch));});
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  navBtns.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.ch);});});
+  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.go);});});
+  var vt=document.getElementById('viewToggle');
+  if(vt){vt.addEventListener('click',function(){var on=document.body.classList.toggle('showall');vt.textContent=on?'❐ Back to chapters':'▤ Read as one page';if(on)window.scrollTo({top:0});});}
+  navBtns.forEach(function(b){b.addEventListener('click',function(){if(document.body.classList.contains('showall')){var t=document.querySelector('.chapter[data-ch="'+b.dataset.ch+'"]');if(t)t.scrollIntoView({behavior:'smooth'});}});});
+</script>
+</body>
+</html>

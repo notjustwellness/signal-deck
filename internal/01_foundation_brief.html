@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>signal — foundation brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#AD4236; --red-deep:#7A2E26; --espresso:#241B17; --ink:#2E2420;
+    --bone:#F6EFEA; --cream:#EFE5D1; --taupe:#D8CCC1; --gold:#A8845A;
+    --muted:#6D665C; --line:#C8BEAE; --paper:#FBF8F4; --brand:#178D78;
+    --display:'Bebas Neue',Impact,sans-serif;
+    --body:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  img{max-width:100%;display:block;}
+
+  /* ── app shell ── */
+  .app{display:flex;min-height:100vh;}
+  .sidebar{width:280px;flex-shrink:0;background:var(--espresso);color:var(--bone);position:sticky;top:0;height:100vh;overflow-y:auto;padding:26px 22px;display:flex;flex-direction:column;}
+  .sb-wm{margin-bottom:6px;} .sb-wm img{height:30px;width:auto;}
+  .sb-kicker{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:14px 0 4px;}
+  .sb-title{font-family:var(--display);font-weight:400;font-size:30px;line-height:.98;letter-spacing:.01em;color:#fff;margin-bottom:20px;}
+  .nav{list-style:none;flex:1;}
+  .nav li{margin:0;}
+  .nav button{width:100%;text-align:left;background:none;border:none;color:var(--taupe);font-family:var(--body);font-size:13.5px;padding:9px 12px;border-radius:7px;cursor:pointer;display:flex;gap:10px;align-items:baseline;transition:background .12s,color .12s;line-height:1.25;}
+  .nav button:hover{background:rgba(246,239,234,.06);color:var(--bone);}
+  .nav button.active{background:var(--red);color:#fff;}
+  .nav .ix{font-family:var(--mono);font-size:10px;opacity:.7;min-width:16px;}
+  .nav button.active .ix{opacity:.9;}
+  .sb-foot{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(216,204,193,.4);margin-top:18px;padding-top:14px;border-top:1px solid rgba(216,204,193,.14);}
+
+  /* ── main ── */
+  .main{flex:1;min-width:0;}
+  .wrap{max-width:780px;margin:0 auto;padding:0 30px 60px;}
+  .chapter{display:none;animation:fade .25s ease;}
+  .chapter.active{display:block;}
+  /* ── one-page / print view ── */
+  body.showall .chapter{display:block!important;animation:none;}
+  body.showall .pager{display:none;}
+  body.showall #nav button.active{background:transparent;color:var(--bone);}
+  .sb-toggle{margin-top:14px;width:100%;background:rgba(246,239,234,.06);border:1px solid rgba(216,204,193,.18);color:var(--bone);border-radius:7px;padding:10px 12px;cursor:pointer;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-align:left;transition:background .12s,border-color .12s;}
+  .sb-toggle:hover{background:rgba(173,66,54,.22);border-color:var(--red);}
+  @media print{.sidebar{display:none!important;}.chapter{display:block!important;}.pager{display:none!important;}#gate{display:none!important;}.app{display:block!important;}body.locked .app{display:block!important;}body.locked{overflow:visible!important;height:auto!important;}}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+  /* chapter header / hero */
+  .chhero{position:relative;height:300px;margin:0 0 26px;overflow:hidden;display:flex;align-items:flex-end;background:var(--espresso);}
+  .chhero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.82;}
+  .chhero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,27,23,.1) 0%,rgba(36,27,23,.82) 100%);}
+  .chhero .cap{position:relative;padding:30px;color:var(--bone);}
+  .chhero .n{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#E8B4AC;margin-bottom:8px;}
+  .chhero h2{font-family:var(--display);font-weight:400;font-size:46px;line-height:.95;letter-spacing:.01em;color:#fff;}
+  .chhero .sub{font-size:14px;color:var(--taupe);margin-top:8px;max-width:90%;}
+
+  .chhead{padding:34px 0 14px;border-bottom:2px solid var(--espresso);margin-bottom:22px;}
+  .chhead .n{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:7px;}
+  .chhead h2{font-family:var(--display);font-weight:400;font-size:40px;line-height:.96;letter-spacing:.01em;color:var(--espresso);}
+  .chhead .sub{font-size:14px;color:var(--muted);margin-top:8px;}
+
+  p{font-size:14.5px;margin-bottom:13px;}
+  p.lead{font-size:15px;color:var(--muted);margin-bottom:18px;}
+  .sub-h{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin:26px 0 10px;font-weight:600;}
+  b{color:var(--ink);}
+
+  ul.clean{list-style:none;margin:6px 0 16px;}
+  ul.clean li{padding:8px 0 8px 22px;position:relative;font-size:14px;border-bottom:1px dotted var(--line);}
+  ul.clean li:last-child{border-bottom:none;}
+  ul.clean li::before{content:"›";position:absolute;left:2px;color:var(--red);font-weight:700;}
+
+  .pill{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:3px;margin-left:8px;vertical-align:middle;}
+  .pill.lock{background:var(--brand);color:#fff;} .pill.pend{background:var(--gold);color:#fff;}
+  .pill.open{background:var(--red);color:#fff;}
+
+  .card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:17px 21px;margin:14px 0;}
+  .card.flag{border-left-color:var(--red);background:#f7ece9;}
+  .card h4{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:.02em;color:var(--espresso);margin-bottom:7px;}
+  .card p{font-size:13.5px;margin-bottom:6px;}.card p:last-child{margin-bottom:0;}
+
+  /* ladder */
+  .ladder{background:#fff;border:1px solid var(--line);border-radius:11px;padding:8px 6px;margin:14px 0 8px;}
+  .rung{display:flex;align-items:baseline;gap:14px;padding:11px 18px;border-bottom:1px solid var(--line);}
+  .rung:last-child{border-bottom:none;}
+  .rung .tag{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);min-width:88px;font-weight:500;}
+  .rung .val{font-size:15px;}
+  .rung .val b{font-family:var(--display);font-weight:400;font-size:20px;letter-spacing:.02em;color:var(--espresso);display:inline-block;margin-right:8px;}
+  .rung .val span{color:var(--muted);font-size:13.5px;}
+
+  /* origin */
+  .origin{background:#251c18;color:var(--bone);border-radius:11px;padding:26px 30px;margin:14px 0;}
+  .origin .firewall{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(168,132,90,.4);border-radius:6px;padding:9px 13px;margin-bottom:20px;}
+  .origin p{font-size:15px;line-height:1.7;color:#E8DFD6;}
+  .origin p + p{margin-top:14px;}
+  .origin .kernel{color:#E8B4AC;font-style:italic;}
+  .origin .send{font-family:var(--display);font-weight:400;font-size:23px;letter-spacing:.03em;color:#fff;}
+
+  /* photos */
+  figure.photo{margin:18px 0 22px;}
+  figure.photo img{border-radius:12px;border:1px solid var(--line);width:100%;}
+  figure.photo figcaption{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:9px;letter-spacing:.02em;}
+
+  .flags{background:#f3e0dd;border-radius:11px;padding:19px 23px;margin:22px 0;}
+  .flags .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:10px;font-weight:600;}
+  .flags ul{list-style:none;}
+  .flags li{padding:7px 0 7px 22px;position:relative;font-size:13.5px;color:var(--red-deep);}
+  .flags li::before{content:"\26A0";position:absolute;left:0;}
+  .flags b{color:var(--red);}
+  .xref{font-family:var(--mono);font-size:11px;color:var(--muted);margin:18px 0 4px;}
+  .xref b{color:var(--red);}
+
+  /* INSDR parent-brand logo, used inline in place of the word "INSDR" */
+  .insdr-logo{height:9px;width:auto;vertical-align:baseline;margin-right:5px;display:inline-block;}
+  .wellness{font-family:var(--display);font-weight:400;letter-spacing:.04em;}
+
+  /* pager */
+  .pager{display:flex;justify-content:space-between;gap:12px;margin-top:38px;padding-top:20px;border-top:1px solid var(--line);}
+  .pager button{flex:1;background:#fff;border:1px solid var(--line);border-radius:9px;padding:13px 16px;cursor:pointer;font-family:var(--body);text-align:left;transition:border-color .12s,box-shadow .12s;}
+  .pager button:hover:not(:disabled){border-color:var(--red);box-shadow:0 3px 14px rgba(36,27,23,.07);}
+  .pager button:disabled{opacity:.35;cursor:default;}
+  .pager .dir{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+  .pager .ttl{font-size:13.5px;color:var(--espresso);font-weight:600;margin-top:3px;}
+  .pager .next{text-align:right;}
+
+  @media (max-width:880px){
+    .app{flex-direction:column;}
+    .sidebar{width:100%;height:auto;position:relative;top:0;}
+    .nav{display:flex;flex-wrap:wrap;gap:4px;}
+    .nav button{width:auto;}
+    .chhero h2{font-size:34px;}
+    .rung{flex-direction:column;gap:3px;}.rung .tag{min-width:0;}
+  }
+
+  /* ── gate ── */
+  #gate{position:fixed;inset:0;background:#241B17;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#D8CCC1;padding:40px;text-align:center;}
+  #gate img{height:80px;margin-bottom:30px;}
+  #gate .ov{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#AD4236;margin-bottom:14px;}
+  #gate input{background:rgba(246,239,234,.08);border:1px solid rgba(246,239,234,.2);border-radius:6px;color:#D8CCC1;padding:13px 20px;font-size:15px;font-family:var(--body);width:260px;text-align:center;letter-spacing:1px;outline:none;}
+  #gate button{margin-top:12px;background:#AD4236;color:#fff;border:none;border-radius:6px;padding:11px 30px;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:var(--body);}
+  body.locked{overflow:hidden;height:100vh;} body.locked .app{display:none;}
+</style>
+</head>
+<body class="locked">
+
+<div id="gate">
+  <img src="../assets/signal_wordmark_on_dark.svg" alt="signal">
+  <div class="ov">Internal · Operating Bible · Confidential</div>
+  <form onsubmit="return checkPass(event)">
+    <input type="password" id="gp" autocomplete="off" autofocus placeholder="password"><br>
+    <button type="submit">Enter</button>
+  </form>
+</div>
+
+<div class="app">
+  <!-- ───────── SIDEBAR ───────── -->
+  <aside class="sidebar">
+    <div class="sb-wm"><img src="../assets/signal_wordmark_on_dark.svg" alt="signal"></div>
+    <div class="sb-kicker">Operating Bible · 01</div>
+    <div class="sb-title">Foundation<br>Brief</div>
+    <ul class="nav" id="nav">
+      <li><button data-ch="0" class="active"><span class="ix">00</span> Overview</button></li>
+      <li><button data-ch="1"><span class="ix">01</span> What Signal is</button></li>
+      <li><button data-ch="2"><span class="ix">02</span> The governing hierarchy</button></li>
+      <li><button data-ch="3"><span class="ix">03</span> How it came about</button></li>
+      <li><button data-ch="4"><span class="ix">04</span> What we make</button></li>
+      <li><button data-ch="5"><span class="ix">05</span> What we believe — the rules</button></li>
+      <li><button data-ch="6"><span class="ix">06</span> Who it's for</button></li>
+      <li><button data-ch="7"><span class="ix">07</span> The moat</button></li>
+      <li><button data-ch="8"><span class="ix">08</span> What we will not do</button></li>
+      <li><button data-ch="9"><span class="ix">09</span> The company &amp; the people</button></li>
+      <li><button data-ch="10"><span class="ix">10</span> Open / Decisions</button></li>
+    </ul>
+    <button class="sb-toggle" id="viewToggle" type="button">▤ Read as one page</button>
+    <div class="sb-foot"><img class="insdr-logo" src="../assets/insdr_logo_light.png" alt="INSDR"> <span class="wellness">Wellness</span> · the cellcare company<br>Confidential — do not share</div>
+  </aside>
+
+  <!-- ───────── MAIN ───────── -->
+  <main class="main">
+
+    <!-- CH 0 — OVERVIEW (cover) -->
+    <section class="chapter active" data-ch="0">
+      <div class="chhero">
+        <img src="../assets/photo_brand_portrait.png" alt="Signal brand portrait">
+        <div class="veil"></div>
+        <div class="cap">
+          <div class="n">Internal · Foundation Brief</div>
+          <h2>The settled canon</h2>
+          <div class="sub">The single source of truth — the foundation every other document gets built on.</div>
+        </div>
+      </div>
+      <div class="wrap">
+        <p class="lead">This brief is the <b>settled canon</b> — the decisions that define what Signal is, gathered in one place. Every other document — the Manifesto, the Codex, and the rest — is built on it.</p>
+        <p class="lead">If a future document contradicts this brief, the document is wrong. Where the brief itself is wrong or incomplete, we fix <em>it</em> first — then build.</p>
+        <div class="card">
+          <h4>How to read this</h4>
+          <p>Tags run through the doc. <b><span class="pill lock">Locked</span></b> = decided, don't reopen. <b><span class="pill pend">Pending</span></b> = a <b>Zone Halo two-day</b> decision (final doses, final active count, the felt-active form). A working value next to Pending is a placeholder, never quote it as final.</p>
+          <p>Use the chapters on the left, or step through with Next →</p>
+        </div>
+        <div class="pager"><button disabled><span class="dir">—</span><div class="ttl">Start</div></button><button class="go-next next" data-go="1"><span class="dir">Next →</span><div class="ttl">What Signal is</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 1 — WHAT SIGNAL IS -->
+    <section class="chapter" data-ch="1">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 01</div><h2>What Signal is</h2><div class="sub">One line, then the category.</div></div>
+        <p class="body"><b>Signal is the daily foundation you actually keep taking</b> — a single, beautifully-made cellular-energy product, dosed honestly, that earns its place by being the one supplement you don't quit.</p>
+        <p class="body">The category is <b>cellcare</b>: not another outcome on the shelf (muscle, sleep, focus, glow), but the floor underneath all of them — the cellular energy your body runs every other process on. We don't sell a result. We prime the system the results depend on.</p>
+        <p class="body"><b>Where Signal sits.</b> <img class="insdr-logo" src="../assets/insdr_logo_dark.png" alt="INSDR"> <b><span class="wellness">Wellness</span></b> is the parent company — the cellcare company. <b>Cellcare</b> is the category we focus on. <b>Signal</b> is the first sub-brand under it with an actual product to sell; more sub-brands may follow, but Signal is where it starts.</p>
+        <p class="body"><b>Energy is the goal — communication is how you get there.</b> Cellular energy is the ultimate aim, but a cell can't produce it without proper <b>cellular communication</b> first. We feed the signal so the energy can follow. (This is also why "prove the pathway / what you absorb" matters — see Chapter 02 and Chapter 07.)</p>
+        <div class="pager"><button class="go-prev" data-go="0"><span class="dir">← Back</span><div class="ttl">Overview</div></button><button class="go-next next" data-go="2"><span class="dir">Next →</span><div class="ttl">The governing hierarchy</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 2 — THE GOVERNING HIERARCHY -->
+    <section class="chapter" data-ch="2">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 02</div><h2>The governing hierarchy</h2><div class="sub">Every claim, every page, every decision ladders to this. Memorize the order.</div></div>
+        <div class="ladder">
+          <div class="rung"><span class="tag">Tagline</span><span class="val"><b>"Send the right signal."</b><span>The brand line — lowercase, said plainly. The one tagline above everything.</span></span></div>
+          <div class="rung"><span class="tag">Headline</span><span class="val"><b>Cellular energy</b><span>The floor, not the outcome — the goal everything is about. Reached only through proper <b>cellular communication</b>: the cell can't make the energy without it.</span></span></div>
+          <div class="rung"><span class="tag">Spine</span><span class="val"><b>Adherence</b><span>"The one you'll actually keep taking." The science is solid — but the effectiveness is in whether the bottle ends up empty. We win on the supplement people don't abandon.</span></span></div>
+          <div class="rung"><span class="tag">Pillars</span><span class="val"><b>Effortlessness · Bioavailability · Provenance</b><span>The three things that make the spine true. <b>Effortlessness</b>: so easy and pleasant to take that finishing it is the default. <b>Bioavailability</b>: it's not what you take, it's what you absorb. <b>Provenance</b>: single-origin, traceable inputs we can stand behind.</span></span></div>
+          <div class="rung"><span class="tag">Method</span><span class="val"><b>Honesty</b><span>"Name the dose, not the hype." Trust is how we earn the place — proof over promise.</span></span></div>
+          <div class="rung"><span class="tag">Felt</span><span class="val"><b>"No instant hit — builds quietly."</b><span>We never fake a sensation. The felt layer is real and disclosed: L1 a genuine felt active · L2 a narrated dose-mirror · L3 the ritual itself.</span></span></div>
+        </div>
+        <p class="body" style="margin-top:18px;"><b>The enemy is distraction from the dose.</b> Everything that sells a supplement is a way of <i>not</i> talking about how much is actually in the bottle. Hype hides the dose behind a promise; personalization hides it behind a quiz, a swab, a monitor. Signal's single discipline is to refuse both and print the number — <b>"name the dose, not the hype"</b> is how we say it, and the enemy it names has two faces.</p>
+        <p class="body" style="font-size:13px;color:var(--muted);">The wedge against the one competitor in this lane: they drive adherence through <b>accountability</b> (coaching, nagging). We drive it through <b>effortlessness</b> — minimalism is the strategy, not a constraint.</p>
+        <div class="pager"><button class="go-prev" data-go="1"><span class="dir">← Back</span><div class="ttl">What Signal is</div></button><button class="go-next next" data-go="3"><span class="dir">Next →</span><div class="ttl">How it came about</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 3 — HOW IT CAME ABOUT -->
+    <section class="chapter" data-ch="3">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 03</div><h2>How it came about</h2><div class="sub">The founder's origin.</div></div>
+        <div class="origin">
+          <p>My father had a stroke ten years ago. He's still here. But when his eyes open and I look in, no one looks back — just an abyss. <span class="kernel">I watch the signal go dark in him a little more every time.</span></p>
+          <p>Now I'm watching it work through my mother. Diabetes. A stroke. Then dementia. Her light's still on — it just shines a little differently now.</p>
+          <p>When it's the people who raised you, you do something. So I bought everything — first for them, grasping at every promise on every label. Then, afraid of what I might be carrying myself, I started buying it for me too. A whole cabinet of it. One morning I stood in front of all of it and realized I had no idea if any of it was working. I was running on hope and blind faith.</p>
+          <p>Maybe you know that cabinet. The bottles you can't remember starting. The quiet suspicion you're spending money to feel like you're doing something — not to actually do it.</p>
+          <p>I'm the kind of person who can't take a label at its word — I have to read the science underneath it. So I did. And the deeper I went, the more obvious the mistake became: everything in that cabinet was chasing an outcome. Nothing was feeding the foundation those outcomes are built on — the cellular layer underneath all of it. The energy the body makes before it can do anything else. <em>(About 9 out of 10 ATP molecules in your cells carry magnesium; the rest sit idle.)</em> And the low, constant inflammation that chokes that system in almost all of us now — a little more every year. Every specialist supplement on the shelf is asking your cells to do work; almost none of them give the cells what it takes to do it.</p>
+          <p>Chasing outcomes is the trap. So I stopped chasing. I started underneath — priming the system everything else depends on, so whatever you do next actually lands.</p>
+          <p>That's Signal. Not another promise. A practice. One signal a day. It compounds.</p>
+          <p>You can't always stop the dark. You can keep sending the signal. <span class="send">Send yours.</span></p>
+        </div>
+        <p class="body" style="font-size:13px;color:var(--muted);">This is the canonical combined read (from <b>founder_story.md</b>) — the master spine with the science beat woven in. The <b>insight</b> — stop chasing outcomes, build the foundation — is the moat; the wound is the fuel.</p>
+        <p class="body" style="font-size:12.5px;color:var(--red-deep);background:#f7ece9;border-radius:7px;padding:11px 14px;">⚠ <b>The inflammation line is sealed-regulatory (DSHEA).</b> It may appear here because this brief is <b>gated / internal</b>. It must be <b>stripped before any public or ungated surface</b> and routed through Zone Halo reg review first. It is the founder's general reasoning about bodies — never a claim that Signal reduces inflammation; the word never migrates onto the label.</p>
+        <div class="pager"><button class="go-prev" data-go="2"><span class="dir">← Back</span><div class="ttl">The governing hierarchy</div></button><button class="go-next next" data-go="4"><span class="dir">Next →</span><div class="ttl">What we make</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 4 — WHAT WE MAKE -->
+    <section class="chapter" data-ch="4">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 04</div><h2>What we make</h2><div class="sub">One flagship. One trust companion. Not a product line — a hero and the act beside it.</div></div>
+
+        <div class="card">
+          <h4>The flagship <span class="pill lock">Locked: format</span><span class="pill pend">Pending: active count</span></h4>
+          <p>A daily, <b>single-serve, individually-packaged chew</b> — the ritual is the product. <b>One chew per daily serving — two at most; one is the goal.</b> The month ships as <b>30 individually-packed daily packages in a counter-kept vessel</b>, visually appealing on purpose so it stays in sight — the format is itself an adherence mechanism (see Chapter 07). <b>Branded, clinically-studied ingredients only</b> (named forms, never a generic blend). <b>Taste is the priority</b> — taste wins every tiebreaker except dose-honesty (we move mass out of the chew or trim transparently; we never quietly under-dose).</p>
+          <p><b>Minimum dosage, maximum provable effect.</b> The number of actives is not fixed — it is a principle, not a number. We do not throw ingredients into a pill to claim a dozen benefits. The fewest actives that each clear a provable, accurate dose. Final count is set at the Zone Halo formulation two-day; likely fewer than the working list. <b>Every active is chosen for a specific role, engineered for little to no overlap</b> — nothing is in there doing a job another ingredient already does.</p>
+          <p>The <b>felt layer is protected</b> from the minimalism trim: the one felt active stays as a deliberate, named exception, because it does a job no other active does — it gives the brand a perceptible signal. It competes on felt-delivery, not on outcome-dose.</p>
+          <p><b>Price.</b> $89/month today, positioned as a <b>premium</b> product. Final pricing depends on the final formulation — set at the Zone Halo two-day, not before.</p>
+        </div>
+
+        <div class="card">
+          <h4>The pure-creatine trust SKU <span class="pill lock">Locked</span></h4>
+          <p><b>Pure creatine, nothing else</b> — the cleanest form, 5 g, from NNB. Delivered in <b>individual single-use aluminum tins</b>, pre-filled, grab-and-go. Sold as a <b>"cellular unit" of 30 tins</b> — a month, one tin a day.</p>
+          <p>Priced <b>well below the marked-up single-serve competition</b> — low enough that, for pure creatine, it's a no-brainer. Most people already run a stack, and a growing problem with stacks is <b>too much overlap in the supply chain</b>; sometimes a customer just wants one clean, pure ingredient, not another blend of add-ons. It is the <b>companion act, not a second hero</b> — its return is trust, retention, and a daily habit fused into the flagship's moment; it never upstages the flagship.</p>
+          <p><b>Why creatine sits outside the flagship — honesty.</b> A standalone tin is simply the best deliverable form and the best experience for taking creatine, and <b>stability is the most important factor</b> when you're delivering something taken for your health. Keeping it separate is the honest call, not a packaging one.</p>
+          <p>Honesty guardrail: no "100% recyclable" / "reusable" claims (recyclable ≠ recycled; small aluminum falls through recycling streams). We name the liner and make no mono-material claim.</p>
+        </div>
+
+        <div class="pager"><button class="go-prev" data-go="3"><span class="dir">← Back</span><div class="ttl">How it came about</div></button><button class="go-next next" data-go="5"><span class="dir">Next →</span><div class="ttl">What we believe — the rules</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 5 — WHAT WE BELIEVE -->
+    <section class="chapter" data-ch="5">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 05</div><h2>What we believe — the rules</h2><div class="sub">The non-negotiables. These are how we keep the promise the spine makes.</div></div>
+        <ul class="clean">
+          <li><b>Name the dose, not the hype.</b> Substantiated structure/function benefits are allowed, each paired with the named dose (receipts). Verbs like <i>supports / helps maintain</i> are fine; <i>boosts / improves / transforms</i> are banned. Disease claims are an illegal wall we never touch.</li>
+          <li><b>Minimum dose, maximum provable effect.</b> Anti-kitchen-sink. If we can't prove it at an accurate dose, it doesn't go in.</li>
+          <li><b>Branded ingredients only.</b> Named, clinically-studied forms — the honesty position and the thing third-party rubrics score.</li>
+          <li><b>Taste wins</b> — over everything except dose-honesty.</li>
+          <li><b>Proof over promise.</b> Honesty is a claim about us; proof is verifiable without trusting us. The highest-impact proof is the kind we don't control. We are building a compounding proof record, not just a brand that says it's honest.</li>
+          <li><b>Never fake a sensation.</b> A decoy felt-effect is banned; a real, disclosed one is allowed. The dose-mirror narrates the dose delivered and the population science — never the user's internal state.</li>
+          <li><b>The relay rule.</b> Trust flows through people. Our job is to equip the person who vouches for us — never to embarrass the one who recommended it.</li>
+        </ul>
+        <p class="body" style="font-size:13px;color:var(--muted);">The anti-gimmick test for any tactic: <b>"would a dishonest competitor do this too?"</b> If yes, it's marketing, not trust.</p>
+        <div class="pager"><button class="go-prev" data-go="4"><span class="dir">← Back</span><div class="ttl">What we make</div></button><button class="go-next next" data-go="6"><span class="dir">Next →</span><div class="ttl">Who it's for</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 6 — WHO IT'S FOR -->
+    <section class="chapter" data-ch="6">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 06</div><h2>Who it's for</h2><div class="sub">Seeds earn credibility; one audience earns revenue; scale comes last.</div></div>
+        <ul class="clean">
+          <li><b>Credibility seeds (not revenue):</b> first responders (borrowed authority / trust) and the skeptic-stacker / biohacker (proof and data). They make us believable; they are not the paying engine.</li>
+          <li><b>Revenue audience:</b> the belief-buyer with a halo — <b>veteran / tactical-fitness</b> (dense, loyal, halo-perfect).</li>
+          <li><b>The cabinet-skeptic:</b> people who see the cabinet itself as the problem — overwhelmed by bottles, suspicious of the stack, wanting to <b>simplify and consolidate</b>. The origin speaks straight to them; Signal is the editor's pick that replaces the clutter.</li>
+          <li><b>Scale:</b> longevity / affluent-wellness, last — only after re-order proof.</li>
+        </ul>
+        <p class="body" style="font-size:13px;color:var(--muted);">The buyer the emotional origin story actually moves is the <b>caregiver / worried-well</b>. The stacker is a <b>conversion</b> segment (de-risk the skeptic <em>after</em> the hook), not a cold-acquisition funnel. One door — the cabinet — both walk through; after it, the stories fork and never blend.</p>
+        <div class="pager"><button class="go-prev" data-go="5"><span class="dir">← Back</span><div class="ttl">What we believe — the rules</div></button><button class="go-next next" data-go="7"><span class="dir">Next →</span><div class="ttl">The moat</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 7 — THE MOAT -->
+    <section class="chapter" data-ch="7">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 07</div><h2>The moat</h2><div class="sub">Why this is defensible — and why it isn't the molecule.</div></div>
+        <p class="body">Signal has <b>no thesis moat</b> — "foundation-first cellular energy" is claimed ground, and no biology is unowned. The defensible position is an <b>execution moat: trust, externalized as a compounding proof record.</b> It builds slowly and is lost instantly, which is exactly what makes it hard to copy — a competitor would have to run the same honest discipline for the same length of time, and their business model usually won't let them.</p>
+        <p class="body"><b>Be precise about what trust does — this is load-bearing.</b> Market research refuted the comfortable assumption that premium brands "compete primarily on trust." They don't: people <b>buy</b> on product attributes — dose, price, format, brand aesthetic. <b>Trust doesn't make people buy us; it makes them not-leave, and it grants permission to be considered.</b> It is a <b>retention and defense</b> asset, not an acquisition engine. The correction in one line: <b>honesty won't sell the product — it keeps the ones who already came.</b> Acquisition runs on relay + the product itself (doc 04); trust is what makes the voucher safe to give and the customer slow to leave.</p>
+        <p class="body">Concretely, the moat is built from <b>inputs, not diagnostics</b>: lot-specific third-party COAs, formulation to the strictest partner rubrics, sport certification, and a public proof record that starts before the storefront does. We don't build the measurement business — we get <b>recommended</b> by the people who do.</p>
+
+        <p class="sub-h">The three edges that matter most</p>
+        <ul class="clean">
+          <li><b>Adherence</b> — we compete on whether the vessel ends up empty. That is why the format is a <b>chew</b>, why taste is the priority, and why it fuses into a daily ritual. The <b>vessel holds 30 individually-packed daily packages</b> and is built to live on the counter — visually appealing on purpose, so it stays in sight; an empty vessel means a finished month.</li>
+          <li><b>Bioavailability</b> — proof of <b>absorption</b>, not just content. The thesis is built on proving the <b>pathway</b>. Most brands lean on a COA, but a COA only proves what is <em>in</em> the product — not what the body actually takes up. Proving the pathway is open ground worth owning. <span style="color:var(--red);">(How we demonstrate absorption is an open research item.)</span></li>
+          <li><b>Provenance</b> — because NNB manufactures several of our actives in-house, we can credibly claim <b>single-origin, traceable-to-the-lot</b> inputs. Most brands white-label and do not actually know their own supply chain. We do — and that is leverage.</li>
+        </ul>
+        <div class="pager"><button class="go-prev" data-go="6"><span class="dir">← Back</span><div class="ttl">Who it's for</div></button><button class="go-next next" data-go="8"><span class="dir">Next →</span><div class="ttl">What we will not do</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 8 — WHAT WE WILL NOT DO -->
+    <section class="chapter" data-ch="8">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 08</div><h2>What we will not do</h2><div class="sub">The guardrails. The clearest way to know what Signal is, is to know what it refuses.</div></div>
+        <ul class="clean">
+          <li><b>No outcome theater</b> — no pill-X-gives-result-Y promises, no hype verbs, no disease claims.</li>
+          <li><b>No felt-effect gimmick</b> — no stimulant or drug bolted on to manufacture a buzz (paraxanthine and NMN-as-mirror were both rejected). The felt layer is honest or it isn't there.</li>
+          <li><b>No quiet under-dosing</b> — taste never wins over dose-honesty; we disclose every trim.</li>
+          <li><b>No retention maze</b> — the subscription is one tap to pause or cancel; we never trap the person a voucher sent us. Feeling trapped is the category's biggest reason people quit — honest retention compounds, trapped retention rots.</li>
+          <li><b>No fabricated read-out</b> — we never narrate a feeling the user is "supposed" to have.</li>
+          <li><b>Never use the man</b> — the founder's personal wound never becomes ad copy; only the impersonal mechanism flows downhill into marketing.</li>
+          <li><b>No greenwashing</b> — no "recyclable" / "sustainable" claims we can't stand behind.</li>
+          <li><b>No second hero</b> — the trust SKU and any future product stay companions; one flagship.</li>
+        </ul>
+        <div class="pager"><button class="go-prev" data-go="7"><span class="dir">← Back</span><div class="ttl">The moat</div></button><button class="go-next next" data-go="9"><span class="dir">Next →</span><div class="ttl">The company &amp; the people</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 9 — THE COMPANY & THE PEOPLE -->
+    <section class="chapter" data-ch="9">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 09</div><h2>The company &amp; the people</h2><div class="sub">Who's building it — and how the names are used.</div></div>
+        <p class="body"><img class="insdr-logo" src="../assets/insdr_logo_dark.png" alt="INSDR"> <b><span class="wellness">Wellness</span></b> is the parent company (the cellcare company); <b>Signal</b> is its first sub-brand with a product to sell. The founding team is four: <b>Damon</b> (founder), <b>Gaby</b>, <b>Vanness Wu</b>, and <b>Frank</b>. (Roles, equity, and capital live in the investor Team doc, not here.)</p>
+        <p class="body"><b>Founder visibility.</b> Damon is the known, attributable founder — but not the day-to-day public face (anonymous and authentic is a contradiction). His lack of a formulation background is an honesty asset, not a gap: he is the customer's proxy, not the lab coat.</p>
+        <p class="body"><b>The credential.</b> Sean Wells is the formulation credential — used as "formulated by," an authority signal, never a paid endorsement. The rule: if a name can't be used honestly, we drop it rather than dress it up (vague "world's best" claims are banned).</p>
+        <p class="body" style="font-size:13px;color:var(--muted);"><b>Zone Halo</b> (referenced throughout) is our formulation &amp; regulatory partner; the "two-day" is the working session where the formula, doses, and final active count get locked.</p>
+        <p class="xref"><img class="insdr-logo" src="../assets/insdr_logo_dark.png" alt="INSDR"> <b><span class="wellness">Wellness</span></b> · the cellcare company · Confidential — do not share.</p>
+        <div class="pager"><button class="go-prev" data-go="8"><span class="dir">← Back</span><div class="ttl">What we will not do</div></button><button class="go-next next" data-go="10"><span class="dir">Next →</span><div class="ttl">Open / Decisions</div></button></div>
+      </div>
+    </section>
+
+    <!-- CH 10 — OPEN / DECISIONS -->
+    <section class="chapter" data-ch="10">
+      <div class="wrap">
+        <div class="chhead"><div class="n">Chapter 10</div><h2>Open / Decisions</h2><div class="sub">Open / unresolved — surfaced, not hidden.</div></div>
+        <div class="flags">
+          <div class="lbl">Open / unresolved — surfaced, not hidden</div>
+          <ul>
+            <li><b>Active count + felt-active form</b> — final count, the felt active's branded form, dose, and chew-stability are all <b>Zone Halo two-day</b> decisions, not desk decisions.</li>
+            <li><b>Felt-layer viability</b> — the felt active is the <b>upside, not the floor</b>. If the formula doesn't deliver a perceptible lift, the dose-mirror and ritual are the guaranteed floor.</li>
+            <li><b>Proving the pathway</b> — how we demonstrate absorption / bioavailability beyond a content-only COA is an open research item.</li>
+            <li><b>The proof RCT gap</b> — we have branded-ingredient pedigree but no Signal-specific clinical trial yet; the honest line is that it gets funded by revenue, not dilution.</li>
+          </ul>
+        </div>
+        <p class="xref">Source of truth → <b>01 Foundation Brief</b>. Everything else ladders to this.</p>
+        <div class="pager"><button class="go-prev" data-go="9"><span class="dir">← Back</span><div class="ttl">The company &amp; the people</div></button><button disabled class="next"><span class="dir">End</span><div class="ttl">Chapter 10 of 10</div></button></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  function checkPass(e){e.preventDefault();if(document.getElementById('gp').value==='54321'){document.body.classList.remove('locked');document.getElementById('gate').style.display='none';}return false;}
+  var navBtns=document.querySelectorAll('#nav button');
+  var chapters=document.querySelectorAll('.chapter');
+  function show(ch){
+    chapters.forEach(function(s){s.classList.toggle('active',s.dataset.ch===String(ch));});
+    navBtns.forEach(function(b){b.classList.toggle('active',b.dataset.ch===String(ch));});
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  navBtns.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.ch);});});
+  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.go);});});
+  var vt=document.getElementById('viewToggle');
+  if(vt){vt.addEventListener('click',function(){var on=document.body.classList.toggle('showall');vt.textContent=on?'❐ Back to chapters':'▤ Read as one page';if(on)window.scrollTo({top:0});});}
+  navBtns.forEach(function(b){b.addEventListener('click',function(){if(document.body.classList.contains('showall')){var t=document.querySelector('.chapter[data-ch="'+b.dataset.ch+'"]');if(t)t.scrollIntoView({behavior:'smooth'});}});});
+</script>
+</body>
+</html>
