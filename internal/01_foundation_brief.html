@@ -100,6 +100,21 @@
   .origin .kernel{color:#E8B4AC;font-style:italic;}
   .origin .send{font-family:var(--display);font-weight:400;font-size:23px;letter-spacing:.03em;color:#fff;}
 
+  /* bedrock — the "what will never change" anchor, highlighted to stand out */
+  .bedrock{background:linear-gradient(157deg,#2c221d,#241B17);border:1px solid #3a2c24;border-left:5px solid var(--gold);border-radius:14px;padding:24px 28px;margin:20px 0 24px;color:var(--bone);box-shadow:0 8px 30px rgba(36,27,23,.18);}
+  .bedrock .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:13px;}
+  .bedrock .anchor{font-family:var(--display);font-weight:400;font-size:28px;line-height:1.08;letter-spacing:.01em;color:#fff;margin-bottom:9px;}
+  .bedrock .anchor .hl{color:#E8B4AC;}
+  .bedrock .lede{font-size:13px;color:var(--taupe);margin-bottom:16px;}
+  .bedrock ol{list-style:none;counter-reset:bd;margin:0;}
+  .bedrock li{position:relative;padding:11px 0 11px 40px;border-top:1px solid rgba(216,204,193,.16);font-size:13.5px;color:#E8DFD6;counter-increment:bd;line-height:1.5;}
+  .bedrock li::before{content:counter(bd);position:absolute;left:0;top:11px;width:24px;height:24px;border-radius:50%;background:rgba(168,132,90,.22);color:var(--gold);font-family:var(--mono);font-size:11px;display:flex;align-items:center;justify-content:center;}
+  .bedrock li b{color:#fff;}
+  .bedrock li.key{background:rgba(173,66,54,.16);border-radius:9px;border-top:none;margin:8px -12px;padding:12px 16px 12px 50px;}
+  .bedrock li.key::before{left:14px;top:12px;background:var(--red);color:#fff;}
+  .bedrock .keytag{font-family:var(--mono);font-size:8.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:var(--red);color:#fff;padding:2px 7px;border-radius:3px;margin-left:8px;vertical-align:middle;}
+  .bedrock .tie{font-size:12.5px;color:var(--taupe);margin:15px 0 0;padding-top:13px;border-top:1px solid rgba(216,204,193,.16);}
+
   /* photos */
   figure.photo{margin:18px 0 22px;}
   figure.photo img{border-radius:12px;border:1px solid var(--line);width:100%;}
@@ -196,6 +211,19 @@
       <div class="wrap">
         <p class="lead">This brief is the <b>settled canon</b> — the decisions that define what Signal is, gathered in one place. Every other document — the Manifesto, the Codex, and the rest — is built on it.</p>
         <p class="lead">If a future document contradicts this brief, the document is wrong. Where the brief itself is wrong or incomplete, we fix <em>it</em> first — then build.</p>
+
+        <div class="bedrock">
+          <div class="lbl">What will never change</div>
+          <div class="anchor">Our customer will always need to trust that what they put in their body is <span class="hl">real, worth it, and easy to keep doing</span> — and that need only grows as the world gets noisier.</div>
+          <div class="lede">The permanent customer truth this whole company is built on. Three needs never change — one is the keystone.</div>
+          <ol>
+            <li class="key"><b>Trust — without having to become an expert.</b><span class="keytag">keystone</span> The only one of the three that grows <i>scarcer</i> as marketing gets louder and machine-made — and the one a hype-built competitor structurally can't supply. An invariant that is also a moat.</li>
+            <li><b>Effortless.</b> No one ever wants a harder routine; as the shelf multiplies, the need for someone to simplify and decide only intensifies.</li>
+            <li><b>Real — to know the effort isn't wasted.</b> The "is it actually working?" need. Proof is how that trust gets earned — which is why we answer it with evidence, never a manufactured buzz.</li>
+          </ol>
+          <p class="tie">Everything that follows — the adherence spine, the proof moat, "name the dose, not the hype," cellcare itself — is a downstream answer to these three.</p>
+        </div>
+
         <div class="card">
           <h4>How to read this</h4>
           <p>Tags run through the doc. <b><span class="pill lock">Locked</span></b> = decided, don't reopen. <b><span class="pill pend">Pending</span></b> = a <b>Zone Halo two-day</b> decision (final doses, final active count, the felt-active form). A working value next to Pending is a placeholder, never quote it as final.</p>
