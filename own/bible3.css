@@ -1,0 +1,207 @@
+/* ============================================================
+   OWN. — Operating Bible 3  ·  shared stylesheet
+   Visual system: oxblood editorial on black.
+   Type: Bebas Neue (structure) · Bodoni Moda (seductive editorial)
+         · Newsreader (body). Accent: oxblood. Product color: violet.
+   Restyle the whole bible from this one file.
+   ============================================================ */
+
+:root{
+  --black:#0B0A0C;
+  --panel:#141115;
+  --paper:#ECE7DD;        /* warm off-white type */
+  --oxblood:#7C0E1B;      /* the accent — blood, wine, lip */
+  --oxblood-bright:#A6182A;
+  --wine-deep:#460910;
+  --violet:#6B34A0;       /* legacy product-color token */
+  --indigo:#1E2F9E;       /* deep product indigo (the drink / fills) */
+  --indigo-mark:#3B49CC;  /* SIGNATURE indigo — the OWN wordmark + the drink.
+                             Three-color system: black=base · oxblood=editorial accent · indigo=signature */
+  --muted:#948A80;        /* warm gray */
+  --line:#2A2429;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#050506;color:var(--paper);
+  font-family:"Newsreader",Georgia,serif;-webkit-font-smoothing:antialiased}
+
+/* ---- the page (landscape spread) ---- */
+.spread{
+  position:relative;width:1400px;height:900px;margin:26px auto;
+  background:var(--black);overflow:hidden;
+  display:grid;grid-template-columns:1fr 1fr;grid-template-rows:900px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+}
+/* film grain over everything */
+.spread::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.11;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode:overlay;
+}
+.gutter{position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);opacity:.5}
+.page{position:relative;padding:56px 60px;display:flex;flex-direction:column;height:100%}
+
+/* corner labels — Bebas, letterspaced */
+.label{font-family:"Bebas Neue",sans-serif;letter-spacing:.28em;font-size:13px;
+  color:var(--muted);text-transform:uppercase}
+.label.red{color:var(--oxblood-bright)}
+.toprow{display:flex;justify-content:space-between;align-items:baseline}
+.botrow{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end}
+
+/* big Bebas chapter number */
+.cnum{font-family:"Bebas Neue",sans-serif;font-size:150px;line-height:.8;
+  color:var(--oxblood);letter-spacing:.01em}
+
+/* editorial Didone headline */
+.headline{font-family:"Bodoni Moda",serif;font-weight:600;line-height:.98;
+  font-size:64px;letter-spacing:-.01em;margin-top:6px}
+.headline em{font-style:italic;font-weight:500;color:var(--oxblood-bright)}
+
+/* seductive pull-line, Didone italic */
+.pull{font-family:"Bodoni Moda",serif;font-style:italic;font-weight:400;
+  font-size:34px;line-height:1.18;color:var(--paper)}
+.pull .hot{color:var(--oxblood-bright)}
+
+/* body copy */
+.body{font-family:"Newsreader",serif;font-weight:300;font-size:19px;
+  line-height:1.62;color:#D8D2C6;max-width:46ch}
+.body p+p{margin-top:14px}
+.body em{font-style:italic;color:var(--paper)}
+.kicker{font-family:"Bebas Neue",sans-serif;letter-spacing:.24em;font-size:15px;
+  color:var(--oxblood-bright);text-transform:uppercase;margin-bottom:18px}
+
+/* hard fact as a design object — giant Bebas figure */
+.figwrap{display:flex;flex-direction:column;justify-content:center;height:100%}
+.fig{font-family:"Bebas Neue",sans-serif;line-height:.78;letter-spacing:.005em}
+.fig .n{font-size:340px;display:block}
+.fig .n.dim{color:#3A3338}
+.fig .n.red{color:var(--oxblood)}
+.fig .cap{font-family:"Newsreader",serif;font-style:italic;font-weight:300;
+  font-size:22px;color:#CFC8BC;margin-top:8px}
+.rule{height:1px;background:var(--line);margin:26px 0}
+
+/* big editorial statement (hero-left pages) */
+.statement{font-family:"Bodoni Moda",serif;font-weight:600;font-size:54px;
+  line-height:1.04;letter-spacing:-.01em;color:var(--paper)}
+.statement em{font-style:italic;font-weight:500;color:var(--oxblood-bright)}
+.underline{width:120px;height:2px;background:var(--oxblood);margin-top:30px}
+
+/* numbered list device (e.g. the two enemies) */
+.enemies{list-style:none;margin-top:8px}
+.enemies li{display:flex;gap:20px;padding:20px 0;border-top:1px solid var(--line)}
+.enemies li:last-child{border-bottom:1px solid var(--line)}
+.enemies .en-n{font-family:"Bebas Neue",sans-serif;font-size:46px;line-height:.8;
+  color:var(--oxblood);flex:0 0 auto;width:52px}
+.enemies .en-t{font-family:"Bebas Neue",sans-serif;letter-spacing:.14em;font-size:20px;
+  text-transform:uppercase;color:var(--paper);margin-bottom:5px}
+.enemies .en-d{font-family:"Newsreader",serif;font-weight:300;font-size:17px;
+  line-height:1.5;color:#CBC4B8}
+
+/* ghost watermark word */
+.ghost{position:absolute;font-family:"Bodoni Moda",serif;font-style:italic;
+  font-weight:400;color:#ffffff;opacity:.035;font-size:420px;line-height:.7;
+  right:-30px;bottom:-70px;pointer-events:none;user-select:none}
+
+/* ---- cover ---- */
+.cover{grid-template-columns:1fr}
+.cover .page{padding:70px 80px;justify-content:space-between}
+/* OWN wordmark — ALWAYS indigo letters, WHITE period. Use everywhere "OWN." appears. */
+.brandmark{font-family:"Bebas Neue",sans-serif;font-size:40px;letter-spacing:.12em;color:var(--indigo-mark)}
+.brandmark .dot{color:#fff}
+/* INSDR parent lockup — ALWAYS the logo image, never typed. Scales with font-size. */
+.insdr{height:.82em;width:auto;display:inline-block;vertical-align:baseline;
+  position:relative;top:.04em;margin:0 .18em}
+
+/* inline wordmark for running text / labels — ALWAYS Bebas Neue, inherits size */
+.wm{font-family:"Bebas Neue",sans-serif;color:var(--indigo-mark);letter-spacing:.04em}
+.wm .dot{color:#fff}
+
+/* full-bleed hero image page (photography) */
+.page.bleed{padding:0;overflow:hidden}
+.heroimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 32%}
+.scrim{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top, rgba(8,7,9,.92) 0%, rgba(8,7,9,0) 44%),
+             linear-gradient(to bottom, rgba(8,7,9,.6) 0%, rgba(8,7,9,0) 22%)}
+.bleed-pad{position:absolute;left:0;right:0;padding:44px 46px;z-index:2}
+.bleed-pad.top{top:0}
+.bleed-pad.bot{bottom:0}
+.bleed-cap{font-family:"Bodoni Moda",serif;font-style:italic;font-weight:500;
+  font-size:42px;line-height:1.04;color:#fff;letter-spacing:-.01em;
+  text-shadow:0 2px 22px rgba(0,0,0,.55);margin-bottom:18px}
+.cover-hero{font-family:"Bodoni Moda",serif;font-weight:600;font-size:150px;
+  line-height:.92;letter-spacing:-.015em;color:var(--paper)}
+.cover-hero em{font-style:italic;font-weight:500;color:var(--oxblood-bright)}
+.cover-sub{font-family:"Bebas Neue",sans-serif;letter-spacing:.26em;font-size:20px;
+  color:var(--muted);margin-top:26px}
+.stamp{border:1px solid var(--oxblood);color:var(--oxblood-bright);
+  font-family:"Bebas Neue",sans-serif;letter-spacing:.22em;font-size:13px;
+  padding:7px 12px;display:inline-block}
+
+/* ---- product moment: the indigo glass (real photo, bg-removed) ---- */
+.glassstage{position:relative;display:flex;align-items:center;justify-content:center;height:100%}
+.glassstage::before{content:"";position:absolute;width:430px;height:430px;border-radius:50%;
+  background:radial-gradient(circle, rgba(43,63,208,.42), rgba(43,63,208,0) 66%);filter:blur(18px)}
+.glassimg{position:relative;z-index:1;height:560px;width:auto;
+  filter:drop-shadow(0 26px 50px rgba(0,0,0,.65))}
+/* concentric "signal" rings behind the glass — the tell broadcasting */
+.signal-rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.signal-rings span{position:absolute;border-radius:50%;border:1px solid rgba(59,73,204,.30)}
+.signal-rings span:nth-child(1){width:360px;height:360px;opacity:.9}
+.signal-rings span:nth-child(2){width:520px;height:520px;opacity:.55}
+.signal-rings span:nth-child(3){width:680px;height:680px;opacity:.28}
+.glassimg.badge{height:440px}
+.swatchrow{display:flex;gap:14px;margin-top:26px}
+.sw{width:46px;height:46px;border:1px solid var(--line)}
+.sw.blk{background:#0B0A0C}.sw.ox{background:var(--oxblood)}.sw.pur{background:var(--indigo)}
+
+/* ---- the Slow-In ramp: half-pack -> full-pack sachet schematic ---- */
+.ramp{display:flex;gap:18px;align-items:flex-end;margin-top:22px}
+.step{flex:1;text-align:center}
+.pack{position:relative;width:100%;max-width:62px;height:150px;margin:0 auto;
+  border:1px solid var(--line);border-radius:5px;background:#0E0D10;overflow:hidden}
+.pack .seam{position:absolute;top:0;left:0;right:0;height:12px;
+  background:repeating-linear-gradient(90deg,#2A2429 0 3px,transparent 3px 6px)}
+.pack .fill{position:absolute;left:0;right:0;bottom:0;
+  background:linear-gradient(180deg,#2B3FD0 0%,#1E2F9E 60%,#141F6E 100%)}
+.step .amt{font-family:"Bebas Neue",sans-serif;letter-spacing:.14em;font-size:17px;
+  color:var(--paper);margin-top:12px}
+.step .when{font-family:"Bebas Neue",sans-serif;letter-spacing:.2em;font-size:11px;
+  color:var(--muted);margin-top:3px}
+.swcap{font-family:"Bebas Neue",sans-serif;letter-spacing:.2em;font-size:11px;color:var(--muted);margin-top:8px}
+
+/* ---- the receipt: a faux ingredient label (07) ---- */
+.receipt{background:#100E12;border:1px solid var(--line);border-radius:4px;padding:26px 28px}
+.rc-head{font-family:"Bebas Neue",sans-serif;letter-spacing:.18em;font-size:18px;color:var(--paper)}
+.rc-sub{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;color:var(--muted);
+  margin-top:3px;letter-spacing:.02em}
+.rc-line{height:1px;background:var(--line);margin:16px 0}
+.rc-row{display:flex;align-items:baseline;gap:8px;font-family:ui-monospace,"SF Mono",Menlo,monospace;
+  font-size:13px;color:#D8D2C6;margin:10px 0}
+.rc-row .dots{flex:1;border-bottom:1px dotted #4a444a;transform:translateY(-3px)}
+.rc-row .amt{white-space:nowrap;color:var(--paper)}
+.rc-note{font-family:"Newsreader",serif;font-style:italic;font-size:14px;color:#CBC4B8;
+  margin-top:14px;line-height:1.45}
+.rc-them{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--muted);
+  margin-top:18px;padding-top:15px;border-top:1px solid var(--line);line-height:1.5}
+
+/* ---- membership control: pause beats cancel (08) ---- */
+.member{background:#100E12;border:1px solid var(--line);border-radius:8px;padding:28px 30px}
+.mb-top{display:flex;justify-content:space-between;align-items:center}
+.mb-title{font-family:"Bebas Neue",sans-serif;letter-spacing:.14em;font-size:19px;color:var(--paper)}
+.mb-status{display:flex;align-items:center;gap:10px}
+.mb-dot{width:9px;height:9px;border-radius:50%;background:#4ea36b;box-shadow:0 0 10px #4ea36b}
+.mb-state{font-family:"Bebas Neue",sans-serif;letter-spacing:.18em;font-size:14px;color:#7FBF97}
+.mb-line{height:1px;background:var(--line);margin:22px 0}
+.mb-lead{font-family:"Newsreader",serif;font-weight:300;font-size:17px;color:#D8D2C6;line-height:1.5}
+.mb-lead em{font-style:italic;color:var(--paper)}
+.mb-actions{display:flex;gap:12px;margin-top:22px}
+.mb-btn{font-family:"Bebas Neue",sans-serif;letter-spacing:.12em;font-size:14px;padding:12px 20px;
+  border:1px solid var(--line);color:var(--paper);border-radius:5px}
+.mb-btn.primary{background:var(--oxblood);border-color:var(--oxblood);color:#fff}
+.mb-fine{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;color:var(--muted);
+  margin-top:16px;letter-spacing:.02em}
+
+@media print{
+  @page{size:1400px 900px;margin:0}
+  body{background:var(--black)}
+  .spread{margin:0;box-shadow:none;page-break-after:always}
+}

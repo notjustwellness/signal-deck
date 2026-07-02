@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>OWN. — Operating Bible</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="bible3.css">
+
+<style id="own-gate-style">
+#gate{position:fixed;inset:0;background:#0B0A0C;z-index:99999;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;color:#ECE7DD;padding:40px;text-align:center;
+  font-family:"Newsreader",Georgia,serif}
+#gate .go{font-family:"Bebas Neue",sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+  color:#A6182A;margin-bottom:30px;display:flex;align-items:center;gap:.45em;justify-content:center;flex-wrap:wrap}
+#gate .go img{height:11px;width:auto;opacity:.85}
+#gate .gwm{font-family:"Bebas Neue",sans-serif;font-size:104px;letter-spacing:.08em;color:#3B49CC;line-height:1;margin-bottom:12px}
+#gate .gwm .dot{color:#fff}
+#gate .gsub{font-style:italic;font-size:15px;color:#948A80;margin-bottom:34px;letter-spacing:.02em}
+#gate form{display:flex;flex-direction:column;align-items:center;gap:14px}
+#gate input{background:rgba(236,231,221,.06);border:1px solid #2A2429;border-radius:7px;color:#ECE7DD;
+  padding:14px 20px;font-size:15px;font-family:inherit;width:288px;text-align:center;outline:none;letter-spacing:.06em}
+#gate input:focus{border-color:#A6182A}
+#gate button{font-family:"Bebas Neue",sans-serif;background:#7C0E1B;color:#fff;border:none;border-radius:7px;
+  padding:13px 36px;font-size:15px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .15s}
+#gate button:hover{background:#A6182A}
+#gate .gerr{color:#A6182A;font-size:13px;margin-top:6px;opacity:0;font-style:italic}
+#gate .gerr.show{opacity:1}
+#gate .gfoot{position:absolute;bottom:36px;font-family:"Bebas Neue",sans-serif;font-size:11px;
+  letter-spacing:.28em;text-transform:uppercase;color:#4a444a}
+body.locked{overflow:hidden;height:100vh}
+body.locked>*:not(#gate){display:none!important}
+</style>
+</head>
+<body class="locked">
+
+<div id="gate">
+  <div class="go">An <img src="insdr_logo.png" alt="INSDR"> Company · Confidential</div>
+  <div class="gwm">OWN<span class="dot">.</span></div>
+  <div class="gsub">This page is private. Enter the passphrase to continue.</div>
+  <form onsubmit="return checkPass(event)">
+    <input id="gate-pass" type="password" placeholder="passphrase" autocomplete="off" autofocus>
+    <button type="submit">Enter</button>
+    <div id="gate-error" class="gerr">Not quite. Try again.</div>
+  </form>
+  <div class="gfoot">An INSDR Company</div>
+</div>
+
+<!-- from chapters_00-01.html -->
+<!-- ============ 00 · COVER — START UPSTREAM ============ -->
+<section class="spread cover">
+  <div class="page">
+    <div class="toprow">
+      <span class="brandmark">OWN<span class="dot">.</span></span>
+      <span class="label">An <img class="insdr" src="insdr_logo.png" alt="INSDR"> Company · Operating Bible · Vol. 01</span>
+    </div>
+
+    <div>
+      <div class="label red" style="margin-bottom:22px">The most overlooked input to aging well</div>
+      <div class="cover-hero">Start<br><em>upstream.</em></div>
+      <div class="cover-sub">Proven. Unhyped. Felt now.</div>
+    </div>
+
+    <div class="botrow">
+      <span class="stamp">Placeholder Name — <span class="wm">OWN<span class="dot">.</span></span></span>
+      <span class="label">The Customer Experience, Start to Finish</span>
+    </div>
+  </div>
+  <span class="ghost">own.</span>
+</section>
+
+
+<!-- ============ 01 · THE FLIP ============ -->
+<section class="spread">
+  <div class="gutter"></div>
+
+  <!-- LEFT: the hero statement -->
+  <div class="page">
+    <div class="toprow">
+      <span class="label">Chapter 01</span>
+      <span class="label red">The Flip</span>
+    </div>
+    <div style="margin:auto 0">
+      <div class="statement">Everyone's chasing<br>the <em>moonshot.</em><br>The one with the<br>receipts is the one<br>nobody's selling you.</div>
+      <div class="underline"></div>
+    </div>
+    <div class="botrow">
+      <span class="label red">Make the proven thing the wanted thing</span>
+      <span class="label">01 · 01</span>
+    </div>
+  </div>
+
+  <!-- RIGHT: the argument -->
+  <div class="page">
+    <div class="toprow"><span class="label"></span><span class="label">Two enemies, one job</span></div>
+    <div style="margin-top:24px">
+      <div class="cnum">01.</div>
+      <h1 class="headline">The <em>flip.</em></h1>
+    </div>
+
+    <div style="margin-top:26px">
+      <div class="kicker">The Point</div>
+      <div class="pull">Fiber is the most overlooked, least-sexy thing in the cabinet. Making it the <span class="hot">most wanted</span> is the whole game.</div>
+    </div>
+
+    <ul class="enemies">
+      <li>
+        <span class="en-n">01</span>
+        <span>
+          <span class="en-t">The Cliché</span>
+          <span class="en-d">Fiber got filed under "regularity" — a beige, geriatric afterthought. We drag it upstream, to energy, cravings, and the long game.</span>
+        </span>
+      </li>
+      <li>
+        <span class="en-n">02</span>
+        <span>
+          <span class="en-t">The Hype Machine</span>
+          <span class="en-d">Everything else in wellness screams a promise you can't feel. We go the other way: quiet, proven, and honest. Restraint is the seduction.</span>
+        </span>
+      </li>
+    </ul>
+
+    <div class="botrow">
+      <span class="label red">Fiber is the next protein — a number people will start to watch</span>
+      <span class="label">01 · 02</span>
+    </div>
+  </div>
+  <span class="ghost">flip.</span>
+</section>
+
+<!-- from chapters_02-03.html -->
+<!-- ============ 02 · THE PERSON ============ -->
+<section class="spread">
+  <div class="gutter"></div>
+
+  <!-- LEFT: the fact as a design object -->
+  <div class="page">
+    <div class="toprow">
+      <span class="label">Chapter 02</span>
+      <span class="label red">The Person</span>
+    </div>
+    <div class="figwrap">
+      <div class="fig">
+        <span class="n dim">2</span>
+        <span class="cap">grams of fiber in your $99 all-in-one.</span>
+      </div>
+      <div class="rule" style="max-width:240px"></div>
+      <div class="fig">
+        <span class="n red">30</span>
+        <span class="cap">grams your body is actually asking for.</span>
+      </div>
+    </div>
+    <div class="botrow"><span class="label"><span class="wm">OWN<span class="dot">.</span></span></span><span class="label">02 · 01</span></div>
+  </div>
+
+  <!-- RIGHT: who they are -->
+  <div class="page">
+    <div class="toprow"><span class="label"></span><span class="label">Acquisition, not identity</span></div>
+    <div style="margin-top:24px">
+      <div class="cnum">02.</div>
+      <h1 class="headline">They found<br>everything but<br>the <em>fiber.</em></h1>
+    </div>
+
+    <div style="margin-top:28px">
+      <div class="kicker">The Point</div>
+      <div class="pull">Our customer already spends <span class="hot">$99 a month</span> optimizing everything — and skips the one input with fifty years of proof.</div>
+
+      <div class="body" style="margin-top:22px">
+        <p>They have the money, the discipline, the shelf of powders. What their all-in-one leaves out is fiber — the least glamorous, most-studied thing in the cabinet.</p>
+        <p>So we don't argue with the habit; we enter through the gap it leaves. The all-in-one is the door. What keeps them is the <em>feeling</em> — steadier, no crash, fewer cravings — and a label that hides nothing. The gap is how we're found. It is never who we are.</p>
+      </div>
+    </div>
+
+    <div class="botrow">
+      <span class="label red">Enter through the gap · retain on the feeling</span>
+      <span class="label">02 · 02</span>
+    </div>
+  </div>
+  <span class="ghost">gap.</span>
+</section>
+
+
+<!-- ============ 03 · THE PROMISE ============ -->
+<section class="spread">
+  <div class="gutter"></div>
+
+  <!-- LEFT: the two-layer sell device -->
+  <div class="page">
+    <div class="toprow">
+      <span class="label">Chapter 03</span>
+      <span class="label red">The Promise</span>
+    </div>
+    <div style="margin:auto 0">
+      <div class="kicker">The two-layer sell</div>
+      <ul class="enemies">
+        <li>
+          <span class="en-n">01</span>
+          <span>
+            <span class="en-t">Pull · This Week</span>
+            <span class="en-d">Steadier energy, no afternoon crash, fewer cravings. The relief you can actually feel — fast, felt, provable. This is what sells.</span>
+          </span>
+        </li>
+        <li>
+          <span class="en-n">02</span>
+          <span>
+            <span class="en-t">Frame · For Decades</span>
+            <span class="en-d">The most-proven foundation for aging well. The depth, the why, the premium. This is what it means — never what we promise.</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div class="botrow">
+      <span class="label red">Lead with relief · halo with longevity</span>
+      <span class="label">03 · 01</span>
+    </div>
+  </div>
+
+  <!-- RIGHT: the discipline -->
+  <div class="page">
+    <div class="toprow"><span class="label"></span><span class="label">Never sell the unfeelable</span></div>
+    <div style="margin-top:24px">
+      <div class="cnum">03.</div>
+      <h1 class="headline">The <em>promise.</em></h1>
+    </div>
+
+    <div style="margin-top:26px">
+      <div class="kicker">The Point</div>
+      <div class="pull">We lead with the relief you feel this week and frame it with the decades you're building — and we <span class="hot">never</span> sell the part you can't feel.</div>
+
+      <div class="body" style="margin-top:22px">
+        <p>Aging is the ultimate unfeelable, and prevention is the hardest sell in wellness. So longevity is our <em>frame</em>, never our claim. We earn the belief with what lands in days, then let the bigger reason hold the room.</p>
+      </div>
+    </div>
+
+    <div class="rule"></div>
+    <div class="pull" style="font-size:28px">A sign, <span class="hot">not</span> a promise.</div>
+
+    <div class="botrow">
+      <span class="label red">Open the door on the need — never board the train</span>
+      <span class="label">03 · 02</span>
+    </div>
+  </div>
+  <span class="ghost">promise.</span>
+</section>
+
+<!-- from chapters_04-05.html -->
+<!-- ============ 04 · THE FIRST GLASS ============ -->
+<section class="spread">
+  <div class="gutter"></div>
+
+  <!-- LEFT: the violet glass -->
+  <div class="page">
+    <div class="toprow">
+      <span class="label">Chapter 04</span>
+      <span class="label red">The First Glass</span>
+    </div>
+    <div class="glassstage">
+      <img class="glassimg" src="product_glass.png" alt="A glass of the prepared drink, deep indigo over ice">
+    </div>
+    <div class="botrow">
+      <span class="label red">One sachet · one glass · it turns indigo</span>
+      <span class="label">04 · 01</span>
+    </div>
+  </div>
+
+  <!-- RIGHT: the ritual + the Slow-In -->
+  <div class="page">
+    <div class="toprow"><span class="label"></span><span class="label">Enjoyment is the gate we design hardest for</span></div>
+    <div style="margin-top:22px">
+      <div class="cnum">04.</div>
+      <h1 class="headline">The boring one,<br>made <em>beautiful.</em></h1>
+    </div>
+
+    <div style="margin-top:22px">
+      <div class="kicker">The Point</div>
+      <div class="pull">Fiber is the least sexy thing in the cabinet — so we make it turn <span class="hot">deep indigo</span>, and the chore becomes a ritual.</div>
+    </div>
+
+    <div style="margin-top:22px">
+      <div class="kicker">The Slow-In · how we onboard</div>
+      <div class="body">Your first shipment is <em>half-pack</em> sachets — a full dose can feel gassy on day one. You graduate to full-pack after two gentle weeks.</div>
+      <img src="sachet_flat_1.png" alt="Oxblood half-pack sachets beside indigo full-pack sachets, showing the size difference" style="display:block;width:100%;height:214px;object-fit:contain;object-position:center;border-radius:6px;margin-top:12px;background:#5c5f66">
+      <div class="swcap" style="margin-top:8px">Half-pack (weeks 1–2) beside full-pack — the starter dose, made visible</div>
+    </div>
+
+    <div class="botrow">
+      <span class="label red">Brand stays oxblood + black · the indigo is the product</span>
+      <span class="label">04 · 02</span>
+    </div>
+  </div>
+  <span class="ghost">indigo.</span>
+</section>
+
+
+<!-- ============ 05 · THE TELL ============ -->
+<section class="spread">
+  <div class="gutter"></div>
+
+  <!-- LEFT: the tell, in the wild — full-bleed café photo -->
+  <div class="page bleed">
+    <img class="heroimg" src="cafe_v3_1.png" alt="A woman at a Parisian café, nothing on her table but a glass of OWN">
+    <div class="scrim"></div>
+    <div class="bleed-pad top">
+      <div class="toprow">
+        <span class="label">Chapter 05</span>
+        <span class="label red">The Tell</span>
+      </div>
+    </div>
+    <div class="bleed-pad bot">
+      <div class="bleed-cap">Let them<br>wonder.</div>
+      <div class="toprow">
+        <span class="label red">The most private habit, worn in public</span>
+        <span class="label">05 · 01</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: what the color says -->
+  <div class="page">
+    <div class="toprow"><span class="label"></span><span class="label">The color is the signal</span></div>
+    <div style="margin-top:24px">
+      <div class="cnum">05.</div>
+      <h1 class="headline">The <em>tell.</em></h1>
+    </div>
+
+    <div style="margin-top:24px">
+      <div class="kicker">The Point</div>
+      <div class="pull">The indigo is so unmistakable that drinking it in public is a quiet signal: you <span class="hot">own</span> your health — and you're not hiding it.</div>
+
+      <div class="body" style="margin-top:18px">
+        <p>Fiber was the most private habit in wellness. The color makes it impossible to miss — in your hand, at the gym, on the desk it says what a supplement never could: <em>I've got this handled.</em> That's the name. That's <span class="wm">OWN<span class="dot">.</span></span> No other drink is this color, and ours is a flower, not a dye — unmistakable, and honestly ours.</p>
+      </div>
+    </div>
+
+    <div class="rule"></div>
+    <div class="body" style="margin-top:0;font-size:17px">
+      <span class="kicker" style="display:block;margin-bottom:6px">The register</span>
+      Today it starts a conversation — <em>"what is that?"</em> — and every question is an introduction. Loud enough to be <em>found</em> now; we earn the right to whisper later. Quiet luxury is a destination, not a starting line.
+    </div>
+
+    <div class="botrow">
+      <span class="label red">Loud enough to be found now · quiet enough to be luxury later</span>
+      <span class="label">05 · 02</span>
+    </div>
+  </div>
+  <span class="ghost">tell.</span>
+</section>
+
+<!-- from chapters_06-07.html -->
+<!-- ============ 06 · THE PROOF ============ -->
+<section class="spread">
+  <div class="gutter"></div>
+
+  <!-- LEFT: not a chart, not a promise -->
+  <div class="page">
+    <div class="toprow">
+      <span class="label">Chapter 06</span>
+      <span class="label red">The Proof</span>
+    </div>
+    <div style="margin:auto 0">
+      <div class="statement">The proof isn't a<br>chart you squint at,<br>or a promise you<br>swallow. It's what<br>you <em>feel</em> — and<br>what's on the <em>label.</em></div>
+      <div class="underline"></div>
+
+      <div style="display:flex;gap:48px;margin-top:36px">
+        <div style="flex:1">
+          <div class="kicker" style="margin-bottom:8px">Felt</div>
+          <div class="body" style="font-size:16px">Energy, cravings, digestion. Universal. No device required — and the reason they stay.</div>
+        </div>
+        <div style="flex:1">
+          <div class="kicker" style="margin-bottom:8px">Transparent</div>
+          <div class="body" style="font-size:16px">Every gram named on the label. The receipt is the proof — nothing hidden to trust.</div>
+        </div>
+      </div>
+    </div>
+    <div class="botrow">
+      <span class="label red">No device required · no study assumed</span>
+      <span class="label">06 · 01</span>
+    </div>
+  </div>
+
+  <!-- RIGHT: the discipline -->
+  <div class="page">
+    <div class="toprow"><span class="label"></span><span class="label">What we prove, and what we don't</span></div>
+    <div style="margin-top:24px">
+      <div class="cnum">06.</div>
+      <h1 class="headline">The <em>proof.</em></h1>
+    </div>
+
+    <div style="margin-top:26px">
+      <div class="kicker">The Point</div>
+      <div class="pull">The proof is what you <span class="hot">feel</span> and what's printed on the <span class="hot">label</span> — not a chart, not a promise.</div>
+
+      <div class="body" style="margin-top:22px">
+        <p>For the few who wear a glucose monitor, the curve is a beautiful bonus — but never the price of entry. Most people never own one, and we're not selling to the device. We're selling to the body.</p>
+        <p>A formal study is a goal we'd be proud to earn, <em>later</em>. It is not something we assume today, and not a claim we lean on before it exists.</p>
+      </div>
+    </div>
+
+    <div class="botrow">
+      <span class="label red">Sell to the body — not to the device</span>
+      <span class="label">06 · 02</span>
+    </div>
+  </div>
+  <span class="ghost">felt.</span>
+</section>
+
+<!-- ============ 07 · THE RECEIPT ============ -->
+<section class="spread">
+  <div class="gutter"></div>
+
+  <!-- LEFT: the label, nothing hidden -->
+  <div class="page">
+    <div class="toprow">
+      <span class="label">Chapter 07</span>
+      <span class="label red">Why They Trust Us</span>
+    </div>
+    <div style="margin:auto 0">
+      <div class="receipt">
+        <div class="rc-head">OWN<span style="color:#fff">.</span> — WHAT'S INSIDE</div>
+        <div class="rc-sub">every line named · nothing behind "proprietary"</div>
+        <div class="rc-line"></div>
+        <div class="rc-row"><span>Soluble fiber (PHGG)</span><span class="dots"></span><span class="amt">10 g+</span></div>
+        <div class="rc-row"><span>Color — butterfly pea</span><span class="dots"></span><span class="amt">trace</span></div>
+        <div class="rc-row"><span>Zinc — only if it earns it</span><span class="dots"></span><span class="amt">TBD</span></div>
+        <div class="rc-line"></div>
+        <div class="rc-note">Final grams set with our formulator — printed on the box, never a blend you can't see.</div>
+        <div class="rc-them">Theirs: &ldquo;Proprietary Blend&nbsp;&hellip;&nbsp;8,000&nbsp;mg&nbsp;&dagger;&rdquo;<br>— per-ingredient amounts <span style="color:#6b6169">undisclosed.</span></div>
+      </div>
+    </div>
+    <div class="botrow">
+      <span class="label red">We sell the receipt · they sell the secret</span>
+      <span class="label">07 · 01</span>
+    </div>
+  </div>
+
+  <!-- RIGHT: honesty as the moat -->
+  <div class="page">
+    <div class="toprow"><span class="label"></span><span class="label">The moat is trust, not the molecule</span></div>
+    <div style="margin-top:24px">
+      <div class="cnum">07.</div>
+      <h1 class="headline">The <em>receipt.</em></h1>
+    </div>
+
+    <div style="margin-top:26px">
+      <div class="kicker">The Point</div>
+      <div class="pull">Everyone sells a <span class="hot">secret</span> blend. We sell the receipt — and the refusal to hide is the flex.</div>
+
+      <div class="body" style="margin-top:22px">
+        <p>Isn't fiber just fiber? <em>Yes.</em> So we don't ask you to trust the molecule — we ask you to read every gram. The commodity is the point: fiber can't be owned, so we don't pretend to. What we build instead is the one thing a competitor can't copy — a record of telling the truth.</p>
+      </div>
+    </div>
+
+    <div class="rule"></div>
+    <div class="pull" style="font-size:28px">The refusal <span class="hot">is</span> the flex.</div>
+
+    <div class="botrow">
+      <span class="label red">Trust compounds · a secret can't</span>
+      <span class="label">07 · 02</span>
+    </div>
+  </div>
+  <span class="ghost">receipt.</span>
+</section>
+
+<!-- from chapters_08-09.html -->
+<!-- ============ 08 · THE LONG GAME ============ -->
+<section class="spread">
+  <div class="gutter"></div>
+
+  <!-- LEFT: pause beats cancel -->
+  <div class="page">
+    <div class="toprow">
+      <span class="label">Chapter 08</span>
+      <span class="label red">The Long Game</span>
+    </div>
+    <div style="margin:auto 0">
+      <div class="member">
+        <div class="mb-top">
+          <span class="mb-title">YOUR <span class="wm">OWN<span class="dot">.</span></span> MEMBERSHIP</span>
+          <span class="mb-status"><span class="mb-dot"></span><span class="mb-state">Active</span></span>
+        </div>
+        <div class="mb-line"></div>
+        <div class="mb-lead">Need a breather? <em>Pause it.</em> Your streak, your price, and your spot are held. We'll be here.</div>
+        <div class="mb-actions">
+          <span class="mb-btn primary">Pause</span>
+          <span class="mb-btn">Skip next</span>
+          <span class="mb-btn">Change frequency</span>
+        </div>
+        <div class="mb-fine">Cancel anytime — one tap, no maze, no phone call.</div>
+      </div>
+    </div>
+    <div class="botrow">
+      <span class="label red">The easiest button is Pause · never a buried Cancel</span>
+      <span class="label">08 · 01</span>
+    </div>
+  </div>
+
+  <!-- RIGHT: the compounding ritual -->
+  <div class="page">
+    <div class="toprow"><span class="label"></span><span class="label">Consistency is the whole return</span></div>
+    <div style="margin-top:24px">
+      <div class="cnum">08.</div>
+      <h1 class="headline">The long <em>game.</em></h1>
+    </div>
+
+    <div style="margin-top:26px">
+      <div class="kicker">The Point</div>
+      <div class="pull">We win by making it <span class="hot">effortless</span> to keep going — pause beats cancel, and the foundation compounds.</div>
+
+      <div class="body" style="margin-top:22px">
+        <p>Fiber is a decades game; the benefit is in the streak, not the sachet. So the job isn't a hard sell — it's a habit that survives a busy month. Subscription fatigue is the number-one reason people quit, so we hand them the off-ramp before they look for the door: a paused member is still ours; a cancelled one is gone.</p>
+        <p>And the ones who feel it don't just stay — they <em>start someone.</em> The color got the question; the felt change gets the referral.</p>
+      </div>
+    </div>
+
+    <div class="botrow">
+      <span class="label red">A paused customer is still a customer</span>
+      <span class="label">08 · 02</span>
+    </div>
+  </div>
+  <span class="ghost">stay.</span>
+</section>
+
+<!-- ============ 09 · WHAT GOES IN ============ -->
+<section class="spread">
+  <div class="gutter"></div>
+
+  <!-- LEFT: the four gates -->
+  <div class="page">
+    <div class="toprow">
+      <span class="label">Chapter 09</span>
+      <span class="label red">What Goes In</span>
+    </div>
+    <div style="margin:auto 0">
+      <div class="kicker">The ingredient filter · fail one gate, it's out</div>
+      <ul class="enemies">
+        <li>
+          <span class="en-n">01</span>
+          <span><span class="en-t">Contaminate the proof?</span><span class="en-d">If we can't still say the fiber did it, it's out.</span></span>
+        </li>
+        <li>
+          <span class="en-n">02</span>
+          <span><span class="en-t">Board the hype train?</span><span class="en-d">Ozempic, weight-loss, miracle — none of it boards.</span></span>
+        </li>
+        <li>
+          <span class="en-n">03</span>
+          <span><span class="en-t">Can you feel &amp; attribute it?</span><span class="en-d">If you can't sense it, it isn't earning its place.</span></span>
+        </li>
+        <li>
+          <span class="en-n">04</span>
+          <span><span class="en-t">Pad the label?</span><span class="en-d">Nothing added just to look comprehensive.</span></span>
+        </li>
+      </ul>
+    </div>
+    <div class="botrow">
+      <span class="label red">Fiber clears all four · zinc squeaks · almost nothing else does</span>
+      <span class="label">09 · 01</span>
+    </div>
+  </div>
+
+  <!-- RIGHT: the brief, not the recipe -->
+  <div class="page">
+    <div class="toprow"><span class="label"></span><span class="label">Direction, not the recipe</span></div>
+    <div style="margin-top:24px">
+      <div class="cnum">09.</div>
+      <h1 class="headline">What goes <em>in.</em></h1>
+    </div>
+
+    <div style="margin-top:26px">
+      <div class="kicker">The Point</div>
+      <div class="pull">One proven fiber, named to the gram, from real plants — anything that clouds the proof or boards the hype train is <span class="hot">out.</span></div>
+
+      <div class="body" style="margin-top:22px">
+        <p>This page is the guardrail, not the recipe. The exact grams are set with our formulator, in the room — what's fixed here is the <em>discipline</em>: one soluble hero fiber doing the real work, a clean pour, a gentle Slow-In, and a very short list of extras that only earn a place by clearing all four gates.</p>
+      </div>
+    </div>
+
+    <div class="rule"></div>
+    <div class="body" style="margin-top:0;font-size:16px">
+      <span class="kicker" style="display:block;margin-bottom:6px">Already turned away</span>
+      Dihydroberberine (clouds the proof) · appetite-suppressant positioning · kitchen-sink minerals.
+    </div>
+
+    <div class="botrow">
+      <span class="label red">We set the guardrails · the formula is set in the room</span>
+      <span class="label">09 · 02</span>
+    </div>
+  </div>
+  <span class="ghost">clean.</span>
+</section>
+
+<!-- from chapters_appendix.html -->
+<!-- ============ APPENDIX · THE BUSINESS BEHIND IT ============ -->
+<section class="spread">
+  <div class="gutter"></div>
+
+  <!-- LEFT: the ledger -->
+  <div class="page">
+    <div class="toprow">
+      <span class="label">Appendix</span>
+      <span class="label red">The Business Behind It</span>
+    </div>
+    <div style="margin:auto 0">
+      <div style="margin-bottom:28px">
+        <div class="kicker">Price</div>
+        <div class="body">~$39&ndash;45 / month, at or below the category. A cheap first-time trial. Premium &mdash; not most-expensive.</div>
+      </div>
+      <div style="margin-bottom:28px">
+        <div class="kicker">The demand test</div>
+        <div class="body">A $15 refundable founding deposit. The gate: <em>at least 3 of 10 visitors pay.</em> Money moved is the only vote that counts.</div>
+      </div>
+      <div>
+        <div class="kicker">The parent</div>
+        <div class="body">An <img class="insdr" src="insdr_logo.png" alt="INSDR"> company &mdash; one trust house; brands that inherit the record.</div>
+      </div>
+    </div>
+    <div class="botrow">
+      <span class="label red">A strategy is not a business</span>
+      <span class="label">A · 01</span>
+    </div>
+  </div>
+
+  <!-- RIGHT: the honest close -->
+  <div class="page">
+    <div class="toprow"><span class="label"></span><span class="label">The test comes first</span></div>
+    <div style="margin-top:24px">
+      <div class="kicker" style="font-size:16px">Appendix</div>
+      <h1 class="headline" style="margin-top:12px">The business<br>behind <em>it.</em></h1>
+    </div>
+
+    <div style="margin-top:26px">
+      <div class="kicker">The Point</div>
+      <div class="pull">The model only works if a <span class="hot">stranger pays</span> — so pricing, acquisition, and the demand test live here, honestly.</div>
+
+      <div class="body" style="margin-top:22px">
+        <p>None of the pages before this one count until someone we've never met puts money down. So the demand test comes <em>before</em> the launch, not after: a small, honest, refundable ask that tells the truth fast. If they don't pay, we learned it cheap. If they do, we build.</p>
+      </div>
+    </div>
+
+    <div class="rule"></div>
+    <div class="pull" style="font-size:26px">Money moved. <span class="hot">Not</span> likes.</div>
+
+    <div class="botrow">
+      <span class="label red">Test before launch · learn it cheap</span>
+      <span class="label">A · 02</span>
+    </div>
+  </div>
+  <span class="ghost">proof.</span>
+</section>
+
+<script>function checkPass(e){e.preventDefault();if(document.getElementById('gate-pass').value==='54321'){document.body.classList.remove('locked');document.getElementById('gate').style.display='none';}else{document.getElementById('gate-error').classList.add('show');document.getElementById('gate-pass').value='';}return false;}</script>
+</body>
+</html>
