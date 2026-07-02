@@ -917,12 +917,18 @@ body.locked>*:not(#gate){display:none!important}
   <div class="doc-rule"></div>
 </div>
 <div style="max-width:1120px;margin:0 auto 120px;padding:0 40px">
-  <div style="border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6)">
-    <iframe src="landing_test.html" title="OWN — the live demand-test landing ($15 reserve)" loading="lazy"
-      style="width:100%;height:820px;border:0;display:block;background:#050506"></iframe>
-  </div>
+  <a href="landing_test.html" target="_blank" rel="noopener" title="Open the live landing page in a new tab"
+     style="display:block;position:relative;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6);text-decoration:none">
+    <iframe src="landing_test.html" title="OWN — the live demand-test landing ($15 reserve)" loading="lazy" scrolling="no" tabindex="-1"
+      style="width:100%;height:660px;border:0;display:block;background:#050506;pointer-events:none"></iframe>
+    <!-- fade + open affordance: the whole frame is a link to the live page; no nested scroll -->
+    <div style="position:absolute;left:0;right:0;bottom:0;height:220px;background:linear-gradient(to bottom,rgba(5,5,6,0) 0%,rgba(5,5,6,.86) 62%,#050506 100%);pointer-events:none"></div>
+    <div style="position:absolute;left:0;right:0;bottom:26px;display:flex;justify-content:center;pointer-events:none">
+      <span style="font-family:'Bebas Neue',sans-serif;letter-spacing:.18em;font-size:14px;text-transform:uppercase;color:#fff;background:var(--oxblood);padding:11px 22px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.5)">Open the live page&nbsp; ↗</span>
+    </div>
+  </a>
   <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-    <span style="font-family:'Bebas Neue',sans-serif;letter-spacing:.18em;font-size:11px;text-transform:uppercase;color:var(--muted)">Live preview — scroll within the frame</span>
+    <span style="font-family:'Bebas Neue',sans-serif;letter-spacing:.18em;font-size:11px;text-transform:uppercase;color:var(--muted)">Live preview — the real page, opens in full</span>
     <a href="landing_test.html" target="_blank" rel="noopener" style="font-family:'Bebas Neue',sans-serif;letter-spacing:.14em;font-size:12px;color:var(--oxblood-bright);text-decoration:none;border-bottom:1px solid var(--oxblood);padding-bottom:3px">Open the live page&nbsp; ↗</a>
   </div>
 </div>
