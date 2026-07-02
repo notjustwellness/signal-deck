@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>OWN. — The Field</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="bible3.css">
+
+<style>
+html,body{background:#050506}
+.doc{max-width:900px;margin:0 auto;padding:76px 40px 120px}
+.doc-eyebrow{font-family:"Bebas Neue",sans-serif;letter-spacing:.28em;font-size:12px;text-transform:uppercase;color:#A6182A;display:flex;align-items:center;gap:.45em;flex-wrap:wrap;margin-bottom:26px}
+.doc-eyebrow img{height:11px;width:auto;opacity:.85}
+.doc-wm{font-family:"Bebas Neue",sans-serif;font-size:34px;letter-spacing:.08em;color:#3B49CC;line-height:1}
+.doc-wm .dot{color:#fff}
+.doc h1{font-family:"Bodoni Moda",serif;font-weight:600;font-size:66px;line-height:.98;letter-spacing:-.01em;color:var(--paper);margin:18px 0 6px}
+.doc h1 em{font-style:italic;font-weight:500;color:var(--oxblood-bright)}
+.doc-sub{font-family:"Bodoni Moda",serif;font-style:italic;font-size:24px;color:#CFC8BC;line-height:1.25;max-width:40ch}
+.doc-rule{height:1px;background:var(--line);margin:44px 0}
+.doc-lead{font-family:"Newsreader",serif;font-weight:300;font-size:20px;line-height:1.6;color:#D8D2C6;max-width:64ch}
+.doc-lead b{font-weight:400;color:var(--paper)}
+.doc-lead em{font-style:italic;color:var(--paper)}
+.sec-k{font-family:"Bebas Neue",sans-serif;letter-spacing:.24em;font-size:15px;text-transform:uppercase;color:var(--oxblood-bright);margin:54px 0 16px}
+.body2{font-family:"Newsreader",serif;font-weight:300;font-size:17px;line-height:1.6;color:#D2CBBF;max-width:64ch}
+.body2 b{font-weight:400;color:var(--paper)}
+.body2 em{font-style:italic;color:var(--paper)}
+.body2 p+p{margin-top:13px}
+
+/* comparison table */
+.ctable-wrap{overflow-x:auto;margin-top:8px}
+.ctable{width:100%;border-collapse:collapse;font-family:"Newsreader",serif;min-width:640px}
+.ctable th{font-family:"Bebas Neue",sans-serif;letter-spacing:.12em;font-size:12px;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:bottom}
+.ctable td{font-weight:300;font-size:15px;line-height:1.42;color:#D2CBBF;padding:14px;border-bottom:1px solid var(--line);vertical-align:top}
+.ctable td.brand{font-family:"Bebas Neue",sans-serif;letter-spacing:.08em;font-size:18px;color:var(--paper);white-space:nowrap}
+.ctable td .want{color:var(--paper)}
+.ctable td .liab{color:var(--oxblood-bright)}
+.ctable tr.own td{background:#130d10}
+.ctable tr.own td.brand{color:var(--indigo-mark)}
+
+/* ranked / bullet lists */
+.ranked{list-style:none;counter-reset:r;margin-top:8px}
+.ranked li{position:relative;padding:16px 0 16px 52px;border-top:1px solid var(--line);font-family:"Newsreader",serif;font-weight:300;font-size:17px;line-height:1.5;color:#D2CBBF;max-width:64ch}
+.ranked li:last-child{border-bottom:1px solid var(--line)}
+.ranked li::before{counter-increment:r;content:counter(r);position:absolute;left:0;top:14px;font-family:"Bebas Neue",sans-serif;font-size:30px;line-height:1;color:var(--oxblood)}
+.ranked li b{font-weight:400;color:var(--paper)}
+.ranked li em{font-style:italic;color:var(--paper)}
+
+.callout{background:#100E12;border:1px solid var(--line);border-left:3px solid var(--oxblood);border-radius:8px;padding:26px 30px;margin-top:8px}
+.callout .big{font-family:"Bodoni Moda",serif;font-style:italic;font-size:26px;line-height:1.25;color:var(--paper)}
+.callout .big .hot{color:var(--oxblood-bright);font-style:normal;font-weight:600}
+.callout .fine{font-family:"Newsreader",serif;font-weight:300;font-size:16px;color:#CBC4B8;margin-top:12px;line-height:1.5}
+
+.sources{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;color:#6a6068;line-height:1.7;margin-top:20px;max-width:70ch;letter-spacing:.01em}
+.doc-foot{margin-top:52px;font-family:"Bebas Neue",sans-serif;letter-spacing:.26em;font-size:11px;text-transform:uppercase;color:#4a444a;display:flex;align-items:center;gap:.5em;flex-wrap:wrap}
+.doc-foot img{height:10px;width:auto;opacity:.7}
+
+/* gate (same as the bible) */
+#gate{position:fixed;inset:0;background:#0B0A0C;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ECE7DD;padding:40px;text-align:center;font-family:"Newsreader",Georgia,serif}
+#gate .go{font-family:"Bebas Neue",sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#A6182A;margin-bottom:30px;display:flex;align-items:center;gap:.45em;justify-content:center;flex-wrap:wrap}
+#gate .go img{height:11px;width:auto;opacity:.85}
+#gate .gwm{font-family:"Bebas Neue",sans-serif;font-size:104px;letter-spacing:.08em;color:#3B49CC;line-height:1;margin-bottom:12px}
+#gate .gwm .dot{color:#fff}
+#gate .gsub{font-style:italic;font-size:15px;color:#948A80;margin-bottom:34px;letter-spacing:.02em}
+#gate form{display:flex;flex-direction:column;align-items:center;gap:14px}
+#gate input{background:rgba(236,231,221,.06);border:1px solid #2A2429;border-radius:7px;color:#ECE7DD;padding:14px 20px;font-size:15px;font-family:inherit;width:288px;text-align:center;outline:none;letter-spacing:.06em}
+#gate input:focus{border-color:#A6182A}
+#gate button{font-family:"Bebas Neue",sans-serif;background:#7C0E1B;color:#fff;border:none;border-radius:7px;padding:13px 36px;font-size:15px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .15s}
+#gate button:hover{background:#A6182A}
+#gate .gerr{color:#A6182A;font-size:13px;margin-top:6px;opacity:0;font-style:italic}
+#gate .gerr.show{opacity:1}
+#gate .gfoot{position:absolute;bottom:36px;font-family:"Bebas Neue",sans-serif;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#4a444a}
+body.locked{overflow:hidden;height:100vh}
+body.locked>*:not(#gate){display:none!important}
+</style>
+</head>
+<body class="locked">
+
+<div id="gate">
+  <div class="go">An <img src="insdr_logo.png" alt="INSDR"> Company · Confidential</div>
+  <div class="gwm">OWN<span class="dot">.</span></div>
+  <div class="gsub">This page is private. Enter the passphrase to continue.</div>
+  <form onsubmit="return checkPass(event)">
+    <input id="gate-pass" type="password" placeholder="passphrase" autocomplete="off" autofocus>
+    <button type="submit">Enter</button>
+    <div id="gate-error" class="gerr">Not quite. Try again.</div>
+  </form>
+  <div class="gfoot">An INSDR Company</div>
+</div>
+
+<div class="doc">
+  <div class="doc-eyebrow">An <img src="insdr_logo.png" alt="INSDR"> Company · Operating Bible · Competitive Annex</div>
+  <div class="doc-wm">OWN<span class="dot">.</span></div>
+  <h1>The <em>field.</em></h1>
+  <div class="doc-sub">Four rivals, and our wedge. Where we're the same, where we're not, and where to optimize.</div>
+
+  <div class="doc-rule"></div>
+
+  <p class="doc-lead">The lead is uncomfortable: <b>our honesty is real, but it is not, by itself, a weapon that wins customers.</b> Every one of these four beats us on something we don't yet have — distribution, a warm audience, or claim latitude. So "where do we optimize" is less about being <em>more</em> honest and more about <b>acquiring their reach while pointing our honesty at their specific liabilities.</b></p>
+
+  <div class="sec-k">What each one actually sells — and its fatal flaw</div>
+  <div class="ctable-wrap">
+    <table class="ctable">
+      <thead><tr><th>Brand</th><th>Real product</th><th>The <em>want</em> they sell</th><th>Their liability</th></tr></thead>
+      <tbody>
+        <tr><td class="brand">ColonBroom</td><td>3.6g psyllium, ~$70</td><td class="want">Weight loss / "poop like a winner"</td><td class="liab">Borrowed claims ("70 lbs / 3 mo" quiz), fake testimonials, subscription-trap billing — FTC crosshairs</td></tr>
+        <tr><td class="brand">Olipop</td><td>Soda, ~6–9g fiber + sugar</td><td class="want">Guilt-free treat</td><td class="liab">Class action: sub-therapeutic dose can't deliver the gut-health claim (Poppi settled $8.9M)</td></tr>
+        <tr><td class="brand">Metamucil</td><td>~3g psyllium / dose, ~$24</td><td class="want">Regularity → "feel lighter"</td><td class="liab">Geriatric baggage, "jelly/glop" texture, no optimizer identity</td></tr>
+        <tr><td class="brand">Supergut</td><td>PHGG + resistant starch, ~6g</td><td class="want">"GLP-1 booster" (nature's Ozempic)</td><td class="liab">RCT is on <em>shakes in sick-ish people</em>, not the sachet you buy; Ozempic-tethered</td></tr>
+        <tr><td class="brand">Glucose&nbsp;Goddess</td><td><em>Carb-blocker capsule</em> (not fiber)</td><td class="want">"Flatten your curve −40%"</td><td class="liab">"−40%" extrapolated from single-ingredient studies; <em>zero</em> trial on the actual product; surrogate-vs-outcome backlash</td></tr>
+        <tr class="own"><td class="brand">OWN.</td><td>PHGG ≥10g, indigo, sachet</td><td class="want">Proof — "a sign, not a promise"</td><td class="liab">No reach yet (no shelf, no audience, no study — <em>yet</em>)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-k">Where we're similar — and why that's the danger</div>
+  <div class="body2">
+    <p><b>Metabolic/glucose positioning</b> overlaps Supergut and Glucose Goddess — the "flatten the curve" territory is <em>contested, not open.</em> <b>PHGG fiber</b> — Supergut uses the same Sunfiber PHGG we plan to, confirming the product layer is not a moat. <b>Premium price + sachet format</b> — Supergut is ~$30 in stick packs; we're not novel there either.</p>
+    <p>The takeaway: <b>our positioning is copyable and our ingredient is commodity.</b> If differentiation lives in words on a landing page, we lose. It has to live in proof + execution.</p>
+  </div>
+
+  <div class="sec-k">Where we genuinely differ — the wall</div>
+  <ul class="ranked">
+    <li><b>Honesty as posture.</b> All four overclaim (ColonBroom, GG), under-dose the claim (Olipop), or borrow the proof (Supergut). We're the only one that <em>refuses</em> — "a sign, not a promise." In a field walking into lawsuits and FTC actions, that refusal is bulletproof.</li>
+    <li><b>Dose.</b> ≥10g vs their 3.6–9g — a real, provable, headline-able edge.</li>
+    <li><b>Zero-texture pour</b> vs Metamucil's jelly reputation.</li>
+    <li><b>Anti-subscription-trap</b> (pause-beats-cancel, one tap) — the literal inverse of ColonBroom's cancel-maze.</li>
+  </ul>
+
+  <div class="sec-k">The opening the whole field shares</div>
+  <div class="callout">
+    <div class="big">Nobody has proof on the exact product a customer buys. <span class="hot">Our CGM study on the actual product, in healthy optimizers, leapfrogs all four at once.</span></div>
+    <div class="fine">Supergut's RCT is on shakes in a dysglycemic population; Glucose Goddess has <em>no</em> product trial; ColonBroom and Olipop borrow ingredient-level science at doses their product doesn't deliver. This is not one differentiator among many — it's <em>the</em> wedge. It should be the centerpiece, sequenced before any loud launch.</div>
+  </div>
+
+  <div class="sec-k">Where to optimize — ranked</div>
+  <ul class="ranked">
+    <li><b>Make the healthy-population, own-product study the hero.</b> The only thing none of them can answer. Everything else is supporting cast.</li>
+    <li><b>Weaponize the dose gap.</b> Named-to-gram, ≥10g, beside their 3.6–6g. "The others show you a graph; we show you the grams."</li>
+    <li><b>Weaponize texture</b> vs Metamucil and <b>easy-cancel</b> vs ColonBroom — cheap, concrete, ownable contrasts.</li>
+    <li><b>Absorb the Glucose Goddess audience — don't fight it.</b> She built a massive "glucose curve" audience on borrowed evidence. Be the honest version they graduate to; her followers are our beachhead.</li>
+    <li><b>Solve our actual gap: reach.</b> Honesty makes borrowed reach <em>convert and stick</em>; it doesn't <em>generate</em> reach. The affordable substitute is creator-seeding (many small credible voices showing their <em>own</em> real curve), then retail <em>after</em> proof. Budget for reach — don't assume the honesty sells itself.</li>
+    <li><b>Never board the GLP-1 train.</b> Supergut's Ozempic tether is its vulnerability. GLP-1 is a demand <em>door</em>, never a hype claim.</li>
+  </ul>
+
+  <div class="sec-k">The one place we're outgunned — you should hear it</div>
+  <div class="body2">
+    <p><b>Metamucil owns psyllium's FDA-authorized cholesterol / heart-disease claim</b> (7g/day soluble fiber). <em>(Likely)</em> our PHGG can't match that regulatory high ground — psyllium's lipid evidence is stronger than guar's. If cardiovascular ever becomes a pillar, a "geriatric" brand out-proofs us on that specific claim. Our answer isn't to chase the cholesterol claim — it's to win on the <b>glucose curve + felt benefit + honesty</b>, where they can't credibly follow. Don't pick the fight where the legacy brand holds the FDA card.</p>
+  </div>
+
+  <div class="sec-k">Sources</div>
+  <div class="sources">
+    ColonBroom: Forbes Health review; Media Matters (TikTok weight-loss advertising); BBB complaints; FTC fake-review crackdown (FoodNavigator, Jan 2026).<br>
+    Olipop: CNBC ($1.85B Series C, Feb 2025); classaction.org (deceptive gut-health suit); Axios (Poppi $8.9M settlement, Sep 2025).<br>
+    Metamucil: eCFR 21 CFR 101.81 (psyllium heart-disease claim); metamucil.com (Two-Week Challenge, GLP-1 label); NielsenIQ #1 branded fiber.<br>
+    Supergut: RCT in <em>Diabetes, Obesity &amp; Metabolism</em> (n=192, 12 wk, shakes, dysglycemic pop); PRNewswire (Target Oct 2024, Walmart Oct 2025).<br>
+    Glucose Goddess / Anti-Spike: glucosegoddess.com science page; ACSH &amp; Unbiased Science (glucose-spike / surrogate-marker critique); ingredient basis (mulberry Reducose, Eriomin, cinnamon).<br>
+    <em>Compiled from live web research, 2026-07-03. Figures are market estimates; verify before external use.</em>
+  </div>
+
+  <div class="doc-foot">An <img src="insdr_logo.png" alt="INSDR"> Company · Confidential · Operating Bible Competitive Annex</div>
+</div>
+
+<script>function checkPass(e){e.preventDefault();if(document.getElementById('gate-pass').value==='54321'){document.body.classList.remove('locked');document.getElementById('gate').style.display='none';}else{document.getElementById('gate-error').classList.add('show');document.getElementById('gate-pass').value='';}return false;}</script>
+</body>
+</html>

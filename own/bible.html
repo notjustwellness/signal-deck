@@ -31,6 +31,53 @@
   letter-spacing:.28em;text-transform:uppercase;color:#4a444a}
 body.locked{overflow:hidden;height:100vh}
 body.locked>*:not(#gate){display:none!important}
+
+/* ---- embedded demand-test playbook (reading-doc section appended after the appendix) ---- */
+.doc-divider{max-width:1400px;margin:0 auto;height:1px;background:var(--line);opacity:.5}
+.doc{max-width:760px;margin:0 auto;padding:76px 40px 120px}
+.doc-eyebrow{font-family:"Bebas Neue",sans-serif;letter-spacing:.28em;font-size:12px;text-transform:uppercase;
+  color:#A6182A;display:flex;align-items:center;gap:.45em;flex-wrap:wrap;margin-bottom:26px}
+.doc-eyebrow img{height:11px;width:auto;opacity:.85}
+.doc-wm{font-family:"Bebas Neue",sans-serif;font-size:34px;letter-spacing:.08em;color:#3B49CC;line-height:1}
+.doc-wm .dot{color:#fff}
+.doc h1{font-family:"Bodoni Moda",serif;font-weight:600;font-size:66px;line-height:.98;letter-spacing:-.01em;
+  color:var(--paper);margin:18px 0 6px}
+.doc h1 em{font-style:italic;font-weight:500;color:var(--oxblood-bright)}
+.doc-sub{font-family:"Bodoni Moda",serif;font-style:italic;font-size:24px;color:#CFC8BC;line-height:1.25;max-width:34ch}
+.doc-rule{height:1px;background:var(--line);margin:44px 0}
+.doc-lead{font-family:"Newsreader",serif;font-weight:300;font-size:20px;line-height:1.6;color:#D8D2C6;max-width:60ch}
+.doc-lead b{font-weight:400;color:var(--paper)}
+.doc-lead em{font-style:italic;color:var(--paper)}
+.sec-k{font-family:"Bebas Neue",sans-serif;letter-spacing:.24em;font-size:15px;text-transform:uppercase;
+  color:var(--oxblood-bright);margin:52px 0 16px}
+.gate-panel{background:#100E12;border:1px solid var(--line);border-left:3px solid var(--oxblood);border-radius:8px;padding:30px 34px;margin:8px 0 8px}
+.gate-panel .big{font-family:"Bodoni Moda",serif;font-style:italic;font-size:30px;line-height:1.2;color:var(--paper)}
+.gate-panel .big .hot{color:var(--oxblood-bright);font-style:normal;font-weight:600}
+.gate-panel .fine{font-family:"Newsreader",serif;font-weight:300;font-size:16px;color:#CBC4B8;margin-top:14px;line-height:1.5}
+.tiers{display:flex;flex-direction:column;gap:12px;margin-top:6px}
+.tier{display:flex;gap:20px;padding:20px 22px;border:1px solid var(--line);border-radius:7px;background:#0E0D10}
+.tier.pick{border-color:var(--oxblood);background:#130d10}
+.tier .tn{font-family:"Bebas Neue",sans-serif;font-size:15px;letter-spacing:.14em;color:var(--muted);flex:0 0 96px;padding-top:3px}
+.tier.pick .tn{color:var(--oxblood-bright)}
+.tier .tt{font-family:"Bebas Neue",sans-serif;letter-spacing:.1em;font-size:18px;text-transform:uppercase;color:var(--paper)}
+.tier .td{font-family:"Newsreader",serif;font-weight:300;font-size:16px;line-height:1.5;color:#CBC4B8;margin-top:5px}
+.tier .cost{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--muted);margin-top:8px;letter-spacing:.02em}
+.pickflag{font-family:"Bebas Neue",sans-serif;letter-spacing:.18em;font-size:11px;color:#fff;background:var(--oxblood);border-radius:4px;padding:3px 9px;display:inline-block;margin-top:10px}
+.steps{list-style:none;margin-top:6px}
+.steps li{display:flex;gap:24px;padding:24px 0;border-top:1px solid var(--line)}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps .sn{font-family:"Bebas Neue",sans-serif;font-size:52px;line-height:.8;color:var(--oxblood);flex:0 0 auto;width:58px}
+.steps .st{font-family:"Bebas Neue",sans-serif;letter-spacing:.12em;font-size:21px;text-transform:uppercase;color:var(--paper);margin-bottom:7px}
+.steps .sd{font-family:"Newsreader",serif;font-weight:300;font-size:17px;line-height:1.56;color:#D2CBBF;max-width:56ch}
+.steps .sd em{font-style:italic;color:var(--paper)}
+.hard{list-style:none;margin-top:6px}
+.hard li{font-family:"Newsreader",serif;font-weight:300;font-size:17px;line-height:1.5;color:#D2CBBF;padding:11px 0 11px 26px;position:relative}
+.hard li::before{content:"—";position:absolute;left:0;color:var(--oxblood-bright)}
+.hard li b{font-weight:400;color:var(--paper)}
+.closer{font-family:"Bodoni Moda",serif;font-style:italic;font-size:34px;color:var(--paper);margin-top:56px}
+.closer .hot{color:var(--oxblood-bright)}
+.doc-foot{margin-top:26px;font-family:"Bebas Neue",sans-serif;letter-spacing:.26em;font-size:11px;text-transform:uppercase;color:#4a444a;display:flex;align-items:center;gap:.5em;flex-wrap:wrap}
+.doc-foot img{height:10px;width:auto;opacity:.7}
 </style>
 </head>
 <body class="locked">
@@ -280,7 +327,7 @@ body.locked>*:not(#gate){display:none!important}
     <div style="margin-top:22px">
       <div class="kicker">The Slow-In · how we onboard</div>
       <div class="body">Your first shipment is <em>half-pack</em> sachets — a full dose can feel gassy on day one. You graduate to full-pack after two gentle weeks.</div>
-      <img src="sachet_flat_1.png" alt="Oxblood half-pack sachets beside indigo full-pack sachets, showing the size difference" style="display:block;width:100%;height:214px;object-fit:contain;object-position:center;border-radius:6px;margin-top:12px;background:#5c5f66">
+      <img src="sachet_flat_1.png" alt="A cascade of OWN sachets — oxblood HALF on-ramp packs above, indigo FULL daily packs below, each carrying the wordmark" style="display:block;width:100%;height:250px;object-fit:cover;object-position:center 58%;border-radius:6px;margin-top:12px">
       <div class="swcap" style="margin-top:8px">Half-pack (weeks 1–2) beside full-pack — the starter dose, made visible</div>
     </div>
 
@@ -290,6 +337,64 @@ body.locked>*:not(#gate){display:none!important}
     </div>
   </div>
   <span class="ghost">indigo.</span>
+</section>
+
+<!-- ============ 04 (cont.) · THE COLOR & THE TASTE ============ -->
+<section class="spread">
+  <div class="gutter"></div>
+
+  <!-- LEFT: the color-shift, consumer-controlled -->
+  <div class="page">
+    <div class="toprow">
+      <span class="label">Chapter 04</span>
+      <span class="label red">The First Glass</span>
+    </div>
+    <div style="margin:auto 0">
+      <div class="kicker">A feature only this color could have</div>
+      <div class="statement" style="font-size:46px">Indigo is <em>ours.</em><br>The shift is <em>yours.</em></div>
+      <div style="display:flex;gap:0;margin:32px 0 10px;border-radius:8px;overflow:hidden;border:1px solid var(--line)">
+        <div style="flex:1;height:66px;background:#1E2F9E"></div>
+        <div style="flex:1;height:66px;background:#6B34A0"></div>
+        <div style="flex:1;height:66px;background:#B23478"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-family:'Bebas Neue',sans-serif;letter-spacing:.14em;font-size:11px;color:var(--muted)">
+        <span>Indigo · as poured</span><span>a squeeze</span><span>+ more citrus</span>
+      </div>
+      <div class="body" style="font-size:16px;margin-top:22px;max-width:none">Butterfly pea is pH-reactive. A squeeze of lemon or lime — or a few berries — and the glass turns from indigo to violet to pink, in your hand, in real time. We <em>never</em> ship it shifted: the pack is always indigo, and the theater is entirely the drinker's to summon.</div>
+    </div>
+    <div class="botrow">
+      <span class="label red">The pack is always indigo · the shift is the drinker's to perform</span>
+      <span class="label">04 · 03</span>
+    </div>
+  </div>
+
+  <!-- RIGHT: the taste — allulose, restraint, and the Pure SKU -->
+  <div class="page">
+    <div class="toprow"><span class="label"></span><span class="label">Pleasure, dialed to a purpose</span></div>
+    <div style="margin-top:24px">
+      <h1 class="headline" style="margin-top:0">Sweet enough<br>to <em>keep.</em></h1>
+    </div>
+
+    <div style="margin-top:24px">
+      <div class="kicker">The Point</div>
+      <div class="pull">Sweetened with <span class="hot">allulose</span> — naturally sweet, no glucose spike, so the taste never argues with the proof.</div>
+      <div class="body" style="margin-top:18px">
+        <p>Allulose is the one natural sweetener on our side: sugar-like on the tongue, non-glycemic in the blood — it can even soften a spike, where the benefits are there. Dialed to <em>lightly sweet</em> — enough pleasure to protect the daily ritual, never so much it reads as dessert.</p>
+      </div>
+    </div>
+
+    <div class="rule"></div>
+    <div class="body" style="margin-top:0;font-size:16px">
+      <span class="kicker" style="display:block;margin-bottom:6px">And a Pure, unflavored SKU</span>
+      No flavor, no sweetener — for the coffee, the smoothie, the all-in-one already on the counter. Flavor is for the ritual; Pure is for the mix-in.
+    </div>
+
+    <div class="botrow">
+      <span class="label red">Lightly sweet, never dessert · Pure for the mixers</span>
+      <span class="label">04 · 04</span>
+    </div>
+  </div>
+  <span class="ghost">shift.</span>
 </section>
 
 
@@ -694,6 +799,10 @@ body.locked>*:not(#gate){display:none!important}
     <div class="rule"></div>
     <div class="pull" style="font-size:26px">Money moved. <span class="hot">Not</span> likes.</div>
 
+    <a href="#demand-test" style="display:table;margin-top:26px;font-family:'Bebas Neue',sans-serif;letter-spacing:.14em;font-size:14px;color:var(--oxblood-bright);text-decoration:none;border-bottom:1px solid var(--oxblood);padding-bottom:4px">▶&nbsp; The demand test — step-by-step playbook &nbsp;↓</a>
+    <a href="#landing" style="display:table;margin-top:14px;font-family:'Bebas Neue',sans-serif;letter-spacing:.14em;font-size:14px;color:var(--oxblood-bright);text-decoration:none;border-bottom:1px solid var(--oxblood);padding-bottom:4px">▶&nbsp; The live landing — reserve for $15 &nbsp;↓</a>
+    <a href="own_competitors.html" target="_blank" rel="noopener" style="display:table;margin-top:14px;font-family:'Bebas Neue',sans-serif;letter-spacing:.14em;font-size:14px;color:var(--oxblood-bright);text-decoration:none;border-bottom:1px solid var(--oxblood);padding-bottom:4px">▶&nbsp; The field — competitor deep-dive &nbsp;→</a>
+
     <div class="botrow">
       <span class="label red">Test before launch · learn it cheap</span>
       <span class="label">A · 02</span>
@@ -701,6 +810,122 @@ body.locked>*:not(#gate){display:none!important}
   </div>
   <span class="ghost">proof.</span>
 </section>
+
+<div class="doc-divider"></div>
+<div class="doc" id="demand-test">
+  <div class="doc-eyebrow">An <img src="insdr_logo.png" alt="INSDR"> Company · Operating Bible · Appendix</div>
+  <div class="doc-wm">OWN<span class="dot">.</span></div>
+  <h1>The demand <em>test.</em></h1>
+  <div class="doc-sub">Prove a stranger will pay — before you build the thing.</div>
+
+  <div class="doc-rule"></div>
+
+  <p class="doc-lead">Every page before this one is a bet. This is the page that settles it. Most founders get the order wrong — <em>build, then hope someone buys.</em> We run it backwards: <b>sell the promise first, and build only what a stranger has already paid for.</b> You don't need a product to run this. You need an offer, a price, a ship date, and ten strangers.</p>
+
+  <div class="sec-k">The gate</div>
+  <div class="gate-panel">
+    <div class="big">Show the offer to ten target strangers. <span class="hot">If at least three pay today, you build. If fewer than three, you stop and listen.</span></div>
+    <div class="fine">Money moved is the only vote that counts — not likes, not comments, not email sign-ups. A signup is curiosity. A charge is demand.</div>
+  </div>
+
+  <div class="sec-k">Three ways to run it · start in the middle</div>
+  <div class="tiers">
+    <div class="tier">
+      <div class="tn">Tier 1</div>
+      <div>
+        <div class="tt">The fake door</div>
+        <div class="td">A "Buy" button that logs intent before it charges. Cheapest to stand up, but the weakest signal — a click isn't a card.</div>
+        <div class="cost">~$20 · about an hour</div>
+      </div>
+    </div>
+    <div class="tier pick">
+      <div class="tn">Tier 2</div>
+      <div>
+        <div class="tt">The refundable deposit</div>
+        <div class="td">A Stripe payment link takes a small, <em>fully refundable</em> deposit. Real money changes hands with almost no build. The honest, high-signal, low-cost test.</div>
+        <div class="cost">~$40 · half a day</div>
+        <span class="pickflag">Start here</span>
+      </div>
+    </div>
+    <div class="tier">
+      <div class="tn">Tier 3</div>
+      <div>
+        <div class="tt">The pre-sale</div>
+        <div class="td">A full pre-order storefront that funds batch one. The strongest signal — only worth building once Tier 2 has already passed.</div>
+        <div class="cost">~$100 · a weekend</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-k">The five steps</div>
+  <ol class="steps">
+    <li>
+      <span class="sn">1</span>
+      <div>
+        <div class="st">Write the offer</div>
+        <div class="sd">One benefit headline <em>[set at ZH]</em>, one honest price, one real ship month (~90 days out). You're selling the <em>promise</em> — the felt benefit and the date — not the science. Keep it to a paragraph.</div>
+      </div>
+    </li>
+    <li>
+      <span class="sn">2</span>
+      <div>
+        <div class="st">Build the page</div>
+        <div class="sd">A single Carrd page, about thirty minutes. The offer, the price, one button. No navigation, no story, no "learn more." One decision.</div>
+      </div>
+    </li>
+    <li>
+      <span class="sn">3</span>
+      <div>
+        <div class="st">Wire the money</div>
+        <div class="sd">A Stripe payment link for a refundable deposit. You do <em>not</em> need an LLC, a factory, or FDA clearance to take a refundable deposit. Thirty more minutes.</div>
+      </div>
+    </li>
+    <li>
+      <span class="sn">4</span>
+      <div>
+        <div class="st">Find ten strangers</div>
+        <div class="sd">Ten people in the actual target — not ten friends. Friends buy to be kind; that's false validation, the most expensive kind. Post where the customer already is and ask them to pay, today.</div>
+      </div>
+    </li>
+    <li>
+      <span class="sn">5</span>
+      <div>
+        <div class="st">Run it, read the verdict</div>
+        <div class="sd"><em>Three or more pay</em> → green light; build batch one. <em>Fewer than three</em> → stop, and email every non-buyer one question: "what stopped you?" The <em>no</em> is the most valuable thing you'll buy this month.</div>
+      </div>
+    </li>
+  </ol>
+
+  <div class="sec-k">The ethics · non-negotiable</div>
+  <p class="doc-lead" style="margin-bottom:6px">This is the honesty brand. Run the test the way the brand talks, or don't run it.</p>
+  <ul class="hard">
+    <li>A <b>real ship window</b>, stated up front — never a date you can't hit.</li>
+    <li><b>One-click refunds</b>, always, no questions.</li>
+    <li>If it's a no-go, <b>refund everyone, immediately</b> — the deposit was always theirs.</li>
+  </ul>
+
+  <div class="closer">Money moved. <span class="hot">Not</span> likes.</div>
+  <div class="doc-foot">An <img src="insdr_logo.png" alt="INSDR"> Company · Confidential · Operating Bible Appendix</div>
+</div>
+
+<div class="doc-divider"></div>
+<div class="doc" id="landing" style="max-width:1120px;padding-bottom:34px">
+  <div class="doc-eyebrow">An <img src="insdr_logo.png" alt="INSDR"> Company · Operating Bible · Appendix</div>
+  <div class="doc-wm">OWN<span class="dot">.</span></div>
+  <h1>The <em>landing.</em></h1>
+  <div class="doc-sub" style="max-width:44ch">The live page — where a stranger reserves theirs for $15. This is the demand test, made real.</div>
+  <div class="doc-rule"></div>
+</div>
+<div style="max-width:1120px;margin:0 auto 120px;padding:0 40px">
+  <div style="border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6)">
+    <iframe src="landing_test.html" title="OWN — the live demand-test landing ($15 reserve)" loading="lazy"
+      style="width:100%;height:820px;border:0;display:block;background:#050506"></iframe>
+  </div>
+  <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+    <span style="font-family:'Bebas Neue',sans-serif;letter-spacing:.18em;font-size:11px;text-transform:uppercase;color:var(--muted)">Live preview — scroll within the frame</span>
+    <a href="landing_test.html" target="_blank" rel="noopener" style="font-family:'Bebas Neue',sans-serif;letter-spacing:.14em;font-size:12px;color:var(--oxblood-bright);text-decoration:none;border-bottom:1px solid var(--oxblood);padding-bottom:3px">Open the live page&nbsp; ↗</a>
+  </div>
+</div>
 
 <script>function checkPass(e){e.preventDefault();if(document.getElementById('gate-pass').value==='54321'){document.body.classList.remove('locked');document.getElementById('gate').style.display='none';}else{document.getElementById('gate-error').classList.add('show');document.getElementById('gate-pass').value='';}return false;}</script>
 </body>
