@@ -164,7 +164,13 @@ footer .fine em{font-style:italic;color:#CBC4B8}
   .layer:last-child{padding-left:0}
   .figblock .n{font-size:190px}
   .statement{font-size:38px}
-  .offer-prod{min-height:360px}
+  html,body{overflow-x:hidden}
+  .offer-prod{min-height:340px;overflow:hidden}
+  .offer-prod::before{width:280px;height:280px}
+  .offer-prod .rings span:nth-child(1){width:220px;height:220px}
+  .offer-prod .rings span:nth-child(2){width:300px;height:300px}
+  .offer-prod .rings span:nth-child(3){width:380px;height:380px}
+  .offer-prod img{max-height:320px}
   section.band{padding:84px 0}
   .field{flex-direction:column}
 }
@@ -249,7 +255,7 @@ footer .fine em{font-style:italic;color:#CBC4B8}
       </div>
       <div>
         <div class="kicker">The founding offer</div>
-        <div class="price">$39<small> – $45 / month</small></div>
+        <div class="price">$55<small> / month</small></div>
         <ul>
           <li><b>Daily</b> One single-serve sachet. Mixes clear, no chalk, no grit. You'll forget it's a supplement.</li>
           <li><b>Slow-In</b> Your first cycle ships as half-doses, so your gut ramps without the rough first week. Then you graduate to full.</li>
