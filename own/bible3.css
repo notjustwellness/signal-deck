@@ -271,3 +271,17 @@ html,body{background:#050506;color:var(--paper);
   body{background:var(--black)}
   .spread{margin:0;box-shadow:none;page-break-after:always}
 }
+
+/* ===== EPHESIS — display-cursive treatment (cover word, pull-lines, statements). Body italics stay Bodoni. ===== */
+.cover-hero em,.headline em,.statement em,.brief-hero em,
+.pull,.bleed-cap,.ghost{
+  font-family:"Ephesis",cursive !important;
+  font-style:normal !important;
+  font-weight:400 !important;
+}
+/* scripts render small — bump the display accents so weight matches Bodoni */
+.cover-hero em{font-size:1.12em}
+.statement em,.headline em,.brief-hero em{font-size:1.14em}
+.pull{font-size:34px;line-height:1.28}
+.bleed-cap{font-size:1.1em}
+/* ===== /EPHESIS ===== */
