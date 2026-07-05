@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>OWN. — The Concept & Opportunity · 概念與機會摘要</title>
+<style>
+  :root{
+    --paper:#F7F3EC; --ink:#20191A; --muted:#6E6259;
+    --oxblood:#7A1E2B; --oxbright:#A83246; --amber:#B9822B; --line:#DAD0C2; --panel:#EFE8DC;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang TC","Microsoft JhengHei",sans-serif;
+    color:var(--ink);background:var(--paper);line-height:1.7;font-size:15px}
+  .zh{font-family:"PingFang TC","Heiti TC","Microsoft JhengHei",sans-serif;line-height:1.85;letter-spacing:.01em}
+  .wrap{max-width:1080px;margin:0 auto;padding:38px 26px 90px}
+  .brand{font-weight:800}.dot{color:var(--oxbright)}
+  b,strong{color:var(--oxblood);font-weight:700}
+  .hot{background:linear-gradient(transparent 62%,rgba(185,130,43,.34) 62%);font-weight:700;color:var(--ink)}
+  .muted{color:var(--muted)}
+  em.k{font-style:normal;color:var(--oxbright);font-weight:700}
+  .lang{display:inline-block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:800;margin-bottom:4px}
+
+  /* cover */
+  .cover{border-bottom:2px solid var(--oxblood);padding-bottom:26px;margin-bottom:10px}
+  .eyebrow{font-size:11px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;margin-bottom:16px}
+  .cover h1{font-size:38px;font-weight:800;line-height:1.15;letter-spacing:.01em}
+  .cover h1 em{font-style:normal;color:var(--oxblood)}
+  .cover .zh-title{font-size:26px;font-weight:800;color:var(--ink);margin-top:8px}
+  .cover .zh-title em{font-style:normal;color:var(--oxblood)}
+  .cover .tag{font-size:14px;color:var(--muted);margin-top:16px;max-width:70ch}
+  .cover .meta{font-size:11px;color:var(--muted);margin-top:14px;letter-spacing:.05em}
+
+  h2.sec{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--oxblood);font-weight:800;
+    margin:44px 0 14px;padding-top:22px;border-top:1px solid var(--line)}
+  h2.sec .zhs{color:var(--ink);font-size:19px;letter-spacing:0;text-transform:none;display:block;margin-top:3px}
+
+  /* bilingual parallel block */
+  .bi{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin:14px 0}
+  .bi>div>p{margin:8px 0}
+  .bi .zh{border-left:3px solid var(--line);padding-left:16px}
+  @media(max-width:820px){ .bi{grid-template-columns:1fr;gap:6px} .bi .zh{margin-top:4px} }
+
+  .lead-en{font-size:16px}.lead-zh{font-size:15px}
+
+  ul.clean{list-style:none;margin:8px 0}
+  ul.clean li{position:relative;padding-left:18px;margin:6px 0}
+  ul.clean li::before{content:"—";position:absolute;left:0;color:var(--oxbright);font-weight:700}
+
+  /* full-width bilingual widgets */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+  @media(max-width:820px){.grid{grid-template-columns:1fr}}
+  .cell{border:1px solid var(--line);border-radius:8px;padding:14px 16px;background:#fff}
+  .cell .k{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);font-weight:800}
+  .cell .kz{font-size:11px;color:var(--muted);font-weight:700;margin-left:6px}
+  .cell .v{font-size:14px;margin-top:6px}
+  .cell .vz{font-size:13.5px;margin-top:8px;padding-top:8px;border-top:1px dotted var(--line)}
+
+  .callout{background:var(--panel);border-left:4px solid var(--oxblood);padding:16px 20px;margin:18px 0;border-radius:0 8px 8px 0}
+  .callout .big{font-size:16px;font-weight:800;color:var(--ink);line-height:1.55}
+  .callout .bigz{font-size:15px;font-weight:800;color:var(--ink);line-height:1.7;margin-top:10px;padding-top:10px;border-top:1px solid rgba(122,30,43,.2)}
+
+  .receipt{border:1px solid var(--line);border-radius:8px;padding:16px 18px;background:#fff;margin:16px 0;font-size:14px;max-width:560px}
+  .receipt .rc-h{font-weight:800;letter-spacing:.04em}
+  .receipt .rc-s{font-size:11px;color:var(--muted);margin:2px 0 10px}
+  .receipt .rc-row{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-bottom:1px dotted var(--line)}
+  .receipt .amt{font-weight:800;color:var(--oxblood);white-space:nowrap}
+  .receipt .rc-them{margin-top:10px;padding-top:9px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+  .chip{border:1px solid var(--line);border-radius:20px;padding:6px 13px;font-size:12px;background:#fff}
+  .chip b{color:var(--oxblood)}
+
+  .pull{margin:22px 0;text-align:center}
+  .pull .p-en{font-size:19px;font-weight:800;color:var(--oxblood);letter-spacing:.01em}
+  .pull .p-zh{font-size:15px;color:var(--muted);font-weight:700;margin-top:4px}
+
+  .foot{margin-top:40px;padding-top:14px;border-top:2px solid var(--oxblood);font-size:11px;color:var(--muted);letter-spacing:.03em;line-height:1.7}
+
+  /* ---- gate (matches the bible) ---- */
+  #gate{position:fixed;inset:0;background:#0B0A0C;z-index:99999;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;color:#ECE7DD;padding:40px;text-align:center;font-family:Georgia,serif}
+  #gate .go{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#A6182A;margin-bottom:26px}
+  #gate .gwm{font-weight:800;font-size:88px;letter-spacing:.04em;color:#3B49CC;line-height:1;margin-bottom:12px;font-family:-apple-system,sans-serif}
+  #gate .gwm .dot{color:#fff}
+  #gate .gsub{font-style:italic;font-size:15px;color:#948A80;margin-bottom:30px}
+  #gate form{display:flex;flex-direction:column;align-items:center;gap:14px}
+  #gate input{background:rgba(236,231,221,.06);border:1px solid #2A2429;border-radius:7px;color:#ECE7DD;
+    padding:14px 20px;font-size:15px;width:288px;text-align:center;outline:none;letter-spacing:.06em}
+  #gate input:focus{border-color:#A6182A}
+  #gate button{background:#7C0E1B;color:#fff;border:none;border-radius:7px;padding:13px 36px;font-size:14px;
+    letter-spacing:.16em;text-transform:uppercase;cursor:pointer;font-family:-apple-system,sans-serif}
+  #gate button:hover{background:#A6182A}
+  #gate .gerr{color:#A6182A;font-size:13px;margin-top:6px;opacity:0;font-style:italic}
+  #gate .gerr.show{opacity:1}
+  body.locked{overflow:hidden;height:100vh}
+  body.locked>*:not(#gate){display:none!important}
+</style>
+</head>
+<body class="locked">
+
+<div id="gate">
+  <div class="go">An INSDR Company · Confidential</div>
+  <div class="gwm">OWN<span class="dot">.</span></div>
+  <div class="gsub">This page is private · 此頁為私人文件 — enter the passphrase / 請輸入通關密語</div>
+  <form onsubmit="return checkPass(event)">
+    <input id="gate-pass" type="password" placeholder="passphrase / 密語" autocomplete="off" autofocus>
+    <button type="submit">Enter · 進入</button>
+    <div id="gate-error" class="gerr">Not quite. Try again. · 不對，再試一次。</div>
+  </form>
+</div>
+
+<div class="wrap">
+
+  <div class="cover">
+    <div class="eyebrow">An INSDR Company · Operating Bible Vol. 01 · Confidential / 機密 · Internal</div>
+    <h1>OWN<span class="dot">.</span> — The Concept &amp; the <em>Opportunity</em></h1>
+    <div class="zh-title">OWN<span class="dot">.</span> — 概念與<em>機會</em>摘要</div>
+    <div class="tag">A bilingual strategy brief for the co-founder — the shortest version of what this is, where the opening is, and why we've earned the right to win it.<br><span class="zh">給共同創辦人的雙語策略簡報 ── 用最短的篇幅，講清楚這是什麼、機會在哪、為什麼我們贏得了。</span></div>
+    <div class="meta">Proven. Unhyped. Felt now.（有實證、不炒作、幾天就有感）· July 2026</div>
+  </div>
+
+  <div class="bi">
+    <div><span class="lang">English</span><p class="lead-en"><b>In one line: the most proven lever in nutrition is the one nobody made you want.</b> It's <em class="k">fiber</em> — sitting under your energy, your cravings, your blood sugar, and how you age. Almost no one gets enough, and every brand that sells it is either boring or lying. <b class="brand">OWN<span class="dot">.</span></b> is the fiber people <em class="k">actually reach for</em>: beautiful, felt in days, and — the part no competitor can honestly say — <span class="hot">proven on the exact product you buy.</span></p></div>
+    <div class="zh"><span class="lang">中文</span><p class="lead-zh">一句話：<b>營養學裡最有實證的那個槓桿，剛好是沒有人讓你「想要」的那一個。</b>那就是<em class="k">膳食纖維</em>——它藏在你的精力、食慾、血糖，以及你如何老化的底層。幾乎沒有人吃夠，而所有在賣它的品牌，不是無聊、就是在說謊。<b class="brand">OWN<span class="dot">.</span></b> 要做的，是人們<em class="k">真的會主動拿起來</em>的那款纖維：好看、幾天就有感，而且——這是任何對手都無法誠實說出口的一句——<span class="hot">在你實際買到的那個產品上被證明過。</span></p></div>
+  </div>
+
+  <!-- 1 · OPPORTUNITY -->
+  <h2 class="sec">01 · The Opportunity — read this first<span class="zhs zh">一、機會 ── 先看這一段</span></h2>
+  <div class="bi">
+    <div><p>If you read one section, read this. The opportunity stacks from three things: a problem almost everyone has, an insight that ignites it, and a timing window that just opened.</p></div>
+    <div class="zh"><p>如果整份文件你只讀一節，讀這一節。機會由三件事疊起來：一個幾乎人人都有的問題、一個把它引爆的洞察，以及一扇剛好打開的時機之窗。</p></div>
+  </div>
+
+  <div class="grid">
+    <div class="cell"><div class="k">The problem<span class="kz zh">問題規模</span></div><div class="v">~<b>95% of Americans</b> miss the daily fiber target — and federal guidelines name fiber a <b>"nutrient of public health concern."</b> Not a niche trend; almost everyone.</div><div class="vz zh">約 <b>95% 的美國人</b>纖維攝取不足，聯邦膳食指南把纖維列為<b>「公共衛生關注的營養素」</b>。不是小眾趨勢，是<em class="k">幾乎所有人</em>。</div></div>
+    <div class="cell"><div class="k">The insight<span class="kz zh">核心洞察</span></div><div class="v">A nutrient explodes when it becomes <b>a number you watch</b>. Protein had macros; fiber has the <b>glucose curve</b>. Fiber is the next protein.</div><div class="vz zh">一個營養素會爆紅，是在它變成<b>一個你會盯著看的數字</b>那一刻。蛋白質有了 macros；纖維，有了<b>血糖曲線</b>。纖維，是下一個蛋白質。</div></div>
+    <div class="cell"><div class="k">The timing<span class="kz zh">時機之窗</span></div><div class="v">GLP-1 drugs pushed "blood sugar" into the mainstream; consumer <b>CGMs</b> went over-the-counter after 2024. The curve is finally visible and shareable.</div><div class="vz zh">GLP-1 減重藥把「血糖」推進大眾對話；消費級<b>連續血糖監測（CGM）</b>在 2024 年後普及。曲線第一次變得看得見、可分享。</div></div>
+    <div class="cell"><div class="k">The market<span class="kz zh">市場結構</span></div><div class="v">The category isn't bigger than others (~$4.4B US) — but it's locked up by legacy brands and <b>no one attacks it with provable proof.</b> That's the gap.</div><div class="vz zh">品類本身不比別的大（美國約 44 億美元），但被老品牌卡住、卻<b>沒有人用「可證明的實證」去打</b>——這正是缺口。</div></div>
+  </div>
+
+  <div class="callout"><div class="big">Fiber is <b>evidence-heavy and hype-light</b> — it lost the <span class="hot">story war, not the science war</span>. Our asymmetry is glamorizing it through proof, not hype.</div><div class="bigz zh">纖維在證據上「重」、在行銷上「輕」——它輸掉的是<span class="hot">故事的戰爭，不是科學的戰爭</span>。我們的不對稱優勢，是用「證明」去讓它變迷人，而不是用炒作。</div></div>
+
+  <!-- 2 · PERSON -->
+  <h2 class="sec">02 · The Person — enter through the gap<span class="zhs zh">二、顧客 ── 從缺口進入</span></h2>
+  <div class="bi">
+    <div><p>Our customer already spends <b>$99 a month</b> optimizing everything — the shelf of powders, the all-in-one, the discipline — and skips the one input with <b>fifty years of proof</b>. Their all-in-one has <b>2 grams</b> of fiber; the body is asking for <b>30</b>.</p>
+      <ul class="clean"><li>We don't argue with the habit; we <b>enter through the gap it leaves</b>. The all-in-one is the door.</li><li>What keeps them is the <em class="k">feeling</em> — steadier, no crash, fewer cravings — and a label that hides nothing.</li><li><b>The gap is how we're found. It is never who we are.</b></li></ul></div>
+    <div class="zh"><p>我們的顧客<b>已經每月花 $99</b> 在優化一切——一整櫃的粉末、綜合營養粉（all-in-one）、紀律十足——卻漏掉了那個唯一有<b>五十年實證</b>的成分。他們的 all-in-one 裡只有 <b>2 克</b>纖維；身體真正需要的是 <b>30 克</b>。</p>
+      <ul class="clean"><li>我們不跟這個習慣爭辯，而是<b>從它留下的缺口進入</b>。All-in-one 是那扇門。</li><li>留住他們的，是那個<em class="k">感受</em>——更穩、不崩、少嘴饞——以及一張什麼都不藏的標籤。</li><li><b>缺口是我們被找到的方式，永遠不是我們是誰。</b></li></ul></div>
+  </div>
+
+  <!-- 3 · CONCEPT -->
+  <h2 class="sec">03 · The Concept — the boring one, made beautiful<span class="zhs zh">三、產品概念 ── 把最無聊的做到最美</span></h2>
+  <div class="grid">
+    <div class="cell"><div class="k">Pull · this week<span class="kz zh">Pull · 這一週</span></div><div class="v">Steadier energy, no afternoon crash, fewer cravings. <b>Fast, felt, provable</b> — this is what sells.</div><div class="vz zh">更穩的精力、沒有午後崩潰、更少嘴饞。<b>快、有感、可證明</b>——這是「賣點」，負責成交。</div></div>
+    <div class="cell"><div class="k">Frame · for decades<span class="kz zh">Frame · 未來數十年</span></div><div class="v">The most-proven foundation for aging well. The depth and the premium — <b>never what we promise</b>.</div><div class="vz zh">抗老最有實證的基礎。深度與高級感——<b>永遠不是我們的承諾</b>。</div></div>
+  </div>
+  <div class="bi">
+    <div><p class="muted">Discipline: aging is the ultimate <em>unfeelable</em>, so longevity is our <em>frame</em>, never our claim. We earn belief with what lands in days. <b>A sign, not a promise.</b></p></div>
+    <div class="zh"><p class="muted">紀律：抗老是終極「感受不到」的東西，所以「長壽/抗老」是我們的<em>框架</em>，永遠不是我們的宣稱。我們用幾天內就落地的東西贏得信任。<b>是徵兆，不是承諾。</b></p></div>
+  </div>
+  <div class="bi">
+    <div><span class="lang">The experience</span><ul class="clean">
+      <li><b>One sachet, one glass — it turns deep indigo.</b> The chore becomes a ritual. The color is <b>butterfly pea (a flower, not a dye)</b>.</li>
+      <li><b>The shift is drinker-controlled.</b> A squeeze of citrus turns it indigo→violet→pink in real time. <em class="k">We always ship it indigo</em>; the theater is theirs to summon.</li>
+      <li><b>Lemon or lime?</b> A real wedge the drinker adds — flavor, color-shift, and signature in one squeeze.</li>
+      <li><b>Allulose, lightly sweet</b> — non-glycemic, so taste never argues with the proof. Plus a <b>Pure, unflavored SKU</b> for the coffee / smoothie / all-in-one.</li>
+      <li><b>Slow-In on-ramp.</b> First shipment is <em>half-dose</em> sachets (a full dose can feel gassy on day one); graduate after two gentle weeks.</li>
+    </ul></div>
+    <div class="zh"><span class="lang">產品體驗</span><ul class="clean">
+      <li><b>一包一杯，加水變靛藍。</b>把苦差事變成儀式。顏色來自<b>蝶豆花（一朵花，不是色素）</b>。</li>
+      <li><b>顏色轉換由飲用者掌控。</b>擠一片柑橘，即時由靛藍→紫→粉。<em class="k">我們永遠出貨靛藍色</em>，那場「表演」留給喝的人自己召喚。</li>
+      <li><b>檸檬，還是萊姆？</b>真正的一片果楔由飲用者自己加——一擠同時完成風味、變色與個人簽名。</li>
+      <li><b>阿洛酮糖（allulose）微甜</b>——不升血糖，味道永遠不跟證明打架。另有 <b>Pure 無味版</b>，給咖啡／果昔／all-in-one 直接混。</li>
+      <li><b>Slow-In 緩入。</b>第一批出貨是<em>半量包</em>（全劑量第一天可能脹氣）；兩週後再畢業到全量。</li>
+    </ul></div>
+  </div>
+  <div class="callout"><div class="big"><b>The Tell.</b> The indigo is so unmistakable that drinking it in public is a quiet signal: you <span class="hot">own</span> your health, and you're not hiding it. Loud enough to be <em>found</em> now; quiet luxury is a destination, not a starting line.</div><div class="bigz zh"><b>The Tell（識別）。</b>這抹靛藍太獨特，在公開場合喝它本身就是一個安靜的信號——<span class="hot">你「掌控」了自己的健康，而且你不藏</span>。今天它大聲到足以「被找到」；安靜的奢華是終點，不是起點。</div></div>
+
+  <!-- 4 · MOAT -->
+  <h2 class="sec">04 · The Wedge &amp; the Moat — why we win<span class="zhs zh">四、護城河 · 我們為什麼贏</span></h2>
+  <div class="bi">
+    <div><p class="lead-en">Fiber is a commodity — <b>fiber is fiber; it can't be owned.</b> So we don't pretend to own the molecule. What we build is the one thing a competitor can't copy: <span class="hot">a record of telling the truth.</span></p></div>
+    <div class="zh"><p class="lead-zh">纖維是大宗商品——<b>纖維就是纖維，無法被獨佔</b>。所以我們不假裝擁有分子。我們建立的，是唯一對手複製不了的東西：<span class="hot">一份說真話的紀錄。</span></p></div>
+  </div>
+
+  <div class="receipt">
+    <div class="rc-h">OWN<span class="dot">.</span> — WHAT'S INSIDE · 裡面有什麼</div>
+    <div class="rc-s">every line named · 每一行都具名 · nothing behind "proprietary"</div>
+    <div class="rc-row"><span>Soluble fiber (PHGG) · 水溶性纖維</span><span class="amt">10 g+</span></div>
+    <div class="rc-row"><span>Allulose — non-glycemic sweetener · 不升糖甜味劑</span><span class="amt">lightly sweet</span></div>
+    <div class="rc-row"><span>Color — butterfly pea · 蝶豆花色素</span><span class="amt">trace · 微量</span></div>
+    <div class="rc-row"><span>Zinc — only if it earns it · 鋅（掙得到才加）</span><span class="amt">TBD</span></div>
+    <div class="rc-them">Theirs: a "Proprietary Blend" — one name, one big number, per-ingredient amounts <b style="color:var(--muted)">undisclosed</b>.<br><span class="zh">對手：一個「專有配方」——一個名字、一個大數字，每個成分含量<b style="color:var(--muted)">不揭露</b>。</span></div>
+  </div>
+
+  <div class="bi">
+    <div><span class="lang">The wedge</span><p>Everyone <b>borrows ingredient science</b> — citing studies run on someone else's material. We do the thing they can't: <span class="hot">a CGM study on our exact product, in healthy people.</span> It's a seat they structurally can't take — Supergut's trial is in <em class="k">type-2 diabetics</em>, on their shake; whether the 6 g booster sold to optimizers does anything measurable in a healthy body, they can't say.</p>
+      <ul class="clean"><li><b>Honest caveat (written into the bible):</b> we <em class="k">haven't</em> proven it yet — that's the plan. PHGG is <b>Monash Low-FODMAP certified</b> with published human trials; what we still owe is proof on <em>our</em> product.</li><li><b>Head start, not a fortress.</b> The differentiators — transparency, proof-fit, zero-texture pour — aren't walls. We win by <b>out-executing</b>; trust and execution compound.</li></ul></div>
+    <div class="zh"><span class="lang">那道楔子</span><p>所有人都在<b>借用「成分科學」</b>——引用別人對某原料做的研究。我們做別人做不到的：<span class="hot">在我們實際販售的產品上、對健康人做一場 CGM 研究。</span>這是他們結構上拿不到的席位——Supergut 的臨床試驗做在<em class="k">第二型糖尿病患者</em>身上、用的是他們的奶昔；賣給優化者的那款 6 克小包在健康身體裡能不能做出可量測的改變，他們答不出來。</p>
+      <ul class="clean"><li><b>誠實揭露（寫進聖經裡）：</b>我們<em class="k">還沒</em>證明——這是計畫。PHGG 已有 <b>Monash 低 FODMAP 認證</b>與已發表人體試驗；我們還欠的，是「我們這支產品」上的證明。</li><li><b>先跑優勢，不是堡壘。</b>差異化——透明、實證貼合、零顆粒口感——沒有一項是牆。贏的方式是<b>把對手比下去</b>；信任與執行力會複利。</li></ul></div>
+  </div>
+  <div class="pull"><div class="p-en">The refusal to hide is the flex.</div><div class="p-zh">拒絕隱藏，本身就是姿態。</div></div>
+
+  <!-- 5 · MODEL -->
+  <h2 class="sec">05 · The Model<span class="zhs zh">五、商業模式</span></h2>
+  <div class="bi">
+    <div><p>A <b>premium daily sachet, on subscription, honest by design</b> — under the <b>INSDR</b> trust house (brands inherit the record).</p><span class="lang" style="margin-top:8px">Pricing</span></div>
+    <div class="zh"><p><b>高級每日隨身包、訂閱制、以設計貫徹誠實</b>——收在 <b>INSDR</b>「信任之家」底下（品牌繼承那份紀錄）。</p><span class="lang" style="margin-top:8px">定價</span></div>
+  </div>
+  <div class="chips">
+    <span class="chip">Supergut <b>~$30</b>/mo</span><span class="chip">ColonBroom <b>~$70</b>/mo</span><span class="chip">Glucose Goddess <b>~$75</b>/mo</span>
+  </div>
+  <div class="bi">
+    <div><p class="muted">We price <em>into</em> that range — premium, never most-expensive; a cheap first trial to start. Pricing is a <b>consequence</b> of format + acquisition cost, not a posture.</p></div>
+    <div class="zh"><p class="muted">我們定價<em>進入</em>這個區間——高級、但絕不是最貴；用一次便宜的試用起步。定價是格式與獲客成本的<b>結果</b>，不是一種姿態。</p></div>
+  </div>
+  <div class="bi">
+    <div><span class="lang">Retention &amp; relay</span><ul class="clean"><li><b>Pause beats cancel.</b> Subscription fatigue is the #1 reason people quit, so we hand them the off-ramp first: <em class="k">a paused member is still ours; a cancelled one is gone.</em> No cancellation maze.</li><li><b>The Hand-off.</b> Every order ships one extra sachet + a give-get card. Because it's the gentle Slow-In dose, the friend's first day is good — the recommendation never embarrasses the recommender. A gift to give, never a quota; no dark patterns.</li></ul></div>
+    <div class="zh"><span class="lang">留存與傳播</span><ul class="clean"><li><b>暫停勝過取消。</b>訂閱疲勞是第一大流失原因，所以我們先遞上下車坡道：<em class="k">被暫停的會員還是我們的；取消的就走了。</em>絕不設取消迷宮。</li><li><b>The Hand-off（交棒）。</b>每張訂單多附一包＋一張 give-get 卡。因為附的是溫和的 Slow-In 劑量，朋友的第一天是好的——推薦永遠不讓推薦人難堪。是禮物，不是配額；不搞黑暗模式。</li></ul></div>
+  </div>
+  <div class="callout"><div class="big"><b>The demand test — before launch.</b> A $15 refundable founding deposit. The gate: <span class="hot">at least 3 of 10 target strangers pay today.</span> Money moved is the only vote that counts — not likes.</div><div class="bigz zh"><b>需求測試——先於發表。</b>$15 可全額退款的創始訂金。門檻：<span class="hot">10 個目標陌生人裡，至少 3 個今天付錢。</span>「錢動了」是唯一算數的一票——不是讚。</div></div>
+
+  <!-- 6 · LINE AHEAD -->
+  <h2 class="sec">06 · The Line Ahead — exploring, not committed<span class="zhs zh">六、產品線的未來 ── 探索，非承諾</span></h2>
+  <div class="bi">
+    <div><p>The flagship does <b>one thing, provably</b> — that restraint <em>is</em> the brand. The line only grows toward things the flagship gives you a <em>reason</em> to buy, that clear the <b>same proof bar</b>.</p></div>
+    <div class="zh"><p>旗艦只做<b>一件事，且可證明</b>——這份克制<em>本身</em>就是品牌。產品線只朝那些「旗艦給了你理由去買」、且通過<b>同一道實證門檻</b>的方向長。</p></div>
+  </div>
+  <div class="grid">
+    <div class="cell"><div class="k">SKU A · Hydration companion<span class="kz zh">補水companion</span></div><div class="v">Fiber pulls water into the gut — so it <b>creates</b> a hydration need. Electrolytes + <b>sea moss</b> + <b>full daily value of Mo / Mn / Se / Zn</b>, dosed to matter (the opposite of fairy-dusting).</div><div class="vz zh">纖維把水拉進腸道——因此它<b>創造</b>補水需求。電解質＋<b>海藻</b>＋<b>鉬／錳／硒／鋅足量每日建議量</b>，真正有效的劑量（養分堆砌的相反）。</div></div>
+    <div class="cell"><div class="k">SKU B · Pure creatine<span class="kz zh">純肌酸</span></div><div class="v">The most-proven molecule. Kept <b>out</b> of the fiber pack (grit would wreck the pour); priced at/near cost — the <b>trust SKU, not the margin SKU</b>.</div><div class="vz zh">最有實證的分子。<b>刻意不放進</b>纖維包（顆粒會毀掉口感）；以接近成本定價——<b>信任 SKU，不是利潤 SKU</b>。</div></div>
+  </div>
+
+  <!-- 7 · WHERE WE ARE -->
+  <h2 class="sec">07 · Where We Are<span class="zhs zh">七、現況與下一步</span></h2>
+  <div class="bi">
+    <div><p>The operating bible (ch. 1–9 + appendix) is built. The brand is named <b class="brand">OWN<span class="dot">.</span></b>, under the <b>INSDR</b> parent. <b>Next is the demand test</b> — a small, honest, refundable ask, before launch. If they pay, we build. If not, we learned it cheap.</p></div>
+    <div class="zh"><p>營運聖經（1–9 章＋附錄）已建置完成。品牌名已定為 <b class="brand">OWN<span class="dot">.</span></b>，收在 <b>INSDR</b> 母公司底下。<b>下一步是需求測試</b>——在正式發表之前，用一個小、誠實、可退款的請求。付了，我們就做；不付，我們用很低的代價學到了。</p></div>
+  </div>
+  <div class="pull"><div class="p-en">Money moved. Not likes.</div><div class="p-zh">錢動了，不是讚。</div></div>
+
+  <div class="foot">An INSDR Company · Confidential · Operating Bible summary (EN / zh-TW).<br>本文為給共同創辦人之內部理解版，非對外行銷文案；競品名稱（Supergut / ColonBroom / Glucose Goddess）僅供內部參照，切勿對外引用。</div>
+
+</div>
+
+<script>function checkPass(e){e.preventDefault();if(document.getElementById('gate-pass').value==='54321'){document.body.classList.remove('locked');document.getElementById('gate').style.display='none';}else{document.getElementById('gate-error').classList.add('show');document.getElementById('gate-pass').value='';}return false;}</script>
+</body>
+</html>
