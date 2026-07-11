@@ -91,10 +91,20 @@ html,body{background:#050506;color:var(--paper);
 .enemies li:last-child{border-bottom:1px solid var(--line)}
 .enemies .en-n{font-family:"Bebas Neue",sans-serif;font-size:46px;line-height:.8;
   color:var(--oxblood);flex:0 0 auto;width:52px}
-.enemies .en-t{font-family:"Bebas Neue",sans-serif;letter-spacing:.14em;font-size:20px;
+.enemies .en-t{display:block;font-family:"Bebas Neue",sans-serif;letter-spacing:.14em;font-size:20px;
   text-transform:uppercase;color:var(--paper);margin-bottom:5px}
 .enemies .en-d{font-family:"Newsreader",serif;font-weight:300;font-size:17px;
   line-height:1.5;color:#CBC4B8}
+
+/* compact benefit list — the payoff spread */
+.paylist{list-style:none;margin-top:16px}
+.paylist li{padding:12px 0;border-top:1px solid var(--line)}
+.paylist li:last-child{border-bottom:1px solid var(--line)}
+.paylist .pl-t{font-family:"Bebas Neue",sans-serif;letter-spacing:.13em;font-size:15px;
+  text-transform:uppercase;color:var(--oxblood-bright);display:block;margin-bottom:3px}
+.paylist .pl-d{font-family:"Newsreader",serif;font-weight:300;font-size:15.5px;
+  line-height:1.45;color:#CBC4B8}
+.paylist .pl-d em{font-style:italic;color:var(--paper)}
 
 /* ghost watermark word */
 .ghost{position:absolute;font-family:"Bodoni Moda",serif;font-style:italic;
