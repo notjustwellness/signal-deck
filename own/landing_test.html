@@ -10,15 +10,43 @@
 <style>
 /* ============================================================
    OWN. — demand-test landing page
-   Visual DNA carried from bible3.css (oxblood editorial on black).
-   Black = base · oxblood = editorial accent · indigo = signature.
+   Visual DNA mirrors bible3.css — THE EIGHT, indigo-base document.
+   BASE INDIGO = the ground (and the drink). Emphasis is VALUE, not hue:
+   there is no general-purpose accent. Reacted/Titre/Stalk are MEANINGS.
+   ⚠️ This page does NOT <link> bible3.css — it is SELF-CONTAINED.
+      The block below is therefore a DUPLICATE of bible3.css's :root and must
+      be kept in sync by hand. Do not "simplify" it into an inherit — there is
+      nothing to inherit from, and the page renders unstyled if you try.
    Static build. PAYMENT WIRED AFTER — see [DEPOSIT HOOK] below.
    ============================================================ */
 :root{
-  --black:#0B0A0C; --bg:#050506; --panel:#141115;
-  --paper:#ECE7DD; --oxblood:#7C0E1B; --oxblood-bright:#A6182A;
-  --wine-deep:#460910; --indigo:#1E2F9E; --indigo-mark:#3B49CC;
-  --muted:#948A80; --line:#2A2429;
+  /* ---- THE EIGHT. Nothing outside this set. ---- */
+  --base-indigo:#2A2F8F;  /* the ground. the drink itself. */
+  --deep-well:#131A4A;    /* the deeper ground. panels, depth, night. */
+  --chalk:#F3F0E8;        /* brightest white. values — the numbers that matter. */
+  --oat:#E4DFD2;          /* dim white. notes — body copy, the quiet register. */
+  --salt:#D5D8D1;         /* cool white. rules and column heads. */
+  --reacted:#FFB3BD;      /* the acid state. footnote calls / links. */
+  --titre:#E0A32B;        /* ALERT — the gap. what is missing or wrong. */
+  --stalk:#7CB342;        /* ALERT — the proof. what is checked. */
+  /* ---- semantic roles ---- */
+  --bg:var(--deep-well);         /* page surround */
+  --ink-loud:var(--chalk);
+  --ink-body:var(--oat);
+  --ink-struct:var(--salt);
+  --ink-dim:rgba(228,223,210,.74);
+  --ink-muted:rgba(228,223,210,.54);
+  --ink-faint:rgba(228,223,210,.36);
+  --rule:rgba(213,216,209,.20);
+  /* ---- DEPRECATED SHIM — old names, re-pointed. Mirrors bible3.css. ---- */
+  --black:var(--base-indigo);
+  --panel:var(--deep-well);
+  --paper:var(--oat);
+  --oxblood:rgba(255,179,189,.55);
+  --oxblood-bright:var(--reacted);
+  --indigo-mark:var(--chalk);    /* wordmark can't be indigo on indigo */
+  --muted:var(--ink-muted);
+  --line:var(--rule);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -32,7 +60,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opa
 
 .wrap{max-width:920px;margin:0 auto;padding:0 32px}
 .wm{font-family:"Bebas Neue",sans-serif;color:var(--indigo-mark);letter-spacing:.05em}
-.wm .dot{color:#fff}
+.wm .dot{color:var(--reacted)}
 .label{font-family:"Bebas Neue",sans-serif;letter-spacing:.28em;font-size:12px;
   color:var(--muted);text-transform:uppercase}
 .label.red{color:var(--oxblood-bright)}
@@ -41,7 +69,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opa
 .top{position:relative;z-index:10;display:flex;justify-content:space-between;align-items:baseline;
   padding:26px 0}
 .brandmark{font-family:"Bebas Neue",sans-serif;font-size:30px;letter-spacing:.1em;color:var(--indigo-mark)}
-.brandmark .dot{color:#fff}
+.brandmark .dot{color:var(--reacted)}
 .insdr-txt{font-family:"Bebas Neue",sans-serif;letter-spacing:.24em;font-size:11px;color:var(--muted);text-transform:uppercase}
 /* INSDR parent lockup — ALWAYS the logo image, NEVER typed. Scales with font-size. */
 .insdr{height:.8em;width:auto;display:inline-block;vertical-align:baseline;position:relative;top:.02em;margin:0 .3em;opacity:.85}
@@ -54,18 +82,18 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opa
   color:var(--oxblood-bright);text-transform:uppercase;margin-bottom:22px}
 .hero h1{font-family:"Bodoni Moda",serif;font-weight:600;font-size:96px;line-height:.9;
   letter-spacing:-.015em;color:var(--paper)}
-.hero h1 em{font-style:italic;font-weight:500;color:var(--oxblood-bright)}
+.hero h1 em{font-style:italic;font-weight:500;color:var(--ink-loud)}
 .hero .sub{font-family:"Newsreader",serif;font-weight:300;font-size:22px;line-height:1.5;
-  color:#D8D2C6;margin-top:28px;max-width:34ch}
+  color:var(--ink-body);margin-top:28px;max-width:34ch}
 .hero .sub em{font-style:italic;color:var(--paper)}
 .hero-fig{position:relative;height:78vh;min-height:560px}
 .hero-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   object-position:center 28%;border-radius:3px;filter:saturate(1.03) contrast(1.02)}
 .hero-fig .fade{position:absolute;inset:0;border-radius:3px;pointer-events:none;
-  background:linear-gradient(90deg, rgba(5,5,6,.85) 0%, rgba(5,5,6,0) 34%),
-             linear-gradient(to top, rgba(5,5,6,.5) 0%, rgba(5,5,6,0) 30%)}
+  background:linear-gradient(90deg, rgba(19,26,74,.85) 0%, rgba(19,26,74,0) 34%),
+             linear-gradient(to top, rgba(19,26,74,.5) 0%, rgba(19,26,74,0) 30%)}
 .hero-cap{position:absolute;right:20px;bottom:20px;z-index:3;
-  font-family:"Bodoni Moda",serif;font-style:italic;font-weight:500;font-size:20px;color:#fff;
+  font-family:"Bodoni Moda",serif;font-style:italic;font-weight:500;font-size:20px;color:var(--chalk);
   text-shadow:0 2px 20px rgba(0,0,0,.6)}
 .cta-inline{margin-top:40px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
 
@@ -75,10 +103,10 @@ section.band{padding:120px 0;position:relative}
   color:var(--oxblood-bright);text-transform:uppercase;margin-bottom:26px}
 .statement{font-family:"Bodoni Moda",serif;font-weight:600;font-size:52px;line-height:1.04;
   letter-spacing:-.01em;color:var(--paper)}
-.statement em{font-style:italic;font-weight:500;color:var(--oxblood-bright)}
-.underline{width:120px;height:2px;background:var(--oxblood);margin-top:32px}
+.statement em{font-style:italic;font-weight:500;color:var(--ink-loud)}
+.underline{width:120px;height:2px;background:var(--reacted);margin-top:32px}
 .body{font-family:"Newsreader",serif;font-weight:300;font-size:20px;line-height:1.62;
-  color:#D8D2C6;max-width:52ch}
+  color:var(--ink-body);max-width:52ch}
 .body p+p{margin-top:18px}
 .body em{font-style:italic;color:var(--paper)}
 .hr{height:1px;background:var(--line);max-width:920px;margin:0 auto}
@@ -86,10 +114,10 @@ section.band{padding:120px 0;position:relative}
 /* ---- the beachhead figure: 2 vs 30 ---- */
 .gap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:8px}
 .figblock .n{font-family:"Bebas Neue",sans-serif;font-size:260px;line-height:.74;letter-spacing:.01em;display:block}
-.figblock .n.dim{color:#39323a}
-.figblock .n.red{color:var(--oxblood)}
+.figblock .n.dim{color:var(--deep-well)}
+.figblock .n.red{color:var(--ink-loud)}
 .figblock .cap{font-family:"Newsreader",serif;font-style:italic;font-weight:300;font-size:21px;
-  color:#CFC8BC;margin-top:14px;max-width:26ch}
+  color:var(--ink-dim);margin-top:14px;max-width:26ch}
 
 /* ---- two-layer sell ---- */
 .layers{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:46px;border-top:1px solid var(--line)}
@@ -100,17 +128,17 @@ section.band{padding:120px 0;position:relative}
   color:var(--oxblood-bright);text-transform:uppercase;margin-bottom:14px}
 .layer h3{font-family:"Bodoni Moda",serif;font-weight:600;font-style:italic;font-size:30px;
   line-height:1.06;color:var(--paper);margin-bottom:16px}
-.layer p{font-family:"Newsreader",serif;font-weight:300;font-size:18px;line-height:1.55;color:#CBC4B8}
+.layer p{font-family:"Newsreader",serif;font-weight:300;font-size:18px;line-height:1.55;color:var(--ink-dim)}
 
 /* ---- offer / product ---- */
-.offer{background:linear-gradient(180deg,#0B0A0C 0%,#0E0A10 100%);border-top:1px solid var(--line);
+.offer{background:linear-gradient(180deg,var(--base-indigo) 0%,var(--deep-well) 100%);border-top:1px solid var(--line);
   border-bottom:1px solid var(--line)}
 .offergrid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
 .offer-prod{position:relative;display:flex;align-items:center;justify-content:center;min-height:440px}
 .offer-prod::before{content:"";position:absolute;width:380px;height:380px;border-radius:50%;
-  background:radial-gradient(circle, rgba(43,63,208,.40), rgba(43,63,208,0) 66%);filter:blur(20px)}
+  background:radial-gradient(circle, rgba(42,47,143,.55), rgba(42,47,143,0) 66%);filter:blur(20px)}
 .offer-prod .rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.offer-prod .rings span{position:absolute;border-radius:50%;border:1px solid rgba(59,73,204,.28)}
+.offer-prod .rings span{position:absolute;border-radius:50%;border:1px solid rgba(243,240,232,.22)}
 .offer-prod .rings span:nth-child(1){width:300px;height:300px}
 .offer-prod .rings span:nth-child(2){width:440px;height:440px;opacity:.55}
 .offer-prod .rings span:nth-child(3){width:580px;height:580px;opacity:.28}
@@ -120,7 +148,7 @@ section.band{padding:120px 0;position:relative}
 .price small{font-family:"Newsreader",serif;font-style:italic;font-weight:300;font-size:22px;color:var(--muted);letter-spacing:0}
 .offer ul{list-style:none;margin:28px 0 0}
 .offer li{font-family:"Newsreader",serif;font-weight:300;font-size:18px;line-height:1.5;
-  color:#D8D2C6;padding:13px 0;border-top:1px solid var(--line);display:flex;gap:14px}
+  color:var(--ink-body);padding:13px 0;border-top:1px solid var(--line);display:flex;gap:14px}
 .offer li:last-child{border-bottom:1px solid var(--line)}
 .offer li b{font-family:"Bebas Neue",sans-serif;font-weight:400;letter-spacing:.06em;color:var(--indigo-mark);flex:0 0 auto;font-size:19px}
 
@@ -132,27 +160,27 @@ section.band{padding:120px 0;position:relative}
   border-radius:10px;padding:40px 44px;max-width:520px;width:100%}
 .deposit .dlabel{font-family:"Bebas Neue",sans-serif;letter-spacing:.2em;font-size:13px;color:var(--muted);text-transform:uppercase}
 .deposit .damt{font-family:"Bebas Neue",sans-serif;font-size:64px;line-height:.9;color:var(--paper);margin:8px 0 4px}
-.deposit .damt em{font-style:normal;color:var(--oxblood-bright)}
-.deposit .dfine{font-family:"Newsreader",serif;font-style:italic;font-weight:300;font-size:16px;color:#CBC4B8;line-height:1.5}
+.deposit .damt em{font-style:normal;color:var(--ink-loud)}
+.deposit .dfine{font-family:"Newsreader",serif;font-style:italic;font-weight:300;font-size:16px;color:var(--ink-dim);line-height:1.5}
 .field{display:flex;gap:10px;margin-top:26px}
-.field input{flex:1;background:#0B0A0C;border:1px solid var(--line);border-radius:7px;
+.field input{flex:1;background:var(--deep-well);border:1px solid var(--line);border-radius:7px;
   padding:15px 16px;color:var(--paper);font-family:"Newsreader",serif;font-size:16px}
-.field input::placeholder{color:#6d655d}
+.field input::placeholder{color:var(--ink-faint)}
 .btn{font-family:"Bebas Neue",sans-serif;letter-spacing:.1em;font-size:17px;
-  background:var(--oxblood);border:1px solid var(--oxblood);color:#fff;
+  background:var(--chalk);border:1px solid var(--chalk);color:var(--base-indigo);
   padding:15px 26px;border-radius:7px;cursor:pointer;white-space:nowrap;transition:background .15s}
 .btn:hover{background:var(--oxblood-bright)}
 .btn.ghost{background:transparent;border-color:var(--line);color:var(--paper)}
 .btn.ghost:hover{border-color:var(--oxblood-bright);color:var(--oxblood-bright)}
 .dnote{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--muted);
   margin-top:20px;letter-spacing:.02em;line-height:1.6}
-#thanks{display:none;margin-top:22px;font-family:"Bodoni Moda",serif;font-style:italic;font-size:20px;color:#7FBF97}
+#thanks{display:none;margin-top:22px;font-family:"Bodoni Moda",serif;font-style:italic;font-size:20px;color:var(--stalk)}
 
 /* ---- footer ---- */
 footer{border-top:1px solid var(--line);padding:50px 0 70px;text-align:center}
 footer .ghost-line{font-family:"Bodoni Moda",serif;font-style:italic;font-size:22px;color:var(--paper);margin-bottom:22px}
 footer .fine{font-family:"Newsreader",serif;font-weight:300;font-size:14px;color:var(--muted);line-height:1.7;max-width:60ch;margin:0 auto}
-footer .fine em{font-style:italic;color:#CBC4B8}
+footer .fine em{font-style:italic;color:var(--ink-dim)}
 
 /* ---- responsive ---- */
 @media(max-width:820px){

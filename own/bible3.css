@@ -1,296 +1,350 @@
 /* ============================================================
-   OWN. — Operating Bible 3  ·  shared stylesheet
-   Visual system: oxblood editorial on black.
-   Type: Bebas Neue (structure) · Bodoni Moda (seductive editorial)
-         · Newsreader (body). Accent: oxblood. Product color: violet.
+   Operating Bible 3  ·  shared stylesheet
+   Visual system: THE EIGHT — indigo-base document.
+     BASE INDIGO is the ground (and the drink). Emphasis is carried
+     by VALUE, not hue: there is no general-purpose accent color.
+     Loud = Chalk · quiet = Oat · structure = Salt.
+     Reacted/Titre/Stalk are MEANINGS, never decoration:
+       reacted = "there is more to know"  (links, footnote calls)
+       titre   = the gap / what is missing or wrong
+       stalk   = the proof / what is checked & cited
+   Type: Bebas Neue (structure) · Bodoni Moda (editorial)
+         · Newsreader (body) · Ephesis (display cursive).
    Restyle the whole bible from this one file.
    ============================================================ */
 
 :root{
-  --black:#0B0A0C;
-  --panel:#141115;
-  --paper:#ECE7DD;        /* warm off-white type */
-  --oxblood:#7C0E1B;      /* the accent — blood, wine, lip */
-  --oxblood-bright:#A6182A;
-  --wine-deep:#460910;
-  --violet:#6B34A0;       /* legacy product-color token */
-  --indigo:#1E2F9E;       /* deep product indigo (the drink / fills) */
-  --indigo-mark:#3B49CC;  /* SIGNATURE indigo — the OWN wordmark + the drink.
-                             Three-color system: black=base · oxblood=editorial accent · indigo=signature */
-  --muted:#948A80;        /* warm gray */
-  --line:#2A2429;
+  /* ---- THE EIGHT. Nothing outside this set. ---- */
+  --base-indigo:#2A2F8F;  /* the ground. the drink itself. */
+  --deep-well:#131A4A;    /* the deeper ground. panels, depth, night. */
+  --chalk:#F3F0E8;        /* brightest white. values — the numbers that matter. */
+  --oat:#E4DFD2;          /* dim white. notes — body copy, the quiet register. */
+  --salt:#D5D8D1;         /* cool white. rules and column heads. */
+  --reacted:#FFB3BD;      /* the acid state. footnote calls — "more to know here". */
+  --titre:#E0A32B;        /* ALERT — the gap. what is missing or wrong. */
+  --stalk:#7CB342;        /* ALERT — the proof. what is checked: a resolved citation. */
+
+  /* ---- semantic roles (author against these) ---- */
+  --ground:var(--base-indigo);
+  --ground-deep:var(--deep-well);
+  --ink-loud:var(--chalk);       /* display type + values */
+  --ink-body:var(--oat);         /* body copy */
+  --ink-struct:var(--salt);      /* column heads, kickers, markers */
+  /* the tonal ramp — value via alpha, so the palette stays at eight */
+  --ink-dim:rgba(228,223,210,.74);
+  --ink-muted:rgba(228,223,210,.54);
+  --ink-faint:rgba(228,223,210,.36);
+  --rule:rgba(213,216,209,.20);
+  --rule-strong:rgba(213,216,209,.44);
+  --accent:var(--reacted);
+  --accent-rule:rgba(255,179,189,.55);
+  /* depth only — not brand colors. tinted to the deep ground. */
+  --shadow:rgba(6,9,32,.62);
+  --scrim:19,26,74;
+
+  /* ---- DEPRECATED SHIM — old token names, re-pointed to THE EIGHT.
+         Kept so the bible HTML's existing var() refs resolve without a
+         per-spread sweep. Author new work against the roles above.
+         TODO: sweep the HTML off these, then delete this block. ---- */
+  --black:var(--base-indigo);
+  --panel:var(--deep-well);
+  --paper:var(--oat);
+  --oxblood:var(--accent-rule);      /* was accent rules/borders → dim reacted */
+  --oxblood-bright:var(--reacted);   /* was links/accents → reacted */
+  --wine-deep:var(--accent-rule);
+  --violet:var(--base-indigo);       /* retired legacy product color */
+  --indigo:var(--base-indigo);
+  --indigo-mark:var(--chalk);        /* wordmark can't be indigo on indigo */
+  --muted:var(--ink-muted);
+  --line:var(--rule);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{background:#050506;color:var(--paper);
+html,body{background:var(--ground-deep);color:var(--ink-body);
   font-family:"Newsreader",Georgia,serif;-webkit-font-smoothing:antialiased}
 
 /* ---- the page (landscape spread) ---- */
 .spread{
   position:relative;width:1400px;height:900px;margin:26px auto;
-  background:var(--black);overflow:hidden;
+  background:var(--ground);overflow:hidden;
   display:grid;grid-template-columns:1fr 1fr;grid-template-rows:900px;
-  box-shadow:0 30px 80px rgba(0,0,0,.6);
+  box-shadow:0 30px 80px var(--shadow);
 }
+/* deep-ground modifier — use on spreads where the INDIGO PRODUCT must read
+   against the page (the glass, the sachet). Base indigo on base indigo = invisible. */
+.spread.well{background:var(--ground-deep)}
 /* film grain over everything */
 .spread::after{
   content:"";position:absolute;inset:0;pointer-events:none;opacity:.11;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   mix-blend-mode:overlay;
 }
-.gutter{position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);opacity:.5}
+.gutter{position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--rule);opacity:.5}
 .page{position:relative;padding:56px 60px;display:flex;flex-direction:column;height:100%}
 
 /* corner labels — Bebas, letterspaced */
 .label{font-family:"Bebas Neue",sans-serif;letter-spacing:.28em;font-size:13px;
-  color:var(--muted);text-transform:uppercase}
-.label.red{color:var(--oxblood-bright)}
+  color:var(--ink-muted);text-transform:uppercase}
+.label.red{color:var(--reacted)}
 .toprow{display:flex;justify-content:space-between;align-items:baseline}
 .botrow{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end}
 
-/* big Bebas chapter number */
+/* big Bebas chapter number — structure, recessed */
 .cnum{font-family:"Bebas Neue",sans-serif;font-size:150px;line-height:.8;
-  color:var(--oxblood);letter-spacing:.01em}
+  color:rgba(213,216,209,.34);letter-spacing:.01em}
 
 /* editorial Didone headline */
 .headline{font-family:"Bodoni Moda",serif;font-weight:600;line-height:.98;
-  font-size:64px;letter-spacing:-.01em;margin-top:6px}
-.headline em{font-style:italic;font-weight:500;color:var(--oxblood-bright)}
+  font-size:64px;letter-spacing:-.01em;margin-top:6px;color:var(--ink-loud)}
+.headline em{font-style:italic;font-weight:500;color:var(--ink-loud)}
 
 /* seductive pull-line, Didone italic */
 .pull{font-family:"Bodoni Moda",serif;font-style:italic;font-weight:400;
-  font-size:34px;line-height:1.18;color:var(--paper)}
-.pull .hot{color:var(--oxblood-bright)}
+  font-size:34px;line-height:1.18;color:var(--ink-loud)}
+.pull .hot{color:var(--ink-loud)}
 
 /* body copy */
 .body{font-family:"Newsreader",serif;font-weight:300;font-size:19px;
-  line-height:1.62;color:#D8D2C6;max-width:46ch}
+  line-height:1.62;color:var(--ink-body);max-width:46ch}
 .body p+p{margin-top:14px}
-.body em{font-style:italic;color:var(--paper)}
+.body em{font-style:italic;color:var(--ink-loud)}
 .kicker{font-family:"Bebas Neue",sans-serif;letter-spacing:.24em;font-size:15px;
-  color:var(--oxblood-bright);text-transform:uppercase;margin-bottom:18px}
+  color:var(--ink-struct);text-transform:uppercase;margin-bottom:18px}
 
-/* hard fact as a design object — giant Bebas figure */
+/* hard fact as a design object — giant Bebas figure = a VALUE */
 .figwrap{display:flex;flex-direction:column;justify-content:center;height:100%}
 .fig{font-family:"Bebas Neue",sans-serif;line-height:.78;letter-spacing:.005em}
-.fig .n{font-size:340px;display:block}
-.fig .n.dim{color:#3A3338}
-.fig .n.red{color:var(--oxblood)}
+.fig .n{font-size:340px;display:block;color:var(--ink-loud)}
+.fig .n.dim{color:var(--deep-well)}
+.fig .n.red{color:var(--ink-loud)}
 .fig .cap{font-family:"Newsreader",serif;font-style:italic;font-weight:300;
-  font-size:22px;color:#CFC8BC;margin-top:8px}
-.rule{height:1px;background:var(--line);margin:26px 0}
+  font-size:22px;color:var(--ink-dim);margin-top:8px}
+.rule{height:1px;background:var(--rule);margin:26px 0}
 
 /* big editorial statement (hero-left pages) */
 .statement{font-family:"Bodoni Moda",serif;font-weight:600;font-size:54px;
-  line-height:1.04;letter-spacing:-.01em;color:var(--paper)}
-.statement em{font-style:italic;font-weight:500;color:var(--oxblood-bright)}
-.underline{width:120px;height:2px;background:var(--oxblood);margin-top:30px}
+  line-height:1.04;letter-spacing:-.01em;color:var(--ink-loud)}
+.statement em{font-style:italic;font-weight:500;color:var(--ink-loud)}
+.underline{width:120px;height:2px;background:var(--reacted);margin-top:30px}
 
 /* numbered list device (e.g. the two enemies) */
 .enemies{list-style:none;margin-top:8px}
-.enemies li{display:flex;gap:20px;padding:20px 0;border-top:1px solid var(--line)}
-.enemies li:last-child{border-bottom:1px solid var(--line)}
+.enemies li{display:flex;gap:20px;padding:20px 0;border-top:1px solid var(--rule)}
+.enemies li:last-child{border-bottom:1px solid var(--rule)}
 .enemies .en-n{font-family:"Bebas Neue",sans-serif;font-size:46px;line-height:.8;
-  color:var(--oxblood);flex:0 0 auto;width:52px}
+  color:var(--ink-struct);flex:0 0 auto;width:52px}
 .enemies .en-t{display:block;font-family:"Bebas Neue",sans-serif;letter-spacing:.14em;font-size:20px;
-  text-transform:uppercase;color:var(--paper);margin-bottom:5px}
+  text-transform:uppercase;color:var(--ink-struct);margin-bottom:5px}
 .enemies .en-d{font-family:"Newsreader",serif;font-weight:300;font-size:17px;
-  line-height:1.5;color:#CBC4B8}
+  line-height:1.5;color:var(--ink-dim)}
 
 /* compact benefit list — the payoff spread */
 .paylist{list-style:none;margin-top:16px}
-.paylist li{padding:12px 0;border-top:1px solid var(--line)}
-.paylist li:last-child{border-bottom:1px solid var(--line)}
+.paylist li{padding:12px 0;border-top:1px solid var(--rule)}
+.paylist li:last-child{border-bottom:1px solid var(--rule)}
 .paylist .pl-t{font-family:"Bebas Neue",sans-serif;letter-spacing:.13em;font-size:15px;
-  text-transform:uppercase;color:var(--oxblood-bright);display:block;margin-bottom:3px}
+  text-transform:uppercase;color:var(--ink-struct);display:block;margin-bottom:3px}
 .paylist .pl-d{font-family:"Newsreader",serif;font-weight:300;font-size:15.5px;
-  line-height:1.45;color:#CBC4B8}
-.paylist .pl-d em{font-style:italic;color:var(--paper)}
+  line-height:1.45;color:var(--ink-dim)}
+.paylist .pl-d em{font-style:italic;color:var(--ink-loud)}
 
 /* ---- Ch12 "The Field" · positioning-map spread (full-bleed, custom 2-col) ---- */
 .field-spread{display:block;padding:0;overflow:hidden}
 .fs-inner{display:flex;height:100%;padding:44px 54px 38px}
 .fs-left{flex:0 0 57%;display:flex;flex-direction:column;padding-right:40px}
-.fs-right{flex:1;display:flex;flex-direction:column;border-left:1px solid var(--line);padding-left:38px}
+.fs-right{flex:1;display:flex;flex-direction:column;border-left:1px solid var(--rule);padding-left:38px}
 .fs-toprow{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
-.fs-map{position:relative;flex:1;margin:30px 34px 34px 58px;border-left:1px solid var(--line);border-bottom:1px solid var(--line)}
+.fs-map{position:relative;flex:1;margin:30px 34px 34px 58px;border-left:1px solid var(--rule);border-bottom:1px solid var(--rule)}
 .fs-ay{position:absolute;left:-58px;top:0;bottom:0;width:38px;display:flex;align-items:center;justify-content:center}
-.fs-ay span{transform:rotate(-90deg);white-space:nowrap;font-family:"Bebas Neue",sans-serif;letter-spacing:.2em;font-size:12.5px;color:var(--muted);text-transform:uppercase}
-.fs-ax{position:absolute;left:0;right:0;bottom:-34px;text-align:center;font-family:"Bebas Neue",sans-serif;letter-spacing:.2em;font-size:12.5px;color:var(--muted);text-transform:uppercase}
-.fs-tick{position:absolute;font-family:"Bebas Neue",sans-serif;letter-spacing:.13em;font-size:10.5px;color:#6E655C;text-transform:uppercase}
-.fs-cv{position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed var(--line)}
-.fs-ch{position:absolute;left:0;right:0;top:50%;border-top:1px dashed var(--line)}
-.fs-qwin{position:absolute;left:50%;top:0;width:50%;height:50%;background:linear-gradient(135deg,rgba(124,14,27,.20),rgba(124,14,27,.02));border-top:1px solid rgba(166,24,42,.4)}
+.fs-ay span{transform:rotate(-90deg);white-space:nowrap;font-family:"Bebas Neue",sans-serif;letter-spacing:.2em;font-size:12.5px;color:var(--ink-muted);text-transform:uppercase}
+.fs-ax{position:absolute;left:0;right:0;bottom:-34px;text-align:center;font-family:"Bebas Neue",sans-serif;letter-spacing:.2em;font-size:12.5px;color:var(--ink-muted);text-transform:uppercase}
+.fs-tick{position:absolute;font-family:"Bebas Neue",sans-serif;letter-spacing:.13em;font-size:10.5px;color:var(--ink-faint);text-transform:uppercase}
+.fs-cv{position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed var(--rule)}
+.fs-ch{position:absolute;left:0;right:0;top:50%;border-top:1px dashed var(--rule)}
+/* NOTE: deliberately NOT --stalk. Green = "checked / cited". Tinting the
+   quadrant we occupy with the PROOF color would color-code an unproven
+   position as verified — the CGM pilot doesn't exist yet. Neutral only. */
+.fs-qwin{position:absolute;left:50%;top:0;width:50%;height:50%;background:linear-gradient(135deg,rgba(213,216,209,.13),rgba(213,216,209,.01));border-top:1px solid var(--rule-strong)}
 .fs-qg{position:absolute;left:50%;top:0;width:50%;height:50%;display:flex;align-items:center;justify-content:center;pointer-events:none}
-.fs-qg span{font-family:"Bodoni Moda",serif;font-style:italic;font-size:20px;color:rgba(236,231,221,.12);white-space:nowrap}
+.fs-qg span{font-family:"Bodoni Moda",serif;font-style:italic;font-size:20px;color:rgba(243,240,232,.12);white-space:nowrap}
 .fs-frontier{position:absolute;inset:0;pointer-events:none}
 .fs-frontier svg{width:100%;height:100%;overflow:visible}
 .fs-pt{position:absolute;transform:translate(-50%,50%)}
-.fs-pt .fs-dot{width:12px;height:12px;border-radius:50%;background:#CBC4B8;border:2px solid var(--black);box-shadow:0 0 0 1px #CBC4B8}
-.fs-pt .fs-l{position:absolute;left:16px;top:50%;transform:translateY(-50%);white-space:nowrap;font-family:"Bebas Neue",sans-serif;letter-spacing:.07em;font-size:13px;color:var(--paper);text-transform:uppercase;line-height:1.05}
-.fs-pt .fs-l small{display:block;font-family:"Newsreader",serif;font-style:italic;letter-spacing:0;font-size:10.5px;text-transform:none;color:var(--muted)}
+.fs-pt .fs-dot{width:12px;height:12px;border-radius:50%;background:var(--ink-struct);border:2px solid var(--ground);box-shadow:0 0 0 1px var(--ink-struct)}
+.fs-pt .fs-l{position:absolute;left:16px;top:50%;transform:translateY(-50%);white-space:nowrap;font-family:"Bebas Neue",sans-serif;letter-spacing:.07em;font-size:13px;color:var(--ink-body);text-transform:uppercase;line-height:1.05}
+.fs-pt .fs-l small{display:block;font-family:"Newsreader",serif;font-style:italic;letter-spacing:0;font-size:10.5px;text-transform:none;color:var(--ink-muted)}
 .fs-pt.l .fs-l{left:auto;right:16px;text-align:right}
-.fs-pt.own .fs-dot{width:22px;height:22px;background:var(--oxblood-bright);box-shadow:0 0 0 5px rgba(166,24,42,.22),0 0 26px 5px rgba(166,24,42,.32)}
+.fs-pt.own .fs-dot{width:22px;height:22px;background:var(--chalk);box-shadow:0 0 0 5px rgba(243,240,232,.20),0 0 26px 5px rgba(243,240,232,.28)}
 .fs-pt.own .fs-l{left:30px;font-size:26px}
-.fs-pt.own .fs-l b{color:var(--oxblood-bright)}
-.fs-pt.own .fs-l small{font-size:12px;color:#CBB2B4}
-.fs-kick{font-family:"Bebas Neue",sans-serif;letter-spacing:.26em;font-size:12px;text-transform:uppercase;color:var(--oxblood-bright);margin-bottom:12px}
-.fs-h{font-family:"Bodoni Moda",serif;font-style:italic;font-weight:400;font-size:38px;line-height:1.06;margin-bottom:11px}
-.fs-h b{font-style:normal;font-weight:500;color:var(--oxblood-bright)}
-.fs-sub{font-family:"Newsreader",serif;font-weight:300;font-size:15px;line-height:1.5;color:#BDB6AB;margin-bottom:20px}
-.fs-camp{border-top:1.5px solid var(--line);padding-top:11px;margin-bottom:13px}
-.fs-camp.win{border-top-color:var(--oxblood-bright)}
-.fs-camp h4{font-family:"Bebas Neue",sans-serif;letter-spacing:.1em;font-size:17px;text-transform:uppercase;margin-bottom:2px}
-.fs-camp.win h4{color:var(--oxblood-bright)}
-.fs-who{font-family:"Newsreader",serif;font-style:italic;font-size:12.5px;color:var(--muted);margin-bottom:8px}
-.fs-r{display:flex;gap:7px;font-family:"Newsreader",serif;font-weight:300;font-size:13.5px;line-height:1.35;margin-bottom:5px;color:#D4CEC3}
-.fs-r.con{color:#B7B0A6}
+.fs-pt.own .fs-l b{color:var(--ink-loud)}
+.fs-pt.own .fs-l small{font-size:12px;color:rgba(255,179,189,.68)}
+.fs-kick{font-family:"Bebas Neue",sans-serif;letter-spacing:.26em;font-size:12px;text-transform:uppercase;color:var(--ink-struct);margin-bottom:12px}
+.fs-h{font-family:"Bodoni Moda",serif;font-style:italic;font-weight:400;font-size:38px;line-height:1.06;margin-bottom:11px;color:var(--ink-loud)}
+.fs-h b{font-style:normal;font-weight:500;color:var(--ink-loud)}
+.fs-sub{font-family:"Newsreader",serif;font-weight:300;font-size:15px;line-height:1.5;color:var(--ink-muted);margin-bottom:20px}
+.fs-camp{border-top:1.5px solid var(--rule);padding-top:11px;margin-bottom:13px}
+.fs-camp.win{border-top-color:var(--rule-strong)}
+.fs-camp h4{font-family:"Bebas Neue",sans-serif;letter-spacing:.1em;font-size:17px;text-transform:uppercase;margin-bottom:2px;color:var(--ink-struct)}
+.fs-camp.win h4{color:var(--ink-loud)}
+.fs-who{font-family:"Newsreader",serif;font-style:italic;font-size:12.5px;color:var(--ink-muted);margin-bottom:8px}
+.fs-r{display:flex;gap:7px;font-family:"Newsreader",serif;font-weight:300;font-size:13.5px;line-height:1.35;margin-bottom:5px;color:var(--ink-dim)}
+.fs-r.con{color:var(--ink-muted)}
 .fs-m{font-family:"Bebas Neue",sans-serif;font-size:13px;flex:0 0 auto;width:10px}
-.fs-r.pro .fs-m{color:#7FA07C}
-.fs-r.con .fs-m{color:var(--oxblood-bright)}
-.fs-foot{margin-top:auto;font-family:"Newsreader",serif;font-style:italic;font-size:12px;color:#6E655C;border-top:1px solid var(--line);padding-top:11px}
+.fs-r.pro .fs-m{color:var(--stalk)}   /* the proof — what is checked */
+.fs-r.con .fs-m{color:var(--titre)}   /* the gap — what is missing or wrong */
+.fs-foot{margin-top:auto;font-family:"Newsreader",serif;font-style:italic;font-size:12px;color:var(--ink-faint);border-top:1px solid var(--rule);padding-top:11px}
 /* three-fiber synergy (right column) */
-.fs-why{font-family:"Bebas Neue",sans-serif;letter-spacing:.16em;font-size:13px;text-transform:uppercase;color:var(--paper);margin:2px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.fs-why{font-family:"Bebas Neue",sans-serif;letter-spacing:.16em;font-size:13px;text-transform:uppercase;color:var(--ink-struct);margin:2px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
 .fs-fib{margin-bottom:12px}
-.fs-fib .fn{font-family:"Bebas Neue",sans-serif;letter-spacing:.07em;font-size:15.5px;text-transform:uppercase;color:#B7B0A6}
-.fs-fib .fn b{color:var(--oxblood-bright);font-weight:400}
-.fs-fib .fd{font-family:"Newsreader",serif;font-weight:300;font-size:13.5px;line-height:1.42;color:#D4CEC3;margin-top:2px}
-.fs-fib .fd em{font-style:italic;color:var(--paper)}
-.fs-syn{font-family:"Bodoni Moda",serif;font-style:italic;font-size:15.5px;line-height:1.38;color:var(--paper);border-top:1.5px solid var(--oxblood);padding-top:12px;margin-top:4px}
-.fs-syn b{font-style:normal;font-weight:500;color:var(--oxblood-bright)}
+.fs-fib .fn{font-family:"Bebas Neue",sans-serif;letter-spacing:.07em;font-size:15.5px;text-transform:uppercase;color:var(--ink-muted)}
+.fs-fib .fn b{color:var(--ink-loud);font-weight:400}
+.fs-fib .fd{font-family:"Newsreader",serif;font-weight:300;font-size:13.5px;line-height:1.42;color:var(--ink-dim);margin-top:2px}
+.fs-fib .fd em{font-style:italic;color:var(--ink-loud)}
+.fs-syn{font-family:"Bodoni Moda",serif;font-style:italic;font-size:15.5px;line-height:1.38;color:var(--ink-body);border-top:1.5px solid var(--rule-strong);padding-top:12px;margin-top:4px}
+.fs-syn b{font-style:normal;font-weight:500;color:var(--ink-loud)}
 
 /* ghost watermark word */
 .ghost{position:absolute;font-family:"Bodoni Moda",serif;font-style:italic;
-  font-weight:400;color:#ffffff;opacity:.035;font-size:420px;line-height:.7;
+  font-weight:400;color:var(--chalk);opacity:.035;font-size:420px;line-height:.7;
   right:-30px;bottom:-70px;pointer-events:none;user-select:none}
 
 /* ---- cover ---- */
 .cover{grid-template-columns:1fr}
 .cover .page{padding:70px 80px;justify-content:space-between}
-/* OWN wordmark — ALWAYS indigo letters, WHITE period. Use everywhere "OWN." appears. */
-.brandmark{font-family:"Bebas Neue",sans-serif;font-size:40px;letter-spacing:.12em;color:var(--indigo-mark)}
-.brandmark .dot{color:#fff}
+/* wordmark — indigo is the GROUND now, so the mark carries in Chalk.
+   The period is the tell: Reacted, the acid state. */
+.brandmark{font-family:"Bebas Neue",sans-serif;font-size:40px;letter-spacing:.12em;color:var(--chalk)}
+.brandmark .dot{color:var(--reacted)}
 /* INSDR parent lockup — ALWAYS the logo image, never typed. Scales with font-size. */
 .insdr{height:.82em;width:auto;display:inline-block;vertical-align:baseline;
   position:relative;top:.04em;margin:0 .18em}
 
 /* inline wordmark for running text / labels — ALWAYS Bebas Neue, inherits size */
-.wm{font-family:"Bebas Neue",sans-serif;color:var(--indigo-mark);letter-spacing:.04em}
-.wm .dot{color:#fff}
+.wm{font-family:"Bebas Neue",sans-serif;color:var(--chalk);letter-spacing:.04em}
+.wm .dot{color:var(--reacted)}
 
 /* full-bleed hero image page (photography) */
 .page.bleed{padding:0;overflow:hidden}
 .heroimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 32%}
 .scrim{position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(to top, rgba(8,7,9,.92) 0%, rgba(8,7,9,0) 44%),
-             linear-gradient(to bottom, rgba(8,7,9,.6) 0%, rgba(8,7,9,0) 22%)}
+  background:linear-gradient(to top, rgba(19,26,74,.92) 0%, rgba(19,26,74,0) 44%),
+             linear-gradient(to bottom, rgba(19,26,74,.6) 0%, rgba(19,26,74,0) 22%)}
 .bleed-pad{position:absolute;left:0;right:0;padding:44px 46px;z-index:2}
 .bleed-pad.top{top:0}
 .bleed-pad.bot{bottom:0}
 .bleed-cap{font-family:"Bodoni Moda",serif;font-style:italic;font-weight:500;
-  font-size:42px;line-height:1.04;color:#fff;letter-spacing:-.01em;
-  text-shadow:0 2px 22px rgba(0,0,0,.55);margin-bottom:18px}
+  font-size:42px;line-height:1.04;color:var(--chalk);letter-spacing:-.01em;
+  text-shadow:0 2px 22px rgba(6,9,32,.55);margin-bottom:18px}
 .cover-hero{font-family:"Bodoni Moda",serif;font-weight:600;font-size:150px;
-  line-height:.92;letter-spacing:-.015em;color:var(--paper)}
-.cover-hero em{font-style:italic;font-weight:500;color:var(--oxblood-bright)}
+  line-height:.92;letter-spacing:-.015em;color:var(--ink-loud)}
+.cover-hero em{font-style:italic;font-weight:500;color:var(--ink-loud)}
 .cover-sub{font-family:"Bebas Neue",sans-serif;letter-spacing:.26em;font-size:20px;
-  color:var(--muted);margin-top:26px}
-.stamp{border:1px solid var(--oxblood);color:var(--oxblood-bright);
+  color:var(--ink-muted);margin-top:26px}
+.stamp{border:1px solid var(--accent-rule);color:var(--reacted);
   font-family:"Bebas Neue",sans-serif;letter-spacing:.22em;font-size:13px;
   padding:7px 12px;display:inline-block}
 
-/* ---- product moment: the indigo glass (real photo, bg-removed) ---- */
+/* ---- product moment: the indigo glass (real photo, bg-removed) ----
+   Put .well on this spread — the drink IS base indigo and vanishes on the base ground. */
 .glassstage{position:relative;display:flex;align-items:center;justify-content:center;height:100%}
 .glassstage::before{content:"";position:absolute;width:430px;height:430px;border-radius:50%;
-  background:radial-gradient(circle, rgba(43,63,208,.42), rgba(43,63,208,0) 66%);filter:blur(18px)}
+  background:radial-gradient(circle, rgba(42,47,143,.55), rgba(42,47,143,0) 66%);filter:blur(18px)}
 .glassimg{position:relative;z-index:1;height:560px;width:auto;
-  filter:drop-shadow(0 26px 50px rgba(0,0,0,.65))}
+  filter:drop-shadow(0 26px 50px rgba(6,9,32,.65))}
 /* concentric "signal" rings behind the glass — the tell broadcasting */
 .signal-rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
-.signal-rings span{position:absolute;border-radius:50%;border:1px solid rgba(59,73,204,.30)}
+.signal-rings span{position:absolute;border-radius:50%;border:1px solid rgba(243,240,232,.22)}
 .signal-rings span:nth-child(1){width:360px;height:360px;opacity:.9}
 .signal-rings span:nth-child(2){width:520px;height:520px;opacity:.55}
 .signal-rings span:nth-child(3){width:680px;height:680px;opacity:.28}
 .glassimg.badge{height:440px}
 .swatchrow{display:flex;gap:14px;margin-top:26px}
-.sw{width:46px;height:46px;border:1px solid var(--line)}
-.sw.blk{background:#0B0A0C}.sw.ox{background:var(--oxblood)}.sw.pur{background:var(--indigo)}
+.sw{width:46px;height:46px;border:1px solid var(--rule)}
+/* legacy 3-swatch row — the old black/oxblood/violet system.
+   TODO(content): this spread still tells the OLD three-color story. Needs a
+   rewrite to THE EIGHT; these keep it from rendering dead colors meanwhile. */
+.sw.blk{background:var(--base-indigo)}.sw.ox{background:var(--reacted)}.sw.pur{background:var(--deep-well)}
 
 /* ---- the Slow-In ramp: half-pack -> full-pack sachet schematic ---- */
 .ramp{display:flex;gap:18px;align-items:flex-end;margin-top:22px}
 .step{flex:1;text-align:center}
 .pack{position:relative;width:100%;max-width:62px;height:150px;margin:0 auto;
-  border:1px solid var(--line);border-radius:5px;background:#0E0D10;overflow:hidden}
+  border:1px solid var(--rule-strong);border-radius:5px;background:var(--deep-well);overflow:hidden}
 .pack .seam{position:absolute;top:0;left:0;right:0;height:12px;
-  background:repeating-linear-gradient(90deg,#2A2429 0 3px,transparent 3px 6px)}
+  background:repeating-linear-gradient(90deg,rgba(213,216,209,.30) 0 3px,transparent 3px 6px)}
 .pack .fill{position:absolute;left:0;right:0;bottom:0;
-  background:linear-gradient(180deg,#2B3FD0 0%,#1E2F9E 60%,#141F6E 100%)}
+  background:linear-gradient(180deg,rgba(42,47,143,1) 0%,var(--base-indigo) 60%,rgba(19,26,74,1) 100%)}
 .step .amt{font-family:"Bebas Neue",sans-serif;letter-spacing:.14em;font-size:17px;
-  color:var(--paper);margin-top:12px}
+  color:var(--ink-loud);margin-top:12px}
 .step .when{font-family:"Bebas Neue",sans-serif;letter-spacing:.2em;font-size:11px;
-  color:var(--muted);margin-top:3px}
-.swcap{font-family:"Bebas Neue",sans-serif;letter-spacing:.2em;font-size:11px;color:var(--muted);margin-top:8px}
+  color:var(--ink-muted);margin-top:3px}
+.swcap{font-family:"Bebas Neue",sans-serif;letter-spacing:.2em;font-size:11px;color:var(--ink-muted);margin-top:8px}
 
 /* ---- the receipt: a faux ingredient label (07) ---- */
-.receipt{background:#100E12;border:1px solid var(--line);border-radius:4px;padding:26px 28px}
-.rc-head{font-family:"Bebas Neue",sans-serif;letter-spacing:.18em;font-size:18px;color:var(--paper)}
-.rc-sub{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;color:var(--muted);
+.receipt{background:var(--deep-well);border:1px solid var(--rule);border-radius:4px;padding:26px 28px}
+.rc-head{font-family:"Bebas Neue",sans-serif;letter-spacing:.18em;font-size:18px;color:var(--ink-struct)}
+.rc-sub{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;color:var(--ink-muted);
   margin-top:3px;letter-spacing:.02em}
-.rc-line{height:1px;background:var(--line);margin:16px 0}
+.rc-line{height:1px;background:var(--rule);margin:16px 0}
 .rc-row{display:flex;align-items:baseline;gap:8px;font-family:ui-monospace,"SF Mono",Menlo,monospace;
-  font-size:13px;color:#D8D2C6;margin:10px 0}
-.rc-row .dots{flex:1;border-bottom:1px dotted #4a444a;transform:translateY(-3px)}
-.rc-row .amt{white-space:nowrap;color:var(--paper)}
-.rc-note{font-family:"Newsreader",serif;font-style:italic;font-size:14px;color:#CBC4B8;
+  font-size:13px;color:var(--ink-body);margin:10px 0}
+.rc-row .dots{flex:1;border-bottom:1px dotted rgba(213,216,209,.28);transform:translateY(-3px)}
+/* the grams ARE the values — Chalk, the brightest thing on the page */
+.rc-row .amt{white-space:nowrap;color:var(--ink-loud)}
+.rc-note{font-family:"Newsreader",serif;font-style:italic;font-size:14px;color:var(--ink-dim);
   margin-top:14px;line-height:1.45}
-.rc-them{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--muted);
-  margin-top:18px;padding-top:15px;border-top:1px solid var(--line);line-height:1.5}
+.rc-them{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--ink-muted);
+  margin-top:18px;padding-top:15px;border-top:1px solid var(--rule);line-height:1.5}
 
 /* ---- membership control: pause beats cancel (08) ---- */
-.member{background:#100E12;border:1px solid var(--line);border-radius:8px;padding:28px 30px}
+.member{background:var(--deep-well);border:1px solid var(--rule);border-radius:8px;padding:28px 30px}
 .mb-top{display:flex;justify-content:space-between;align-items:center}
-.mb-title{font-family:"Bebas Neue",sans-serif;letter-spacing:.14em;font-size:19px;color:var(--paper)}
+.mb-title{font-family:"Bebas Neue",sans-serif;letter-spacing:.14em;font-size:19px;color:var(--ink-struct)}
 .mb-status{display:flex;align-items:center;gap:10px}
-.mb-dot{width:9px;height:9px;border-radius:50%;background:#4ea36b;box-shadow:0 0 10px #4ea36b}
-.mb-state{font-family:"Bebas Neue",sans-serif;letter-spacing:.18em;font-size:14px;color:#7FBF97}
-.mb-line{height:1px;background:var(--line);margin:22px 0}
-.mb-lead{font-family:"Newsreader",serif;font-weight:300;font-size:17px;color:#D8D2C6;line-height:1.5}
-.mb-lead em{font-style:italic;color:var(--paper)}
+/* live/active status = the proof register */
+.mb-dot{width:9px;height:9px;border-radius:50%;background:var(--stalk);box-shadow:0 0 10px var(--stalk)}
+.mb-state{font-family:"Bebas Neue",sans-serif;letter-spacing:.18em;font-size:14px;color:var(--stalk)}
+.mb-line{height:1px;background:var(--rule);margin:22px 0}
+.mb-lead{font-family:"Newsreader",serif;font-weight:300;font-size:17px;color:var(--ink-body);line-height:1.5}
+.mb-lead em{font-style:italic;color:var(--ink-loud)}
 .mb-actions{display:flex;gap:12px;margin-top:22px}
 .mb-btn{font-family:"Bebas Neue",sans-serif;letter-spacing:.12em;font-size:14px;padding:12px 20px;
-  border:1px solid var(--line);color:var(--paper);border-radius:5px}
-.mb-btn.primary{background:var(--oxblood);border-color:var(--oxblood);color:#fff}
-.mb-fine{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;color:var(--muted);
+  border:1px solid var(--rule-strong);color:var(--ink-body);border-radius:5px}
+/* no accent hue left for CTAs — the primary button inverts instead */
+.mb-btn.primary{background:var(--chalk);border-color:var(--chalk);color:var(--base-indigo)}
+.mb-fine{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;color:var(--ink-muted);
   margin-top:16px;letter-spacing:.02em}
 
 /* ---- the 60-second opener ---- */
-.brief{background:linear-gradient(180deg,#0B0A0C,#0e0c11);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.brief{background:linear-gradient(180deg,var(--base-indigo),var(--deep-well));border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
 .brief-inner{max-width:920px;margin:0 auto;padding:82px 40px 90px}
 .brief-hero{font-family:"Bodoni Moda",serif;font-weight:600;font-size:clamp(34px,5.4vw,58px);
-  line-height:1.05;letter-spacing:-.01em;color:var(--paper)}
-.brief-hero em{font-style:italic;font-weight:500;color:var(--oxblood-bright)}
+  line-height:1.05;letter-spacing:-.01em;color:var(--ink-loud)}
+.brief-hero em{font-style:italic;font-weight:500;color:var(--ink-loud)}
 .brief-lead{font-family:"Newsreader",serif;font-weight:300;font-size:clamp(17px,2.2vw,21px);
-  line-height:1.6;color:#D8D2C6;max-width:64ch;margin-top:20px}
-.brief-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);
-  border:1px solid var(--line);margin-top:42px}
-.brief-cell{background:#0B0A0C;padding:22px 24px;display:flex;flex-direction:column;gap:8px}
-.bc-k{font-family:"Bebas Neue",sans-serif;letter-spacing:.2em;font-size:13px;text-transform:uppercase;color:var(--oxblood-bright)}
-.bc-b{font-family:"Newsreader",serif;font-weight:300;font-size:16px;line-height:1.5;color:#CFC8BC}
-.bc-b em{font-style:italic;color:var(--paper)}
+  line-height:1.6;color:var(--ink-body);max-width:64ch;margin-top:20px}
+.brief-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);margin-top:42px}
+.brief-cell{background:var(--deep-well);padding:22px 24px;display:flex;flex-direction:column;gap:8px}
+.bc-k{font-family:"Bebas Neue",sans-serif;letter-spacing:.2em;font-size:13px;text-transform:uppercase;color:var(--ink-struct)}
+.bc-b{font-family:"Newsreader",serif;font-weight:300;font-size:16px;line-height:1.5;color:var(--ink-dim)}
+.bc-b em{font-style:italic;color:var(--ink-loud)}
+/* the honest caveat — literally "there is more to know here" */
 .brief-honest{font-family:"Bodoni Moda",serif;font-style:italic;font-weight:400;
-  font-size:clamp(18px,2.4vw,23px);line-height:1.4;color:var(--paper);max-width:62ch;
-  margin-top:36px;border-left:3px solid var(--oxblood);padding-left:22px}
+  font-size:clamp(18px,2.4vw,23px);line-height:1.4;color:var(--ink-body);max-width:62ch;
+  margin-top:36px;border-left:3px solid var(--reacted);padding-left:22px}
 
-/* ---- proof-point callout (real, cited) ---- */
+/* ---- proof-point callout (real, cited) ----
+   This is what Stalk is FOR: a resolved citation. The only place it earns a border. */
 .proofband{padding:30px 40px 42px}
-.proofpoint{border:1px solid var(--line);border-left:3px solid var(--oxblood-bright);
-  background:#100E12;border-radius:6px;padding:22px 24px;margin-top:34px}
+.proofpoint{border:1px solid var(--rule);border-left:3px solid var(--stalk);
+  background:var(--deep-well);border-radius:6px;padding:22px 24px;margin-top:34px}
 .proofpoint .pp-k{font-family:"Bebas Neue",sans-serif;letter-spacing:.2em;font-size:12px;
-  text-transform:uppercase;color:var(--oxblood-bright);margin-bottom:9px}
-.proofpoint .pp-claim{font-family:"Newsreader",serif;font-weight:300;font-size:19px;line-height:1.5;color:#E7E1D6}
-.proofpoint .pp-claim b{font-weight:400;color:#fff}
-.proofpoint .pp-claim em{font-style:italic;color:var(--paper)}
+  text-transform:uppercase;color:var(--stalk);margin-bottom:9px}
+.proofpoint .pp-claim{font-family:"Newsreader",serif;font-weight:300;font-size:19px;line-height:1.5;color:var(--ink-body)}
+.proofpoint .pp-claim b{font-weight:400;color:var(--ink-loud)}
+.proofpoint .pp-claim em{font-style:italic;color:var(--ink-loud)}
 .proofpoint .pp-src{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;
-  color:var(--muted);margin-top:12px;letter-spacing:.02em}
+  color:var(--ink-muted);margin-top:12px;letter-spacing:.02em}
 
 /* ============ MOBILE / RESPONSIVE ============ */
 @media (max-width:900px){
@@ -330,7 +384,7 @@ html,body{background:#050506;color:var(--paper);
 
 @media print{
   @page{size:1400px 900px;margin:0}
-  body{background:var(--black)}
+  body{background:var(--ground)}
   .spread{margin:0;box-shadow:none;page-break-after:always}
 }
 

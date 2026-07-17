@@ -10,41 +10,41 @@
 
 <style>
 /* ---- scrollable reading-doc layout (bible3.css is spread-based; this is the doc view) ---- */
-html,body{background:#050506}
+html,body{background:var(--deep-well)}
 .doc{max-width:760px;margin:0 auto;padding:76px 40px 120px}
 .doc-eyebrow{font-family:"Bebas Neue",sans-serif;letter-spacing:.28em;font-size:12px;text-transform:uppercase;
-  color:#A6182A;display:flex;align-items:center;gap:.45em;flex-wrap:wrap;margin-bottom:26px}
+  color:var(--reacted);display:flex;align-items:center;gap:.45em;flex-wrap:wrap;margin-bottom:26px}
 .doc-eyebrow img{height:11px;width:auto;opacity:.85}
-.doc-wm{font-family:"Bebas Neue",sans-serif;font-size:34px;letter-spacing:.08em;color:#3B49CC;line-height:1}
-.doc-wm .dot{color:#fff}
+.doc-wm{font-family:"Bebas Neue",sans-serif;font-size:34px;letter-spacing:.08em;color:var(--chalk);line-height:1}
+.doc-wm .dot{color:var(--reacted)}
 .doc h1{font-family:"Bodoni Moda",serif;font-weight:600;font-size:66px;line-height:.98;letter-spacing:-.01em;
   color:var(--paper);margin:18px 0 6px}
 .doc h1 em{font-style:italic;font-weight:500;color:var(--oxblood-bright)}
-.doc-sub{font-family:"Bodoni Moda",serif;font-style:italic;font-size:24px;color:#CFC8BC;line-height:1.25;max-width:34ch}
+.doc-sub{font-family:"Bodoni Moda",serif;font-style:italic;font-size:24px;color:var(--ink-dim);line-height:1.25;max-width:34ch}
 .doc-rule{height:1px;background:var(--line);margin:44px 0}
-.doc-lead{font-family:"Newsreader",serif;font-weight:300;font-size:20px;line-height:1.6;color:#D8D2C6;max-width:60ch}
+.doc-lead{font-family:"Newsreader",serif;font-weight:300;font-size:20px;line-height:1.6;color:var(--ink-body);max-width:60ch}
 .doc-lead b{font-weight:400;color:var(--paper)}
 .doc-lead em{font-style:italic;color:var(--paper)}
 .sec-k{font-family:"Bebas Neue",sans-serif;letter-spacing:.24em;font-size:15px;text-transform:uppercase;
   color:var(--oxblood-bright);margin:52px 0 16px}
 
 /* the gate panel */
-.gate-panel{background:#100E12;border:1px solid var(--line);border-left:3px solid var(--oxblood);border-radius:8px;
+.gate-panel{background:var(--deep-well);border:1px solid var(--line);border-left:3px solid var(--oxblood);border-radius:8px;
   padding:30px 34px;margin:8px 0 8px}
 .gate-panel .big{font-family:"Bodoni Moda",serif;font-style:italic;font-size:30px;line-height:1.2;color:var(--paper)}
 .gate-panel .big .hot{color:var(--oxblood-bright);font-style:normal;font-weight:600}
-.gate-panel .fine{font-family:"Newsreader",serif;font-weight:300;font-size:16px;color:#CBC4B8;margin-top:14px;line-height:1.5}
+.gate-panel .fine{font-family:"Newsreader",serif;font-weight:300;font-size:16px;color:var(--ink-dim);margin-top:14px;line-height:1.5}
 
 /* tiers */
 .tiers{display:flex;flex-direction:column;gap:12px;margin-top:6px}
-.tier{display:flex;gap:20px;padding:20px 22px;border:1px solid var(--line);border-radius:7px;background:#0E0D10}
-.tier.pick{border-color:var(--oxblood);background:#130d10}
+.tier{display:flex;gap:20px;padding:20px 22px;border:1px solid var(--line);border-radius:7px;background:var(--deep-well)}
+.tier.pick{border-color:var(--oxblood);background:var(--deep-well)}
 .tier .tn{font-family:"Bebas Neue",sans-serif;font-size:15px;letter-spacing:.14em;color:var(--muted);flex:0 0 96px;padding-top:3px}
 .tier.pick .tn{color:var(--oxblood-bright)}
 .tier .tt{font-family:"Bebas Neue",sans-serif;letter-spacing:.1em;font-size:18px;text-transform:uppercase;color:var(--paper)}
-.tier .td{font-family:"Newsreader",serif;font-weight:300;font-size:16px;line-height:1.5;color:#CBC4B8;margin-top:5px}
+.tier .td{font-family:"Newsreader",serif;font-weight:300;font-size:16px;line-height:1.5;color:var(--ink-dim);margin-top:5px}
 .tier .cost{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--muted);margin-top:8px;letter-spacing:.02em}
-.pickflag{font-family:"Bebas Neue",sans-serif;letter-spacing:.18em;font-size:11px;color:#fff;background:var(--oxblood);
+.pickflag{font-family:"Bebas Neue",sans-serif;letter-spacing:.18em;font-size:11px;color:var(--base-indigo);background:var(--reacted);
   border-radius:4px;padding:3px 9px;display:inline-block;margin-top:10px}
 
 /* the five steps */
@@ -53,19 +53,19 @@ html,body{background:#050506}
 .steps li:last-child{border-bottom:1px solid var(--line)}
 .steps .sn{font-family:"Bebas Neue",sans-serif;font-size:52px;line-height:.8;color:var(--oxblood);flex:0 0 auto;width:58px}
 .steps .st{font-family:"Bebas Neue",sans-serif;letter-spacing:.12em;font-size:21px;text-transform:uppercase;color:var(--paper);margin-bottom:7px}
-.steps .sd{font-family:"Newsreader",serif;font-weight:300;font-size:17px;line-height:1.56;color:#D2CBBF;max-width:56ch}
+.steps .sd{font-family:"Newsreader",serif;font-weight:300;font-size:17px;line-height:1.56;color:var(--ink-dim);max-width:56ch}
 .steps .sd em{font-style:italic;color:var(--paper)}
 
 /* ethics + money list */
 .hard{list-style:none;margin-top:6px}
-.hard li{font-family:"Newsreader",serif;font-weight:300;font-size:17px;line-height:1.5;color:#D2CBBF;
+.hard li{font-family:"Newsreader",serif;font-weight:300;font-size:17px;line-height:1.5;color:var(--ink-dim);
   padding:11px 0 11px 26px;position:relative}
 .hard li::before{content:"—";position:absolute;left:0;color:var(--oxblood-bright)}
 .hard li b{font-weight:400;color:var(--paper)}
 
 .closer{font-family:"Bodoni Moda",serif;font-style:italic;font-size:34px;color:var(--paper);margin-top:56px}
 .closer .hot{color:var(--oxblood-bright)}
-.doc-foot{margin-top:26px;font-family:"Bebas Neue",sans-serif;letter-spacing:.26em;font-size:11px;text-transform:uppercase;color:#4a444a;
+.doc-foot{margin-top:26px;font-family:"Bebas Neue",sans-serif;letter-spacing:.26em;font-size:11px;text-transform:uppercase;color:var(--ink-faint);
   display:flex;align-items:center;gap:.5em;flex-wrap:wrap}
 .doc-foot img{height:10px;width:auto;opacity:.7}
 .backlink{display:inline-block;margin-top:40px;font-family:"Bebas Neue",sans-serif;letter-spacing:.14em;font-size:13px;
@@ -73,24 +73,24 @@ html,body{background:#050506}
 .backlink:hover{color:var(--oxblood-bright);border-color:var(--oxblood)}
 
 /* gate (same as the bible) */
-#gate{position:fixed;inset:0;background:#0B0A0C;z-index:99999;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;color:#ECE7DD;padding:40px;text-align:center;font-family:"Newsreader",Georgia,serif}
+#gate{position:fixed;inset:0;background:var(--base-indigo);z-index:99999;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;color:var(--ink-body);padding:40px;text-align:center;font-family:"Newsreader",Georgia,serif}
 #gate .go{font-family:"Bebas Neue",sans-serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;
-  color:#A6182A;margin-bottom:30px;display:flex;align-items:center;gap:.45em;justify-content:center;flex-wrap:wrap}
+  color:var(--reacted);margin-bottom:30px;display:flex;align-items:center;gap:.45em;justify-content:center;flex-wrap:wrap}
 #gate .go img{height:11px;width:auto;opacity:.85}
-#gate .gwm{font-family:"Bebas Neue",sans-serif;font-size:104px;letter-spacing:.08em;color:#3B49CC;line-height:1;margin-bottom:12px}
-#gate .gwm .dot{color:#fff}
-#gate .gsub{font-style:italic;font-size:15px;color:#948A80;margin-bottom:34px;letter-spacing:.02em}
+#gate .gwm{font-family:"Bebas Neue",sans-serif;font-size:104px;letter-spacing:.08em;color:var(--chalk);line-height:1;margin-bottom:12px}
+#gate .gwm .dot{color:var(--reacted)}
+#gate .gsub{font-style:italic;font-size:15px;color:var(--ink-muted);margin-bottom:34px;letter-spacing:.02em}
 #gate form{display:flex;flex-direction:column;align-items:center;gap:14px}
-#gate input{background:rgba(236,231,221,.06);border:1px solid #2A2429;border-radius:7px;color:#ECE7DD;
+#gate input{background:rgba(228,223,210,.06);border:1px solid var(--rule);border-radius:7px;color:var(--ink-body);
   padding:14px 20px;font-size:15px;font-family:inherit;width:288px;text-align:center;outline:none;letter-spacing:.06em}
-#gate input:focus{border-color:#A6182A}
-#gate button{font-family:"Bebas Neue",sans-serif;background:#7C0E1B;color:#fff;border:none;border-radius:7px;
+#gate input:focus{border-color:var(--reacted)}
+#gate button{font-family:"Bebas Neue",sans-serif;background:var(--chalk);color:var(--base-indigo);border:none;border-radius:7px;
   padding:13px 36px;font-size:15px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .15s}
-#gate button:hover{background:#A6182A}
-#gate .gerr{color:#A6182A;font-size:13px;margin-top:6px;opacity:0;font-style:italic}
+#gate button:hover{background:var(--reacted)}
+#gate .gerr{color:var(--titre);font-size:13px;margin-top:6px;opacity:0;font-style:italic}
 #gate .gerr.show{opacity:1}
-#gate .gfoot{position:absolute;bottom:36px;font-family:"Bebas Neue",sans-serif;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#4a444a}
+#gate .gfoot{position:absolute;bottom:36px;font-family:"Bebas Neue",sans-serif;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-faint)}
 body.locked{overflow:hidden;height:100vh}
 body.locked>*:not(#gate){display:none!important}
 </style>
